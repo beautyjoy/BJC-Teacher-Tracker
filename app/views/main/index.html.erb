@@ -1,0 +1,14 @@
+<h1>Sign up for BJC!</h1>
+
+<%= form_for @teacher do |f| %>
+    <%= f.text_field :first_name, placeholder: "First Name"%>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+    <%= f.text_field :school_name, placeholder: "School Name" %>
+    <%= f.text_field :email, placeholder: "Your Teacher Email" %>
+    <%= f.text_field :city, placeholder: "School City" %>
+    <%= f.text_field :state, placeholder: "School State" %>
+    <%= f.text_field :website, placeholder: "School Website" %>
+    <%= f.text_field :course, placeholder: "Course" %>
+    <%= f.text_field :snap, placeholder: "Snap Username" %>
+    <%= f.submit %>
+<% end %>
