@@ -245,3 +245,1296 @@ Started GET "/" for ::1 at 2019-10-30 16:10:00 -0700
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (2.2ms)
 Completed 200 OK in 28ms (Views: 26.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:27:37 -0700
+
+LoadError (cannot load such file -- /Users/janani/Documents/BJC_Form/bjc_teacher_tracker/config/routes.rb):
+  activesupport (4.2.10) lib/active_support/dependencies.rb:268:in `load'
+  activesupport (4.2.10) lib/active_support/dependencies.rb:268:in `block in load'
+  activesupport (4.2.10) lib/active_support/dependencies.rb:240:in `load_dependency'
+  activesupport (4.2.10) lib/active_support/dependencies.rb:268:in `load'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:40:in `block in load_paths'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:40:in `each'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:40:in `load_paths'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:16:in `reload!'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:26:in `block in updater'
+  activesupport (4.2.10) lib/active_support/file_update_checker.rb:75:in `execute'
+  railties (4.2.10) lib/rails/application/routes_reloader.rb:7:in `execute'
+  railties (4.2.10) lib/rails/application/finisher.rb:81:in `block (2 levels) in <module:Finisher>'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:446:in `instance_exec'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:446:in `block in make_lambda'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:192:in `block in simple'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:504:in `each'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_prepare_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:83:in `prepare!'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:71:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (64.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (74.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (104.8ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:27:39 -0700
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (60.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (64.6ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (92.6ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:28:44 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 271ms (Views: 247.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:28:47 -0700
+
+SyntaxError (/Users/janani/Desktop/BJC-Teacher-Tracker/app/controllers/teachers_controller.rb:14: syntax error, unexpected end-of-input, expecting keyword_end):
+  app/controllers/teachers_controller.rb:14: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.1ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (57.1ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (49.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (113.8ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:29:04 -0700
+
+SyntaxError (/Users/janani/Desktop/BJC-Teacher-Tracker/app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (53.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (53.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (123.3ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:29:08 -0700
+
+SyntaxError (/Users/janani/Desktop/BJC-Teacher-Tracker/app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (6.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (57.6ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (54.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (124.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:29:19 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 37ms (Views: 22.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:29:20 -0700
+
+SyntaxError (/Users/janani/Desktop/BJC-Teacher-Tracker/app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  app/controllers/teachers_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.1ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (51.6ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (88.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (154.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:29:38 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 41ms (Views: 24.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:29:42 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"m1s9iXIG/TPn7udsQmnR5Xk7VpA+WEMjPd5nLd8Gw8kpTQUbwUpu4BdRGPG02kYoHTZle7gBr/mTuHOmIKtfWw==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+NameError (uninitialized constant TeachersController::Lead):
+  app/controllers/teachers_controller.rb:3:in `create'
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (57.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (44.7ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (105.8ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:30:07 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 34ms (Views: 21.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:30:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QBk7IV6OE4ZetNG2eVRCGlMsnLrpVcuK7gMsqvG8VZryDwOz7cKAVa4LLiuP59XXNyGvUW8MJ1BAZTghDhHJCA==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:30:11.514937"], ["updated_at", "2019-10-30 23:30:11.514937"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:30:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:30:13 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y37/TVBVn/Jjvs/TVSvn9uM9FnkpTbRT6j6+Fs/h+bzRaMff4xkMIZMBME6jmHA7hzAlkq8UWIlEWKqdMExlLg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:30:13.362894"], ["updated_at", "2019-10-30 23:30:13.362894"]]
+  [1m[36m (1.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:30:13 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 16ms (Views: 15.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:30:17 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LR97s2u95YjHL46JJh4FcwHbeXGF2HrK4nhOnvCFpIufCUMh2PF2WzeQcRTQrZK+ZdZKmgOBlhBMHloVDyg4GQ==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:30:17.122100"], ["updated_at", "2019-10-30 23:30:17.122100"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:30:17 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:30:17 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"o8rfte3AN+8WCJJdcORt5c+y9XRFJvVmm+0P5SkQDuIR3OcnXoykPOa3bcCGV/ooq7/Gn8N/Gbw1ixtu1r2ScA==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:30:17.501831"], ["updated_at", "2019-10-30 23:30:17.501831"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:30:17 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:31:54 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 38ms (Views: 23.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:31:56 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C+h9Zzz0iWBkYDULqbynYY2A5sC/+5qRV2hqR7SVn6S5/kX1j7gas5TfypZfDzCs6Y3VKzmidkv5Dn7MSzgDNg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:31:56.496074"], ["updated_at", "2019-10-30 23:31:56.496074"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 2.1ms)
+
+TypeError (no implicit conversion of Symbol into String):
+  app/controllers/teachers_controller.rb:5:in `create'
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.6ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (62.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (46.8ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (106.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:32:37 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 38ms (Views: 20.3ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:32:38 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HOA6pcmuia85dwBFw2P/tlELgCVNtLUwmxFqYmpWzpyu9gI3euIafMnI/9g10Gh7NQazzsvtWeo1d37plftSDg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:32:38.917353"], ["updated_at", "2019-10-30 23:32:38.917353"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:32:38 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 15ms (Views: 14.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:32:39 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0ynm/AwZCuwNkS0f6ZEUNBOr6+SNin0/rXFJeI9AuOJhP95uv1WZP/0u0oIfIoP5d6bYDwvTkeUDF13zcO0kcA==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:32:39.820133"], ["updated_at", "2019-10-30 23:32:39.820133"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:32:39 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 23ms (Views: 22.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:49 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 29ms (Views: 28.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:35:50 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7dblWsKlWAQTQvwPNWkZ4K+XhJB7k8/q60JDuWHO6OxfwN3IcenL1+P9A5LD2o4ty5q3e/3KIzBFJFcynmN0fg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:35:50.791573"], ["updated_at", "2019-10-30 23:35:50.791573"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 28ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:50 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 16ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:35:55 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"69VBvh7Csc2FdZIRLhvi/AZJKlxrmi+S5ib4wCGt1dxZw3ksrY4iHnXKbYzYqHUxYkQZt+3Dw0hIQOxL3gBJTg==", "teacher"=>{"first_name"=>"dfvvv", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "dfvvv"], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:35:55.116854"], ["updated_at", "2019-10-30 23:35:55.116854"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:55 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 16ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:35:55 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E+A9zIApkEKSQEt7Vj3XFcxYsVNxcmf5CWeTf77QslKh9gVeM2UDkWL/tOagjkDYqFWCuPcriyOnAYf0QX0uwA==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:35:55.450461"], ["updated_at", "2019-10-30 23:35:55.450461"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 21ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:55 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 26ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:35:56 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ng43sslcHq36BGR/oTJU+pugtUNsiDfGPJx9/gYHnkiEGA8gehCNfgq7m+JXgcM3/62GqOrR2xyS+ml1+aoC2g==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:35:56.550255"], ["updated_at", "2019-10-30 23:35:56.550255"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:56 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:35:56 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9cJDm9TN2HapWLdZrwCpFxd41MvVw6H8Jr31W3i0a1dH1HsJZ4FLpVnnSMRZsz7ac3XnIFOaTSaI2+HQhxn3xQ==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:35:56.962041"], ["updated_at", "2019-10-30 23:35:56.962041"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:35:56 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 30ms (Views: 28.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:36:23 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 31ms (Views: 30.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:36:26 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FWRvCU3ukxjA+v0QBebVZYnk0cKdNOOYGnLcgzttooWncleb/qIAyzBFAo3zVUKo7eniKRttD0K0FMgIxMA+Fw==", "teacher"=>{"first_name"=>"j", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "j"], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:36:26.217738"], ["updated_at", "2019-10-30 23:36:26.217738"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:36:26 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 15ms (Views: 14.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:36:29 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kBLqBoh9ueNZ4kfekQBaX/36X/HG2GDYjmWFESq/bTgiBNKUOzEqMKlduENns82SmfdsGkCBjAIgA5Ga1RLxqg==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:36:29.501115"], ["updated_at", "2019-10-30 23:36:29.501115"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:36:29 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 14ms (Views: 13.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:36:30 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WSdQeP/NtkGSPvwua7SQkJe/GP+rNim1kjr0x9PoE6XrMWjqTIElkmKBA7OdBwdd87IrFC1vxW88XOBMLEWPNw==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:36:30.888713"], ["updated_at", "2019-10-30 23:36:30.888713"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 33ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:36:30 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:36:31 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FZfAgAFn+ACKicIHcA+USypjmMdhKR4UyvgX4YdwIpyngfgSsitr03o2PZqGvAOGTm6rLOdw8s5kngNqeN2+Dg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:36:31.285069"], ["updated_at", "2019-10-30 23:36:31.285069"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:36:31 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:37:08 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"16/MOKtYxDzDPhJyxmv4mniwvog7yy1/QD7uXGjKWZVlufSqGBRX7zOB7e8w2G9XHL2NY72SwaXuWPrXl2fFBw==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:37:08.403183"], ["updated_at", "2019-10-30 23:37:08.403183"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:08 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:37:09 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tSFvHurUxQKhVd2wIbdd4T8Zm/2OsAQNpX9yp/k55+sHN1eMWZhW0VHqIi3XBMosWxSoFgjp6NcLGWYsBpR7eQ==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:37:09.423474"], ["updated_at", "2019-10-30 23:37:09.423474"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:09 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:37:10 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"snEjbqmcPJV8xoeXf7z6IFXnQ5eDUwFq7gBt3pkTtUkAZxv8GtCvRox5eAqJD23tMepwfAUK7bBAZnlVZr4p2w==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:37:10.165798"], ["updated_at", "2019-10-30 23:37:10.165798"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.6ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:10 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 17ms (Views: 16.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:20 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 55ms (Views: 31.9ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:37:21 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"b7If2YeXLAX3MGAyTfrng00dspqNbPybFIDtgj2bmK7dpCdLNNu/1gePn6+7SXBOKRCBcQs1EEG65vkJwjYEPA==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:37:21.253361"], ["updated_at", "2019-10-30 23:37:21.253361"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:21 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 14ms (Views: 13.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:37:21 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Jb7uOat1cfEkff8l7aAjxdR8lQLxNtocGTPu85I7X4iXqNarGDniItTCALgbE7QIsHGm6XdvNsa3Vfp4bZbDGg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.5ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:37:21.835568"], ["updated_at", "2019-10-30 23:37:21.835568"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:37:21 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 19ms (Views: 17.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:39:12 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 40ms (Views: 19.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:39:16 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"oYPF3K0a1gwa+W/SBFWax4EMo8bMW7q5hP7KEi342gUTlf1OHlZF3+pGkE/y5g0K5QGQLUoCVmMqmN6Z0lVGlw==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:39:16.082669"], ["updated_at", "2019-10-30 23:39:16.082669"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 2.3ms)
+
+ActionView::MissingTemplate (Missing template teachers/create, application/create with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/Users/janani/Desktop/BJC-Teacher-Tracker/app/views"
+):
+  actionview (4.2.10) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.10) lib/action_view/lookup_context.rb:121:in `find'
+  actionview (4.2.10) lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+  actionview (4.2.10) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.10) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.10) lib/action_view/renderer/renderer.rb:46:in `render_template'
+  actionview (4.2.10) lib/action_view/renderer/renderer.rb:27:in `render'
+  actionview (4.2.10) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.10) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.10) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.10) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.10) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.10) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/benchmark.rb:308:in `realtime'
+  activesupport (4.2.10) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.10) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.10) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.10) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.10) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.10) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.10) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.10) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.10) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.10) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.10) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.10) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.10) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.10) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  rack (1.6.11) lib/rack/etag.rb:24:in `call'
+  rack (1.6.11) lib/rack/conditionalget.rb:38:in `call'
+  rack (1.6.11) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.10) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.10) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.10) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  /Users/janani/.rvm/rubies/ruby-2.4.0/lib/ruby/2.4.0/webrick/server.rb:290:in `block in start_thread'
+
+
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (62.9ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (45.2ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/janani/.rvm/gems/ruby-2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (100.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:39:53 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 32ms (Views: 19.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:39:54 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+myS34sfE4yE860u0qB4Jn6Cc4dl+BPzt2YR2t2jo0JIeqpNOFOAX3RMUrMkE+/rGo9AbOOh/ykZAAVRIg4/0A==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:39:54.801280"], ["updated_at", "2019-10-30 23:39:54.801280"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 26ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:39:54 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 15ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:39:58 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"J5V4beePH6WXDRZOqPlwOBeNJiZ1teobvWXCTXOc7YSVg0D/VMOMdmey6dNeSuf1c4AVzfPsBsETA9bGjDFxFg==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:39:58.352855"], ["updated_at", "2019-10-30 23:39:58.352855"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 28ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:39:58 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 17ms (Views: 16.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:41:38 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 34ms (Views: 33.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:41:41 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hAQpT3CEV/9TBmSUfcRpUFPBYjInh9SH/sZ30vUV5Og2EhHdw8jELKO5mwmLd/6dN8xR2aHeOF1QoGNZCrh4eg==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", ""], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:41:41.280699"], ["updated_at", "2019-10-30 23:41:41.280699"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:41:41 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 16ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:41:42 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1u99wY56+Aw0N+30V9FCFlSutMNEAY1czJZ49yvIB5xk+UVTPTZr38SIEmmhYtXbMKOHKMJYYYZi8Gx81GWbDg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:41:42.169365"], ["updated_at", "2019-10-30 23:41:42.169365"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:41:42 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 16ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:41:42 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"c4HPln9ubDNxbGYe3yJplR0O4aR52wnm2+sgse6wH2bBl/cEzCL/4IHTmYMpkf5YeQPST/+C5Tx1jTQ6ER2D9A==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:41:42.562448"], ["updated_at", "2019-10-30 23:41:42.562448"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:41:42 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 14ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:41:43 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FsA4mjoQCCeIau/jtJ90gsmR7N8RhxLK5MPcNDvh3+Sk1gAIiVyb9HjVEH5CLONPrZzfNJfe/hBKpci/xExDdg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:41:43.026597"], ["updated_at", "2019-10-30 23:41:43.026597"]]
+  [1m[36m (4.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 13ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:41:43 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 17ms (Views: 16.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:02 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 22ms (Views: 21.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2019-10-30 16:42:02 -0700
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-10-30 16:42:02 -0700
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-10-30 16:42:02 -0700
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-10-30 16:42:02 -0700
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-10-30 16:42:02 -0700
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:04 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1P8Su4iMTJXIPa59oLpINsAzpctPYDqly5+VdtcxBcJFE+Y+njQG9CD3qW3K/miPXU42InSl8IWJT19GMvBB3g==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:04.600398"], ["updated_at", "2019-10-30 23:42:04.600398"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 34ms (ActiveRecord: 2.6ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:04 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1P8Su4iMTJXIPa59oLpINsAzpctPYDqly5+VdtcxBcJFE+Y+njQG9CD3qW3K/miPXU42InSl8IWJT19GMvBB3g==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:04.640061"], ["updated_at", "2019-10-30 23:42:04.640061"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:04 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:10 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wE2mylOAOSt0k7i7Mlpv/8no7PqPML1a5jxoI7FHlLRRoVJPRThzSpxZv6tYHk9GVJV/E7T1d3qk7KITVIbQqA==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"Janani Vijaykumar", "email"=>"janani_vijaykumar@berkeley.edu", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", "Janani Vijaykumar"], ["email", "janani_vijaykumar@berkeley.edu"], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:10.613077"], ["updated_at", "2019-10-30 23:42:10.613077"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:10 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 16ms (Views: 15.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:10 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VHW1QvqVxq6Nc3dXFKfXYxE8/mp9/SXEs36dsp6kP27FmUHH7C2Mz2W5cEd+4/fajEFtg0Y47+TxrleCe2V7cg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:10.813319"], ["updated_at", "2019-10-30 23:42:10.813319"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 18ms (ActiveRecord: 1.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:10 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 18ms (Views: 17.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Aovsgmnkkn1t3b22IrLpcvzSksm3J4VAV5N+yefEnuyTZxgHf1zYHIUXuqZI9snLYa8BIIziT2AVQ7T5AgXa8A==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:11.137300"], ["updated_at", "2019-10-30 23:42:11.137300"]]
+  [1m[35m (1.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"McK6cNh9IscqdM+AbjjZlMwrjfoJbl38sr2VRfouZuegLk71zsVopsK+yJAEfPktUVYeEzKrl9zwbV91H+8i+w==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:11.297394"], ["updated_at", "2019-10-30 23:42:11.297394"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 38ms (ActiveRecord: 2.8ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PB0S9XyXip9gqHg8Quc9vk0s5ky+w09KDjOBhdoJXPSt8eZwai/A/ohifywoox0H0FF1pYUGhWpM40u1P8gY6A==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:11.627489"], ["updated_at", "2019-10-30 23:42:11.627489"]]
+  [1m[35m (1.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 18ms (Views: 17.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HwJaGpnVnVZGvKnSK6/zE5QkJuf3bRKryKdIX+Ghk+eO7q6fj23XN652rsJB69OqCVm1Dsyo2IuKd4JvBGDX+w==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:11.916691"], ["updated_at", "2019-10-30 23:42:11.916691"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 14ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 20ms (Views: 19.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:12 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VHy5k2Op9kEcFFgQ/WNx//kFSDv/JoZGjb42tqjDblPFkE0WdRG8IPTeXwCXJ1FGZHjb0sTjTGbPbvyGTQIqTw==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:12.178261"], ["updated_at", "2019-10-30 23:42:12.178261"]]
+  [1m[35m (1.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:12 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:42:12 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"V6w8BN8+DUWzNtpNSKXG4gkIb8iF3DyuMsEFTCe/cN7GQMiByYZHJFv83V0i4eZblHX8Ib4Z9o5wEc98wn40wg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", ""], ["last_name", ""], ["school_name", ""], ["email", ""], ["city", ""], ["state", ""], ["website", ""], ["course", ""], ["snap", ""], ["created_at", "2019-10-30 23:42:12.495199"], ["updated_at", "2019-10-30 23:42:12.495199"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 36ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:42:12 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:09 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 55ms (Views: 33.6ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:10 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Nyfb3AO6V8rfOTqSQRy71L+q/z+6PV4MTVux8MeA/siFMeNOsPbEGS+GxQ+3rywZ26fM1DxkstbjPaV7OC1iWg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:10 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 21ms (Views: 20.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Cghvnl8qLY2E46c81NLxX36DCBNMoumni0A5K5YZW1W4HlcM7Ga+XnRcWKEiYWaSGo47+Mr7BX0lJi2gabTHxw==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 16ms (Views: 15.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:11 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HKHyd4STMWTzTOOazALdMkSS1VUOAmyxJ3o9L5GXdpmut8rlN9+itwPzHAc6sUr/IJ/mvohbgGuJHCmkbjrqCw==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:11 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 23ms (Views: 22.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:18 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"AIbkO+3tlXOZ/lEJll/eBzgDA9YL7BMQVXZs57VnFUiykNypXqEGoGlBrpRg7EnKXA4wPY21/8r7EHhsSsqJ2g==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:18 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 17ms (Views: 16.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:18 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xcF1YBuMmEmWDXrBDR0+DW7E9wOTjB8vtUJ8m9lmOWB3103yqMALmmayhVz7rqnACsnE6BXV8/UbJGgQJsul8g==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:18 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 17ms (Views: 16.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:47:19 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"k85J6rtnZMMNurFZBwdrHW/P9LUc/+/1t8tbQxvbscQh2HF4CCv3EP0FTsTxtPzQC8LHXpqmAy8ZrU/I5HYtVg==", "teacher"=>{"first_name"=>"", "last_name"=>"", "school_name"=>"", "email"=>"", "city"=>"", "state"=>"", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:47:19 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 16ms (Views: 15.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:20 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 32ms (Views: 19.7ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:49:23 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"e7pCsbdYVu9SMPZS0U6lhSYkKhKp78EfPJsXBh9A1/7JrHojBBTFPKKPCc8n/TJIQikZ+S+2LcWS/QON4O1LbA==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:23 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 15ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:49:30 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dsKIHPyLGd9m/u0H6Y9kX9tHr/k5umZNafsbFfOnpM7E1LCOT8eKDJZBEpofPPOSv0qcEr/jipfHnQ+eDAo4XA==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"", "course"=>"", "snap"=>""}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:30 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 17ms (Views: 16.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:49:40 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2ZslH+pXYIT/ywjjbPRiOpa4iTTrHFbcfBe+NGGDmf5rjR2NWRvzVw90936aR/X38rW6321FugbScaq/ni4FbA==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"jfngerf", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"frfwfw", "course"=>"fwerfwrefw", "snap"=>"fwefwe"}, "commit"=>"Create Teacher"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", "jfngerf"], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", "frfwfw"], ["course", "fwerfwrefw"], ["snap", "fwefwe"], ["created_at", "2019-10-30 23:49:40.306075"], ["updated_at", "2019-10-30 23:49:40.306075"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:40 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:55 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 17ms (Views: 15.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:49:56 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:50:08 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 31ms (Views: 30.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2019-10-30 16:50:08 -0700
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-10-30 16:50:08 -0700
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-10-30 16:50:08 -0700
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-10-30 16:50:08 -0700
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-10-30 16:50:08 -0700
+
+
+Started POST "/teachers" for ::1 at 2019-10-30 16:50:25 -0700
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2yr+6UrbQG6g3pV/OPN1q/A9OBde8BUDFCTygHageNja3MmPUqkNRA3WNSV7Xqt7+EUybbEevMuystghxIKo2g==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "school_name"=>"fawfa", "email"=>"janani1120@gmail.com", "city"=>"Cupertino", "state"=>"California", "website"=>"wfewf", "course"=>"fewfw", "snap"=>"fewfw"}, "commit"=>"Create Teacher"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["school_name", "fawfa"], ["email", "janani1120@gmail.com"], ["city", "Cupertino"], ["state", "California"], ["website", "wfewf"], ["course", "fewfw"], ["snap", "fewfw"], ["created_at", "2019-10-30 23:50:25.431783"], ["updated_at", "2019-10-30 23:50:25.431783"]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 36ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:50:25 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 18ms (Views: 17.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:50:26 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:50:27 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 21ms (Views: 20.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:57:49 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 58ms (Views: 57.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-10-30 16:57:49 -0700
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-10-30 16:57:49 -0700
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-10-30 16:57:50 -0700
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-10-30 16:57:50 -0700
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2019-10-30 16:57:50 -0700
+
+
+Started GET "/" for ::1 at 2019-10-30 16:58:00 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 16:58:43 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 19ms (Views: 18.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 17:00:03 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 32ms (Views: 31.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 17:00:41 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 26ms (Views: 25.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 17:03:15 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-10-30 17:03:26 -0700
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 22ms (Views: 21.6ms | ActiveRecord: 0.0ms)
