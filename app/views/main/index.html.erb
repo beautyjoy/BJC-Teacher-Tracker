@@ -1,0 +1,43 @@
+<h1>Sign up for BJC!</h1>
+
+<% if cookies[:saved_teacher] %>
+    Thanks for signing up!
+<% else %>
+    <%= form_for @teacher do |f| %>
+        <div>
+            <%= f.text_field :first_name, placeholder: "First Name"%>
+        </div>
+        
+        <div>
+            <%= f.text_field :last_name, placeholder: "Last Name" %>
+        </div>
+
+        <div>
+            <%= f.text_field :school_name, placeholder: "School Name" %>
+        </div>
+        <div>
+            <%= f.text_field :email, placeholder: "Your Teacher Email" %>
+        </div>
+        <div>
+            <%= f.text_field :city, placeholder: "School City" %>
+        </div>   
+        <div>
+            <%= f.select :state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], prompt: "Select School State" %>
+        </div>
+        <div>
+            <%= f.text_field :website, placeholder: "School Website" %>
+        </div>
+        <%# Add other field to course question %>
+        <div>
+            <%= f.select :course, ["I am teaching BJC as an AP CS Principles course.", "I am teaching BJC but not as an AP CS Principles course.", 
+        "I am using BJC as a resource, but not teaching with it.", "I am a TEALS volunteer, and am teaching the BJC curriculum."], prompt: "Which applies to you?" %>
+        </div>      
+        <div>
+            <%= f.text_field :snap, placeholder: "Snap Username" %>
+        </div>
+        <div>    
+            <%= f.submit %>
+        </div>
+    <% end %>
+
+<% end %>
