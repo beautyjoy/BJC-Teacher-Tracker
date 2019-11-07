@@ -4,7 +4,7 @@ class Teacher < ActiveRecord::Base
   def self.from_omniauth(auth)
     # Creates a new teacher only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |teacher|
-      teacher.first_name = auth.info.first_name
+      teacher.first_name = auth.info.name
       teacher.email = auth.info.email
     end
   end
