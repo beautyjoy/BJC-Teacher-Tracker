@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   #   end
 
   resources :teachers
+  resources :admins
 
   root to: 'main#index'
 
