@@ -1,4 +1,4 @@
-class Administrator < ActiveRecord::Base
+class Admin < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
   def self.from_omniauth(auth)

@@ -1,10 +1,10 @@
-class AdminController < ApplicationController
+class AdminsController < ApplicationController
   def new
-    @administrator = Administrator.new
+    @administrator = Admin.new
   end
 
   def create
-    @administrator = Administrator.new(params[:user])
+    @administrator = Admin.new(params[:user])
     if @administrator.save
       flash[:notice] = "You signed up successfully"
       flash[:color]= "valid"
@@ -15,10 +15,14 @@ class AdminController < ApplicationController
     render "new"
   end
 
+  def index
+    render "main/admin"
+  end
+
   def googleAuth
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
-    adminastrator = Adminastrator.from_omniauth(access_token)
+    adminastrator = Admin.from_omniauth(access_token)
     log_in(admin)
     # Access_token is used to authenticate request made from the rails application to the google server
     adminastrator.google_token = access_token.credentials.token
