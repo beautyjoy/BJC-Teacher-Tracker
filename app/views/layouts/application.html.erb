@@ -3,6 +3,7 @@
 <head>
   <title>BjcTeacherTracker</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" media="screen" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -11,8 +12,7 @@
 <body>
 <nav class='navbar navbar-light bg-light'>
   <a class='navbar-brand' href='/'>
-    <img src='...' width='30' height='30' alt='' />
-    BJC
+    <img src='https://bjc.berkeley.edu/assets/img/bjc.png' width='30' height='30' alt='BJC' />
   </a>
 
   <div>
@@ -33,6 +33,61 @@
   <% end %>
   <%= yield %>
 </div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 social-icons">
+        <a href="https://twitter.com/cspbjc">
+          <i
+            class="fa fa-twitter-square fa-2x"
+            aria-label="Visit BJC Twitter"></i>
+        </a>
+        <a href="https://facebook.com/cspbjc">
+          <i
+            class="fa fa-facebook-square fa-2x"
+            aria-label="Visit BJC Facebook"></i>
+        </a>
+        <a href="https://instagram.com/cspbjc">
+          <i
+            class="fa fa-instagram fa-2x"
+            aria-label="Visit BJC Instagram"></i>
+        </a>
+        <a href="/contact">
+          <i class="fa fa-envelope-o fa-2x"
+             aria-label="Send us an email"
+             style="position: relative; top -2px"></i>
+        </a>
+      </div>
+    </div>
+    <div class="row footer-links">
+      <div class="col-xs-12">
+        <span class="footer--requiredNotice">
+        <span xmlns:dct="https://purl.org/dc/terms/" property="dct:title">
+          The Beauty and Joy of Computing
+        </span>
+        ©
+        <span xmlns:cc="https://creativecommons.org/ns#" property="cc:attributionName">
+          University of California, Berkeley
+        </span>
+        is licensed under a
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+        </a>.
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+        </a>
+    </span>
+      <br />
+      <br />
+      <span class="footer--requiredNotice">
+        This material is based upon work supported by the National Science Foundation under Grant No. 1138596 and 1441075. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
+      </span>
+      <br />
+      <p>Last updated at: <time>2019-10-02 00:01:53 +0000</time></p>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

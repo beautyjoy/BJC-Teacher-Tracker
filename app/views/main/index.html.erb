@@ -1,79 +1,80 @@
-<h1 id="form-page-title">Sign up for BJC!</h1>
+<div id='sign-up-form-container'>
+  <h1 id="form-page-title">Sign up for BJC!</h1>
 
-<% if cookies[:saved_teacher] %>
-  Thanks for signing up!
-<% else %>
-  <%= form_for @teacher do |f| %>
+  <% if cookies[:saved_teacher] %>
+    Thanks for signing up!
+  <% else %>
+    <%= form_for @teacher do |f| %>
+      <div class='form-input-group'>
+        <h3>Your Information</h2>
+        <div class='row'>
+          <div class='col-6'>
+            <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+          </div>
+          
+          <div class='col-6'>
+            <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control' %>
+          </div>
+        </div>
 
-    <div class='form-input-group'>
-      <h3>Your Information</h2>
-      <div class='row'>
-        <div class='col-6'>
-          <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+        <div class='row'>
+          <div class='col-6'>
+            <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control' %>
+          </div>
+
+          <div class='col-6'>
+            <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class='row'>
+          <div class='col-12'>
+            <%= f.select(
+              :course, 
+              [
+                'I am teaching BJC as an AP CS Principles course.', 
+                'I am teaching BJC but not as an AP CS Principles course.', 
+                'I am using BJC as a resource, but not teaching with it.', 
+                'I am a TEALS volunteer, and am teaching the BJC curriculum.'
+              ],
+              {
+                include_blank: "Which applies to you?"
+              }, 
+              { 
+                :class => 'form-control' 
+              }
+            ) %>
+          </div> 
+        </div>
+      </div>
+
+      <div class='form-input-group'>
+        <h3>Your School</h2>
+
+        <div class='row'>
+          <div class='col-6'>
+            <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control' %>
+          </div>
+
+          <div class='col-4'>
+            <%= f.text_field :city, placeholder: 'School City', class: 'form-control' %>
+          </div>
+
+          <div class='col-2'>
+            <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control' }) %>
+          </div>
         </div>
         
-        <div class='col-6'>
-          <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control' %>
-        </div>
-      </div>
-
-      <div class='row'>
-        <div class='col-6'>
-          <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control' %>
+        <div>
+          <%= f.text_field :website, placeholder: "School Website", class: "form-control" %>
         </div>
 
-        <div class='col-6'>
-          <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control" %>
-        </div>
-      </div>
-
-      <div class='row'>
-        <div class='col-12'>
-          <%= f.select(
-            :course, 
-            [
-              'I am teaching BJC as an AP CS Principles course.', 
-              'I am teaching BJC but not as an AP CS Principles course.', 
-              'I am using BJC as a resource, but not teaching with it.', 
-              'I am a TEALS volunteer, and am teaching the BJC curriculum.'
-            ],
-            {
-              include_blank: "Which applies to you?"
-            }, 
-            { 
-              :class => 'form-control' 
-            }
-          ) %>
-        </div> 
-      </div>
-    </div>
-
-    <div class='form-input-group'>
-      <h3>Your School</h2>
-
-      <div class='row'>
-        <div class='col-6'>
-          <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control' %>
-        </div>
-
-        <div class='col-4'>
-          <%= f.text_field :city, placeholder: 'School City', class: 'form-control' %>
-        </div>
-
-        <div class='col-2'>
-          <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control' }) %>
-        </div>
+        <%# Add other field to course question %>
       </div>
       
-      <div>
-        <%= f.text_field :website, placeholder: "School Website", class: "form-control" %>
+      <div>    
+        <%= f.submit 'Submit', :class => 'btn btn-primary', id: 'form-submit-button' %>
       </div>
-
-      <%# Add other field to course question %>
-    </div>
-    
-    <div>    
-      <%= f.submit 'Submit', :class => 'btn btn-primary' %>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

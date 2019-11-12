@@ -15,12 +15,39 @@
  */
 
 html, body {
-  height: 100%;
+  min-height: 100%;
 }
 
-.page-footer {
-  bottom: 0;
-  position: absolute;
+footer {
+  margin: 0;
+  background-color: #18568C;
+  color: #FFF;
+  padding-top: 25px;
+}
+
+footer .container .social-icons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .container .social-icons a {
+  margin-right: 10px;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+footer .footer-links {
+  max-width: 80em;
+  margin: 0.2em auto;
+  padding: 1em;
+  text-align: center;
+  font-size: 12px;
+}
+
+.social-icons > a {
+  color: #fff;
 }
 
 #form-page-title {
@@ -39,4 +66,8 @@ input, select {
   border-width: 1px;
   border-radius: 4px;
   margin-bottom: 15px;
+}
+
+#sign-up-form-container {
+  margin-bottom: 80px;
 }
