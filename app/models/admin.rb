@@ -4,7 +4,8 @@ class Admin < ActiveRecord::Base
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |administrator|
-      administrator.first_name = auth.info.name
+      administrator.first_name = auth.info.first_name
+      administrator.last_name = auth.info.last_name
       administrator.email = auth.info.email
     end
   end

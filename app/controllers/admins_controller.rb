@@ -7,10 +7,11 @@ class AdminsController < ApplicationController
     @administrator = Admin.new(params[:user])
     if @administrator.save
       flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
+      # Color for the flash may not have been implemented.
+      flash[:color] = "valid"
     else
       flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
+      flash[:color] = "invalid"
     end
     render "new"
   end
