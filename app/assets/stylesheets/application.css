@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+input, select{
+  width: 100%;
+  margin-bottom: 15px;
+}

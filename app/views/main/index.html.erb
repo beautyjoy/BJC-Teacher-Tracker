@@ -5,35 +5,35 @@
 <% else %>
     <%= form_for @teacher do |f| %>
         <div>
-            <%= f.text_field :first_name, placeholder: "First Name"%>
+            <%= f.text_field :first_name, placeholder: "First Name", class: "form-control" %>
         </div>
         
         <div>
-            <%= f.text_field :last_name, placeholder: "Last Name" %>
+            <%= f.text_field :last_name, placeholder: "Last Name", class: "form-control" %>
         </div>
 
         <div>
-            <%= f.text_field :school_name, placeholder: "School Name" %>
+            <%= f.text_field :school_name, placeholder: "School Name", class: "form-control" %>
         </div>
         <div>
-            <%= f.text_field :email, placeholder: "Your Teacher Email" %>
+            <%= f.text_field :email, placeholder: "Your Teacher Email", class: "form-control" %>
         </div>
         <div>
-            <%= f.text_field :city, placeholder: "School City" %>
+            <%= f.text_field :city, placeholder: "School City", class: "form-control" %>
         </div>   
         <div>
-            <%= f.select :state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], prompt: "Select School State" %>
+            <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "Select School State"}, { :class => 'form-control' }) %>
         </div>
         <div>
-            <%= f.text_field :website, placeholder: "School Website" %>
+            <%= f.text_field :website, placeholder: "School Website", class: "form-control" %>
         </div>
         <%# Add other field to course question %>
         <div>
-            <%= f.select :course, ["I am teaching BJC as an AP CS Principles course.", "I am teaching BJC but not as an AP CS Principles course.", 
-        "I am using BJC as a resource, but not teaching with it.", "I am a TEALS volunteer, and am teaching the BJC curriculum."], prompt: "Which applies to you?" %>
+            <%= f.select(:course, ['I am teaching BJC as an AP CS Principles course.', 'I am teaching BJC but not as an AP CS Principles course.', 
+            'I am using BJC as a resource, but not teaching with it.', 'I am a TEALS volunteer, and am teaching the BJC curriculum.'], {include_blank: "Which applies to you?"}, { :class => 'form-control' }) %>
         </div>      
         <div>
-            <%= f.text_field :snap, placeholder: "Snap Username" %>
+            <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control" %>
         </div>
         <div>    
             <%= f.submit 'Submit', :class => 'btn btn-primary' %>
