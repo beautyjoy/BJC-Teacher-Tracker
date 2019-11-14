@@ -42,6 +42,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-cucumber'
+  gem 'guard-shell'
 end
 
 group :development do
