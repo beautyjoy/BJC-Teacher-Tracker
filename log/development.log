@@ -1538,3 +1538,4 @@ Started GET "/" for ::1 at 2019-10-30 17:03:26 -0700
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (4.1ms)
 Completed 200 OK in 22ms (Views: 21.6ms | ActiveRecord: 0.0ms)
+Initializing jasmine.yml configuration
