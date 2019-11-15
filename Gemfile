@@ -30,6 +30,8 @@ gem 'tzinfo-data'
 # for managing API keys
 gem 'figaro'
 
+# Generate attr_accessors that transparently encrypt and decrypt attributes.
+gem 'attr_encrypted', '~> 3.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
