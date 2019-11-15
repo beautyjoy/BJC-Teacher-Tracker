@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191115080526) do
+ActiveRecord::Schema.define(version: 20191108235318) do
 
   create_table "admins", force: :cascade do |t|
     t.string "encrypted_first_name"
