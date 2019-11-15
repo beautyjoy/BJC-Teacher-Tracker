@@ -48,7 +48,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   #gem "sqlite3", "~> 1.3.6"
-  gem 'pg'
+  gem 'pg', '~> 0.15'
 end
 
 group :development do
@@ -61,7 +61,7 @@ end
 
 # make sure the following gems are in your production group:
 group :production do
-  gem 'pg'              # use PostgreSQL in production (Heroku)
+  gem 'pg', '~> 0.15'              # use PostgreSQL in production (Heroku)
   gem 'rails_12factor'  # Heroku-specific production settings
 end
 
