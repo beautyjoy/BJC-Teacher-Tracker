@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # for google oauth
 gem 'omniauth-google-oauth2'
 
+# Generate attr_accessors that transparently encrypt and decrypt attributes.
+gem 'attr_encrypted', '~> 3.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
