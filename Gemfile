@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # for google oauth
 gem 'omniauth-google-oauth2'
+# for timezone information for windows users
+gem 'tzinfo-data'
+# for managing API keys
+gem 'figaro'
 
 
 
