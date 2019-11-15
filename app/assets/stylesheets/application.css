@@ -13,3 +13,61 @@
  *= require_tree .
  *= require_self
  */
+
+html, body {
+  min-height: 100%;
+}
+
+footer {
+  margin: 0;
+  background-color: #18568C;
+  color: #FFF;
+  padding-top: 25px;
+}
+
+footer .container .social-icons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .container .social-icons a {
+  margin-right: 10px;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+footer .footer-links {
+  max-width: 80em;
+  margin: 0.2em auto;
+  padding: 1em;
+  text-align: center;
+  font-size: 12px;
+}
+
+.social-icons > a {
+  color: #fff;
+}
+
+#form-page-title {
+  margin: 25px 0px;
+}
+
+input, select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-input-group {
+  padding: 20px 25px 10px 25px;
+  border-color: #999;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+#sign-up-form-container {
+  margin-bottom: 80px;
+}
