@@ -34,6 +34,8 @@ gem 'figaro'
 # Generate attr_accessors that transparently encrypt and decrypt attributes.
 gem 'attr_encrypted', '~> 3.1.0'
 
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -47,6 +49,11 @@ gem 'attr_encrypted', '~> 3.1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-cucumber'
+  gem 'guard-shell'
   #gem "sqlite3", "~> 1.3.6"
   gem 'pg', '~> 0.15'
 end
@@ -57,6 +64,18 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+# setup Cucumber, RSpec, Guard support
+group :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels' # basic imperative step defs
+  gem 'database_cleaner' # required by Cucumber
+  gem 'factory_girl_rails' # if using FactoryGirl
+  gem 'metric_fu'        # collect code metrics
 end
 
 # make sure the following gems are in your production group:
