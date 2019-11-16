@@ -5,7 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.10'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
-gem "sqlite3", "~> 1.3.6"
+#gem 'pg'
+#gem "sqlite3", "~> 1.3.6"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,6 +31,8 @@ gem 'tzinfo-data'
 # for managing API keys
 gem 'figaro'
 
+# Generate attr_accessors that transparently encrypt and decrypt attributes.
+gem 'attr_encrypted', '~> 3.1.0'
 
 
 
@@ -42,6 +45,7 @@ gem 'figaro'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -50,6 +54,8 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
+  #gem "sqlite3", "~> 1.3.6"
+  gem 'pg', '~> 0.15'
 end
 
 group :development do
@@ -70,5 +76,11 @@ group :test do
   gem 'database_cleaner' # required by Cucumber
   gem 'factory_girl_rails' # if using FactoryGirl
   gem 'metric_fu'        # collect code metrics
+end
+
+# make sure the following gems are in your production group:
+group :production do
+  gem 'pg', '~> 0.15'              # use PostgreSQL in production (Heroku)
+  gem 'rails_12factor'  # Heroku-specific production settings
 end
 
