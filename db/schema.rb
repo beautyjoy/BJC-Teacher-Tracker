@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20191108235318) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "admins", force: :cascade do |t|
     t.string "encrypted_first_name"
     t.string "encrypted_last_name"

@@ -1,6 +1,7 @@
 class TeachersController < ApplicationController
     def create
         @teacher = Teacher.new teacher_params
+        puts @teacher
         if @teacher.save
             cookies[:saved_teacher] = true
             redirect_to root_path

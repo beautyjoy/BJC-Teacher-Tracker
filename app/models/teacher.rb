@@ -1,6 +1,7 @@
 class Teacher < ActiveRecord::Base
   validates :first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, presence: true
 
+  
   attr_encrypted_options.merge!(:encode => true)
   attr_encrypted :first_name, :key => Figaro.env.FIRST_NAMEKEY
   ENV["USERKEY"]
@@ -21,4 +22,6 @@ class Teacher < ActiveRecord::Base
       teacher.email = auth.info.email
     end
   end
+
 end
+

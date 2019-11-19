@@ -54,8 +54,8 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
-  #gem "sqlite3", "~> 1.3.6"
-  gem 'pg', '~> 0.15'
+  gem "sqlite3", "~> 1.3.6"
+  # gem 'pg', '~> 0.15'
 end
 
 group :development do
