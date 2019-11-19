@@ -3,7 +3,9 @@ class TeachersController < ApplicationController
         @teacher = Teacher.new teacher_params
         puts @teacher
         if @teacher.save
-            cookies[:saved_teacher] = true
+            flash[:saved_teacher] = true
+            message = TeacherMailer.welcome_email(@teacher.email)
+            message.deliver_now
             redirect_to root_path
         else
             redirect_to root_path, alert: "Failed to submit information :("

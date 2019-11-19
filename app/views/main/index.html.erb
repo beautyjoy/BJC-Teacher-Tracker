@@ -1,7 +1,7 @@
 <div id='sign-up-form-container'>
   <h1 id="form-page-title">Sign up for BJC!</h1>
 
-  <% if cookies[:saved_teacher] %>
+  <% if flash[:saved_teacher] %>
     Thanks for signing up!
   <% else %>
     <%= form_for @teacher do |f| %>
