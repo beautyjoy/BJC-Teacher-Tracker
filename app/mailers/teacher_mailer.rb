@@ -1,7 +1,7 @@
 class TeacherMailer < ApplicationMailer
-    default from: 'developer.murthy@gmail.com'
  
-  def welcome_email(email)
-    mail(to: email, subject: 'Welcome to My Awesome Site')
+  def welcome_email(teacher)
+  	@teacher = teacher
+    mail(to: @teacher.email, subject: 'Welcome to My Awesome Site')
   end
 end

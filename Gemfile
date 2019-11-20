@@ -45,6 +45,8 @@ gem 'attr_encrypted', '~> 3.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "sqlite3", "~> 1.3.6"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,7 +56,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
-  gem "sqlite3", "~> 1.3.6"
+  
   # gem 'pg', '~> 0.15'
 end
 
