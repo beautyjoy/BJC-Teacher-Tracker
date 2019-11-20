@@ -1544,3 +1544,218 @@ Net::OpenTimeout (execution expired):
   Rendered /Users/tastypineapple/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
   Rendered /Users/tastypineapple/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
   Rendered /Users/tastypineapple/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (27.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddForeignKeyConstraintToActiveStorageAttachmentsForBlobId (20191116010039)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddForeignKeyConstraintToActiveStorageAttachmentsForBlobId (20191116010039)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddForeignKeyConstraintToActiveStorageAttachmentsForBlobId (20191116010039)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for ::1 at 2019-11-20 11:17:37 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (69.5ms)
+Completed 200 OK in 719ms (Views: 683.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-20 11:17:39 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-20 11:17:39 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-20 11:17:39 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-20 11:17:39 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-20 11:17:39 -0800
+
+
+Started GET "/" for ::1 at 2019-11-20 11:26:17 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.9ms)
+Completed 200 OK in 291ms (Views: 266.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-20 11:26:36 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yuGNx+joHW0azfl1KH5TCYhfAZVeizIyEiN6f1ZL0nzITSgTGltMTjbtMin9rV6QekzBr26OsShW4GBYX+tjEQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"", "school_name"=>"", "city"=>"", "state"=>"", "website"=>""}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 81ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-20 11:26:36 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 113ms (Views: 111.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-20 11:27:18 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yUSQVQVv4tYmUkKDyRzt0AqVSx84ZCly70fKr7qzk1vL6DWB99yz9Qpyid8cz+BJ+IaLJQhhqmirhNCIsxMiNg==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (4.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "IeBKK4qnPe4axbczdYC9U14RAAByIg==\n"], ["encrypted_last_name", "ssoMoT7AeZkEg1Vvgx/BhboRXd2KZ0XSV6w=\n"], ["encrypted_school_name", "z5/1gMAoUgMZeppPRKALhugLFd3PxXhZ\n"], ["encrypted_email", "PERMSM8iIFcTavT0KVW8h5cQivcRawXHGyBrCLnGifkT6ef3kzc4PdOg4WA=\n"], ["encrypted_city", "GJm7Zx/2juIrbtwtiz4uOZ2X+PPwsNNE\n"], ["encrypted_state", "zxRLs00MiMlOj3Z2qSS8FNlE\n"], ["encrypted_website", "Z2NSO8ikLXAVAoFvaomzkPSfNeSFu1X+u3YybA==\n"], ["encrypted_course", "dPXqXEZtjp5TxZF+Q14N3HRiFJAKAqcOS73EvrMu8n88nrTxiUBy6y6PnpXK\nPaCZLvBD909qIQA1YUeINlzMkA==\n"], ["encrypted_snap", "E7DHW917qN4P7/dJQkW+SElADijDtVCAPQ==\n"], ["created_at", "2019-11-20 19:27:18.878792"], ["updated_at", "2019-11-20 19:27:18.878792"]]
+  [1m[35m (16.0ms)[0m  commit transaction
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (1.0ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 566.8ms
+
+Sent mail to daltonsurprenant98@gmail.com (460.2ms)
+Date: Wed, 20 Nov 2019 11:27:19 -0800
+From: developer.murthy@gmail.com
+To: daltonsurprenant98@gmail.com
+Message-ID: <5dd59397843ac_43fc3a2de8467227@Desktop.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Completed 500 Internal Server Error in 1119ms (ActiveRecord: 19.9ms)
+
+Net::SMTPAuthenticationError (535-5.7.8 Username and Password not accepted. Learn more at
+):
+  app/controllers/teachers_controller.rb:8:in `create'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (975.9ms)
+
+
+Started GET "/" for ::1 at 2019-11-20 11:40:11 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 336ms (Views: 303.1ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-20 11:40:46 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kJ0jIm0dS8fODLPRzRCfvxD2Qce2VMG5FWx9iT40ineSMYb2n64a5OIseI0Yw5Im4uWB/YZRQqNRr2euN5Q7Gg==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "2uldwAjDdKaJy+9Zv5FzIFxDFqLVtw==\n"], ["encrypted_last_name", "sxiB0SDXDEU6UBDLz88ZNr/faTwG1j5SsrA=\n"], ["encrypted_school_name", "zyb7AU1Q8PBqQS6CC8Wi2Oi+vfqkpDpQ\n"], ["encrypted_email", "a9dykwX2GzniSrpPd3jog0tOrsQSbDbXbRYmjyPf2iR2LCn7efowkMrOuIo=\n"], ["encrypted_city", "qyuHUIk5L4sBtfmAIWW8ZdTQyGf6haEc\n"], ["encrypted_state", "Z22b4pTZhkJYJoRhdS4K2sbm\n"], ["encrypted_website", "Obj9nE+dM6lROJVQk4tUEOpLAXkqvBC+YFdO4A==\n"], ["encrypted_course", "Oyjmqjb8puu6ys5jT3FFU7zo56MTLTQBjc0J329kG30PSw0HjRpdGJCxVlFo\n/YQ4tJHdF9Jxa3/xKK4SIvsi/A==\n"], ["encrypted_snap", "vumc5jbldh/p52DyPQiG9be9cTO3W4ckNw==\n"], ["created_at", "2019-11-20 19:40:46.933055"], ["updated_at", "2019-11-20 19:40:46.933055"]]
+  [1m[35m (17.0ms)[0m  commit transaction
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.0ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 484.7ms
+
+Sent mail to daltonsurprenant98@gmail.com (309.1ms)
+Date: Wed, 20 Nov 2019 11:40:47 -0800
+From: bjc.site@gmail.com
+To: daltonsurprenant98@gmail.com
+Message-ID: <5dd596bf7802a_35443a98804425e@Desktop.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Completed 500 Internal Server Error in 894ms (ActiveRecord: 18.0ms)
+
+Net::SMTPAuthenticationError (535-5.7.8 Username and Password not accepted. Learn more at
+):
+  app/controllers/teachers_controller.rb:7:in `create'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (951.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-20 11:43:03 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 331ms (Views: 305.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-20 11:43:29 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Csno8z1gD+L5Pyys/0pfmaZpmOAYx9ltT7FO0UoF6TUIZU0nz9NewdUf5/AqmVIAVHpY2ijCWncLclT2Q6VYWA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "+rvn474SfQ3TLP81jTcp7zKD6yNRFQ==\n"], ["encrypted_last_name", "g39l7dtvChc/nkog7hDvxPT5ffPltT6WIlY=\n"], ["encrypted_school_name", "ERgAuoOmdcVeSDIqJ2AgVoDpt3gnOP3q\n"], ["encrypted_email", "W37yEL6w8pQY4jpQTfhyoGQZp1kPYHGoHTaLIoc1/6N74jJNgMX0SXORHVQ=\n"], ["encrypted_city", "jYH0L8e6WzTltiBXhySxaFAYI0kI9QCY\n"], ["encrypted_state", "ZTU5BuA0DZDZjthpZR9k/gzo\n"], ["encrypted_website", "uECB3MsNJHJK6r0QXeJ7lm4g1JyF2FBrrBX6pQ==\n"], ["encrypted_course", "cJTH01X2y/8r5YOdU20INDKSMxaE65eDImed4wyuLmWU6wQKpIku3K/zL9Gq\nf6KCl405/luiPHjzyzG45iIUtw==\n"], ["encrypted_snap", "RVR4eqgp3IDmLwwNZBXYvLxc3WcSTXA9kw==\n"], ["created_at", "2019-11-20 19:43:29.120738"], ["updated_at", "2019-11-20 19:43:29.120738"]]
+  [1m[35m (14.8ms)[0m  commit transaction
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.0ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 490.7ms
+
+Sent mail to daltonsurprenant98@gmail.com (1672.7ms)
+Date: Wed, 20 Nov 2019 11:43:29 -0800
+From: beautyandjoy2019@gmail.com
+To: daltonsurprenant98@gmail.com
+Message-ID: <5dd59761a7be5_46d02c12fd0424d3@Desktop.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 2281ms (ActiveRecord: 17.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-20 11:43:31 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 99ms (Views: 97.4ms | ActiveRecord: 0.0ms)

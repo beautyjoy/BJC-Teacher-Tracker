@@ -4,8 +4,7 @@ class TeachersController < ApplicationController
         puts @teacher
         if @teacher.save
             flash[:saved_teacher] = true
-            message = TeacherMailer.welcome_email(@teacher.email)
-            message.deliver_now
+            TeacherMailer.welcome_email(@teacher).deliver_now
             redirect_to root_path
         else
             redirect_to root_path, alert: "Failed to submit information :("
