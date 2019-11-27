@@ -1,5 +1,5 @@
 class Teacher < ActiveRecord::Base
-  validates :first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, presence: true
+  validates :first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, :other, presence: true
 
   
   # attr_encrypted_options.merge!(:encode => true)
@@ -25,6 +25,7 @@ class Teacher < ActiveRecord::Base
   attr_encrypted :website, :key => SecureRandom.base64(32).first(32)
   attr_encrypted :course, :key => SecureRandom.base64(32).first(32)
   attr_encrypted :snap, :key => SecureRandom.base64(32).first(32)
+  attr_encrypted :other, :key => SecureRandom.base64(32).first(32)
 
   def self.from_omniauth(auth)
     # Creates a new teacher only if it doesn't exist

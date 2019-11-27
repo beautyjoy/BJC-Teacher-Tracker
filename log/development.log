@@ -1759,3 +1759,213 @@ Started GET "/" for ::1 at 2019-11-20 11:43:31 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (0.0ms)
 Completed 200 OK in 99ms (Views: 97.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:35:12 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (49.8ms)
+Completed 200 OK in 991ms (Views: 943.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-27 13:35:14 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-27 13:35:14 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-27 13:35:14 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-27 13:35:14 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-27 13:35:14 -0800
+
+
+Started GET "/" for ::1 at 2019-11-27 13:42:05 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 72ms (Views: 69.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:42:17 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 22ms (Views: 21.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:42:54 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 48ms (Views: 47.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:45:08 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.5ms)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/index.html.erb:44: syntax error, unexpected tSTRING_BEG, expecting ']'
+                'Other - PLease specify Below'
+                ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/index.html.erb:45: syntax error, unexpected ']', expecting ')'
+              ],
+              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/index.html.erb:48: syntax error, unexpected ',', expecting ')'
+              }, 
+               ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/index.html.erb:52: syntax error, unexpected ')', expecting end
+            ) );@output_buffer.safe_append='
+              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/index.html.erb:96: syntax error, unexpected ensure, expecting end-of-input
+          ensure
+          ^~~~~~):
+  app/views/main/index.html.erb:44: syntax error, unexpected tSTRING_BEG, expecting ']'
+  app/views/main/index.html.erb:45: syntax error, unexpected ']', expecting ')'
+  app/views/main/index.html.erb:48: syntax error, unexpected ',', expecting ')'
+  app/views/main/index.html.erb:52: syntax error, unexpected ')', expecting end
+  app/views/main/index.html.erb:96: syntax error, unexpected ensure, expecting end-of-input
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (45.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (64.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (128.1ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:45:47 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (7.4ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `other' for #<Teacher:0x00007fa01d4290b8>):
+    55:         
+    56:         <div class='row'>
+    57:             <h6>If Other, Please Specify</h6>
+    58:             <%= f.text_field :other, placeholder: 'Other', class: 'form-control' %>
+    59:         </div>
+    60: 
+    61:       </div>
+  app/views/main/index.html.erb:58:in `block in _app_views_main_index_html_erb__1051653372685585820_70162831214340'
+  app/views/main/index.html.erb:7:in `_app_views_main_index_html_erb__1051653372685585820_70162831214340'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (30.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (29.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (62.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:46:51 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (8.9ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `other' for #<Teacher:0x00007fa021472048>):
+    55:         
+    56:         <div class='row'>
+    57:             <h6>If Other, Please Specify</h6>
+    58:             <!-- <%= f.text_field :other, placeholder: 'Other', class: 'form-control' %> -->
+    59:         </div>
+    60: 
+    61:       </div>
+  app/views/main/index.html.erb:58:in `block in _app_views_main_index_html_erb__1051653372685585820_70162864898860'
+  app/views/main/index.html.erb:7:in `_app_views_main_index_html_erb__1051653372685585820_70162864898860'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (24.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (52.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (28.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (63.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:47:08 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (9.5ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `other' for #<Teacher:0x00007fa01cf03250>):
+    55:         
+    56:         <div class='row'>
+    57:             <h6>If Other, Please Specify</h6>
+    58:             <! -- <%= f.text_field :other, placeholder: 'Other', class: 'form-control' %> -->
+    59:         </div>
+    60: 
+    61:       </div>
+  app/views/main/index.html.erb:58:in `block in _app_views_main_index_html_erb__1051653372685585820_70162828516460'
+  app/views/main/index.html.erb:7:in `_app_views_main_index_html_erb__1051653372685585820_70162828516460'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (41.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (26.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (53.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:47:53 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 84ms (Views: 77.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:48:17 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 21ms (Views: 19.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:49:14 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (151.0ms)
+Completed 200 OK in 208ms (Views: 207.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:54:48 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (23.8ms)
+Completed 200 OK in 99ms (Views: 91.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:55:02 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 44ms (Views: 42.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 13:57:05 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 67ms (Views: 43.7ms | ActiveRecord: 1.2ms)
