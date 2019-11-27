@@ -9,33 +9,39 @@
         <h3>Your Information</h2>
         <div class='row'>
           <div class='col-6'>
+            <h6>First Name</h6>
             <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
           </div>
           
           <div class='col-6'>
+            <h6>Last Name</h6>
             <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control' %>
           </div>
         </div>
 
         <div class='row'>
           <div class='col-6'>
+            <h6>Teacher Email</h6>
             <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control' %>
           </div>
 
           <div class='col-6'>
+            <h6>Snap Username</h6>
             <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control" %>
           </div>
         </div>
 
         <div class='row'>
           <div class='col-12'>
+            <h6>Which Applies to You</h6>
             <%= f.select(
               :course, 
               [
                 'I am teaching BJC as an AP CS Principles course.', 
                 'I am teaching BJC but not as an AP CS Principles course.', 
                 'I am using BJC as a resource, but not teaching with it.', 
-                'I am a TEALS volunteer, and am teaching the BJC curriculum.'
+                'I am a TEALS volunteer, and am teaching the BJC curriculum.',
+                'Other - PLease specify Below'
               ],
               {
                 include_blank: "Which applies to you?"
@@ -46,6 +52,14 @@
             ) %>
           </div> 
         </div>
+        
+        <div class='row'>
+          <div class='col-12'>
+            <h6>Other (if none, write N/A)</h6>
+            <%= f.text_field :other, placeholder: "Other", class: "form-control" %>
+            </div>
+        </div>
+
       </div>
 
       <div class='form-input-group'>
@@ -53,19 +67,23 @@
 
         <div class='row'>
           <div class='col-6'>
+          <h6>School Name</h6>
             <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control' %>
           </div>
 
           <div class='col-4'>
+          <h6>School City</h6>
             <%= f.text_field :city, placeholder: 'School City', class: 'form-control' %>
           </div>
 
           <div class='col-2'>
+          <h6>State</h6>
             <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control' }) %>
           </div>
         </div>
         
         <div>
+          <h6>School Website</h6>
           <%= f.text_field :website, placeholder: "School Website", class: "form-control" %>
         </div>
 
