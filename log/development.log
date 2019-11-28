@@ -2097,3 +2097,41 @@ Completed 200 OK in 142ms (Views: 107.9ms | ActiveRecord: 0.9ms)
   [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
   [1m[35m (0.1ms)[0m  begin transaction
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (7.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  select sqlite_version(*)
+  [1m[36m (5.5ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "school_name" varchar, "email" varchar, "city" varchar, "state" varchar, "website" varchar, "course" varchar, "snap" varchar, "other" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (43.4ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (9.4ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "google_token" varchar, "google_refresh_token" varchar) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (38.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.8ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["email", "janani_vijaykumar@berkeley.edu"], ["school_name", "Monta Vista High School"], ["city", "Cupertino"], ["state", "California"], ["website", "https://mvhs.fuhsd.org"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.896831"], ["updated_at", "2019-11-28 03:05:51.896831"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["email", "kpzhu@berkeley.edu"], ["school_name", "Cupertino High School"], ["city", "Cupertino"], ["state", "California"], ["website", "https://chs.fuhsd.org"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.905232"], ["updated_at", "2019-11-28 03:05:51.905232"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Dalton"], ["last_name", "Surprenant"], ["email", "daltons@berkeley.edu"], ["school_name", "San Diego High School"], ["city", "San Diego"], ["state", "California"], ["website", "https://sdhs.org"], ["course", "I am using BJC as a resource, but not teaching with it."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.925663"], ["updated_at", "2019-11-28 03:05:51.925663"]]
+  [1m[35m (3.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Ye"], ["last_name", "Wang"], ["email", "wangye@berkeley.edu"], ["school_name", "New York High School"], ["city", "New York"], ["state", "New York"], ["website", "https://nyhs.fuhsd.org"], ["course", "I am a TEALS volunteer, and am teaching the BJC curriculum."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.932189"], ["updated_at", "2019-11-28 03:05:51.932189"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Zachary"], ["last_name", "Chao"], ["email", "zachchao@berkeley.edu"], ["school_name", "Santa Barbara High School"], ["city", "Santa Barbara"], ["state", "California"], ["website", "https://sbhs.org"], ["course", "Other"], ["snap", "N/A"], ["other", "For a club"], ["created_at", "2019-11-28 03:05:51.939998"], ["updated_at", "2019-11-28 03:05:51.939998"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Varun"], ["last_name", "Murthy"], ["email", "murthy@berkeley.edu"], ["school_name", "Houston High School"], ["city", "Houston"], ["state", "Texas"], ["website", "https://houstonTexas.org"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.945931"], ["updated_at", "2019-11-28 03:05:51.945931"]]
+  [1m[36m (6.3ms)[0m  [1mcommit transaction[0m
