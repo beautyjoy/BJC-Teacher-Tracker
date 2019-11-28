@@ -10,6 +10,7 @@ class CreateTeachers < ActiveRecord::Migration
       t.string :encrypted_website
       t.string :encrypted_course
       t.string :encrypted_snap
+      t.string :encrypted_other
 
       t.timestamps null: false
     end

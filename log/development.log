@@ -1969,3 +1969,131 @@ Started GET "/" for ::1 at 2019-11-27 13:57:05 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (4.9ms)
 Completed 200 OK in 67ms (Views: 43.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:12:27 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (75.5ms)
+Completed 200 OK in 1072ms (Views: 1023.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:12:56 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 101ms (Views: 99.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 156ms (Views: 154.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:29 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 266ms (Views: 265.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:30 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:35 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 50ms (Views: 49.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-27 18:13:41 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 34ms (Views: 32.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-27 18:13:44 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"/V4UYXVZ4zKsQNmClez+It3w2NLuCEXqK1bVYrRvxgwCyX3txZEjHIxgthnvGhqIYrTRrwwPoSOewf+wpHZ4OA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 16ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-27 18:13:44 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=145716ff45ad8e6f6863cc732f75f5e68e1480eed3f5f0c2&code=4/tgFokW84NQyeMN31HqCu_f1ZNAeBVYMIe0PoDpdy4lsq0QtGQLTOywPQECczSPZsuyHD3-XP3cqsR8RJoO4c3Jc&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile%20openid&authuser=1&hd=berkeley.edu&session_state=7377bbbedb1afb62a70af3a38d85914969b80c62..bc0e&prompt=consent" for ::1 at 2019-11-27 18:13:58 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"145716ff45ad8e6f6863cc732f75f5e68e1480eed3f5f0c2", "code"=>"4/tgFokW84NQyeMN31HqCu_f1ZNAeBVYMIe0PoDpdy4lsq0QtGQLTOywPQECczSPZsuyHD3-XP3cqsR8RJoO4c3Jc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"7377bbbedb1afb62a70af3a38d85914969b80c62..bc0e", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.8ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kpzhu@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 2.0ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kpzhu@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:12:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (35.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (23.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (146.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (12.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (113.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (213.7ms)
+
+
+Started POST "/login" for ::1 at 2019-11-27 18:14:13 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"/V4UYXVZ4zKsQNmClez+It3w2NLuCEXqK1bVYrRvxgwCyX3txZEjHIxgthnvGhqIYrTRrwwPoSOewf+wpHZ4OA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-27 18:14:13 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=90b3e79d4a0ff42e27adedc6dfaa272ff363cf78f3bd653b&code=4%2FtgHtumfW_glxNt1wSh923R9Xc_0v5Gww374PvDnDs33b4ztSD3KnwKjEBrQG05klzB1L7l6-SkwLaJxPmNrmF9Y&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=797242b74820abf431b1d86abdd2964543b57fd2..85cb&prompt=consent" for ::1 at 2019-11-27 18:14:18 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"90b3e79d4a0ff42e27adedc6dfaa272ff363cf78f3bd653b", "code"=>"4/tgHtumfW_glxNt1wSh923R9Xc_0v5Gww374PvDnDs33b4ztSD3KnwKjEBrQG05klzB1L7l6-SkwLaJxPmNrmF9Y", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"797242b74820abf431b1d86abdd2964543b57fd2..85cb", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[36mAdmin Load (1.1ms)[0m  [1mSELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kimberly.zhu.2000@gmail.com'  ORDER BY "admins"."id" ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 1.1ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kimberly.zhu.2000@gmail.com'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:12:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (36.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (2.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (48.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (100.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:23:55 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 142ms (Views: 107.9ms | ActiveRecord: 0.9ms)
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m

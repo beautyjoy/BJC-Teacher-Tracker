@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20191108235318) do
     t.string   "encrypted_website"
     t.string   "encrypted_course"
     t.string   "encrypted_snap"
+    t.string   "encrypted_other"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
