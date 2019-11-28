@@ -7,12 +7,13 @@ Then("I see a confirmation {string}") do |string|
 end
   
 Given("I don't enter my information in all the provided fields") do
-    pending # Write code here that turns the phrase above into concrete actions
-  end
+   #don't fill out
+
+end
   
-Then("I should see a empty form on the home page") do
+Then("I should see an empty form on the home page") do
     pending # Write code here that turns the phrase above into concrete actions
-  end
+end
 
 
 Given /the following movies exist/ do |movies_table|
