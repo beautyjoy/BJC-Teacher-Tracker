@@ -1969,3 +1969,1983 @@ Started GET "/" for ::1 at 2019-11-27 13:57:05 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (4.9ms)
 Completed 200 OK in 67ms (Views: 43.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-29 19:43:46 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (21.7ms)
+Completed 200 OK in 334ms (Views: 315.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-29 19:43:49 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 16ms (Views: 16.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-29 19:43:50 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"MTztjuPId7fHwG8f7wWS5EeRQwmby/Ue2YkrVTR2jg5Jz2NH1wSDaZU2uUX/412D6nyb/JqP8XxuqvK/26Tf8Q=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-29 19:43:50 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=8362a029292411e9758144a6bb3f0c9f11b5d04468561270&code=4/twHe72oFKxWR0ogBxq5XWB5mY4Dim_SFPqAfAYwhrhAVpFp7s-fsX8npC7l8hcKVzq8gRToITq_aHnnzjkXdeFg&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=867b2b2aac243e5328121ca6534029d52d1d2fc5..201e&prompt=none" for 127.0.0.1 at 2019-11-29 19:43:53 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"8362a029292411e9758144a6bb3f0c9f11b5d04468561270", "code"=>"4/twHe72oFKxWR0ogBxq5XWB5mY4Dim_SFPqAfAYwhrhAVpFp7s-fsX8npC7l8hcKVzq8gRToITq_aHnnzjkXdeFg", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"867b2b2aac243e5328121ca6534029d52d1d2fc5..201e", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.6ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:11:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (26.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (27.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (56.2ms)
+  [1m[36m (1.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "encrypted_first_name" varchar, "encrypted_last_name" varchar, "encrypted_school_name" varchar, "encrypted_email" varchar, "encrypted_city" varchar, "encrypted_state" varchar, "encrypted_website" varchar, "encrypted_course" varchar, "encrypted_snap" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "encrypted_first_name" varchar, "encrypted_last_name" varchar, "encrypted_email" varchar, "encrypted_google_token" varchar, "encrypted_google_refresh_token" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-29 19:45:09 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (18.4ms)
+Completed 200 OK in 282ms (Views: 262.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-29 19:45:11 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 13ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-29 19:45:12 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"1jNA/QKs2eU1bymo7eGRlOk+dbsMrM5UbpTDh76pB8iuwM40NmAtO2eZ//L9B17zRNOtTg3oyjbZtxptUXtWNw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-29 19:45:12 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=6458ce2ff39a46036a27508af2fad92e5bd34b0c8feffe2c&code=4/twHDyT8ILOXyNsbQBx5bcpRNC0d_SQs1uUzupGZ7YuR0V6QiBMhLbUH0ze0CCXYePcfor3ZdF-7HzhFjz0ncH0g&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=berkeley.edu&session_state=67839083375ae190169d5efb5fb104d646348ceb..cda6&prompt=none" for 127.0.0.1 at 2019-11-29 19:45:15 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"6458ce2ff39a46036a27508af2fad92e5bd34b0c8feffe2c", "code"=>"4/twHDyT8ILOXyNsbQBx5bcpRNC0d_SQs1uUzupGZ7YuR0V6QiBMhLbUH0ze0CCXYePcfor3ZdF-7HzhFjz0ncH0g", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"67839083375ae190169d5efb5fb104d646348ceb..cda6", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.6ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:11:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (51.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-29 19:46:16 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (18.2ms)
+Completed 200 OK in 283ms (Views: 263.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-29 19:46:19 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 14ms (Views: 13.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-29 19:46:21 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"ioAsks5h0FmT/CBn74pwbqDBsiyODXEHZ4FCmOe7lyzyc6Jb+q0kh8EK9j3/bL8JDSxq2Y9JdWXQoptyCGnG0w=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-29 19:46:21 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=643c5bd6741ec14a69fc77678af16357af23f53b32182db4&code=4/twHRoYZnC15S0p67scNK-Z6nPQb7Of7l-61hW1KMtENc6UdYeOGT6z_ddYTlVlFHwMoTErtgzX4Y2JniRg7ZAFc&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=f831c14982172c7879bb2975cae2340b5e37e01f..f11b&prompt=none" for 127.0.0.1 at 2019-11-29 19:46:23 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"643c5bd6741ec14a69fc77678af16357af23f53b32182db4", "code"=>"4/twHRoYZnC15S0p67scNK-Z6nPQb7Of7l-61hW1KMtENc6UdYeOGT6z_ddYTlVlFHwMoTErtgzX4Y2JniRg7ZAFc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"f831c14982172c7879bb2975cae2340b5e37e01f..f11b", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.3ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.6ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:11:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (1.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (53.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-29 19:58:43 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (18.0ms)
+Completed 200 OK in 277ms (Views: 257.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-29 19:58:46 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 13ms (Views: 12.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-29 19:58:47 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"klWrh16J9iQfsV+G6flXPZ7aYhV3h9Fek6JII9WckSzqpiVOakUC+k1Hidz5H5haMze64HbD1TwkgZHJOk7A0w=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-29 19:58:47 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=af8758b843868479bacea7b1a4cf75ba17c4deb1011e647b&code=4/twHaVskOLzbJDl8cR0unaaD6OJFpMO9Ez-z6Z1WJsHs9jSrgZkZIF8YOvC4_NjaaP7myFpfidNsyp44siujGIi4&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=0161c6ae333a431c86ec57168d1b18a7aa7e5a4a..aa54&prompt=none" for 127.0.0.1 at 2019-11-29 19:58:50 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"af8758b843868479bacea7b1a4cf75ba17c4deb1011e647b", "code"=>"4/twHaVskOLzbJDl8cR0unaaD6OJFpMO9Ez-z6Z1WJsHs9jSrgZkZIF8YOvC4_NjaaP7myFpfidNsyp44siujGIi4", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"0161c6ae333a431c86ec57168d1b18a7aa7e5a4a..aa54", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.8ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:11:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (31.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (24.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (51.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (10.1ms)
+Completed 200 OK in 66ms (Views: 65.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for 127.0.0.1 at 2019-11-29 20:00:52 -0800
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 11:40:04 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 279ms (Views: 261.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2019-11-30 11:40:05 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for 127.0.0.1 at 2019-11-30 11:40:05 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2019-11-30 11:40:05 -0800
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 11:40:07 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 14ms (Views: 13.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 11:40:09 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"sqMB8p/G8F5CqcpmGgrmq/wl4XuuYqx4ZxlfMuPhpwLKUI87qwoEgBBfHDwK7CnMUcg5jq8mqBrQOobYDDP2/Q=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 11:40:09 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=d2e08dce171a4a098465f67ad8165fd83087869584a45198&code=4/twERho63wKv_wYtqiE7qJxIcqPYXrzxkL9CgjxWpnLRxBoL1kli2gC_vmSI5uls50MsmLXRBSBkaWwjWJKBXyoI&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=ca3d6b4337d4690d91cf1f01b2c11a7a2ec4c37d..a13a&prompt=none" for 127.0.0.1 at 2019-11-30 11:40:12 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"d2e08dce171a4a098465f67ad8165fd83087869584a45198", "code"=>"4/twERho63wKv_wYtqiE7qJxIcqPYXrzxkL9CgjxWpnLRxBoL1kli2gC_vmSI5uls50MsmLXRBSBkaWwjWJKBXyoI", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"ca3d6b4337d4690d91cf1f01b2c11a7a2ec4c37d..a13a", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.6ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'wangye@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:8:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (50.8ms)
+  [1m[36m (1.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "encrypted_first_name" varchar, "encrypted_last_name" varchar, "encrypted_school_name" varchar, "encrypted_email" varchar, "encrypted_city" varchar, "encrypted_state" varchar, "encrypted_website" varchar, "encrypted_course" varchar, "encrypted_snap" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_refresh_token" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 11:43:51 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (27.7ms)
+Completed 200 OK in 372ms (Views: 337.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 11:43:54 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 11:43:55 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"4FqJAIkLpqAwKtZWc9W2u/1mfE/AMqqTFV1ylv7/4k2YqQfJvcdSfmLcAAxjM3ncUIukusF2rvGifqt8ES2zsg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 11:43:56 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=8ccaee13cf8bbf06fbafdb305462707877b055ff3cbb15a7&code=4/twFgoRG9toUlzGmwZPUO9dwJB67qiwPb100bkC-fTAFLGITHp4eMKRw7W5otFi8kI9LegWCM99FSTl5y4DohuIQ&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=e412f1caccaa6e78571342bb7e579268ec3dcfc8..ec41&prompt=none" for 127.0.0.1 at 2019-11-30 11:43:59 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"8ccaee13cf8bbf06fbafdb305462707877b055ff3cbb15a7", "code"=>"4/twFgoRG9toUlzGmwZPUO9dwJB67qiwPb100bkC-fTAFLGITHp4eMKRw7W5otFi8kI9LegWCM99FSTl5y4DohuIQ", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"e412f1caccaa6e78571342bb7e579268ec3dcfc8..ec41", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.3ms)
+
+NoMethodError (undefined method `google_token=' for #<Admin:0x00007f98268b1a80>):
+  app/controllers/sessions_controller.rb:21:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (18.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (4.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (29.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (54.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:01:10 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (21.0ms)
+Completed 200 OK in 304ms (Views: 281.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:01:12 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:01:14 -0800
+
+ActionController::RoutingError (undefined local variable or method `attr_encrypted_options' for SessionsController:Class):
+  app/controllers/sessions_controller.rb:3:in `<class:SessionsController>'
+  app/controllers/sessions_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.9ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (33.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (36.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (56.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:02:05 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 297ms (Views: 275.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:02:08 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 11ms (Views: 11.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:02:09 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"tCqbOxdx47UpaKa3V8TawHwIsYD0bHI7Q8GcISg7oQ/M2RXyI70Xa3uecO1HIhWn0eVpdfUodln04kXLx+nw8A=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:02:09 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=8862f8b4f663690aa2907393bbd93253c632f9db7b6d11ef&code=4/twEe2qZ5LGIfSruwsunGVVYanPPBdkzdfY4HxBJi6qHfQEFC2kJpxfIUm82Bqw9ukc0IYVaP3Ju3bhvLwluKIXg&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=e0880ec6d8c48bb94ae3d9ba51763bd44f9209bb..14f7&prompt=none" for 127.0.0.1 at 2019-11-30 12:02:12 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"8862f8b4f663690aa2907393bbd93253c632f9db7b6d11ef", "code"=>"4/twEe2qZ5LGIfSruwsunGVVYanPPBdkzdfY4HxBJi6qHfQEFC2kJpxfIUm82Bqw9ukc0IYVaP3Ju3bhvLwluKIXg", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"e0880ec6d8c48bb94ae3d9ba51763bd44f9209bb..14f7", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token") VALUES (?, ?, ?, ?)  [["email", "wangye@berkeley.edu"], ["first_name", "Ye"], ["last_name", "Wang"], ["encrypted_google_token", "CaYxRQpahnWJdUkcV7qj+kfUOB2K2cHtThxycT/v0xN6lasSs6g/39zypjGl\n12AOPPaMx2/MMmK4XseomSElVynj3fIoQbYL8CBXjW0Zfc3E0ozP+V3V/4Zx\ntrx2urMUEDwITjzYzdhumvKva2SI38iL+UWvYkiH9lvxXMKHtgT0XFDNsF8x\nPB/F/qJ4t+Y7a9TbGgNIyjvL7HPYQg==\n"]]
+  [1m[36m (6.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:02:13 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:02:15 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 11ms (Views: 10.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:02:16 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"abJNrQGp2AYXWQtWQ7Tn5QH+bOJuNymSzBzxBaPxlZoRQcNkNWUs2EWv3QxTUiiCrBO0F29zLfB7PyjvTCPEZQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:02:16 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=f5445d85851175d0c46e0d39b8d6c288e5df894c6dceeb7c&code=4/twEosXtQgJx_XxmfYN9ZjAIEmuOCQUeiDwFgOrU_lsyNbv1ffuqc-nnHlt-9xqUsFbgSxJ8bon28JxuRwteGufY&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=bf321d4c729c17a324d9fc952f436b5fe3601da6..4e00&prompt=none" for 127.0.0.1 at 2019-11-30 12:02:19 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"f5445d85851175d0c46e0d39b8d6c288e5df894c6dceeb7c", "code"=>"4/twEosXtQgJx_XxmfYN9ZjAIEmuOCQUeiDwFgOrU_lsyNbv1ffuqc-nnHlt-9xqUsFbgSxJ8bon28JxuRwteGufY", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"bf321d4c729c17a324d9fc952f436b5fe3601da6..4e00", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.1ms)
+
+ArgumentError (must specify an iv):
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (32.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (52.2ms)
+  [1m[36m (7.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.6ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "encrypted_first_name" varchar, "encrypted_last_name" varchar, "encrypted_school_name" varchar, "encrypted_email" varchar, "encrypted_city" varchar, "encrypted_state" varchar, "encrypted_website" varchar, "encrypted_course" varchar, "encrypted_snap" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:21:28 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (19.7ms)
+Completed 200 OK in 283ms (Views: 263.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:21:32 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:21:33 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"Fmf4vOq9uKwU3x4pgkqzvICVPRXv62e80HVo9Ri5rWpulHZ13nFMckYpyHOSrHzbLXjl4O6vY95nVrEf92v8lQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:21:33 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=da2531e68dc850a5534e63bfd2ce61d1e22c10218177fab8&code=4/twEl-jmn1Zwx8Rhls2oTasKqNmV1LqaHqOEYuWGBr3RRK7Z0iYCxMjAJXDWdX8pePuxliCUTLyKLPMkYHivIUFQ&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=berkeley.edu&session_state=3bfc7c0b8a11222f8b73ac2a2f15b4ecb289c39f..5ac7&prompt=none" for 127.0.0.1 at 2019-11-30 12:21:36 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"da2531e68dc850a5534e63bfd2ce61d1e22c10218177fab8", "code"=>"4/twEl-jmn1Zwx8Rhls2oTasKqNmV1LqaHqOEYuWGBr3RRK7Z0iYCxMjAJXDWdX8pePuxliCUTLyKLPMkYHivIUFQ", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"3bfc7c0b8a11222f8b73ac2a2f15b4ecb289c39f..5ac7", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token") VALUES (?, ?, ?, ?, ?)  [["email", "wangye@berkeley.edu"], ["first_name", "Ye"], ["last_name", "Wang"], ["encrypted_google_token_iv", "keZiCfjvOZv81hJb\n"], ["encrypted_google_token", "sAYcPQd1hWxr3Mm+gQiNmNaQfp3/jH8c9Fnxw9QoOyCG3vYumMZA2OdOjHm4\nUFS9+bbTCEv8L75cZCK+xmJh736KQYZ7ADtF1d0NeE68HQgrD8cpSnBExr5z\nZWXkRT6zGXmawtnkQHydFZQtFvycRGotod9Ms2EvDNYnod2442Z2NCTfc/PD\nXKaaloGrh1vKXnQdAj1lZHUsRAca1Q==\n"]]
+  [1m[36m (6.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:21:36 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:21:45 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 18ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:21:46 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"Q59LVK7bzJ8Uw643VnDiaEMEM84/qfZSshxM4T/ouZk7bMWdmhc4QUY1eG1Gli0P7unrOz7t8jAFP5UL0DroZg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:21:46 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=941de8aaa2c4ba5e4ac2c018d1cd8c43c0575522315e9160&code=4/twGI0laoNpbMM1aXR1HRhY14poWNWCuUHJ2x4u6ezL-BJ6jQzrLQticf7CwabSDXX_tReb7e3Xf1sVOCMxwITM8&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=9a9f66a43ce1f5d3a338b429aef96d4daf0c749f..53b4&prompt=none" for 127.0.0.1 at 2019-11-30 12:21:49 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"941de8aaa2c4ba5e4ac2c018d1cd8c43c0575522315e9160", "code"=>"4/twGI0laoNpbMM1aXR1HRhY14poWNWCuUHJ2x4u6ezL-BJ6jQzrLQticf7CwabSDXX_tReb7e3Xf1sVOCMxwITM8", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"9a9f66a43ce1f5d3a338b429aef96d4daf0c749f..53b4", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "Lp4QsFYZpWmYgO6/\n"], ["encrypted_google_token", "kL7SIwD8KDQb80NOFENNmFhYoWbKEk+0DDLsE+JzIEFtApEJGQvaQ0Kj0b6P\nAiBGFrA6Lp9DzjvSF+fEZ7UIQkDCAH4n+mJ62IWDKMoQ3PYedldehwMxajRn\nuCQyk4sv8YpuYUjtYQzNFixR1tILWcxqZghjRetYMZ2Ct/geI1f8nHe83j4A\nMgQRz0czTc8+1eivBWyzQcWNFx4Akg==\n"], ["id", 1]]
+  [1m[36m (7.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:21:50 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:23:02 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 290ms (Views: 270.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:23:05 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 13ms (Views: 12.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:23:07 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"k405z+3HGqUAQtiXDqWO5Q6f+A484bgxrH9ogvET2hnrfrcG2Qvue1K0Ds0eQ0GCo3Ig+z2lvFMbXLFoHsGL5g=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:23:07 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=8b5124b08c24895794d501beb9d01ce2b0d3add2d9902646&code=4%2FtwGtuxwZGxbT_9pEzVMQyIpf9SiKorGgzgzm4E6_Bus0aA60t1uRlpXOS-_sS32IJpdDlZhZM6OOITd0Tx1Px1c&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=1fd3c31aed376ba210eaeeee59b808a4cddc14f6..a532&prompt=consent" for 127.0.0.1 at 2019-11-30 12:23:10 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"8b5124b08c24895794d501beb9d01ce2b0d3add2d9902646", "code"=>"4/twGtuxwZGxbT_9pEzVMQyIpf9SiKorGgzgzm4E6_Bus0aA60t1uRlpXOS-_sS32IJpdDlZhZM6OOITd0Tx1Px1c", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"1fd3c31aed376ba210eaeeee59b808a4cddc14f6..a532", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.2ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.4ms)
+
+NameError (undefined local variable or method `user' for #<SessionsController:0x00007fa653e4d5d0>
+Did you mean?  super):
+  app/controllers/sessions_controller.rb:26:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (9.9ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (35.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (21.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (46.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:23:42 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (28.1ms)
+Completed 200 OK in 296ms (Views: 275.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admins" for 127.0.0.1 at 2019-11-30 12:23:45 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 12ms (Views: 12.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2019-11-30 12:23:46 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"yyMfSDIc/4ZlAbBRI6lqcc4hIzF9f72AFSurmH7NMiiz0JGBBtALWDf3ZgszT6UWY8z7xHw7ueKiCHJykR9j1w=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for 127.0.0.1 at 2019-11-30 12:23:46 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=7faedd5d2d640297fb0511de885feaa09d272e8a22c8bbd7&code=4/twEHTZjLfxYe5uocIxNaKfhCKC913lg6dv4b5mVEGX4RXOqNUGyjBwSzOl98gxKRjwhfCYDf5-YTsL5ilrwFc3o&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=berkeley.edu&session_state=3985d7a19795ab8ec3bdcd2e4bc5310e0dacc812..1c9f&prompt=none" for 127.0.0.1 at 2019-11-30 12:23:49 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"7faedd5d2d640297fb0511de885feaa09d272e8a22c8bbd7", "code"=>"4/twEHTZjLfxYe5uocIxNaKfhCKC913lg6dv4b5mVEGX4RXOqNUGyjBwSzOl98gxKRjwhfCYDf5-YTsL5ilrwFc3o", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"3985d7a19795ab8ec3bdcd2e4bc5310e0dacc812..1c9f", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "5yzv8ZWbtDB9xqTS\n"], ["encrypted_google_token", "nq1We+FFQ5KfaxINa6kZxbubEctdgO7ZG3LHrXyHgyG9mXHgWwasjfZX7uHS\nYZLULPVc/GKajWSAHcUy986VFGUKcdoHU7+aBQDSwE5v/ydDNa7b6uzZJ01I\nq6icGv3kLYeCdHIK1fNHOif0wW3Av2+Ykd/dxWM8LckyktRNO/V43GBG+WSg\nlCg2EF4TCFw9lli22huj8vSAFUOB+g==\n"], ["id", 1]]
+  [1m[36m (6.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 7.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-11-30 12:23:50 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 12ms (Views: 11.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2/callback?state=7faedd5d2d640297fb0511de885feaa09d272e8a22c8bbd7&code=4%2FtwG6LePMcQzpofnbe1psKcCB54BhOiFhzxlj-cN9wiA8yvT4-1zxafaXcWNjYfynmzQGqrIEmBYfPjTjx7GjITI&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=29a9a82d78c228a70a650ce53f5824bd55b81f04..9645&prompt=consent" for 127.0.0.1 at 2019-11-30 12:23:55 -0800
+
+OmniAuth::Strategies::OAuth2::CallbackError (csrf_detected | CSRF detected):
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:25:in `raise_out!'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:20:in `call'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:12:in `call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:491:in `fail!'
+  omniauth-oauth2 (1.6.0) lib/omniauth/strategies/oauth2.rb:71:in `callback_phase'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:238:in `callback_call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:189:in `call!'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:169:in `call'
+  omniauth (1.9.0) lib/omniauth/builder.rb:64:in `call'
+  rack (1.6.11) lib/rack/etag.rb:24:in `call'
+  rack (1.6.11) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.11) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.10) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.10) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.10) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (18.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (39.3ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:24:26 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 15ms (Views: 14.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-30 12:24:26 -0800
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:24:28 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 20ms (Views: 19.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:24:29 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"QTzoZX0KfRtp+yl0tkDQ9ULeVBuH3PFYM2ZL6C8LEWU/90C0TDxXBhpBRS6COuJBbnYflVRNowS04jfu6wS3Kw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:24:29 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=70ef0fc2f1ce04fe53e5ddf25181563252a748837815d36d&code=4%2FtwHtgsOVo6Ar0OrNdrhH537SDDV8e5yRWD0mz_VYCHeht9LaeBCwndMWXnyX977SwPGa-_t3p0yfVnChYWMNBTA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&hd=berkeley.edu&session_state=2f5b75d168a52d1c80ab60de7c48c19fdcc09174..c746&prompt=consent" for ::1 at 2019-11-30 12:25:09 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"70ef0fc2f1ce04fe53e5ddf25181563252a748837815d36d", "code"=>"4/twHtgsOVo6Ar0OrNdrhH537SDDV8e5yRWD0mz_VYCHeht9LaeBCwndMWXnyX977SwPGa-_t3p0yfVnChYWMNBTA", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"2f5b75d168a52d1c80ab60de7c48c19fdcc09174..c746", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.1ms)
+
+NameError (undefined local variable or method `user' for #<SessionsController:0x00007fc401ba5d70>
+Did you mean?  super):
+  app/controllers/sessions_controller.rb:26:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.9ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (17.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (10.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (21.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:26:29 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (17.0ms)
+Completed 200 OK in 267ms (Views: 249.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-30 12:26:29 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-30 12:26:29 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-30 12:26:29 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-30 12:26:29 -0800
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-30 12:26:29 -0800
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:26:34 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 18ms (Views: 17.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:26:36 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"Kw8TI7gfRtmRquh8dfJE0/5TgWK1ebZHc3FCtEp3gm7ip2ckLZFABhIEuoYe6FjrHH/OpzKdyl+HKrrb/3PZjQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:26:36 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=f2962cd134840d96d25f33e6060e25c7dfa520d563382b1c&code=4%2FtwHb7sTT4FojrtFOquf7OGJlvX3W_Y2gzJJ-2e9Focakct62NTjERaPTe_O_-mCVVCJvT16OhYnbWIhVwgX9zXk&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=0f90700d1fb789885efecd6ecf931fbdb7fb6fa1..d4a9&prompt=consent" for ::1 at 2019-11-30 12:26:57 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"f2962cd134840d96d25f33e6060e25c7dfa520d563382b1c", "code"=>"4/twHb7sTT4FojrtFOquf7OGJlvX3W_Y2gzJJ-2e9Focakct62NTjERaPTe_O_-mCVVCJvT16OhYnbWIhVwgX9zXk", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"0f90700d1fb789885efecd6ecf931fbdb7fb6fa1..d4a9", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token", "encrypted_google_refresh_token_iv", "encrypted_google_refresh_token") VALUES (?, ?, ?, ?, ?, ?, ?)  [["email", "wangyegp@gmail.com"], ["first_name", "Ye"], ["last_name", "Wang"], ["encrypted_google_token_iv", "4OyW7YXKT1miERZs\n"], ["encrypted_google_token", "Iwe11Y9O1ff+wskx/YpMtKbTf5oZMRl1ma/EMtW0xXoR90q7hwTbPP9YDy7w\nj/CG/9TDsBPZOEGlOMI+w1zYisus+b5C2Je2M4Fl3vk4Z/vg3B3BnvRJyRWA\nqFShOQt0P1tJJ0CWygtyy45HdEQVt3gUG7Whb9dufGouW7Zk1rVUJRRwquk6\nXSiYXHB2EM+kxxGMduje7w==\n"], ["encrypted_google_refresh_token_iv", "nCpN145FnYlwrYS3\n"], ["encrypted_google_refresh_token", "JRUl7QLN81Enh0hrNdhJZRXj6rH+Z18TPo1Pka+96N1JP7YiXo6pKQTmRAov\nXFNXFZ+B5Idl0wJ5o8Go8wLSwqZmGcEC56KcPMygQsg2o36jM/Q86CbnGvRu\n+xJjW5qH2i0T/Ndq94TGQ15Dmy6Wm7z1KBFhM4s=\n"]]
+  [1m[36m (6.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 40ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:26:58 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 12:27:01 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"w3QKLlqoDRRZCQw3PtPiKLBONpKYTS8E451YOkp33XoK3H4pzyYLy9qnXs1Vyf4QUmJ5Vx+pUxwXxqBV/3OGmQ==", "teacher"=>{"first_name"=>"", "last_name"=>"", "email"=>"", "snap"=>"", "course"=>"", "other"=>"", "school_name"=>"", "city"=>"", "state"=>"", "website"=>""}, "commit"=>"Submit"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 13ms (Views: 11.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:27:04 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:27:05 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"Glnz73TJqoW7og5nLcOBAlD2DOf7OeKOWJ+46+Ii2g/T8Yfo4UesWjgMXJ1G2Z06stpDInzdnpasxECEVyaB7A=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:27:05 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=daed5f7467b4dab4a24acd39ed37449ed882b36d10556e7e&code=4/twGMVOyKfIvP9_KdEQpRSlsBVMfJoWs7CSZcA2V70sZth400Ml7mNzHrhF3NCtVmgcDBMerXX2FIj4B0EBOaobc&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&session_state=bde5e58a3e7819ef89ad3ca10ec7e5e9973e3c57..9c57&prompt=none" for ::1 at 2019-11-30 12:27:05 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"daed5f7467b4dab4a24acd39ed37449ed882b36d10556e7e", "code"=>"4/twGMVOyKfIvP9_KdEQpRSlsBVMfJoWs7CSZcA2V70sZth400Ml7mNzHrhF3NCtVmgcDBMerXX2FIj4B0EBOaobc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"0", "session_state"=>"bde5e58a3e7819ef89ad3ca10ec7e5e9973e3c57..9c57", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "1PQ2RyKUz8rEtSZf\n"], ["encrypted_google_token", "siBNZwY8ytyppeVi58NdlU0VzU4ndZ81uRmv7XgvcWguhjy4n+sI4wCVeUT2\nPV7V2Rnpw1Ck8LiYqUXNNcmQwAYQtUJiPV+QgMH0MaAS86fs4BP3APLwpovz\nfboYU+35uykb/G6gj62Vfn1U5Bhk5h44q2s+t6GXBvcxHqqyS8eFzydOQP4J\n1ClYueHTN8ysndU4uwY0mSRCsURf\n"], ["id", 2]]
+  [1m[36m (7.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:06 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:18 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:27:21 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 13ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:27:22 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"zY9azHLGtBYyRP7nXEA3b2TeQ7p/reqLRsHZ7rB1EC0EJy7L50iyybHqrB03WitXhvIMf/hJlpOymiGBBXFLzg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:27:22 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=406409e6ac49c1c5c62e2a350a3a9af5b57406484677f493&code=4/twFuSiAIQ-chMwec-4B7V46f-zFcWLVU9p7cP1AiTEq0-pZIqXwlEIMf00unG-CF1XUV4EuzVzwraiymo9IncHY&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&session_state=b0e0a7998e97825d8df9cf28de2544017b941254..a953&prompt=none" for ::1 at 2019-11-30 12:27:22 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"406409e6ac49c1c5c62e2a350a3a9af5b57406484677f493", "code"=>"4/twFuSiAIQ-chMwec-4B7V46f-zFcWLVU9p7cP1AiTEq0-pZIqXwlEIMf00unG-CF1XUV4EuzVzwraiymo9IncHY", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "session_state"=>"b0e0a7998e97825d8df9cf28de2544017b941254..a953", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "7xIqVJsPGASFhykG\n"], ["encrypted_google_token", "1HmtREcPyV6Tj3WUvVMwpmmuBYk8qjSJaMmOEnA1HpPxBKWMJbrQVCWoLfNW\n9fbgMEZ93BEe9qoBLdWuQTSxU2YanVuMy+M5gpDQiBaDOlhd/+Gv//fg2CvW\nIt86IzCErmJkUv+O60p/+iMjnmCPCY8AhOnvuK3WbpzOkFWpyI/vDrDQmBQr\npjQyS9nkkrKMHjFmtFDxkE23MZ/K\n"], ["id", 2]]
+  [1m[36m (6.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:23 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 12ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:27:26 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:27:27 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"N5/0FDCAEgz5nWK4dWge40Za/6cs23GOOtCSLgD/pST+N4ATpQ4U03ozMEIecgLbpHawYqs/DZbOi2pBtfv+xw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:27:27 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=b81f56e443d286a34e67a895e9a6401cfffeb509b7a64435&code=4/twHCCz4QvwiRf7oRAqNAdAtwzOWiay44SxuPB7IuuRwecAYZ6u6x_FOU2IgbClMQJwrBH5pjwqhjp8tUXLr8-SA&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&session_state=d31ec4b0da194f8753559cf8678b6bd27537e842..b334&prompt=none" for ::1 at 2019-11-30 12:27:27 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"b81f56e443d286a34e67a895e9a6401cfffeb509b7a64435", "code"=>"4/twHCCz4QvwiRf7oRAqNAdAtwzOWiay44SxuPB7IuuRwecAYZ6u6x_FOU2IgbClMQJwrBH5pjwqhjp8tUXLr8-SA", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "session_state"=>"d31ec4b0da194f8753559cf8678b6bd27537e842..b334", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "YKPpYpCnKbLMqibC\n"], ["encrypted_google_token", "Ngh1FvZIABUvfn81xhAqFdSWDaie3AfL2EWHOspehY8CisKbV/ffyJ8WmgY9\ngyvseuX6HTnJJunLx22d4XqooBfI+8CcBcA2HEsW2gg8JljSpK1DpKp0SPbj\nT4qpuyDr8gUSuI1r9H+wsAqDOF/TZkqQQ9pwM8ZOYmbZ8J0lGL2XkMlUeNP/\nuBZjkBWETtB+g7BkyHfQMq8fu0Wc\n"], ["id", 2]]
+  [1m[36m (6.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:28 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 12ms (Views: 11.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:27:37 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 19ms (Views: 18.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:27:41 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 11ms (Views: 10.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:27:42 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"5AZS89TT8KoChDItZGYORBnSbHiI0COPh2l52I5CTUrHOd1lxr5TJXCvkczsdZ7n3lkqBo8JZb1dr70zggctUA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:27:42 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=6c07ad4ee2e5cdadfae44de73779ac96f95108565d3db60b&code=4%2FtwFLsUHJSulkJV3xKhezEJcHQczBmTNKo5F89QpEocEsWFpfeaAfCEMP9ZZic4ev6VLM2FVqUsCAzXkwRvOK85Y&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&hd=berkeley.edu&session_state=01163abfa9dbbee560dbd510b769b8b2697e7e55..894e&prompt=consent" for ::1 at 2019-11-30 12:28:15 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"6c07ad4ee2e5cdadfae44de73779ac96f95108565d3db60b", "code"=>"4/twFLsUHJSulkJV3xKhezEJcHQczBmTNKo5F89QpEocEsWFpfeaAfCEMP9ZZic4ev6VLM2FVqUsCAzXkwRvOK85Y", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"01163abfa9dbbee560dbd510b769b8b2697e7e55..894e", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ?, "encrypted_google_refresh_token_iv" = ?, "encrypted_google_refresh_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "11i7vvZhsICqA85k\n"], ["encrypted_google_token", "RJtkxtLqhAF0dGRmWFlOTFOjGkYcW5zmTQy70HS+I9UmvR+sC0T59DqflcCi\nQe5FSgV3CG1BMfDIJC/E39UJBP+9ych26eP3RArALRF8tZVAh1kCxYrTGO22\nmS5jslZdrRQ/Uct/wbkxz+LH8mnCxT2656sWRrIHbbhC+SYoz816zAG7iu8n\nC9qLHJZhR3ZK9l+tT3Fp1A==\n"], ["encrypted_google_refresh_token_iv", "gCSA3V85w8V+lPJZ\n"], ["encrypted_google_refresh_token", "tuNbWdrXxDE5GOHitDXtc3hslkQQ1aiUvh0irt6Bxrws4/3ZqYg3pc7hqHZO\ns9RlLYvx9qh2YDPh7bMJjaRJ5PpLLwQ4hQS7gFYEwKnBStpYfF1cxIQu9lkx\nbQxBCc3UXDdUFfAdugNR9Kk6Y10DDN/S4p+EASE=\n"], ["id", 1]]
+  [1m[36m (6.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 6.9ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:15 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 48ms (Views: 47.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:28:18 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 11ms (Views: 10.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:28:20 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"0+sfUpbrHT23e7pJkOdzUr+BMAw9dHAJavaO6NpCgSTw1JDEhIa+ssVQGagY9OPxeAp2cjqtNjuwMEoD1gfhPg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:28:20 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=97b8dbe777966674e50b5c4d106a9fdcecc18499e2f29066&code=4/twHe1b6uWboyuavbMyuwz18brCIV30ZdPu-UsYi51agKOFL-xOWHtKNZAyC1--vgW8mJwxFtm46jWVD_Lq5SxTw&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=berkeley.edu&session_state=19cd6f387c78c61c8c7c454e51089f8526cd80fe..4e03&prompt=none" for ::1 at 2019-11-30 12:28:20 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"97b8dbe777966674e50b5c4d106a9fdcecc18499e2f29066", "code"=>"4/twHe1b6uWboyuavbMyuwz18brCIV30ZdPu-UsYi51agKOFL-xOWHtKNZAyC1--vgW8mJwxFtm46jWVD_Lq5SxTw", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"19cd6f387c78c61c8c7c454e51089f8526cd80fe..4e03", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "6stl0dapo7GXcyyT\n"], ["encrypted_google_token", "FMLAWvuLPuxQzvFofq9tSG0+eErdvbxzRocpvyaXvozSydUnufIGovaWmrQE\n+Kq7/ATQVtOcgr3SejNMP/CFLQ9xmGTtLjlVQyfwKOFZblcTYp3YRkMN8e5B\nv1p9Xr8erStZyIywgmGs0WemtrCPKeaUnkYkdVlWxO4X2lPfesZzqdMO4OkS\ns3phXh9i8KT/gqElWJsFsI10yycu\n"], ["id", 1]]
+  [1m[36m (7.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:21 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:29 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 10ms (Views: 9.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:34 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:28:36 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 12ms (Views: 11.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:28:38 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"LzBmhEG1ifhToiug9oji4R58VwicskNPZ2H8IZpjEAxR+85VcIOj5SAYR/rC8tBVMtQchk8jERPg5YAnXmy2Qg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:28:38 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=f1a89761225a030d8f55a46ded5b87f96a6ffabbb9ee860d&code=4/twG9-qcSqXsXAkUllXtPEdzBKC7LxU3pkvlqj77zG9d7VN4_B0cUoSkt_mK7gT685DNWmC4w_zpeRs7IxL-ocU0&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=berkeley.edu&session_state=8ccb42e06d2fceabe98a36922c0cd5f187e7414f..5755&prompt=none" for ::1 at 2019-11-30 12:28:38 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"f1a89761225a030d8f55a46ded5b87f96a6ffabbb9ee860d", "code"=>"4/twG9-qcSqXsXAkUllXtPEdzBKC7LxU3pkvlqj77zG9d7VN4_B0cUoSkt_mK7gT685DNWmC4w_zpeRs7IxL-ocU0", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"8ccb42e06d2fceabe98a36922c0cd5f187e7414f..5755", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "g97oGTBeUMlmoG4D\n"], ["encrypted_google_token", "z3Rs5ksB1fiLOSJrVL5Qex6jLpKBOdgezprc6gxkRj0v9WiMkVDGXFiZEOYz\nDRs38J7yvEi581mWJduiL8Yu93Oc06Q0NxkGspluhhvusDVjnTxWixxJuVx4\nssbR+claq0ARnYhsGog2pWrU3KVV7tvcZ0m+Y2+hEsYnyuc3tzUUXdrGhffo\n3cGzF7HJ4/R3WJ0eWeIBZYqP5+MV\n"], ["id", 1]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:38 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:28:40 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:28:41 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"rVC1WOF2Ug09DM+ZMIOWK1tYby/3eruhHcvENnfzD3rTmx2J0EB4EE62o8ME+aSfd/AkoSTr6f2aT7gws/ypNA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:28:41 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=871d5f84285c3a3ad92bead3e3114f4e932d369048f6f1c5&code=4/twEm_5vSzo_WnfJCwDJMS-ybuPEoH2p1NZqKxyWr-LtcEyoWErJdFSLnbRYS2lUO1hFN_dbwWEgUvoBKhUKXwsc&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=berkeley.edu&session_state=9c0157e2d63d6a21d77e63bc74beb5dc0631f39e..262d&prompt=none" for ::1 at 2019-11-30 12:28:42 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"871d5f84285c3a3ad92bead3e3114f4e932d369048f6f1c5", "code"=>"4/twEm_5vSzo_WnfJCwDJMS-ybuPEoH2p1NZqKxyWr-LtcEyoWErJdFSLnbRYS2lUO1hFN_dbwWEgUvoBKhUKXwsc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"9c0157e2d63d6a21d77e63bc74beb5dc0631f39e..262d", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "w7pXzDk1Whwu8FMa\n"], ["encrypted_google_token", "ODRLhHJY8E0bnyFNbmBUHasoDortnFrUfyqur9/bVThwAjqgLUVr/COjfqc2\nhGb+ocy4gcwK0a6uwrsMPTV3WL9Bk8yNE1dFzwd7ld6dCFT53KMrRhUQqoMK\nz0PzZWcEK7QiUTPBm/+hvDejCzoflOI90cv8wykagaSPl5JTIa7w++iydj4i\nFw3zWcjhORrtruGzYdGUVxF0AbVg\n"], ["id", 1]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:42 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 11ms (Views: 10.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 12:28:45 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 13ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 12:28:46 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"sk1PPTRECGXeVRtN36RNascJwnw8VDEg+HH9QFV34/vMhufsBXIieK3vdxfr3n/e66GJ8u/FY3x/9YFGkXhFtQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 12:28:46 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=d8f618947b780608b25fdc2b64dfa2db89d22a5267829edd&code=4/twH3NzFq9vU9VVWBS_9tyKviymlwXZQ0tSahorCW1jW3LnVcnGiyNr9owAxNHK4tz7TIWaWuadFs_mbKmfudoaY&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&hd=berkeley.edu&session_state=e9edbc44e1daead7b09292e4d822c2e57f64b81d..2e6b&prompt=none" for ::1 at 2019-11-30 12:28:47 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"d8f618947b780608b25fdc2b64dfa2db89d22a5267829edd", "code"=>"4/twH3NzFq9vU9VVWBS_9tyKviymlwXZQ0tSahorCW1jW3LnVcnGiyNr9owAxNHK4tz7TIWaWuadFs_mbKmfudoaY", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"e9edbc44e1daead7b09292e4d822c2e57f64b81d..2e6b", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "Oihir7wDwlIXbGOF\n"], ["encrypted_google_token", "mnayKRQknh9fi6PKEUBjo7JNqqU3QdofdySI3GcUE/2xFGhwUYCKNcHAeuh8\nvZsESa7pK3MIunO2lEZJhlKM1rzEWGEB7Q7ox4HhBpjJ3Un8ceRVtITKVNBY\nbbZ/B4OOOYJaRDCKyWqoBCgqLuRVuawdjeCzMMNEWmaWEffgf/S7t7ZgnZ7P\ngZFXPGYRi/l0ywEnSgUdNXKiTfF8\n"], ["id", 1]]
+  [1m[36m (6.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 12:28:47 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 12ms (Views: 11.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:12:33 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 298ms (Views: 280.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:12:35 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:12:37 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"rKjte9yPMHAUr24/vVV7bKlDiKSvF1OecWZCOO6h/jTUW2Oy6EPErkZZuGWts7QLBK5QUa5TV/zGRZvSAXOvyw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:12:37 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=5cc98af00b0e3032e33c174101748c1b0847e821fcc2e973&code=4/twH0IMnL_xuuIPbP9gn7o9bYdA3JnskO7k93DUcIDHVuf9tnrHrfvEKDKJKhYtJ2A6FSYRrV-yMtMg9nfBf7_NE&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=e448704e6a9a89766a85e34f9cafc51c92f1c4d5..cc4e&prompt=none" for ::1 at 2019-11-30 13:12:40 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"5cc98af00b0e3032e33c174101748c1b0847e821fcc2e973", "code"=>"4/twH0IMnL_xuuIPbP9gn7o9bYdA3JnskO7k93DUcIDHVuf9tnrHrfvEKDKJKhYtJ2A6FSYRrV-yMtMg9nfBf7_NE", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"e448704e6a9a89766a85e34f9cafc51c92f1c4d5..cc4e", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.8ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 1.0ms)
+
+ArgumentError (key must be 32 bytes):
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (33.9ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (51.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:13:15 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.4ms)
+Completed 200 OK in 321ms (Views: 299.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:13:17 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 15ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:13:19 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"vTN54VCakzgYuP+OpsI5sGjwHFscUIkoLUTmwfWrVfrFwPcoZFZn5kpOKdS2JPbXxR3Erh0UjUqaZz8rGnkEBQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:13:19 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=dd9f5aad65246ae1703c762ed2fa11219a0f8fac6585a46f&code=4/twFvWkrlKjuxocLXKXqhWoInutNqsRYE8q190s_rGgft2_xdgJ1JZp5HSRJpMLXhs9tgCaiDTSIpt0xCYewotbc&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=2cd8af49e4b5a56638a5fdd72ead77d2def25200..ed49&prompt=none" for ::1 at 2019-11-30 13:13:22 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"dd9f5aad65246ae1703c762ed2fa11219a0f8fac6585a46f", "code"=>"4/twFvWkrlKjuxocLXKXqhWoInutNqsRYE8q190s_rGgft2_xdgJ1JZp5HSRJpMLXhs9tgCaiDTSIpt0xCYewotbc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"2cd8af49e4b5a56638a5fdd72ead77d2def25200..ed49", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.9ms)
+
+ArgumentError (key must be 32 bytes):
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (38.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (32.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (61.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:13:45 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (18.8ms)
+Completed 200 OK in 303ms (Views: 283.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:13:47 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 31ms (Views: 30.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:13:49 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"N6xM5SKol+4rwcvbmPtNdCt/JnB80KeGqg7bUbVxbeNPX8IsFmRjMHk3HYGIHYIThpL+hX2Uo+QdLQK7WqM8HA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:13:49 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=14e34361bb4b5fb2f269867669f2b505df239f6f414cbcff&code=4%2FtwHNW75oGNuQsRKsitg2hjxH4ab3Vm1IeH_WP1r3Xe8uPUjCj6GvnREcoHiwCM1_yTAr5emIjyUlpikNJQsjG-A&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=30c4481db783b9c724b292483c57de5965e97f94..f779&prompt=consent" for ::1 at 2019-11-30 13:13:52 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"14e34361bb4b5fb2f269867669f2b505df239f6f414cbcff", "code"=>"4/twHNW75oGNuQsRKsitg2hjxH4ab3Vm1IeH_WP1r3Xe8uPUjCj6GvnREcoHiwCM1_yTAr5emIjyUlpikNJQsjG-A", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"30c4481db783b9c724b292483c57de5965e97f94..f779", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.8ms)
+
+ArgumentError (key must be 32 bytes):
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (39.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (28.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (57.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:14:11 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.4ms)
+Completed 200 OK in 336ms (Views: 316.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:14:13 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 14ms (Views: 13.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:14:14 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"6abQoG34GhD1WEILsGE3ddHISdwAPs/YtUYyVXwQqM6RVV5pWTTuzqeulFGgh/gSfCWRKQF6y7oCZeu/k8L5MQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:14:14 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=2d1839bdd0af2e5cfcd62224eccad9a939503e05bdbcf1b4&code=4%2FtwFftjB9MiTaRyYarYp2SNqTQohgPwFJcmMwZMc1oxqHafOjTOr57VKVU9FuMcvEXwY-p-FNFjYcoImMA9b1ftg&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=7a7bb9ed110cfb17fec89daacd0abdd243ea5fdd..f63a&prompt=consent" for ::1 at 2019-11-30 13:14:17 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"2d1839bdd0af2e5cfcd62224eccad9a939503e05bdbcf1b4", "code"=>"4/twFftjB9MiTaRyYarYp2SNqTQohgPwFJcmMwZMc1oxqHafOjTOr57VKVU9FuMcvEXwY-p-FNFjYcoImMA9b1ftg", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"7a7bb9ed110cfb17fec89daacd0abdd243ea5fdd..f63a", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.7ms)
+
+ArgumentError (key must be 32 bytes):
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (13.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (37.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (29.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (57.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:14:52 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (21.5ms)
+Completed 200 OK in 291ms (Views: 272.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:14:55 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 14ms (Views: 13.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:14:56 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"JoHqXoYID2YK79vTvgl0kuiLPX4Mhbwj4Q55UE09UR5ecmSXssT7uFgZDYmu77v1RWbliw3BuEFWLaC6ou8A4Q=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:14:56 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=7da7d46f559f535be19b5e8d011da05d91d442656b50aefa&code=4%2FtwEfv1Xr38jrv1HC0om8feuD2CC5HJEfuJsNlgVtnSVLC4WVWn8f7pkZErdJqRaGzksaiDqMK5EDTThT6ehx8hU&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=950024d099e4a7ca0c7ecc8991a867f74258c671..0331&prompt=consent" for ::1 at 2019-11-30 13:14:59 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"7da7d46f559f535be19b5e8d011da05d91d442656b50aefa", "code"=>"4/twEfv1Xr38jrv1HC0om8feuD2CC5HJEfuJsNlgVtnSVLC4WVWn8f7pkZErdJqRaGzksaiDqMK5EDTThT6ehx8hU", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"950024d099e4a7ca0c7ecc8991a867f74258c671..0331", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.7ms)
+
+OpenSSL::Cipher::CipherError ():
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (13.9ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (37.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (27.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (55.4ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:15:36 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (21.6ms)
+Completed 200 OK in 248ms (Views: 229.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:15:38 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 11ms (Views: 10.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:15:40 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"oZXEVZFAu4gFK3hS69YzLJtrljmN36HY7l2t1XmCq73ZZkqcpYxPVlfdrgj7MPxLNoZOzIybpbpZfnQ/llD6Qg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:15:40 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=d68eb584ce7fcf28f3ce0a16544528d5261f33a055527acb&code=4%2FtwEpdyO0nRKBf6X07-2gk03tAolVUefqBOzcwhaTGQrj3Koro4U-cb6XOx47-H7Fh-8if2E1BFlWmaT5ajN_AS8&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=a0a524e98dcc27cecc412172e86d21564c661aec..b4f6&prompt=consent" for ::1 at 2019-11-30 13:15:43 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"d68eb584ce7fcf28f3ce0a16544528d5261f33a055527acb", "code"=>"4/twEpdyO0nRKBf6X07-2gk03tAolVUefqBOzcwhaTGQrj3Koro4U-cb6XOx47-H7Fh-8if2E1BFlWmaT5ajN_AS8", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"a0a524e98dcc27cecc412172e86d21564c661aec..b4f6", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.4ms)
+
+OpenSSL::Cipher::CipherError ():
+  app/controllers/sessions_controller.rb:22:in `googleAuth'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (31.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (38.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:16:33 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.1ms)
+Completed 200 OK in 289ms (Views: 270.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:16:36 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 13ms (Views: 13.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:16:38 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"eqBxTYU9t+D9BreRY64iVkYAVfqtAy3AnTnMyOGYuBoCU/+EsfFDPq/wYctzSO0x6+2ND6xHKaIqGhUiDkrp5Q=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:16:38 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=3ffe19f7712a094b0179e0fb38dfad97294420107e9eb6b3&code=4%2FtwFIBkd8_sdr0KpMYuff-Jbe0EVkMrPgqBa3oiASe6T6d1-BcP-N4FvFg5o-MNWUbG8TEGsbWM7eGxFyC71m8UU&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=e7a386ae188253ee7c48859c6177ccba5df099e1..2928&prompt=consent" for ::1 at 2019-11-30 13:16:41 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"3ffe19f7712a094b0179e0fb38dfad97294420107e9eb6b3", "code"=>"4/twFIBkd8_sdr0KpMYuff-Jbe0EVkMrPgqBa3oiASe6T6d1-BcP-N4FvFg5o-MNWUbG8TEGsbWM7eGxFyC71m8UU", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"e7a386ae188253ee7c48859c6177ccba5df099e1..2928", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ?, "encrypted_google_refresh_token_iv" = ?, "encrypted_google_refresh_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "2Xazmu+EnOYDCdob\n"], ["encrypted_google_token", "rFKlkotiKTA/7wir2E/8fb5EZ3q6sW5J9A6L1shupjM/Rnd4FV75QsBHgfVS\nFg4Rr+CREVestVyPMVH69VUbnC5DHwJ/tdl9Ge1wsmPRX0H6fxJZHf4WLvum\nffjB/V/0N6V4juQIqiBkodBTDqHHx4V0T2zEbY48nyzIl5glDGJC3GSi2fKL\nCxeLCtuYxnw12SzvA4NbEg==\n"], ["encrypted_google_refresh_token_iv", "i1/IyqIDpa5vPnQ+\n"], ["encrypted_google_refresh_token", "e+xfVbbaKGrT4nIvAAX/HcIyGH8rb4DYkOqX5u5e3IjfUa6M8ibnB5Oykw9J\ncwCmmjJpTEacGcg7THqopuMWq0Bi2y94Qc7SiBTnTGn7MptFP/D5bzlYk0M2\nnlX2yb1abaBVeqw9WJKNr1ACkDMEJcmcxdA7zoI=\n"], ["id", 2]]
+  [1m[36m (6.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 23ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:16:42 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 13ms (Views: 12.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:16:44 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 17ms (Views: 16.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:16:46 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"IvWqvP8bgQMkH3R6mWdxZ/oFI8jRmVql/2XSNdfRTDhaBiR1y9d13XbpoiCJgb4AV+j7PdDdXsdIRgvfOAMdxw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:16:46 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=591567480694d338e99b715978e577974b71d55b7ea538a3&code=4%2FtwEmBIgkr-YQ8ynZf0X7NGOyYM37X2v5m7pwKqGqqJ1QIv7J8PrvcLRUBQ0WqtyIsQhWhZTcarlUsNQd6Rnl8ec&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=f773da009d95abe52e4482f2428815e6296a2d44..801e&prompt=consent" for ::1 at 2019-11-30 13:16:49 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"591567480694d338e99b715978e577974b71d55b7ea538a3", "code"=>"4/twEmBIgkr-YQ8ynZf0X7NGOyYM37X2v5m7pwKqGqqJ1QIv7J8PrvcLRUBQ0WqtyIsQhWhZTcarlUsNQd6Rnl8ec", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"f773da009d95abe52e4482f2428815e6296a2d44..801e", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.4ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ?, "encrypted_google_refresh_token_iv" = ?, "encrypted_google_refresh_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "UpmcpYtrz6gH3Dzf\n"], ["encrypted_google_token", "Wu6BndCFqjAibkVitYGtQ1rta1vvZLc9OebCWPmjk7+medLGcIrndXCMGZx5\n9XJGNPEoQwKm2P1Oe1HbYHJmcDK2JE0nep1DNoCJ2ar0/Dqii8VD0OEl6b21\nZrkb62k58fYlsvexZ/b2Jyj6s50kNeCV/llZaQmS9ubQHV6qzrBEdPwKaadp\nkxh/pU3SDFe7+9MHYVrosg==\n"], ["encrypted_google_refresh_token_iv", "QmfwJQV3zI6QVE+5\n"], ["encrypted_google_refresh_token", "TTPIgusWyBoMkYn6zwc7e8A+/aOQOYwVgbrBuqtsyDQefi0c61tzauuJePte\ngrr9sD2tKSD8FfRt81WTStfBhWVpBzTizvXjwREZFNR6ataLIphn6u29K2aY\n3ZZYNKx+4l2jyNYWcH/r7v1Lprsn2mM+HQfIS4w=\n"], ["id", 2]]
+  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 8.3ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:16:49 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:17:48 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:17:50 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"neXm3QQ4LOE65PxBftNgHuRHhfy9ScmN6OMt1KsHoqjlFmgUMPTYP2gSKhtuNa95SapdCbwNze9fwPQ+RNXzVw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:17:50 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=b860f04e2b79da3586b0354ade5c85afe22c37fde4ea859b&code=4%2FtwGdfE8v0-yhmApZUDvT50RE0uRy-aBdm70FS_YczBXph0_xvVAcm1PmyqSGkynlpVvJBwKII6nBkq_xzJvbHJo&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=f3bcfa45597def5b71d4f2d27651a34ec5482874..af0c&prompt=consent" for ::1 at 2019-11-30 13:17:53 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"b860f04e2b79da3586b0354ade5c85afe22c37fde4ea859b", "code"=>"4/twGdfE8v0-yhmApZUDvT50RE0uRy-aBdm70FS_YczBXph0_xvVAcm1PmyqSGkynlpVvJBwKII6nBkq_xzJvbHJo", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"f3bcfa45597def5b71d4f2d27651a34ec5482874..af0c", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ?, "encrypted_google_refresh_token_iv" = ?, "encrypted_google_refresh_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "lpLPsDxFICz/6YAZ\n"], ["encrypted_google_token", "HGwj4WAXKCRpspceMI7ZETEDf3f32rywrqug/DdZcmkm3CcqWEnVJ5YlMjUy\nVO2Ke9aES/egrcgjshOX2Ghpf+yJkMyYoSQf23+/QU+gj/XbHEfdscSFsyiM\nxB+7gtUOQsAwyTgsMhn16LuAhktpTle9Pl1/AIvgzKFugTD+rY+VcshM49fT\n+BU+XgXXUePQTERoTPuksA==\n"], ["encrypted_google_refresh_token_iv", "aM+uZPOpEF40HZb8\n"], ["encrypted_google_refresh_token", "Ztm+FGGAucZD+0tSb7sPZpAMbxTTvXaae1X8JJZHPyPA7B1dEemc8GCk7yLl\nzQaycZpVh02+QktgMPYYbFhoR3EG9xmL0nSqxH8Kfkj39q1NJeSB+o1+m6FH\nsC7GdgRS8yZ8Sz+bSVhhRNIN/4KDApdjp8cL/LA=\n"], ["id", 2]]
+  [1m[36m (6.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:17:53 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 25ms (Views: 24.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:17:55 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 20ms (Views: 19.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:23:05 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (20.6ms)
+Completed 200 OK in 275ms (Views: 258.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:23:08 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 10ms (Views: 9.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:23:10 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"d/qxTdErdRiJ398bk+9IiJn35PUcGW+xztt4O79cWvMPCT+E5eeBxtspCUGDCYfvNBo8AB1da9N5+KHRUI4LDA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:23:10 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=c15fc81fb9a677f140295c7890862f885786f08bb7e1a1c6&code=4%2FtwE8s_oKPxlHrSgO-6x8JyNBTiYn_SkAVdwkOlyNTbKee54iFL94Kd9bAFbPMJWp6Ss3UjYIbwR5UKryO-Ex0FM&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=f6c59d0982a13b7841e0b213bc81fa8e9320fdb7..04f3&prompt=consent" for ::1 at 2019-11-30 13:23:13 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"c15fc81fb9a677f140295c7890862f885786f08bb7e1a1c6", "code"=>"4/twE8s_oKPxlHrSgO-6x8JyNBTiYn_SkAVdwkOlyNTbKee54iFL94Kd9bAFbPMJWp6Ss3UjYIbwR5UKryO-Ex0FM", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"f6c59d0982a13b7841e0b213bc81fa8e9320fdb7..04f3", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ?, "encrypted_google_refresh_token_iv" = ?, "encrypted_google_refresh_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "7T55ElFTZ9R8i/l4\n"], ["encrypted_google_token", "9tzzlmGMjfuTTNmjy4gldXsuFWgUUCJFKkt7ZO/ok7pT/U7WQmlOezofzgU2\nNbns68o9is5nytJqccDFj/q1aZLyOdRg3+7otxBjfZz9HyEJCm7AOntk9MgZ\nH8El4Dv68paDtdnLwGHbMZc36d5vgc57rAEa6twN5CXStHUgA9ZI5fpIMkjn\nl0xx3CSUp/YqEIO7hbdMSA==\n"], ["encrypted_google_refresh_token_iv", "uOscnPgBeDEwceJ4\n"], ["encrypted_google_refresh_token", "dPSrR9iix/Ha+Pz3KdvoQEGtN1C+rLx1omRujOCw9sBJolVNk1X08+d7YeaE\ngA91u7toJioMpVwFO73LG47QD9F3wR8ysz+F8ToBt7IqtB0J2IgSjN22NL9U\nZDT9/BN0klQnFNomGyhF29t8fEZXJ1j2x17iM4M=\n"], ["id", 2]]
+  [1m[36m (6.7ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 25ms (ActiveRecord: 7.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:23:14 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 12ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:33:53 -0800
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (34.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (51.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (95.1ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:33:53 -0800
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (39.0ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (33.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (65.7ms)
+  [1m[36m (7.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.5ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "encrypted_first_name" varchar, "encrypted_last_name" varchar, "encrypted_school_name" varchar, "encrypted_email" varchar, "encrypted_city" varchar, "encrypted_state" varchar, "encrypted_website" varchar, "encrypted_course" varchar, "encrypted_snap" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for ::1 at 2019-11-30 13:35:11 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (29.3ms)
+Completed 200 OK in 613ms (Views: 570.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:35:14 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 18ms (Views: 17.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:35:15 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"jnU6d9TQkEtco3pbaPJPqaS+qnoDlidE7P7IDdZ73dj2hrS+4BxklQ5VrAF4FIDOCVNyjwLSIyZb3RHnOamMJw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:35:15 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=f3d6793c0e13bf7ed375d75d406e4c25d7f847dcb795a857&code=4%2FtwHLRRn1bUdVPP2dUxTUiaPQR95SMChygN3zH_a41Z9rXSGEjjV3nyfDwUcFie06ZMDCRhz0UwM7QQ5wfrcPj8U&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=c90909efa82de6d7a50f4f56abf9bf0d6ceadd93..a83c&prompt=consent" for ::1 at 2019-11-30 13:35:20 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"f3d6793c0e13bf7ed375d75d406e4c25d7f847dcb795a857", "code"=>"4/twHLRRn1bUdVPP2dUxTUiaPQR95SMChygN3zH_a41Z9rXSGEjjV3nyfDwUcFie06ZMDCRhz0UwM7QQ5wfrcPj8U", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"c90909efa82de6d7a50f4f56abf9bf0d6ceadd93..a83c", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangyegp@gmail.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token", "encrypted_google_refresh_token_iv", "encrypted_google_refresh_token") VALUES (?, ?, ?, ?, ?, ?, ?)  [["email", "wangyegp@gmail.com"], ["first_name", "Ye"], ["last_name", "Wang"], ["encrypted_google_token_iv", "mjEqgwCuPIFZC6DW\n"], ["encrypted_google_token", "nZRTvXibVkvKkhgGaggMA6iz9uc6l1UCs9twqDM22ttAyxaq2gfmXAUJ8ed5\n4LO0KrOe9l1DBMCGzGwD02VZsN8lqwb3nRYrC3lvRBj6277DbzRbuLg4gvEw\no7s182OUxe8e4LuDftNx+oyMaS2eBkKqqsApFFtQDjC+1mw0CGNB10bVucGR\nAMKkkNL5HYMotlBCso/q+w==\n"], ["encrypted_google_refresh_token_iv", "R9cjuVH7ne/Bmcv6\n"], ["encrypted_google_refresh_token", "pEMcEcrjW0qth8i9VJqQgg/muh8nAXk5UcA7PEOuArKxDdchsB6CvPLqCNVK\naU4GW41K/q1eJPIbfqn1uz6M+cPOpbazw3rPbC6q3muEyGghV8pBScciTxtA\n3NTUPbcAcomUDczkHDDfv/gOQ5NBB21B44+iEwc=\n"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 29ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:35:20 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 20ms (Views: 19.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2/callback?state=f3d6793c0e13bf7ed375d75d406e4c25d7f847dcb795a857&code=4/twHSgcDHolw-mOjQIdgc5UhwgYAckBWtYwOmGtPxk7Zv2RwYz7URDV0CB8KcwirAC80hrqBFXuZdQ8im12UJNrA&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=berkeley.edu&session_state=a29036d70e4214573f9dca52dadef19c155b9fbd..22a9&prompt=none" for ::1 at 2019-11-30 13:35:25 -0800
+
+OmniAuth::Strategies::OAuth2::CallbackError (csrf_detected | CSRF detected):
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:25:in `raise_out!'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:20:in `call'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:12:in `call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:491:in `fail!'
+  omniauth-oauth2 (1.6.0) lib/omniauth/strategies/oauth2.rb:71:in `callback_phase'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:238:in `callback_call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:189:in `call!'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:169:in `call'
+  omniauth (1.9.0) lib/omniauth/builder.rb:64:in `call'
+  rack (1.6.11) lib/rack/etag.rb:24:in `call'
+  rack (1.6.11) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.11) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.10) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.10) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.10) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.2ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (46.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (37.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (81.0ms)
+
+
+Started GET "/auth/google_oauth2/callback?state=f3d6793c0e13bf7ed375d75d406e4c25d7f847dcb795a857&code=4/twHSgcDHolw-mOjQIdgc5UhwgYAckBWtYwOmGtPxk7Zv2RwYz7URDV0CB8KcwirAC80hrqBFXuZdQ8im12UJNrA&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email&authuser=1&hd=berkeley.edu&session_state=a29036d70e4214573f9dca52dadef19c155b9fbd..22a9&prompt=none" for ::1 at 2019-11-30 13:35:30 -0800
+
+OmniAuth::Strategies::OAuth2::CallbackError (csrf_detected | CSRF detected):
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:25:in `raise_out!'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:20:in `call'
+  omniauth (1.9.0) lib/omniauth/failure_endpoint.rb:12:in `call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:491:in `fail!'
+  omniauth-oauth2 (1.6.0) lib/omniauth/strategies/oauth2.rb:71:in `callback_phase'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:238:in `callback_call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:189:in `call!'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:169:in `call'
+  omniauth (1.9.0) lib/omniauth/builder.rb:64:in `call'
+  rack (1.6.11) lib/rack/etag.rb:24:in `call'
+  rack (1.6.11) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.11) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.10) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.10) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.10) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/ye/.rvm/rubies/ruby-2.6.5/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.8ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (20.5ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ye/.rvm/gems/ruby-2.6.5/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (40.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:35:39 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-30 13:35:40 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-30 13:35:40 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-30 13:35:40 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-30 13:35:40 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-30 13:35:40 -0800
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:35:42 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 14ms (Views: 13.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:35:43 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"bbtXeCBMk4n06KvRX89mgS9V/vY9vq4Yisek4cSF+L+aqcHXO/oZEfiDOR5S0YivgSX+g6/q/ogehWm03Vby7w=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:35:43 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=5c72e30bf15d28a011c8687acf2d4cc70637ac766c185ce6&code=4%2FtwF30jC0ZZi3ooiz9Is1c-niNvc89CbMsS7DjlNJ95tma3jUhM-jv5KmLyGLkBzCUQtkF4hdnufbayqXw2omVn8&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&hd=berkeley.edu&session_state=a4423b78bc07393e6bc0c888a9822ef58bb785db..6d03&prompt=consent" for ::1 at 2019-11-30 13:36:25 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"5c72e30bf15d28a011c8687acf2d4cc70637ac766c185ce6", "code"=>"4/twF30jC0ZZi3ooiz9Is1c-niNvc89CbMsS7DjlNJ95tma3jUhM-jv5KmLyGLkBzCUQtkF4hdnufbayqXw2omVn8", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"a4423b78bc07393e6bc0c888a9822ef58bb785db..6d03", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.2ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token", "encrypted_google_refresh_token_iv", "encrypted_google_refresh_token") VALUES (?, ?, ?, ?, ?, ?, ?)  [["email", "wangye@berkeley.edu"], ["first_name", "Ye"], ["last_name", "Wang"], ["encrypted_google_token_iv", "B6hR4dXwWg/rcIy6\n"], ["encrypted_google_token", "xf0dU4/CGdOAVHBXbVj2WDprzMxexsYbbL3JpK0fgAW2wDDKaTMIyd5eHlX9\n+14nMjqFst2X0QaN0KfVb/JIZ9kJxZmeuwbsHZaBJse/fb0o4tgaGiBXURc0\nX/CRRQRCop+12E4ls2BihXbSrZbIXrJb0THDpJpIWQ3Gh01R+Byva7+RU+wk\n8KQNZheZbPDKYNe20PCUgw==\n"], ["encrypted_google_refresh_token_iv", "FXzxssythPJm8xDm\n"], ["encrypted_google_refresh_token", "FMiDyoCtNmaoeUqgp1NoMf24CUYSpyxKhtodw0utFDiqJlkqLCSAIZfIUlFJ\nn36F9WAlQPQvSCpTHu1hCwhb3OO0PI6d5hCVZPzpvcMqhlrXvn13hAoiCskj\nlC5ogj10nRUeudnHcCKkA7q3i5u6HRgL5CvWSZ8=\n"]]
+  [1m[36m (6.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 7.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:36:26 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 23ms (Views: 22.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:36:28 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 20ms (Views: 19.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-30 13:36:30 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"2VzvM8OzbjxXzBFhfhKPY4fD7kUVtFvaYLQkHCQeD6AuTnmc2AXkpFung65zDGFNKbPuMIfgC0r09ulJPc0F8A=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-30 13:36:30 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=e5fabb27ccb2905413db0d209a7fcc836e63e630f6071220&code=4/twFnm8YGXz2vjRryH7b-Gwh7CpHs07oL8xGpknwMOW3LU52bgL_uGLoxqR8J7Kwj_1bd8hSgWDVwjmGuHlhnkCw&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=berkeley.edu&session_state=2bc70733bc0ef55f3e71da55a0f760e8880e4985..25b0&prompt=none" for ::1 at 2019-11-30 13:36:31 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"e5fabb27ccb2905413db0d209a7fcc836e63e630f6071220", "code"=>"4/twFnm8YGXz2vjRryH7b-Gwh7CpHs07oL8xGpknwMOW3LU52bgL_uGLoxqR8J7Kwj_1bd8hSgWDVwjmGuHlhnkCw", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"2bc70733bc0ef55f3e71da55a0f760e8880e4985..25b0", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.2ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "wangye@berkeley.edu"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?  [["encrypted_google_token_iv", "V+UDH3Caan2eYCln\n"], ["encrypted_google_token", "T89za9a6ij+a6O/5Fa5vjCMf67XyC52RZOGYNjFPeRu9MyKx93JsTNOJBMza\nRK7ZFia1COFMF8RsmFPneMgbBtvyDhUpCe2hifXAZmC1M9HbvaSVLDO3yQ+a\nHW0b4/6Q8KCubDsTFvZexNPYaMQqlEQHzUlsvj3gBHvuqSRBs9rB0/wlVu5M\nop+EQ4oij0YugPxUChsdOFKYrmzp\n"], ["id", 2]]
+  [1m[36m (6.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 7.6ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 13:36:31 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-30 13:36:32 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-30 13:36:32 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-30 13:36:32 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-30 13:36:32 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-30 13:36:32 -0800
+
+
+Started GET "/admins" for ::1 at 2019-11-30 13:36:34 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 16ms (Views: 14.9ms | ActiveRecord: 0.0ms)
