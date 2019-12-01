@@ -14,25 +14,26 @@
 ActiveRecord::Schema.define(version: 20191108235318) do
 
   create_table "admins", force: :cascade do |t|
-    t.string "encrypted_first_name"
-    t.string "encrypted_last_name"
-    t.string "encrypted_email"
-    t.string "encrypted_google_token"
-    t.string "encrypted_google_refresh_token"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "google_token"
+    t.string "google_refresh_token"
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "encrypted_first_name"
-    t.string   "encrypted_last_name"
-    t.string   "encrypted_school_name"
-    t.string   "encrypted_email"
-    t.string   "encrypted_city"
-    t.string   "encrypted_state"
-    t.string   "encrypted_website"
-    t.string   "encrypted_course"
-    t.string   "encrypted_snap"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "school_name"
+    t.string   "email"
+    t.string   "city"
+    t.string   "state"
+    t.string   "website"
+    t.string   "course"
+    t.string   "snap"
+    t.string   "other"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

@@ -1969,3 +1969,361 @@ Started GET "/" for ::1 at 2019-11-27 13:57:05 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (4.9ms)
 Completed 200 OK in 67ms (Views: 43.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:12:27 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (75.5ms)
+Completed 200 OK in 1072ms (Views: 1023.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:12:56 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (11.4ms)
+Completed 200 OK in 101ms (Views: 99.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 156ms (Views: 154.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:29 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 266ms (Views: 265.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:30 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:13:35 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 50ms (Views: 49.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-11-27 18:13:41 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 34ms (Views: 32.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-11-27 18:13:44 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"/V4UYXVZ4zKsQNmClez+It3w2NLuCEXqK1bVYrRvxgwCyX3txZEjHIxgthnvGhqIYrTRrwwPoSOewf+wpHZ4OA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 16ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-27 18:13:44 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=145716ff45ad8e6f6863cc732f75f5e68e1480eed3f5f0c2&code=4/tgFokW84NQyeMN31HqCu_f1ZNAeBVYMIe0PoDpdy4lsq0QtGQLTOywPQECczSPZsuyHD3-XP3cqsR8RJoO4c3Jc&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile%20openid&authuser=1&hd=berkeley.edu&session_state=7377bbbedb1afb62a70af3a38d85914969b80c62..bc0e&prompt=consent" for ::1 at 2019-11-27 18:13:58 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"145716ff45ad8e6f6863cc732f75f5e68e1480eed3f5f0c2", "code"=>"4/tgFokW84NQyeMN31HqCu_f1ZNAeBVYMIe0PoDpdy4lsq0QtGQLTOywPQECczSPZsuyHD3-XP3cqsR8RJoO4c3Jc", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"7377bbbedb1afb62a70af3a38d85914969b80c62..bc0e", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.8ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kpzhu@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 2.0ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kpzhu@berkeley.edu'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:12:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (35.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (23.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (146.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (12.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (113.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (213.7ms)
+
+
+Started POST "/login" for ::1 at 2019-11-27 18:14:13 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"/V4UYXVZ4zKsQNmClez+It3w2NLuCEXqK1bVYrRvxgwCyX3txZEjHIxgthnvGhqIYrTRrwwPoSOewf+wpHZ4OA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-11-27 18:14:13 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=90b3e79d4a0ff42e27adedc6dfaa272ff363cf78f3bd653b&code=4%2FtgHtumfW_glxNt1wSh923R9Xc_0v5Gww374PvDnDs33b4ztSD3KnwKjEBrQG05klzB1L7l6-SkwLaJxPmNrmF9Y&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=797242b74820abf431b1d86abdd2964543b57fd2..85cb&prompt=consent" for ::1 at 2019-11-27 18:14:18 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"90b3e79d4a0ff42e27adedc6dfaa272ff363cf78f3bd653b", "code"=>"4/tgHtumfW_glxNt1wSh923R9Xc_0v5Gww374PvDnDs33b4ztSD3KnwKjEBrQG05klzB1L7l6-SkwLaJxPmNrmF9Y", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"797242b74820abf431b1d86abdd2964543b57fd2..85cb", "prompt"=>"consent", "provider"=>"google_oauth2"}
+  [1m[36mAdmin Load (1.1ms)[0m  [1mSELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kimberly.zhu.2000@gmail.com'  ORDER BY "admins"."id" ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 1.1ms)
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: admins.email: SELECT  "admins".* FROM "admins" WHERE "admins"."email" = 'kimberly.zhu.2000@gmail.com'  ORDER BY "admins"."id" ASC LIMIT 1):
+  app/models/admin.rb:12:in `from_omniauth'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (8.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (36.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (2.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (48.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (100.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 18:23:55 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (14.7ms)
+Completed 200 OK in 142ms (Views: 107.9ms | ActiveRecord: 0.9ms)
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (7.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.9ms)[0m  select sqlite_version(*)
+  [1m[36m (5.5ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "school_name" varchar, "email" varchar, "city" varchar, "state" varchar, "website" varchar, "course" varchar, "snap" varchar, "other" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191030224841"]]
+  [1m[35m (43.4ms)[0m  commit transaction
+Migrating to CreateAdmins (20191108235318)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (9.4ms)[0m  CREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "google_token" varchar, "google_refresh_token" varchar) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191108235318"]]
+  [1m[35m (38.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.8ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["email", "janani_vijaykumar@berkeley.edu"], ["school_name", "Monta Vista High School"], ["city", "Cupertino"], ["state", "California"], ["website", "https://mvhs.fuhsd.org"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.896831"], ["updated_at", "2019-11-28 03:05:51.896831"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["email", "kpzhu@berkeley.edu"], ["school_name", "Cupertino High School"], ["city", "Cupertino"], ["state", "California"], ["website", "https://chs.fuhsd.org"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.905232"], ["updated_at", "2019-11-28 03:05:51.905232"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Dalton"], ["last_name", "Surprenant"], ["email", "daltons@berkeley.edu"], ["school_name", "San Diego High School"], ["city", "San Diego"], ["state", "California"], ["website", "https://sdhs.org"], ["course", "I am using BJC as a resource, but not teaching with it."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.925663"], ["updated_at", "2019-11-28 03:05:51.925663"]]
+  [1m[35m (3.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Ye"], ["last_name", "Wang"], ["email", "wangye@berkeley.edu"], ["school_name", "New York High School"], ["city", "New York"], ["state", "New York"], ["website", "https://nyhs.fuhsd.org"], ["course", "I am a TEALS volunteer, and am teaching the BJC curriculum."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.932189"], ["updated_at", "2019-11-28 03:05:51.932189"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Zachary"], ["last_name", "Chao"], ["email", "zachchao@berkeley.edu"], ["school_name", "Santa Barbara High School"], ["city", "Santa Barbara"], ["state", "California"], ["website", "https://sbhs.org"], ["course", "Other"], ["snap", "N/A"], ["other", "For a club"], ["created_at", "2019-11-28 03:05:51.939998"], ["updated_at", "2019-11-28 03:05:51.939998"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "school_name", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Varun"], ["last_name", "Murthy"], ["email", "murthy@berkeley.edu"], ["school_name", "Houston High School"], ["city", "Houston"], ["state", "Texas"], ["website", "https://houstonTexas.org"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:05:51.945931"], ["updated_at", "2019-11-28 03:05:51.945931"]]
+  [1m[36m (6.3ms)[0m  [1mcommit transaction[0m
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 19:14:44 -0800
+  [1m[35mActiveRecord::SchemaMigration Load (2.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"p8BrF6Nmv3KDN1wxtCrwH0sZTSoVozT4K2TqkU1YbqtYVwKbE65/XKMXM6rO3BS19F1EV/ek0DGe88BDXUHQnw==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Cupertino High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"chs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[36m (7.7ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (10.0ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["school_name", "Cupertino High School"], ["email", "kimberly.zhu.2000@gmail.com"], ["city", "Cupertino"], ["state", "CA"], ["website", "chs.fuhsd.org"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["created_at", "2019-11-28 03:14:45.662553"], ["updated_at", "2019-11-28 03:14:45.662553"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (38.6ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 1261.4ms
+
+Sent mail to kimberly.zhu.2000@gmail.com (2133.8ms)
+Date: Wed, 27 Nov 2019 19:14:47 -0800
+From: beautyandjoy2019@gmail.com
+To: kimberly.zhu.2000@gmail.com
+Message-ID: <5ddf3ba7201f1_48393fd8874f046c41284@Kimberlys-Air.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 3747ms (ActiveRecord: 20.7ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 19:14:49 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 78ms (Views: 77.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 19:15:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 107ms (Views: 105.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 19:15:13 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vZgc8x5/vNddvSpji7yS0cC6vpfZgVn537+2annUUSBCD3V/rrd8+X2dRfjxSnZ7f/636juGvTBqKJy4ac3vFA==", "teacher"=>{"first_name"=>"d", "last_name"=>"", "email"=>"", "snap"=>"", "course"=>"", "other"=>"", "school_name"=>"", "city"=>"", "state"=>"", "website"=>""}, "commit"=>"Submit"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 28ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 19:15:13 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 38ms (Views: 36.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 19:15:55 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VSCuHtHKGJtbNsR8ivNZWlJ7QmFw1qqoqCAhHQTQHuuqt8eSYQLYtXsWq+fwBb3w7T9LHJLRTmEdtwvPFMmg3w==", "teacher"=>{"first_name"=>"a", "last_name"=>"a", "email"=>"a", "snap"=>"a", "course"=>"I am teaching BJC but not as an AP CS Principles course.", "other"=>"a", "school_name"=>"a", "city"=>"a", "state"=>"AL", "website"=>"s"}, "commit"=>"Submit"}
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "a"], ["last_name", "a"], ["school_name", "a"], ["email", "a"], ["city", "a"], ["state", "AL"], ["website", "s"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "a"], ["other", "a"], ["created_at", "2019-11-28 03:15:55.609494"], ["updated_at", "2019-11-28 03:15:55.609494"]]
+  [1m[35m (6.4ms)[0m  commit transaction
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.4ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 26.8ms
+
+Sent mail to a (637.1ms)
+Date: Wed, 27 Nov 2019 19:15:55 -0800
+From: beautyandjoy2019@gmail.com
+To: a
+Message-ID: <5ddf3beba38fd_48393fd8874ed974413f6@Kimberlys-Air.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Completed 500 Internal Server Error in 701ms (ActiveRecord: 7.4ms)
+
+Net::SMTPFatalError (553 5.1.2 The recipient address <a> is not a valid RFC-5321 address. g26sm5800954pfo.128 - gsmtp
+):
+  app/controllers/teachers_controller.rb:7:in `create'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (11.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (8.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (86.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (7.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (4.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (85.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (3.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (175.6ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 19:16:11 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VSCuHtHKGJtbNsR8ivNZWlJ7QmFw1qqoqCAhHQTQHuuqt8eSYQLYtXsWq+fwBb3w7T9LHJLRTmEdtwvPFMmg3w==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"a", "course"=>"I am teaching BJC but not as an AP CS Principles course.", "other"=>"a", "school_name"=>"None", "city"=>"Cupertino", "state"=>"CA", "website"=>"s"}, "commit"=>"Submit"}
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "school_name", "email", "city", "state", "website", "course", "snap", "other", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["school_name", "None"], ["email", "kimberly.zhu.2000@gmail.com"], ["city", "Cupertino"], ["state", "CA"], ["website", "s"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "a"], ["other", "a"], ["created_at", "2019-11-28 03:16:11.958435"], ["updated_at", "2019-11-28 03:16:11.958435"]]
+  [1m[36m (3.5ms)[0m  [1mcommit transaction[0m
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.1ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 32.0ms
+
+Sent mail to kimberly.zhu.2000@gmail.com (1552.8ms)
+Date: Wed, 27 Nov 2019 19:16:12 -0800
+From: beautyandjoy2019@gmail.com
+To: kimberly.zhu.2000@gmail.com
+Message-ID: <5ddf3bfc154f_48393fd8874ed97441411@Kimberlys-Air.mail>
+Subject: Welcome to My Awesome Site
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Teachers,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 1602ms (ActiveRecord: 6.2ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 19:16:13 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 62ms (Views: 61.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 20:07:48 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (211.4ms)
+Completed 200 OK in 457ms (Views: 427.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 20:12:09 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hvvgeUbmL6UeKUTJgD5SBYR0rApUz4if14Q3Xhpw6pR5bIn19i7viz4JK1L6yLavOzCld7bIbFZiEx2MCmlUoA==", "teacher"=>{"first_name"=>"k", "last_name"=>"k", "email"=>"k", "snap"=>"k", "course"=>"", "other"=>"k", "school_name"=>"k", "city"=>"k", "state"=>"", "website"=>"k"}, "commit"=>"Submit"}
+  [1m[35m (8.8ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 140ms (ActiveRecord: 8.9ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 20:12:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 166ms (Views: 162.5ms | ActiveRecord: 0.0ms)

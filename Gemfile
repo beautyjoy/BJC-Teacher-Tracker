@@ -32,7 +32,7 @@ gem 'tzinfo-data'
 gem 'figaro'
 
 # Generate attr_accessors that transparently encrypt and decrypt attributes.
-gem 'attr_encrypted', '~> 3.1.0'
+#gem 'attr_encrypted', '~> 3.1.0'
 
 
 
