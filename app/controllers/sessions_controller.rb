@@ -1,4 +1,4 @@
-:class SessionsController < ApplicationController
+class SessionsController < ApplicationController
   def create
     redirect_to "/auth/google_oauth2"
   end
