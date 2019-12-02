@@ -15,6 +15,11 @@ class TeachersController < ApplicationController
         @teachers = Teacher.unvalidated
     end
 
+    #need to move to school controller after it is made and use schools.
+    def statistics
+        @teachers = Teacher.unvalidated
+    end
+
     def validate
         id = params[:id]
         teacher = Teacher.find_by(:id => id)
