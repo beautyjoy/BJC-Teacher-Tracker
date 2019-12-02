@@ -32,7 +32,7 @@ gem 'tzinfo-data'
 gem 'figaro'
 
 # Generate attr_accessors that transparently encrypt and decrypt attributes.
-#gem 'attr_encrypted', '~> 3.1.0'
+gem 'attr_encrypted', '~> 3.1.0'
 
 
 
@@ -84,4 +84,3 @@ group :production do
   gem 'pg', '~> 0.15'              # use PostgreSQL in production (Heroku)
   gem 'rails_12factor'  # Heroku-specific production settings
 end
-

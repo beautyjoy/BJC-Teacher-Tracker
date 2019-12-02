@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @administrator = Admin.new(params[:user])
+    @administrator = Admin.new(params[:admin])
     if @administrator.save
       flash[:notice] = "You signed up successfully"
     else
