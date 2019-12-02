@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 20191201000900) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "google_token"
-    t.string "google_refresh_token"
+    t.string "encrypted_google_token"
+    t.string "encrypted_google_token_iv"
+    t.string "encrypted_google_refresh_token"
+    t.string "encrypted_google_refresh_token_iv"
   end
 
   create_table "teachers", force: :cascade do |t|
