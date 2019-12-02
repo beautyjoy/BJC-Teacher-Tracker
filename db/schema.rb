@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191108235318) do
+ActiveRecord::Schema.define(version: 20191201000900) do
 
   create_table "admins", force: :cascade do |t|
     t.string "encrypted_first_name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20191108235318) do
     t.string   "encrypted_snap"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.boolean  "validated"
   end
 
 end

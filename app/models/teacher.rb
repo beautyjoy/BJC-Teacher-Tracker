@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
   validates :first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, :other, presence: true
+  validates_inclusion_of :validated, :in => [true, false]
 
   
   # attr_encrypted_options.merge!(:encode => true)
@@ -16,7 +17,6 @@ class Teacher < ActiveRecord::Base
 
   attr_encrypted_options.merge!(:encode => true)
   attr_encrypted :first_name, :key => SecureRandom.base64(32).first(32)
-  ENV["USERKEY"]
   attr_encrypted :last_name, :key => SecureRandom.base64(32).first(32)
   attr_encrypted :school_name, :key => SecureRandom.base64(32).first(32)
   attr_encrypted :email, :key => SecureRandom.base64(32).first(32)
@@ -36,4 +36,7 @@ class Teacher < ActiveRecord::Base
     end
   end
 
+  def self.unvalidated
+    Teacher.where(:validated => false)
+  end
 end
