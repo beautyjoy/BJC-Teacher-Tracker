@@ -3,6 +3,8 @@
 
   <% if flash[:saved_teacher] %>
     Thanks for signing up!
+  <% elsif flash[:failed] %>
+    Error saving
   <% else %>
     <%= form_for @teacher do |f| %>
       <div class='form-input-group'>
@@ -98,4 +100,5 @@
   <% end %>
 </div>
 
-<%= link_to "Go to Admin View", admins_path %>
+<%= link_to "Go to Admin View", admins_path %><br>
+<%= link_to "Go to Forms View", forms_path %>

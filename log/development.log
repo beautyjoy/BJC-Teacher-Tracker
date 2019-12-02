@@ -1971,6 +1971,894 @@ Processing by MainController#index as HTML
 Completed 200 OK in 67ms (Views: 43.7ms | ActiveRecord: 1.2ms)
 
 
+<<<<<<< HEAD
+Started GET "/" for ::1 at 2019-11-27 21:15:50 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (61.9ms)
+Completed 200 OK in 635ms (Views: 605.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-27 21:15:52 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-27 21:15:52 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-27 21:15:52 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-27 21:15:52 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-27 21:15:52 -0800
+
+
+Started POST "/teachers" for ::1 at 2019-11-27 21:16:27 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wdG281y2cD0nYcViXCqSTx5yL85iKrhmS3x9cj8oEywPCE3bXhh9zDl32C4Ez0lK1IyPI4LNwacZTjuB8shJAw==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 61ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 21:16:27 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 88ms (Views: 87.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-27 23:06:42 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (57.9ms)
+Completed 500 Internal Server Error in 158ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `first_name' for #<Teacher:0x04a74410>):
+    10:         <div class='row'>
+    11:           <div class='col-6'>
+    12:             <h6>First Name</h6>
+    13:             <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+    14:           </div>
+    15:           
+    16:           <div class='col-6'>
+  app/views/main/index.html.erb:13:in `block in _app_views_main_index_html_erb___633119512_49036068'
+  app/views/main/index.html.erb:7:in `_app_views_main_index_html_erb___633119512_49036068'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (976.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddValidation (20191201000900)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "teachers" ADD "validated" boolean[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20191201000900"]]
+  [1m[36m (16.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for ::1 at 2019-11-30 21:23:22 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.0ms)
+
+SyntaxError (C:/Users/dalto/CS169/Project/code/BJC-Teacher-Tracker/app/models/teacher.rb:2: syntax error, unexpected '\n', expecting =>):
+  app/models/teacher.rb:2: syntax error, unexpected '\n', expecting =>
+  app/controllers/main_controller.rb:3:in `index'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (980.8ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:24:41 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (57.8ms)
+Completed 200 OK in 592ms (Views: 563.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-11-30 21:24:43 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-11-30 21:24:43 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-11-30 21:24:43 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-11-30 21:24:43 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-11-30 21:24:43 -0800
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:25:37 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"jQ3M8lwA1oSIsnvNj5U4/dmxlUqO46gfKwBW6Fz3WRJWDZqEg0JVlAhLlsYPI2b3kOGRAApjb0uLIAA622+VFQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 66ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:25:37 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 88ms (Views: 87.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:25:43 -0800
+Processing by TeachersController#forms as HTML
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+NoMethodError (undefined method `unvalidated' for #<Class:0x05b70550>
+Did you mean?  validate
+               validates):
+  app/controllers/teachers_controller.rb:16:in `forms'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (863.7ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:26:36 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TeachersController#forms as HTML
+Completed 500 Internal Server Error in 98ms (ActiveRecord: 0.0ms)
+
+ActionView::MissingTemplate (Missing template teachers/forms, application/forms with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "C:/Users/dalto/CS169/Project/code/BJC-Teacher-Tracker/app/views"
+):
+  actionview (4.2.10) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.10) lib/action_view/lookup_context.rb:121:in `find'
+  C:in `find_template'
+  actionview (4.2.10) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.10) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.10) lib/action_view/renderer/renderer.rb:46:in `render_template'
+  actionview (4.2.10) lib/action_view/renderer/renderer.rb:27:in `render'
+  actionview (4.2.10) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.10) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.10) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.10) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.10) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.10) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  C:/Ruby24/lib/ruby/2.4.0/benchmark.rb:308:in `realtime'
+  activesupport (4.2.10) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.10) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.10) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.10) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.10) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.10) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.10) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.10) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.10) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.10) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.10) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.10) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.10) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.10) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.10) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.10) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.10) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.10) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.10) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:192:in `call!'
+  omniauth (1.9.0) lib/omniauth/strategy.rb:169:in `call'
+  omniauth (1.9.0) lib/omniauth/builder.rb:64:in `call'
+  rack (1.6.11) lib/rack/etag.rb:24:in `call'
+  rack (1.6.11) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.11) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.11) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.10) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.10) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.10) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  C:/Ruby24/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  C:/Ruby24/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  C:/Ruby24/lib/ruby/2.4.0/webrick/server.rb:308:in `block in start_thread'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (892.6ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:29:12 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TeachersController#forms as HTML
+  Rendered teachers/forms.html.erb within layouts/application (0.0ms)
+Completed 500 Internal Server Error in 101ms (ActiveRecord: 1.0ms)
+
+SyntaxError (C:/Users/dalto/CS169/Project/code/BJC-Teacher-Tracker/app/views/teachers/forms.html.erb:31: syntax error, unexpected keyword_ensure, expecting keyword_end
+          ensure
+                ^):
+  app/views/teachers/forms.html.erb:31: syntax error, unexpected keyword_ensure, expecting keyword_end
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (875.2ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:30:39 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (0.0ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 298ms (Views: 269.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:30:48 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (30.0ms)
+Completed 200 OK in 119ms (Views: 111.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:31:18 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wtt5seWuOTeI2Gv9EEu9sxQody++tI+OxqAx8p/oaAeB2y/HOuy6JwghhvaQ/eO5XXhzZTo0SNpmgGcgGHCkAA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 47ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:31:18 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 90ms (Views: 89.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:31:23 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 85ms (Views: 84.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:39:20 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (0.0ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 300ms (Views: 271.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:39:25 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 110ms (Views: 104.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:39:33 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"E5YhOUvIByGKpQlQFutBd6nL1pr8k7B61/XUfFMc9DzIlndPlIqEMQpc5FuWXR994JvS0HgTdy531YKu1IQ4Ow==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"", "snap"=>"", "course"=>"", "other"=>"", "school_name"=>"", "city"=>"", "state"=>"", "website"=>""}, "commit"=>"Submit"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 50ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:39:33 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 89ms (Views: 89.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:40:00 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KPFc0qwWtlBTJNUh3nunF2RN+VlZPn60Td6nMi6jqQbz8Qqkc1Q1QNPdOCpezfkdLR39E92+ueDt/vHgqTtlAQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"berkeley", "city"=>"berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 37ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:40:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 89ms (Views: 87.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-11-30 21:40:05 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 85ms (Views: 84.4ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for ::1 at 2019-11-30 21:42:49 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 313ms (Views: 287.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:43:06 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vxhSabeOMsK7sb9aF6v+ZnNHFjRHBzI0H6bIw5pczeFkGAQfaMyx0jtIUlGXHaBsOhcSfsOH9WC/hp4RHcQB5g==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"", "other"=>"", "school_name"=>"", "city"=>"", "state"=>"", "website"=>""}, "commit"=>"Submit"}
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 44ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:43:06 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 88ms (Views: 86.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:44:19 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JCk1rwCOGrb/Rkqjymjh1X2EWpSwwyfQpfY3N4klwFH/KWPZ38yZpn+/p6hK3r/fNNRe3jRD4IQF1mHlDr0MVg==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 49ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:44:19 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 88ms (Views: 87.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:57:46 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (29.9ms)
+Completed 200 OK in 334ms (Views: 308.3ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 21:58:10 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hqR3cjeMJGgVAYmrn9pHBNw/cNvkEj5s4abr5E3qWKVdpCEE6M6neJX4ZKAfbBkOlW90kWCS+ThBhr02ynKUog==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:58:10 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 85ms (Views: 84.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 21:59:36 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (22.9ms)
+Completed 200 OK in 331ms (Views: 304.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 22:00:05 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OoVb619juoDZx4wXaGI2w9/b/6xCVlcitBpEt5YNAAjhhQ2dgCE5kFk+YRzo1GjJlov75sbWkHYUOhJlEZXMDw==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 26ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 22:00:05 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 87ms (Views: 86.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 22:17:45 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 318ms (Views: 291.5ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 22:18:15 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VvicQHX3tdaaC1VGWLtMVjAtUDHFr94OdxlYHveVuCON+Mo2qrU2xhryuE3YDRJceX1Ue0EvGVrXOQ7McA10JA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 51ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 22:18:16 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 86ms (Views: 85.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:17:44 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 314ms (Views: 286.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 23:18:18 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"m6YREw5H0L6EvbAeWPRCXNOHJHIXmbq95vXCc0H31sVApkdl0QVTrgREXRXYQhxWmtcgOJMZfelG1ZShxm8awg==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 40ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:18:19 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 87ms (Views: 86.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:19:13 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 321ms (Views: 294.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 23:19:48 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ba77bRgZM/oScTikXFfIIXb4+uiS3042e40I8ZxxHNLerq0bx1uw6pKI1a/c4ZYrP6j+ohZfiWLbrV4jG+nQ1Q==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 50ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:19:49 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 87ms (Views: 87.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:24:43 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 318ms (Views: 289.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-11-30 23:25:12 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zLFBG83p9sg3am2vuVLNKiJCKnzpMfGWPM8WS4zbuN8XsRdtEqt12LeTgKQ55JMgaxIuNm2xNsKc70CZC0N02A==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 43ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-11-30 23:25:12 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 85ms (Views: 83.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:05:58 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (56.9ms)
+Completed 200 OK in 631ms (Views: 595.8ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:06:25 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SrFgslZElmjKetuiNVp0EEnLYB+uG+cEq8J8CND4RuWRsTbEiQYVeEqDNqm17CoaAJtkVSqbIFAL4iraV2CK4g==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 52ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:06:25 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 85ms (Views: 84.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:07:42 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.9ms)
+Completed 200 OK in 328ms (Views: 301.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:08:11 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pRbAqBm0Bp6me02WH/Jk2ZrbYsK15BrrLd/qT1T/ZD5+FpbexvaFjiaCoJ2fRDrT04tmiDFk3b+N/7yd02eoOQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:08:11 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 92ms (Views: 90.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:40:45 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 317ms (Views: 292.7ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:41:15 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6F90LqYRExRodr0eYUw/LCrcZ/OR4iub0oCcD/unQvgzXyJYeVOQBOiPUBXh+mEmY4xjuRVi7M9yoMrdfD+O/w==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 22ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:41:16 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 84ms (Views: 83.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:44:03 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (26.0ms)
+Completed 200 OK in 291ms (Views: 259.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:44:32 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"C1lXLjEjrOlBfMbkjGv7zbScb0Bj9qa2zyXI/xkJEYzQWQFY7mEv+cGFK+8M3aXH/cxrCud2YeJvBZ4tnpHdiw==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:44:32 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 101ms (Views: 100.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:46:19 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 327ms (Views: 296.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:46:50 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nJN3Pm8oqypsvKpxHpcwQWhBuPrxXQtezU88kLOa3H5HkyFIsGooOuxFR3qeIW5LIRG8sHXdzAptb2pCNAIQeQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:46:50 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 87ms (Views: 86.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:48:23 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms)
+
+ArgumentError (Unknown validator: 'InValidator'):
+  app/models/teacher.rb:3:in `<class:Teacher>'
+  app/models/teacher.rb:1:in `<top (required)>'
+  app/controllers/main_controller.rb:3:in `index'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (988.4ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:49:59 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.9ms)
+Completed 200 OK in 320ms (Views: 290.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:50:27 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HpSUGFFCFRHuqGMob0mpYuPBDeF23dKOpy1KvrzqGcLFlMJujgCWAW5RjiPv//doqpEJq/JdFdoHDRxsO3LVxQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 29ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:50:27 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 85ms (Views: 83.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:51:05 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.9ms)
+Completed 200 OK in 322ms (Views: 294.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:51:35 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zCBb2iRJ4LzB4a0z65Fj10/njmmrEDoSKNnHE/cYTNwXIA2s+wtjrEEYQDhrJz3dBreKIy+Q/UaI+ZHBcICA2w==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "rLwy7eBbCQ0zv9jDQTH5AhpdKwe9Dw==\n"], ["encrypted_last_name", "bQTa/31xBCIWtJlaurTlXMsMaRkrhuosLZE=\n"], ["encrypted_school_name", "fpm2Kf17mAy2fBBvKQV4YCGAm8X1FRxs\n"], ["encrypted_email", "+TZp7dbDCyZM9e5LX0oYqUQGv/5gbFIGR10i9CF4igOe1wXCham6UnK5xCs=\n"], ["encrypted_city", "DsYh5l7UxA0xhq52qubnNRkn6yBnB6N9\n"], ["encrypted_state", "IQdEKeOQEJD69TlMf+zZG+/7\n"], ["encrypted_website", "JvRNtvfpXb3RAxTV9yhdAisKhjNp1Ox5NB8hdQ==\n"], ["encrypted_course", "pa5OQ4yFZQYio+a90LhdDqfcUCsVZ9fjom+AaJd7tlZAPnEBDXcUx1FQo2EF\nCdoeWDFrtx0WyjcbHyLaiAQ20w==\n"], ["encrypted_snap", "/LfiLRp8hYHsvdIu4gzLVFwRdC+LhjFefg==\n"], ["validated", "f"], ["created_at", "2019-12-01 08:51:35.292451"], ["updated_at", "2019-12-01 08:51:35.292451"]]
+  [1m[35m (16.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 46ms (ActiveRecord: 18.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:51:35 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 84ms (Views: 84.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:52:15 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.0ms)
+Completed 200 OK in 317ms (Views: 287.4ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:52:46 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OVO72ukKmtGa76sv9gv+hqDvxmF/t0clTEjaLvmzbT/iU+2sNkgZwRoWRiR2vaCM6b/CK/s3gHHsaIz8fiuhOA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "M1ZPOwKetmGFA+ykida+c6hdE2IwWA==\n"], ["encrypted_last_name", "rQ8aq0MGImjo0OfiF700QsrIjPO2trlg0/g=\n"], ["encrypted_school_name", "SGKa2aE3RKraIXU9JbVWxBN6NWzM7niF\n"], ["encrypted_email", "AOwc0j4ft1Y9UCZBaE3J4elnGsrNzTbSM7gob+CMg7HoXTX8FYFS7bODxew=\n"], ["encrypted_city", "LV5WoI14wXiSnPK/LvwKWwJuPpTLAFwr\n"], ["encrypted_state", "Vpk7cEWA57pTK/xY7uq6x0Im\n"], ["encrypted_website", "sKdETh7Cv6/zab7gsGdcNdJcl5CaWRBAXQPRFQ==\n"], ["encrypted_course", "mU3/zQyT6UGiExplKGCF0mcW4VN5DQz7r9pXwMX1cyVyHgNg1n77Xh4Z20MO\n31edeS914b/Vbc//k3I3wxfhdA==\n"], ["encrypted_snap", "ZMj/8pTfHYGC2PKN8QULD6e4+P1nCIrQiA==\n"], ["validated", "f"], ["created_at", "2019-12-01 08:52:46.467971"], ["updated_at", "2019-12-01 08:52:46.467971"]]
+  [1m[35m (13.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 32ms (ActiveRecord: 14.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:52:46 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 86ms (Views: 85.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-01 00:52:49 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (27.0ms)
+Completed 500 Internal Server Error in 123ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (must specify an iv):
+    16:     <tbody>
+    17:       <% @teachers.each do |teacher| %>
+    18:       <tr>
+    19:       	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+    20:       	<td> <%= teacher.school_name %> </td>
+    21:       	<td> <%= teacher.email %> </td>
+    22:       	<td> <%= teacher.city + ', ' + teacher.state %> </td>
+  app/views/teachers/forms.html.erb:19:in `block in _app_views_teachers_forms_html_erb___595349752_67204476'
+  app/views/teachers/forms.html.erb:17:in `_app_views_teachers_forms_html_erb___595349752_67204476'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (906.7ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:53:29 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (26.9ms)
+Completed 200 OK in 313ms (Views: 285.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 00:54:01 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xD2oERvVUo6/i5vttZRGW2BwopbXu8AaUnOQgmrYh0YfPf5nxJfRnj9yduY1IhhRKSCm3FM7B07yU8ZQ7UBLQQ==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "+hUL0B2crNIvXsYWhram1XRMA3OdnA==\n"], ["encrypted_last_name", "JHN7Miz0gr0uzWW6vHHELZn2SsG/yHgaOeg=\n"], ["encrypted_school_name", "7s/BEvf1z4HMKXHXARhMySYbUqyzN1E1\n"], ["encrypted_email", "QnFE5Hfj2LgCqYaMxji+40oMRZuEQxY29Fjvhz+kj2GQgAlwGeMULmjW7LY=\n"], ["encrypted_city", "hCDrbSZbc9oybP1YvCFfVM9ErBhZsRK3\n"], ["encrypted_state", "Yk0AkdQ7osJc07xoOBz6MA8x\n"], ["encrypted_website", "L4TL/zv+SFCv9esukvM9OzanM0XHx5UFVwsICQ==\n"], ["encrypted_course", "LjZ6ndMOBQFpE5kX2UeHVnKfrsNRPyViDgPC1DS7VAnpGFwZlchSceZ+FTEz\n7aAkyeMXovKKQ/JcTeIfDPg/6w==\n"], ["encrypted_snap", "/jyZ/uPGFxmhoySuNbEtkLz8vybP/BHf8A==\n"], ["validated", "f"], ["created_at", "2019-12-01 08:54:01.848739"], ["updated_at", "2019-12-01 08:54:01.848739"]]
+  [1m[35m (15.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 36ms (ActiveRecord: 16.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 00:54:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 85ms (Views: 84.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-01 00:54:04 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (26.9ms)
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (must specify an iv):
+    16:     <tbody>
+    17:       <% @teachers.each do |teacher| %>
+    18:       <tr>
+    19:       	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+    20:       	<td> <%= teacher.school_name %> </td>
+    21:       	<td> <%= teacher.email %> </td>
+    22:       	<td> <%= teacher.city + ', ' + teacher.state %> </td>
+  app/views/teachers/forms.html.erb:19:in `block in _app_views_teachers_forms_html_erb__536257325_67114056'
+  app/views/teachers/forms.html.erb:17:in `_app_views_teachers_forms_html_erb__536257325_67114056'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (893.2ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 16:03:12 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (63.8ms)
+Completed 200 OK in 653ms (Views: 617.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 16:03:40 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"KQLRwpAIJhLPRn30GTNXuHhkSDqIjQ1/6D5hOSYHu1PyAoe0T0qlAk+/kP+ZhQmyMTRMcAwNyitIHjfroZ93VA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "Q/TU619xdOQ192YMSi1EWA0x5svBrg==\n"], ["encrypted_last_name", "xfiCjCE4v7E1YTeQrsdM91LJRvF7QJNjSoM=\n"], ["encrypted_school_name", "XZhTIgipStP2JQFEpK/AnjUc1dkCHthr\n"], ["encrypted_email", "+QrU+qnFOi4IainNFqhT+9KGVQLYWGHwzs2VwxG1xAv9DU3ZwAubRh9yoSo=\n"], ["encrypted_city", "rLaaB/z4O7MI/xr/v7j42tSQsqOefn3O\n"], ["encrypted_state", "rf402rd9f5zS4tmL24P/BiRf\n"], ["encrypted_website", "auma0ZmGsXfhWj5k5XCkMwiHltpniQ87BILJQQ==\n"], ["encrypted_course", "6cjg6HCIjtdmzyisYYoFAcGA8hZpSb0CBmgKZkkuH0p/4ka0HZBxYRA51WH2\nqz4NCLtNqlvadcoGZABs28p/Yg==\n"], ["encrypted_snap", "5NAqkt4sU720O3bnojdvbTVWVuvNHfqYuA==\n"], ["validated", "f"], ["created_at", "2019-12-02 00:03:40.709379"], ["updated_at", "2019-12-02 00:03:40.709379"]]
+  [1m[35m (17.9ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 40ms (ActiveRecord: 19.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 16:03:40 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 84ms (Views: 82.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-01 16:03:43 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (29.9ms)
+Completed 500 Internal Server Error in 129ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (must specify an iv):
+    16:     <tbody>
+    17:       <% @teachers.each do |teacher| %>
+    18:       <tr>
+    19:       	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+    20:       	<td> <%= teacher.school_name %> </td>
+    21:       	<td> <%= teacher.email %> </td>
+    22:       	<td> <%= teacher.city + ', ' + teacher.state %> </td>
+  app/views/teachers/forms.html.erb:19:in `block in _app_views_teachers_forms_html_erb__468692796_66861312'
+  app/views/teachers/forms.html.erb:17:in `_app_views_teachers_forms_html_erb__468692796_66861312'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (942.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 16:42:29 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 314ms (Views: 290.0ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-01 16:43:03 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"OT9qwSb4R5aiwaChPGdyWV05OrKC3FkF/gzdEEu9bSviPzy3+brEhiI4Taq80SxTFGk++AZcnlFeLIvCzCWhLA==", "teacher"=>{"first_name"=>"Dalton", "last_name"=>"Surprenant", "email"=>"daltonsurprenant98@gmail.com", "snap"=>"daltonsur", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A", "school_name"=>"Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "teachers" ("encrypted_first_name", "encrypted_last_name", "encrypted_school_name", "encrypted_email", "encrypted_city", "encrypted_state", "encrypted_website", "encrypted_course", "encrypted_snap", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["encrypted_first_name", "e7oC/0/KxF2R+Zs5alg5Ygw+mf4Evg==\n"], ["encrypted_last_name", "37Qiow5DCH5j86MPQoEJ/sLbFHbT3N4OS5Q=\n"], ["encrypted_school_name", "KJVL7nEyoNDa56GTdJaTUA+tKFLwLpSa\n"], ["encrypted_email", "NYS0MSIpHG/K/kzxGMfq3S+dnGrregDC0tBULa4YE7h+pkrMPOW6Bah+ZwQ=\n"], ["encrypted_city", "I3X8zBFwhdCE+/9Rxf28KdYUrKBkMWO4\n"], ["encrypted_state", "TqOVgjFRO60r6bkETNCxsYt9\n"], ["encrypted_website", "i2MgS/lj3pJeH3kklAWBri27AeL3xeOVtyNlzg==\n"], ["encrypted_course", "ahCFjxMfGJZdWZ2fA3xafEDi9E7+0cWA5JH9Mmfgst16U94mEWxlrLXFiKBX\nmTtmkvm3zh52tfayJUAcJpCUXQ==\n"], ["encrypted_snap", "7ocGSopxjnGlxSVMr3yw6r++xchb/YKxSQ==\n"], ["validated", "f"], ["created_at", "2019-12-02 00:43:03.568742"], ["updated_at", "2019-12-02 00:43:03.568742"]]
+  [1m[35m (16.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 41ms (ActiveRecord: 18.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-01 16:43:03 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 83ms (Views: 82.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-01 16:43:06 -0800
+Processing by TeachersController#forms as HTML
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (26.9ms)
+Completed 500 Internal Server Error in 100ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (must specify an iv):
+    16:     <tbody>
+    17:       <% @teachers.each do |teacher| %>
+    18:       <tr>
+    19:       	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+    20:       	<td> <%= teacher.school_name %> </td>
+    21:       	<td> <%= teacher.email %> </td>
+    22:       	<td> <%= teacher.city + ', ' + teacher.state %> </td>
+  app/views/teachers/forms.html.erb:19:in `block in _app_views_teachers_forms_html_erb__141020000_66824784'
+  app/views/teachers/forms.html.erb:17:in `_app_views_teachers_forms_html_erb__141020000_66824784'
+
+
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered C:/Ruby24/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (895.6ms)
+=======
 Started GET "/" for ::1 at 2019-11-27 18:12:27 -0800
   [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
 Processing by MainController#index as HTML
@@ -2327,3 +3215,4 @@ Started GET "/" for ::1 at 2019-11-27 20:12:09 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (22.8ms)
 Completed 200 OK in 166ms (Views: 162.5ms | ActiveRecord: 0.0ms)
+>>>>>>> 283722d2cfd6ef7ea2cf238f7f1af349a3ab6c5b
