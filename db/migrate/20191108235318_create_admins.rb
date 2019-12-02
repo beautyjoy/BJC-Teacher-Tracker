@@ -12,6 +12,8 @@ class CreateAdmins < ActiveRecord::Migration
       a.string :encrypted_google_token_iv
       a.string :encrypted_google_refresh_token
       a.string :encrypted_google_refresh_token_iv
+
+      a.timestamps null: false
     end
   end
 end
