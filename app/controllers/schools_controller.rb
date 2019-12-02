@@ -1,7 +1,6 @@
 class SchoolsController < ApplicationController
   def create
     @school= School.new school_params
-    puts @school
     if @school.save
       flash[:saved_school] = true
     else
