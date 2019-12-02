@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @administrator = Admin.new(params[:user])
+    @administrator = Admin.new(params[:admin])
     if @administrator.save
       flash[:notice] = "You signed up successfully"
     else
@@ -27,7 +27,7 @@ class AdminsController < ApplicationController
     # Refresh_token to request new access_token
     # Note: Refresh_token is only sent once during the first request
     refresh_token = access_token.credentials.refresh_token
-    user.google_refresh_token = refresh_token if refresh_token.present?
+    admin.google_refresh_token = refresh_token if refresh_token.present?
     adminastrator.save
     redirect_to root_path
   end

@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
   validates :first_name, :last_name, :email, :course, :snap, :other, presence: true
+  validates_inclusion_of :validated, :in => [true, false]
 
   belongs_to :school, counter_cache: true
 
@@ -25,4 +26,7 @@ class Teacher < ActiveRecord::Base
     end
   end
 
+  def self.unvalidated
+    Teacher.where(:validated => false)
+  end
 end

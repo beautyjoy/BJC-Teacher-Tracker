@@ -12,13 +12,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20191201025202) do
-
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "google_token"
-    t.string "google_refresh_token"
+    t.string "encrypted_google_token"
+    t.string "encrypted_google_token_iv"
+    t.string "encrypted_google_refresh_token"
+    t.string "encrypted_google_refresh_token_iv"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -40,9 +41,15 @@ ActiveRecord::Schema.define(version: 20191201025202) do
     t.string   "course"
     t.string   "snap"
     t.string   "other"
+<<<<<<< HEAD
     t.integer  "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+=======
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "validated"
+>>>>>>> master
   end
 
   add_index "teachers", ["school_id", nil], name: "index_teachers_on_school_id_and_timestamps"
