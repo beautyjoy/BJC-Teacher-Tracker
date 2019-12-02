@@ -34,8 +34,7 @@ ActiveRecord::Schema.define(version: 20191201000900) do
     t.string   "other"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.boolean "validated"
-
+    t.boolean  "validated"
   end
 
 end

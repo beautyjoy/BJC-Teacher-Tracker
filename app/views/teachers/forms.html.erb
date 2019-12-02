@@ -22,8 +22,8 @@
       	<td> <%= teacher.city + ', ' + teacher.state %> </td>
       	<td> <%= teacher.website %> </td>
       	<td> <%= teacher.snap %> </td>
-      	<td> <%= button_to(validate_path(:id => teacher.id)) %> </td>
-      	<td> <%= button_to(delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}) %> </td>
+      	<td> <%= button_to("validate", validate_path(:id => teacher.id)) %> </td>
+      	<td> <%= button_to("delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}) %> </td>
       </tr>
       <% end %>
     </tbody>

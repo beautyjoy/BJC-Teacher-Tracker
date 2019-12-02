@@ -4,7 +4,6 @@ class TeachersController < ApplicationController
         @teacher.validated = false
         if @teacher.save
             flash[:saved_teacher] = true
-            #TeacherMailer.welcome_email(@teacher).deliver_now
             redirect_to root_path
         else
             redirect_to root_path, alert: "Failed to submit information :("
@@ -21,13 +20,14 @@ class TeachersController < ApplicationController
         teacher = Teacher.find_by(:id => id)
         teacher.validated = true
         teacher.save!
+        TeacherMailer.welcome_email(teacher).deliver_now
         redirect_to forms_path
     end
 
     def delete
         id = params[:id]
         Teacher.delete(id)
-        redirect_to forms_pat
+        redirect_to forms_path
     end
 
     private
