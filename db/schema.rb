@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20191201025202) do
     t.string   "website"
     t.float    "lat"
     t.float    "lng"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "teachers_count", default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "teachers", force: :cascade do |t|
