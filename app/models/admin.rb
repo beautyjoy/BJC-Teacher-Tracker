@@ -1,4 +1,4 @@
-class Admin < ActiveRecord::Base
+git checkout masterclass Admin < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
