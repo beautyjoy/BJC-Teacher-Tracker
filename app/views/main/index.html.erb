@@ -12,24 +12,25 @@
         <div class='row'>
           <div class='col-6'>
             <h6>First Name</h6>
-            <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+
+            <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control', id: "first name"%>
           </div>
           
           <div class='col-6'>
             <h6>Last Name</h6>
-            <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control' %>
+            <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control', id: "last name" %>
           </div>
         </div>
 
         <div class='row'>
           <div class='col-6'>
             <h6>Teacher Email</h6>
-            <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control' %>
+            <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control', id: "email" %>
           </div>
 
           <div class='col-6'>
             <h6>Snap Username</h6>
-            <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control" %>
+            <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control", id: "snap username" %>
           </div>
         </div>
 
@@ -49,7 +50,7 @@
                 include_blank: "Which applies to you?"
               }, 
               { 
-                :class => 'form-control' 
+                :class => 'form-control', :id => "course"
               }
             ) %>
           </div> 
@@ -58,7 +59,7 @@
         <div class='row'>
           <div class='col-12'>
             <h6>Other (if none, write N/A)</h6>
-            <%= f.text_field :other, placeholder: "Other", class: "form-control" %>
+            <%= f.text_field :other, placeholder: "Other", class: "form-control", id: "other" %>
             </div>
         </div>
 
@@ -70,23 +71,23 @@
         <div class='row'>
           <div class='col-6'>
           <h6>School Name</h6>
-            <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control' %>
+            <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control', id: "school name" %>
           </div>
 
           <div class='col-4'>
           <h6>School City</h6>
-            <%= f.text_field :city, placeholder: 'School City', class: 'form-control' %>
+            <%= f.text_field :city, placeholder: 'School City', class: 'form-control', id: "school city" %>
           </div>
 
           <div class='col-2'>
           <h6>State</h6>
-            <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control' }) %>
+            <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control', :id => "state" }) %>
           </div>
         </div>
         
         <div>
           <h6>School Website</h6>
-          <%= f.text_field :website, placeholder: "School Website", class: "form-control" %>
+          <%= f.text_field :website, placeholder: "School Website", class: "form-control", id: "school website" %>
         </div>
 
         <%# Add other field to course question %>
