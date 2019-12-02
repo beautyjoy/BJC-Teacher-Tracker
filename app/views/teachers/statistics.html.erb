@@ -1,0 +1,21 @@
+<div id='statistics-container'>
+  <h1 id="statistics-title">School Statistics</h1>
+  <table id='school_stats'>
+    <thead>
+      <tr>
+        <th> School </th>
+      	<th> City </th>
+      	<th> Number of Teachers </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teachers.each do |teacher| %>
+      <tr>
+      	<td> <%= teacher.school_name %> </td>
+        <td> <%= teacher.city + ', ' + teacher.state %> </td>
+        <td> <%= 1s %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
