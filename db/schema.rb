@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191108235318) do
+ActiveRecord::Schema.define(version: 20191201025202) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -21,19 +21,29 @@ ActiveRecord::Schema.define(version: 20191108235318) do
     t.string "google_refresh_token"
   end
 
-  create_table "teachers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "school_name"
-    t.string   "email"
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
     t.string   "city"
     t.string   "state"
     t.string   "website"
+    t.float    "lat"
+    t.float    "lng"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
     t.string   "course"
     t.string   "snap"
     t.string   "other"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  add_index "teachers", ["school_id", nil], name: "index_teachers_on_school_id_and_timestamps"
 
 end

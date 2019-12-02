@@ -1,5 +1,7 @@
 class Teacher < ActiveRecord::Base
-  validates :first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, :other, presence: true
+  validates :first_name, :last_name, :email, :course, :snap, :other, presence: true
+
+  belongs_to :school
 
   #attr_encrypted_options.merge!(:encode => true)
   #attr_encrypted :first_name, :key => SecureRandom.base64(32).first(32)
