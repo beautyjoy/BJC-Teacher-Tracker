@@ -29,7 +29,7 @@
           </div>
 
           <div class='col-6'>
-            <h6>Snap Username</h6>
+            <h6>Snap Username (if none, write N/A) </h6>
             <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control", id: "snap username" %>
           </div>
         </div>
@@ -103,4 +103,5 @@
 </div>
 
 <%= link_to "Go to Admin View", admins_path %><br>
-<%= link_to "Go to Forms View", forms_path %>
+<%= link_to "Go to Forms View", forms_path %><br>
+<%= link_to "Go to Statistics View", statistics_path %>
