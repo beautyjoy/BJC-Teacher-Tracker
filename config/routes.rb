@@ -80,6 +80,6 @@ Rails.application.routes.draw do
   post '/admin/forms/delete/:id', to: 'teachers#delete', as: "delete"
 
   #route for viewing statistics as an admin
-  get '/admin/statistics', to: 'teachers#statistics', as: "statistics"
+  get '/admin/statistics', to: 'schools#statistics', as: "statistics"
 
 end

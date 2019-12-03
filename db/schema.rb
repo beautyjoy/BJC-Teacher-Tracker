@@ -48,6 +48,6 @@ ActiveRecord::Schema.define(version: 20191201025202) do
     t.boolean  "validated"
   end
 
-  add_index "teachers", ["school_id", nil], name: "index_teachers_on_school_id_and_timestamps"
+  add_index "teachers", [nil, nil], name: "index_teachers_on_school_name_and_timestamps"
 
 end

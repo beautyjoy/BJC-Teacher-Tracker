@@ -21,10 +21,6 @@ class TeachersController < ApplicationController
         @teachers = Teacher.unvalidated
     end
 
-    def statistics
-        @teachers = Teacher.unvalidated
-    end
-
     def validate
         id = params[:id]
         teacher = Teacher.find_by(:id => id)

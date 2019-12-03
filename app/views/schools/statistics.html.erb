@@ -7,16 +7,16 @@
     <thead>
       <tr>
       <th> School </th> 
-      <th> City </th>
+      <th> City, State </th>
       <th> Number of Teachers </th> 
       </tr>
     </thead>
     <tbody>
-      <% @teachers.each do |teacher| %>
+      <% @schools.each do |school| %>
       <tr>
-      	<td> <%= teacher.school_name %> </td>
-        <td> <%= teacher.city + ', ' + teacher.state %> </td>
-        <td> <%= 1 %> </td>
+      	<td> <%= school.name %> </td>
+        <td> <%= school.city + ', ' + school.state %> </td>
+        <td> <%= school.teachers_count %> </td>
       </tr>
       <% end %>
     </tbody>

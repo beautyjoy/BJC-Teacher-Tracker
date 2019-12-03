@@ -4,6 +4,10 @@ class School < ActiveRecord::Base
 
   has_many :teachers
 
+  def self.validated
+    School.all
+  end
+
   private
     def grab_lat_lng
       self.lat = 0.0 if self.lat.nil?
