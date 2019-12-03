@@ -1,6 +1,13 @@
 class TeachersController < ApplicationController
+
     def create
-        @teacher = Teacher.new teacher_params
+        # Receive nested hash from field_for in the view
+        @school = School.new school_params
+        if !@school.save
+            redirect_to root_path, alert: "Failed to submit information :("
+        end
+
+        @teacher = @school.teachers.build teacher_params
         @teacher.validated = false
         if @teacher.save
             flash[:saved_teacher] = true
@@ -8,7 +15,6 @@ class TeachersController < ApplicationController
         else
             redirect_to root_path, alert: "Failed to submit information :("
         end
-
     end
 
     def forms
@@ -36,7 +42,19 @@ class TeachersController < ApplicationController
 
     private
 
+        # def prepare_school
+        #     # Receive nested hash from field_for in the view
+        #     @school = School.new school_params
+        #     if !@school.save
+        #         redirect_to root_path, alert: "Failed to submit information :("
+        #     end
+        # end
+
         def teacher_params
-            params.require(:teacher).permit(:first_name, :last_name, :school_name, :email, :city, :state, :website, :course, :snap, :other)
+            params.require(:teacher).permit(:first_name, :last_name, :school, :email, :course, :snap, :other)
+        end
+
+        def school_params
+            params.require(:school).permit(:name, :city, :state, :website)
         end
 end

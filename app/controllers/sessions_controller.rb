@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def create
     redirect_to "/auth/google_oauth2"
   end
@@ -22,7 +21,7 @@ class SessionsController < ApplicationController
     # Refresh_token to request new access_token
     # Note: Refresh_token is only sent once during the first request
     refresh_token = access_token.credentials.refresh_token
-    user.google_refresh_token = refresh_token if refresh_token.present?
+    admin.google_refresh_token = refresh_token if refresh_token.present?
     admin.save
     redirect_to root_path
   end
