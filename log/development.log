@@ -1759,3 +1759,85 @@ Started GET "/" for ::1 at 2019-11-20 11:43:31 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (0.0ms)
 Completed 200 OK in 99ms (Views: 97.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 22:59:09 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (25.3ms)
+Completed 200 OK in 581ms (Views: 556.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-02 22:59:10 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-12-02 22:59:10 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-12-02 22:59:10 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-12-02 22:59:10 -0800
+
+
+Started GET "/assets/application.self-469f7655740c3a66f94812c1d8a81f715fcc0fbcedeaf08d54dba364f694e6cd.css?body=1" for ::1 at 2019-12-02 22:59:10 -0800
+
+
+Started GET "/" for ::1 at 2019-12-02 23:05:55 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (17.3ms)
+Completed 200 OK in 90ms (Views: 79.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:13:57 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 135ms (Views: 127.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-fb1bfbc39bd6958b7071f301604689ded6571ab70bf66b7d23fb775d3c2d7b80.css?body=1" for ::1 at 2019-12-02 23:13:57 -0800
+
+
+Started GET "/admins" for ::1 at 2019-12-02 23:14:00 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 29ms (Views: 27.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:14:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 69ms (Views: 67.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-02 23:14:02 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 51ms (Views: 50.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:14:02 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 57ms (Views: 56.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:15:59 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 61ms (Views: 54.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:16:08 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-aac791aa5646ff4ff04a51730dfa7f8311b3ea81ce8e7e2be0bd931d8362dde7.css?body=1" for ::1 at 2019-12-02 23:16:08 -0800
+
+
+Started GET "/admins" for ::1 at 2019-12-02 23:20:44 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 59ms (Views: 52.7ms | ActiveRecord: 0.0ms)

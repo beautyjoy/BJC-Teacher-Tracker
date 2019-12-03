@@ -71,3 +71,11 @@ input, select {
 #sign-up-form-container {
   margin-bottom: 80px;
 }
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
