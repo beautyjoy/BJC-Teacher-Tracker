@@ -71,3 +71,8 @@ input, select {
 #sign-up-form-container {
   margin-bottom: 80px;
 }
+
+.padding-table-columns th
+{
+    padding:100px 100px 0 0; /* Only right padding*/
+}
