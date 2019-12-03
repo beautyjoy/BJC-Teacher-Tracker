@@ -5,15 +5,16 @@ class TeachersController < ApplicationController
         @school = School.new school_params
         if !@school.save
             redirect_to root_path, alert: "Failed to submit information :("
-        end
-
-        @teacher = @school.teachers.build teacher_params
-        @teacher.validated = false
-        if @teacher.save
-            flash[:saved_teacher] = true
-            redirect_to root_path
         else
-            redirect_to root_path, alert: "Failed to submit information :("
+
+            @teacher = @school.teachers.build teacher_params
+            @teacher.validated = false
+            if @teacher.save
+                flash[:saved_teacher] = true
+                redirect_to root_path
+            else
+                redirect_to root_path, alert: "Failed to submit information :("
+            end
         end
     end
 

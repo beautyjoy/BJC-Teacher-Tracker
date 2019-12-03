@@ -6027,3 +6027,422 @@ Processing by TeachersController#forms as HTML
   [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 3]]
   Rendered teachers/forms.html.erb within layouts/application (6.9ms)
 Completed 200 OK in 48ms (Views: 46.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:41:23 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (160.9ms)
+Completed 200 OK in 414ms (Views: 390.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-02 23:44:29 -0800
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (2.0ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered teachers/forms.html.erb within layouts/application (129.1ms)
+Completed 200 OK in 878ms (Views: 720.2ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/admin/forms/validate/3" for ::1 at 2019-12-02 23:44:31 -0800
+Processing by TeachersController#validate as HTML
+  Parameters: {"authenticity_token"=>"QJqGVk4xmxO19PNLF7BB4y0IQw+9YtehrQFa03/eQVe/De/a/vlbPZXUnNBtRqVJkkxKcl9lM2gYlnABb8f/Yw==", "id"=>"3"}
+  [1m[35mTeacher Load (0.3ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.9ms)[0m  UPDATE "teachers" SET "validated" = ?, "updated_at" = ? WHERE "teachers"."id" = ?  [["validated", "t"], ["updated_at", "2019-12-03 07:44:31.484757"], ["id", 3]]
+  [1m[36m (13.1ms)[0m  [1mcommit transaction[0m
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (3.4ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 270.7ms
+
+Sent mail to kimberly.zhu.2000@gmail.com (1945.5ms)
+Date: Mon, 02 Dec 2019 23:44:32 -0800
+From: beautyandjoy2019@gmail.com
+To: kimberly.zhu.2000@gmail.com
+Message-ID: <5de6126012adb_7a793fc2b9ada03c79777@Mias-iPhone.mail>
+Subject: Welcome to the Beauty and Joy of Computing!
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Kimberly,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Redirected to http://localhost:3000/admin/forms
+Completed 302 Found in 2646ms (ActiveRecord: 16.8ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-02 23:44:34 -0800
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (2.5ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 84ms (Views: 79.6ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:44:58 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (332.3ms)
+Completed 200 OK in 1054ms (Views: 1025.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-02 23:45:41 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cj5u3SrlgXc9A/bIxtef555WPtGKWpFCQiHndtWnaR6NqQdRmi1BWR0jmVO8IXtNIRI3rGhddYv3ts2kxb7XKg==", "teacher"=>{"first_name"=>"Janani", "last_name"=>"Vijaykumar", "email"=>"janani_vijaykumar@berkeley.edu", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Monta Vista High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"mvhs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[36m (0.9ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (29.7ms)[0m  INSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Monta Vista High School"], ["city", "Cupertino"], ["state", "CA"], ["website", "mvhs.fuhsd.org"], ["lat", 0.0], ["lng", 0.0], ["created_at", "2019-12-03 07:45:41.381490"], ["updated_at", "2019-12-03 07:45:41.381490"]]
+  [1m[36m (39.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.7ms)[0m  begin transaction
+  [1m[36mSQL (32.7ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Janani"], ["last_name", "Vijaykumar"], ["email", "janani_vijaykumar@berkeley.edu"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 4], ["validated", "f"], ["created_at", "2019-12-03 07:45:41.729831"], ["updated_at", "2019-12-03 07:45:41.729831"]]
+  [1m[35mSQL (0.2ms)[0m  UPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?  [["id", 4]]
+  [1m[36m (6.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 545ms (ActiveRecord: 109.6ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:45:41 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 231ms (Views: 225.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-02 23:45:45 -0800
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (0.3ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 4]]
+  Rendered teachers/forms.html.erb within layouts/application (27.3ms)
+Completed 200 OK in 112ms (Views: 110.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/admin/forms/validate/4" for ::1 at 2019-12-02 23:45:46 -0800
+Processing by TeachersController#validate as HTML
+  Parameters: {"authenticity_token"=>"QNj+yZNER+AN8p7alVUffGVB5Tzg70CT3W8zAxDiZxa/T5dFI4yHzi3S8UHvo/vW2gXsQQLopFpo+BnRAPvZIg==", "id"=>"4"}
+  [1m[35mTeacher Load (1.0ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "teachers" SET "validated" = ?, "updated_at" = ? WHERE "teachers"."id" = ?  [["validated", "t"], ["updated_at", "2019-12-03 07:45:46.774887"], ["id", 4]]
+  [1m[36m (5.0ms)[0m  [1mcommit transaction[0m
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.2ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 28.6ms
+
+Sent mail to janani_vijaykumar@berkeley.edu (1830.5ms)
+Date: Mon, 02 Dec 2019 23:45:46 -0800
+From: beautyandjoy2019@gmail.com
+To: janani_vijaykumar@berkeley.edu
+Message-ID: <5de612aacdc5c_7a793fc2bbd2c004798c3@Mias-iPhone.mail>
+Subject: Welcome to the Beauty and Joy of Computing!
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Janani,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Redirected to http://localhost:3000/admin/forms
+Completed 302 Found in 1918ms (ActiveRecord: 6.9ms)
+
+
+Started GET "/admin/forms" for ::1 at 2019-12-02 23:45:48 -0800
+Processing by TeachersController#forms as HTML
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  Rendered teachers/forms.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 179ms (Views: 177.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:45:53 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (49.6ms)
+Completed 200 OK in 150ms (Views: 149.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admin/statistics" for ::1 at 2019-12-02 23:45:55 -0800
+Processing by SchoolsController#statistics as HTML
+  [1m[36mSchool Load (5.4ms)[0m  [1mSELECT "schools".* FROM "schools"[0m
+  Rendered schools/statistics.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 76ms (Views: 61.4ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/admin/application.css" for ::1 at 2019-12-02 23:45:55 -0800
+
+ActionController::RoutingError (No route matches [GET] "/admin/application.css"):
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/kimberlyzhu/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /Users/kimberlyzhu/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /Users/kimberlyzhu/.rvm/rubies/ruby-2.6.3/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (81.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (18.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_route.html.erb (0.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/routes/_table.html.erb (28.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (317.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (4.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (3.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (6.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (204.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (13.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (293.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-02 23:46:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (30.7ms)
+Completed 200 OK in 606ms (Views: 601.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 12:22:43 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (74.0ms)
+Completed 200 OK in 741ms (Views: 677.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-12-03 12:22:44 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-12-03 12:22:44 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-03 12:22:44 -0800
+
+
+Started GET "/" for ::1 at 2019-12-03 12:23:10 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 15ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 12:24:27 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 40ms (Views: 39.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 12:24:51 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"erSwdTwnBKD1hcgjKATAbI31BkmYrUL0k25kFbYEyamFI9n5jO/EjtWlp7hS8iTGMrEPNHqqpj0m+U7Hph13nQ==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Cupertino High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"chs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (7.1ms)[0m  [1mINSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Cupertino High School"], ["city", "Cupertino"], ["state", "CA"], ["website", "chs.fuhsd.org"], ["lat", 0.0], ["lng", 0.0], ["created_at", "2019-12-03 20:24:51.393284"], ["updated_at", "2019-12-03 20:24:51.393284"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["email", "kimberly.zhu.2000@gmail.com"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 5], ["validated", "f"], ["created_at", "2019-12-03 20:24:51.444627"], ["updated_at", "2019-12-03 20:24:51.444627"]]
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?[0m  [["id", 5]]
+  [1m[35m (2.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 81ms (ActiveRecord: 14.4ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 12:24:51 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 14ms (Views: 13.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 13:10:55 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (75.0ms)
+Completed 200 OK in 684ms (Views: 625.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:11:08 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4mpFqXNXKE6RbeN2GV1DYVXHcuS9ZT7mMOVyhJ4htYId/Swlw5/oYLFNjO1jq6fL6oN7mV9i2i+FclhWjjgLtg==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Cupertino High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"chs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (3.9ms)[0m  [1mINSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Cupertino High School"], ["city", "Cupertino"], ["state", "CA"], ["website", "chs.fuhsd.org"], ["lat", 0.0], ["lng", 0.0], ["created_at", "2019-12-03 21:11:08.323210"], ["updated_at", "2019-12-03 21:11:08.323210"]]
+  [1m[35m (3.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.7ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["email", "kimberly.zhu.2000@gmail.com"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 6], ["validated", "f"], ["created_at", "2019-12-03 21:11:08.367729"], ["updated_at", "2019-12-03 21:11:08.367729"]]
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?[0m  [["id", 6]]
+  [1m[35m (2.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 78ms (ActiveRecord: 12.8ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 13:11:08 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 35ms (Views: 34.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-03 13:11:17 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 62ms (Views: 55.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 13:11:21 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 20ms (Views: 18.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:11:25 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z2N2xtYM+Yywv+g2wkpdc9+y7V1hMZ+oxlAXoH/0SzCY9B9KZsQ5opCfh624vLnZYPbkIIM2e2Fzxz1yb+31BA==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"", "course"=>"", "other"=>""}, "school"=>{"name"=>"", "city"=>"Cupertino", "state"=>"CA", "website"=>""}, "commit"=>"Submit"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Redirected to 
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.3ms)
+
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  app/controllers/teachers_controller.rb:16:in `create'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (188.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (39.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (87.5ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:11:25 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z2N2xtYM+Yywv+g2wkpdc9+y7V1hMZ+oxlAXoH/0SzCY9B9KZsQ5opCfh624vLnZYPbkIIM2e2Fzxz1yb+31BA==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"", "course"=>"", "other"=>""}, "school"=>{"name"=>"", "city"=>"Cupertino", "state"=>"CA", "website"=>""}, "commit"=>"Submit"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to 
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.2ms)
+
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  app/controllers/teachers_controller.rb:16:in `create'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.7ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:11:38 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yteJqNLSWsUPFeQwNqhV5SxqJj3ReSokBFNmEfqdtE01QOAkYhqa6y81i6tMXrFPky4vQDN+zu2xxEzD6oQKeQ==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"", "course"=>"", "other"=>""}, "school"=>{"name"=>"", "city"=>"Cupertino", "state"=>"CA", "website"=>""}, "commit"=>"Submit"}
+  [1m[36m (0.9ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Redirected to 
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 1.1ms)
+
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  app/controllers/teachers_controller.rb:16:in `create'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (36.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (38.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (79.1ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:14:57 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yteJqNLSWsUPFeQwNqhV5SxqJj3ReSokBFNmEfqdtE01QOAkYhqa6y81i6tMXrFPky4vQDN+zu2xxEzD6oQKeQ==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"", "course"=>"", "other"=>""}, "school"=>{"name"=>"", "city"=>"Cupertino", "state"=>"CA", "website"=>""}, "commit"=>"Submit"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 20ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 13:14:57 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 86ms (Views: 65.1ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-03 13:15:13 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"krKceDxYc3i5FuH9FHKJhTV3TdPlIF+7fnYF+SW4a7xtJfX0jJCzVpk2jmZuhG0vijNErgcnu3LL4S8rNaHViA==", "teacher"=>{"first_name"=>"Kimberly", "last_name"=>"Zhu", "email"=>"kimberly.zhu.2000@gmail.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Cupertino High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"chs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Cupertino High School"], ["city", "Cupertino"], ["state", "CA"], ["website", "chs.fuhsd.org"], ["lat", 0.0], ["lng", 0.0], ["created_at", "2019-12-03 21:15:13.431998"], ["updated_at", "2019-12-03 21:15:13.431998"]]
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Kimberly"], ["last_name", "Zhu"], ["email", "kimberly.zhu.2000@gmail.com"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 7], ["validated", "f"], ["created_at", "2019-12-03 21:15:13.442468"], ["updated_at", "2019-12-03 21:15:13.442468"]]
+  [1m[35mSQL (0.1ms)[0m  UPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?  [["id", 7]]
+  [1m[36m (6.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 21ms (ActiveRecord: 11.2ms)
+
+
+Started GET "/" for ::1 at 2019-12-03 13:15:13 -0800
+Processing by MainController#index as HTML
+  Rendered main/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 43ms (Views: 42.5ms | ActiveRecord: 0.0ms)
