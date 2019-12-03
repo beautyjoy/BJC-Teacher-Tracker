@@ -65,33 +65,35 @@
 
       </div>
 
-      <div class='form-input-group'>
-        <h3>Your School</h2>
+      <%= fields_for :school, @teacher.school do |school_fields| %>
+        <div class='form-input-group'>
+          <h2>Your School</h2>
 
-        <div class='row'>
-          <div class='col-6'>
-          <h6>School Name</h6>
-            <%= f.text_field :school_name, placeholder: 'School Name', class: 'form-control', id: "school name" %>
+          <div class='row'>
+            <div class='col-6'>
+            <h6>School Name</h6>
+              <%= school_fields.text_field :name, placeholder: 'School Name', class: 'form-control', id: "school name" %>
+            </div>
+
+            <div class='col-4'>
+            <h6>School City</h6>
+              <%= school_fields.text_field :city, placeholder: 'School City', class: 'form-control', id: "school city" %>
+            </div>
+
+            <div class='col-2'>
+            <h6>State</h6>
+              <%= school_fields.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control', :id => "state" }) %>
+            </div>
           </div>
 
-          <div class='col-4'>
-          <h6>School City</h6>
-            <%= f.text_field :city, placeholder: 'School City', class: 'form-control', id: "school city" %>
+          <div>
+            <h6>School Website</h6>
+            <%= school_fields.text_field :website, placeholder: "School Website", class: "form-control", id: "school website" %>
           </div>
 
-          <div class='col-2'>
-          <h6>State</h6>
-            <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control', :id => "state" }) %>
-          </div>
+          <%# Add other field to course question %>
         </div>
-        
-        <div>
-          <h6>School Website</h6>
-          <%= f.text_field :website, placeholder: "School Website", class: "form-control", id: "school website" %>
-        </div>
-
-        <%# Add other field to course question %>
-      </div>
+      <% end %>
       
       <div>    
         <%= f.submit 'Submit', :class => 'btn btn-primary', id: 'form-submit-button' %>
