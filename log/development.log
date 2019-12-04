@@ -6593,3 +6593,53 @@ Completed 200 OK in 394ms (Views: 345.6ms | ActiveRecord: 5.1ms)
             FROM sqlite_temp_master
             WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
 [0m
+
+
+Started GET "/" for ::1 at 2019-12-04 01:54:44 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.0ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.0ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (1.0ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSchool Load (0.0ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered schools/statistics.html.erb (75.3ms)
+  Rendered main/index.html.erb within layouts/application (107.2ms)
+Completed 200 OK in 813ms (Views: 704.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-11440eb0cae76dbff07cfae33c7b20ea6d59d6285e1d3dd62179010df506541a.css?body=1" for ::1 at 2019-12-04 01:54:46 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-04 01:54:46 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-12-04 01:54:46 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-12-04 01:54:46 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-12-04 01:54:46 -0800
+
+
+Started POST "/logout" for ::1 at 2019-12-04 01:54:51 -0800
+Processing by MainController#logout as HTML
+  Parameters: {"authenticity_token"=>"VgbWqHvFI+g/eRhso/rj48LJPm6IMW+JGX7i8cQM1uR4td38lH+vqGiOvanoGmWAlltnfnh7Pjj45BuvXiG3oA=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:54:51 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (61.1ms)
+  Rendered main/index.html.erb within layouts/application (114.0ms)
+Completed 200 OK in 206ms (Views: 205.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:54:53 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (2.0ms)
+  Rendered main/index.html.erb within layouts/application (13.9ms)
+Completed 200 OK in 115ms (Views: 113.1ms | ActiveRecord: 0.0ms)
