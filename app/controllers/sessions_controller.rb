@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out if logged_in?
+    # log_out if logged_in?
+    session[:logged_in] = false
     redirect_to root_url
   end
 
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
     refresh_token = access_token.credentials.refresh_token
     admin.google_refresh_token = refresh_token if refresh_token.present?
     admin.save
+    session[:logged_in] = true
     redirect_to root_path
   end
 end

@@ -1,25 +1,77 @@
-<head> 
-  <link rel="stylesheet" href="application.css">
-</head>
-<div id='statistics-container'>
-  <h1 id="statistics-title">School Statistics</h1>
-  <table id='school_stats', className="padding-table-columns",  border="1", cellpadding="10px">
-    <thead>
+<div style="margin-top: 55px;">
+  <h1>Validate submitted forms here</h1>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-      <th> School </th> 
-      <th> City, State </th>
-      <th> Number of Teachers </th> 
+      	<th scope="col"> Name </th>
+      	<th scope="col"> School </th>
+      	<th scope="col"> Email </th>
+      	<th scope="col"> Location </th>
+      	<th scope="col"> Website </th>
+      	<th scope="col"> Snap </th>
+      	<th scope="col"> Validate </th>
+      	<th scope="col"> Delete </th>
       </tr>
     </thead>
     <tbody>
-      <% @schools.each do |school| %>
+      <% @teachers.each do |teacher| %>
       <tr>
-      	<td> <%= school.name %> </td>
-        <td> <%= school.city + ', ' + school.state %> </td>
-        <td> <%= school.teachers_count %> </td>
+      	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+      	<td> <%= teacher.school.name %> </td>
+      	<td> <%= teacher.email %> </td>
+      	<td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+      	<td> <%= teacher.school.website %> </td>
+		<td> <%= teacher.snap %> </td>
+      	<td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
+      	<td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
+<div id='statistics-container'>
+  <h1 id="statistics-title">School Statistics</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+      <th scope="col"> School </th> 
+      <th scope="col"> City, State </th>
+      <th scope="col"> Number of Teachers </th> 
+      </tr>
+    </thead>
+    <tbody>
+      <% @schools.each do |school| %>
+      <tr>
+      	<td> <%= school[0][0] %> </td>
+        <td> <%= school[0][1] + ', ' + school[0][2] %> </td>
+        <td> <%= school[1] %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="map"></div>
+
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 39.50, lng: -98.35},
+      zoom: 4
+    });
+
+    let markers = [];
+    <% @items.each do |item| %>
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng(<%= item[:lat] %>, <%= item[:long] %>),
+        map: map
+      }))
+    <% end %>
+  }
+</script>
+
+<script async defer 
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
+</script>

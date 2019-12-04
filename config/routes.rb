@@ -59,7 +59,6 @@ Rails.application.routes.draw do
   resources :admins
 
   root to: 'main#index'
-  get '/dashboard', to: 'main#dashboard'
 
   # The line below would be unnecessary since we use Google.
   # sessions#new could be left as an empty Ruby function.
@@ -68,6 +67,7 @@ Rails.application.routes.draw do
   # get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+  post   '/logout',  to: 'main#logout'
 
   # Routes for Google authentication, note that these need to be
   # here for ominauth middleware whose route is /auth/google_oauth2,
@@ -76,11 +76,6 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   # Route for validating forms as an admin
-  get '/admin/forms', to: 'teachers#forms', as: "forms"
   post '/admin/forms/validate/:id', to: 'teachers#validate', as: "validate"
   post '/admin/forms/delete/:id', to: 'teachers#delete', as: "delete"
-
-  #route for viewing statistics as an admin
-  get '/admin/statistics', to: 'schools#statistics', as: "statistics"
-
 end

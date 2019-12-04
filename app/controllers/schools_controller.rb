@@ -8,10 +8,6 @@ class SchoolsController < ApplicationController
     end
   end
 
-  def statistics
-    @schools = School.validated
-  end
-
   private
 
     def school_params

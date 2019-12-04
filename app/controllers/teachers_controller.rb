@@ -1,7 +1,6 @@
 require 'net/http'
 
 class TeachersController < ApplicationController
-
     def create
         # Receive nested hash from field_for in the view
         @school = School.new school_params
@@ -20,27 +19,22 @@ class TeachersController < ApplicationController
         end
     end
 
-    def forms
-        @teachers = Teacher.unvalidated
-    end
-
     def validate
         id = params[:id]
         teacher = Teacher.find_by(:id => id)
         teacher.validated = true
         teacher.save!
         TeacherMailer.welcome_email(teacher).deliver_now
-        redirect_to forms_path
+        redirect_to root_path
     end
 
     def delete
         id = params[:id]
         Teacher.delete(id)
-        redirect_to forms_path
+        redirect_to root_path
     end
 
     private
-
         # def prepare_school
         #     # Receive nested hash from field_for in the view
         #     @school = School.new school_params

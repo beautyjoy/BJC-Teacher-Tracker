@@ -104,15 +104,9 @@ input, select {
 
 .admin-jumbotron {
   margin-top: 55px;
+}
+
 #map {
   height: 500px;
-  margin-bottom: 15px;
-}
-.padding-table-columns th
-{
-    padding:100px 100px 0 0; /* Only right padding*/
-}
-.padding-table-columns th
-{
-    padding:100px 100px 0 0; /* Only right padding*/
+  margin-bottom: 55px;
 }

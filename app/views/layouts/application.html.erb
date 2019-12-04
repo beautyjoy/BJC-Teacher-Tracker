@@ -20,9 +20,16 @@
       <li class='nav-item active'>
         <a class='nav-link' href='/'>Home</a>
       </li>
-      <li class='nav-item'>
-        <a class='nav-link' href='/admins'>Admin View</a>
-      </li>
+
+      <% if @admin %>
+        <li class='nav-item'>
+          <a class='nav-link' href='/logout' data-method='post'>Logout</a>
+        </li>
+      <% else %>
+        <li class='nav-item'>
+          <a class='nav-link' href='/admins'>Log in</a>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>
