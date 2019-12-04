@@ -5,6 +5,7 @@ class MainController < ApplicationController
     if @admin 
       @teachers = Teacher.unvalidated
       @schools = School.validated.group(:name, :city, :state).count
+      @courses = Teacher.group(:course).count
       school_coords = School.select(:lat, :lng)
 
       @items = []
@@ -14,6 +15,9 @@ class MainController < ApplicationController
           'lat': school[:lat]
         }
       end
+
+      puts "COURSES"
+      puts @courses
     else 
       @teacher = Teacher.new
     end

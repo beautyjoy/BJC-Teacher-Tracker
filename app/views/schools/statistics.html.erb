@@ -30,26 +30,48 @@
   </table>
 </div>
 
-<div id='statistics-container'>
-  <h1 id="statistics-title">School Statistics</h1>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-      <th scope="col"> School </th> 
-      <th scope="col"> City, State </th>
-      <th scope="col"> Number of Teachers </th> 
-      </tr>
-    </thead>
-    <tbody>
-      <% @schools.each do |school| %>
-      <tr>
-      	<td> <%= school[0][0] %> </td>
-        <td> <%= school[0][1] + ', ' + school[0][2] %> </td>
-        <td> <%= school[1] %> </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-6">
+    <h1>Course Statistics</h1>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+        <th scope="col"> Course </th> 
+        <th scope="col"> Count </th> 
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |key, value| %>
+        <tr>
+          <td> <%= key %> </td>
+          <td> <%= value %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-6">
+    <h1>School Statistics</h1>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+        <th scope="col"> School </th> 
+        <th scope="col"> City, State </th>
+        <th scope="col"> Count </th> 
+        </tr>
+      </thead>
+      <tbody>
+        <% @schools.each do |school| %>
+        <tr>
+          <td> <%= school[0][0] %> </td>
+          <td> <%= school[0][1] + ', ' + school[0][2] %> </td>
+          <td> <%= school[1] %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div id="map"></div>
