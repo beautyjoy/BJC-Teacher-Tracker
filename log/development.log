@@ -6167,3 +6167,419 @@ Started GET "/" for ::1 at 2019-12-03 13:15:13 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (0.8ms)
 Completed 200 OK in 43ms (Views: 42.5ms | ActiveRecord: 0.0ms)
+  [1m[36m (15.5ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35m (16.5ms)[0m  CREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (16.0ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "validated" boolean) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("", "")[0m
+  [1m[36m (15.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (10.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("school_name", "timestamps")[0m
+  [1m[35m (10.4ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeachers (20191030224841)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (5.3ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (1.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("school_name", "timestamps")[0m
+  [1m[35m (10.0ms)[0m  rollback transaction
+  [1m[36m (23.4ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35m (15.0ms)[0m  CREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (18.3ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "validated" boolean) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("", "")[0m
+  [1m[36m (19.2ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35m (19.0ms)[0m  CREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (18.6ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "validated" boolean) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("", "")[0m
+  [1m[36m (15.0ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35m (15.0ms)[0m  CREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (12.0ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "validated" boolean) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("", "")[0m
+  [1m[36m (19.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (18.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.7ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeachers (20191030224841)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (21.6ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35m (19.6ms)[0m  CREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (22.8ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "validated" boolean) [0m
+  [1m[35m (1.0ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("", "")[0m
+  [1m[36m (26.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  select sqlite_version(*)
+  [1m[36m (18.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20191030224841)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (1.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_name_and_timestamps" ON "teachers" ("school_name", "timestamps")[0m
+  [1m[35m (10.0ms)[0m  rollback transaction
+
+
+Started GET "/" for ::1 at 2019-12-04 01:05:44 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/server.rb:308:in `block in start_thread'
+
+
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.1ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (1627.2ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (1.1ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.8ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1582.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (3108.3ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:05:50 -0800
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.10) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.10) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.10) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.10) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.10) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.10) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.10) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.11) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.11) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.10) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.10) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.11) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.10) lib/rails/engine.rb:518:in `call'
+  railties (4.2.10) lib/rails/application.rb:165:in `call'
+  rack (1.6.11) lib/rack/lock.rb:17:in `call'
+  rack (1.6.11) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.11) lib/rack/handler/webrick.rb:88:in `service'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/httpserver.rb:140:in `service'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/httpserver.rb:96:in `run'
+  C:/Ruby24-x64/lib/ruby/2.4.0/webrick/server.rb:308:in `block in start_thread'
+
+
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (1208.6ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.1ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (930.5ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.1ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (2618.4ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeachers (20191030224841)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (4.7ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_and_timestamps" ON "teachers" ("school", "timestamps")[0m
+  [1m[35m (11.6ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeachers (20191030224841)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (4.3ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mCREATE  INDEX "index_teachers_on_email_and_timestamps" ON "teachers" ("email", "timestamps")[0m
+  [1m[35m (10.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTeachers (20191030224841)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (4.6ms)[0m  [1mCREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "course" varchar, "snap" varchar, "other" varchar, "school_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (1.1ms)[0m  [1mCREATE  INDEX "index_teachers_on_school_id_and_created_at" ON "teachers" ("school_id", "created_at")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20191030224841"]]
+  [1m[36m (19.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAdmins (20191108235318)
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "admins" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar, "encrypted_google_token" varchar, "encrypted_google_token_iv" varchar, "encrypted_google_refresh_token" varchar, "encrypted_google_refresh_token_iv" varchar) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20191108235318"]]
+  [1m[36m (22.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddValidation (20191201000900)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (3.0ms)[0m  [1mALTER TABLE "teachers" ADD "validated" boolean[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20191201000900"]]
+  [1m[36m (23.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSchools (20191201025202)
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36m (2.0ms)[0m  [1mCREATE TABLE "schools" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "city" varchar, "state" varchar, "website" varchar, "lat" float, "lng" float, "teachers_count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20191201025202"]]
+  [1m[36m (23.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+[0m
+
+
+Started GET "/" for ::1 at 2019-12-04 01:10:17 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (245.9ms)
+  Rendered main/index.html.erb within layouts/application (354.0ms)
+Completed 200 OK in 4324ms (Views: 4078.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/assets/application.self-11440eb0cae76dbff07cfae33c7b20ea6d59d6285e1d3dd62179010df506541a.css?body=1" for ::1 at 2019-12-04 01:10:24 -0800
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-04 01:10:24 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-12-04 01:10:24 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-12-04 01:10:24 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-12-04 01:10:24 -0800
+
+
+Started POST "/teachers" for ::1 at 2019-12-04 01:11:05 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QRzmI2VIyu3SMZvzIaGs5wwp7Pc+Kiwzc9XeD5Or+EFvr+13ivJGrYXGPjZqQSqEWLu1585gfYKSTydRCYaZBQ==", "teacher"=>{"first_name"=>"Varun", "last_name"=>"Murthy", "email"=>"murthy@berkeley.edu", "snap"=>"Murthy1999", "course"=>"I am teaching BJC but not as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"UC Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"www.berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (6.9ms)[0m  [1mINSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "UC Berkeley"], ["city", "Berkeley"], ["state", "CA"], ["website", "www.berkeley.edu"], ["lat", 37.8715226], ["lng", -122.273042], ["created_at", "2019-12-04 09:11:06.462565"], ["updated_at", "2019-12-04 09:11:06.462565"]]
+  [1m[35m (18.8ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Varun"], ["last_name", "Murthy"], ["email", "murthy@berkeley.edu"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "Murthy1999"], ["other", "N/A"], ["school_id", 1], ["validated", "f"], ["created_at", "2019-12-04 09:11:06.683078"], ["updated_at", "2019-12-04 09:11:06.683078"]]
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?[0m  [["id", 1]]
+  [1m[35m (18.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 930ms (ActiveRecord: 49.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:11:06 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (0.0ms)
+  Rendered main/index.html.erb within layouts/application (32.3ms)
+Completed 200 OK in 250ms (Views: 249.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-04 01:11:13 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 204ms (Views: 204.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-04 01:11:16 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"qOovp4inNC7Yix/hfxphM2FbvzRM/+VgxXfELZE2YnaGWSTzZx24bo98uiQ0+udQNcnmJLy1tNEk7T1zCxsDMg=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 15ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-04 01:11:16 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=3b4d4bcb8a413047e63b61b3c2fe1f0dbfdad1114de1beaf&code=4/twHmUtOc3PPOvbBGANWcXrztR3W1RTa3YptpcVro5dYNDibwH2U3sYVwCf9m0TlsHpnHGdm3VOwym1MhdWaiPYs&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&hd=berkeley.edu&session_state=25324319f4dcd88ba9e3d03b632655313d9246a6..f3d4&prompt=none" for ::1 at 2019-12-04 01:11:17 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"3b4d4bcb8a413047e63b61b3c2fe1f0dbfdad1114de1beaf", "code"=>"4/twHmUtOc3PPOvbBGANWcXrztR3W1RTa3YptpcVro5dYNDibwH2U3sYVwCf9m0TlsHpnHGdm3VOwym1MhdWaiPYs", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"25324319f4dcd88ba9e3d03b632655313d9246a6..f3d4", "prompt"=>"none", "provider"=>"google_oauth2"}
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 0.0ms)
+
+Figaro::MissingKey (Missing required configuration key: "attr_encrypted_key"):
+  app/models/admin.rb:4:in `<class:Admin>'
+  app/models/admin.rb:1:in `<top (required)>'
+  app/controllers/sessions_controller.rb:18:in `googleAuth'
+
+
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.6ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.1ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (1792.4ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (1.0ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (1591.6ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.7ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.8ms)
+  Rendered C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (3518.4ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+[0m
+
+
+Started GET "/" for ::1 at 2019-12-04 01:17:23 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (114.6ms)
+  Rendered main/index.html.erb within layouts/application (159.1ms)
+Completed 200 OK in 873ms (Views: 766.7ms | ActiveRecord: 2.5ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-04 01:19:45 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Zjey4QwWP6cb7whJ/Gx9egJFxsCT/Oi7ehggraA/juFIhLm146yz50wYrYy3jPsZVtef0GO2uQqbgtnzOhLvpQ==", "teacher"=>{"first_name"=>"Varun", "last_name"=>"Murthy", "email"=>"murthy@berkeley.edu", "snap"=>"Murthy1999", "course"=>"I am teaching BJC but not as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"UC Berkeley", "city"=>"Berkeley", "state"=>"CA", "website"=>"www.berkeley.edu"}, "commit"=>"Submit"}
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (8.7ms)[0m  [1mINSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "UC Berkeley"], ["city", "Berkeley"], ["state", "CA"], ["website", "www.berkeley.edu"], ["lat", 37.8715226], ["lng", -122.273042], ["created_at", "2019-12-04 09:19:45.997547"], ["updated_at", "2019-12-04 09:19:45.997547"]]
+  [1m[35m (22.4ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.5ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Varun"], ["last_name", "Murthy"], ["email", "murthy@berkeley.edu"], ["course", "I am teaching BJC but not as an AP CS Principles course."], ["snap", "Murthy1999"], ["other", "N/A"], ["school_id", 2], ["validated", "f"], ["created_at", "2019-12-04 09:19:46.139967"], ["updated_at", "2019-12-04 09:19:46.139967"]]
+  [1m[36mSQL (0.0ms)[0m  [1mUPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?[0m  [["id", 2]]
+  [1m[35m (12.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 474ms (ActiveRecord: 50.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:19:46 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (0.0ms)
+  Rendered main/index.html.erb within layouts/application (31.0ms)
+Completed 200 OK in 240ms (Views: 239.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-04 01:19:48 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 181ms (Views: 180.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-04 01:19:50 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"HOkOFrODmZ8C/Q2Jr1UJLoUzcGj7l/ZuYMO6DwmwBH0yWgVCXDkV31UKqEzktY9N0aEpeAvdp9+BWUNRk51lOQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-04 01:19:50 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=d0b46983ec17fa5504ab1b943e7dbc64a4598dad9a665b69&code=4/twFBeZBagG6zDW3AOIUeI0s-_nvsrFwFpTdNlRb1nz2l1RkVfi-uwsLvssVnRw1FSqEBJD4eo3Dfgn5QP701gG4&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&hd=berkeley.edu&session_state=cd82d9a93a3cce2fc1ec99196f0e553535222dd7..ab7d&prompt=none" for ::1 at 2019-12-04 01:19:51 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"d0b46983ec17fa5504ab1b943e7dbc64a4598dad9a665b69", "code"=>"4/twFBeZBagG6zDW3AOIUeI0s-_nvsrFwFpTdNlRb1nz2l1RkVfi-uwsLvssVnRw1FSqEBJD4eo3Dfgn5QP701gG4", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "hd"=>"berkeley.edu", "session_state"=>"cd82d9a93a3cce2fc1ec99196f0e553535222dd7..ab7d", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[36mAdmin Load (1.0ms)[0m  [1mSELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1[0m  [["email", "murthy@berkeley.edu"]]
+  [1m[35m (1.0ms)[0m  begin transaction
+  [1m[36mSQL (6.7ms)[0m  [1mINSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token") VALUES (?, ?, ?, ?, ?)[0m  [["email", "murthy@berkeley.edu"], ["first_name", "Varun Srinivasa"], ["last_name", "Murthy BA"], ["encrypted_google_token_iv", "jfhGpNSnvr8OOizN\n"], ["encrypted_google_token", "k1MWEpc4tgLmdKQ40tP1FVn8r7MwZebt2YRAO0st9UPGmxPXqYoq3f+TDJQU\nueppUy8roxn/3REBdzWEYxD/N71cHdbnx2D+lR+JTInCHKVew5+Mn2sFFcTd\nJY/0dlOlnq5+OqxH6lTyQ68PqmGctCWvkTshPtJp6DsYD69BlM5CTaNTSgBQ\nhTmoik1/d4PsFAdB6p2SLNudNgF0rw==\n"]]
+  [1m[35m (19.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 131ms (ActiveRecord: 30.4ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 01:19:51 -0800
+Processing by MainController#index as HTML
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (1.1ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (1.0ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.0ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSchool Load (1.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered schools/statistics.html.erb (48.5ms)
+  Rendered main/index.html.erb within layouts/application (122.3ms)
+Completed 200 OK in 394ms (Views: 345.6ms | ActiveRecord: 5.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+[0m

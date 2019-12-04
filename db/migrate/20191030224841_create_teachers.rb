@@ -25,6 +25,6 @@ class CreateTeachers < ActiveRecord::Migration
 
     # We're expecting to retrieve teachers in the same school by reverse order
     # of creation.
-    add_index :teachers, [:school_name, :timestamps]
+    add_index :teachers, [:school_id, :created_at]
   end
 end
