@@ -15,9 +15,6 @@ class MainController < ApplicationController
           'lat': school[:lat]
         }
       end
-
-      puts "COURSES"
-      puts @courses
     else 
       @teacher = Teacher.new
     end
