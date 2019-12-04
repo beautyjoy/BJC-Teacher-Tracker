@@ -1,0 +1,25 @@
+<head> 
+  <link rel="stylesheet" href="application.css">
+</head>
+<div id='statistics-container'>
+  <h1 id="statistics-title">School Statistics</h1>
+  <table id='school_stats', className="padding-table-columns",  border="1", cellpadding="10px">
+    <thead>
+      <tr>
+      <th> School </th> 
+      <th> City, State </th>
+      <th> Number of Teachers </th> 
+      </tr>
+    </thead>
+    <tbody>
+      <% @schools.each do |school| %>
+      <tr>
+      	<td> <%= school.name %> </td>
+        <td> <%= school.city + ', ' + school.state %> </td>
+        <td> <%= school.teachers_count %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

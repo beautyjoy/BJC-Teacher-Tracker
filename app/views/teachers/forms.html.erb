@@ -1,0 +1,31 @@
+<div id='validation-container'>
+  <h1 id="validation-title">Validate submitted forms here</h1>
+  <table id='movies', border="1", cellpadding="10px">
+    <thead>
+      <tr>
+      	<th> Name </th>
+      	<th> School </th>
+      	<th> Email </th>
+      	<th> Location </th>
+      	<th> School Website </th>
+      	<th> Snap Username </th>
+      	<th> Validate </th>
+      	<th> Delete </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teachers.each do |teacher| %>
+      <tr>
+      	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+      	<td> <%= teacher.school.name %> </td>
+      	<td> <%= teacher.email %> </td>
+      	<td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+      	<td> <%= teacher.school.website %> </td>
+      	<td> <%= teacher.snap %> </td>
+      	<td> <%= button_to("validate", validate_path(:id => teacher.id)) %> </td>
+      	<td> <%= button_to("delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}) %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

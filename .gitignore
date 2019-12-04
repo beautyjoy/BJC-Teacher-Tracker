@@ -69,6 +69,9 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
+# Ignore postgress-related database files
+my_database_development
+my_database_test
 
 # A copy of GitHub's template .gitignore for all JetBrains IDEs.
 # It can be found here: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore 

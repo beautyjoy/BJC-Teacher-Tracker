@@ -11,28 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191108235318) do
+ActiveRecord::Schema.define(version: 20191201025202) do
 
   create_table "admins", force: :cascade do |t|
-    t.string "encrypted_first_name"
-    t.string "encrypted_last_name"
-    t.string "encrypted_email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
     t.string "encrypted_google_token"
+    t.string "encrypted_google_token_iv"
     t.string "encrypted_google_refresh_token"
+    t.string "encrypted_google_refresh_token_iv"
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "state"
+    t.string   "website"
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "teachers_count", default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "encrypted_first_name"
-    t.string   "encrypted_last_name"
-    t.string   "encrypted_school_name"
-    t.string   "encrypted_email"
-    t.string   "encrypted_city"
-    t.string   "encrypted_state"
-    t.string   "encrypted_website"
-    t.string   "encrypted_course"
-    t.string   "encrypted_snap"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "course"
+    t.string   "snap"
+    t.string   "other"
+    t.integer  "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "validated"
   end
+
+  add_index "teachers", [nil, nil], name: "index_teachers_on_school_name_and_timestamps"
 
 end
