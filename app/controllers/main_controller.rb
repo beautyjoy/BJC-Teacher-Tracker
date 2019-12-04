@@ -5,6 +5,7 @@ class MainController < ApplicationController
     if @admin 
       @teachers = Teacher.unvalidated
       @schools = School.validated.group(:name, :city, :state).count
+      @courses = Teacher.group(:course).count
       school_coords = School.select(:lat, :lng)
 
       @items = []

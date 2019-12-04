@@ -7,7 +7,6 @@ class TeachersController < ApplicationController
         if !@school.save
             redirect_to root_path, alert: "Failed to submit information :("
         else
-
             @teacher = @school.teachers.build teacher_params
             @teacher.validated = false
             if @teacher.save

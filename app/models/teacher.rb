@@ -1,5 +1,5 @@
 class Teacher < ActiveRecord::Base
-  validates :first_name, :last_name, :email, :course, :snap, :other, presence: true
+  validates :first_name, :last_name, :email, :course, :snap, presence: true
   validates_inclusion_of :validated, :in => [true, false]
 
   belongs_to :school, counter_cache: true
