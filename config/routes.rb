@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   resources :admins
 
   root to: 'main#index'
+  get '/dashboard', to: 'main#dashboard'
 
   # The line below would be unnecessary since we use Google.
   # sessions#new could be left as an empty Ruby function.

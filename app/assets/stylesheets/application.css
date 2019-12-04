@@ -72,6 +72,14 @@ input, select {
   margin-bottom: 80px;
 }
 
+#map {
+  height: 500px;
+  margin-bottom: 15px;
+}
+.padding-table-columns th
+{
+    padding:100px 100px 0 0; /* Only right padding*/
+}
 .padding-table-columns th
 {
     padding:100px 100px 0 0; /* Only right padding*/

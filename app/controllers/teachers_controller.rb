@@ -1,3 +1,5 @@
+require 'net/http'
+
 class TeachersController < ApplicationController
 
     def create
