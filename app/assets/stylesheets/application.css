@@ -84,7 +84,6 @@ input, select {
   margin-bottom: 80px;
 }
 
-<<<<<<< HEAD
 .navbar-nav {
   flex-direction: row;
 }
@@ -105,7 +104,6 @@ input, select {
 
 .admin-jumbotron {
   margin-top: 55px;
-=======
 #map {
   height: 500px;
   margin-bottom: 15px;
@@ -117,5 +115,4 @@ input, select {
 .padding-table-columns th
 {
     padding:100px 100px 0 0; /* Only right padding*/
->>>>>>> e803ff2b2063262677f5e1fafb96d5a8a6fd9268
 }
