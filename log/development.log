@@ -6583,3 +6583,13 @@ Completed 200 OK in 394ms (Views: 345.6ms | ActiveRecord: 5.1ms)
             FROM sqlite_temp_master
             WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
 [0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.0ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_teachers_on_school_id_and_created_at' AND type='index'
+[0m

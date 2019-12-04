@@ -1,5 +1,18 @@
 class CreateTeachers < ActiveRecord::Migration
+  
   def change
+    create_table :schools do |t|
+      t.string :name
+      t.string :city
+      t.string :state
+      t.string :website
+      t.float :lat
+      t.float :lng
+      t.integer :teachers_count, default: 0
+
+      t.timestamps null: false
+    end
+    
     create_table :teachers do |t|
       t.string :first_name
       t.string :last_name
