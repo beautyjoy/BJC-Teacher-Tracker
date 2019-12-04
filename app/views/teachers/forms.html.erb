@@ -1,16 +1,16 @@
-<div id='validation-container'>
-  <h1 id="validation-title">Validate submitted forms here</h1>
-  <table id='movies', border="1", cellpadding="10px">
-    <thead>
+<div style="margin-top: 55px;">
+  <h1>Validate submitted forms here</h1>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-      	<th> Name </th>
-      	<th> School </th>
-      	<th> Email </th>
-      	<th> Location </th>
-      	<th> School Website </th>
-      	<th> Snap Username </th>
-      	<th> Validate </th>
-      	<th> Delete </th>
+      	<th scope="col"> Name </th>
+      	<th scope="col"> School </th>
+      	<th scope="col"> Email </th>
+      	<th scope="col"> Location </th>
+      	<th scope="col"> Website </th>
+      	<th scope="col"> Snap </th>
+      	<th scope="col"> Validate </th>
+      	<th scope="col"> Delete </th>
       </tr>
     </thead>
     <tbody>
@@ -21,9 +21,9 @@
       	<td> <%= teacher.email %> </td>
       	<td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
       	<td> <%= teacher.school.website %> </td>
-      	<td> <%= teacher.snap %> </td>
-      	<td> <%= button_to("validate", validate_path(:id => teacher.id)) %> </td>
-      	<td> <%= button_to("delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}) %> </td>
+		<td> <%= teacher.snap %> </td>
+      	<td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
+      	<td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
       </tr>
       <% end %>
     </tbody>

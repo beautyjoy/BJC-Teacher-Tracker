@@ -14,8 +14,14 @@
  *= require_self
  */
 
-html, body {
+html {
   min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0 0 255px;
+  /* bottom = footer height */
 }
 
 footer {
@@ -23,6 +29,12 @@ footer {
   background-color: #18568C;
   color: #FFF;
   padding-top: 25px;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
 }
 
 footer .container .social-icons {
@@ -72,15 +84,29 @@ input, select {
   margin-bottom: 80px;
 }
 
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.google-signin {
+  background-color: white;
+}
+
+.hero-btn {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+  width: 160px;
+  margin-right: 15px;
+}
+
+.admin-jumbotron {
+  margin-top: 55px;
+}
+
 #map {
   height: 500px;
-  margin-bottom: 15px;
-}
-.padding-table-columns th
-{
-    padding:100px 100px 0 0; /* Only right padding*/
-}
-.padding-table-columns th
-{
-    padding:100px 100px 0 0; /* Only right padding*/
+  margin-bottom: 55px;
 }
