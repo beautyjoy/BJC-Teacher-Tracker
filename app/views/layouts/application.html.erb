@@ -35,11 +35,8 @@
 </nav>
 
 <div class="container">
-  <% if notice%>
-    <% notice%>
-  <% end %>
-  <% if alert%>
-    <% alert%>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert" %>
   <% end %>
   <%= yield %>
 </div>
