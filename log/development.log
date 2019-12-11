@@ -6167,3 +6167,808 @@ Started GET "/" for ::1 at 2019-12-03 13:15:13 -0800
 Processing by MainController#index as HTML
   Rendered main/index.html.erb within layouts/application (0.8ms)
 Completed 200 OK in 43ms (Views: 42.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:23:38 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.2ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.2ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.2ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 5]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 6]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  Rendered schools/statistics.html.erb (64.7ms)
+  Rendered main/index.html.erb within layouts/application (70.7ms)
+Completed 200 OK in 824ms (Views: 752.6ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/admin/forms/delete/5" for ::1 at 2019-12-04 16:23:55 -0800
+Processing by TeachersController#delete as HTML
+  Parameters: {"authenticity_token"=>"hV9LUvGVg2KoRSZowcbcGvWAtrdg0ok19qV38FKPle26CBK/OEi4wST/ovVAFxAEaiqn7eM9pJOdwsQ2yL7Vpw==", "id"=>"5"}
+  [1m[36mSQL (3.6ms)[0m  [1mDELETE FROM "teachers" WHERE "teachers"."id" = ?[0m  [["id", 5]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 3.6ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:23:55 -0800
+Processing by MainController#index as HTML
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.2ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 6]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  Rendered schools/statistics.html.erb (3.8ms)
+  Rendered main/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 27ms (Views: 21.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/admin/forms/delete/6" for ::1 at 2019-12-04 16:23:56 -0800
+Processing by TeachersController#delete as HTML
+  Parameters: {"authenticity_token"=>"oGNfZLhg9LoNB6ofxKbgECFg4T5AGMEZLnRq6OVxXI6fNAaJcb3PGYG9LoJFdywOvsrwZMP37L9FE9kuf0AcxA==", "id"=>"6"}
+  [1m[35mSQL (3.1ms)[0m  DELETE FROM "teachers" WHERE "teachers"."id" = ?  [["id", 6]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:23:56 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  Rendered schools/statistics.html.erb (4.9ms)
+  Rendered main/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 22ms (Views: 16.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:23:57 -0800
+Processing by MainController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.1ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  Rendered schools/statistics.html.erb (2.5ms)
+  Rendered main/index.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 18ms (Views: 15.8ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/logout" for ::1 at 2019-12-04 16:24:01 -0800
+Processing by MainController#logout as HTML
+  Parameters: {"authenticity_token"=>"zcSyXQ427wQ0eUFjl5Q50ry8hiuSMcLDoJ9wLK8UbKbyk+uwx+vUp7jDxf4WRfXMIxaXcRHe72XL+MPqNSUs7A=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:24:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (57.0ms)
+  Rendered main/index.html.erb within layouts/application (57.7ms)
+Completed 200 OK in 69ms (Views: 68.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-04 16:24:44 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"magLdZIvI3XfiRxHJ+RdnDXjig6andWnh/V+sNKUDIqm/1KYW/IY1lMzmNqmNZGCqkmbVBly+AHsks12SKVMwA==", "teacher"=>{"first_name"=>"Bob", "last_name"=>"Joe", "email"=>"bobjoe@test.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Bronx High School of Science", "city"=>"Bronx", "state"=>"NY", "website"=>"www.bxscience.edu"}, "commit"=>"Submit"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (2.5ms)[0m  INSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Bronx High School of Science"], ["city", "Bronx"], ["state", "NY"], ["website", "www.bxscience.edu"], ["lat", 40.8447819], ["lng", -73.8648268], ["created_at", "2019-12-05 00:24:45.163468"], ["updated_at", "2019-12-05 00:24:45.163468"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["first_name", "Bob"], ["last_name", "Joe"], ["email", "bobjoe@test.com"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 8], ["validated", "f"], ["created_at", "2019-12-05 00:24:45.200135"], ["updated_at", "2019-12-05 00:24:45.200135"]]
+  [1m[35mSQL (0.2ms)[0m  UPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?  [["id", 8]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 439ms (ActiveRecord: 9.6ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:24:45 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (0.1ms)
+  Rendered main/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 56ms (Views: 55.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:24:49 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (1.5ms)
+  Rendered main/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 30ms (Views: 29.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-04 16:24:52 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 25ms (Views: 24.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-04 16:24:53 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"+3Hcqc3bz8Y40Y0vO5d9eRV17JtMhk9nF/+U7Bu1cuPEJoVEBAb0ZbRrCbK6RrFnit/9wc9pYsF8mCcqgYQyqQ=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 5ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-04 16:24:53 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=0552da56985c80089eaffac525414f4de5c0fa894ed81a83&code=4/twGEluT_ZJ63S4tGWp5KH4B1eSlKdOen_8GcBegEfn6CQiXJBvL1U86_zJNjLXkHPuJOdpPITvNNEupFrNUq0MI&scope=email+profile+https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&authuser=0&session_state=fe8a0ca2f6192bd78faab9a90ac134ca459c6bb2..5802&prompt=none" for ::1 at 2019-12-04 16:24:54 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"0552da56985c80089eaffac525414f4de5c0fa894ed81a83", "code"=>"4/twGEluT_ZJ63S4tGWp5KH4B1eSlKdOen_8GcBegEfn6CQiXJBvL1U86_zJNjLXkHPuJOdpPITvNNEupFrNUq0MI", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"0", "session_state"=>"fe8a0ca2f6192bd78faab9a90ac134ca459c6bb2..5802", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[35mAdmin Load (0.5ms)[0m  SELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1  [["email", "kimberly.zhu.2000@gmail.com"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "admins" ("email", "first_name", "last_name", "encrypted_google_token_iv", "encrypted_google_token") VALUES (?, ?, ?, ?, ?)  [["email", "kimberly.zhu.2000@gmail.com"], ["first_name", "Kimberly"], ["last_name", "Zhu"], ["encrypted_google_token_iv", "6jViDglUELHRQZZh\n"], ["encrypted_google_token", "zgebxvirb6m8ejHPknMqbXlDf7eNRJjpkzxFMHmBWlW93nnSarXVmvnIeA7m\nGsICa8ANm0p/W+LSnY8hzs5gmHgNXdxxprfOBcO9qpxuuT84vGJqbds/FKNd\nqjLccOBKiG80rLoJguybAA1/sHsao+sKJ16fxE2Xeqdl/8Fp4AxchiezBNTi\n43YiD+lH5o95JEhGpKZdwJbh7Tb+\n"]]
+  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 24ms (ActiveRecord: 4.3ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:24:54 -0800
+Processing by MainController#index as HTML
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.1ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.2ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.9ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered schools/statistics.html.erb (9.1ms)
+  Rendered main/index.html.erb within layouts/application (12.7ms)
+Completed 200 OK in 38ms (Views: 32.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:25:09 -0800
+Processing by MainController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"[0m
+  [1m[35mSchool Load (0.3ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 8]]
+  Rendered schools/statistics.html.erb (3.4ms)
+  Rendered main/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 25ms (Views: 20.3ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/logout" for ::1 at 2019-12-04 16:25:13 -0800
+Processing by MainController#logout as HTML
+  Parameters: {"authenticity_token"=>"W+PABvdBXv8l8xxqcilRLexRu/TAeIQAEylI7Yt96H5ktJnrPpxlXKlJmPfz+J0zc/uqrkOXqaZ4TvsrEUyoNA=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:25:13 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (1.7ms)
+  Rendered main/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 18ms (Views: 17.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/teachers" for ::1 at 2019-12-04 16:25:30 -0800
+Processing by TeachersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yGJuWdzpRGYEwm3uhmOquQaSQnF3lutiPC457gHpPaf3NTe0FTR/xYh46XMHsmanmThTK/R5xsRXSYoom9h97Q==", "teacher"=>{"first_name"=>"Anthony", "last_name"=>"Zhu", "email"=>"anthony.zhu.2001@gmail.com", "snap"=>"N/A", "course"=>"I am teaching BJC as an AP CS Principles course.", "other"=>"N/A"}, "school"=>{"name"=>"Monta Vista High School", "city"=>"Cupertino", "state"=>"CA", "website"=>"mvhs.fuhsd.org"}, "commit"=>"Submit"}
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "schools" ("name", "city", "state", "website", "lat", "lng", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Monta Vista High School"], ["city", "Cupertino"], ["state", "CA"], ["website", "mvhs.fuhsd.org"], ["lat", 37.3229978], ["lng", -122.0321823], ["created_at", "2019-12-05 00:25:30.864281"], ["updated_at", "2019-12-05 00:25:30.864281"]]
+  [1m[35m (3.3ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "teachers" ("first_name", "last_name", "email", "course", "snap", "other", "school_id", "validated", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["first_name", "Anthony"], ["last_name", "Zhu"], ["email", "anthony.zhu.2001@gmail.com"], ["course", "I am teaching BJC as an AP CS Principles course."], ["snap", "N/A"], ["other", "N/A"], ["school_id", 9], ["validated", "f"], ["created_at", "2019-12-05 00:25:30.876440"], ["updated_at", "2019-12-05 00:25:30.876440"]]
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "schools" SET "teachers_count" = COALESCE("teachers_count", 0) + 1 WHERE "schools"."id" = ?[0m  [["id", 9]]
+  [1m[35m (2.8ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 336ms (ActiveRecord: 9.7ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:25:30 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (0.0ms)
+  Rendered main/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 11ms (Views: 10.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-04 16:25:32 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.0ms)
+Completed 200 OK in 18ms (Views: 17.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-04 16:25:33 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"+EBV8ZanmovQBsjBJjRbDHImv16kngHYURgcUyvaFS7HFwwcX3qhKFy8TFyn5ZcS7YyuBCdxLH46f6+VsetVZA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-04 16:25:33 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=99dd9912d3d1fd289d007b81c7ed022ae1a6cb16f2a33936&code=4/twExNW9xCrYPZHZx46ww4Drx5BXUA7AyCfr-nUpWDbex3PqTjEkzgzkLDFvGzfOJUkyW-pamY3YKvT1cPGIT9sE&scope=email+profile+https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&authuser=0&session_state=aaa25fb0edcdb38b19678a84ee18c06c9a41a120..106a&prompt=none" for ::1 at 2019-12-04 16:25:33 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"99dd9912d3d1fd289d007b81c7ed022ae1a6cb16f2a33936", "code"=>"4/twExNW9xCrYPZHZx46ww4Drx5BXUA7AyCfr-nUpWDbex3PqTjEkzgzkLDFvGzfOJUkyW-pamY3YKvT1cPGIT9sE", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email", "authuser"=>"0", "session_state"=>"aaa25fb0edcdb38b19678a84ee18c06c9a41a120..106a", "prompt"=>"none", "provider"=>"google_oauth2"}
+  [1m[36mAdmin Load (0.5ms)[0m  [1mSELECT  "admins".* FROM "admins" WHERE "admins"."email" = ?  ORDER BY "admins"."id" ASC LIMIT 1[0m  [["email", "kimberly.zhu.2000@gmail.com"]]
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "admins" SET "encrypted_google_token_iv" = ?, "encrypted_google_token" = ? WHERE "admins"."id" = ?[0m  [["encrypted_google_token_iv", "hwDp5Llplq1XlVgY\n"], ["encrypted_google_token", "r1iT9HmMNCpgSwB82wLBxacm5E/sHpKR2a1VIMrj6OsP2FkJY+lX7L4iHozl\niFdTUSvFuDvqypufYHZO3PvqUojqTkLCPLvbvGYxgYuoyBKd+GVxzLnIhz+K\n4Ftqhg0QlNnJKWSN8dWO7lyd1AyZsVp1mJ3zqQg5di1HtQPyu+9KXthqe2Pn\ntuAF+sYnszM9WeIHQbFYEqNgkGqs\n"], ["id", 1]]
+  [1m[35m (3.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 5.1ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:25:34 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.3ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 9]]
+  Rendered schools/statistics.html.erb (8.8ms)
+  Rendered main/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 31ms (Views: 26.2ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/admin/forms/validate/9" for ::1 at 2019-12-04 16:25:40 -0800
+Processing by TeachersController#validate as HTML
+  Parameters: {"authenticity_token"=>"c2nNE3LXX68C8Ajb0jlbMCab3CALEHkVHQ2WtE2QJjlMPpT+uwpkDI5KjEZT6JcuuTHNeoj/VLN2aiVy16Fmcw==", "id"=>"9"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."id" = ? LIMIT 1  [["id", 9]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  UPDATE "teachers" SET "validated" = ?, "updated_at" = ? WHERE "teachers"."id" = ?  [["validated", "t"], ["updated_at", "2019-12-05 00:25:40.965020"], ["id", 9]]
+  [1m[36m (3.6ms)[0m  [1mcommit transaction[0m
+  Rendered teacher_mailer/welcome_email.text.erb within layouts/mailer (0.6ms)
+
+TeacherMailer#welcome_email: processed outbound mail in 402.0ms
+
+Sent mail to anthony.zhu.2001@gmail.com (30037.5ms)
+Date: Wed, 04 Dec 2019 16:25:41 -0800
+From: beautyandjoy2019@gmail.com
+To: anthony.zhu.2001@gmail.com
+Message-ID: <5de84e8574428_b5d83fe4e3f4dd3441889@calvisitor-10-105-161-232.calvisitor.1918.berkeley.edu.mail>
+Subject: Welcome to the Beauty and Joy of Computing!
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hi Anthony,
+
+To view bjc.edc.org/teacher, you will need the username: bjcteacher and the case-sensitive password: DeBUgg
+
+After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies.
+
+Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
+
+Thanks!
+--
+Michael Ball | michaelball.co
+Lecturer | UC Berkeley Computer Science
+Software Engineer | Gradescope
+m: (909) 993-3988 | CV
+
+Completed 500 Internal Server Error in 30532ms (ActiveRecord: 5.3ms)
+
+Net::OpenTimeout (execution expired):
+  app/controllers/teachers_controller.rb:26:in `validate'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (48.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (63.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (113.7ms)
+
+
+Started POST "/admin/forms/delete/9" for ::1 at 2019-12-04 16:26:11 -0800
+Processing by TeachersController#delete as HTML
+  Parameters: {"authenticity_token"=>"c2nNE3LXX68C8Ajb0jlbMCab3CALEHkVHQ2WtE2QJjlMPpT+uwpkDI5KjEZT6JcuuTHNeoj/VLN2aiVy16Fmcw==", "id"=>"9"}
+  [1m[35mSQL (3.2ms)[0m  DELETE FROM "teachers" WHERE "teachers"."id" = ?  [["id", 9]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:26:11 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (0.3ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered schools/statistics.html.erb (4.2ms)
+  Rendered main/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 34ms (Views: 27.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:26:11 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered schools/statistics.html.erb (5.6ms)
+  Rendered main/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 21ms (Views: 17.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2019-12-04 16:26:12 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" GROUP BY "teachers"."course"
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.4ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mSchool Load (0.2ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 8]]
+  Rendered schools/statistics.html.erb (6.7ms)
+  Rendered main/index.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 56ms (Views: 50.3ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 17:58:36 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  [1m[35m (2.6ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (2.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" WHERE "teachers"."validated" = ? GROUP BY "teachers"."course"[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.2ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.2ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.2ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  ORDER BY "teachers"."created_at" ASC  [["validated", "t"]]
+  Rendered schools/statistics.html.erb (54.2ms)
+  Rendered main/index.html.erb within layouts/application (63.2ms)
+Completed 200 OK in 697ms (Views: 605.1ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-10 17:58:38 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2019-12-10 17:58:38 -0800
+
+
+Started GET "/assets/application.self-11440eb0cae76dbff07cfae33c7b20ea6d59d6285e1d3dd62179010df506541a.css?body=1" for ::1 at 2019-12-10 17:58:38 -0800
+
+
+Started GET "/assets/turbolinks.self-569ee74eaa15c1e2019317ff770b8769b1ec033a0f572a485f64c82ddc8f989e.js?body=1" for ::1 at 2019-12-10 17:58:38 -0800
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for ::1 at 2019-12-10 17:58:38 -0800
+
+
+Started GET "/" for ::1 at 2019-12-10 20:40:25 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  [1m[35m (2.2ms)[0m  SELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" WHERE "teachers"."validated" = ? GROUP BY "teachers"."course"[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.3ms)[0m  SELECT "schools"."lat", "schools"."lng" FROM "schools"
+  [1m[36mTeacher Load (0.3ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?[0m  [["validated", "f"]]
+  [1m[35mSchool Load (0.2ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 7]]
+  [1m[36mSchool Load (0.2ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mTeacher Load (0.3ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  ORDER BY "teachers"."created_at" ASC  [["validated", "t"]]
+  Rendered schools/statistics.html.erb (151.0ms)
+  Rendered main/index.html.erb within layouts/application (175.7ms)
+Completed 200 OK in 2407ms (Views: 1805.8ms | ActiveRecord: 21.1ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:40:28 -0800
+Processing by MainController#index as HTML
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) AS count_all, "schools"."name" AS schools_name, "schools"."city" AS schools_city, "schools"."state" AS schools_state FROM "schools" GROUP BY "schools"."name", "schools"."city", "schools"."state"[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) AS count_all, "teachers"."course" AS teachers_course FROM "teachers" WHERE "teachers"."validated" = ? GROUP BY "teachers"."course"  [["validated", "f"]]
+  [1m[36mSchool Load (0.3ms)[0m  [1mSELECT "schools"."lat", "schools"."lng" FROM "schools"[0m
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  [["validated", "f"]]
+  [1m[36mSchool Load (0.1ms)[0m  [1mSELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1[0m  [["id", 7]]
+  [1m[35mSchool Load (0.1ms)[0m  SELECT  "schools".* FROM "schools" WHERE "schools"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36mTeacher Load (0.4ms)[0m  [1mSELECT "teachers".* FROM "teachers" WHERE "teachers"."validated" = ?  ORDER BY "teachers"."created_at" ASC[0m  [["validated", "t"]]
+  Rendered schools/statistics.html.erb (10.4ms)
+  Rendered main/index.html.erb within layouts/application (12.1ms)
+Completed 200 OK in 53ms (Views: 47.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for ::1 at 2019-12-10 20:40:29 -0800
+
+
+Started POST "/logout" for ::1 at 2019-12-10 20:40:57 -0800
+Processing by MainController#logout as HTML
+  Parameters: {"authenticity_token"=>"moeKX9JHaAUQB42FBxb5lwS1E+kPPqXS+nlt3z4ap3xlEOPTYo+oKzAn4h594B09u/EalO05QRtP7kcNLgMZSA=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:40:57 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (106.0ms)
+  Rendered main/index.html.erb within layouts/application (134.3ms)
+Completed 200 OK in 202ms (Views: 197.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:43:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (6.8ms)
+  Rendered main/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 63ms (Views: 62.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-10 20:45:52 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 54ms (Views: 52.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-10 20:45:54 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"m1bRxpRiDOA8qJY8l61qYo1Oy2SA0gDmGngXBCBkpjxkwbhKJKrMzhyI+aftW47IMgrCGWLV5C+v7z3WMH0YCA=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-10 20:45:54 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=1c567a9e605a0f8c8af8af15e096c85949d36f7bab49afe2&code=4/uAFdDWCnJajUjFBYHsPv1J31XKHpuDJBgO1H1FvXSHUoei-dN7ErxYXcGn9L2fGYZSk1fNKyfe8yu97SnpNauJA&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/userinfo.profile%20openid&authuser=1&hd=berkeley.edu&session_state=9e6de0410515f806666063475d152495455b0f90..8420&prompt=none" for ::1 at 2019-12-10 20:45:59 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"1c567a9e605a0f8c8af8af15e096c85949d36f7bab49afe2", "code"=>"4/uAFdDWCnJajUjFBYHsPv1J31XKHpuDJBgO1H1FvXSHUoei-dN7ErxYXcGn9L2fGYZSk1fNKyfe8yu97SnpNauJA", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"9e6de0410515f806666063475d152495455b0f90..8420", "prompt"=>"none", "provider"=>"google_oauth2"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 14ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:45:59 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (2.9ms)
+  Rendered main/index.html.erb within layouts/application (7.5ms)
+Completed 200 OK in 54ms (Views: 52.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-10 20:46:03 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 103ms (Views: 101.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-10 20:46:04 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"ZpYPnHwZ88kNhXfSn0NBllS9oPlRe25l34uiFDcUmsaZAWYQzNEz5y2lGEnltaU86/mphLN8iqxqHIjGJw0k8g=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-10 20:46:04 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=0c19ca0baa2848da1dec5199421db8e74372e2a286bed72f&code=4%2FuAEK3ado0xUfqahMjg_5T_gmCsKsmRBKlaTkJSGgI8TJODW1vPpnOSSMJda8peeuJcXn6Ir20O_ck9m61wllnhk&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&session_state=4eaf4b7cfe3e4294c9c4428713a3d1bdf4269a6a..e347&prompt=consent" for ::1 at 2019-12-10 20:46:09 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"0c19ca0baa2848da1dec5199421db8e74372e2a286bed72f", "code"=>"4/uAEK3ado0xUfqahMjg_5T_gmCsKsmRBKlaTkJSGgI8TJODW1vPpnOSSMJda8peeuJcXn6Ir20O_ck9m61wllnhk", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid", "authuser"=>"0", "session_state"=>"4eaf4b7cfe3e4294c9c4428713a3d1bdf4269a6a..e347", "prompt"=>"consent", "provider"=>"google_oauth2"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:46:09 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (4.5ms)
+  Rendered main/index.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 40ms (Views: 39.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:49:39 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (93.3ms)
+  Rendered main/index.html.erb within layouts/application (104.3ms)
+Completed 200 OK in 1025ms (Views: 917.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-10 20:49:44 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 183ms (Views: 182.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:50:25 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (3.9ms)
+  Rendered main/index.html.erb within layouts/application (14.5ms)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+...reeze;@output_buffer.append=( <a href="https://snap.berkeley...
+...                              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: unknown regexp option - h
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: unmatched close parenthesis: /a> );@output_buffer.safe_append='
+            </
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: syntax error, unexpected tINTEGER, expecting ')'
+            </h6>
+               ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:36: syntax error, unexpected '<', expecting ')'
+          </div>
+          ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:37: unknown regexp options - dv
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:39: syntax error, unexpected '<'
+        <div class=\'row\'>
+        ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+'.freeze;     end 
+              ^~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+          ensure
+          ^~~~~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+          end
+          ^~~):
+  app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:34: unknown regexp option - h
+  app/views/main/teacher_form.html.erb:34: unmatched close parenthesis: /a> );@output_buffer.safe_append='
+  app/views/main/teacher_form.html.erb:34: syntax error, unexpected tINTEGER, expecting ')'
+  app/views/main/teacher_form.html.erb:36: syntax error, unexpected '<', expecting ')'
+  app/views/main/teacher_form.html.erb:37: unknown regexp options - dv
+  app/views/main/teacher_form.html.erb:39: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+  app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+  app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (18.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (27.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (10.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (302.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (1.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (321.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (5.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (633.9ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:50:28 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (33.1ms)
+  Rendered main/index.html.erb within layouts/application (34.3ms)
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+...reeze;@output_buffer.append=( <a href="https://snap.berkeley...
+...                              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: unknown regexp option - h
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: unmatched close parenthesis: /a> );@output_buffer.safe_append='
+            </
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:34: syntax error, unexpected tINTEGER, expecting ')'
+            </h6>
+               ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:36: syntax error, unexpected '<', expecting ')'
+          </div>
+          ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:37: unknown regexp options - dv
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:39: syntax error, unexpected '<'
+        <div class=\'row\'>
+        ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+'.freeze;     end 
+              ^~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+          ensure
+          ^~~~~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+          end
+          ^~~):
+  app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:34: unknown regexp option - h
+  app/views/main/teacher_form.html.erb:34: unmatched close parenthesis: /a> );@output_buffer.safe_append='
+  app/views/main/teacher_form.html.erb:34: syntax error, unexpected tINTEGER, expecting ')'
+  app/views/main/teacher_form.html.erb:36: syntax error, unexpected '<', expecting ')'
+  app/views/main/teacher_form.html.erb:37: unknown regexp options - dv
+  app/views/main/teacher_form.html.erb:39: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+  app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+  app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (8.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (5.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (154.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (4.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (82.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (317.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:51:01 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (80.8ms)
+  Rendered main/index.html.erb within layouts/application (82.0ms)
+Completed 500 Internal Server Error in 92ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined local variable or method `teacher' for #<#<Class:0x00007f9544a45ea8>:0x00007f9547ae2f70>
+Did you mean?  @teacher):
+    30: 
+    31:           <div class='col-6'>
+    32:             <h6>Snap Username (if none, write N/A) 
+    33:             <a href="https://snap.berkeley.edu/users?user=#{teacher.snap}"> <%= teacher.snap %> </a>
+    34:             </h6>
+    35:             <%= f.text_field :snap, placeholder: "ex. mBall101", class: "form-control", id: "snap username" %>
+    36:           </div>
+  app/views/main/teacher_form.html.erb:33:in `block in _app_views_main_teacher_form_html_erb__1264373287257447813_70139572129480'
+  app/views/main/teacher_form.html.erb:9:in `_app_views_main_teacher_form_html_erb__1264373287257447813_70139572129480'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (12.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (13.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (71.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (15.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (100.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (33.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (253.5ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:51:25 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (3.4ms)
+  Rendered main/index.html.erb within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+...reeze;@output_buffer.append=( <a href="https://snap.berkeley...
+...                              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+.../users?user=#{teacher.snap}"> <%= teacher.snap );@output_buf...
+...                              ^
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+'.freeze;     end 
+              ^~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+          ensure
+          ^~~~~~
+/Users/kimberlyzhu/Documents/cs169/BJC-Teacher-Tracker/app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+          end
+          ^~~):
+  app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:33: syntax error, unexpected '<'
+  app/views/main/teacher_form.html.erb:103: syntax error, unexpected end, expecting ')'
+  app/views/main/teacher_form.html.erb:107: syntax error, unexpected ensure, expecting ')'
+  app/views/main/teacher_form.html.erb:109: syntax error, unexpected end, expecting ')'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.2ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (61.8ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (6.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (91.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (189.4ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:51:51 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (84.4ms)
+  Rendered main/index.html.erb within layouts/application (90.4ms)
+Completed 500 Internal Server Error in 101ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined local variable or method `teacher' for #<#<Class:0x00007f9544a45ea8>:0x00007f9544e21400>
+Did you mean?  @teacher):
+    30: 
+    31:           <div class='col-6'>
+    32:             <h6>Snap Username (if none, write N/A) 
+    33:             <a href="https://snap.berkeley.edu/users?user=#{<%=teacher.snap%>}"> <%= teacher.snap %> </a>
+    34:             </h6>
+    35:             <%= f.text_field :snap, placeholder: "ex. mBall101", class: "form-control", id: "snap username" %>
+    36:           </div>
+  app/views/main/teacher_form.html.erb:33:in `block in _app_views_main_teacher_form_html_erb__1264373287257447813_70139571979240'
+  app/views/main/teacher_form.html.erb:9:in `_app_views_main_teacher_form_html_erb__1264373287257447813_70139571979240'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (14.0ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (23.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (7.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (226.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (15.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (217.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (6.9ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (357.6ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:52:04 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (349.7ms)
+  Rendered main/index.html.erb within layouts/application (360.9ms)
+Completed 500 Internal Server Error in 372ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined local variable or method `teacher' for #<#<Class:0x00007f9544a45ea8>:0x00007f9544c384b8>
+Did you mean?  @teacher):
+    30: 
+    31:           <div class='col-6'>
+    32:             <h6>Snap Username (if none, write N/A) 
+    33:             <a href="https://snap.berkeley.edu/users?user=#{<%=@teacher.snap%>}"> <%= teacher.snap %> </a>
+    34:             </h6>
+    35:             <%= f.text_field :snap, placeholder: "ex. mBall101", class: "form-control", id: "snap username" %>
+    36:           </div>
+  app/views/main/teacher_form.html.erb:33:in `block in _app_views_main_teacher_form_html_erb__1264373287257447813_70139529323960'
+  app/views/main/teacher_form.html.erb:9:in `_app_views_main_teacher_form_html_erb__1264373287257447813_70139529323960'
+  app/views/main/index.html.erb:4:in `_app_views_main_index_html_erb___2393273313658851032_70139532746660'
+
+
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (11.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (25.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (87.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (147.3ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (3.1ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /Users/kimberlyzhu/.rvm/gems/ruby-2.6.3/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (397.4ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:53:29 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (7.6ms)
+  Rendered main/index.html.erb within layouts/application (10.5ms)
+Completed 200 OK in 172ms (Views: 170.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:54:46 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (27.7ms)
+  Rendered main/index.html.erb within layouts/application (34.2ms)
+Completed 200 OK in 136ms (Views: 131.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/admins" for ::1 at 2019-12-10 20:55:00 -0800
+Processing by AdminsController#index as HTML
+  Rendered main/admin.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 41ms (Views: 40.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2019-12-10 20:55:01 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"mLcn74kd2XUtDUZVyqMzTUxOrYyNE6hAZwYSqLvjrHNnIE5jOdUZWw0tKc6wVdfn8wqk8W8UTInSkTh6q/oSRw=="}
+Redirected to http://localhost:3000/auth/google_oauth2
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_oauth2" for ::1 at 2019-12-10 20:55:01 -0800
+
+
+Started GET "/auth/google_oauth2/callback?state=d39ff063bc93470ae822c5989d75c87c84da9492f35a4b6d&code=4/uAHY5TwKDCs4uQ6uYqX41Xv4W2SduNUzIVm6-oXJdIMx7ufbvHL4AgkV7-M5QRAQevFDpKEGr4-0sTMkNT7ocbQ&scope=email%20profile%20https://www.googleapis.com/auth/userinfo.email%20openid%20https://www.googleapis.com/auth/userinfo.profile&authuser=1&hd=berkeley.edu&session_state=c04c3c7b46c4470b6be0efd5ddd3f71f7d219e63..314a&prompt=none" for ::1 at 2019-12-10 20:55:07 -0800
+Processing by SessionsController#googleAuth as HTML
+  Parameters: {"state"=>"d39ff063bc93470ae822c5989d75c87c84da9492f35a4b6d", "code"=>"4/uAHY5TwKDCs4uQ6uYqX41Xv4W2SduNUzIVm6-oXJdIMx7ufbvHL4AgkV7-M5QRAQevFDpKEGr4-0sTMkNT7ocbQ", "scope"=>"email profile https://www.googleapis.com/auth/userinfo.email openid https://www.googleapis.com/auth/userinfo.profile", "authuser"=>"1", "hd"=>"berkeley.edu", "session_state"=>"c04c3c7b46c4470b6be0efd5ddd3f71f7d219e63..314a", "prompt"=>"none", "provider"=>"google_oauth2"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 26ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2019-12-10 20:55:08 -0800
+Processing by MainController#index as HTML
+  Rendered main/teacher_form.html.erb (16.4ms)
+  Rendered main/index.html.erb within layouts/application (19.9ms)
+Completed 200 OK in 106ms (Views: 104.5ms | ActiveRecord: 0.0ms)

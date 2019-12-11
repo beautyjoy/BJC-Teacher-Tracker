@@ -13,24 +13,25 @@
           <div class='col-6'>
             <h6>First Name</h6>
 
-            <%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control', id: "first name"%>
+            <%= f.text_field :first_name, placeholder: 'ex. Michael', class: 'form-control', id: "first name"%>
           </div>
           
           <div class='col-6'>
             <h6>Last Name</h6>
-            <%= f.text_field :last_name, placeholder: 'Last Name', class: 'form-control', id: "last name" %>
+            <%= f.text_field :last_name, placeholder: 'ex. Ball', class: 'form-control', id: "last name" %>
           </div>
         </div>
 
         <div class='row'>
           <div class='col-6'>
             <h6>Teacher Email</h6>
-            <%= f.text_field :email, placeholder: 'Teacher Email', class: 'form-control', id: "email" %>
+            <%= f.text_field :email, placeholder: 'ex. michael_ball@berkeley.edu', class: 'form-control', id: "email" %>
           </div>
 
           <div class='col-6'>
-            <h6>Snap Username (if none, write N/A) </h6>
-            <%= f.text_field :snap, placeholder: "Snap Username", class: "form-control", id: "snap username" %>
+            <h6>Snap Username (if none, write N/A) 
+            </h6>
+            <%= f.text_field :snap, placeholder: "ex. mBall101", class: "form-control", id: "snap username" %>
           </div>
         </div>
 
@@ -59,7 +60,7 @@
         <div class='row'>
           <div class='col-12'>
             <h6>Other (if none, write N/A)</h6>
-            <%= f.text_field :other, placeholder: "Other", class: "form-control", id: "other" %>
+            <%= f.text_field :other, placeholder: "ex. I'm teaching a college course", class: "form-control", id: "other" %>
             </div>
         </div>
 
@@ -72,12 +73,12 @@
           <div class='row'>
             <div class='col-6'>
             <h6>School Name</h6>
-              <%= school_fields.text_field :name, placeholder: 'School Name', class: 'form-control', id: "school name" %>
+              <%= school_fields.text_field :name, placeholder: 'ex. Berkeley High', class: 'form-control', id: "school name" %>
             </div>
 
             <div class='col-4'>
             <h6>School City</h6>
-              <%= school_fields.text_field :city, placeholder: 'School City', class: 'form-control', id: "school city" %>
+              <%= school_fields.text_field :city, placeholder: 'ex. Berkeley', class: 'form-control', id: "school city" %>
             </div>
 
             <div class='col-2'>
@@ -88,7 +89,7 @@
 
           <div>
             <h6>School Website</h6>
-            <%= school_fields.text_field :website, placeholder: "School Website", class: "form-control", id: "school website" %>
+            <%= school_fields.text_field :website, placeholder: "ex. bhs.org", class: "form-control", id: "school website" %>
           </div>
 
           <%# Add other field to course question %>
