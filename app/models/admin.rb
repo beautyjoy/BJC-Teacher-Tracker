@@ -13,4 +13,20 @@ class Admin < ActiveRecord::Base
       administrator.email = auth.info.email
     end
   end
+
+  def self.validate_auth(auth)
+    return self.validate_by_email(auth.info.email)
+  end
+
+
+  private
+
+    def self.validate_by_email(email)
+      # Check if the email is in a list of all BJC Teacher Tracker administrators and
+      # current developers of the app.
+      admin_emails = %w(ball@berkeley.edu')
+      developer_2019_emails = %w(wangye@berkeley.edu janani_vijaykumar@berkeley.edu
+                    daltons@berkeley.edu murthy@berkeley.edu zachchao@berkeley.edu)
+      return admin_emails.include?(email) || developer_2019_emails.include?(email)
+    end
 end

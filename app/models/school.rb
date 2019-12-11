@@ -9,6 +9,7 @@ class School < ActiveRecord::Base
   end
 
   private
+
     def grab_lat_lng
       # Getting the long and lat of the city they put
       google_key = "AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw"
