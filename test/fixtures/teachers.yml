@@ -3,21 +3,15 @@
 one:
   first_name: MyString
   last_name: MyString
-  school_name: MyString
+  school: MyString
   email: MyString
-  city: MyString
-  state: MyString
-  website: MyString
   course: MyString
   snap: MyString
 
 two:
   first_name: MyString
   last_name: MyString
-  school_name: MyString
+  school: MyString
   email: MyString
-  city: MyString
-  state: MyString
-  website: MyString
   course: MyString
   snap: MyString
