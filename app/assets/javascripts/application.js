@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+<script src="node_modules/axe-core/axe.min.js"></script>
