@@ -11,17 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191201025202) do
+ActiveRecord::Schema.define(version: 20191211072821) do
 
   create_table "admins", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "encrypted_google_token"
-    t.string "encrypted_google_token_iv"
-    t.string "encrypted_google_refresh_token"
-    t.string "encrypted_google_refresh_token_iv"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "encrypted_google_token"
+    t.string   "encrypted_google_token_iv"
+    t.string   "encrypted_google_refresh_token"
+    t.string   "encrypted_google_refresh_token_iv"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "admins", ["email", "first_name"], name: "index_admins_on_emails_and_first_name"
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
@@ -31,9 +35,11 @@ ActiveRecord::Schema.define(version: 20191201025202) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "teachers_count", default: 0
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",     default: '2019-12-11 07:35:22'
+    t.datetime "updated_at",     default: '2019-12-11 07:35:22'
   end
+
+  add_index "schools", ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
 
   create_table "teachers", force: :cascade do |t|
     t.string   "first_name"
@@ -43,11 +49,13 @@ ActiveRecord::Schema.define(version: 20191201025202) do
     t.string   "snap"
     t.string   "other"
     t.integer  "school_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "school_name"
     t.boolean  "validated"
+    t.boolean  "boolean"
+    t.datetime "created_at",  default: '2019-12-11 07:35:22'
+    t.datetime "updated_at",  default: '2019-12-11 07:35:22'
   end
 
-  add_index "teachers", [nil, nil], name: "index_teachers_on_school_name_and_timestamps"
+  add_index "teachers", ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
 
 end
