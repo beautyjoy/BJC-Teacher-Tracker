@@ -3,18 +3,22 @@ require 'net/http'
 class TeachersController < ApplicationController
     def create
         # Receive nested hash from field_for in the view
-        @school = School.new school_params
-        if !@school.save
-            redirect_to root_path, alert: "Failed to submit information :("
+        if Teacher.exists?(email: teacher_params[:email])
+            redirect_to root_path, alert: "User with this email already exists"
         else
-            @teacher = @school.teachers.build teacher_params
-            @teacher.validated = false
-            if @teacher.save
-                flash[:saved_teacher] = true
-                TeacherMailer.form_submission(@teacher).deliver_now
-                redirect_to root_path
+            @school = School.new school_params
+            if !@school.save
+                redirect_to root_path, alert: "Error submitting school information"
             else
-                redirect_to root_path, alert: "Failed to submit information :("
+                @teacher = @school.teachers.build teacher_params
+                @teacher.validated = false
+                if @teacher.save
+                    flash[:saved_teacher] = true
+                    TeacherMailer.form_submission(@teacher).deliver_now
+                    redirect_to root_path
+                else
+                    redirect_to root_path, alert: "Error submitting teacher information"
+                end
             end
         end
     end
