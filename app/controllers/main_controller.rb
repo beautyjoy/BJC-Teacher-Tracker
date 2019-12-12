@@ -3,9 +3,10 @@ class MainController < ApplicationController
     @admin = (session.key?("logged_in") and session[:logged_in] == true)
 
     if @admin 
-      @teachers = Teacher.unvalidated
-      @schools = School.validated.group(:name, :city, :state).count
-      @courses = Teacher.group(:course).count
+      @teachers = Teacher.where(validated: 'f')
+      @validated_teachers = Teacher.where(validated: 't').order(:created_at)
+      @schools = School.validated.group(:name, :city, :state, :website).count
+      @courses = Teacher.where(validated: 'f').group(:course).count
       school_coords = School.select(:lat, :lng)
 
       @items = []

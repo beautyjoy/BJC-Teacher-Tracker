@@ -19,9 +19,21 @@
       	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
       	<td> <%= teacher.school.name %> </td>
       	<td> <%= teacher.email %> </td>
-      	<td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
-      	<td> <%= teacher.school.website %> </td>
-		<td> <%= teacher.snap %> </td>
+        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+        <td>
+          <a href="<%= teacher.school.website %>">
+            <%= teacher.school.website %>
+          </a>
+        </td>
+        <td>
+          <% if ['N/A', 'None', ''].include? teacher.snap %>
+            <%= teacher.snap %>
+          <% else %>
+            <a href="https://snap.berkeley.edu/users?user=#<%= teacher.snap %>">
+              <%= teacher.snap %>
+            </a>
+          <% end %>
+        </td>
       	<td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
       	<td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
       </tr>
@@ -64,7 +76,11 @@
       <tbody>
         <% @schools.each do |school| %>
         <tr>
-          <td> <%= school[0][0] %> </td>
+          <td>
+            <a href="https:\/\/<%= school[0][3] %>">
+              <%= school[0][0] %>
+            </a>
+          </td>
           <td> <%= school[0][1] + ', ' + school[0][2] %> </td>
           <td> <%= school[1] %> </td>
         </tr>
@@ -97,3 +113,37 @@
 <script async defer 
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
 </script>
+
+<div class="col-12">
+  <h1>Validated Teacher Statistics</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Name </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Course </th>
+        <th scope="col"> Snap </th>
+        <th scope="col"> Created </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @validated_teachers.each do |teacher| %>
+      <tr>
+        <td> <%= teacher[:first_name] + " " + teacher[:last_name] %> </td>
+        <td> <%= teacher[:email] %> </td>
+        <td> <%= teacher[:course] %> </td>
+        <td> 
+          <% if ['N/A', 'None', ''].include? teacher[:snap] %>
+            <%= teacher[:snap] %>
+          <% else %>
+            <a href="https://snap.berkeley.edu/users?user=#<%= teacher[:snap] %>">
+              <%= teacher[:snap] %>
+            </a>
+          <% end %>
+        </td>
+        <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
