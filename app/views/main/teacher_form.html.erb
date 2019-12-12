@@ -1,10 +1,13 @@
 <div id='sign-up-form-container'>
   <h1 id="form-page-title">Sign up for BJC!</h1>
 
+  <div class="alert alert-warning">
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
+    <% end %>
+  </div>
   <% if flash[:saved_teacher] %>
     Thanks for signing up!
-  <% elsif flash[:failed] %>
-    Error saving
   <% else %>
     <%= form_for @teacher do |f| %>
       <div class='form-input-group'>
