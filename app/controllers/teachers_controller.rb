@@ -11,6 +11,7 @@ class TeachersController < ApplicationController
             @teacher.validated = false
             if @teacher.save
                 flash[:saved_teacher] = true
+                TeacherMailer.form_submission(@teacher).deliver_now
                 redirect_to root_path
             else
                 redirect_to root_path, alert: "Failed to submit information :("
