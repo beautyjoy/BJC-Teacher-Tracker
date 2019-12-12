@@ -24,12 +24,6 @@ body {
   /* bottom = footer height */
 }
 
-a {
-    color: #B3EFFF;
-}
-
-
-
 footer {
   margin: 0;
   background-color: #18568C;
@@ -115,4 +109,29 @@ input, select {
 #map {
   height: 500px;
   margin-bottom: 55px;
+}
+
+a {
+    color: #3B7EA1;
+}
+
+footer a {
+    color: #B3EFFF;
+}
+
+footer a:hover,
+footer a:active {
+    /* As similar lines below, each line has been considered.
+       Links' colors are placed at the end so that they have the
+       highest specificity. */
+    color: #EABF6A;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link {
+    color: #B3EFFF;
+}
+
+.navbar-dark .navbar-nav .nav-item:hover .nav-link,
+.navbar-dark .navbar-nav .nav-item:active .nav-link {
+    color: #EABF6A;
 }
