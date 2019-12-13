@@ -5,7 +5,7 @@ class School < ActiveRecord::Base
   has_many :teachers
 
   def self.validated
-    School.all
+    School.where("num_validated_teachers > '0'")
   end
 
   private

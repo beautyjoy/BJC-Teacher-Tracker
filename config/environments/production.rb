@@ -76,4 +76,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Email settings
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => 'email-smtp.us-west-2.amazonaws.com',
+    :port                 => 587,
+    :user_name            => 'AKIA6JV7O2DSLSCZFINV',
+    :password             => Figaro.env.email_password,
+    :authentication       => :login,
+    :enable_starttls_auto => true,
+  }
 end
