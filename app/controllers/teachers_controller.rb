@@ -7,11 +7,21 @@ class TeachersController < ApplicationController
         @admin = (session.key?("logged_in") and session[:logged_in] == true)
     end
 
+    def site_parse(site)
+        if site.include? "https://"
+            return site[8..-1]
+        elsif site.include? "http://"
+            return site[7..-1]
+        else
+            return site
+        end
+    end
+
     def create
-        # Receive nested hash from field_for in the view
         if Teacher.exists?(email: teacher_params[:email])
             redirect_to root_path, alert: "A user with this email already exists!"
         else
+            school_params[:website] = site_parse(school_params[:website])
             if School.exists?(name: school_params[:name], city: school_params[:city], state: school_params[:state])
                 @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
             else
@@ -67,13 +77,6 @@ class TeachersController < ApplicationController
     end
 
     private
-        # def prepare_school
-        #     # Receive nested hash from field_for in the view
-        #     @school = School.new school_params
-        #     if !@school.save
-        #         redirect_to root_path, alert: "Failed to submit information :("
-        #     end
-        # end
 
         def teacher_params
             params.require(:teacher).permit(:first_name, :last_name, :school, :email, :course, :snap, :other)

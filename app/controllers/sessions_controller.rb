@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
     access_token = request.env["omniauth.auth"]
 
     if Admin.validate_auth(access_token)
-      # TODO: don't register if the name in the token is not in the database.
       # Tell them to register.
       admin = Admin.from_omniauth(access_token)
       log_in admin
@@ -29,7 +28,7 @@ class SessionsController < ApplicationController
       session[:logged_in] = true
       redirect_to root_path
     else
-      redirect_to root_path, alert: "Please email Michael Ball at ball@berkely.edu to sign up as an administrator."
+      redirect_to root_path, alert: "Please email a current administrator to sign up as an administrator."
     end
   end
 end

@@ -23,7 +23,7 @@
           <% if ['N/A', 'None', ''].include? teacher[:snap] %>
             <%= teacher[:snap] %>
           <% else %>
-            <a href="https://snap.berkeley.edu/users?user=#<%= teacher[:snap] %>" target="_blank">
+            <a href="https://snap.berkeley.edu/user?user=<%= teacher[:snap] %>" target="_blank">
               <%= teacher[:snap] %>
             </a>
           <% end %>
