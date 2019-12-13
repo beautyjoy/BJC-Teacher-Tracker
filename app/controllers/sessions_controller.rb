@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
     access_token = request.env["omniauth.auth"]
 
     if Admin.validate_auth(access_token)
-      # TODO: don't register if the name in the token is not in the database.
       # Tell them to register.
       admin = Admin.from_omniauth(access_token)
       log_in admin
