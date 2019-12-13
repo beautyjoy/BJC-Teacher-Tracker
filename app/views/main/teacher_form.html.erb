@@ -1,11 +1,11 @@
 <div id='sign-up-form-container'>
   <h1 id="form-page-title">Sign up for BJC!</h1>
 
-  <div class="alert alert-warning">
-    <% if flash[:alert] %>
+  <% if flash[:alert] %>
+    <div class="alert alert-warning">
       <%= flash[:alert] %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <% if flash[:saved_teacher] %>
     Thanks for signing up!
   <% else %>

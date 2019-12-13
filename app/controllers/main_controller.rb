@@ -5,8 +5,8 @@ class MainController < ApplicationController
     if @admin 
       @teachers = Teacher.where(validated: 'f')
       @validated_teachers = Teacher.where(validated: 't').order(:created_at)
-      @schools = School.validated.group(:name, :city, :state, :website).count
-      @courses = Teacher.where(validated: 'f').group(:course).count
+      @schools = School.validated
+      @courses = Teacher.where(validated: 't').group(:course).count
       school_coords = School.select(:lat, :lng)
 
       @items = []
