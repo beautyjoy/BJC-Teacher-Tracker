@@ -7,10 +7,21 @@ class TeachersController < ApplicationController
         @admin = (session.key?("logged_in") and session[:logged_in] == true)
     end
 
+    def site_parse(site)
+        if site.includes? "https://"
+            return site[8..-1]
+        elsif site.includes? "http://"
+            return site[7..-1]
+        else
+            return site
+        end
+    end
+
     def create
         if Teacher.exists?(email: teacher_params[:email])
             redirect_to root_path, alert: "User with this email already exists"
         else
+            school_params[:website] = site_parse(school_params[:website])
             if School.exists?(name: school_params[:name], city: school_params[:city], state: school_params[:state])
                 @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
             else
