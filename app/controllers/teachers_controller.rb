@@ -8,9 +8,9 @@ class TeachersController < ApplicationController
     end
 
     def site_parse(site)
-        if site.includes? "https://"
+        if site.include? "https://"
             return site[8..-1]
-        elsif site.includes? "http://"
+        elsif site.include? "http://"
             return site[7..-1]
         else
             return site
