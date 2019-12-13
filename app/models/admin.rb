@@ -26,7 +26,7 @@ class Admin < ActiveRecord::Base
       # current developers of the app.
       admin_emails = %w(ball@berkeley.edu')
       developer_2019_emails = %w(wangye@berkeley.edu janani_vijaykumar@berkeley.edu
-                    daltons@berkeley.edu murthy@berkeley.edu zachchao@berkeley.edu)
+                    daltons@berkeley.edu murthy@berkeley.edu zachchao@berkeley.edu kpzhu@berkeley.edu)
       return admin_emails.include?(email) || developer_2019_emails.include?(email)
     end
 end
