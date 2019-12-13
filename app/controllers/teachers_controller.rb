@@ -1,6 +1,12 @@
 require 'net/http'
 
 class TeachersController < ApplicationController
+    before_action :login
+
+    def login
+        @admin = (session.key?("logged_in") and session[:logged_in] == true)
+    end
+
     def create
         # Receive nested hash from field_for in the view
         if Teacher.exists?(email: teacher_params[:email])
@@ -28,20 +34,36 @@ class TeachersController < ApplicationController
     end
 
     def validate
-        id = params[:id]
-        teacher = Teacher.find_by(:id => id)
-        teacher.validated = true
-        teacher.school.num_validated_teachers += 1
-        teacher.school.save!
-        teacher.save!
-        TeacherMailer.welcome_email(teacher).deliver_now
-        redirect_to root_path
+        if !@admin
+            redirect_to root_path, alert: "Only admins can validate"
+        else
+            id = params[:id]
+            teacher = Teacher.find_by(:id => id)
+            teacher.validated = true
+            teacher.school.num_validated_teachers += 1
+            teacher.school.save!
+            teacher.save!
+            TeacherMailer.welcome_email(teacher).deliver_now
+            redirect_to root_path
+        end
     end
 
     def delete
-        id = params[:id]
-        Teacher.delete(id)
-        redirect_to root_path
+        if !@admin
+            redirect_to root_path, alert: "Only admins can delete"
+        else
+            id = params[:id]
+            Teacher.delete(id)
+            redirect_to root_path
+        end
+    end
+
+    def all
+        if !@admin
+            redirect_to root_path, alert: "Only admins can view all forms"
+        else
+            @validated_teachers = Teacher.where(validated: true)
+        end
     end
 
     private
