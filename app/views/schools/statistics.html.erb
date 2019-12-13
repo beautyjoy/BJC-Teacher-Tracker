@@ -1,94 +1,132 @@
 <div style="margin-top: 55px;">
-  <h1>Validate submitted forms here</h1>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-      	<th scope="col"> Name </th>
-      	<th scope="col"> School </th>
-      	<th scope="col"> Email </th>
-      	<th scope="col"> Location </th>
-      	<th scope="col"> Website </th>
-      	<th scope="col"> Snap </th>
-      	<th scope="col"> Validate </th>
-      	<th scope="col"> Delete </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @teachers.each do |teacher| %>
-      <tr>
-      	<td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
-      	<td> <%= teacher.school.name %> </td>
-      	<td> <%= teacher.email %> </td>
-        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
-        <td>
-          <a href="<%= teacher.school.website %>">
-            <%= teacher.school.website %>
-          </a>
-        </td>
-        <td>
-          <% if ['N/A', 'None', ''].include? teacher.snap %>
-            <%= teacher.snap %>
-          <% else %>
-            <a href="https://snap.berkeley.edu/users?user=#<%= teacher.snap %>">
-              <%= teacher.snap %>
+  <h1> Unvalidated Forms </h1>
+  <% if @unvalidated_teachers.empty? %>
+
+    <div class="alert alert-warning" role="alert">
+      <strong>No unvalidated teachers yet!</strong>
+    </div>
+
+  <% else %>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"> Name </th>
+          <th scope="col"> School </th>
+          <th scope="col"> Email </th>
+          <th scope="col"> Location </th>
+          <th scope="col"> Website </th>
+          <th scope="col"> Snap </th>
+          <th scope="col"> Validate </th>
+          <th scope="col"> Delete </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unvalidated_teachers.each do |teacher| %>
+        <tr>
+          <td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
+          <td> <%= teacher.school.name %> </td>
+          <td> <%= teacher.email %> </td>
+          <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+          <td>
+            <a href="https://<%= teacher.school.website %>" target="_blank">
+              <%= teacher.school.website %>
             </a>
-          <% end %>
-        </td>
-      	<td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
-      	<td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </td>
+          <td>
+          
+            <% if ['N/A', 'None', ''].include? teacher.snap %>
+              <%= teacher.snap %>
+            <% else %>
+              <a href="https://snap.berkeley.edu/user?user=<%= teacher.snap %>" target="_blank">
+                <%= teacher.snap %>
+              </a>
+            <% end %>
+          </td>
+          <td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
+          <td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  
 </div>
 
 <div class="row">
   <div class="col-6">
     <h1>Course Statistics</h1>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-        <th scope="col"> Course </th> 
-        <th scope="col"> Count </th> 
-        </tr>
-      </thead>
-      <tbody>
-        <% @courses.each do |key, value| %>
-        <tr>
-          <td> <%= key %> </td>
-          <td> <%= value %> </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @courses.empty? %>
+      
+      <div class="alert alert-warning" role="alert">
+        <strong>No validated courses yet!</strong>
+      </div>
+
+    <% else %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+          <th scope="col"> Course </th> 
+          <th scope="col"> Count </th> 
+          </tr>
+        </thead>
+        <tbody>
+          <% @courses.each do |key, value| %>
+          <tr>
+            <td> <%= key %> </td>
+            <td> <%= value %> </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 
   <div class="col-6">
     <h1>School Statistics</h1>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-        <th scope="col"> School </th> 
-        <th scope="col"> City, State </th>
-        <th scope="col"> Count </th> 
-        </tr>
-      </thead>
-      <tbody>
-        <% @schools.each do |school| %>
-        <tr>
-          <td>
-            <a href="https:\/\/<%= school.website %>">
-              <%= school.name %>
-            </a>
-          </td>
-          <td> <%= school.city + ', ' + school.state %> </td>
-          <td> <%= school.num_validated_teachers %> </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @schools.size == 0 %>
+    
+      <div class="alert alert-warning" role="alert">
+        <strong>No validated schools yet!</strong>
+      </div>
+          
+    <% else %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+          <th scope="col"> School </th> 
+          <th scope="col"> City, State </th>
+          <th scope="col"> Count </th> 
+          </tr>
+        </thead>
+        <tbody>
+          <% @schools.each do |school| %>
+          <tr>
+            <td>
+              <a href="https://<%= school.website %>" target="_blank">
+                <%= school.name %>
+              </a>
+            </td>
+            <td> <%= school.city + ', ' + school.state %> </td>
+            <td> <%= school.num_validated_teachers %> </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
+
+<h1> Schools Map </h1>
+
+<% if @items.empty? %>
+  
+  <div class="alert alert-warning" role="alert">
+    <strong>
+      No validated schools yet!
+    </strong>
+  </div>
+
+<% end %>
 
 <div id="map"></div>
 

@@ -2,12 +2,14 @@
   <h1 id="form-page-title">Sign up for BJC!</h1>
 
   <% if flash[:alert] %>
-    <div class="alert alert-warning">
+    <div class="alert alert-danger">
       <%= flash[:alert] %>
     </div>
   <% end %>
   <% if flash[:saved_teacher] %>
-    Thanks for signing up!
+    <div class="alert alert-success" role="alert">
+      <strong>Thanks for signing up!</strong>
+    </div>
   <% else %>
     <%= form_for @teacher do |f| %>
       <div class='form-input-group'>
@@ -92,7 +94,7 @@
 
           <div>
             <h6>School Website</h6>
-            <%= school_fields.text_field :website, placeholder: "ex. bhs.org", class: "form-control", id: "school website" %>
+            <%= school_fields.text_field :website, placeholder: "ex. bhs.org (without https://)", class: "form-control", id: "school website" %>
           </div>
 
           <%# Add other field to course question %>

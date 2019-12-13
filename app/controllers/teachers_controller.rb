@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
     def create
         # Receive nested hash from field_for in the view
         if Teacher.exists?(email: teacher_params[:email])
-            redirect_to root_path, alert: "User with this email already exists"
+            redirect_to root_path, alert: "A user with this email already exists!"
         else
             if School.exists?(name: school_params[:name], city: school_params[:city], state: school_params[:state])
                 @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
@@ -18,7 +18,7 @@ class TeachersController < ApplicationController
                 @school = School.new school_params
             end
             if !@school.save
-                redirect_to root_path, alert: "Error submitting school information"
+                redirect_to root_path, alert: "An error occured! Please fill out the form fields correctly."
             else
                 @teacher = @school.teachers.build teacher_params
                 @teacher.validated = false
@@ -27,7 +27,7 @@ class TeachersController < ApplicationController
                     TeacherMailer.form_submission(@teacher).deliver_now
                     redirect_to root_path
                 else
-                    redirect_to root_path, alert: "Error submitting teacher information"
+                    redirect_to root_path, alert: "An error occurred while trying to submit teacher information!"
                 end
             end
         end
@@ -35,7 +35,7 @@ class TeachersController < ApplicationController
 
     def validate
         if !@admin
-            redirect_to root_path, alert: "Only admins can validate"
+            redirect_to root_path, alert: "Only administrators can validate!"
         else
             id = params[:id]
             teacher = Teacher.find_by(:id => id)
@@ -50,7 +50,7 @@ class TeachersController < ApplicationController
 
     def delete
         if !@admin
-            redirect_to root_path, alert: "Only admins can delete"
+            redirect_to root_path, alert: "Only administrators can delete!"
         else
             id = params[:id]
             Teacher.delete(id)
@@ -60,7 +60,7 @@ class TeachersController < ApplicationController
 
     def all
         if !@admin
-            redirect_to root_path, alert: "Only admins can view all forms"
+            redirect_to root_path, alert: "Only administrators can view all forms!"
         else
             @validated_teachers = Teacher.where(validated: true)
         end
