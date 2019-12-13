@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       session[:logged_in] = true
       redirect_to root_path
     else
-      redirect_to root_path, alert: "Please email Michael Ball at ball@berkely.edu to sign up as an administrator."
+      redirect_to root_path, alert: "Please email a current administrator to sign up as an administrator."
     end
   end
 end
