@@ -114,36 +114,6 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
 </script>
 
-<div class="col-12">
-  <h1>Validated Teacher Statistics</h1>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"> Name </th>
-        <th scope="col"> Email </th>
-        <th scope="col"> Course </th>
-        <th scope="col"> Snap </th>
-        <th scope="col"> Created </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @validated_teachers.each do |teacher| %>
-      <tr>
-        <td> <%= teacher[:first_name] + " " + teacher[:last_name] %> </td>
-        <td> <%= teacher[:email] %> </td>
-        <td> <%= teacher[:course] %> </td>
-        <td> 
-          <% if ['N/A', 'None', ''].include? teacher[:snap] %>
-            <%= teacher[:snap] %>
-          <% else %>
-            <a href="https://snap.berkeley.edu/users?user=#<%= teacher[:snap] %>">
-              <%= teacher[:snap] %>
-            </a>
-          <% end %>
-        </td>
-        <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div id = "forms_link">
+  <%= link_to "See Validated Forms", all_path %>
 </div>

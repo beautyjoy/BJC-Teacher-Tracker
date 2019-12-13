@@ -78,4 +78,7 @@ Rails.application.routes.draw do
   # Route for validating forms as an admin
   post '/admin/forms/validate/:id', to: 'teachers#validate', as: "validate"
   post '/admin/forms/delete/:id', to: 'teachers#delete', as: "delete"
+
+  # Route for displaying all teacher information
+  get '/all', to: 'teachers#all', as: "all"
 end

@@ -1,0 +1,43 @@
+<div class="col-12">
+  <h1>Validated Teacher Statistics</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Name </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Course </th>
+        <th scope="col"> Snap </th>
+        <th scope="col"> School Name </th>
+        <th scope="col"> Location </th>
+        <th scope="col"> Website </th>
+        <th scope="col"> Created </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @validated_teachers.each do |teacher| %>
+      <tr>
+        <td> <%= teacher[:first_name] + " " + teacher[:last_name] %> </td>
+        <td> <%= teacher[:email] %> </td>
+        <td> <%= teacher[:course] %> </td>
+        <td> 
+          <% if ['N/A', 'None', ''].include? teacher[:snap] %>
+            <%= teacher[:snap] %>
+          <% else %>
+            <a href="https://snap.berkeley.edu/users?user=#<%= teacher[:snap] %>">
+              <%= teacher[:snap] %>
+            </a>
+          <% end %>
+        </td>
+        <td> <%= teacher.school.name %> </td>
+        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+        <td> 
+          <a href="<%= teacher.school.website %>">
+            <%= teacher.school.website %>
+          </a>
+        </td>
+        <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
