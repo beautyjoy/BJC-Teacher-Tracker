@@ -2,7 +2,6 @@ require 'net/http'
 
 class TeachersController < ApplicationController
     def create
-        # Receive nested hash from field_for in the view
         @school = School.new school_params
         if !@school.save
             redirect_to root_path, alert: "Failed to submit information :("
@@ -34,13 +33,6 @@ class TeachersController < ApplicationController
     end
 
     private
-        # def prepare_school
-        #     # Receive nested hash from field_for in the view
-        #     @school = School.new school_params
-        #     if !@school.save
-        #         redirect_to root_path, alert: "Failed to submit information :("
-        #     end
-        # end
 
         def teacher_params
             params.require(:teacher).permit(:first_name, :last_name, :school, :email, :course, :snap, :other)
