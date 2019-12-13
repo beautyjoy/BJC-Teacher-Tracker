@@ -6,7 +6,11 @@ class TeachersController < ApplicationController
         if Teacher.exists?(email: teacher_params[:email])
             redirect_to root_path, alert: "User with this email already exists"
         else
-            @school = School.new school_params
+            if School.exists?(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+                @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+            else
+                @school = School.new school_params
+            end
             if !@school.save
                 redirect_to root_path, alert: "Error submitting school information"
             else
@@ -27,6 +31,8 @@ class TeachersController < ApplicationController
         id = params[:id]
         teacher = Teacher.find_by(:id => id)
         teacher.validated = true
+        teacher.school.num_validated_teachers += 1
+        teacher.school.save!
         teacher.save!
         TeacherMailer.welcome_email(teacher).deliver_now
         redirect_to root_path
