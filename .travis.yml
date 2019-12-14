@@ -1,7 +1,7 @@
 # replace with version(s) of Ruby that matches your Gemfile:
 language: ruby
 rvm:
-  - 2.3.1
+  - 2.4.0
 
 # make sure production-only gems are not installed
 bundler_args: --without production
