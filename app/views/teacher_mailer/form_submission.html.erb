@@ -2,7 +2,7 @@
 Here is the information that was submitted: <br>
 Name: <%= @teacher.first_name + ' ' + @teacher.last_name %> <br>
 Email: <%= @teacher.email %> <br>
-Snap Username: <%= link_to(@teacher.snap, "https://snap.berkeley.edu/users?user=" + @teacher.snap) %> <br>
+Snap Username: <%= link_to(@teacher.snap, "https://snap.berkeley.edu/user?user=" + @teacher.snap) %> <br>
 School: <%= @teacher.school.name %> <br>
 Location: <%= @teacher.school.city + ', ' + @teacher.school.state %> <br>
 Website: <%= link_to(nil, @teacher.school.website) %>
