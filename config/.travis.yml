@@ -20,7 +20,7 @@ before_script:
   # create config/application.yml (sensitive API keys etc) from config/application.yml.asc
   # IMPORTANT: you must MANUALLY set correct value of encryption KEY in Travis settings for your project --
   # DO NOT expose that value here!
- - gpg --passphrase "$KEY" --output config/application.yml \
+  - gpg --passphrase "$KEY" --output config/application.yml \
        --decrypt config/application.yml.asc
   # install CodeClimate test reporter and tell it we are starting a test run
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
@@ -33,10 +33,10 @@ script:
   # insert here any other steps needed (load other sample data, etc) before starting tests 
   # run RSpec tests, and capture coverage
   - bundle exec rspec
-  - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
+  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
   # run Cucumber scenarios, and capture coverage. --strict means undefined steps result in a failure.
   - bundle exec cucumber --strict
-  - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
+  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
 
 after_script:
   # combine coverage from all suites, and upload to CodeClimate
