@@ -14,6 +14,7 @@ BJC is an introduction to computer science curriculum developed at UC Berkeley a
 
 - Before being able to run our app locally, the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Michael (the customer for this product) has the secret key to do this. 
 - To add admins to the app: In the admins model, you have to add the admin's email to the list of emails in self.validate_by_email. Then admin can just log in using their email through the google auth flow we have implemented.
+- To run rspec tests, run: bundle exec rspec
 
 ### Maintainability Badge
 
