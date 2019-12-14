@@ -16,6 +16,10 @@ BJC is an introduction to computer science curriculum developed at UC Berkeley a
 - To add admins to the app: In the admins model, you have to add the admin's email to the list of emails in self.validate_by_email. Then admin can just log in using their email through the google auth flow we have implemented.
 - To run rspec tests, run: bundle exec rspec
 
+## Heroku Link
+
+- https://bjc-teacher-tracker.herokuapp.com/
+
 ### Maintainability Badge
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab0826b627a599c468d5/maintainability)](https://codeclimate.com/github/JananiVijaykumar/BJC-Teacher-Tracker/maintainability)
