@@ -20,8 +20,7 @@ before_script:
   # create config/application.yml (sensitive API keys etc) from config/application.yml.asc
   # IMPORTANT: you must MANUALLY set correct value of encryption KEY in Travis settings for your project --
   # DO NOT expose that value here!
-  - gpg --passphrase "$KEY" --output config/application.yml \
-       --decrypt config/application.yml.asc
+  - gpg --passphrase $KEY -d -o config/application.yml config/application.yml.asc
   # install CodeClimate test reporter and tell it we are starting a test run
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
   - chmod +x $CCTR
