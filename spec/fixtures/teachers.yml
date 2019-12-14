@@ -1,0 +1,7 @@
+bob_teacher:
+  first_name: 'Bob'
+  last_name: 'Johnson'
+  snap: 'BobJohnson'
+  email: 'bob@gmail.com'
+  course: 'I am teaching BJC as an AP CS Principles course.'
+  validated: false

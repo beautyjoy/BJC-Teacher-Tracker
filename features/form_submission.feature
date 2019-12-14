@@ -16,7 +16,6 @@ Scenario: Correctly filling out and succesful form submission
     And   I enter my "school city" as "Cupertino"
     And   I select "CA" from "state" 
     And   I enter my "school website" as "chs.fuhsd.org"
-
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up!" 
 
