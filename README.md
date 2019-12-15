@@ -11,11 +11,14 @@ We have worked on the adding following core features and functionality:
 - Feature: A application form for prospective teachers to request access to the platform
 - Functionality: Administrators are immediately notified of new applications via email
 - Feature: Administrators can validate or deny applicants with a button click 
-- Functionality: An email is automatically sent to successful applicants notifyin
-- Feature: 
-- Email automatically sent to teacher once they are validated by Admin
-- Separate Admin view that uses Google Auth as a login
-- Admin view contains a statistics main page with the following information: table with newly submitted forms with buttons to delete or validate, tables for statistics about the schools and the courses teachers are teaching, a map with the locations of all the school teachers are a part of, and a separate page with all the validated forms.
+- Functionality: An email is automatically sent to successful applicants notifying them of their acceptance to the teaching program
+- Feature: A separate administrators' view that uses Google OAuth to allow logins from UC Berkeley-registered users (@berkeley.edu)
+- Functionality: Administrators can login to the dashboard to view unvalidated applications, statistics on validated applicants, and a list of current teachers
+- Feature: The administrators' view contains a main page with
+-- buttons to delete or validate newly submitted forms 
+-- tables for statistics about the schools and the courses current teachers are teaching
+-- a map with the locations of all the schools that teachers are a part of
+-- a separate page with all the validated teachers and their information
 
 
 ## Few Things to Know:
@@ -32,9 +35,9 @@ We have worked on the adding following core features and functionality:
 ## Steps to Deploying on Heroku
 
 - `git remote set-url heroku https://github.com/JananiVijaykumar/BJC-Teacher-Tracker.git`
-- Make your local changes
+- Make your local changes and start the commit process
 - `git add .`
-- git `git commit -m "<Message>"`
+- `git commit -m "<Message>"`
 - `git push heroku master`
 
 If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
