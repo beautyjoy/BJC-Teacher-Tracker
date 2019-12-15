@@ -20,14 +20,29 @@ We have worked on the adding following core features and functionality:
 
 ## Few Things to Know:
 
-- Before running our application on localhost (default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this. 
-- To add administrators to the application you have to add the person's email to the list of emails in 'self.validate_by_email'. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
+- Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this. 
+- To add administrators to the application you have to add the person's email to the list of emails in `self.validate_by_email`. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber` 
 
 ## Heroku Link
 
 - https://bjc-teacher-tracker.herokuapp.com/
+
+## Steps to Deploying on Heroku
+
+- `git remote set-url heroku https://github.com/JananiVijaykumar/BJC-Teacher-Tracker.git`
+- Make your local changes
+- `git add .`
+- git `git commit -m "<Message>"`
+- `git push heroku master`
+
+If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
+- `heroku run rake db:drop`
+- `heroku run rake db:schema:load`
+- `heroku run rake db:migrate`
+- `figaro heroku:set -e production`
+- `heroku open`
 
 ### Maintainability Badge
 
