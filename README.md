@@ -22,7 +22,7 @@ We have worked on the adding following core features and functionality:
 
 - Before running our application on localhost (default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this. 
 - To add administrators to the application you have to add the person's email to the list of emails in 'self.validate_by_email'. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
-- For RSpec tests run 'bundle exec rspec'
+- For RSpec tests run '''ruby bundle exec rspec'''
 - For Cucumber tests run 'bundle exec cucumber' 
 
 ## Heroku Link
