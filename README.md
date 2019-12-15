@@ -15,10 +15,10 @@ We have worked on the adding following core features and functionality:
 - Feature: A separate administrators' view that uses Google OAuth to allow logins from UC Berkeley-registered users (@berkeley.edu)
 - Functionality: Administrators can login to the dashboard to view unvalidated applications, statistics on validated applicants, and a list of current teachers
 - Feature: The administrators' view contains a main page with
-  -- buttons to delete or validate newly submitted forms 
-  -- tables for statistics about the schools and the courses current teachers are teaching
-  -- a map with the locations of all the schools that teachers are a part of
-  -- a separate page with all the validated teachers and their information
+  - buttons to delete or validate newly submitted forms 
+  - tables for statistics about the schools and the courses current teachers are teaching
+  - a map with the locations of all the schools that teachers are a part of
+  - a separate page with all the validated teachers and their information
 
 
 ## Few Things to Know:
