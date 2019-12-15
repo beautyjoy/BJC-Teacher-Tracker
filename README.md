@@ -2,19 +2,28 @@
 
 ## Description
 
-BJC is an introduction to computer science curriculum developed at UC Berkeley and is meant mainly for high school teachers. They have a teacher guide that is to be given to any teacher that signs up for the program, and it requires a password that is emailed to them. This BJC Teacher Tracker is a NEW project, started in Fall 2019 by a group of students in CS 169. The main features that the app has currently are as follows:
+The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering. 
 
-- Signup form for prospective teachers to request access
-- Email automatically sent to Admin when teacher signs up
+## Key Features and Functionality
+
+We have worked on the adding following core features and functionality:
+
+- Feature: A application form for prospective teachers to request access to the platform
+- Functionality: Administrators are immediately notified of new applications via email
+- Feature: Administrators can validate or deny applicants with a button click 
+- Functionality: An email is automatically sent to successful applicants notifyin
+- Feature: 
 - Email automatically sent to teacher once they are validated by Admin
 - Separate Admin view that uses Google Auth as a login
 - Admin view contains a statistics main page with the following information: table with newly submitted forms with buttons to delete or validate, tables for statistics about the schools and the courses teachers are teaching, a map with the locations of all the school teachers are a part of, and a separate page with all the validated forms.
 
+
 ## Few Things to Know:
 
-- Before being able to run our app locally, the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Michael (the customer for this product) has the secret key to do this. 
-- To add admins to the app: In the admins model, you have to add the admin's email to the list of emails in self.validate_by_email. Then admin can just log in using their email through the google auth flow we have implemented.
-- To run rspec tests, run: bundle exec rspec
+- Before running our application on localhost (default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this. 
+- To add administrators to the application you have to add the person's email to the list of emails in 'self.validate_by_email'. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
+- For RSpec tests run 'bundle exec rspec'
+- For Cucumber tests run 'bundle exec cucumber' 
 
 ## Heroku Link
 
