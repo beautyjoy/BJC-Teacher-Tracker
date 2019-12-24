@@ -35,7 +35,7 @@ gem 'attr_encrypted', '~> 3.1.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Production app server
-# gem 'puma'
+gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
