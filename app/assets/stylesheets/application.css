@@ -1,0 +1,137 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0 0 255px;
+  /* bottom = footer height */
+}
+
+footer {
+  margin: 0;
+  background-color: #18568C;
+  color: #FFF;
+  padding-top: 25px;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+footer .container .social-icons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+footer .container .social-icons a {
+  margin-right: 10px;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+footer .footer-links {
+  max-width: 80em;
+  margin: 0.2em auto;
+  padding: 1em;
+  text-align: center;
+  font-size: 12px;
+}
+
+.social-icons > a {
+  color: #fff;
+}
+
+#form-page-title {
+  margin: 25px 0px;
+}
+
+input, select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-input-group {
+  padding: 20px 25px 10px 25px;
+  border-color: #999;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+#sign-up-form-container {
+  margin-bottom: 80px;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.google-signin {
+  background-color: white;
+}
+
+.hero-btn {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+  width: 160px;
+  margin-right: 15px;
+}
+
+.admin-jumbotron {
+  margin-top: 55px;
+}
+
+#map {
+  height: 500px;
+  margin-bottom: 55px;
+}
+
+a {
+    color: #3B7EA1;
+}
+
+footer a {
+    color: #B3EFFF;
+}
+
+footer a:hover,
+footer a:active {
+    /* As similar lines below, each line has been considered.
+       Links' colors are placed at the end so that they have the
+       highest specificity. */
+    color: #EABF6A;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link {
+    color: #B3EFFF;
+}
+
+.navbar-dark .navbar-nav .nav-item:hover .nav-link,
+.navbar-dark .navbar-nav .nav-item:active .nav-link {
+    color: #EABF6A;
+}
