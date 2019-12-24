@@ -1,15 +1,15 @@
 <div class="col-12">
   <h1>Validated Teacher Statistics</h1>
+  <h2><%= @validated_teachers.counter %> total teachers.</h2>
   <table class="table">
     <thead class="thead-dark">
       <tr>
         <th scope="col"> Name </th>
         <th scope="col"> Email </th>
-        <th scope="col"> Course </th>
+        <th scope="col"> Status </th>
         <th scope="col"> Snap </th>
         <th scope="col"> School Name </th>
         <th scope="col"> Location </th>
-        <th scope="col"> Website </th>
         <th scope="col"> Created </th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
         <td> <%= teacher[:first_name] + " " + teacher[:last_name] %> </td>
         <td> <%= teacher[:email] %> </td>
         <td> <%= teacher[:course] %> </td>
-        <td> 
+        <td>
           <% if ['N/A', 'None', ''].include? teacher[:snap] %>
             <%= teacher[:snap] %>
           <% else %>
@@ -28,13 +28,12 @@
             </a>
           <% end %>
         </td>
-        <td> <%= teacher.school.name %> </td>
-        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
-        <td> 
-          <a href="https://<%= teacher.school.website %>" target="_blank">
-            <%= teacher.school.website %>
+        <td>
+          <a href="<%= teacher.school.website %>" target="_blank">
+            <%= teacher.school.name %>
           </a>
         </td>
+        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
         <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
       </tr>
       <% end %>
