@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20191224104817) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "num_validated_teachers", default: 0
+    t.integer  "teachers_count",         default: 0
     t.datetime "created_at",             default: '2019-12-11 07:35:22'
     t.datetime "updated_at",             default: '2019-12-11 07:35:22'
   end

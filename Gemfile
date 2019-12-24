@@ -52,6 +52,10 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'guard-shell'
   gem "sqlite3", "~> 1.3.6"
+
+  # Intercept and view emails in a browser
+  gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.0'
 end
 
 group :development do
