@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>BjcTeacherTracker</title>
+  <title>BJC Teacher Signup</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" media="screen" rel="stylesheet" />
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -36,8 +36,9 @@
 
 <div class="container">
   <% flash.each do |name, msg| %>
-    <% content_tag :div, msg, class: "alert" %>
+    <% content_tag :div, msg, class: "alert alert-#{name}" %>
   <% end %>
+
   <%= yield %>
 </div>
 
@@ -90,8 +91,6 @@
       <span class="footer--requiredNotice">
         This material is based upon work supported by the National Science Foundation under Grant No. 1138596 and 1441075. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
       </span>
-      <br />
-      <p>Last updated at: <time>2019-10-02 00:01:53 +0000</time></p>
     </div>
   </div>
 </footer>
