@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '4.2.11.1'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -31,13 +31,11 @@ gem 'figaro'
 # Generate attr_accessors that transparently encrypt and decrypt attributes.
 gem 'attr_encrypted', '~> 3.1.0'
 
-
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
+# Production app server
+# gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
