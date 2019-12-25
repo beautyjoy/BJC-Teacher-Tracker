@@ -15,10 +15,10 @@ rerun.txt
 pickle-email-*.html
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
@@ -74,7 +74,7 @@ my_database_development
 my_database_test
 
 # A copy of GitHub's template .gitignore for all JetBrains IDEs.
-# It can be found here: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore 
+# It can be found here: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839

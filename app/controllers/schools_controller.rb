@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
   def create
-    @school= School.new school_params
+    @school = School.new(school_params)
     if @school.save
       flash[:saved_school] = true
     else
@@ -10,7 +10,7 @@ class SchoolsController < ApplicationController
 
   private
 
-    def school_params
-      params.require(:teacher).permit(:name, :city, :state, :website)
-    end
+  def school_params
+    params.require(:teacher).permit(:name, :city, :state, :website)
+  end
 end

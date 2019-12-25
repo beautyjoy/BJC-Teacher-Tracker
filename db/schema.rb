@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191211072821) do
+ActiveRecord::Schema.define(version: 20191224104817) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "first_name"
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20191211072821) do
     t.string   "website"
     t.float    "lat"
     t.float    "lng"
-    t.integer  "teachers_count",         default: 0
     t.integer  "num_validated_teachers", default: 0
+    t.integer  "teachers_count",         default: 0
     t.datetime "created_at",             default: '2019-12-11 07:35:22'
     t.datetime "updated_at",             default: '2019-12-11 07:35:22'
   end
@@ -50,11 +50,9 @@ ActiveRecord::Schema.define(version: 20191211072821) do
     t.string   "snap"
     t.string   "other"
     t.integer  "school_id"
-    t.integer  "school_name"
     t.boolean  "validated"
-    t.boolean  "boolean"
-    t.datetime "created_at",  default: '2019-12-11 07:35:22'
-    t.datetime "updated_at",  default: '2019-12-11 07:35:22'
+    t.datetime "created_at", default: '2019-12-11 07:35:22'
+    t.datetime "updated_at", default: '2019-12-11 07:35:22'
   end
 
   add_index "teachers", ["email", "first_name"], name: "index_teachers_on_email_and_first_name"

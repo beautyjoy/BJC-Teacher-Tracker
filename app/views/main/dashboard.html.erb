@@ -1,6 +1,5 @@
-<%= provide(:h1, "Unvalidated Forms") %>
-
-<div>
+<div style="margin-top: 55px;">
+  <h1> Unvalidated Forms </h1>
   <% if @unvalidated_teachers.empty? %>
 
     <div class="alert alert-warning" role="alert">
@@ -64,7 +63,7 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-          <th scope="col"> Course </th>
+          <th scope="col"> Status </th>
           <th scope="col"> Count </th>
           </tr>
         </thead>
@@ -101,11 +100,9 @@
           <% @schools.each do |school| %>
           <tr>
             <td>
-              <a href="https://<%= school.website %>" target="_blank">
-                <%= school.name %>
-              </a>
+              <%= link_to school.name, school.website, target: "_blank" %>
             </td>
-            <td> <%= school.city + ', ' + school.state %> </td>
+            <td> <%= school.location %> </td>
             <td> <%= school.num_validated_teachers %> </td>
           </tr>
           <% end %>
@@ -117,7 +114,7 @@
 
 <h1> Schools Map </h1>
 
-<% if @items.empty? %>
+<% if @school_coordinates.empty? %>
 
   <div class="alert alert-warning" role="alert">
     <strong>
@@ -138,12 +135,20 @@
     });
 
     let markers = [];
-    <% @items.each do |item| %>
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng(<%= item[:lat] %>, <%= item[:long] %>),
-        map: map
-      }))
+    let infoWindows = [];
+    <% @schools.each do |school| %>
+    markers.push(new google.maps.Marker({
+      position: new google.maps.LatLng(<%= school.lat %>, <%= school.lng %>),
+      map: map
+    }));
+    infoWindows.push(new google.maps.InfoWindow({
+      content: "<%= school.name %>"
+    }));
     <% end %>
+    markers.forEach((marker, idx) => {
+      let info = infoWindows[idx];
+      marker.addListener('click', () => { info.open(map, marker) });
+    });
   }
 </script>
 
@@ -151,6 +156,6 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
 </script>
 
-<div id = "forms_link">
-  <%= link_to "See Validated Forms", all_path %>
+<div id="forms_link">
+  <%= link_to "See all Teachers", all_path %>
 </div>

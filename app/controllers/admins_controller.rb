@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  # before_action :require_admin, except: [:index]
+
   def new
     @administrator = Admin.new
   end
@@ -14,7 +16,7 @@ class AdminsController < ApplicationController
   end
 
   def index
-    render "main/admin"
+    redirect_to login_path
   end
 
   def googleAuth

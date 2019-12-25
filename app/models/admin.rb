@@ -5,6 +5,13 @@ class Admin < ActiveRecord::Base
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
+  ADMIN_EMAILS = %w|
+    ball@berkeley.edu
+    lmock@berkeley.edu
+    ddgarcia@cs.berkeley.edu
+    bh@cs.berkeley.edu
+  |.freeze
+
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |administrator|
@@ -21,12 +28,7 @@ class Admin < ActiveRecord::Base
 
   private
 
-    def self.validate_by_email(email)
-      # Check if the email is in a list of all BJC Teacher Tracker administrators and
-      # current developers of the app.
-      admin_emails = %w(ball@berkeley.edu)
-      developer_2019_emails = %w(wangye@berkeley.edu janani_vijaykumar@berkeley.edu
-                    daltons@berkeley.edu murthy@berkeley.edu zachchao@berkeley.edu kpzhu@berkeley.edu)
-      return admin_emails.include?(email) || developer_2019_emails.include?(email)
-    end
+  def self.validate_by_email(email)
+    return ADMIN_EMAILS.include?(email)
+  end
 end
