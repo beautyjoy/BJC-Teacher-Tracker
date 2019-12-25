@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
 
   # TODO: This really need to be tweaked!
   def is_admin?
-    session.key?("logged_in") and session[:logged_in] == true
+    @is_admin ||= session.key?("logged_in") and session[:logged_in] == true
   end
 
   def require_admin
     unless is_admin?
-      flash[:alert] = 'Only admins can access this page.'
+      flash[:danger] = 'Only admins can access this page.'
       redirect_to root_path
     end
   end

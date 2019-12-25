@@ -1,11 +1,6 @@
-<div id='sign-up-form-container'>
-  <h1 id="form-page-title">Sign up for BJC!</h1>
+<%= provide(:h1, "Sign up for BJC!") %>
 
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
+<div id='sign-up-form-container'>
   <% if flash[:saved_teacher] %>
     <div class="alert alert-success" role="alert">
       <strong>Thanks for signing up!</strong>

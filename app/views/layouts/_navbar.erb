@@ -1,0 +1,23 @@
+<nav class='navbar navbar-dark navbar-bjc'>
+  <a class='navbar-brand' href='/'>
+    <img src='https://bjc.berkeley.edu/assets/img/bjc.png' width='30' height='30' alt='BJC' />
+  </a>
+
+  <div>
+    <ul class='navbar-nav'>
+      <li class='nav-item active'>
+        <a class='nav-link' href='/'>Home</a>
+      </li>
+
+      <% if @is_admin %>
+        <li class='nav-item'>
+          <a class='nav-link' href='/logout' data-method='post'>Logout</a>
+        </li>
+      <% else %>
+        <li class='nav-item'>
+          <a class='nav-link' href='/login'>Log in</a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

@@ -1,35 +1,26 @@
 class TeachersController < ApplicationController
+  before_action :set_teacher_and_school
   before_action :require_admin, except: [:new, :create]
 
-  def login
-    @admin = (session.key?("logged_in") and session[:logged_in] == true)
-  end
-
-  def new
-    @teacher = Teacher.new(new_teacher_params)
-    @school = School.new(new_teacher_params)
-  end
+  def new; end
 
   def create
     if Teacher.exists?(email: teacher_params[:email])
-      redirect_to root_path, alert: "A user with this email already exists!"
+      flash[:alert] = "A user with this email already exists!"
+      redirect_to new_teacher_path
     else
-      if School.exists?(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-        @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-      else
-        @school = School.new(school_params)
-      end
+      @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
       if !@school.save
-        redirect_to new_teacher_path, alert: "An error occured! Please fill out the form fields correctly."
+        redirect_to new_teacher_path, alert: "An error occured! #{@school.errors.full_messages}"
       else
         @teacher = @school.teachers.build(teacher_params)
         @teacher.validated = false
         if @teacher.save
-          flash[:saved_teacher] = true
+          flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}!"
           TeacherMailer.form_submission(@teacher).deliver_now
           redirect_to root_path
         else
-          redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information!"
+          redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information. #{@teacher.errors.full_messages}"
         end
       end
     end
@@ -70,7 +61,12 @@ class TeachersController < ApplicationController
 
   private
 
-  def new_teacher_params
+  def set_teacher_and_school
+    @teacher = Teacher.new(new_object_params[:teacher])
+    @school = School.new(new_object_params[:school])
+  end
+
+  def new_object_params
     params.permit(
       school: [:first_name, :last_name, :school, :email, :course, :snap, :other],
       teacher: [:name, :city, :state, :website]
