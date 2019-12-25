@@ -8,6 +8,6 @@ Given /^I set my status as "(.*)"$/ do |input|
     select(input, from: STATUS_FIELD)
 end
 
-Then("I see a confirmation {string}") do |string|
-    page.should have_content "Thanks for signing up!"
+Then(/I see a confirmation "(.*)"/) do |string|
+    page.should have_css ".alert", text: string
 end
