@@ -10,19 +10,10 @@ class MainController < ApplicationController
   end
 
   def dashboard
-    @unvalidated_teachers = Teacher.where(validated: 'f').order(:created_at) || []
-    @validated_teachers = Teacher.where(validated: 't').order(:created_at) || []
-    @schools = School.validated || []
-    @courses = Teacher.where(validated: 't').group(:course).count
-    school_coords = @schools.select(:lat, :lng)
-
-    @items = []
-    school_coords.each do |school|
-      @items << {
-        'long': school[:lng],
-        'lat': school[:lat]
-      }
-    end
+    @unvalidated_teachers = Teacher.unvalidated.order(:created_at) || []
+    @validated_teachers = Teacher.validated.order(:created_at) || []
+    @courses = Teacher.validated.group(:course).order('count_all desc').count
+    @schools = School.validated
   end
 
   def logout

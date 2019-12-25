@@ -10,6 +10,10 @@ class School < ActiveRecord::Base
     prefix_url(self[:website])
   end
 
+  def location
+    "#{city}, #{state}"
+  end
+
   private
 
   def prefix_url(url)
