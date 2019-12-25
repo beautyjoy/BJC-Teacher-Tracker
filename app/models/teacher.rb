@@ -4,7 +4,6 @@ class Teacher < ActiveRecord::Base
 
   belongs_to :school, counter_cache: true
 
-  def self.unvalidated
-    Teacher.where(:validated => false)
-  end
+  scope :unvalidated, -> { where(validated: false) }
+  scope :validated, -> { where(validated: true) }
 end
