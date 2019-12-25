@@ -32,5 +32,5 @@ Rails.application.routes.draw do
 
   # Route for displaying all teacher information
   get "/all", to: "teachers#all", as: "all"
-  get "/dashboard", to "main#dashboard", as: "dashboard"
+  get "/dashboard", to: "main#dashboard", as: "dashboard"
 end
