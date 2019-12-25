@@ -2,7 +2,7 @@
 
 ## Description
 
-The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering. 
+The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering.
 
 ## Key Features and Functionality
 
@@ -10,12 +10,12 @@ We have worked on the adding following core features and functionality:
 
 - Feature: A application form for prospective teachers to request access to the platform
 - Functionality: Administrators are immediately notified of new applications via email
-- Feature: Administrators can validate or deny applicants with a button click 
+- Feature: Administrators can validate or deny applicants with a button click
 - Functionality: An email is automatically sent to successful applicants notifying them of their acceptance to the teaching program
 - Feature: A separate administrators' view that uses Google OAuth to allow logins from UC Berkeley-registered users (@berkeley.edu)
 - Functionality: Administrators can login to the dashboard to view unvalidated applications, statistics on validated applicants, and a list of current teachers
 - Feature: The administrators' view contains a main page with
-  - buttons to delete or validate newly submitted forms 
+  - buttons to delete or validate newly submitted forms
   - tables for statistics about the schools and the courses current teachers are teaching
   - a map with the locations of all the schools that teachers are a part of
   - a separate page with all the validated teachers and their information
@@ -23,10 +23,10 @@ We have worked on the adding following core features and functionality:
 
 ## Few Things to Know:
 
-- Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this. 
+- Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
 - To add administrators to the application you have to add the person's email to the list of emails in `self.validate_by_email`. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
 - For RSpec tests run `bundle exec rspec`
-- For Cucumber tests run `bundle exec cucumber` 
+- For Cucumber tests run `bundle exec cucumber`
 
 ## Heroku Link
 
@@ -49,11 +49,11 @@ If bundler install runs successfully, continue with the following commands to co
 
 ### Maintainability Badge
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/ab0826b627a599c468d5/maintainability)](https://codeclimate.com/github/JananiVijaykumar/BJC-Teacher-Tracker/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/maintainability)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/maintainability)
 
 ### Test Coverage Badge
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ab0826b627a599c468d5/test_coverage)](https://codeclimate.com/github/JananiVijaykumar/BJC-Teacher-Tracker/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage)
 
 ## Travis CI Badge
-[![Build Status](https://travis-ci.com/JananiVijaykumar/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.com/JananiVijaykumar/BJC-Teacher-Tracker)
+[![Build Status](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker)
