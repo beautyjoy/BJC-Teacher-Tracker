@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherMailer < ApplicationMailer
-  CONTACT_EMAIL = 'contact@bjc.berkeley.edu'
+  CONTACT_EMAIL = 'lmock@berkeley.edu'
 
   def welcome_email(teacher)
     @teacher = teacher
