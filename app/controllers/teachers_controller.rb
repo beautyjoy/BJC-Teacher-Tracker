@@ -27,7 +27,7 @@ class TeachersController < ApplicationController
   end
 
   def validate
-    if !@admin
+    if !is_admin?
       redirect_to root_path, alert: "Only administrators can validate!"
     else
       id = params[:id]
@@ -42,7 +42,7 @@ class TeachersController < ApplicationController
   end
 
   def delete
-    if !@admin
+    if !is_admin?
       redirect_to root_path, alert: "Only administrators can delete!"
     else
       id = params[:id]
@@ -52,7 +52,7 @@ class TeachersController < ApplicationController
   end
 
   def all
-    if !@admin
+    if !is_admin?
       redirect_to root_path, alert: "Only administrators can view all forms!"
     else
       @validated_teachers = Teacher.where(validated: true)
