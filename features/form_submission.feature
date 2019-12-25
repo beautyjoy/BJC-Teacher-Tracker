@@ -17,7 +17,7 @@ Scenario: Correctly filling out and succesful form submission
     And   I select "CA" from "State"
     And   I enter my "School Website" as "chs.fuhsd.org"
     And   I press "Submit"
-    Then  I see a confirmation "Thanks for signing up!"
+    Then  I see a confirmation "Thanks for signing up for BJC"
 
 Scenario: Correctly filling out with other and snap empty and succesful form submission
     Given I am on the BJC home page
@@ -30,7 +30,7 @@ Scenario: Correctly filling out with other and snap empty and succesful form sub
     And   I select "CA" from "State"
     And   I enter my "School Website" as "chs.fuhsd.org"
     And   I press "Submit"
-    Then  I see a confirmation "Thanks for signing up!"
+    Then  I see a confirmation "Thanks for signing up for BJC"
 
 Scenario: Not Correctly filling out and unsuccesful form submission
     Given I am on the BJC home page
