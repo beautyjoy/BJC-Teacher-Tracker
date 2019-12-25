@@ -25,19 +25,12 @@
           <td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
           <td> <%= teacher.email %> </td>
           <td>
-            <a href="<%= teacher.school.website %>" target="_blank">
-              <%= teacher.school.name %>
-            </a>
+            <%= link_to teacher.school.name, teacher.school.website, target: "_blank" %>
           </td>
-          <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
+          <td> <%= teacher.school.location %> </td>
           <td>
-
-            <% if ['N/A', 'None', ''].include? teacher.snap %>
-              <%= teacher.snap %>
-            <% else %>
-              <a href="https://snap.berkeley.edu/user?user=<%= teacher.snap %>" target="_blank">
-                <%= teacher.snap %>
-              </a>
+            <% if !['N/A', 'None', ''].include?(teacher.snap) %>
+            <%= link_to teacher.snap, "https://snap.berkeley.edu/user?user=#{teacher.snap}", target: "_blank" %>
             <% end %>
           </td>
           <td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
@@ -81,7 +74,7 @@
 
   <div class="col-6">
     <h1>School Statistics</h1>
-    <% if @schools.size == 0 %>
+    <% if @schools.empty? %>
 
       <div class="alert alert-warning" role="alert">
         <strong>No validated schools yet!</strong>
@@ -114,7 +107,7 @@
 
 <h1> Schools Map </h1>
 
-<% if @school_coordinates.empty? %>
+<% if @schools.empty? %>
 
   <div class="alert alert-warning" role="alert">
     <strong>
