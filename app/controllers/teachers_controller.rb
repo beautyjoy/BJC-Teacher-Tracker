@@ -1,8 +1,13 @@
 class TeachersController < ApplicationController
-  before_action :login
+  before_action :require_admin, except: [:new, :create]
 
   def login
     @admin = (session.key?("logged_in") and session[:logged_in] == true)
+  end
+
+  def new
+    @teacher = Teacher.new(new_teacher_params)
+    @school = School.new(new_teacher_params)
   end
 
   def create
@@ -15,7 +20,7 @@ class TeachersController < ApplicationController
         @school = School.new(school_params)
       end
       if !@school.save
-        redirect_to root_path, alert: "An error occured! Please fill out the form fields correctly."
+        redirect_to new_teacher_path, alert: "An error occured! Please fill out the form fields correctly."
       else
         @teacher = @school.teachers.build(teacher_params)
         @teacher.validated = false
@@ -24,7 +29,7 @@ class TeachersController < ApplicationController
           TeacherMailer.form_submission(@teacher).deliver_now
           redirect_to root_path
         else
-          redirect_to root_path, alert: "An error occurred while trying to submit teacher information!"
+          redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information!"
         end
       end
     end
@@ -64,6 +69,13 @@ class TeachersController < ApplicationController
   end
 
   private
+
+  def new_teacher_params
+    params.permit(
+      school: [:first_name, :last_name, :school, :email, :course, :snap, :other],
+      teacher: [:name, :city, :state, :website]
+    )
+  end
 
   def teacher_params
     params.require(:teacher).permit(:first_name, :last_name, :school, :email, :course, :snap, :other)

@@ -1,8 +1,8 @@
 class MainController < ApplicationController
   def index
     @admin = (session.key?("logged_in") and session[:logged_in] == true)
-    
-    if @admin 
+
+    if @admin
       @unvalidated_teachers = Teacher.where(validated: 'f').order(:created_at) || []
       @validated_teachers = Teacher.where(validated: 't').order(:created_at) || []
       @schools = School.validated || []
@@ -16,13 +16,12 @@ class MainController < ApplicationController
           'lat': school[:lat]
         }
       end
-    else 
-      puts "Oops!"
-      @teacher = Teacher.new
+    else
+      redirect_to new_teacher_path
     end
   end
 
-  def logout 
+  def logout
     session[:logged_in] = false
     redirect_to root_url
   end
