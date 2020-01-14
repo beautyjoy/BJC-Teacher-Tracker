@@ -1,4 +1,4 @@
-class Teacher < ActiveRecord::Base
+class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :course, presence: true
   validates_inclusion_of :validated, :in => [true, false]
 
