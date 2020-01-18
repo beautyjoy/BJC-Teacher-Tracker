@@ -1,4 +1,4 @@
-<%= provide(:h1, "Sign up for BJC!") %>
+<%= provide(:h1, "Request Access to Teacher Materials") %>
 
 <div id='sign-up-form-container'>
   <% if flash[:saved_teacher] %>
@@ -40,13 +40,7 @@
             <%= f.label :course, "What's your current status?" %>
             <%= f.select(
               :course,
-              [
-                'I am teaching BJC as an AP CS Principles course.',
-                'I am teaching BJC but not as an AP CS Principles course.',
-                'I am using BJC as a resource, but not teaching with it.',
-                'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-                'Other - Please specify below.'
-              ],
+              Teacher.statuses,
               { include_blank: "Select an option" },
               { class: 'form-control' }
             ) %>

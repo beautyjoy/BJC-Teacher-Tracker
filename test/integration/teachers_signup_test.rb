@@ -5,17 +5,22 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
   test "invalid signup information" do
     get root_path
     assert_no_difference 'Teacher.count' do
-      post teachers_path, school: {name: "invalid",
-                                   city: "Berkeley",
-                                   state: "CA",
-                                   website: "invalid.com"
-                                  }, teacher: {
+      post teachers_path, {
+          params: { school: {
+                      name: "invalid",
+                      city: "Berkeley",
+                      state: "CA",
+                      website: "invalid.com"
+                    },
+                    teacher: {
                                       first_name: "",
                                       last_name: "invalid",
                                       email: "invalid@invalid.edu",
                                       course: "invalid",
                                       snap: "invalid"
                                   }
+                                }
+                              }
     end
     assert_equal "Failed to submit information :(", flash[:alert]
   end
@@ -24,7 +29,7 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
   test "valid signup information" do
     get root_path
     assert_difference 'Teacher.count', 1 do
-      post teachers_path, school: {name: "valid_example",
+      post teachers_path, params: { school: {name: "valid_example",
                                 city: "Berkeley",
                                 state: "CA",
                                 website: "valid_example.com"
@@ -35,6 +40,7 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
                                 course: "valid_example",
                                 snap: "valid_example"
                                 }
+                              }
     end
     assert_equal true, flash[:saved_teacher]
   end

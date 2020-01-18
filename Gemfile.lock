@@ -452,6 +452,7 @@ DEPENDENCIES
   metric_fu
   omniauth-google-oauth2
   pg (~> 0.21)
+  pry
   puma
   rails (= 5.2.4.1)
   rails_12factor

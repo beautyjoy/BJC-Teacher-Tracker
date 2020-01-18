@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  city: MyString
-  state: MyString
-  website: MyString
+berkeley:
+  name: UC Berkeley
+  city: Berkeley
+  state: CA
+  website: https://berkeley.edu
 
-two:
-  name: MyString
-  city: MyString
-  state: MyString
-  website: MyString
+stanfurd:
+  name: $tanfurd
+  city: Palo Alto
+  state: CA
+  website: https://stanford.edu
