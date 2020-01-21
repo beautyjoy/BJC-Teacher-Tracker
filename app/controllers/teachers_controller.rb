@@ -16,7 +16,8 @@ class TeachersController < ApplicationController
         @teacher = @school.teachers.build(teacher_params)
         @teacher.validated = false
         if @teacher.save
-          flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}!"
+          flash[:success] =
+            "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly."
           TeacherMailer.form_submission(@teacher).deliver_now
           redirect_to root_path
         else
