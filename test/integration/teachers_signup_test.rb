@@ -22,7 +22,7 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
                                 }
                               }
     end
-    assert_equal "Failed to submit information :(", flash[:alert]
+    assert_match(/First name can't be blank/, flash[:alert])
   end
 
 
@@ -42,7 +42,6 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
                                 }
                               }
     end
-    assert_equal true, flash[:saved_teacher]
+    assert_match(/Thanks for signing up for BJC/, flash[:success])
   end
-
 end
