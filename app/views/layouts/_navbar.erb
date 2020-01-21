@@ -10,15 +10,17 @@
       </li>
 
       <% if @is_admin %>
-        <li class='nav-item'>
-          <%= link_to "All Teachers", all_path, class: "nav-link" %>
-        </li>
+        <% admin_nav_links.each do |name, url|  %>
+          <li class='nav-item'>
+            <%= link_to name, url, class: "nav-link" %>
+          </li>
+        <% end %>
         <li class='nav-item'>
           <a class='nav-link' href='/logout' data-method='post'>Logout</a>
         </li>
       <% else %>
         <li class='nav-item'>
-          <a class='nav-link' href='/login'>Log In</a>
+          <a class='nav-link' href='/login'>Admin Log In</a>
         </li>
       <% end %>
     </ul>

@@ -9,4 +9,14 @@ module ApplicationHelper
       name
     end
   end
+
+  def admin_nav_links
+    {
+      "New Teacher": new_teacher_path,
+      "New School": new_school_path,
+      "All Schools": schools_path,
+      "All Teachers": teachers_path,
+      "Dashboard": dashboard_path
+    }
+  end
 end

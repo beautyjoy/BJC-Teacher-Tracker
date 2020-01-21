@@ -2,6 +2,10 @@ class TeachersController < ApplicationController
   before_action :set_teacher_and_school
   before_action :require_admin, except: [:new, :create]
 
+  def index
+    @validated_teachers = Teacher.where(validated: true)
+  end
+
   def new; end
 
   def create
@@ -46,17 +50,8 @@ class TeachersController < ApplicationController
     if !is_admin?
       redirect_to root_path, alert: "Only administrators can delete!"
     else
-      id = params[:id]
-      Teacher.delete(id)
+      Teacher.delete(params[:id])
       redirect_to root_path
-    end
-  end
-
-  def all
-    if !is_admin?
-      redirect_to root_path, alert: "Only administrators can view all forms!"
-    else
-      @validated_teachers = Teacher.where(validated: true)
     end
   end
 
