@@ -36,7 +36,7 @@ script:
   # run Cucumber scenarios, and capture coverage. --strict means undefined steps result in a failure.
   - bundle exec cucumber --strict
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
-  - bundle exec rais test
+  - bundle exec rails test
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
 
 after_script:
