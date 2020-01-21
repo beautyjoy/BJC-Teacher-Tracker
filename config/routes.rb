@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :teachers
   resources :admins
+resources :schools, only: [:new, :create, :index]
 
   root to: "main#index"
 
