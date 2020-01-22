@@ -10,7 +10,9 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require font-awesome.min
+ *= require bootstrap/dist/css/bootstrap.min
+ *= require @fortawesome/fontawesome-free/css/fontawesome.min.css
+ *= require @fortawesome/fontawesome-free/css/all.min.css
  *= require_tree .
  *= require_self
  */
@@ -26,6 +28,7 @@ body {
 }
 
 footer {
+  position: absolute;
   margin: 0;
   background-color: #18568C;
   color: #FFF;
