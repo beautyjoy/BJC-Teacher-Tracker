@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  # before_action :require_admin
+  before_action :require_admin
   def create
     @school = School.new(school_params)
     if @school.save

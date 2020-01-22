@@ -71,9 +71,9 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-          <th scope="col"> School </th>
-          <th scope="col"> City, State </th>
-          <th scope="col"> Count </th>
+          <th scope="col">School </th>
+          <th scope="col">City, State </th>
+          <th scope="col">Count </th>
           </tr>
         </thead>
         <tbody>
@@ -102,13 +102,15 @@
     let markers = [];
     let infoWindows = [];
     <% @schools.each do |school| %>
-    markers.push(new google.maps.Marker({
-      position: new google.maps.LatLng(<%= school.lat %>, <%= school.lng %>),
-      map: map
-    }));
-    infoWindows.push(new google.maps.InfoWindow({
-      content: "<%= school.name %>"
-    }));
+    <% if school.lat && school.lng %>
+      markers.push(new google.maps.Marker({
+        position: new google.maps.LatLng(<%= school.lat %>, <%= school.lng %>),
+        map: map
+      }));
+      infoWindows.push(new google.maps.InfoWindow({
+        content: "<%= school.name %>"
+      }));
+      <% end %>
     <% end %>
     markers.forEach((marker, idx) => {
       let info = infoWindows[idx];
