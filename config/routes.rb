@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :teachers
   resources :admins
+  resources :schools, only: [:new, :create, :index]
 
   root to: "main#index"
 
@@ -30,7 +31,5 @@ Rails.application.routes.draw do
   post "/admin/forms/validate/:id", to: "teachers#validate", as: "validate"
   post "/admin/forms/delete/:id", to: "teachers#delete", as: "delete"
 
-  # Route for displaying all teacher information
-  get "/all", to: "teachers#all", as: "all"
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 end

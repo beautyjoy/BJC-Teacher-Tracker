@@ -1,17 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  school: MyString
-  email: MyString
-  course: MyString
-  snap: MyString
+ye:
+  first_name: Ye
+  last_name: Wang
+  course: Other
+  other: A CS169 Student
+  email: ye@berkeley.edu
+  snap: ye
+  validated: true
 
-two:
-  first_name: MyString
-  last_name: MyString
-  school: MyString
-  email: MyString
-  course: MyString
-  snap: MyString
+bob_teacher:
+    first_name: 'Bob'
+    last_name: 'Johnson'
+    snap: 'BobJohnson'
+    email: 'bob@gmail.com'
+    course: 'I am teaching BJC as an AP CS Principles course.'
+    validated: false

@@ -1,0 +1,28 @@
+<%= provide(:h1, "All Schools") %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Website</th>
+      <th scope="col">Teachers Count</th>
+      <th scope="col">First Teacher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schools.each do |school| %>
+    <tr>
+      <td><%= school.name %></td>
+      <td><%= school.location %></td>
+      <td>
+        <a href="<%= school.website %>" target="_blank">
+          <%= school.website %>
+        </a>
+      </td>
+      <td><%= school.teachers_count %></td>
+      <td><%= school.created_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

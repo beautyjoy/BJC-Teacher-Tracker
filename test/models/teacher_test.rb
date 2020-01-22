@@ -1,12 +1,9 @@
 require 'test_helper'
 
 class TeacherTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
   def setup
-    @school = schools(:stanford)
-    @teacher = @school.teachers.build(:ye)
+    @teacher = teachers(:ye)
   end
 
   test "should be valid" do

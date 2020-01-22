@@ -1,0 +1,31 @@
+<%= provide(:h1, "Add a School") %>
+
+<%= form_for @school do |f| %>
+  <div class='form-input-group'>
+    <div class='row'>
+      <div class='col-6'>
+        <%= f.label :name, "School Name" %>
+        <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control' %>
+      </div>
+
+      <div class='col-4'>
+        <%= f.label :city %>
+        <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control' %>
+      </div>
+
+      <div class='col-2'>
+        <%= f.label :state %>
+        <%= f.select(:state, [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ], {include_blank: "State"}, { :class => 'form-control' }) %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :website, "School Website" %>
+      <%= f.text_field :website, placeholder: "https://snap.berkeley.edu", class: "form-control" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
