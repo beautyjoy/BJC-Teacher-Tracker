@@ -25,6 +25,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
   - chmod +x $CCTR
   - $CCTR before-build
+  - bin/yarn test
 
 script:
   # setup the test database, including any seed data
