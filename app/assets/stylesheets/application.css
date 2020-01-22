@@ -10,7 +10,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap.min
  *= require font-awesome.min
  *= require_tree .
  *= require_self
@@ -31,8 +30,6 @@ footer {
   background-color: #18568C;
   color: #FFF;
   padding-top: 25px;
-
-  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -64,30 +61,8 @@ footer .footer-links {
   color: #fff;
 }
 
-input, select {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.form-input-group {
-  padding: 20px 25px 10px 25px;
-  border-color: #999;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-}
-
 #sign-up-form-container {
   margin-bottom: 80px;
-}
-
-.navbar-nav {
-  flex-direction: row;
-}
-
-.nav-item {
-  margin-right: 15px;
 }
 
 .google-signin {
@@ -122,5 +97,5 @@ footer a:active {
     /* As similar lines below, each line has been considered.
        Links' colors are placed at the end so that they have the
        highest specificity. */
-    color: #EABF6A;
+    color: #F2E205;
 }

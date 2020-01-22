@@ -12,11 +12,11 @@ module ApplicationHelper
 
   def admin_nav_links
     {
+      "Dashboard": dashboard_path,
       "New Teacher": new_teacher_path,
       "New School": new_school_path,
       "All Schools": schools_path,
       "All Teachers": teachers_path,
-      "Dashboard": dashboard_path
     }
   end
 end
