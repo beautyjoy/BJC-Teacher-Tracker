@@ -15,6 +15,9 @@ env:
     # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
     - TZ=America/Los_Angeles
 
+before_install:
+  - nvm install 12
+
 # steps to run BEFORE the test run
 before_script:
   # create config/application.yml (sensitive API keys etc) from config/application.yml.asc
