@@ -17,7 +17,5 @@
 
 import 'jquery/src/jquery'
 import 'jquery-ujs/src/rails'
-import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap';
 import 'popper.js';
-// import 'style/application.scss'
