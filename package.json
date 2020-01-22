@@ -1,4 +1,7 @@
 {
+  "name": "BJC-Teacher-Tracker",
+  "private": true,
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@rails/webpacker": "4.2.2",
