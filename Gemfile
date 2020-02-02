@@ -12,10 +12,6 @@ gem 'webpacker'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -37,12 +33,9 @@ gem 'attr_encrypted', '~> 3.1.0'
 # Production app server
 gem 'puma'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
+gem 'sentry-raven'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
