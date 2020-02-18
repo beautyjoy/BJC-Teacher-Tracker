@@ -22,4 +22,8 @@ class Teacher < ApplicationRecord
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
