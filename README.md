@@ -24,17 +24,18 @@ We have worked on the adding following core features and functionality:
 ## Few Things to Know:
 
 - Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
-- To add administrators to the application you have to add the person's email to the list of emails in `self.validate_by_email`. The administrator can just log in using their email through the Google OAuth workflow we have implemented.
+- To add administrators to the application you have to add the person's email to the list of emails in the environment variable `ADMIN_EMAILS`, which is separated by comma.
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber`
 
-## Heroku Link
+## Deployed Site:
 
-- https://bjc-teacher-tracker.herokuapp.com/
+- https://teachers.bjc.berkeley.edu
+- https://bjc-teachers.herokuapp.com/
 
 ## Steps to Deploying on Heroku
 
-- `git remote set-url heroku https://github.com/JananiVijaykumar/BJC-Teacher-Tracker.git`
+- `git remote set-url heroku https://git.heroku.com/bjc-teachers.git`
 - Make your local changes and start the commit process
 - `git add .`
 - `git commit -m "<Message>"`

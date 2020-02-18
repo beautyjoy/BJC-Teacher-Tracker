@@ -5,12 +5,7 @@ class Admin < ApplicationRecord
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
-  ADMIN_EMAILS = %w|
-    ball@berkeley.edu
-    lmock@berkeley.edu
-    ddgarcia@cs.berkeley.edu
-    bh@cs.berkeley.edu
-  |.freeze
+  ADMIN_EMAILS = Rails.application.secrets.admin_emails.split(',').freeze
 
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
@@ -22,13 +17,6 @@ class Admin < ApplicationRecord
   end
 
   def self.validate_auth(auth)
-    return self.validate_by_email(auth.info.email)
-  end
-
-
-  private
-
-  def self.validate_by_email(email)
-    return ADMIN_EMAILS.include?(email)
-  end
+    return ADMIN_EMAILS.include?(auth.info.email)
+end
 end

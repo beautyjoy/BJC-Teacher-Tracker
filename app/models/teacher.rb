@@ -9,6 +9,8 @@ class Teacher < ApplicationRecord
   scope :unvalidated, -> { where(validated: false) }
   scope :validated, -> { where(validated: true) }
 
+  # TODO: Replace these with names that are usable as methods.
+  # Add a second function to return status: form description
   enum status: [
     'I am teaching BJC as an AP CS Principles course.',
     'I am teaching BJC but not as an AP CS Principles course.',
@@ -16,4 +18,8 @@ class Teacher < ApplicationRecord
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
     'Other - Please specify below.'
   ].freeze
+
+  attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
+  attr_encrypted :google_token
+  attr_encrypted :google_refresh_token
 end
