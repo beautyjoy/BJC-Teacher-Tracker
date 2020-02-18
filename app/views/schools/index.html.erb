@@ -1,8 +1,6 @@
 <%= provide(:h1, "BJC Schools") %>
 
-<h2><%= @schools.count %> Schools</h2>
-
-<table class="table table-striped">
+<table class="table table-striped js-dataTable">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
@@ -23,7 +21,7 @@
         </a>
       </td>
       <td><%= school.teachers_count %></td>
-      <td><%= school.created_at %></td>
+      <td ata-sort="<%= school.created_at %>"><%= school.created_at.strftime("%b %d, %Y") %></td>
     </tr>
     <% end %>
   </tbody>

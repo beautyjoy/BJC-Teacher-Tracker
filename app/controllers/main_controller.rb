@@ -12,7 +12,7 @@ class MainController < ApplicationController
   def dashboard
     @unvalidated_teachers = Teacher.unvalidated.order(:created_at) || []
     @validated_teachers = Teacher.validated.order(:created_at) || []
-    @courses = Teacher.validated.group(:course).order('count_all desc').limit(6).count
+    @statuses = Teacher.validated.group(:status).count
     @schools = School.validated.order(num_validated_teachers: :desc)
   end
 

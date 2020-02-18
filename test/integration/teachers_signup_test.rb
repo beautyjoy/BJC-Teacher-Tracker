@@ -16,7 +16,7 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
                                       first_name: "",
                                       last_name: "invalid",
                                       email: "invalid@invalid.edu",
-                                      course: "invalid",
+                                      status: "invalid",
                                       snap: "invalid"
                                   }
                                 }
@@ -37,7 +37,7 @@ class TeachersSignupTest < ActionDispatch::IntegrationTest
                                 first_name: "valid_example",
                                 last_name: "valid_example",
                                 email: "valid_example@valid_example.edu",
-                                course: "valid_example",
+                                status: 0,
                                 snap: "valid_example"
                                 }
                               }

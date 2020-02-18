@@ -1,9 +1,8 @@
 <%= provide(:h1, "All BJC Teachers") %>
 
-<h2><%= @validated_teachers.count %> total teachers.</h2>
 
 <div class="col-12">
-  <table class="table">
+  <table class="table table-striped js-dataTable">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Name</th>
@@ -18,12 +17,12 @@
     <tbody>
       <% @validated_teachers.each do |teacher| %>
       <tr>
-        <td> <%= teacher[:first_name] + " " + teacher[:last_name] %> </td>
+        <td> <%= teacher.full_name %> </td>
         <td> <%= teacher[:email] %> </td>
-        <td> <%= teacher[:course] %> </td>
+        <td> <%= teacher.status %> </td>
         <td>
-          <% if ['N/A', 'None', ''].include? teacher[:snap] %>
-            <%= teacher[:snap] %>
+          <% if ['N/A', 'None', '', nil].include?(teacher[:snap]) %>
+            —
           <% else %>
             <a href="https://snap.berkeley.edu/user?user=<%= teacher[:snap] %>" target="_blank">
               <%= teacher[:snap] %>
@@ -35,8 +34,10 @@
             <%= teacher.school.name %>
           </a>
         </td>
-        <td> <%= teacher.school.city + ', ' + teacher.school.state %> </td>
-        <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
+        <td> <%= teacher.school.location %> </td>
+        <td data-sort="<%= teacher.created_at %>">
+          <%= teacher.created_at.strftime("%b %d, %Y") %>
+        </td>
       </tr>
       <% end %>
     </tbody>

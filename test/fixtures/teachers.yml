@@ -3,8 +3,8 @@
 ye:
   first_name: Ye
   last_name: Wang
-  course: Other
-  other: A CS169 Student
+  status: 4
+  more_info: A CS169 Student
   email: ye@berkeley.edu
   snap: ye
   validated: true
@@ -14,5 +14,6 @@ bob_teacher:
     last_name: 'Johnson'
     snap: 'BobJohnson'
     email: 'bob@gmail.com'
-    course: 'I am teaching BJC as an AP CS Principles course.'
+    status: 1
+    more_info: ''
     validated: false
