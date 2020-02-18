@@ -17,6 +17,6 @@ class Admin < ApplicationRecord
   end
 
   def self.validate_auth(auth)
-    return ADMIN_EMAILS.include?(auth.info.email)
+    return ADMIN_EMAILS.include?(auth.info.email.downcase)
 end
 end
