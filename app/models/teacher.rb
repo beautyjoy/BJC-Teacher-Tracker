@@ -18,4 +18,8 @@ class Teacher < ApplicationRecord
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
     'Other - Please specify below.'
   ].freeze
+
+  attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
+  attr_encrypted :google_token
+  attr_encrypted :google_refresh_token
 end

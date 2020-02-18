@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_010024) do
+ActiveRecord::Schema.define(version: 2020_02_18_013314) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -51,6 +51,12 @@ ActiveRecord::Schema.define(version: 2020_02_18_010024) do
     t.datetime "created_at", default: "2019-12-11 07:35:22"
     t.datetime "updated_at", default: "2019-12-11 07:35:22"
     t.integer "status"
+    t.string "more_info"
+    t.boolean "admin", default: false
+    t.string "google_token"
+    t.string "google_token_iv"
+    t.string "google_refresh_token"
+    t.string "google_refresh_token_iv"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
   end
 
