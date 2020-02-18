@@ -21,7 +21,7 @@
         </a>
       </td>
       <td><%= school.teachers_count %></td>
-      <td><%= school.created_at %></td>
+      <td ata-sort="<%= school.created_at %>"><%= school.created_at.strftime("%b %d, %Y") %></td>
     </tr>
     <% end %>
   </tbody>

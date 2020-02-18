@@ -35,7 +35,9 @@
           </a>
         </td>
         <td> <%= teacher.school.location %> </td>
-        <td> <%= teacher[:created_at].strftime("%d %b %Y") %> </td>
+        <td data-sort="<%= teacher.created_at %>">
+          <%= teacher.created_at.strftime("%b %d, %Y") %>
+        </td>
       </tr>
       <% end %>
     </tbody>
