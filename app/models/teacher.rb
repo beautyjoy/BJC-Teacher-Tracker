@@ -26,4 +26,9 @@ class Teacher < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def status=(value)
+    value = value.to_i if value.is_a? String
+    super(value)
+  end
 end
