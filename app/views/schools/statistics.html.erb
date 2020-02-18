@@ -53,23 +53,23 @@
 
 <div class="row">
   <div class="col-6">
-    <h1>Course Statistics</h1>
-    <% if @courses.empty? %>
+    <h1>Teaching Status</h1>
+    <% if @statuses.empty? %>
 
       <div class="alert alert-warning" role="alert">
-        <strong>No validated courses yet!</strong>
+        <strong>No validated teachers yet.</strong>
       </div>
 
     <% else %>
       <table class="table">
         <thead class="thead-dark">
           <tr>
-          <th scope="col"> Course </th>
-          <th scope="col"> Count </th>
+          <th scope="col">Status</th>
+          <th scope="col">Count</th>
           </tr>
         </thead>
         <tbody>
-          <% @courses.each do |key, value| %>
+          <% @statuses.each do |key, value| %>
           <tr>
             <td> <%= key %> </td>
             <td> <%= value %> </td>
@@ -121,7 +121,7 @@
 
   <div class="alert alert-warning" role="alert">
     <strong>
-      No validated schools yet!
+      No validated schools yet.
     </strong>
   </div>
 

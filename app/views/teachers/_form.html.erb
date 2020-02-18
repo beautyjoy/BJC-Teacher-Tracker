@@ -32,9 +32,9 @@
 
     <div class='form-group row'>
       <div class='col-12'>
-        <%= f.label :course, "What's your current status?", class: "label-required" %>
+        <%= f.label :status, "What's your current status?", class: "label-required" %>
         <%= f.select(
-          :course,
+          :status,
           Teacher.statuses,
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
@@ -44,8 +44,8 @@
 
     <div class='form-group row'>
       <div class='col-12'>
-        <%= f.label :other, "More Information" %>
-        <%= f.text_field :other, placeholder: "ex. I'm teaching a college course",
+        <%= f.label :more_info, "More Information" %>
+        <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
           class: "form-control" %>
         </div>
     </div>

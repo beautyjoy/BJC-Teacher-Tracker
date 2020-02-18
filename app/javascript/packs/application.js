@@ -15,7 +15,13 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import 'jquery/src/jquery'
+import 'jquery/src/jquery';
 import 'jquery-ujs/src/rails'
 import 'bootstrap';
 import 'popper.js';
+
+import "datatables.net-bs4";
+import "datatables.net-buttons-bs4";
+import  'datatables.net-buttons/js/buttons.html5.js';
+
+import './datatables.js';
