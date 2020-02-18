@@ -13,7 +13,7 @@ class TeachersController < ApplicationController
       flash[:alert] = "A user with this email already exists!"
       redirect_to new_teacher_path
     else
-      @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
+      @school = school_from_params
       if !@school.save
         redirect_to new_teacher_path, alert: "An error occured! #{@school.errors.full_messages}"
       else
@@ -57,6 +57,10 @@ class TeachersController < ApplicationController
 
   private
 
+  def school_from_params
+    School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
+  end
+
   def set_teacher_and_school
     @teacher = Teacher.new(new_object_params[:teacher])
     @school = School.new(new_object_params[:school])
@@ -64,13 +68,13 @@ class TeachersController < ApplicationController
 
   def new_object_params
     params.permit(
-      school: [:first_name, :last_name, :school, :email, :course, :snap, :other],
+      school: [:first_name, :last_name, :school, :email, :status, :snap, :more_info],
       teacher: [:name, :city, :state, :website]
     )
   end
 
   def teacher_params
-    params.require(:teacher).permit(:first_name, :last_name, :school, :email, :course, :snap, :other)
+    params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap, :more_info)
   end
 
   def school_params
