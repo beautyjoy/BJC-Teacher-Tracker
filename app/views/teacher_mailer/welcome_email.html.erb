@@ -1,21 +1,27 @@
 <p>
 Hi <%= @teacher.first_name %>,<br>
-<br>
 
 Thanks for teaching with BJC!<br>
 
 <b>Accessing the teacher's guide:</b><br>
 
-To view the teacher's guide at <%= link_to nil, "https://bjc.edc.org/teacher" %>, you will need the username: bjcteacher and the case-sensitive password: DeBUgg <br>
+To view the teacher's guide at <%= link_to nil, "https://bjc.edc.org/teacher" %>, you will need the username: <code>bjcteacher</code> and the case-sensitive password: <code>DeBUgg</code><br>
 <br>
 After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies. <br>
 <br>
 Please note that only the Teacher Guide lab pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages. <br>
 
-<b>Piazza</b>
-<br>
-Thanks!
-<br>
+<b>Piazza:</b><br>
 
-The BJC Team
+We have a teacher's forum on <%= link_to('Piazza', 'https://piazza.com' ) %>, where we will share updates and you can get your questions answered. If you have not be added to Piazza, you can <% link_to('join the BJC Piazza', 'https://piazza.com/cs10k/other/bjcteachers') %> using your email. When prompted, enter the code <code>BJCCSP</code> to get access.
+<br>
+<b>Snap<em>!</em></b><br>
+
+We encourage you to check out the <%= link_to('Snap!Forum', 'https://forum.snap.berkeley.edu') %>. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at contact@snap.berkeley.edu.
+</p>
+<p>
+<br>
+Thank you!
+<br>
+— pThe BJC Team
 </p>
