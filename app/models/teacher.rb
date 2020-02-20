@@ -28,7 +28,7 @@ class Teacher < ApplicationRecord
   end
 
   def email_name
-    "#{full_name} <#{@email}>"
+    "#{full_name} <#{email}>"
   end
 
   def status=(value)
