@@ -37,4 +37,4 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
     And   I press "Submit"
-    Then  I see a confirmation "An error occured! [\"Name can't be blank\", \"City can't be blank\", \"State can't be blank\"]"
+    Then  I see a confirmation "× An error occured! [\"Name can't be blank\", \"City can't be blank\", \"State can't be blank\"]"
