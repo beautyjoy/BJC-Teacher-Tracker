@@ -37,4 +37,4 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
     And   I press "Submit"
-    Then  I should be on the new teacher page
+    Then  I should see /An error occurred.*/
