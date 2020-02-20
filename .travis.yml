@@ -3,6 +3,9 @@ language: ruby
 rvm:
   - 2.6.5
 
+services:
+  - postgresql
+
 # make sure production-only gems are not installed
 bundler_args: --without production
 
@@ -34,6 +37,7 @@ before_script:
 script:
   # setup the test database, including any seed data
   - bundle exec rake db:setup
+  - bundle exec rake db:migrate
   # insert here any other steps needed (load other sample data, etc) before starting tests
   # run RSpec tests, and capture coverage
   - bundle exec rspec

@@ -5,6 +5,11 @@ ruby '2.6.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.4.1'
 
+# Production app server
+gem 'puma'
+
+gem 'pg', '~> 1.0'
+
 # Front-end Assets
 gem 'webpacker'
 
@@ -27,12 +32,6 @@ gem 'figaro'
 # Generate attr_accessors that transparently encrypt and decrypt attributes.
 gem 'attr_encrypted', '~> 3.1.0'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Production app server
-gem 'puma'
-
 gem 'sentry-raven'
 
 group :development, :test do
@@ -43,7 +42,6 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
   gem 'guard-shell'
-  gem "sqlite3", "~> 1.3.6"
 
   # Intercept and view emails in a browser
   gem 'letter_opener'
@@ -67,9 +65,4 @@ group :test do
   gem 'database_cleaner' # required by Cucumber
   gem 'factory_bot_rails' # if using FactoryBot
   gem 'metric_fu'        # collect code metrics
-end
-
-# make sure the following gems are in your production group:
-group :production do
-  gem 'pg', '~> 1.0' # use PostgreSQL in production (Heroku)
 end

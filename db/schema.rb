@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_013314) do
+ActiveRecord::Schema.define(version: 2020_02_20_094041) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_013314) do
     t.string "encrypted_google_token_iv"
     t.string "encrypted_google_refresh_token"
     t.string "encrypted_google_refresh_token_iv"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", default: -> { "now()" }
+    t.datetime "updated_at", default: -> { "now()" }
     t.index ["email", "first_name"], name: "index_admins_on_emails_and_first_name"
   end
 
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 2020_02_18_013314) do
     t.string "other"
     t.integer "school_id"
     t.boolean "validated"
-    t.datetime "created_at", default: "2019-12-11 07:35:22"
-    t.datetime "updated_at", default: "2019-12-11 07:35:22"
+    t.datetime "created_at", default: -> { "now()" }
+    t.datetime "updated_at", default: -> { "now()" }
     t.integer "status"
     t.string "more_info"
     t.boolean "admin", default: false
