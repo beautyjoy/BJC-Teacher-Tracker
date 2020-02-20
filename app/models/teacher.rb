@@ -27,6 +27,10 @@ class Teacher < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def email_name
+    "#{full_name} <#{@email}>"
+  end
+
   def status=(value)
     value = value.to_i if value.is_a? String
     super(value)

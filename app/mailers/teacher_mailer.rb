@@ -2,12 +2,13 @@
 
 class TeacherMailer < ApplicationMailer
   CONTACT_EMAIL = 'lmock@berkeley.edu'
+  BJC_EMAIL = 'contact@bjc.berkeley.edu'
 
   def welcome_email(teacher)
     @teacher = teacher
-    mail to: @teacher.email,
+    mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
-         subject: 'Welcome to the Beauty and Joy of Computing!'
+         subject: 'Welcome to The Beauty and Joy of Computing!'
   end
 
   def form_submission(teacher)

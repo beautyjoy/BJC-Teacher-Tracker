@@ -8,6 +8,6 @@ describe TeacherMailer do
 		email.deliver_now
 		expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
 		expect(email.to[0]).to eq("bob@gmail.com")
-		expect(email.subject).to eq("Welcome to the Beauty and Joy of Computing!")
+		expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
 	end
 end
