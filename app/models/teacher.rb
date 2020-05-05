@@ -32,7 +32,12 @@ class Teacher < ApplicationRecord
   end
 
   def status=(value)
-    value = value.to_i if value.is_a? String
+    value = value.to_i if value.is_a?(String)
     super(value)
+  end
+
+  def display_status
+    return "Other: #{more_info}" if status == 4
+    status
   end
 end

@@ -1,16 +1,17 @@
 <% provide(:h1, "BJC Teacher Dashboard") %>
 <div class="">
   <h2>New Requests</h2>
-    <table class="table">
+    <table class="table js-datatable">
       <thead class="thead-dark">
         <tr>
-          <th scope="col"> Name </th>
-          <th scope="col"> Email </th>
-          <th scope="col"> School </th>
-          <th scope="col"> Location </th>
-          <th scope="col"> Snap<i>!</i> </th>
-          <th scope="col"> Validate </th>
-          <th scope="col"> Delete </th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">School</th>
+          <th scope="col">Location</th>
+          <th scope="col">Status</th>
+          <th scope="col">Snap<i>!</i></th>
+          <th scope="col">Validate</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +23,7 @@
             <%= link_to teacher.school.name, teacher.school.website, target: "_blank" %>
           </td>
           <td> <%= teacher.school.location %> </td>
+          <td> <%= teacher.display_status %>
           <td>
             <% if !['N/A', 'None', ''].include?(teacher.snap) %>
             <%= link_to teacher.snap, "https://snap.berkeley.edu/user?user=#{teacher.snap}", target: "_blank" %>
