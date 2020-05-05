@@ -11,9 +11,11 @@
   <%= render 'layouts/navbar' %>
 
   <div class="container">
-    <h1 class="page-title"> <%= yield(:h1) %> </h1>
-    <%= render 'layouts/flash' %>
-    <%= yield %>
+    <main>
+      <h1 class="page-title"><%= yield(:h1) %></h1>
+      <%= render 'layouts/flash' %>
+      <%= yield %>
+    </main>
   </div>
 
   <%= render "layouts/footer" %>
