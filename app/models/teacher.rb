@@ -37,7 +37,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_status
-    return "Other: #{more_info}" if more_info?
+    return "#{status} | #{more_info}" if more_info?
     status
   end
 end
