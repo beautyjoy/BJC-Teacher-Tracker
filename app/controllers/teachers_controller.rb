@@ -12,10 +12,26 @@ class TeachersController < ApplicationController
   end
 
   def create
-    set_teacher_and_school
-    if Teacher.exists?(email: teacher_params[:email])
-      flash[:alert] = "A user with this email already exists!"
-      render 'new'
+    # TODO: This needs to be re-written.
+    @school = School.new(school_params)
+    # Find by email, but allow updating other info.
+    @teacher = Teacher.find_by(email: teacher_params[:email])
+    if @teacher
+      # Exclude website from the school finder, so we can update an existing school.
+      @school = School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+      @school.website = school_params[:website]
+      @school.save!
+      @teacher.update(teacher_params)
+      @teacher.school = @school
+      @teacher.save!
+      if @teacher.validated?
+        TeacherMailer.welcome_email(@teacher).delivr_now
+        TeacherMailer.form_submission(@teacher).deliver_now
+        flash[:success] = "Thanks! We have a updated your information. We have sent BJC info to #{@teacher.email}."
+      else
+        flash[:success] = "Thanks! We have a updated your information."
+      end
+      redirect_to root_path
     else
       @school = school_from_params
       if !@school.save
@@ -26,7 +42,7 @@ class TeachersController < ApplicationController
         @teacher.validated = false
         if @teacher.save
           flash[:success] =
-            "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly."
+            "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
           TeacherMailer.form_submission(@teacher).deliver_now
           redirect_to root_path
         else
@@ -37,9 +53,11 @@ class TeachersController < ApplicationController
   end
 
   def validate
+    # TODO: Require admin helper.
     if !is_admin?
       redirect_to root_path, alert: "Only administrators can validate!"
     else
+      # TODO: Clean this up so the counter doesn't need to be manually incremented.
       teacher = Teacher.find(params[:id])
       teacher.validated = true
       teacher.school.num_validated_teachers += 1

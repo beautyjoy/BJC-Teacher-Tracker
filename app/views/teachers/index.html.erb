@@ -17,10 +17,12 @@
     <tbody>
       <% @validated_teachers.each do |teacher| %>
       <tr>
+        <%# TODO: Refactor this row into a partial. %>
         <td> <%= teacher.full_name %> </td>
-        <td> <%= teacher[:email] %> </td>
-        <td> <%= teacher.status %> </td>
+        <td> <%= teacher.email %> </td>
+        <td> <%= teacher.display_status %> </td>
         <td>
+          <%# TODO: Extract this into a method / helper. %>
           <% if ['N/A', 'None', '', nil].include?(teacher[:snap]) %>
             —
           <% else %>
