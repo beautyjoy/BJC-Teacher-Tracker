@@ -25,3 +25,5 @@ import "datatables.net-buttons-bs4";
 import  'datatables.net-buttons/js/buttons.html5.js';
 
 import './datatables.js';
+
+// export default {};
