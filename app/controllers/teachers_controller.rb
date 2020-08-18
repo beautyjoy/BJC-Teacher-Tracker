@@ -52,6 +52,22 @@ class TeachersController < ApplicationController
     end
   end
 
+  def edit
+    @teacher = Teacher.find(params[:id])
+    @school = @teacher.school
+  end
+
+  def update
+    @teacher = Teacher.find(params[:id])
+    @school = @teacher.school
+    @teacher.update(teacher_params)
+    @school.update(school_params)
+    @teacher.save!
+    @school.save!
+    flash[:success] = "Saved #{@teacher.full_name}"
+    redirect_to teachers_path
+  end
+
   def validate
     # TODO: Require admin helper.
     if !is_admin?

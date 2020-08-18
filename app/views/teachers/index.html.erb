@@ -18,7 +18,7 @@
       <% @validated_teachers.each do |teacher| %>
       <tr>
         <%# TODO: Refactor this row into a partial. %>
-        <td> <%= teacher.full_name %> </td>
+        <td> <%= link_to(teacher.full_name, edit_teacher_path(teacher)) %> </td>
         <td> <%= teacher.email %> </td>
         <td> <%= teacher.display_status %> </td>
         <td>
