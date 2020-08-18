@@ -16,7 +16,8 @@ class Teacher < ApplicationRecord
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.'
+    'Other - Please specify below.',
+    'I am teaching BJC through the TEALS program'
   ].freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
