@@ -35,7 +35,7 @@
         <%= f.label :status, "What's your current status?", class: "label-required" %>
         <%= f.select(
           :status,
-          options_for_select(Teacher.statuses),
+          options_for_select(Teacher.statuses, teacher.status_before_type_cast),
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
         ) %>
