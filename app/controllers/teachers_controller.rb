@@ -25,7 +25,7 @@ class TeachersController < ApplicationController
       @teacher.school = @school
       @teacher.save!
       if @teacher.validated?
-        TeacherMailer.welcome_email(@teacher).delivr_now
+        TeacherMailer.welcome_email(@teacher).deliver_now
         TeacherMailer.form_submission(@teacher).deliver_now
         flash[:success] = "Thanks! We have a updated your information. We have sent BJC info to #{@teacher.email}."
       else
