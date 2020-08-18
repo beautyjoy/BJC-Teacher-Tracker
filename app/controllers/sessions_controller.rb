@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     if Admin.validate_auth(access_token)
       # Tell them to register.
       admin = Admin.from_omniauth(access_token)
-      log_in admin
+      log_in(admin)
       # Access_token is used to authenticate request made from the rails application to the google server
       admin.google_token = access_token.credentials.token
       # Refresh_token to request new access_token
