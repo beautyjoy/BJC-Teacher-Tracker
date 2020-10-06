@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_094041) do
+ActiveRecord::Schema.define(version: 2020_10_06_003829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_094041) do
     t.string "google_token_iv"
     t.string "google_refresh_token"
     t.string "google_refresh_token_iv"
+    t.string "personal_website"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
   end
 
