@@ -9,6 +9,7 @@
           <th scope="col">School</th>
           <th scope="col">Location</th>
           <th scope="col">Status</th>
+          <th scope="col">Website</th>
           <th scope="col">Snap<i>!</i></th>
           <th scope="col">Validate</th>
           <th scope="col">Delete</th>
@@ -24,6 +25,9 @@
           </td>
           <td> <%= teacher.school.location %> </td>
           <td> <%= teacher.display_status %>
+          <td>
+            <%= link_to('Website', teacher.personal_website) if teacher.personal_website %>
+          </td>
           <td>
             <% if !['N/A', 'None', ''].include?(teacher.snap) %>
             <%= link_to teacher.snap, "https://snap.berkeley.edu/user?user=#{teacher.snap}", target: "_blank" %>
