@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ye:
+  first_name: Ye
+  last_name: Wang
+  status: 4
+  more_info: A CS169 Student
+  email: ye@berkeley.edu
+  snap: ye
+  validated: true
+
+bob_teacher:
+    first_name: 'Bob'
+    last_name: 'Johnson'
+    snap: 'BobJohnson'
+    email: 'bob@gmail.com'
+    status: 1
+    more_info: ''
+    validated: false

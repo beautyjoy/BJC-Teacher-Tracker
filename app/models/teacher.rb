@@ -20,6 +20,15 @@ class Teacher < ApplicationRecord
     'I am teaching BJC through the TEALS program'
   ].freeze
 
+  SHORT_STATUS = [
+    'CSP Teacher',
+    'Non-CSP Teacher',
+    'Mixed Class',
+    'TEALS Volunteer',
+    'Other',
+    'TEALS Teacher'
+  ].freeze
+
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
@@ -38,7 +47,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_status
-    return "#{status} | #{more_info}" if more_info?
-    status
+    return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
+    SHORT_STATUS[status_before_type_cast]
   end
 end

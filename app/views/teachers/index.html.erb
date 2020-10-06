@@ -5,21 +5,13 @@
   <table class="table table-striped js-dataTable">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Status</th>
-        <th scope="col">Snap<i>!</i></th>
-        <th scope="col">Website</th>
-        <th scope="col">School</th>
-        <th scope="col">Location</th>
-        <th scope="col">Created</th>
+        <%= render 'table_headers' %>
       </tr>
     </thead>
     <tbody>
       <% @validated_teachers.each do |teacher| %>
       <tr>
-        <%# TODO: Refactor this row into a partial. %>
-        <% render 'teacher', teacher: teacher %>
+        <%= render 'teacher', teacher: teacher %>
       </tr>
       <% end %>
     </tbody>
