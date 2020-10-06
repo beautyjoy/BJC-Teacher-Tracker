@@ -1,6 +1,7 @@
 <%= provide(:h1, "Request Access to Teacher Materials") %>
 
 <div id='sign-up-form-container'>
+  <%# If out submission was successful, don't re-render the form. %>
   <% if !flash[:success] %>
     <%= render 'form', teacher: @teacher %>
   <% end %>
