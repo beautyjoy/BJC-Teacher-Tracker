@@ -9,6 +9,7 @@
         <th scope="col">Email</th>
         <th scope="col">Status</th>
         <th scope="col">Snap<i>!</i></th>
+        <th scope="col">Website</th>
         <th scope="col">School</th>
         <th scope="col">Location</th>
         <th scope="col">Created</th>
@@ -30,6 +31,9 @@
               <%= teacher[:snap] %>
             </a>
           <% end %>
+        </td>
+        <td>
+          <%= link_to('Website', teacher.personal_website) if teacher.personal_website %>
         </td>
         <td>
           <a href="<%= teacher.school.website %>" target="_blank">
