@@ -6,11 +6,12 @@
         <tr>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
+          <th scope="col">Status</th>
+          <th scope="col">Snap<i>!</i></th>
+          <th scope="col">Website</th>
           <th scope="col">School</th>
           <th scope="col">Location</th>
-          <th scope="col">Status</th>
-          <th scope="col">Website</th>
-          <th scope="col">Snap<i>!</i></th>
+          <th scope="col">Created</th>
           <th scope="col">Validate</th>
           <th scope="col">Delete</th>
         </tr>
@@ -18,21 +19,7 @@
       <tbody>
         <% @unvalidated_teachers.each do |teacher| %>
         <tr>
-          <td> <%= teacher.first_name + ' ' + teacher.last_name %> </td>
-          <td> <%= teacher.email %> </td>
-          <td>
-            <%= link_to teacher.school.name, teacher.school.website, target: "_blank" %>
-          </td>
-          <td> <%= teacher.school.location %> </td>
-          <td> <%= teacher.display_status %>
-          <td>
-            <%= link_to('Website', teacher.personal_website) if teacher.personal_website %>
-          </td>
-          <td>
-            <% if !['N/A', 'None', ''].include?(teacher.snap) %>
-            <%= link_to teacher.snap, "https://snap.berkeley.edu/user?user=#{teacher.snap}", target: "_blank" %>
-            <% end %>
-          </td>
+          <%= render 'teachers/teacher', teacher: teacher %>
           <td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
           <td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
         </tr>
