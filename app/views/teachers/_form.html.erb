@@ -30,6 +30,13 @@
       </div>
     </div>
 
+    <div class="form-group row">
+      <div class='col-12'>
+        <%= f.label :personal_website, "Personal or Course Website", class: "label" %>
+        <%= f.text_field :personal_website, placeholder: "https://school.edu", class: "form-control", type: "url" %>
+      </div>
+    </div>
+
     <div class='form-group row'>
       <div class='col-12'>
         <%= f.label :status, "What's your current status?", class: "label-required" %>
@@ -83,7 +90,7 @@
       <div class="form-group">
         <%= school_fields.label :website, "School Website", class: "label-required" %>
         <%= school_fields.text_field :website, placeholder: "https://snap.berkeley.edu",
-          class: "form-control", required: true %>
+          class: "form-control", required: true, type: "url" %>
       </div>
     </div>
   <% end %>

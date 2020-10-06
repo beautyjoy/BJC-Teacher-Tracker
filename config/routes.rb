@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :teachers
-  resources :admins
+  resources :teachers # Note we're not actually using all of these...
+  resources :admins   # Note we're not actually using all of these...
   resources :schools, only: [:new, :create, :index]
 
   root to: "main#index"

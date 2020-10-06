@@ -9,6 +9,7 @@
         <th scope="col">Email</th>
         <th scope="col">Status</th>
         <th scope="col">Snap<i>!</i></th>
+        <th scope="col">Website</th>
         <th scope="col">School</th>
         <th scope="col">Location</th>
         <th scope="col">Created</th>
@@ -18,28 +19,7 @@
       <% @validated_teachers.each do |teacher| %>
       <tr>
         <%# TODO: Refactor this row into a partial. %>
-        <td> <%= link_to(teacher.full_name, edit_teacher_path(teacher)) %> </td>
-        <td> <%= teacher.email %> </td>
-        <td> <%= teacher.display_status %> </td>
-        <td>
-          <%# TODO: Extract this into a method / helper. %>
-          <% if ['N/A', 'None', '', nil].include?(teacher[:snap]) %>
-            —
-          <% else %>
-            <a href="https://snap.berkeley.edu/user?user=<%= teacher[:snap] %>" target="_blank">
-              <%= teacher[:snap] %>
-            </a>
-          <% end %>
-        </td>
-        <td>
-          <a href="<%= teacher.school.website %>" target="_blank">
-            <%= teacher.school.name %>
-          </a>
-        </td>
-        <td> <%= teacher.school.location %> </td>
-        <td data-sort="<%= teacher.created_at %>">
-          <%= teacher.created_at.strftime("%b %d, %Y") %>
-        </td>
+        <% render 'teacher', teacher: teacher %>
       </tr>
       <% end %>
     </tbody>
