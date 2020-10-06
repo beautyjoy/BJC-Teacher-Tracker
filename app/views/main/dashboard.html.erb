@@ -12,16 +12,20 @@
           <th scope="col">School</th>
           <th scope="col">Location</th>
           <th scope="col">Created</th>
-          <th scope="col">Validate</th>
-          <th scope="col">Delete</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @unvalidated_teachers.each do |teacher| %>
         <tr>
           <%= render 'teachers/teacher', teacher: teacher %>
-          <td> <%= button_to("Validate", validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
-          <td> <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
+              <%= button_to("Validate", validate_path(:id => teacher.id),
+                {class: 'btn btn-success', type: 'button'}) %>
+              <%= button_to("Delete", delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger', type: 'button') %>
+            </div>
+          </td>
         </tr>
         <% end %>
       </tbody>
