@@ -35,7 +35,6 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
-
 RSpec.configure do |config|
   # This app has both Rails 5 and rspec tests.
   # They share the same fixtures.
