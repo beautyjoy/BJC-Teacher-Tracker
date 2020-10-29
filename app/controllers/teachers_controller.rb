@@ -27,9 +27,9 @@ class TeachersController < ApplicationController
       if @teacher.validated?
         TeacherMailer.welcome_email(@teacher).deliver_now
         TeacherMailer.form_submission(@teacher).deliver_now
-        flash[:success] = "Thanks! We have a updated your information. We have sent BJC info to #{@teacher.email}."
+        flash[:success] = "Thanks! We have updated your information. We have sent BJC info to #{@teacher.email}."
       else
-        flash[:success] = "Thanks! We have a updated your information."
+        flash[:success] = "Thanks! We have updated your information."
       end
       redirect_to root_path
     else
