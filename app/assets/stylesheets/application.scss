@@ -15,12 +15,18 @@
  *= require_self
  */
 
+<<<<<<< HEAD:app/assets/stylesheets/application.css.scss
+ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+ @import '@fortawesome/fontawesome-free/scss/fontawesome';
+ @import '@fortawesome/fontawesome-free/scss/solid';
+=======
 
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/solid';
+>>>>>>> aa8876676b981d7e1308c6a8dc4dc3581cee79f8:app/assets/stylesheets/application.scss
 
 html {
   min-height: 100%;
