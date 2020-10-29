@@ -6,6 +6,9 @@ rvm:
 services:
   - postgresql
 
+addons:
+  chrome: stable
+
 # make sure production-only gems are not installed
 bundler_args: --without production
 

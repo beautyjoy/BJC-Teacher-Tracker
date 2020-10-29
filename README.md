@@ -20,6 +20,13 @@ We have worked on the adding following core features and functionality:
   - a map with the locations of all the schools that teachers are a part of
   - a separate page with all the validated teachers and their information
 
+## Installation:
+
+* `brew install postgresql chromedriver`
+* `rvm use 2.6.5` # Double-check `.ruby-version`
+* `bundle`
+* Start postgres if necessary. `brew services start postgresql`
+* `bin/rails db:setup`
 
 ## Few Things to Know:
 
@@ -31,7 +38,6 @@ We have worked on the adding following core features and functionality:
 ## Deployed Site:
 
 - https://teachers.bjc.berkeley.edu
-- https://bjc-teachers.herokuapp.com/
 
 ## Steps to Deploying on Heroku
 

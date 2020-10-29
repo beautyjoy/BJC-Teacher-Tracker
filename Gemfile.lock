@@ -67,6 +67,10 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    capybara-selenium (0.0.6)
+      capybara
+      selenium-webdriver
+    childprocess (3.0.0)
     chronic (0.10.2)
     churn (0.0.35)
       chronic (>= 0.2.3)
@@ -356,6 +360,7 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_parser (3.14.1)
       sexp_processor (~> 4.9)
+    rubyzip (2.3.0)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -370,6 +375,9 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     sentry-raven (2.13.0)
       faraday (>= 0.7.6, < 1.0)
     sexp_processor (4.13.0)
@@ -428,6 +436,8 @@ PLATFORMS
 DEPENDENCIES
   attr_encrypted (~> 3.1.0)
   byebug
+  capybara
+  capybara-selenium
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
@@ -450,6 +460,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   sentry-raven
   simplecov
   spring

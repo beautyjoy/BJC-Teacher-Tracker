@@ -43,5 +43,5 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I enter my "School Website" as "chs.fuhsd.org"
     And   I press "Submit"
     # Then  I am on the BJC home page
-    # Then  debug javascript
+    Then  debug javascript
     # Then  I see a confirmation "× An error occured! [\"Name can't be blank\", \"City can't be blank\", \"State can't be blank\"]"
