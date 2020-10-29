@@ -12,14 +12,15 @@ Scenario: Correctly filling out and succesful form submission
     And   I enter my "Snap! Username" as "kpzhu"
     And   I set my status as "I am teaching BJC as an AP CS Principles course."
     And   I enter my "More Information" as "I am after school volunteer"
+    And   I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
     And   I enter my "School Name" as "Cupertino High School"
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
-    And   I enter my "School Website" as "chs.fuhsd.org"
+    And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
 
-Scenario: Correctly filling out with other and snap empty and succesful form submission
+Scenario: Filling a new form with existing info shows and updated confirmation.
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
@@ -28,9 +29,9 @@ Scenario: Correctly filling out with other and snap empty and succesful form sub
     And   I enter my "School Name" as "Cupertino High School"
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
-    And   I enter my "School Website" as "chs.fuhsd.org"
+    And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I press "Submit"
-    Then  I see a confirmation "Thanks for signing up for BJC"
+    Then  I see a confirmation "Thanks! We have updated your information."
 
 Scenario: Not Correctly filling out and unsuccesful form submission
     Given I am on the BJC home page
@@ -42,6 +43,5 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I select "CA" from "State"
     And   I enter my "School Website" as "chs.fuhsd.org"
     And   I press "Submit"
-    # Then  I am on the BJC home page
-    Then  debug javascript
-    # Then  I see a confirmation "× An error occured! [\"Name can't be blank\", \"City can't be blank\", \"State can't be blank\"]"
+    Then  The "#new_teacher" form is invalid
+    And  I am on the BJC home page

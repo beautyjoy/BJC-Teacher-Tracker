@@ -11,11 +11,13 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap.min
- *= require @fortawesome/fontawesome-free/css/fontawesome.min.css
- *= require @fortawesome/fontawesome-free/css/all.min.css
  *= require_tree .
  *= require_self
  */
+
+ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+ @import '@fortawesome/fontawesome-free/scss/fontawesome';
+ @import '@fortawesome/fontawesome-free/scss/solid';
 
 html {
   min-height: 100%;

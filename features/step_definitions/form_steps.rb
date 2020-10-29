@@ -9,11 +9,11 @@ Given /^I set my status as "(.*)"$/ do |input|
 end
 
 Then(/I see a confirmation "(.*)"/) do |string|
-    page.should have_css ".alert", text: string
+    page.should have_css ".alert", text: /#{string}/
 end
 
-Then /The "(.*)" field has an error/     do |string|
-
+Then /The "(.*)" form is invalid/ do |id|
+    page.evaluate_script("document.querySelector('#{id}').reportValidity()").should be false
 end
 
 Then /^debug javascript$/ do
