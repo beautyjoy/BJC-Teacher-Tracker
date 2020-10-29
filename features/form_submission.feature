@@ -11,7 +11,7 @@ Scenario: Correctly filling out and succesful form submission
     And   I enter my "School Email" as "kpzhu@berkeley.edu"
     And   I enter my "Snap! Username" as "kpzhu"
     And   I set my status as "I am teaching BJC as an AP CS Principles course."
-    And   I enter my "More Information" as "I am after school volunteer"
+    And   I enter "More Information" as "I am after school volunteer"
     And   I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
     And   I enter my "School Name" as "Cupertino High School"
     And   I enter my "City" as "Cupertino"
