@@ -65,4 +65,5 @@ group :test do
   gem 'database_cleaner' # required by Cucumber
   gem 'factory_bot_rails' # if using FactoryBot
   gem 'metric_fu'        # collect code metrics
+  gem 'selenium-webdriver'
 end
