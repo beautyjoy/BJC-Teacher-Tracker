@@ -49,8 +49,7 @@ script:
   # run RSpec tests, and capture coverage
   - bundle exec rspec
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
-  # run Cucumber scenarios, and capture coverage. --strict means undefined steps result in a failure.
-  - bundle exec cucumber --strict
+  - bundle exec cucumber
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
   - bundle exec rails test
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
