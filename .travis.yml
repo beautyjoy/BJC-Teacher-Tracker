@@ -1,7 +1,7 @@
 # replace with version(s) of Ruby that matches your Gemfile:
 language: ruby
 rvm:
-  - 2.6.5
+  - 2.6.6
 
 services:
   - postgresql

@@ -20,11 +20,13 @@ import 'jquery-ujs/src/rails'
 import 'bootstrap';
 import 'popper.js';
 
+// import '@fortawesome/fontawesome-free/scss/';
 import "@fortawesome/fontawesome-free/js/all";
+// import '@fortawesome/fontawesome-free/webfonts/*';
 
 import "datatables.net-bs4";
 import "datatables.net-buttons-bs4";
-import  'datatables.net-buttons/js/buttons.html5.js';
+import 'datatables.net-buttons/js/buttons.html5.js';
 
 import './datatables.js';
 
