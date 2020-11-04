@@ -39,7 +39,8 @@ before_script:
   - chmod +x $CCTR
   - $CCTR before-build
   - bin/yarn
-  - bin/rails assets:precompile
+  - bundle exec rails assets:precompile
+  - bundle exec rails webpacker:compile
 
 script:
   # setup the test database, including any seed data
