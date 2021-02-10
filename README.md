@@ -56,11 +56,11 @@ If bundler install runs successfully, continue with the following commands to co
 
 ### Maintainability Badge
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/maintainability)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/maintainability)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/maintainability)
 
 ### Test Coverage Badge
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/test_coverage)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/test_coverage)
 
 ## Travis CI Badge
-[![Build Status](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker)
+[![Build Status](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker)
