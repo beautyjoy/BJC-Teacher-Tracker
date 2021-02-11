@@ -16,15 +16,16 @@
 @import "~bootstrap/scss/bootstrap";
 
 // $fa-font-path: '/packs/media/webfonts';
-// @import '@fortawesome/fontawesome-free/scss/fontawesome';
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+// @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/variables';
 @import '~@fortawesome/fontawesome-free/scss/mixins';
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/core';
-@import '~@fortawesome/fontawesome-free/scss/icons';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/larger';
+@import '~@fortawesome/fontawesome-free/scss/icons';
 
 @import 'stylesheets/main';
 @import 'stylesheets/layout';
