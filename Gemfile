@@ -9,7 +9,7 @@ gem 'puma', '>= 4.3.5'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
-gem 'webpacker'
+gem 'webpacker', '~> 4.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
