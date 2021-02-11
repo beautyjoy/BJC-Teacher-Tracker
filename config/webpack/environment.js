@@ -15,7 +15,14 @@ environment.config.merge({
     rules: [
       {
         test: /\.(svg|eot|woff|woff2|ttf)$/,
-        use: ["file-loader"],
+        use: [
+          {
+            loader: "file-loader?name=[path][name].[ext]",
+            options: {
+              name: '[path][name].[ext]',
+            }
+          }
+        ],
       },
     ],
   },
