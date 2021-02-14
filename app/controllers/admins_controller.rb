@@ -20,6 +20,7 @@ class AdminsController < ApplicationController
   end
 
   def googleAuth
+    # most likely useless, but will investigate later - spring 2021 Team 3
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
     adminastrator = Admin.from_omniauth(access_token)

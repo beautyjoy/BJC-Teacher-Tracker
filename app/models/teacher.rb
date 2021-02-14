@@ -50,4 +50,9 @@ class Teacher < ApplicationRecord
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
   end
+
+  def self.from_omniauth(auth)
+    email_from_google = auth.info.email.downcase
+    return find_by(email: email_from_google)
+  end
 end
