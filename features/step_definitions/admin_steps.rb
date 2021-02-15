@@ -9,5 +9,5 @@ end
 Then /I can log in with Google/ do
   allow(Admin).to receive(:validate_auth).and_return(true)
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-  page.find('a', text: /.*Sign in/).click()
+  page.find('button', text: /.*Sign in/).click()
 end

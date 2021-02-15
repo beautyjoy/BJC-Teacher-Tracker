@@ -22,8 +22,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-# for google oauth
+
+# Login via 3rd party services.
+gem 'omniauth', '~> 2.0'
+gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+
 # for timezone information for windows users
 gem 'tzinfo-data'
 # for managing API keys
