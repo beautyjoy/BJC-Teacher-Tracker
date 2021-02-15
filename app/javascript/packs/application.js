@@ -28,4 +28,6 @@ import  'datatables.net-buttons/js/buttons.html5.js';
 
 import './datatables.js';
 
+import '../styles/application.scss';
+
 // export default {};
