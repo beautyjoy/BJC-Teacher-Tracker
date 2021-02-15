@@ -3,4 +3,4 @@
 admin:
   first_name: Admin
   last_name: User
-  email_address: admin@example.com
+  email: admin@example.com
