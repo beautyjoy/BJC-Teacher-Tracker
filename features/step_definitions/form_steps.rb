@@ -1,5 +1,9 @@
 STATUS_FIELD = "What's your current status?"
 
+And /^"(.*)" is not in the database$/ do |email|
+    Teacher.find_by(email: email).try(:destroy)
+end
+
 Given /^I enter (?:my)? "(.*)" as "(.*)"$/ do |field_name, input|
     fill_in(field_name, with: input)
 end
