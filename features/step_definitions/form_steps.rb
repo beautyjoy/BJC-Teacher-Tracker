@@ -1,6 +1,6 @@
 STATUS_FIELD = "What's your current status?"
 
-Given /a teacher exists/ do
+Given /a valid teacher exists/ do
     create(:teacher)
     create(:school)
 end

@@ -6,12 +6,12 @@ ruby '2.6.6'
 gem 'rails', '5.2.4.5'
 
 # Production app server
-gem 'puma', '>= 4.3.5'
+gem 'puma', '~> 5'
 
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
-gem 'webpacker'
+gem 'webpacker', '~> 4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

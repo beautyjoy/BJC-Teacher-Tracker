@@ -5,7 +5,7 @@ Feature: submit a form as a teacher
   I want to be able to fill out a form on the BJC website
 
 Background: Test Data
-    Given a teacher exists
+    Given a valid teacher exists
 
 Scenario: Correctly filling out and succesful form submission
     Given "kpzhu@berkeley.edu" is not in the database
