@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
 
-ruby '2.6.5'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.3'
+gem 'rails', '5.2.4.5'
 
 # Production app server
-gem 'puma', '>= 4.3.5'
+gem 'puma', '~> 5'
 
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
-gem 'webpacker'
+gem 'webpacker', '~> 4'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -22,8 +22,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-# for google oauth
+
+# Login via 3rd party services.
+gem 'omniauth', '~> 2.0'
+gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+
 # for timezone information for windows users
 gem 'tzinfo-data'
 # for managing API keys

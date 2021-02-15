@@ -8,6 +8,7 @@ ye:
   email: ye@berkeley.edu
   snap: ye
   validated: true
+  school_id: 1
 
 bob_teacher:
     first_name: 'Bob'
@@ -17,3 +18,4 @@ bob_teacher:
     status: 1
     more_info: ''
     validated: false
+    school_id: 1
