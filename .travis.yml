@@ -46,11 +46,10 @@ script:
   # setup the test database, including any seed data
   - bundle exec rake db:setup
   - bundle exec rake db:migrate
-  # insert here any other steps needed (load other sample data, etc) before starting tests
-  # run RSpec tests, and capture coverage
-  - bundle exec rspec
-  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  # There is a very weird ordering effect. Run cucumber before rspec or some data is invalid.
   - bundle exec cucumber
+  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  - bundle exec rspec
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
   # TODO: Deprecate this step after moving to rspec
   - bundle exec rails test
