@@ -9,6 +9,13 @@
   <%= link_to(teacher.school.name, teacher.school.website, target: '_blank') %>
 </td>
 <td> <%= teacher.school.location %> </td>
+<% if teacher.validated == false && teacher.denied == false %>
+  <td> Pending </td>
+<% elsif teacher.validated == true %>
+  <td> Validated </td>
+<% elsif teacher.denied == true %>
+  <td> Denied </td>
+<% end %>
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%b %d, %Y") %>
 </td>
