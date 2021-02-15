@@ -4,6 +4,9 @@ Feature: submit a form as a teacher
   So that I can be added to the BJC program
   I want to be able to fill out a form on the BJC website
 
+Background: Test Data
+    Given a teacher exists
+
 Scenario: Correctly filling out and succesful form submission
     Given "kpzhu@berkeley.edu" is not in the database
     Given I am on the BJC home page
@@ -25,7 +28,7 @@ Scenario: Filling a new form with existing info shows and updated confirmation.
     Given I am on the BJC home page
     And   I enter my "First Name" as "Ye"
     And   I enter my "Last Name" as "Wang"
-    And   I enter my "School Email" as "ye@berkeley.edu"
+    And   I enter my "School Email" as "teacher@example.edu"
     And   I set my status as "I am teaching BJC as an AP CS Principles course."
     And   I enter my "School Name" as "Cupertino High School"
     And   I enter my "City" as "Cupertino"

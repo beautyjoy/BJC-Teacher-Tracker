@@ -1,5 +1,10 @@
 STATUS_FIELD = "What's your current status?"
 
+Given /a teacher exists/ do
+    create(:teacher)
+    create(:school)
+end
+
 And /^"(.*)" is not in the database$/ do |email|
     Teacher.find_by(email: email).try(:destroy)
 end

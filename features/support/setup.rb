@@ -6,17 +6,7 @@ ENV['RAILS_ENV'] ||= 'test'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
-# require 'support/factory_bot'
 
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-#
 # The following line is provided for convenience purposes. It has the downside
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
@@ -33,10 +23,19 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+
+# static seed data
+# load File.join(Rails.root, 'db', 'seeds.rb')
+
+# Load Rails all factories into cucumber:
+Before do
+  FactoryBot.reload
+end
+
 RSpec.configure do |config|
   # This app has both Rails 5 and rspec tests.
   # They share the same fixtures.
-  config.fixture_path = "#{::Rails.root}/test/fixtures"
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -66,3 +65,19 @@ end
 
 # Setup OmniAuth for testing
 OmniAuth.config.test_mode = true
+
+# TODO: Make this a generic email when you don't need to store
+# admin emails in the app secrets
+OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+  provider: 'google_oauth2',
+  uid: '123545',
+  info: {
+    name: 'Admin User',
+    first_name: "Admin",
+    last_name: "User",
+    email: "ball@berkeley.edu"
+  },
+  credentials: {
+    token: 'test_token'
+  }
+})

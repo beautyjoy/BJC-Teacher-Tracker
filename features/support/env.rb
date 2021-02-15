@@ -36,7 +36,7 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
@@ -62,22 +62,3 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 World(FactoryBot::Syntax::Methods)
-
-# Setup OmniAuth for testing
-OmniAuth.config.test_mode = true
-
-# TODO: Make this a generic email when you don't need to store
-# admin emails in the app secrets
-OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-  provider: 'google_oauth2',
-  uid: '123545',
-  info: {
-    name: 'Admin User',
-    first_name: "Admin",
-    last_name: "User",
-    email: "ball@berkeley.edu"
-  },
-  credentials: {
-    token: 'test_token'
-  }
-})
