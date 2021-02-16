@@ -23,6 +23,5 @@ class ApplicationController < ActionController::Base
 
   def set_sentry_user
     Sentry.set_user(id: session[:user_id]) # or anything else in session
-    # Sentry.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
