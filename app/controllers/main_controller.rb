@@ -10,7 +10,6 @@ class MainController < ApplicationController
   end
 
   def dashboard
-    Sentry.capture_message("test message")
     @unvalidated_teachers = Teacher.unvalidated.order(:created_at) || []
     @validated_teachers = Teacher.validated.order(:created_at) || []
     @statuses = Teacher.validated.group(:status).count
