@@ -1,6 +1,5 @@
-if !Rails.env.development?
-  Raven.configure do |config|
-    config.dsn = ENV['SENTRY_DSN']
-    config.sanitize_fields = Rails.application.config.filter_parameters.map(&:to_s)
-  end
+Sentry.init do |config|
+  config.enabled_environments = %w|production staging|
+
+  config.dsn = ENV['SENTRY_DSN']
 end
