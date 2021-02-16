@@ -38,7 +38,7 @@ end
 RSpec.configure do |config|
   # This app has both Rails 5 and rspec tests.
   # They share the same fixtures.
-  config.fixture_path = "#{::Rails.root}/test/fixtures"
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -65,3 +65,23 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+    :provider => "google_oauth2",
+    :uid => "123456789",
+    :info => {
+      :name => "Tony Stark",
+      :email => "tony@stark.com"
+    },
+    :credentials => {
+      :token => "token",
+      :refresh_token => "refresh token"
+    }
+  }
+)
+
+# def sign_in_admin
+  
+  
+# end

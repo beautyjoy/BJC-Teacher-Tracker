@@ -74,9 +74,11 @@ class TeachersController < ApplicationController
     if !is_admin?
       redirect_to root_path, alert: "Only administrators can validate!"
     else
+      # TODO: Check if teacher is already denied (MAYBE)
       # TODO: Clean this up so the counter doesn't need to be manually incremented.
       teacher = Teacher.find(params[:id])
       teacher.validated = true
+      teacher.denied = false
       teacher.school.num_validated_teachers += 1
       teacher.school.save!
       teacher.save!
@@ -90,9 +92,13 @@ class TeachersController < ApplicationController
     if !is_admin?
       redirect_to root_path, alert: "Only administrators can deny!"
     else
+      # TODO: Check if teacher is already validated (MAYBE)
       # TODO: Clean this up so the counter doesn't need to be manually incremented.
       teacher = Teacher.find(params[:id])
+      teacher.validated = false
       teacher.denied = true
+      teacher.school.num_denied_teachers += 1
+      teacher.school.save!
       teacher.save!
       # Replace with deny email later
       # TeacherMailer.welcome_email(teacher).deliver_now 

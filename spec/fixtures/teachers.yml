@@ -8,12 +8,33 @@ ye:
   email: ye@berkeley.edu
   snap: ye
   validated: true
+  denied: false
 
-bob_teacher:
-    first_name: 'Bob'
-    last_name: 'Johnson'
-    snap: 'BobJohnson'
-    email: 'bob@gmail.com'
-    status: 1
-    more_info: ''
-    validated: false
+bob:
+  first_name: 'Bob'
+  last_name: 'Johnson'
+  snap: 'BobJohnson'
+  email: 'bob@gmail.com'
+  status: 1
+  more_info: ''
+  validated: 'false'
+  denied: 'true'
+
+long:
+  first_name: 'Short'
+  last_name: 'Long'
+  snap: 'song'
+  email: 'short@long.com'
+  status: 1
+  school: berkeley
+  more_info: ''
+  validated: false
+  denied: false
+
+tony:
+  first_name: 'Tony'
+  last_name: 'Stark'
+  validated: true
+  denied: false
+  email: 'tony@stark.com'
+  admin: true

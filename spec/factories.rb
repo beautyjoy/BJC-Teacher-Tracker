@@ -8,5 +8,7 @@ FactoryBot.define do
     status { 0 }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
+    validated { false }
+    denied { true }
   end
 end
