@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_raven_context
+  before_action :set_sentry_user
 
   include SessionsHelper
 
@@ -21,9 +21,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_raven_context
-    return unless !Rails.env.development? and !Rails.env.test?
-    Sentry.user_context(id: session[:user_id]) # or anything else in session
-    Sentry.extra_context(params: params.to_unsafe_h, url: request.url)
+  def set_sentry_user
+    Sentry.set_user(id: session[:user_id]) # or anything else in session
+    # Sentry.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
