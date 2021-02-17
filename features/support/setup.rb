@@ -1,25 +1,12 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'simplecov'
-SimpleCov.start 'rails'
-require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path('../config/environment', __dir__)
+# require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
-require 'support/factory_bot'
 
-# Requires supporting ruby files with custom matchers and macros, etc, in
-# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
-# run as spec files by default. This means that files in spec/support that end
-# in _spec.rb will both be required and run as specs, causing the specs to be
-# run twice. It is recommended that you do not name files matching this glob to
-# end with _spec.rb. You can configure this pattern with the --pattern
-# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
-#
 # The following line is provided for convenience purposes. It has the downside
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
@@ -34,6 +21,15 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
+end
+
+
+# static seed data
+# load File.join(Rails.root, 'db', 'seeds.rb')
+
+# Load Rails all factories into cucumber:
+Before do
+  FactoryBot.reload
 end
 
 RSpec.configure do |config|
@@ -69,3 +65,19 @@ end
 
 # Setup OmniAuth for testing
 OmniAuth.config.test_mode = true
+
+# TODO: Make this a generic email when you don't need to store
+# admin emails in the app secrets
+OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+  provider: 'google_oauth2',
+  uid: '123545',
+  info: {
+    name: 'Admin User',
+    first_name: "Admin",
+    last_name: "User",
+    email: "ball@berkeley.edu"
+  },
+  credentials: {
+    token: 'test_token'
+  }
+})
