@@ -38,3 +38,14 @@ tony:
   denied: false
   email: 'tony@stark.com'
   admin: true
+  school_id: 1
+
+bob_teacher:
+    first_name: 'Bob'
+    last_name: 'Johnson'
+    snap: 'BobJohnson'
+    email: 'bob@gmail.com'
+    status: 1
+    more_info: ''
+    validated: false
+    school_id: 1

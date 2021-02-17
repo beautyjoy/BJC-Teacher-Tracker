@@ -9,6 +9,7 @@ ye:
   snap: ye
   validated: true
   denied: false
+  school_id: 1
 
 bob_teacher:
     first_name: 'Bob'
@@ -19,3 +20,4 @@ bob_teacher:
     more_info: ''
     validated: false
     denied: true
+    school_id: 1
