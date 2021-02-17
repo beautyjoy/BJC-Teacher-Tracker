@@ -12,5 +12,5 @@ RAILS_ENV: "development"
 RAILS_SERVE_STATIC_FILES: "true"
 SECRET_KEY_BASE: "6952b19932b43c62e7db551f7c9f7959ea72792bcf443609c4a1cbc3b01368ae"
 teacher_key: "784390af75de89" # not sure what this is used for.
-ADMIN_EMAILS: "justinphyo@berkeley.edu, tony@stark.com"
-SENTRY_DSN: "https://19d6d747d49d4a99a03764dbeaf73e82:a933d558ddcc42d2abf11161655e8f4f@sentry.cs10.org/4"
+ADMIN_EMAILS: "longhtong@berkeley.edu, tony@stark.com"
+SENTRY_DSN: "https://19d6d747d49d4a99a03764dbeaf73e82:a933d558ddcc42d2abf11161655e8f4f@sentry.cs10.org/4" 
