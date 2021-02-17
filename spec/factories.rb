@@ -16,8 +16,7 @@ FactoryBot.define do
     validated { true }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
-    validated { false }
-    denied { true }
+    denied { false }
   end
 
   factory :admin do
