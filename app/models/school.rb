@@ -1,4 +1,25 @@
 # frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: schools
+#
+#  id                     :bigint           not null, primary key
+#  city                   :string
+#  lat                    :float
+#  lng                    :float
+#  name                   :string
+#  num_validated_teachers :integer          default(0)
+#  state                  :string
+#  teachers_count         :integer          default(0)
+#  website                :string
+#  created_at             :datetime         default(Wed, 11 Dec 2019 07:35:22 UTC +00:00)
+#  updated_at             :datetime         default(Wed, 11 Dec 2019 07:35:22 UTC +00:00)
+#
+# Indexes
+#
+#  index_schools_on_name_city_and_website  (name,city,website)
+#
 require 'uri'
 class School < ApplicationRecord
   validates :name, :city, :state, :website, presence: true
