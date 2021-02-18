@@ -1,5 +1,32 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id                      :bigint           not null, primary key
+#  admin                   :boolean          default(FALSE)
+#  course                  :string
+#  email                   :string
+#  first_name              :string
+#  google_refresh_token    :string
+#  google_refresh_token_iv :string
+#  google_token            :string
+#  google_token_iv         :string
+#  last_name               :string
+#  more_info               :string
+#  other                   :string
+#  snap                    :string
+#  status                  :integer
+#  validated               :boolean
+#  created_at              :datetime
+#  updated_at              :datetime
+#  school_id               :integer
+#
+# Indexes
+#
+#  index_teachers_on_email_and_first_name  (email,first_name)
+#
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
   validates_inclusion_of :validated, :in => [true, false]
