@@ -10,8 +10,6 @@ project:
       url: 'https://bjc-sp21.herokuapp.com'
     travis:
       url: 'https://travis-ci.org/github/tommywei110/BJC-Teacher-Tracker'
-    codeclimate:
-      url: 'https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker'
   members:
     member1:
       name: 'Justin'
