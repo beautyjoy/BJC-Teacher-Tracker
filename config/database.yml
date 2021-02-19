@@ -9,13 +9,11 @@ default: &default
   pool: 5
   timeout: 5000
   host: localhost
-  username: ubuntuDB
-  password: AAAAA38750881	
+	
 development:
   <<: *default
   database: bjc_teachers_dev
-  username: ubuntuDB
-  password: AAAAA38750881
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
