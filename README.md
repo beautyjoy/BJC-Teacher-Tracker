@@ -62,5 +62,9 @@ If bundler install runs successfully, continue with the following commands to co
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/test_coverage)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/test_coverage)
 
+### Pivotal Tracker
+
+[![Pivotal Tracker](https://github.com/saasbook/q2q-demo/blob/main/app/assets/images/pivotal_tracker_logo.png)](https://pivotaltracker.com/n/projects/2406982)
+
 ## Travis CI Badge
 [![Build Status](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker)
