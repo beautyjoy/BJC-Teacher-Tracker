@@ -66,5 +66,8 @@ If bundler install runs successfully, continue with the following commands to co
 
 [![Pivotal Tracker](https://github.com/saasbook/q2q-demo/blob/main/app/assets/images/pivotal_tracker_logo.png)](https://pivotaltracker.com/n/projects/2406982)
 
-## Travis CI Badge
+### Travis CI Badge
 [![Build Status](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker)
+
+### Bluejay Badge
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_3-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-tommywei110_BJC-Teacher-Tracker/main)
