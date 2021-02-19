@@ -11,7 +11,7 @@ project:
     travis:
       url: 'https://travis-ci.org/github/tommywei110/BJC-Teacher-Tracker'
     codeclimate:
-      url: 'url'
+      url: 'https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker'
   members:
     member1:
       name: 'Justin'
@@ -19,4 +19,3 @@ project:
       githubUsername: 'justinphyo'
       pivotalUsername: 'justinphyo'
       herokuEmail: 'justinphyo@berkeley.edu'
-      
