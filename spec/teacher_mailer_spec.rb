@@ -3,7 +3,7 @@ require 'rails_helper'
 describe TeacherMailer do
 	fixtures :teachers
 	it 'Sends Welcome Email' do
-		teacher = teachers(:bob_teacher)
+		teacher = teachers(:bob)
 		email = TeacherMailer.welcome_email(teacher)
 		email.deliver_now
 		expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
