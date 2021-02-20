@@ -22,10 +22,19 @@ We have worked on the adding following core features and functionality:
 
 ## Installation:
 
+### Postgres Installation (MacOS):
 * `brew install postgresql chromedriver`
+* Start postgres if necessary. `brew services start postgresql`
+### Postgres Installation (Linux):
+* `sudo apt install postgresql`
+* Create a postgres user.
+  * `sudo su - postgres` (to get into postgres shell)
+  * `createuser --interactive --pwprompt` (in postgres shell)
+  * Save these information in `database.yml` under `default`. (`username: [username]` `password: [password]`)
+* Start postgres if necessary. `pg_ctlcluster 12 main start`
+
 * `rvm use 2.6.5` # Double-check `.ruby-version`
 * `bundle`
-* Start postgres if necessary. `brew services start postgresql`
 * `bin/rails db:setup`
 
 ## Few Things to Know:
