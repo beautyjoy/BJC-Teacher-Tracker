@@ -36,7 +36,7 @@ We have worked on the adding following core features and functionality:
 #### General Installation
 * `rvm use 2.6.5` # Double-check `.ruby-version`
 * `bundle`
-* `bin/rails db:setup`
+* `bin/rails db:setup` (Run this after setting up Postgres)
 
 ## Few Things to Know:
 
