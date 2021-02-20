@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_02_19_233254) do
     t.integer "teachers_count", default: 0
     t.datetime "created_at", default: "2019-12-11 07:35:22"
     t.datetime "updated_at", default: "2019-12-11 07:35:22"
+    t.integer "num_denied_teachers", default: 0
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_02_19_233254) do
     t.string "google_refresh_token"
     t.string "google_refresh_token_iv"
     t.string "personal_website"
+    t.boolean "denied"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
   end
 
