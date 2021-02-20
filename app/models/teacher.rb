@@ -6,8 +6,8 @@ class Teacher < ApplicationRecord
 
   belongs_to :school, counter_cache: true
 
-  scope :unvalidated, -> { where(validated: false) }
-  scope :validated, -> { where(validated: true) }
+  scope :unvalidated, -> { where("validated=? AND admin=?", 'false', 'false') }
+  scope :validated, -> { where("validated=? AND admin=?", 'true', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -29,7 +29,7 @@ class Teacher < ApplicationRecord
     'TEALS Teacher'
   ].freeze
 
-  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.split(',').freeze
+  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -53,19 +53,25 @@ class Teacher < ApplicationRecord
     SHORT_STATUS[status_before_type_cast]
   end
 
-  def self.admin_from_omniauth(auth)
-    # Creates a new user only if it doesn't exist
-    admin = where(email: auth.info.email).first_or_initialize do |administrator|
-      administrator.first_name = auth.info.first_name
-      administrator.last_name = auth.info.last_name
-      administrator.email = auth.info.email
+  def self.user_from_omniauth(auth)
+    user = find_or_create_by(email: auth.info.email)
+    # TODO: Should be changed when we have a way to add admin without using ENV.
+
+    if ADMIN_EMAILS =~ /#{user.email}/
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
+        user.email = auth.info.email
+        user.admin = true
+        user.status = 'Other'
+        user.validated = true
+        user.denied = false
     end
-    admin.admin = true
-    return admin
+
+    return user
   end
 
   def self.validate_auth(auth)
-    email_from_auth = auth.info.email.downcase
-    return ADMIN_EMAILS.include?(email_from_auth) || exists?(email: email_from_auth)
+    email_from_auth = auth.info.email
+    return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
   end
 end

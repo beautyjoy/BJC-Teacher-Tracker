@@ -18,22 +18,16 @@ class SessionsController < ApplicationController
 
     if Teacher.validate_auth(access_token)
       # Tell them to register.
-      user = Teacher.admin_from_omniauth(access_token)
-      if user.admin
-        admin = user
-        log_in(admin)
-        # Access_token is used to authenticate request made from the rails application to the google server
-        admin.google_token = access_token.credentials.token
-        # Refresh_token to request new access_token
-        # Note: Refresh_token is only sent once during the first request
-        refresh_token = access_token.credentials.refresh_token
-        admin.google_refresh_token = refresh_token if refresh_token.present?
-        admin.save
-        session[:logged_in] = true
-        redirect_to root_path
-      else
-        redirect_to root_path, alert: "Logged in as a teacher, not an admin (support coming)"
-      end
+      user = Teacher.user_from_omniauth(access_token)
+      # Access_token is used to authenticate request made from the rails application to the google server
+      user.google_token = access_token.credentials.token
+      # Refresh_token to request new access_token
+      # Note: Refresh_token is only sent once during the first request
+      refresh_token = access_token.credentials.refresh_token
+      user.google_refresh_token = refresh_token if refresh_token.present?
+      user.save!
+      log_in(user)
+      redirect_to root_path
     else
       redirect_to root_path, alert: "Please Submit a teacher request"
     end
