@@ -29,6 +29,8 @@ class Teacher < ApplicationRecord
     'TEALS Teacher'
   ].freeze
 
+  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.split(',').freeze
+
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
@@ -49,5 +51,21 @@ class Teacher < ApplicationRecord
   def display_status
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
+  end
+
+  def self.admin_from_omniauth(auth)
+    # Creates a new user only if it doesn't exist
+    admin = where(email: auth.info.email).first_or_initialize do |administrator|
+      administrator.first_name = auth.info.first_name
+      administrator.last_name = auth.info.last_name
+      administrator.email = auth.info.email
+    end
+    admin.admin = true
+    return admin
+  end
+
+  def self.validate_auth(auth)
+    email_from_auth = auth.info.email.downcase
+    return ADMIN_EMAILS.include?(email_from_auth) || exists?(email: email_from_auth)
   end
 end
