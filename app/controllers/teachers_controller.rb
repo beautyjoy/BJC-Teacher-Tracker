@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
   before_action :require_admin, except: [:new, :create]
 
   def index
-    @validated_teachers = Teacher.where(validated: true)
+    @all_teachers = Teacher.all
   end
 
   def new
@@ -40,6 +40,7 @@ class TeachersController < ApplicationController
       else
         @teacher = @school.teachers.build(teacher_params)
         @teacher.validated = false
+        @teacher.denied = false
         if @teacher.save
           flash[:success] =
             "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
@@ -73,13 +74,34 @@ class TeachersController < ApplicationController
     if !is_admin?
       redirect_to root_path, alert: "Only administrators can validate!"
     else
+      # TODO: Check if teacher is already denied (MAYBE)
       # TODO: Clean this up so the counter doesn't need to be manually incremented.
       teacher = Teacher.find(params[:id])
       teacher.validated = true
+      teacher.denied = false
       teacher.school.num_validated_teachers += 1
       teacher.school.save!
       teacher.save!
       TeacherMailer.welcome_email(teacher).deliver_now
+      redirect_to root_path
+    end
+  end
+
+  def deny
+    # TODO: Require admin helper.
+    if !is_admin?
+      redirect_to root_path, alert: "Only administrators can deny!"
+    else
+      # TODO: Check if teacher is already validated (MAYBE)
+      # TODO: Clean this up so the counter doesn't need to be manually incremented.
+      teacher = Teacher.find(params[:id])
+      teacher.validated = false
+      teacher.denied = true
+      teacher.school.num_denied_teachers += 1
+      teacher.school.save!
+      teacher.save!
+      # Replace with deny email later
+      # TeacherMailer.welcome_email(teacher).deliver_now 
       redirect_to root_path
     end
   end
