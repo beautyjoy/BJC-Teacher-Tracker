@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   # TODO: This really need to be tweaked!
   def is_admin?
-    @is_admin ||= session.key?("logged_in") and session[:logged_in] == true
+    @is_admin = logged_in? ? current_user.admin : false
   end
 
   def require_admin
