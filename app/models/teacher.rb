@@ -3,11 +3,13 @@
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
   validates_inclusion_of :validated, :in => [true, false]
+  validates_inclusion_of :denied, :in => [true, false]
 
   belongs_to :school, counter_cache: true
 
-  scope :unvalidated, -> { where("validated=? AND admin=?", 'false', 'false') }
-  scope :validated, -> { where("validated=? AND admin=?", 'true', 'false') }
+
+  scope :unvalidated, -> { where('validated=? AND denied=?', 'false', 'false') }
+  scope :validated, -> { where('validated=? OR denied=?', 'true', 'true') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -74,4 +76,15 @@ class Teacher < ApplicationRecord
     email_from_auth = auth.info.email
     return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
   end
+
+  def display_application_status
+    if validated == false && denied == false
+      return 'Pending' 
+    elsif validated == true
+      return 'Validated'
+    elsif denied == true
+      return 'Denied' 
+    end
+  end
+  
 end
