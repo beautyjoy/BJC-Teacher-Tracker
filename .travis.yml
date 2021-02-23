@@ -1,7 +1,7 @@
 # replace with version(s) of Ruby that matches your Gemfile:
 language: ruby
 rvm:
-  - 2.6.5
+  - 2.6.6
 
 services:
   - postgresql
@@ -15,7 +15,7 @@ bundler_args: --without production
 env:
   global:
     # in TravisCI settings, set CCKEY to your CodeClimate Test Reporter ID:
-    - CC_TEST_REPORTER_ID=$CCKEY
+    - CC_TEST_REPORTER_ID=fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
     - CCTR=./cc-test-reporter
     # set to whatever timezone your app assumes from this list:
     # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -29,7 +29,7 @@ before_script:
   # create config/application.yml (sensitive API keys etc) from config/application.yml.asc
   # IMPORTANT: you must MANUALLY set correct value of encryption KEY in Travis settings for your project --
   # DO NOT expose that value here!
-  - gpg --passphrase $KEY -d -o config/application.yml config/application.yml.asc
+  # gpg --passphrase $KEY -d -o config/application.yml config/application.yml.asc
   # Chromedriver to interface with headless chrome
   - LATEST_CHROMEDRIVER_VERSION=`curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
   - curl "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O
@@ -39,19 +39,18 @@ before_script:
   - chmod +x $CCTR
   - $CCTR before-build
   - bin/yarn
-  - bin/rails assets:precompile
+  - bin/rails webpacker:compile
 
 script:
   # setup the test database, including any seed data
   - bundle exec rake db:setup
   - bundle exec rake db:migrate
-  # insert here any other steps needed (load other sample data, etc) before starting tests
-  # run RSpec tests, and capture coverage
+  # There is a very weird ordering effect. Run cucumber before rspec or some data is invalid.
+  - bundle exec cucumber
+  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
   - bundle exec rspec
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
-  # run Cucumber scenarios, and capture coverage. --strict means undefined steps result in a failure.
-  - bundle exec cucumber --strict
-  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  # TODO: Deprecate this step after moving to rspec
   - bundle exec rails test
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
 
