@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
     # Manages the callback from Google
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
-
-    if Teacher.validate_auth(access_token)
+    if Teacher.validate_access_token(access_token)
       # Tell them to register.
       user = Teacher.user_from_omniauth(access_token)
       # Access_token is used to authenticate request made from the rails application to the google server
@@ -27,6 +26,9 @@ class SessionsController < ApplicationController
       user.google_refresh_token = refresh_token if refresh_token.present?
       user.save!
       log_in(user)
+      if !user.admin
+        flash.notice = "You can edit your information"
+      end
       redirect_to root_path
     else
       redirect_to root_path, alert: "Please Submit a teacher request"
