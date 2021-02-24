@@ -26,9 +26,6 @@ class SessionsController < ApplicationController
       user.google_refresh_token = refresh_token if refresh_token.present?
       user.save!
       log_in(user)
-      if !user.admin
-        flash.notice = "You can edit your information"
-      end
       redirect_to root_path
     else
       redirect_to root_path, alert: "Please Submit a teacher request"
