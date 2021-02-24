@@ -7,7 +7,7 @@ Feature: basic admin functionality
 Scenario: Logging in as an admin
   Given I am on the BJC home page
   Given I have an admin email
-  And I follow "Admin Log In"
+  And I follow "Log In"
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
 
@@ -21,14 +21,14 @@ Scenario: Logging in as a teacher should be able to edit their info
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu |
   Given I have a teacher email
   Given I am on the BJC home page
-  And I follow "Admin Log In"
+  And I follow "Log In"
   Then I can log in with Google
   And I should see "You can edit your information"
 
 Scenario: Logging in with random Google Account should fail
   Given I have a random email
   Given I am on the BJC home page
-  And I follow "Admin Log In"
+  And I follow "Log In"
   Then I can log in with Google
   And I should see "Please Submit a teacher request"
 
@@ -37,7 +37,7 @@ Scenario: Logging in as an env-removed admin should not give admin access
   | first_name | last_name | admin | email                        |
   | Joseph     | Mamoa     | true  | testteacheruser@berkeley.edu |
   Given I am on the BJC home page
-  And I follow "Admin Log In"
+  And I follow "Log In"
   Then I can log in with Google as Teacher
   And I should see "Please Submit a teacher request"
 
