@@ -68,7 +68,7 @@ OmniAuth.config.test_mode = true
 
 # TODO: Make this a generic email when you don't need to store
 # admin emails in the app secrets
-OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+OmniAuth.config.mock_auth[:google_oauth2_admin] = OmniAuth::AuthHash.new({
   provider: 'google_oauth2',
   uid: '123545',
   info: {
@@ -80,5 +80,20 @@ OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
   },
   credentials: {
     token: 'test_token'
+  }
+})
+
+OmniAuth.config.mock_auth[:google_oauth2_teacher] = OmniAuth::AuthHash.new({
+  provider: 'google_oauth2',
+  uid: '545321',
+  info: {
+    name: 'Teacher User',
+    first_name: "Teacher",
+    last_name: "User",
+    email: "testteacheruser@berkeley.edu",
+    school: "UC Berkeley",
+  },
+  credentials: {
+    token: 'teacher_test_token'
   }
 })
