@@ -7,6 +7,7 @@ class Teacher < ApplicationRecord
 
   belongs_to :school, counter_cache: true
 
+
   scope :unvalidated, -> { where('validated=? AND denied=?', 'false', 'false') }
   scope :validated, -> { where('validated=? OR denied=?', 'true', 'true') }
 
@@ -29,6 +30,8 @@ class Teacher < ApplicationRecord
     'Other',
     'TEALS Teacher'
   ].freeze
+
+  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -60,6 +63,26 @@ class Teacher < ApplicationRecord
     elsif denied == true
       return 'Denied' 
     end
+  end
+
+  def self.user_from_omniauth(auth)
+    user = find_or_create_by(email: auth.info.email)
+    # TODO: Should be changed when we have a way to add admin without using ENV.
+    if ADMIN_EMAILS =~ /#{user.email}/
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
+        user.email = auth.info.email
+        user.admin = true
+        user.status = 'Other'
+        user.validated = true
+        user.denied = false
+    end
+    return user
+  end
+
+  def self.validate_access_token(auth)
+    email_from_auth = auth.info.email
+    return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
   end
   
 end
