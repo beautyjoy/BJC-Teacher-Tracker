@@ -7,9 +7,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # TODO: This really need to be tweaked!
   def is_admin?
-    @is_admin ||= session.key?("logged_in") and session[:logged_in] == true
+    @is_admin = logged_in? ? current_user.admin : false
+  end
+
+  def is_teacher?
+    @is_teacher = logged_in? ? !current_user.admin : false
   end
 
   def require_admin
