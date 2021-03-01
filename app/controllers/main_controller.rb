@@ -4,6 +4,9 @@ class MainController < ApplicationController
   def index
     if is_admin?
       redirect_to dashboard_path
+    elsif is_teacher?
+      #TODO: this should really be a page to edit information
+      redirect_to new_teacher_path, notice: "You can edit your information"
     else
       redirect_to new_teacher_path
     end

@@ -55,10 +55,19 @@ class Teacher < ApplicationRecord
     SHORT_STATUS[status_before_type_cast]
   end
 
+  def display_application_status
+    if validated == false && denied == false
+      return 'Pending' 
+    elsif validated == true
+      return 'Validated'
+    elsif denied == true
+      return 'Denied' 
+    end
+  end
+
   def self.user_from_omniauth(auth)
     user = find_or_create_by(email: auth.info.email)
     # TODO: Should be changed when we have a way to add admin without using ENV.
-
     if ADMIN_EMAILS =~ /#{user.email}/
         user.first_name = auth.info.first_name
         user.last_name = auth.info.last_name
@@ -68,23 +77,12 @@ class Teacher < ApplicationRecord
         user.validated = true
         user.denied = false
     end
-
     return user
   end
 
-  def self.validate_auth(auth)
+  def self.validate_access_token(auth)
     email_from_auth = auth.info.email
     return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
-  end
-
-  def display_application_status
-    if validated == false && denied == false
-      return 'Pending' 
-    elsif validated == true
-      return 'Validated'
-    elsif denied == true
-      return 'Denied' 
-    end
   end
   
 end
