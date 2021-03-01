@@ -1,6 +1,8 @@
 class TeachersController < ApplicationController
-  before_action :sanitize_params, only: [:new, :create]
-  before_action :require_admin, except: [:new, :create]
+  before_action :sanitize_params, only: [:new, :create, :edit, :update]
+  before_action :require_login, except: [:new, :create]
+  before_action :require_admin, only: [:validate, :deny, :delete, :index]
+  before_action :require_edit_permission, only: [:edit, :update]
 
   def index
     @all_teachers = Teacher.all
@@ -56,6 +58,7 @@ class TeachersController < ApplicationController
   def edit
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def update
@@ -66,7 +69,12 @@ class TeachersController < ApplicationController
     @teacher.save!
     @school.save!
     flash[:success] = "Saved #{@teacher.full_name}"
-    redirect_to teachers_path
+    if is_admin?
+      redirect_to teachers_path, notice: "Successfully updated information"
+    else
+      # maybe it makes more sense to redirect to somewhere else
+      redirect_to root_path
+    end
   end
 
   def validate
