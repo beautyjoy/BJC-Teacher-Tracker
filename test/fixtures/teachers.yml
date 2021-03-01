@@ -10,6 +10,7 @@ ye:
   validated: true
   denied: false
   school_id: 1
+  education_level: 1
 
 bob_teacher:
     first_name: 'Bob'
