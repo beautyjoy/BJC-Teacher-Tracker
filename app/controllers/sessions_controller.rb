@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
     # Manages the callback from Google
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
-
-    if Teacher.validate_auth(access_token)
+    if Teacher.validate_access_token(access_token)
       # Tell them to register.
       user = Teacher.user_from_omniauth(access_token)
       # Access_token is used to authenticate request made from the rails application to the google server
