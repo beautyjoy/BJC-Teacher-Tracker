@@ -1,4 +1,5 @@
 STATUS_FIELD = "What's your current status?"
+EDUCATION_FIELD = "What's your education level target?"
 
 Given /a valid teacher exists/ do
     create(:teacher)
@@ -15,6 +16,10 @@ end
 
 Given /^I set my status as "(.*)"$/ do |input|
     select(input, from: STATUS_FIELD)
+end
+
+Given /^I set my education level target as "(.*)"$/ do |input|
+    select(input, from: EDUCATION_FIELD)
 end
 
 Then(/I see a confirmation "(.*)"/) do |string|

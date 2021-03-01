@@ -25,6 +25,10 @@ RSpec.describe Teacher, type: :model do
     expect(teacher.display_application_status).to eq 'Denied'
   end
 
+  it 'shows Unknown education level' do 
+    expect(teacher.display_education_level).to eq 'Unknown'
+  end
+
   describe 'teacher with more info' do
     let(:teacher) { teachers(:ye) }
 
