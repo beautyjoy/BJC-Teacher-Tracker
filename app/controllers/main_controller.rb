@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   before_action :require_admin, only: [:dashboard]
-
+  before_action :check_teacher_admin
   def index
     if is_admin?
       redirect_to dashboard_path
