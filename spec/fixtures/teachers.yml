@@ -9,6 +9,7 @@ ye:
   snap: ye
   validated: true
   denied: false
+  education_level: -1
 
 bob:
   first_name: 'Bob'
@@ -19,6 +20,7 @@ bob:
   more_info: ''
   validated: 'false'
   denied: 'true'
+  education_level: -1
 
 long:
   first_name: 'Short'
@@ -30,6 +32,7 @@ long:
   more_info: ''
   validated: false
   denied: false
+  education_level: 2
 
 tony:
   first_name: 'Tony'
@@ -39,6 +42,7 @@ tony:
   email: 'tony@stark.com'
   admin: true
   school_id: 1
+  education_level: 0
 
 bob_teacher:
     first_name: 'Bob'
@@ -49,3 +53,5 @@ bob_teacher:
     more_info: ''
     validated: false
     school_id: 1
+    education_level: -1
+

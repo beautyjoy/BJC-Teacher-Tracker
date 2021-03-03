@@ -22,6 +22,12 @@ class Teacher < ApplicationRecord
     'I am teaching BJC through the TEALS program'
   ].freeze
 
+  enum education_level: [
+    'Middle School',
+    'High School',
+    'College'
+  ].freeze
+
   SHORT_STATUS = [
     'CSP Teacher',
     'Non-CSP Teacher',
@@ -29,6 +35,12 @@ class Teacher < ApplicationRecord
     'TEALS Volunteer',
     'Other',
     'TEALS Teacher'
+  ].freeze
+
+  EDUCATION_LEVELS = [
+    'Middle School',
+    'High School',
+    'College'
   ].freeze
 
   ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
@@ -50,6 +62,14 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def display_education_level
+    if education_level_before_type_cast.to_i == -1
+      return "Unknown"
+    else
+      return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
+    end
+  end
+  
   def display_status
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
