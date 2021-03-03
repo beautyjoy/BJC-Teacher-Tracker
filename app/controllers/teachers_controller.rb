@@ -1,9 +1,9 @@
 class TeachersController < ApplicationController
-  before_action :sanitize_params, only: [:new, :create]
+  before_action :sanitize_params, only: [:new, :create, :update, :edit]
   before_action :require_admin, except: [:new, :create]
 
   def index
-    @all_teachers = Teacher.all
+    @all_teachers = Teacher.where(admin: false)
   end
 
   def new
