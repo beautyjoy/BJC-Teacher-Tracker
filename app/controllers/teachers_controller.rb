@@ -68,12 +68,11 @@ class TeachersController < ApplicationController
     @school.update(school_params)
     @teacher.save!
     @school.save!
-    flash[:success] = "Saved #{@teacher.full_name}"
     if is_admin?
+      flash[:success] = "Saved #{@teacher.full_name}"
       redirect_to teachers_path, notice: "Successfully updated information"
     else
-      # maybe it makes more sense to redirect to somewhere else
-      redirect_to root_path
+      redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
     end
   end
 
@@ -109,7 +108,7 @@ class TeachersController < ApplicationController
       teacher.school.save!
       teacher.save!
       # Replace with deny email later
-      # TeacherMailer.welcome_email(teacher).deliver_now 
+      # TeacherMailer.welcome_email(teacher).deliver_now
       redirect_to root_path
     end
   end
