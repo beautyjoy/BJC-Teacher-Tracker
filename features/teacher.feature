@@ -5,9 +5,12 @@ Feature: teacher login functionality
     I can login via gmail
 
 Scenario: Logging in as a teacher should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu |
+  | first_name | last_name | admin | email                | school_id |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | 1 |
   Given I have a teacher email
   Given I am on the BJC home page
   And   I follow "Log In"
