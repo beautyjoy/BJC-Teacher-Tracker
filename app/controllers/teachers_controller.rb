@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
   before_action :require_edit_permission, only: [:edit, :update]
 
   def index
-    @all_teachers = Teacher.all
+    @all_teachers = Teacher.where(admin: false)
   end
 
   def new
