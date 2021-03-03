@@ -11,6 +11,14 @@ Scenario: Logging in as an admin
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
 
+Scenario: Viewing all teachers as an admin
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the teachers page
+  Then I should see "All BJC Teachers"
+
 # TODO: Add steps to check basic dashboard functions
 # A search field should be visible on the index pages
 # Check for a CSV button
