@@ -18,8 +18,9 @@ class Teacher < ApplicationRecord
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
-    'I am teaching BJC through the TEALS program'
+    'I am teaching BJC through the TEALS program.',
+    'I am a BJC curriculum or tool developer.',
+    'Other - Please specify below.'
   ].freeze
 
   SHORT_STATUS = [
@@ -27,8 +28,9 @@ class Teacher < ApplicationRecord
     'Non-CSP Teacher',
     'Mixed Class',
     'TEALS Volunteer',
-    'Other',
-    'TEALS Teacher'
+    'TEALS Teacher',
+    'Curriculum/Tool Developer',
+    'Other'
   ].freeze
 
   ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
