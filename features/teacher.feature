@@ -23,9 +23,8 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I select "CA" from "State"
   And   I enter my "School Website" as "https://chs.fuhsd.org"
   And   I press "Submit"
-  Then  the "First Name" field should contain "Joe"
   Then  I see a confirmation "Successfully updated your information"
-
+  Then  the "First Name" field should contain "Joe"
 
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
