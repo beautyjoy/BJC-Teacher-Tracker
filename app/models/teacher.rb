@@ -8,8 +8,8 @@ class Teacher < ApplicationRecord
   belongs_to :school, counter_cache: true
 
 
-  scope :unvalidated, -> { where('validated=? AND denied=?', 'false', 'false') }
-  scope :validated, -> { where('validated=? OR denied=?', 'true', 'true') }
+  scope :unvalidated, -> { where('(validated=? AND denied=?) AND admin=?', 'false', 'false', 'false') }
+  scope :validated, -> { where('(validated=? OR denied=?) AND admin=?', 'true', 'true', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
