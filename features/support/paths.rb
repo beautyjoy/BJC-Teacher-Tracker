@@ -14,7 +14,7 @@ module NavigationHelpers
     case page_name
 
     when /^the (BJC )?home\s?page$/ then '/'
-    when /^teacher (.*)'s edit page$/i then '/teachers/$1/edit'
+    when /^teacher (.*)'s edit page$/i then '/teachers/' + $1 + '/edit'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
