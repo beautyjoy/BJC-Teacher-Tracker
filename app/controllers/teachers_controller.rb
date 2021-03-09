@@ -1,6 +1,8 @@
 class TeachersController < ApplicationController
-  before_action :sanitize_params, only: [:new, :create, :update, :edit]
-  before_action :require_admin, except: [:new, :create]
+  before_action :sanitize_params, only: [:new, :create, :edit, :update]
+  before_action :require_login, except: [:new, :create]
+  before_action :require_admin, only: [:validate, :deny, :delete, :index]
+  before_action :require_edit_permission, only: [:edit, :update]
 
   def index
     @all_teachers = Teacher.where(admin: false)
@@ -56,6 +58,7 @@ class TeachersController < ApplicationController
   def edit
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def update
@@ -65,45 +68,40 @@ class TeachersController < ApplicationController
     @school.update(school_params)
     @teacher.save!
     @school.save!
-    flash[:success] = "Saved #{@teacher.full_name}"
-    redirect_to teachers_path
+    if is_admin?
+      flash[:success] = "Saved #{@teacher.full_name}"
+      redirect_to teachers_path, notice: "Successfully updated information"
+    else
+      redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+    end
   end
 
   def validate
-    # TODO: Require admin helper.
-    if !is_admin?
-      redirect_to root_path, alert: "Only administrators can validate!"
-    else
-      # TODO: Check if teacher is already denied (MAYBE)
-      # TODO: Clean this up so the counter doesn't need to be manually incremented.
-      teacher = Teacher.find(params[:id])
-      teacher.validated = true
-      teacher.denied = false
-      teacher.school.num_validated_teachers += 1
-      teacher.school.save!
-      teacher.save!
-      TeacherMailer.welcome_email(teacher).deliver_now
-      redirect_to root_path
-    end
+    # TODO: Check if teacher is already denied (MAYBE)
+    # TODO: Clean this up so the counter doesn't need to be manually incremented.
+    teacher = Teacher.find(params[:id])
+    teacher.validated = true
+    teacher.denied = false
+    teacher.school.num_validated_teachers += 1
+    teacher.school.save!
+    teacher.save!
+    TeacherMailer.welcome_email(teacher).deliver_now
+    redirect_to root_path
   end
 
   def deny
     # TODO: Require admin helper.
-    if !is_admin?
-      redirect_to root_path, alert: "Only administrators can deny!"
-    else
-      # TODO: Check if teacher is already validated (MAYBE)
-      # TODO: Clean this up so the counter doesn't need to be manually incremented.
-      teacher = Teacher.find(params[:id])
-      teacher.validated = false
-      teacher.denied = true
-      teacher.school.num_denied_teachers += 1
-      teacher.school.save!
-      teacher.save!
-      # Replace with deny email later
-      # TeacherMailer.welcome_email(teacher).deliver_now 
-      redirect_to root_path
-    end
+    # TODO: Check if teacher is already validated (MAYBE)
+    # TODO: Clean this up so the counter doesn't need to be manually incremented.
+    teacher = Teacher.find(params[:id])
+    teacher.validated = false
+    teacher.denied = true
+    teacher.school.num_denied_teachers += 1
+    teacher.school.save!
+    teacher.save!
+    # Replace with deny email later
+    # TeacherMailer.welcome_email(teacher).deliver_now
+    redirect_to root_path
   end
 
   def delete

@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe TeachersController, type: :controller do
     fixtures :all
-    
+
     before(:each) do
-        ApplicationController.any_instance.stub(:is_admin?).and_return(@is_admin = true)
+        ApplicationController.any_instance.stub(:require_admin).and_return(true)
+        ApplicationController.any_instance.stub(:require_login).and_return(true)
     end
 
     it "able to deny an application" do
