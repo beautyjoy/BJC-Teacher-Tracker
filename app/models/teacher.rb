@@ -79,11 +79,11 @@ class Teacher < ApplicationRecord
 
   def display_application_status
     if validated == false && denied == false
-      return 'Pending' 
+      return 'Pending'
     elsif validated == true
       return 'Validated'
     elsif denied == true
-      return 'Denied' 
+      return 'Denied'
     end
   end
 
@@ -106,5 +106,5 @@ class Teacher < ApplicationRecord
     email_from_auth = auth.info.email
     return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
   end
-  
+
 end
