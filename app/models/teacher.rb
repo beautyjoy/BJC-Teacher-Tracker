@@ -7,9 +7,10 @@ class Teacher < ApplicationRecord
 
   belongs_to :school, counter_cache: true
 
-
+  #Non-admin teachers who have not been denied nor accepted
   scope :unvalidated, -> { where('(validated=? AND denied=?) AND admin=?', 'false', 'false', 'false') }
-  scope :validated, -> { where('(validated=? OR denied=?) AND admin=?', 'true', 'true', 'false') }
+  #Non-admin teachers who have been accepted/validated
+  scope :validated, -> { where('validated=? AND admin=?', 'true', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
