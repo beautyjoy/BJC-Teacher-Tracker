@@ -1,5 +1,7 @@
 require 'cucumber/rspec/doubles'
 
+# Prereq: In order for admin capability, "testadminuser@berkeley.edu" must exist within ENV["TEST_ADMIN_EMAILS"]
+# Returns a OAuth2 token associated with email "testadminuser@berkeley.edu"
 Given /I have an admin email/ do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: 'google_oauth2',
@@ -17,13 +19,14 @@ Given /I have an admin email/ do
   })
 end
 
+# Returns a OAuth2 token associated with email "randomemail@gmail.com"
 Given /I have a random email/ do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: 'google_oauth2',
     uid: '123545',
     info: {
-      name: 'Admin User',
-      first_name: "Admin",
+      name: 'Random User',
+      first_name: "Random",
       last_name: "User",
       email: "randomemail@gmail.com",
       school: "UC Berkeley",
@@ -42,4 +45,3 @@ Then /I can log in with Google/ do
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
   page.find('button', text: /.*Log In/).click()
 end
-

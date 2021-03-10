@@ -9,8 +9,8 @@ Scenario: Logging in as a teacher should be able to edit their info
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                | school_id |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | 1 |
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher email
   Given I am on the BJC home page
   And   I follow "Log In"
@@ -31,13 +31,13 @@ Scenario: Logged in teacher can only edit their own information
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu |
+  | first_name | last_name | admin | email                     |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   | Jane       | Austin    | false | testteacher2@berkeley.edu |
   Given I have a teacher email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
-  When I go to teacher 2's edit page
+  When I go to the edit page for Jane Austin
   Then I should see "You can only edit your own information"
 
