@@ -1,5 +1,6 @@
 require 'cucumber/rspec/doubles'
 
+# Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
 Given /I have a teacher email/ do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: 'google_oauth2',
@@ -44,7 +45,20 @@ Given(/the following teachers exist/) do |teachers_table|
         teacher[key] = value
       end
     end
-    Teacher.create!(teacher)
+
+    # Extract extra parameter 'school'
+    school_name = teacher.delete("school")
+    
+    new_teacher = Teacher.create!(teacher)
+
+    #Create an association between teacher and school
+    if school_name != nil
+      school = School.find_by(name: school_name)
+      if school != nil
+        new_teacher.school = school
+        new_teacher.save!
+      end
+    end
   end
 end
 
