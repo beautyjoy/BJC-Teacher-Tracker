@@ -14,7 +14,8 @@ module NavigationHelpers
     case page_name
 
     when /^the (BJC )?home\s?page$/ then '/'
-    when /^teacher (.*)'s edit page$/i then '/teachers/' + $1 + '/edit'
+    when /^the edit page for (.*) (.*)$/i
+      edit_teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
