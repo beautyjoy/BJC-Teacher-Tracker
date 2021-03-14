@@ -11,6 +11,8 @@ class TeachersController < ApplicationController
   def new
     @teacher = Teacher.new
     @school = School.new
+    @action = "Submit"
+    @readonly = false
   end
 
   def create
@@ -59,11 +61,19 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
+    @action = "Update"
+    @readonly = !is_admin?
   end
 
   def update
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    old_email, old_snap = @teacher.email, @teacher.snap
+    new_email, new_snap = teacher_params[:email], teacher_params[:snap]
+    if ((old_email != new_email) || (old_snap != new_snap)) && !is_admin?
+      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please contact an admin."
+      return
+    end
     @teacher.update(teacher_params)
     @school.update(school_params)
     @teacher.save!

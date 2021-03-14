@@ -41,3 +41,16 @@ Scenario: Logged in teacher can only edit their own information
   When I go to the edit page for Jane Austin
   Then I should see "You can only edit your own information"
 
+Scenario: Logging in as a teacher should see "Update" instead of "Submit" when editing info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  Then I should see a button named "Submit"
+  Given I follow "Log In"
+  Then I can log in with Google
+  Then I should see a button named "Update"
