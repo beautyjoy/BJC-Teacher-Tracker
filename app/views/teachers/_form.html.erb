@@ -19,14 +19,14 @@
       <div class='col-6'>
         <%= f.label :email, "School Email", class: "label-required" %>
         <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
-          required: true, type: :email %>
+          required: true, type: :email, readonly: @readonly %>
       </div>
 
       <div class='col-6'>
         <%= f.label :snap do %>
           Snap<i>!</i> Username
         <% end %>
-        <%= f.text_field :snap, placeholder: "alonzo", class: "form-control" %>
+        <%= f.text_field :snap, placeholder: "alonzo", class: "form-control", readonly: @readonly %>
       </div>
     </div>
 
@@ -108,6 +108,6 @@
   <% end %>
 
   <div>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit @action, class: 'btn btn-primary', id: "#action-button" %>
   </div>
 <% end %>
