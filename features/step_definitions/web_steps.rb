@@ -252,3 +252,7 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^(?:|I )should see a button named "([^"]*)"$/ do |text|
+  page.should have_button(text)
+end
