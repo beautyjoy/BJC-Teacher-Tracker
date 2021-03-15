@@ -100,7 +100,6 @@ class TeachersController < ApplicationController
   end
 
   def deny
-    # TODO: Require admin helper.
     # TODO: Check if teacher is already validated (MAYBE)
     # TODO: Clean this up so the counter doesn't need to be manually incremented.
     teacher = Teacher.find(params[:id])
