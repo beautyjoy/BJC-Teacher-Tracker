@@ -25,7 +25,7 @@ class TeacherMailer < ApplicationMailer
   end
 
   def form_submission(teacher)
-  	@teacher = teacher
-  	mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
+    @teacher = teacher
+    mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
   end
 end
