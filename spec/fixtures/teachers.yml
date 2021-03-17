@@ -29,7 +29,7 @@ long:
   last_name: 'Long'
   snap: 'song'
   email: 'short@long.com'
-  status: 1
+  status: 4
   school: berkeley
   more_info: ''
   validated: false
@@ -46,6 +46,3 @@ tony:
   admin: true
   school_id: 1
   education_level: 0
-
-
-
