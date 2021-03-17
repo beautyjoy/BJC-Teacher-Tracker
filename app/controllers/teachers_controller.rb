@@ -31,6 +31,7 @@ class TeachersController < ApplicationController
       if @teacher.validated?
         TeacherMailer.welcome_email(@teacher).deliver_now
         TeacherMailer.form_submission(@teacher).deliver_now
+        TeacherMailer.teals_confirmation_email(@teacher).deliver_now
         flash[:success] = "Thanks! We have updated your information. We have sent BJC info to #{@teacher.email}."
       else
         flash[:success] = "Thanks! We have updated your information."
@@ -49,6 +50,7 @@ class TeachersController < ApplicationController
           flash[:success] =
             "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
           TeacherMailer.form_submission(@teacher).deliver_now
+          TeacherMailer.teals_confirmation_email(@teacher).deliver_now
           redirect_to root_path
         else
           redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information. #{@teacher.errors.full_messages}"
