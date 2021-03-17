@@ -15,9 +15,32 @@
           <td>
             <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
               <%= button_to("Validate", validate_path(:id => teacher.id),
-                 class: 'btn btn-success', type: 'button') %>
-              <%= button_to("Deny", deny_path(:id => teacher.id),
-                 class: 'btn btn-danger', type: 'button') %>
+                class: 'btn btn-success', type: 'button') %>
+              <span>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#denialModal">
+                  Deny
+                </button>
+              </span>
+              <div class="modal fade" id="denialModal" tabindex="-1" role="dialog" aria-labelledby="denialModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Denial</h4>
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <%= form_tag deny_path(:id => teacher.id), method: :post, :class => "form-horizontal" do %>
+                        <%= label_tag 'reason', 'Reason for Denial', :class => 'control-label' %>
+                        <%= text_field_tag :reason, params[:reason], :class => "form-control", :id => nil %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <%= button_tag "Submit", name: nil, type: "submit", class: "btn btn-success" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <%# <%= button_to("Delete", delete_path(:id => teacher.id), 
                  data: {confirm: "Are you sure you wish to delete this form?"}, 
                  class: 'btn btn-danger', type: 'button') %>

@@ -55,7 +55,24 @@ Scenario: Edit teacher info as an admin
   Then  I should see "Joseph"
   And   I enter my "First Name" as "Joe"
   And   I press "Update"
-  Then I see a confirmation "Successfully updated information"
+  Then  I see a confirmation "Successfully updated information"
+
+Scenario: Deny teacher as an admin
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I am on the BJC home page
+  Given I have an admin email
+  When  I follow "Log In"
+  Then  I can log in with Google
+  And   I press "Deny"
+  Then  I should see "Reason for Denial"
+  And   I fill in "reason" with "Test"
+  And   I press "Submit"
+  Then  I can send a deny email
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
