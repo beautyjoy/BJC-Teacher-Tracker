@@ -7,8 +7,7 @@ ye:
   more_info: A CS169 Student
   email: ye@berkeley.edu
   snap: ye
-  validated: true
-  denied: false
+  application_status: Validated
   school_id: 2 #stanfurd
   education_level: -1
 
@@ -19,8 +18,7 @@ bob:
   email: 'bob@gmail.com'
   status: 1
   more_info: ''
-  validated: false
-  denied: true
+  application_status: Denied
   school_id: 1 #berkeley
   education_level: -1
 
@@ -32,16 +30,14 @@ long:
   status: 1
   school: berkeley
   more_info: ''
-  validated: false
-  denied: false
+  application_status: Pending
   school_id: 1
   education_level: 2
 
 tony:
   first_name: 'Tony'
   last_name: 'Stark'
-  validated: true
-  denied: false
+  application_status: Validated
   email: 'tony@stark.com'
   admin: true
   school_id: 1
