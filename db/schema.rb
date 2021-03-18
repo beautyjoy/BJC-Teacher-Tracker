@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_28_232609) do
+ActiveRecord::Schema.define(version: 2021_03_18_034405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2021_02_28_232609) do
     t.string "snap"
     t.string "other"
     t.integer "school_id"
-    t.boolean "validated"
     t.datetime "created_at", default: -> { "now()" }
     t.datetime "updated_at", default: -> { "now()" }
     t.integer "status"
@@ -49,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_02_28_232609) do
     t.string "encrypted_google_refresh_token"
     t.string "encrypted_google_refresh_token_iv"
     t.string "personal_website"
-    t.boolean "denied"
     t.integer "education_level", default: -1
+    t.string "application_status"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
   end
 
