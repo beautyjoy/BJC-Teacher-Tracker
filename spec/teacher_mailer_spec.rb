@@ -12,12 +12,13 @@ describe TeacherMailer do
         expect(email.body.encoded).to include("Hi Bob,")
 	end
 
+    # Prereq: "testadminuser@berkeley.edu" must exist within ENV["TEST_TEALS_CONTACT_EMAIL"]
     it 'Sends TEALS Confirmation Email' do
         teacher = teachers(:long)
         email = TeacherMailer.teals_confirmation_email(teacher)
         email.deliver_now
         expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-        expect(email.to[0]).to eq("chris.hou@berkeley.edu") #CHANGE THIS LATER
+        expect(email.to[0]).to eq("testcontactemail@berkeley.edu")
         expect(email.subject).to eq("TEALS Confirmation Email")
         expect(email.body.encoded).to include("Blahblahblah")
     end
