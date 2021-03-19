@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherMailer < ApplicationMailer
-  CONTACT_EMAIL = 'Christopher Hou <chris.hou@berkeley.edu>' #'Lauren Mock <lmock@berkeley.edu>'
+  CONTACT_EMAIL = 'Lauren Mock <lmock@berkeley.edu>'
   TEALS_CONTACT_EMAIL = Rails.application.secrets[:teals_contact_email]&.freeze
   BJC_EMAIL = 'BJC <contact@bjc.berkeley.edu>'
   BJC_PASSWORD = Rails.application.secrets[:bjc_password]
