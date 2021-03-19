@@ -5,16 +5,16 @@ ye:
   last_name: Wang
   status: 6
   more_info: A CS169 Student
-  email: ye@berkeley.edu
+  email: 'ye@berkeley.edu'
   snap: ye
   application_status: Validated
   school_id: 2 #stanfurd
   education_level: -1
 
 bob:
-  first_name: 'Bob'
-  last_name: 'Johnson'
-  snap: 'BobJohnson'
+  first_name: Bob
+  last_name: Johnson
+  snap: BobJohnson
   email: 'bob@gmail.com'
   status: 1
   more_info: ''
@@ -23,9 +23,9 @@ bob:
   education_level: -1
 
 long:
-  first_name: 'Short'
-  last_name: 'Long'
-  snap: 'song'
+  first_name: Short
+  last_name: Long
+  snap: song
   email: 'short@long.com'
   status: 1
   school: berkeley
@@ -35,8 +35,8 @@ long:
   education_level: 2
 
 tony:
-  first_name: 'Tony'
-  last_name: 'Stark'
+  first_name: Tony
+  last_name: Stark
   application_status: Validated
   email: 'tony@stark.com'
   admin: true

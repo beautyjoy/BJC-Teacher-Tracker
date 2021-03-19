@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_034405) do
     t.string "encrypted_google_refresh_token_iv"
     t.string "personal_website"
     t.integer "education_level", default: -1
-    t.string "application_status"
+    t.string "application_status", default: "Pending"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
   end
 
