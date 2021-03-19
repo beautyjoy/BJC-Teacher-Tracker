@@ -2,7 +2,7 @@
 
 class TeacherMailer < ApplicationMailer
   CONTACT_EMAIL = 'Christopher Hou <chris.hou@berkeley.edu>' #'Lauren Mock <lmock@berkeley.edu>'
-  TEALS_CONTACT_EMAIL = 'Christopher Hou <chris.hou@berkeley.edu>' #CHANGE THIS LATER
+  TEALS_CONTACT_EMAIL = Rails.application.secrets[:teals_contact_email]&.freeze
   BJC_EMAIL = 'BJC <contact@bjc.berkeley.edu>'
   BJC_PASSWORD = Rails.application.secrets[:bjc_password]
   PIAZZA_PASSWORD = Rails.application.secrets[:piazza_password]
@@ -18,7 +18,7 @@ class TeacherMailer < ApplicationMailer
 
   def teals_confirmation_email(teacher)
     @teacher = teacher
-    if !@teacher.status.nil? and @teacher.status.include? "TEALS"
+    if !@teacher.status.nil? and @teacher.status.include? "I am a TEALS volunteer"
       @bjc_password = BJC_PASSWORD
       @piazza_password = PIAZZA_PASSWORD
       mail to: TEALS_CONTACT_EMAIL,

@@ -29,7 +29,7 @@ long:
   last_name: 'Long'
   snap: 'song'
   email: 'short@long.com'
-  status: 4
+  status: 3
   school: berkeley
   more_info: ''
   validated: false

@@ -62,3 +62,11 @@ Given(/the following teachers exist/) do |teachers_table|
   end
 end
 
+
+Then /there is a TEALS email/ do
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.to[0].should eq "testcontactemail@berkeley.edu"
+  last_email.subject.should eq "TEALS Confirmation Email"
+  last_email.body.encoded.should include "Blahblahblah"
+end
+

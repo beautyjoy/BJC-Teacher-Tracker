@@ -18,6 +18,7 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
   And   I enter my "First Name" as "Joe"
+  And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
   And   I enter my "School Name" as "Cupertino High School"
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
@@ -25,6 +26,7 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  Then  there is a TEALS email
 
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
