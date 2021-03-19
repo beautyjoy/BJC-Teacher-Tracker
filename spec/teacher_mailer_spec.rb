@@ -20,7 +20,7 @@ describe TeacherMailer do
         expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
         expect(email.to[0]).to eq("testcontactemail@berkeley.edu")
         expect(email.subject).to eq("TEALS Confirmation Email")
-        expect(email.body.encoded).to include("Blahblahblah")
+        expect(email.body.encoded).to include("Short Long")
     end
 
     it 'Doesn\'t Send Wrong TEALS Confirmation Email' do

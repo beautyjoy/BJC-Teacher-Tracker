@@ -1,3 +1,13 @@
 <p>
-  Blahblahblah
+  Hi,<br><br>
+
+  Can you please verify that <%= @teacher.first_name + ' ' + @teacher.last_name %> is a TEALS Volunteer?<br>
+  They have signed up to access the BJC Teacher Solutions with the following details:<br>
+  Name: <%= @teacher.first_name + ' ' + @teacher.last_name %> <br>
+  Email: <%= @teacher.email %><br>
+  School: <%= @teacher.school.name %><br>
+  More Info: <%= @teacher.more_info %><br><br>
+
+  Thank You,<br>
+  - The BJC Team
 </p>
