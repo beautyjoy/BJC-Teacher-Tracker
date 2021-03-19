@@ -45,7 +45,6 @@ class Teacher < ApplicationRecord
     'College'
   ].freeze
 
-  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -71,7 +70,7 @@ class Teacher < ApplicationRecord
       return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
     end
   end
-  
+
   def display_status
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
@@ -82,22 +81,12 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(auth)
-    user = find_or_create_by(email: auth.info.email)
-    # TODO: Should be changed when we have a way to add admin without using ENV.
-    if ADMIN_EMAILS =~ /#{user.email}/
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
-        user.email = auth.info.email
-        user.admin = true
-        user.status = 'Other'
-        user.application_status = 'Validated'
-    end
-    return user
+    find_by(email: auth.info.email)
   end
 
   def self.validate_access_token(auth)
     email_from_auth = auth.info.email
-    return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
+    return exists?(email: email_from_auth)
   end
 
 end
