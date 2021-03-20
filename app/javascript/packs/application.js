@@ -15,8 +15,8 @@
 const images = require.context('../images', true);
 // const imagePath = (name) => images(name, true)
 
-import 'jquery/src/jquery';
-import 'jquery-ujs/src/rails'
+import * as $ from 'jquery';
+window.$ = $;
 import 'bootstrap';
 import 'popper.js';
 
