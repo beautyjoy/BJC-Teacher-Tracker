@@ -15,13 +15,14 @@
 const images = require.context('../images', true);
 // const imagePath = (name) => images(name, true)
 
-import 'jquery/src/jquery';
-import 'jquery-ujs/src/rails'
+import * as $ from 'jquery';
+window.$ = $;
 import 'bootstrap';
 import 'popper.js';
 
 import "@fortawesome/fontawesome-free/js/all";
 
+import 'datatables.net';
 import "datatables.net-bs4";
 import "datatables.net-buttons-bs4";
 import  'datatables.net-buttons/js/buttons.html5.js';
