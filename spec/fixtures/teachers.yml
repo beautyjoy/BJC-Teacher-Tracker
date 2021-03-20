@@ -27,7 +27,7 @@ long:
   last_name: Long
   snap: song
   email: 'short@long.com'
-  status: 1
+  status: 3
   school: berkeley
   more_info: ''
   application_status: Pending
@@ -42,6 +42,3 @@ tony:
   admin: true
   school_id: 1
   education_level: 0
-
-
-
