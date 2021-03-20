@@ -28,7 +28,7 @@ class TeachersController < ApplicationController
       @teacher.update(teacher_params)
       @teacher.school = @school
       @teacher.save!
-      if @teacher.validated?
+      if @teacher.application_status == "Validated"
         TeacherMailer.welcome_email(@teacher).deliver_now
         TeacherMailer.form_submission(@teacher).deliver_now
         TeacherMailer.teals_confirmation_email(@teacher).deliver_now
@@ -44,8 +44,7 @@ class TeachersController < ApplicationController
         render 'new'
       else
         @teacher = @school.teachers.build(teacher_params)
-        @teacher.validated = false
-        @teacher.denied = false
+        @teacher.application_status = "Pending"
         if @teacher.save
           flash[:success] =
             "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
@@ -95,8 +94,7 @@ class TeachersController < ApplicationController
     # TODO: Check if teacher is already denied (MAYBE)
     # TODO: Clean this up so the counter doesn't need to be manually incremented.
     teacher = Teacher.find(params[:id])
-    teacher.validated = true
-    teacher.denied = false
+    teacher.application_status = "Validated"
     teacher.school.num_validated_teachers += 1
     teacher.school.save!
     teacher.save!
@@ -108,8 +106,7 @@ class TeachersController < ApplicationController
     # TODO: Check if teacher is already validated (MAYBE)
     # TODO: Clean this up so the counter doesn't need to be manually incremented.
     teacher = Teacher.find(params[:id])
-    teacher.validated = false
-    teacher.denied = true
+    teacher.application_status = "Denied"
     teacher.school.num_denied_teachers += 1
     teacher.school.save!
     teacher.save!

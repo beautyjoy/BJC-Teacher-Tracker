@@ -36,8 +36,8 @@ end
 Given(/the following teachers exist/) do |teachers_table|
   #Default Values
   teachers_default = {first_name: "Alonzo", last_name: "Church", email: "alonzo@snap.berkeley.edu", course: "https://school.edu", snap: "alonzo",
-                      other: "I'm teaching a college course", validated: false, status: "Other - Please specify below.", education_level: 1,
-                      more_info: "I'm teaching a college course", admin: false, personal_website: "https://snap.berkeley.edu", denied: false}
+                      other: "I'm teaching a college course", status: "Other - Please specify below.", education_level: 1,
+                      more_info: "I'm teaching a college course", admin: false, personal_website: "https://snap.berkeley.edu", application_status: "Pending"}
 
   teachers_table.hashes.each do |teacher|
     teachers_default.each do |key, value|
