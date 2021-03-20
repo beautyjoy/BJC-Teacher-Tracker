@@ -2,15 +2,14 @@
 
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
-  validates_inclusion_of :validated, :in => [true, false]
-  validates_inclusion_of :denied, :in => [true, false]
+  validates_inclusion_of :application_status, :in => %w(Validated Denied Pending)
 
   belongs_to :school, counter_cache: true
 
   #Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where('(validated=? AND denied=?) AND admin=?', 'false', 'false', 'false') }
+  scope :unvalidated, -> { where('(application_status!=? AND application_status!=?) AND admin=?', 'Validated', 'Denied', 'false') }
   #Non-admin teachers who have been accepted/validated
-  scope :validated, -> { where('validated=? AND admin=?', 'true', 'false') }
+  scope :validated, -> { where('application_status=? AND admin=?', 'Validated', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -78,13 +77,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    if validated == false && denied == false
-      return 'Pending'
-    elsif validated == true
-      return 'Validated'
-    elsif denied == true
-      return 'Denied'
-    end
+    return application_status
   end
 
   def self.user_from_omniauth(auth)
