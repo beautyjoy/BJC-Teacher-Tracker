@@ -4,6 +4,11 @@ Feature: basic admin functionality
   So that I can see how many people are teaching BJC
   I can login in an see the dashboard
 
+Background: Has an Admin in DB
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                        |
+  | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+
 Scenario: Logging in as an admin
   Given I am on the BJC home page
   Given I have an admin email
@@ -25,15 +30,6 @@ Scenario: Viewing all teachers as an admin
 
 Scenario: Logging in with random Google Account should fail
   Given I have a random email
-  Given I am on the BJC home page
-  And I follow "Log In"
-  Then I can log in with Google
-  And I should see "Please Submit a teacher request"
-
-Scenario: Logging in as an env-removed admin should not give admin access
-  Given the following teachers exist:
-  | first_name | last_name | admin | email                        |
-  | Joseph     | Mamoa     | true  | testteacheruser@berkeley.edu |
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
