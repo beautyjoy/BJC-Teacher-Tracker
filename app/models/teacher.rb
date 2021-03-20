@@ -2,15 +2,14 @@
 
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
-  validates_inclusion_of :validated, :in => [true, false]
-  validates_inclusion_of :denied, :in => [true, false]
+  validates_inclusion_of :application_status, :in => %w(Validated Denied Pending)
 
   belongs_to :school, counter_cache: true
 
   #Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where('(validated=? AND denied=?) AND admin=?', 'false', 'false', 'false') }
+  scope :unvalidated, -> { where('(application_status!=? AND application_status!=?) AND admin=?', 'Validated', 'Denied', 'false') }
   #Non-admin teachers who have been accepted/validated
-  scope :validated, -> { where('validated=? AND admin=?', 'true', 'false') }
+  scope :validated, -> { where('application_status=? AND admin=?', 'Validated', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -46,7 +45,6 @@ class Teacher < ApplicationRecord
     'College'
   ].freeze
 
-  ADMIN_EMAILS = Rails.application.secrets.admin_emails&.freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -72,40 +70,23 @@ class Teacher < ApplicationRecord
       return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
     end
   end
-  
+
   def display_status
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
   end
 
   def display_application_status
-    if validated == false && denied == false
-      return 'Pending'
-    elsif validated == true
-      return 'Validated'
-    elsif denied == true
-      return 'Denied'
-    end
+    return application_status
   end
 
   def self.user_from_omniauth(auth)
-    user = find_or_create_by(email: auth.info.email)
-    # TODO: Should be changed when we have a way to add admin without using ENV.
-    if ADMIN_EMAILS =~ /#{user.email}/
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
-        user.email = auth.info.email
-        user.admin = true
-        user.status = 'Other'
-        user.validated = true
-        user.denied = false
-    end
-    return user
+    find_by(email: auth.info.email)
   end
 
   def self.validate_access_token(auth)
     email_from_auth = auth.info.email
-    return ADMIN_EMAILS.match?(/#{email_from_auth}/) || exists?(email: email_from_auth)
+    return exists?(email: email_from_auth)
   end
 
 end
