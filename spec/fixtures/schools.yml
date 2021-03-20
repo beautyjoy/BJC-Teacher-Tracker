@@ -4,11 +4,11 @@ berkeley:
   name: UC Berkeley
   city: Berkeley
   state: CA
-  website: https://berkeley.edu
+  website: 'https://berkeley.edu'
 
 stanfurd:
   name: $tanfurd
   city: Palo Alto
   state: CA
-  website: https://stanford.edu
+  website: 'https://stanford.edu'
   num_validated_teachers: 1
