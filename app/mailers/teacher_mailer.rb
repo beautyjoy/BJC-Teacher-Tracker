@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherMailer < ApplicationMailer
-  CONTACT_EMAIL = 'Christopher Hou <chris.hou@berkeley.edu>' #'Lauren Mock <lmock@berkeley.edu>'
+  CONTACT_EMAIL = 'Lauren Mock <lmock@berkeley.edu>'
   BJC_PASSWORD = Rails.application.secrets[:bjc_password]
   PIAZZA_PASSWORD = Rails.application.secrets[:piazza_password]
 
@@ -16,7 +16,7 @@ class TeacherMailer < ApplicationMailer
 
   def deny_email(teacher, reason)
     @teacher = teacher
-    @reason = reason
+    @reason = reason.to_s
     @bjc_password = BJC_PASSWORD
     @piazza_password = PIAZZA_PASSWORD
     mail to: @teacher.email_name,
