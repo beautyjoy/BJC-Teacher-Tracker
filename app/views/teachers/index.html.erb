@@ -1,6 +1,7 @@
 <%= provide(:h1, "All BJC Teachers") %>
-
-
+<input id="checkbox1" class="check" type="checkbox" name="Application Status" value="Pending">Pending
+<input id="checkbox2" class="check" type="checkbox" name="Application Status" value="Denied">Denied
+<input id="checkbox3" class="check" type="checkbox" name="Application Status" value="Validated">Validated
 <div class="col-12">
   <table class="table table-striped js-dataTable">
     <thead class="thead-dark">
@@ -17,3 +18,18 @@
     </tbody>
   </table>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    otable = $('#DataTables_Table_0').dataTable();
+  })
+  function filterme() {
+    var types = $('input:checkbox[name="Application Status"]:checked').map(function() {
+      return '^' + this.value + '\$';
+    }).get().join('|');
+    otable.fnFilter(types, 8, true, false, false, false);
+  }
+  $(".check").change(function() {
+    filterme()
+  });
+</script>
