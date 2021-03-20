@@ -17,11 +17,11 @@
               <%= button_to("Validate", validate_path(:id => teacher.id),
                 class: 'btn btn-success', type: 'button') %>
               <span>
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#denialModal">
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="<%= "#denialModal" + teacher.id.to_s %>" >
                   Deny
                 </button>
               </span>
-              <div class="modal fade" id="denialModal" tabindex="-1" role="dialog" aria-labelledby="denialModalLabel" aria-hidden="true">
+              <div class="modal fade" id="<%= "denialModal" + teacher.id.to_s %>" tabindex="-1" role="dialog" aria-labelledby="denialModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -41,6 +41,13 @@
                   </div>
                 </div>
               </div>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+              <script type="text/javascript">
+                modal = $('<%= "#denialModal" + teacher.id.to_s %>')
+                modal.on('hidden.bs.modal', function () {
+                  $(this).find("input,textarea,select").val('').end();
+                })
+              </script>
               <%# <%= button_to("Delete", delete_path(:id => teacher.id), 
                  data: {confirm: "Are you sure you wish to delete this form?"}, 
                  class: 'btn btn-danger', type: 'button') %>

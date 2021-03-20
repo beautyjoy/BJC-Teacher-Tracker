@@ -1,4 +1,5 @@
 class TeachersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :delete, :index]

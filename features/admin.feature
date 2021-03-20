@@ -71,6 +71,10 @@ Scenario: Deny teacher as an admin
   And   I press "Deny"
   Then  I should see "Reason for Denial"
   And   I fill in "reason" with "Test"
+  And   I press "Cancel"
+  And   I press "Deny"
+  Then  the "reason" field should not contain "Test"
+  And   I fill in "reason" with "Test2"
   And   I press "Submit"
   Then  I can send a deny email
 
