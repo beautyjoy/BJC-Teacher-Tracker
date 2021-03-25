@@ -1,6 +1,15 @@
 module SeedData
     def self.teachers
-        [
+        [   
+            {
+                first_name: 'Michael',
+                last_name: 'Ball',
+                email: 'michael.ball@berkeley.edu',
+                admin: true,
+                status: 0,
+                application_status: 'Validated'
+            },
+
             {
                 first_name: 'Christopher',
                 last_name: 'Hou',
