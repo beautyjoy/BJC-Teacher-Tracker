@@ -16,6 +16,15 @@ Scenario: Logging in as an admin
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
 
+Scenario: Logging out as an admin
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I follow "Logout"
+  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Log In"
+
 Scenario: Viewing all teachers as an admin
   Given I am on the BJC home page
   Given I have an admin email
