@@ -1,7 +1,18 @@
 <%= provide(:h1, "All BJC Teachers") %>
-<input id="checkbox1" class="check" type="checkbox" name="Application Status" value="Pending">Pending
-<input id="checkbox2" class="check" type="checkbox" name="Application Status" value="Denied">Denied
-<input id="checkbox3" class="check" type="checkbox" name="Application Status" value="Validated">Validated
+
+<div class="custom-control custom-checkbox custom-control-inline float-right">
+  <input class="custom-control-input" type="checkbox" name="Application Status" id="Validated" value="Validated">
+  <label class="custom-control-label" for="Validated">Validated</label>
+</div>
+<div class="custom-control custom-checkbox custom-control-inline float-right">
+  <input class="custom-control-input" type="checkbox" name="Application Status" id="Denied" value="Denied">
+  <label class="custom-control-label" for="Denied">Denied</label>
+</div>
+<div class="custom-control custom-checkbox custom-control-inline float-right">
+  <input class="custom-control-input" type="checkbox" name="Application Status" id="Pending" value="Pending">
+  <label class="custom-control-label" for="Pending">Pending</label>
+</div>
+
 <div class="col-12">
   <table class="table table-striped js-dataTable">
     <thead class="thead-dark">
@@ -29,7 +40,7 @@
     }).get().join('|');
     otable.fnFilter(types, 8, true, false, false, false);
   }
-  $(".check").change(function() {
+  $(".custom-checkbox").change(function() {
     filterme()
   });
 </script>
