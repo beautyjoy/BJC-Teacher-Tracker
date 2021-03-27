@@ -1,0 +1,9 @@
+<%# <script type="text/javascript" src="/assets/tinymce.js"> %>
+<%= form_with(model: @email_template, local: true) do |form| %>
+  <div class="form">
+    <%= form.text_area :body, class: "tinymce", rows: 40, cols: 120  %>
+    <%= tinymce %>
+  </div><div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

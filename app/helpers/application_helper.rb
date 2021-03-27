@@ -17,6 +17,7 @@ module ApplicationHelper
       "New School": new_school_path,
       "All Schools": schools_path,
       "All Teachers": teachers_path,
+      "All Email Templates": email_templates_path
     }
   end
 end

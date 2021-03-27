@@ -33,6 +33,9 @@ gem "sentry-rails"
 # Mailer template
 gem "panoramic"
 
+# Editor
+gem 'tinymce-rails'
+
 group :development, :test do
   gem 'byebug'
   gem 'pry'
