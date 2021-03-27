@@ -1,0 +1,9 @@
+welcome_email:
+  # Fixtures don't seem to support erb format
+  body: "Hi, Thanks for your feedback. Works"
+  path: "teacher_mailer/welcome_email"
+  locale:
+  handler: "erb"
+  partial: false
+  format: "html"
+
