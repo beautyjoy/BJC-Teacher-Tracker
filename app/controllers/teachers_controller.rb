@@ -4,6 +4,8 @@ class TeachersController < ApplicationController
   before_action :require_admin, only: [:validate, :deny, :delete, :index]
   before_action :require_edit_permission, only: [:edit, :update]
 
+  rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
+
   def index
     @all_teachers = Teacher.where(admin: false)
   end
@@ -20,23 +22,9 @@ class TeachersController < ApplicationController
     @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher
-      # Exclude website from the school finder, so we can update an existing school.
-      @school = School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-      @school.website = school_params[:website]
-      @school.save!
-      @teacher.update(teacher_params)
-      @teacher.school = @school
-      @teacher.save!
-      if @teacher.application_status == "Validated"
-        TeacherMailer.welcome_email(@teacher).deliver_now
-        TeacherMailer.form_submission(@teacher).deliver_now
-        TeacherMailer.teals_confirmation_email(@teacher).deliver_now
-        flash[:success] = "Thanks! We have updated your information. We have sent BJC info to #{@teacher.email}."
-      else
-        flash[:success] = "Thanks! We have updated your information."
-      end
-      redirect_to root_path
+    if @teacher and defined?(current_user.id) and current_user.id == @teacher.id
+      params[:id] = current_user.id
+      update
     else
       @school = school_from_params
       if !@school.save
@@ -83,9 +71,11 @@ class TeachersController < ApplicationController
       flash[:success] = "Saved #{@teacher.full_name}"
       redirect_to teachers_path, notice: "Successfully updated information"
     else
-      # Resends emails only when teacher updates
-      TeacherMailer.form_submission(@teacher).deliver_now
-      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
+      # Resends emails only when teacher (not admin) updates and not validated
+      if @teacher.application_status != "Validated"
+        TeacherMailer.form_submission(@teacher).deliver_now
+        TeacherMailer.teals_confirmation_email(@teacher).deliver_now
+      end
       redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
     end
   end
@@ -125,6 +115,10 @@ class TeachersController < ApplicationController
   end
 
   private
+
+  def deny_access
+    redirect_to new_teacher_path, alert: "Email address already in use. Please use a different email."
+  end
 
   def school_from_params
     School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
