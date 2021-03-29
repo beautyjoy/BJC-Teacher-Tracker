@@ -1,14 +1,18 @@
 class TeachersController < ApplicationController
-  before_action :sanitize_params, only: [:new, :create]
-  before_action :require_admin, except: [:new, :create]
+  before_action :sanitize_params, only: [:new, :create, :edit, :update]
+  before_action :require_login, except: [:new, :create]
+  before_action :require_admin, only: [:validate, :deny, :delete, :index]
+  before_action :require_edit_permission, only: [:edit, :update]
 
   def index
-    @validated_teachers = Teacher.where(validated: true)
+    @all_teachers = Teacher.where(admin: false)
   end
 
   def new
     @teacher = Teacher.new
     @school = School.new
+    @action = "Submit"
+    @readonly = false
   end
 
   def create
@@ -24,9 +28,10 @@ class TeachersController < ApplicationController
       @teacher.update(teacher_params)
       @teacher.school = @school
       @teacher.save!
-      if @teacher.validated?
+      if @teacher.application_status == "Validated"
         TeacherMailer.welcome_email(@teacher).deliver_now
         TeacherMailer.form_submission(@teacher).deliver_now
+        TeacherMailer.teals_confirmation_email(@teacher).deliver_now
         flash[:success] = "Thanks! We have updated your information. We have sent BJC info to #{@teacher.email}."
       else
         flash[:success] = "Thanks! We have updated your information."
@@ -39,11 +44,12 @@ class TeachersController < ApplicationController
         render 'new'
       else
         @teacher = @school.teachers.build(teacher_params)
-        @teacher.validated = false
+        @teacher.application_status = "Pending"
         if @teacher.save
           flash[:success] =
             "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
           TeacherMailer.form_submission(@teacher).deliver_now
+          TeacherMailer.teals_confirmation_email(@teacher).deliver_now
           redirect_to root_path
         else
           redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information. #{@teacher.errors.full_messages}"
@@ -55,33 +61,58 @@ class TeachersController < ApplicationController
   def edit
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
+    @action = "Update"
+    @readonly = !is_admin?
   end
 
   def update
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    old_email, old_snap = @teacher.email, @teacher.snap
+    new_email, new_snap = teacher_params[:email], teacher_params[:snap]
+    if ((old_email != new_email) || (old_snap != new_snap)) && !is_admin?
+      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please contact an admin."
+      return
+    end
     @teacher.update(teacher_params)
     @school.update(school_params)
     @teacher.save!
     @school.save!
-    flash[:success] = "Saved #{@teacher.full_name}"
-    redirect_to teachers_path
+    if is_admin?
+      flash[:success] = "Saved #{@teacher.full_name}"
+      redirect_to teachers_path, notice: "Successfully updated information"
+    else
+      # Resends emails only when teacher updates
+      TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
+      redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+    end
   end
 
   def validate
-    # TODO: Require admin helper.
-    if !is_admin?
-      redirect_to root_path, alert: "Only administrators can validate!"
-    else
-      # TODO: Clean this up so the counter doesn't need to be manually incremented.
-      teacher = Teacher.find(params[:id])
-      teacher.validated = true
-      teacher.school.num_validated_teachers += 1
-      teacher.school.save!
-      teacher.save!
-      TeacherMailer.welcome_email(teacher).deliver_now
-      redirect_to root_path
-    end
+    # TODO: Check if teacher is already denied (MAYBE)
+    # TODO: Clean this up so the counter doesn't need to be manually incremented.
+    teacher = Teacher.find(params[:id])
+    teacher.application_status = "Validated"
+    teacher.school.num_validated_teachers += 1
+    teacher.school.save!
+    teacher.save!
+    TeacherMailer.welcome_email(teacher).deliver_now
+    redirect_to root_path
+  end
+
+  def deny
+    # TODO: Check if teacher is already validated (MAYBE)
+    # TODO: Clean this up so the counter doesn't need to be manually incremented.
+    teacher = Teacher.find(params[:id])
+    teacher.application_status = "Denied"
+    teacher.school.num_denied_teachers += 1
+    teacher.school.save!
+    teacher.save!
+    # Replace with deny email later
+    # TeacherMailer.welcome_email(teacher).deliver_now
+    redirect_to root_path
   end
 
   def delete
@@ -106,7 +137,7 @@ class TeachersController < ApplicationController
 
   def teacher_params
     params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website)
+      :more_info, :personal_website, :education_level)
   end
 
   def school_params
@@ -114,8 +145,13 @@ class TeachersController < ApplicationController
   end
 
   def sanitize_params
-    if params[:teacher] && params[:teacher][:status]
-      params[:teacher][:status] = params[:teacher][:status].to_i
+    if params[:teacher]
+      if params[:teacher][:status]
+        params[:teacher][:status] = params[:teacher][:status].to_i
+      end
+      if params[:teacher][:education_level]
+        params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+      end
     end
   end
 end

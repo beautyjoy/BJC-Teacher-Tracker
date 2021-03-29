@@ -31,17 +31,18 @@ ye:
   last_name: Wang
   status: 4
   more_info: A CS169 Student
-  email: ye@berkeley.edu
+  email: 'ye@berkeley.edu'
   snap: ye
-  validated: true
+  application_status: Validated
   school_id: 1
+  education_level: 1
 
 bob_teacher:
-    first_name: 'Bob'
-    last_name: 'Johnson'
-    snap: 'BobJohnson'
+    first_name: Bob
+    last_name: Johnson
+    snap: BobJohnson
     email: 'bob@gmail.com'
     status: 1
     more_info: ''
-    validated: false
+    application_status: Denied
     school_id: 1

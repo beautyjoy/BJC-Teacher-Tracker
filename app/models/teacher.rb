@@ -29,12 +29,14 @@
 #
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
-  validates_inclusion_of :validated, :in => [true, false]
+  validates_inclusion_of :application_status, :in => %w(Validated Denied Pending)
 
   belongs_to :school, counter_cache: true
 
-  scope :unvalidated, -> { where(validated: false) }
-  scope :validated, -> { where(validated: true) }
+  #Non-admin teachers who have not been denied nor accepted
+  scope :unvalidated, -> { where('(application_status!=? AND application_status!=?) AND admin=?', 'Validated', 'Denied', 'false') }
+  #Non-admin teachers who have been accepted/validated
+  scope :validated, -> { where('application_status=? AND admin=?', 'Validated', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -43,8 +45,15 @@ class Teacher < ApplicationRecord
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
-    'I am teaching BJC through the TEALS program'
+    'I am teaching BJC through the TEALS program.',
+    'I am a BJC curriculum or tool developer.',
+    'Other - Please specify below.'
+  ].freeze
+
+  enum education_level: [
+    'Middle School',
+    'High School',
+    'College'
   ].freeze
 
   SHORT_STATUS = [
@@ -52,9 +61,17 @@ class Teacher < ApplicationRecord
     'Non-CSP Teacher',
     'Mixed Class',
     'TEALS Volunteer',
-    'Other',
-    'TEALS Teacher'
+    'TEALS Teacher',
+    'Curriculum/Tool Developer',
+    'Other'
   ].freeze
+
+  EDUCATION_LEVELS = [
+    'Middle School',
+    'High School',
+    'College'
+  ].freeze
+
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -73,8 +90,30 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def display_education_level
+    if education_level_before_type_cast.to_i == -1
+      return "Unknown"
+    else
+      return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
+    end
+  end
+
   def display_status
     return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
     SHORT_STATUS[status_before_type_cast]
   end
+
+  def display_application_status
+    return application_status
+  end
+
+  def self.user_from_omniauth(auth)
+    find_by(email: auth.info.email)
+  end
+
+  def self.validate_access_token(auth)
+    email_from_auth = auth.info.email
+    return exists?(email: email_from_auth)
+  end
+
 end
