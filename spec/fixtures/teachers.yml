@@ -29,19 +29,42 @@
 ye:
   first_name: Ye
   last_name: Wang
-  status: 4
+  status: 6
   more_info: A CS169 Student
-  email: ye@berkeley.edu
+  email: 'ye@berkeley.edu'
   snap: ye
-  validated: true
-  school_id: 1
+  application_status: Validated
+  school_id: 2 #stanfurd
+  education_level: -1
 
-bob_teacher:
-    first_name: 'Bob'
-    last_name: 'Johnson'
-    snap: 'BobJohnson'
-    email: 'bob@gmail.com'
-    status: 1
-    more_info: ''
-    validated: false
-    school_id: 1
+bob:
+  first_name: Bob
+  last_name: Johnson
+  snap: BobJohnson
+  email: 'bob@gmail.com'
+  status: 1
+  more_info: ''
+  application_status: Denied
+  school_id: 1 #berkeley
+  education_level: -1
+
+long:
+  first_name: Short
+  last_name: Long
+  snap: song
+  email: 'short@long.com'
+  status: 3
+  school: berkeley
+  more_info: ''
+  application_status: Pending
+  school_id: 1
+  education_level: 2
+
+tony:
+  first_name: Tony
+  last_name: Stark
+  application_status: Validated
+  email: 'tony@stark.com'
+  admin: true
+  school_id: 1
+  education_level: 0

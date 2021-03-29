@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   # TODO: #21 - move to teachers/:id/...
   post "/admin/forms/validate/:id", to: "teachers#validate", as: "validate"
   post "/admin/forms/delete/:id", to: "teachers#delete", as: "delete"
+  post "/admin/forms/deny/:id", to: "teachers#deny", as: "deny"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 end

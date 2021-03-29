@@ -13,11 +13,9 @@ FactoryBot.define do
     snap { "teacher" }
     email { "teacher@example.edu"}
     status { 0 }
-    validated { true }
+    application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
-
-    school
   end
 
   factory :admin do

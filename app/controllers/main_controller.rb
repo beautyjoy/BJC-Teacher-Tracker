@@ -1,9 +1,10 @@
 class MainController < ApplicationController
   before_action :require_admin, only: [:dashboard]
-
   def index
     if is_admin?
       redirect_to dashboard_path
+    elsif is_teacher?
+      redirect_to edit_teacher_path(current_user.id), notice: "You can edit your information"
     else
       redirect_to new_teacher_path
     end
@@ -18,6 +19,7 @@ class MainController < ApplicationController
 
   def logout
     session[:logged_in] = false
+    session[:user_id] = nil
     redirect_to root_url
   end
 end

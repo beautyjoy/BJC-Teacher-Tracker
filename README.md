@@ -22,11 +22,21 @@ We have worked on the adding following core features and functionality:
 
 ## Installation:
 
+#### Postgres Installation (MacOS):
 * `brew install postgresql chromedriver`
-* `rvm use 2.6.5` # Double-check `.ruby-version`
-* `bundle`
 * Start postgres if necessary. `brew services start postgresql`
-* `bin/rails db:setup`
+#### Postgres Installation (Linux):
+* `sudo apt install postgresql`
+* Create a postgres user.
+  * `sudo su - postgres` (to get into postgres shell)
+  * `createuser --interactive --pwprompt` (in postgres shell)
+  * Save these information in `database.yml` under `default`. (`username: [username]` `password: [password]`)
+* Start postgres if necessary. `pg_ctlcluster 12 main start`
+
+#### General Installation
+* `rvm use 2.6.6` # Double-check `.ruby-version`
+* `bundle`
+* `bin/rails db:setup` (Run this after setting up Postgres)
 
 ## Few Things to Know:
 
@@ -56,11 +66,18 @@ If bundler install runs successfully, continue with the following commands to co
 
 ### Maintainability Badge
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/maintainability)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/maintainability)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/maintainability)
 
 ### Test Coverage Badge
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/test_coverage)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/test_coverage)
 
-## Travis CI Badge
-[![Build Status](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker)
+### Pivotal Tracker
+
+[![Pivotal Tracker](https://github.com/saasbook/q2q-demo/blob/main/app/assets/images/pivotal_tracker_logo.png)](https://pivotaltracker.com/n/projects/2406982)
+
+### Travis CI Badge
+[![Build Status](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker)
+
+### Bluejay Badge
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_3-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-tommywei110_BJC-Teacher-Tracker/main)

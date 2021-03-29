@@ -1,5 +1,6 @@
 <td><%= link_to(teacher.full_name, edit_teacher_path(teacher)) %></td>
 <td><%= teacher.email %></td>
+<td><%= teacher.display_education_level %></td>
 <td><%= teacher.display_status %></td>
 <td><%= snap_link(teacher) %></td>
 <td>
@@ -9,6 +10,7 @@
   <%= link_to(teacher.school.name, teacher.school.website, target: '_blank') %>
 </td>
 <td> <%= teacher.school.location %> </td>
+<td> <%= teacher.display_application_status %> </td>
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%b %d, %Y") %>
 </td>

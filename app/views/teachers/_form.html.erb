@@ -19,21 +19,22 @@
       <div class='col-6'>
         <%= f.label :email, "School Email", class: "label-required" %>
         <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
-          required: true, type: :email %>
+          required: true, type: :email, readonly: @readonly %>
       </div>
 
       <div class='col-6'>
         <%= f.label :snap do %>
           Snap<i>!</i> Username
         <% end %>
-        <%= f.text_field :snap, placeholder: "alonzo", class: "form-control" %>
+        <%= f.text_field :snap, placeholder: "alonzo", class: "form-control", readonly: @readonly %>
       </div>
     </div>
 
     <div class="form-group row">
       <div class='col-12'>
         <%= f.label :personal_website, "Personal or Course Website", class: "label" %>
-        <%= f.text_field :personal_website, placeholder: "https://school.edu", class: "form-control", type: "url" %>
+        <%= f.text_field :personal_website, placeholder: "school.edu", class: "form-control", 
+        pattern: ".+\\..+", title: "Please enter a valid URL." %>
       </div>
     </div>
 
@@ -43,6 +44,18 @@
         <%= f.select(
           :status,
           options_for_select(Teacher.statuses, teacher.status_before_type_cast),
+          { include_blank: "Select an option" },
+          { class: 'form-control', required: true }
+        ) %>
+      </div>
+    </div>
+
+    <div class='form-group row'>
+      <div class='col-12'>
+        <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
+        <%= f.select(
+          :education_level,
+          options_for_select(Teacher.education_levels, teacher.education_level_before_type_cast),
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
         ) %>
@@ -89,13 +102,13 @@
 
       <div class="form-group">
         <%= school_fields.label :website, "School Website", class: "label-required" %>
-        <%= school_fields.text_field :website, placeholder: "https://snap.berkeley.edu",
-          class: "form-control", required: true, type: "url" %>
+        <%= school_fields.text_field :website, placeholder: "snap.berkeley.edu",
+          class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
       </div>
     </div>
   <% end %>
 
   <div>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit @action, class: 'btn btn-primary', id: "#action-button" %>
   </div>
 <% end %>
