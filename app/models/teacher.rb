@@ -35,9 +35,9 @@ class Teacher < ApplicationRecord
 
   belongs_to :school, counter_cache: true
 
-  #Non-admin teachers who have not been denied nor accepted
+  # Non-admin teachers who have not been denied nor accepted
   scope :unvalidated, -> { where('(application_status!=? AND application_status!=?) AND admin=?', 'Validated', 'Denied', 'false') }
-  #Non-admin teachers who have been accepted/validated
+  # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where('application_status=? AND admin=?', 'Validated', 'false') }
 
   # TODO: Replace these with names that are usable as methods.
@@ -52,11 +52,11 @@ class Teacher < ApplicationRecord
     'I am a BJC curriculum or tool developer.',
   ].freeze
 
-  enum education_level: [
-    'Middle School',
-    'High School',
-    'College'
-  ].freeze
+  enum education_level: {
+    middle_school: 0,
+    high_school: 1,
+    college: 2
+  }
 
   SHORT_STATUS = [
     'CSP Teacher',
@@ -66,12 +66,6 @@ class Teacher < ApplicationRecord
     'Other',
     'TEALS Teacher',
     'Curriculum/Tool Developer',
-  ].freeze
-
-  EDUCATION_LEVELS = [
-    'Middle School',
-    'High School',
-    'College'
   ].freeze
 
 
@@ -96,7 +90,7 @@ class Teacher < ApplicationRecord
     if education_level_before_type_cast.to_i == -1
       return "Unknown"
     else
-      return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
+      return education_level.to_s.titlecase
     end
   end
 
