@@ -2,24 +2,26 @@
 #
 # Table name: teachers
 #
-#  id                      :bigint           not null, primary key
-#  admin                   :boolean          default(FALSE)
-#  course                  :string
-#  email                   :string
-#  first_name              :string
-#  google_refresh_token    :string
-#  google_refresh_token_iv :string
-#  google_token            :string
-#  google_token_iv         :string
-#  last_name               :string
-#  more_info               :string
-#  other                   :string
-#  snap                    :string
-#  status                  :integer
-#  validated               :boolean
-#  created_at              :datetime
-#  updated_at              :datetime
-#  school_id               :integer
+#  id                                :bigint           not null, primary key
+#  admin                             :boolean          default(FALSE)
+#  application_status                :string           default("Pending")
+#  course                            :string
+#  education_level                   :integer          default(NULL)
+#  email                             :string
+#  encrypted_google_refresh_token    :string
+#  encrypted_google_refresh_token_iv :string
+#  encrypted_google_token            :string
+#  encrypted_google_token_iv         :string
+#  first_name                        :string
+#  last_name                         :string
+#  more_info                         :string
+#  other                             :string
+#  personal_website                  :string
+#  snap                              :string
+#  status                            :integer
+#  created_at                        :datetime
+#  updated_at                        :datetime
+#  school_id                         :integer
 #
 # Indexes
 #

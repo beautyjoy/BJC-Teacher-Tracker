@@ -7,6 +7,7 @@
 #  lat                    :float
 #  lng                    :float
 #  name                   :string
+#  num_denied_teachers    :integer          default(0)
 #  num_validated_teachers :integer          default(0)
 #  state                  :string
 #  teachers_count         :integer          default(0)
