@@ -20,7 +20,7 @@ RSpec.describe MainController, type: :controller do
     end
 
     it 'shows correct course statistics' do
-      #only validated (accepted) teachers are accounted for in statuses.
+      # only validated (accepted) teachers are accounted for in statuses.
       statuses = @controller_stub.instance_variable_get(:@statuses)
       schools = @controller_stub.instance_variable_get(:@schools)
       expect(statuses.size).to equal 1

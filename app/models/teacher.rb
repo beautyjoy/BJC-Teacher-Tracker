@@ -86,6 +86,10 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def self.education_level_options
+    Teacher.education_levels.keys.map { |sym| sym.to_s.titlecase }
+  end
+
   def display_education_level
     if education_level_before_type_cast.to_i == -1
       return "Unknown"
