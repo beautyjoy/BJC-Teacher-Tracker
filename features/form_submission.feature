@@ -25,20 +25,6 @@ Scenario: Correctly filling out and succesful form submission
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
 
-Scenario: Filling a new form with existing info shows and updated confirmation.
-    Given I am on the BJC home page
-    And   I enter my "First Name" as "Ye"
-    And   I enter my "Last Name" as "Wang"
-    And   I enter my "School Email" as "teacher@example.edu"
-    And   I set my status as "I am teaching BJC as an AP CS Principles course."
-    And   I set my education level target as "High School"
-    And   I enter my "School Name" as "Cupertino High School"
-    And   I enter my "City" as "Cupertino"
-    And   I select "CA" from "State"
-    And   I enter my "School Website" as "https://chs.fuhsd.org"
-    And   I press "Submit"
-    Then  I see a confirmation "Thanks! We have updated your information."
-
 Scenario: Not Correctly filling out and unsuccesful form submission
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
