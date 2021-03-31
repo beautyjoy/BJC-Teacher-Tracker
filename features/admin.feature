@@ -53,7 +53,7 @@ Scenario: Edit teacher info as an admin
   Then  I should see "Joseph"
   And   I enter my "First Name" as "Joe"
   And   I press "Update"
-  Then I see a confirmation "Successfully updated information"
+  Then I see a confirmation "Saved"
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
