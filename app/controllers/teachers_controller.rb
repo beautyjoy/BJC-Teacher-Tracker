@@ -80,8 +80,7 @@ class TeachersController < ApplicationController
     @teacher.save!
     @school.save!
     if is_admin?
-      flash[:success] = "Saved #{@teacher.full_name}"
-      redirect_to teachers_path, notice: "Successfully updated information"
+      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
     else
       # Resends emails only when teacher updates
       TeacherMailer.form_submission(@teacher).deliver_now
