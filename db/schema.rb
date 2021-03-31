@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_18_034405) do
+ActiveRecord::Schema.define(version: 2021_03_31_091225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2021_03_18_034405) do
     t.float "lng"
     t.integer "num_validated_teachers", default: 0
     t.integer "teachers_count", default: 0
-    t.datetime "created_at", default: "2019-12-11 07:35:22"
-    t.datetime "updated_at", default: "2019-12-11 07:35:22"
+    t.datetime "created_at", default: -> { "now()" }
+    t.datetime "updated_at", default: -> { "now()" }
     t.integer "num_denied_teachers", default: 0
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
@@ -34,9 +34,7 @@ ActiveRecord::Schema.define(version: 2021_03_18_034405) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.string "course"
     t.string "snap"
-    t.string "other"
     t.integer "school_id"
     t.datetime "created_at", default: -> { "now()" }
     t.datetime "updated_at", default: -> { "now()" }
@@ -51,6 +49,8 @@ ActiveRecord::Schema.define(version: 2021_03_18_034405) do
     t.integer "education_level", default: -1
     t.string "application_status", default: "Pending"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
+    t.index ["school_id"], name: "index_teachers_on_school_id"
+    t.index ["status"], name: "index_teachers_on_status"
   end
 
 end

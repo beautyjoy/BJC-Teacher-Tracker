@@ -28,6 +28,8 @@ Scenario: Viewing all teachers as an admin
 # A search field should be visible on the index pages
 # Check for a CSV button
 
+# TODO: Checks for validation and deny belong here.
+
 Scenario: Logging in with random Google Account should fail
   Given I have a random email
   Given I am on the BJC home page
@@ -62,4 +64,3 @@ Scenario: Not logged in should not have access to edit
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   When  I go to the edit page for Joseph Mamoa
   Then  should see "You need to log in to access this."
-
