@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_091225) do
     t.integer "education_level", default: -1
     t.string "application_status", default: "Pending"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
+    t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["status"], name: "index_teachers_on_status"
   end

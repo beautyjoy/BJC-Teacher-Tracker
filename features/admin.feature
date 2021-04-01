@@ -67,3 +67,26 @@ Scenario: Not logged in should not have access to edit
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   When  I go to the edit page for Joseph Mamoa
   Then  should see "You need to log in to access this."
+
+Scenario: Filter all teacher info as an admin
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name  | admin | email                     | school      | application_status |
+  | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
+  | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
+  | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |       Pending      |
+  Given I am on the BJC home page
+  Given I have an admin email
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the teachers page
+  And   I check "Pending"
+  Then  I should see "Peter"
+  Then  I should not see "Victor"
+  Then  I should not see "Danny"
+  And   I check "Validated"
+  Then  I should see "Peter"
+  Then  I should see "Victor"
+  Then  I should not see "Danny"
