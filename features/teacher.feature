@@ -30,6 +30,58 @@ Scenario: Logging in as a teacher should be able to edit their info
   Then  the "First Name" field should contain "Joe"
   Then  there is a TEALS email
 
+Scenario: Logged in teacher can fill a new form with their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the new teachers page
+  And   I enter my "First Name" as "Joe"
+  And   I enter my "Last Name" as "Mamoa"
+  And   I enter my "School Email" as "testteacher@berkeley.edu"
+  And   I enter my "Snap! Username" as "alonzo"
+  And   I set my status as "I am teaching BJC as an AP CS Principles course."
+  And   I set my education level target as "High School"
+  And   I enter my "School Name" as "Cupertino High School"
+  And   I enter my "City" as "Cupertino"
+  And   I select "CA" from "State"
+  And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I press "Submit"
+  Then  I see a confirmation "Successfully updated your information"
+  And   I am on the edit page for Joe Mamoa
+
+  Scenario: Logged in teacher cannot change Snap from new form path
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the new teachers page
+  And   I enter my "First Name" as "Joe"
+  And   I enter my "Last Name" as "Mamoa"
+  And   I enter my "School Email" as "testteacher@berkeley.edu"
+  And   I enter my "Snap! Username" as "not_alonzo"
+  And   I set my status as "I am teaching BJC as an AP CS Principles course."
+  And   I set my education level target as "High School"
+  And   I enter my "School Name" as "Cupertino High School"
+  And   I enter my "City" as "Cupertino"
+  And   I select "CA" from "State"
+  And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I press "Submit"
+  Then  I see a confirmation "Failed to update your information"
+  And   I am on the edit page for Joseph Mamoa
+
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
