@@ -52,6 +52,23 @@ class Teacher < ApplicationRecord
     'I am a BJC curriculum or tool developer.',
   ].freeze
 
+  # TODO: We should rewrite `status` to look like education level:
+  # enum status: {
+  #   csp_teacher: 0,
+  #   non_csp_teacher: 1,
+  #   mixed_class: 2,
+  #   teals_volunteer: 3,
+  #   other: 4
+  #   teals_teacher: 5,
+  #   developer: 6
+  # }
+  # This gives us the method `teals_volunteer?`
+  # The keys here replace the short names used, and essentially makes that the default.
+
+  # We then need to map these keys/values to the longer status text
+  # We can put that map in a different order so we can build the form the way we want.
+  # We will no longer need SHORT_STATUS and can update the `display_status` method.
+
   enum education_level: {
     middle_school: 0,
     high_school: 1,
