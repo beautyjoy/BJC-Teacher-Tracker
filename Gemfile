@@ -35,6 +35,8 @@ gem "panoramic"
 
 # Editor
 gem 'tinymce-rails'
+#Sanitizing email templates
+gem 'liquid-rails'
 
 group :development, :test do
   gem 'byebug'
