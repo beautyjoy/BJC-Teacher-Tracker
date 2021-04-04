@@ -14,6 +14,7 @@ module NavigationHelpers
     case page_name
 
     when /^the (BJC )?home\s?page$/ then '/'
+    when /^the email templates index$/ then '/email_templates'
     when /^the edit page for (.*) (.*)$/i
       edit_teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
     # Add more mappings here.
