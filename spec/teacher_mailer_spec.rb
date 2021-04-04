@@ -2,6 +2,9 @@ require 'rails_helper'
 
 describe TeacherMailer do
 	fixtures :all
+    before(:all) do
+        Rails.application.load_seed
+    end 
     it 'Sends Welcome Email' do
 		teacher = teachers(:bob)
 		email = TeacherMailer.welcome_email(teacher)
@@ -9,7 +12,7 @@ describe TeacherMailer do
 		expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
 		expect(email.to[0]).to eq("bob@gmail.com")
 		expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
-        expect(email.body.encoded).to include("Works")
+        expect(email.body.encoded).to include("Hi Bob")
 	end
 
     # Prereq: "testadminuser@berkeley.edu" must exist within ENV["TEST_TEALS_CONTACT_EMAIL"]
