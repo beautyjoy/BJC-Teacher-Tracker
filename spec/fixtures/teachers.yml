@@ -8,8 +8,8 @@ ye:
   email: 'ye@berkeley.edu'
   snap: ye
   application_status: Validated
-  school_id: 2 #stanfurd
   education_level: -1
+  school: stanfurd
 
 bob:
   first_name: Bob
@@ -19,7 +19,7 @@ bob:
   status: 1
   more_info: ''
   application_status: Denied
-  school_id: 1 #berkeley
+  school: berkeley
   education_level: -1
 
 long:
@@ -31,14 +31,6 @@ long:
   school: berkeley
   more_info: ''
   application_status: Pending
-  school_id: 1
   education_level: 2
 
-tony:
-  first_name: Tony
-  last_name: Stark
-  application_status: Validated
-  email: 'tony@stark.com'
-  admin: true
-  school_id: 1
-  education_level: 0
+
