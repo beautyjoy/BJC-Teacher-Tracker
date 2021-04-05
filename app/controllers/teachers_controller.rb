@@ -67,12 +67,14 @@ class TeachersController < ApplicationController
     @teacher.save!
     @school.save!
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
+      flash[:success] = "Saved #{@teacher.full_name}"
+      redirect_to teachers_path, notice: "Successfully updated information"
       return
     end
     # Resends emails only when teacher (not admin) updates and not validated
     if @teacher.application_status != "Validated"
       TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end
