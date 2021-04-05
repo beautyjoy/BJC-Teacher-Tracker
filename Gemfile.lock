@@ -44,9 +44,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    annotate (3.1.1)
-      activerecord (>= 3.2, < 7.0)
-      rake (>= 10.4, < 14.0)
     arel (9.0.0)
     arrayfields (4.9.2)
     ast (2.4.2)
@@ -426,7 +423,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  annotate
   attr_encrypted (~> 3.1.0)
   byebug
   cucumber-rails
