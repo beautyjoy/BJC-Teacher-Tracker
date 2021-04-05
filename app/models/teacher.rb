@@ -6,7 +6,7 @@
 #
 #  id                                :bigint           not null, primary key
 #  admin                             :boolean          default(FALSE)
-#  application_status                :string           default("Pending")
+#  application_status                :string           default("pending")
 #  education_level                   :integer          default(NULL)
 #  email                             :string
 #  encrypted_google_refresh_token    :string
@@ -25,20 +25,27 @@
 #
 # Indexes
 #
+#  index_teachers_on_email                 (email) UNIQUE
 #  index_teachers_on_email_and_first_name  (email,first_name)
 #  index_teachers_on_school_id             (school_id)
 #  index_teachers_on_status                (status)
 #
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
-  validates_inclusion_of :application_status, :in => %w(Validated Denied Pending)
+
+  enum application_status: {
+    validated: "Validated",
+    denied: "Denied",
+    pending: "Pending"
+  }
+  validates_inclusion_of :application_status, :in => application_statuses.keys
 
   belongs_to :school, counter_cache: true
 
   # Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where('(application_status!=? AND application_status!=?) AND admin=?', 'Validated', 'Denied', 'false') }
+  scope :unvalidated, -> { where('application_status=? AND admin=?', application_statuses[:pending], 'false') }
   # Non-admin teachers who have been accepted/validated
-  scope :validated, -> { where('application_status=? AND admin=?', 'Validated', 'false') }
+  scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
 
   # TODO: Replace these with names that are usable as methods.
   # Add a second function to return status: form description
@@ -121,7 +128,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    return application_status
+    return Teacher.application_statuses[application_status]
   end
 
   def self.user_from_omniauth(auth)
