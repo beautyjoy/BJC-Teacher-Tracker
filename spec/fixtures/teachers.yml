@@ -1,37 +1,9 @@
-# == Schema Information
-#
-# Table name: teachers
-#
-#  id                                :bigint           not null, primary key
-#  admin                             :boolean          default(FALSE)
-#  application_status                :string           default("Pending")
-#  education_level                   :integer          default(NULL)
-#  email                             :string
-#  encrypted_google_refresh_token    :string
-#  encrypted_google_refresh_token_iv :string
-#  encrypted_google_token            :string
-#  encrypted_google_token_iv         :string
-#  first_name                        :string
-#  last_name                         :string
-#  more_info                         :string
-#  personal_website                  :string
-#  snap                              :string
-#  status                            :integer
-#  created_at                        :datetime
-#  updated_at                        :datetime
-#  school_id                         :integer
-#
-# Indexes
-#
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_status                (status)
-#
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 ye:
   first_name: Ye
   last_name: Wang
-  status: 4
+  status: 6
   more_info: A CS169 Student
   email: 'ye@berkeley.edu'
   snap: ye

@@ -54,42 +54,31 @@ class Teacher < ApplicationRecord
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
     'I am teaching BJC through the TEALS program.',
     'I am a BJC curriculum or tool developer.',
+    'Other - Please specify below.'
   ].freeze
 
-  # TODO: We should rewrite `status` to look like education level:
-  # enum status: {
-  #   csp_teacher: 0,
-  #   non_csp_teacher: 1,
-  #   mixed_class: 2,
-  #   teals_volunteer: 3,
-  #   other: 4
-  #   teals_teacher: 5,
-  #   developer: 6
-  # }
-  # This gives us the method `teals_volunteer?`
-  # The keys here replace the short names used, and essentially makes that the default.
-
-  # We then need to map these keys/values to the longer status text
-  # We can put that map in a different order so we can build the form the way we want.
-  # We will no longer need SHORT_STATUS and can update the `display_status` method.
-
-  enum education_level: {
-    middle_school: 0,
-    high_school: 1,
-    college: 2
-  }
+  enum education_level: [
+    'Middle School',
+    'High School',
+    'College'
+  ].freeze
 
   SHORT_STATUS = [
     'CSP Teacher',
     'Non-CSP Teacher',
     'Mixed Class',
     'TEALS Volunteer',
-    'Other',
     'TEALS Teacher',
     'Curriculum/Tool Developer',
+    'Other'
+  ].freeze
+
+  EDUCATION_LEVELS = [
+    'Middle School',
+    'High School',
+    'College'
   ].freeze
 
 
@@ -110,15 +99,11 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
-  def self.education_level_options
-    Teacher.education_levels.keys.map { |sym| sym.to_s.titlecase }
-  end
-
   def display_education_level
     if education_level_before_type_cast.to_i == -1
       return "Unknown"
     else
-      return education_level.to_s.titlecase
+      return EDUCATION_LEVELS[education_level_before_type_cast.to_i]
     end
   end
 
