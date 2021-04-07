@@ -9,7 +9,7 @@
     <tbody>
       <% @all_templates.each do |template| %>
       <tr>
-        <td><%= link_to(template.path, edit_email_template_path(template)) %></td>
+        <td><%= link_to(template.title, edit_email_template_path(template)) %></td>
       </tr>
       <% end %>
     </tbody>

@@ -66,7 +66,8 @@ module SeedData
         locale: nil,
         handler: "liquid",
         partial: false,
-        format: "html"
+        format: "html",
+        title: "Welcome Email"
       },
 
       {
@@ -76,7 +77,8 @@ module SeedData
         locale: nil,
         handler: "liquid",
         partial: false,
-        format: "html"
+        format: "html",
+        title: "TEALS Confirmation Email"
       },
       {
         id: 3,
@@ -85,7 +87,8 @@ module SeedData
         locale: nil,
         handler: "liquid",
         partial: false,
-        format: "html"
+        format: "html",
+        title: "Form Submission Email"
       }
 
     ]
