@@ -14,10 +14,7 @@ class EmailTemplatesController < ApplicationController
     template.save!
     redirect_to email_templates_path
   end
-
-  def delete
-  end
-
+  
   private
   def template_params
     params.require(:email_template).permit(:body)
