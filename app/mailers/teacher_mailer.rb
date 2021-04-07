@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'liquid-rails'
 
 class TeacherMailer < ApplicationMailer
   CONTACT_EMAIL = 'Lauren Mock <lmock@berkeley.edu>'
