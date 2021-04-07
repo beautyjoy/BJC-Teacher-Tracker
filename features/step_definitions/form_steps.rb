@@ -39,3 +39,7 @@ Then /^debug$/ do
     require "rubygems"; require "byebug"; byebug
     1 # intentionally force debugger context in this method
 end
+
+Then /the "(.*)" of the user with email "(.*)" should be "(.*)"/ do |field, email, expected|
+    expect(Teacher.find_by(email:email)[field]).to eq(expected)
+end
