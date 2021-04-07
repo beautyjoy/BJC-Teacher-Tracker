@@ -38,7 +38,7 @@
     var types = $('input:checkbox[name="Application Status"]:checked').map(function() {
       return '^' + this.value + '\$';
     }).get().join('|');
-    otable.fnFilter(types, 8, true, false, false, false);
+    otable.fnFilter(types, 6, true, false, false, false);
   }
   $(".custom-checkbox").change(function() {
     filterme()

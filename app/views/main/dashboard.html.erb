@@ -14,12 +14,12 @@
           <%= render 'teachers/teacher', teacher: teacher %>
           <td>
             <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
-              <%= button_to("Validate", validate_path(:id => teacher.id),
-                 class: 'btn btn-success', type: 'button') %>
-              <%= button_to("Deny", deny_path(:id => teacher.id),
-                 class: 'btn btn-danger', type: 'button') %>
-              <%# <%= button_to("Delete", delete_path(:id => teacher.id), 
-                 data: {confirm: "Are you sure you wish to delete this form?"}, 
+              <%= button_to("✔️", validate_path(:id => teacher.id),
+                 class: 'btn btn-outline-success', type: 'button') %>
+              <%= button_to("❌", deny_path(:id => teacher.id),
+                 class: 'btn btn-outline-danger', type: 'button') %>
+              <%# <%= button_to("Delete", delete_path(:id => teacher.id),
+                 data: {confirm: "Are you sure you wish to delete this form?"},
                  class: 'btn btn-danger', type: 'button') %>
             </div>
           </td>
@@ -114,5 +114,5 @@
 </script>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9YjQt1uyBo0rEKe7UWMeW9GUryKtaMVo&callback=initMap">
 </script>

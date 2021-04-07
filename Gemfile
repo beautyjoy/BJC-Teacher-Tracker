@@ -31,6 +31,7 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 group :development, :test do
+  gem 'annotate'
   gem 'byebug'
   gem 'pry'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
