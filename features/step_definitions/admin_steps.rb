@@ -19,7 +19,7 @@ Given /I have an admin email/ do
 end
 
 # Returns a OAuth2 token associated with email "randomemail@gmail.com"
-Given /I have a random email/ do
+Given /I have a non-admin, unregistered email/ do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: 'google_oauth2',
     uid: '123545',

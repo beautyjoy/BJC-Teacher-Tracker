@@ -19,7 +19,7 @@ class MainController < ApplicationController
 
   def logout
     session[:logged_in] = false
-    session[:user_id] = nil
+    session.destroy
     redirect_to root_url
   end
 end

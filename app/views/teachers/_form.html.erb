@@ -109,6 +109,6 @@
   <% end %>
 
   <div>
-    <%= f.submit @action, class: 'btn btn-primary', id: "#action-button" %>
+    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary'%>
   </div>
 <% end %>
