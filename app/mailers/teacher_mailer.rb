@@ -16,6 +16,16 @@ class TeacherMailer < ApplicationMailer
          subject: 'Welcome to The Beauty and Joy of Computing!'
   end
 
+  def deny_email(teacher, reason)
+    @teacher = teacher
+    @reason = reason.to_s
+    @bjc_password = BJC_PASSWORD
+    @piazza_password = PIAZZA_PASSWORD
+    mail to: @teacher.email_name,
+         cc: CONTACT_EMAIL,
+         subject: 'Deny Email'
+  end
+
   def teals_confirmation_email(teacher)
     @teacher = teacher
     if !@teacher.status.nil? and @teacher.status.include? "I am a TEALS volunteer"
@@ -28,7 +38,7 @@ class TeacherMailer < ApplicationMailer
   end
 
   def form_submission(teacher)
-  	@teacher = teacher
-  	mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
+    @teacher = teacher
+    mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
   end
 end

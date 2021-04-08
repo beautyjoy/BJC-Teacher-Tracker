@@ -25,6 +25,11 @@
 #
 # Indexes
 #
+#  index_teachers_on_email                 (email) UNIQUE
+#  index_teachers_on_email_and_first_name  (email,first_name)
+#  index_teachers_on_school_id             (school_id)
+#  index_teachers_on_status                (status)
+#
 
 #  index_teachers_on_email                 (email) UNIQUE
 #  index_teachers_on_email_and_first_name  (email,first_name)

@@ -16,6 +16,15 @@ Scenario: Logging in as an admin
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
 
+Scenario: Logging out as an admin
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I follow "Logout"
+  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Log In"
+
 Scenario: Viewing all teachers as an admin
   Given I am on the BJC home page
   Given I have an admin email
@@ -57,6 +66,28 @@ Scenario: Edit teacher info as an admin
   And   I set my education level target as "College"
   And   I press "Update"
   Then I see a confirmation "Saved"
+
+Scenario: Deny teacher as an admin
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I am on the BJC home page
+  Given I have an admin email
+  When  I follow "Log In"
+  Then  I can log in with Google
+  And   I press "❌"
+  Then  I should see "Reason for Denial"
+  And   I should see "Deny Joseph Mamoa"
+  And   I fill in "reason" with "Test"
+  And   I press "Cancel"
+  And   I press "❌"
+  Then  the "reason" field should not contain "Test"
+  And   I fill in "reason" with "Denial Reason"
+  And   I press "Submit"
+  Then  I can send a deny email
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
