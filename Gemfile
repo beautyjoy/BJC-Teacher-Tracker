@@ -39,6 +39,7 @@ gem 'tinymce-rails'
 gem 'liquid-rails'
 
 group :development, :test do
+  gem 'annotate'
   gem 'byebug'
   gem 'pry'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
