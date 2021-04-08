@@ -75,11 +75,12 @@ Scenario: Deny teacher as an admin
   Then  I can log in with Google
   And   I press "Deny"
   Then  I should see "Reason for Denial"
+  And   I should see "Deny Joseph Mamoa"
   And   I fill in "reason" with "Test"
   And   I press "Cancel"
   And   I press "Deny"
   Then  the "reason" field should not contain "Test"
-  And   I fill in "reason" with "Test2"
+  And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
   Then  I can send a deny email
 

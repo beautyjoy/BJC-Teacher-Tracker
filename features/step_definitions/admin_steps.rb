@@ -49,5 +49,5 @@ Then /I can send a deny email/ do
   last_email = ActionMailer::Base.deliveries.last
   last_email.to[0].should eq "testteacher@berkeley.edu"
   last_email.subject.should eq "Deny Email"
-  last_email.body.encoded.should include "Test2"
+  last_email.body.encoded.should include "Denial Reason"
 end
