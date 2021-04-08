@@ -14,12 +14,12 @@ describe TeacherMailer do
 
     it 'Sends Deny Email' do
         teacher = teachers(:long)
-        email = TeacherMailer.deny_email(teacher, "Test")
+        email = TeacherMailer.deny_email(teacher, "Denial Reason")
         email.deliver_now
         expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
         expect(email.to[0]).to eq("short@long.com")
         expect(email.subject).to eq("Deny Email")
-        expect(email.body.encoded).to include("Test")
+        expect(email.body.encoded).to include("Denial Reason")
     end
 
     # Prereq: "testadminuser@berkeley.edu" must exist within ENV["TEST_TEALS_CONTACT_EMAIL"]
