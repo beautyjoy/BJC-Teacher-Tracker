@@ -12,6 +12,7 @@ Scenario: Logging in as a teacher should be able to edit their info
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher email
+  And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -19,6 +20,7 @@ Scenario: Logging in as a teacher should be able to edit their info
   Then  the "First Name" field should contain "Joseph"
   And   I enter my "First Name" as "Joe"
   And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
+  And   I set my education level target as "College"
   And   I enter my "School Name" as "Cupertino High School"
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
@@ -26,7 +28,6 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
-  Then  there is a TEALS email
 
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
