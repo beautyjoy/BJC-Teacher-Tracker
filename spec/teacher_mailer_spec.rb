@@ -12,6 +12,16 @@ describe TeacherMailer do
     expect(email.body.encoded).to include("Hi Bob,")
   end
 
+  it 'Sends Deny Email' do
+    teacher = teachers(:long)
+    email = TeacherMailer.deny_email(teacher, "Denial Reason")
+    email.deliver_now
+    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+    expect(email.to[0]).to eq("short@long.com")
+    expect(email.subject).to eq("Deny Email")
+    expect(email.body.encoded).to include("Denial Reason")
+  end
+
   it 'Sends TEALS Confirmation Email' do
     stub_const('TeacherMailer::TEALS_CONTACT_EMAIL', 'testcontactemail@berkeley.edu')
     teacher = teachers(:long)
