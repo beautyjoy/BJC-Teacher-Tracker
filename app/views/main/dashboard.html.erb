@@ -14,11 +14,11 @@
           <%= render 'teachers/teacher', teacher: teacher %>
           <td>
             <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
-              <%= button_to("Validate", validate_path(:id => teacher.id),
-                class: 'btn btn-success', type: 'button') %>
+              <%= button_to("✔️", validate_path(:id => teacher.id),
+                 class: 'btn btn-outline-success', type: 'button') %>
               <span>
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".js-denialModal" data-teacherid="<%= teacher.id %>" data-teachername="<%= teacher.full_name %>">
-                  Deny
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" data-teacherid="<%= teacher.id %>" data-teachername="<%= teacher.full_name %>">
+                  ❌
                 </button>
               </span>
               <%# <%= button_to("Delete", delete_path(:id => teacher.id), 
@@ -119,5 +119,5 @@
 </script>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7jyOFHSorVb256ZEwvvyprp2KPjxKTPw&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9YjQt1uyBo0rEKe7UWMeW9GUryKtaMVo&callback=initMap">
 </script>

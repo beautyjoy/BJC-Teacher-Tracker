@@ -37,6 +37,8 @@ Scenario: Viewing all teachers as an admin
 # A search field should be visible on the index pages
 # Check for a CSV button
 
+# TODO: Checks for validation and deny belong here.
+
 Scenario: Logging in with random Google Account should fail
   Given I have a random email
   Given I am on the BJC home page
@@ -52,6 +54,7 @@ Scenario: Edit teacher info as an admin
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I am on the BJC home page
+  And The TEALS contact email is stubbed
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
@@ -59,8 +62,10 @@ Scenario: Edit teacher info as an admin
   When  I go to the edit page for Joseph Mamoa
   Then  I should see "Joseph"
   And   I enter my "First Name" as "Joe"
+  And   I set my status as "Other - Please specify below."
+  And   I set my education level target as "College"
   And   I press "Update"
-  Then  I see a confirmation "Successfully updated information"
+  Then I see a confirmation "Saved"
 
 Scenario: Deny teacher as an admin
   Given the following schools exist:
@@ -73,12 +78,12 @@ Scenario: Deny teacher as an admin
   Given I have an admin email
   When  I follow "Log In"
   Then  I can log in with Google
-  And   I press "Deny"
+  And   I press "❌"
   Then  I should see "Reason for Denial"
   And   I should see "Deny Joseph Mamoa"
   And   I fill in "reason" with "Test"
   And   I press "Cancel"
-  And   I press "Deny"
+  And   I press "❌"
   Then  the "reason" field should not contain "Test"
   And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
@@ -116,4 +121,3 @@ Scenario: Filter all teacher info as an admin
   Then  I should see "Peter"
   Then  I should see "Victor"
   Then  I should not see "Danny"
-  

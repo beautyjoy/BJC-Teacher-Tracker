@@ -65,4 +65,3 @@ end
 
 # Setup OmniAuth for testing
 OmniAuth.config.test_mode = true
-

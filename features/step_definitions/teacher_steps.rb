@@ -34,10 +34,18 @@ end
 
 
 Given(/the following teachers exist/) do |teachers_table|
-  #Default Values
-  teachers_default = {first_name: "Alonzo", last_name: "Church", email: "alonzo@snap.berkeley.edu", course: "https://school.edu", snap: "alonzo",
-                      other: "I'm teaching a college course", status: "Other - Please specify below.", education_level: 1,
-                      more_info: "I'm teaching a college course", admin: false, personal_website: "https://snap.berkeley.edu", application_status: "Pending"}
+  teachers_default = {
+    first_name: "Alonzo",
+    last_name: "Church",
+    email: "alonzo@snap.berkeley.edu",
+    snap: "alonzo",
+    status: "Other - Please specify below.",
+    education_level: 1,
+    more_info: "I'm teaching a college course",
+    admin: false,
+    personal_website: "https://snap.berkeley.edu",
+    application_status: "Pending"
+  }
 
   teachers_table.hashes.each do |teacher|
     teachers_default.each do |key, value|
@@ -48,7 +56,7 @@ Given(/the following teachers exist/) do |teachers_table|
 
     # Extract extra parameter 'school'
     school_name = teacher.delete("school")
-    
+
     new_teacher = Teacher.create!(teacher)
 
     #Create an association between teacher and school
@@ -65,8 +73,7 @@ end
 
 Then /there is a TEALS email/ do
   last_email = ActionMailer::Base.deliveries.last
-  last_email.to[0].should eq "testcontactemail@berkeley.edu"
   last_email.subject.should eq "TEALS Confirmation Email"
+  last_email.to[0].should eq "testcontactemail@berkeley.edu"
   last_email.body.encoded.should include "Joe Mamoa"
 end
-
