@@ -97,8 +97,7 @@ class TeachersController < ApplicationController
     teacher.school.num_denied_teachers += 1
     teacher.school.save!
     teacher.save!
-    # Replace with deny email later
-    # TeacherMailer.welcome_email(teacher).deliver_now
+    TeacherMailer.deny_email(teacher, params[:reason]).deliver_now
     redirect_to root_path
   end
 
