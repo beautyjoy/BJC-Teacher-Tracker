@@ -36,7 +36,6 @@ Given /I have a random email/ do
   })
 end
 
-
 # A wrapper around the omniauth link.
 # TODO: This should be adapted to take in a provider.
 Then /I can log in with Google/ do
@@ -47,4 +46,11 @@ end
 
 And /The TEALS contact email is stubbed/ do
   TeacherMailer::TEALS_CONTACT_EMAIL = 'testcontactemail@berkeley.edu'
+end
+
+Then /I can send a deny email/ do
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.to[0].should eq "testteacher@berkeley.edu"
+  last_email.subject.should eq "Deny Email"
+  last_email.body.encoded.should include "Denial Reason"
 end
