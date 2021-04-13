@@ -60,17 +60,19 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please contact an admin."
       return
     end
-    @teacher.update(teacher_params)
-    @school.update(school_params)
+    @teacher.assign_attributes(teacher_params)
+    @school.assign_attributes(school_params)
+    # Resends form email only when pending teacher updates
+    TeacherMailer.form_submission(@teacher).deliver_now
+    # Resends TEALS email only when said teacher changes status
+    if @teacher.status_changed?
+      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
+    end
     @teacher.save!
     @school.save!
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
-    end
-    # Resends emails only when teacher (not admin) updates and not validated
-    if @teacher.application_status != "Validated"
-      TeacherMailer.form_submission(@teacher).deliver_now
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end
