@@ -43,7 +43,7 @@
         <%= f.label :status, "What's your current status?", class: "label-required" %>
         <%= f.select(
           :status,
-          options_for_select(Teacher.statuses, teacher.status_before_type_cast),
+          options_for_select(Teacher.status_options, teacher.status_before_type_cast),
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
         ) %>
@@ -55,7 +55,7 @@
         <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
         <%= f.select(
           :education_level,
-          options_for_select(Teacher.education_level_options),
+          options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
         ) %>

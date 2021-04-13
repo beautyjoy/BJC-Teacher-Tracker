@@ -53,28 +53,15 @@ class Teacher < ApplicationRecord
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
 
-  # TODO: Replace these with names that are usable as methods.
-  # Add a second function to return status: form description
-  enum status: [
-    'I am teaching BJC as an AP CS Principles course.',
-    'I am teaching BJC but not as an AP CS Principles course.',
-    'I am using BJC as a resource, but not teaching with it.',
-    'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
-    'I am teaching BJC through the TEALS program.',
-    'I am a BJC curriculum or tool developer.',
-  ].freeze
-
-  # TODO: We should rewrite `status` to look like education level:
-  # enum status: {
-  #   csp_teacher: 0,
-  #   non_csp_teacher: 1,
-  #   mixed_class: 2,
-  #   teals_volunteer: 3,
-  #   other: 4
-  #   teals_teacher: 5,
-  #   developer: 6
-  # }
+  enum status: {
+    csp_teacher: 0,
+    non_csp_teacher: 1,
+    mixed_class: 2,
+    teals_volunteer: 3,
+    other: 4,
+    teals_teacher: 5,
+    developer: 6
+  }
   # This gives us the method `teals_volunteer?`
   # The keys here replace the short names used, and essentially makes that the default.
 
@@ -88,16 +75,15 @@ class Teacher < ApplicationRecord
     college: 2
   }
 
-  SHORT_STATUS = [
-    'CSP Teacher',
-    'Non-CSP Teacher',
-    'Mixed Class',
-    'TEALS Volunteer',
-    'Other',
-    'TEALS Teacher',
-    'Curriculum/Tool Developer',
+  STATUSES = [
+    'I am teaching BJC as an AP CS Principles course.',
+    'I am teaching BJC but not as an AP CS Principles course.',
+    'I am using BJC as a resource, but not teaching with it.',
+    'I am a TEALS volunteer, and am teaching the BJC curriculum.',
+    'Other - Please specify below.',
+    'I am teaching BJC through the TEALS program.',
+    'I am a BJC curriculum or tool developer.',
   ].freeze
-
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -116,8 +102,12 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def self.status_options
+    Teacher.statuses.values.map { |val| [STATUSES[val], val] }
+  end
+
   def self.education_level_options
-    Teacher.education_levels.keys.map { |sym| sym.to_s.titlecase }
+    Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
   def display_education_level
@@ -129,8 +119,8 @@ class Teacher < ApplicationRecord
   end
 
   def display_status
-    return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
-    SHORT_STATUS[status_before_type_cast]
+    return "#{status.to_s.titlecase} | #{more_info}" if more_info?
+    status.to_s.titlecase
   end
 
   def display_application_status
