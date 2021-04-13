@@ -6,8 +6,8 @@ Feature: basic admin functionality
 
 Background: Has an Admin in DB
   Given the following teachers exist:
-  | first_name | last_name | admin | email                        |
-  | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+  | first_name | last_name | admin | email                        | snap |
+  | Albert     | Admin     | true  | testadminuser@berkeley.edu   | au   |
 
 Scenario: Logging in as an admin
   Given I am on the BJC home page
@@ -104,10 +104,10 @@ Scenario: Filter all teacher info as an admin
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name  | admin | email                     | school      | application_status |
-  | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
-  | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
-  | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |       Pending      |
+  | first_name | last_name  | admin | email                     | school      | application_status | snap |
+  | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     | vv   |
+  | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       | dd   |
+  | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |       Pending      | pp   |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"

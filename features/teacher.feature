@@ -86,9 +86,9 @@ Scenario: Logged in teacher can only edit their own information
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
-  | Jane       | Austin    | false | testteacher2@berkeley.edu |
+  | first_name | last_name | admin | email                     | snap |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu  | jm   |
+  | Jane       | Austin    | false | testteacher2@berkeley.edu | ja   |
   Given I have a teacher email
   Given I am on the BJC home page
   And I follow "Log In"
