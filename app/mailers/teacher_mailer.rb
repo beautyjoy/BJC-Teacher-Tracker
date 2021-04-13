@@ -28,6 +28,7 @@ class TeacherMailer < ApplicationMailer
 
   def teals_confirmation_email(teacher)
     @teacher = teacher
+    # Only send if teacher is a TEALS volunteer
     if !@teacher.status.nil? and @teacher.status.include? "I am a TEALS volunteer"
       @bjc_password = BJC_PASSWORD
       @piazza_password = PIAZZA_PASSWORD
@@ -39,6 +40,9 @@ class TeacherMailer < ApplicationMailer
 
   def form_submission(teacher)
     @teacher = teacher
-    mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
+    # Only send if teacher is pending
+    if @teacher.pending?
+      mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
+    end
   end
 end
