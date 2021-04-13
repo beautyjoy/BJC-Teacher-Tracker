@@ -62,12 +62,6 @@ class Teacher < ApplicationRecord
     teals_teacher: 5,
     developer: 6
   }
-  # This gives us the method `teals_volunteer?`
-  # The keys here replace the short names used, and essentially makes that the default.
-
-  # We then need to map these keys/values to the longer status text
-  # We can put that map in a different order so we can build the form the way we want.
-  # We will no longer need SHORT_STATUS and can update the `display_status` method.
 
   enum education_level: {
     middle_school: 0,
@@ -118,9 +112,14 @@ class Teacher < ApplicationRecord
     end
   end
 
+  def text_status
+    STATUSES[status_before_type_cast]
+  end
+
   def display_status
-    return "#{status.to_s.titlecase} | #{more_info}" if more_info?
-    status.to_s.titlecase
+    formatted_status = status.to_s.titlecase.gsub('Csp', 'CSP').gsub('teals', 'TEALS')
+    return "#{formatted_status} | #{more_info}" if more_info?
+    formatted_status
   end
 
   def display_application_status

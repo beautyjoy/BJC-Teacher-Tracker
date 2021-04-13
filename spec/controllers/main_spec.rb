@@ -24,7 +24,7 @@ RSpec.describe MainController, type: :controller do
       statuses = @controller_stub.instance_variable_get(:@statuses)
       schools = @controller_stub.instance_variable_get(:@schools)
       expect(statuses.size).to equal 1
-      expect(statuses["Other - Please specify below."]).to equal 1
+      expect(statuses['other']).to equal 1
       expect(schools.size).to equal 1
       expect(schools.find_by(name: '$tanfurd').name).to eq('$tanfurd')
     end

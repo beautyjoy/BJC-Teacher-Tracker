@@ -28,7 +28,7 @@ class TeacherMailer < ApplicationMailer
 
   def teals_confirmation_email(teacher)
     @teacher = teacher
-    if !@teacher.status.nil? and @teacher.status.include? "I am a TEALS volunteer"
+    if !@teacher.status.nil? and @teacher.teals_volunteer?
       @bjc_password = BJC_PASSWORD
       @piazza_password = PIAZZA_PASSWORD
       mail to: TEALS_CONTACT_EMAIL,

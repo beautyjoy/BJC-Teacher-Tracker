@@ -44,11 +44,11 @@ RSpec.describe Teacher, type: :model do
   end
 
   it 'shows a text status' do
-    expect(teacher.status).to eq 'I am teaching BJC but not as an AP CS Principles course.'
+    expect(teacher.text_status).to eq 'I am teaching BJC but not as an AP CS Principles course.'
   end
 
   it 'shows a short status' do
-    expect(teacher.display_status).to eq 'Non-CSP Teacher'
+    expect(teacher.display_status).to eq 'Non CSP Teacher'
   end
 
   it 'shows an application status' do
