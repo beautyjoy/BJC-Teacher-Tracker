@@ -7,7 +7,7 @@ Given /a valid teacher exists/ do
 end
 
 And /^"(.*)" is not in the database$/ do |email|
-    Teacher.find_by(email: email).try(:destroy)
+    expect(Teacher.find_by(email: email).try(:destroy)).to be_nil
 end
 
 Given /^I enter (?:my)? "(.*)" as "(.*)"$/ do |field_name, input|
