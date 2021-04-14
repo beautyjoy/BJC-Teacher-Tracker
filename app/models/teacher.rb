@@ -53,9 +53,23 @@ class Teacher < ApplicationRecord
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
 
-  # TODO: Replace these with names that are usable as methods.
-  # Add a second function to return status: form description
-  enum status: [
+  enum status: {
+    csp_teacher: 0,
+    non_csp_teacher: 1,
+    mixed_class: 2,
+    teals_volunteer: 3,
+    other: 4,
+    teals_teacher: 5,
+    developer: 6
+  }
+
+  enum education_level: {
+    middle_school: 0,
+    high_school: 1,
+    college: 2
+  }
+
+  STATUSES = [
     'I am teaching BJC as an AP CS Principles course.',
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
@@ -64,40 +78,6 @@ class Teacher < ApplicationRecord
     'I am teaching BJC through the TEALS program.',
     'I am a BJC curriculum or tool developer.',
   ].freeze
-
-  # TODO: We should rewrite `status` to look like education level:
-  # enum status: {
-  #   csp_teacher: 0,
-  #   non_csp_teacher: 1,
-  #   mixed_class: 2,
-  #   teals_volunteer: 3,
-  #   other: 4
-  #   teals_teacher: 5,
-  #   developer: 6
-  # }
-  # This gives us the method `teals_volunteer?`
-  # The keys here replace the short names used, and essentially makes that the default.
-
-  # We then need to map these keys/values to the longer status text
-  # We can put that map in a different order so we can build the form the way we want.
-  # We will no longer need SHORT_STATUS and can update the `display_status` method.
-
-  enum education_level: {
-    middle_school: 0,
-    high_school: 1,
-    college: 2
-  }
-
-  SHORT_STATUS = [
-    'CSP Teacher',
-    'Non-CSP Teacher',
-    'Mixed Class',
-    'TEALS Volunteer',
-    'Other',
-    'TEALS Teacher',
-    'Curriculum/Tool Developer',
-  ].freeze
-
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
@@ -116,8 +96,12 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def self.status_options
+    Teacher.statuses.values.map { |val| [STATUSES[val], val] }
+  end
+
   def self.education_level_options
-    Teacher.education_levels.keys.map { |sym| sym.to_s.titlecase }
+    Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
   def display_education_level
@@ -128,9 +112,14 @@ class Teacher < ApplicationRecord
     end
   end
 
+  def text_status
+    STATUSES[status_before_type_cast]
+  end
+
   def display_status
-    return "#{SHORT_STATUS[status_before_type_cast]} | #{more_info}" if more_info?
-    SHORT_STATUS[status_before_type_cast]
+    formatted_status = status.to_s.titlecase.gsub('Csp', 'CSP').gsub('teals', 'TEALS')
+    return "#{formatted_status} | #{more_info}" if more_info?
+    formatted_status
   end
 
   def display_application_status
