@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def is_admin?
-    @is_admin = logged_in? ? current_user.admin : false
+    @is_admin ||= logged_in? ? current_user.admin : false
   end
 
   def is_teacher?
-    @is_teacher = logged_in? ? !current_user.admin : false
+    @is_teacher ||= logged_in? ? !current_user.admin : false
   end
 
   def require_login
