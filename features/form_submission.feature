@@ -121,7 +121,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
     Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
     Then the "snap" of the user with email "bbaker@berkeley.edu" should be "bbbbbaker"
-    Then the "status" of the user with email "bbaker@berkeley.edu" should be "I am teaching BJC through the TEALS program."
+    Then the "status" of the user with email "bbaker@berkeley.edu" should be "teals_teacher"
     Then the "more_info" of the user with email "bbaker@berkeley.edu" should be "I am a TEALS program employee!"
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
-    
+    Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
