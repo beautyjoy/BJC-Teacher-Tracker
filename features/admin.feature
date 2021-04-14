@@ -39,8 +39,8 @@ Scenario: Viewing all teachers as an admin
 
 # TODO: Checks for validation and deny belong here.
 
-Scenario: Logging in with random Google Account should fail
-  Given I have a random email
+Scenario: Logging in with non-admin, unregistered Google Account should fail
+  Given I have a non-admin, unregistered email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
