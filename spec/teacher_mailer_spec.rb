@@ -26,6 +26,15 @@ describe TeacherMailer do
     expect(email.body.encoded).to include("Denial Reason")
   end
 
+  it 'Sends Form Submission Email' do
+    teacher = teachers(:long)
+    email = TeacherMailer.form_submission(teacher)
+    email.deliver_now
+    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+    expect(email.to[0]).to eq("lmock@berkeley.edu")
+    expect(email.body.encoded).to include("Short Long")
+  end
+
   it 'Sends TEALS Confirmation Email' do
     stub_const('TeacherMailer::TEALS_CONTACT_EMAIL', 'testcontactemail@berkeley.edu')
     teacher = teachers(:long)
