@@ -10,22 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_081000) do
+ActiveRecord::Schema.define(version: 2021_03_31_091225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "email_templates", force: :cascade do |t|
-    t.text "body"
-    t.string "path"
-    t.string "locale"
-    t.string "handler"
-    t.boolean "partial"
-    t.string "format"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "title"
-  end
 
   create_table "schools", force: :cascade do |t|
     t.string "name"
