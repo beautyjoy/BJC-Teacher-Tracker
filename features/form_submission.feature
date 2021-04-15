@@ -98,7 +98,27 @@ Scenario: Filling out new form with existing email should not update information
     And I select "CA" from "State"
     And I enter my "School Website" as "https://chs.fuhsd.org"
     And I press "Submit"
-    And the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
+    Then I should see "Email address or Snap username already in use."
+    Then the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
+
+Scenario: Filling out new form with existing Snap should not create new teacher
+    Given the following teachers exist:
+    | first_name | last_name | admin | email              | snap       |
+    | Alice      | Adams     | false | alice@berkeley.edu | aliceadams |
+    And I am on the BJC home page
+    And I enter my "First Name" as "Mallory"
+    And I enter my "Last Name" as "Moore"
+    And I enter my "School Email" as "mallory@berkeley.edu"
+    And I enter my "Snap! Username" as "aliceadams"
+    And I set my status as "I am teaching BJC as an AP CS Principles course."
+    And I set my education level target as "High School"
+    And I enter my "School Name" as "Cupertino High School"
+    And I enter my "City" as "Cupertino"
+    And I select "CA" from "State"
+    And I enter my "School Website" as "https://chs.fuhsd.org"
+    And I press "Submit"
+    Then I should see "Email address or Snap username already in use."
+    And "mallory@berkeley.edu" is not in the database
 
 Scenario: Filling out form should have the correct information in a Teacher
     Given "bbaker@berkeley.edu" is not in the database
@@ -120,7 +140,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
     Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
     Then the "snap" of the user with email "bbaker@berkeley.edu" should be "bbbbbaker"
-    Then the "status" of the user with email "bbaker@berkeley.edu" should be "I am teaching BJC through the TEALS program."
+    Then the "status" of the user with email "bbaker@berkeley.edu" should be "teals_teacher"
     Then the "more_info" of the user with email "bbaker@berkeley.edu" should be "I am a TEALS program employee!"
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
-    
+    Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
