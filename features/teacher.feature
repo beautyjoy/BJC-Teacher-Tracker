@@ -31,6 +31,7 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  Then  there is a TEALS email
 
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
