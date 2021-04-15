@@ -38,7 +38,7 @@ Given(/the following teachers exist/) do |teachers_table|
     first_name: "Alonzo",
     last_name: "Church",
     email: "alonzo@snap.berkeley.edu",
-    snap: "alonzo",
+    snap: '',
     status: "Other - Please specify below.",
     education_level: 1,
     more_info: "I'm teaching a college course",

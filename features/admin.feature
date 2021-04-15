@@ -51,8 +51,8 @@ Scenario: Edit teacher info as an admin
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   And The TEALS contact email is stubbed
   Given I have an admin email
