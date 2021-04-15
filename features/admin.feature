@@ -5,6 +5,7 @@ Feature: basic admin functionality
   I can login in an see the dashboard
 
 Background: Has an Admin in DB
+  Given I seed data
   Given the following teachers exist:
   | first_name | last_name | admin | email                        |
   | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
