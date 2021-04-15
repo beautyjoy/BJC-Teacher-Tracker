@@ -113,7 +113,7 @@ class TeachersController < ApplicationController
   private
 
   def deny_access
-    redirect_to new_teacher_path, alert: "Email address already in use. Please use a different email."
+    redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params
