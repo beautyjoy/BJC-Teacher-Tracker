@@ -256,3 +256,7 @@ end
 Then /^(?:|I )should see a button named "([^"]*)"$/ do |text|
   page.should have_button(text)
 end
+
+Given /I seed data/ do
+  Rails.application.load_seed
+end

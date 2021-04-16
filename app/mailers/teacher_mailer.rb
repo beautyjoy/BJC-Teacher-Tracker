@@ -9,8 +9,6 @@ class TeacherMailer < ApplicationMailer
 
   def welcome_email(teacher)
     @teacher = teacher
-    @bjc_password = BJC_PASSWORD
-    @piazza_password = PIAZZA_PASSWORD
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
          subject: 'Welcome to The Beauty and Joy of Computing!'
@@ -44,5 +42,21 @@ class TeacherMailer < ApplicationMailer
     if @teacher.pending?
       mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
     end
+  end
+
+  def liquid_assigns
+    { 'teacher_first_name' => @teacher.first_name,
+      'teacher_last_name' => @teacher.last_name,
+      'teacher_email' => @teacher.email,
+      'teacher_more_info' => @teacher.more_info,
+      'teacher_school_name' => @teacher.school.name,
+      'teacher_school_city' => @teacher.school.city,
+      'teacher_school_state' => @teacher.school.state,
+      'teacher_snap' => @teacher.snap,
+      'teacher_school_website' => @teacher.school.website,
+      'bjc_password' => BJC_PASSWORD,
+      'piazza_password' => PIAZZA_PASSWORD
+    }
+      
   end
 end

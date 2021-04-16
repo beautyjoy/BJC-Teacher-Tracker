@@ -30,6 +30,14 @@ gem 'attr_encrypted', '~> 3.1.0'
 gem "sentry-ruby"
 gem "sentry-rails"
 
+# Mailer template
+gem "panoramic"
+
+# Editor
+gem 'tinymce-rails'
+#Sanitizing email templates
+gem 'liquid-rails'
+
 group :development, :test do
   gem 'annotate'
   gem 'byebug'
