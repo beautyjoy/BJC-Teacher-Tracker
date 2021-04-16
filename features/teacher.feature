@@ -4,6 +4,9 @@ Feature: teacher login functionality
     So that I can edit my information
     I can login via gmail
 
+Background: See data
+  Given I seed data
+
 Scenario: Logging in as a teacher should be able to edit their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
