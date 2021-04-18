@@ -71,7 +71,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Welcome Email"
+        title: "Welcome Email",
+        subject: "Welcome Email"
       },
 
       {
@@ -82,7 +83,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "TEALS Confirmation Email"
+        title: "TEALS Confirmation Email",
+        subject: "TEALS Confirmation Email"
       },
       {
         id: 3,
@@ -92,7 +94,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Form Submission Email"
+        title: "Form Submission Email",
+        subject: "Form Submission Email"
       },
       {
         id: 4,
@@ -102,7 +105,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Deny Email"
+        title: "Deny Email",
+        subject: "Deny Email test"
       }
     ]
 
