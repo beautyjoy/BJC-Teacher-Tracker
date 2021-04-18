@@ -72,7 +72,7 @@ module SeedData
         partial: false,
         format: "html",
         title: "Welcome Email",
-        subject: "Welcome Email"
+        subject: "Welcome to The Beauty and Joy of Computing!"
       },
 
       {
@@ -106,7 +106,7 @@ module SeedData
         partial: false,
         format: "html",
         title: "Deny Email",
-        subject: "Deny Email test"
+        subject: "Deny Email"
       }
     ]
 
