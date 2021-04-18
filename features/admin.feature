@@ -122,3 +122,20 @@ Scenario: Filter all teacher info as an admin
   Then  I should see "Peter"
   Then  I should see "Victor"
   Then  I should not see "Danny"
+
+Scenario: Should be able to resend welcome email
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      | snap   | application_status |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
+  Given I am on the BJC home page
+  And The TEALS contact email is stubbed
+  Given I have an admin email
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the teachers page
+  When  I go to the edit page for Joseph Mamoa
+  Then I should see a button named "Resend Welcome Email"
+

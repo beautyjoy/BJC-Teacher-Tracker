@@ -2,12 +2,19 @@ class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :delete, :index]
-  before_action :require_edit_permission, only: [:edit, :update]
+  before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
 
   def index
     @all_teachers = Teacher.where(admin: false)
+  end
+
+  def resend_welcome_email
+    @teacher = Teacher.find(params[:id])
+    if @teacher.validated? or @is_admin
+      TeacherMailer.welcome_email(@teacher).deliver_now
+    end
   end
 
   def new

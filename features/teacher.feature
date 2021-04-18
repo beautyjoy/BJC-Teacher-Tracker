@@ -130,3 +130,47 @@ Scenario: Frontend should not allow Teacher to edit their email
   And  I enter my "Snap! Username" as "wrong"
   Then the "School Email" field should contain "testteacher@berkeley.edu"
   Then the "Snap!" field should contain "Jane"
+
+Scenario: Validated teacher should see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should see a button named "Resend Welcome Email"
+
+Scenario: Pending teacher should not see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Resend Welcome Email"
+
+Scenario: Denied teacher should not see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
+  Given I have a teacher email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Resend Welcome Email"
+
+
