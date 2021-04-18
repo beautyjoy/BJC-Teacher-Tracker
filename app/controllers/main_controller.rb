@@ -18,7 +18,6 @@ class MainController < ApplicationController
   end
 
   def logout
-    session[:logged_in] = false
     session.destroy
     redirect_to root_url
   end
