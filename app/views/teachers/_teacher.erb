@@ -1,5 +1,5 @@
 <td>
-  <%= link_to(teacher.full_name, edit_teacher_path(teacher)) %>
+  <%= link_to(teacher.full_name, teacher_path(teacher)) %>
   <%= link_to('(Web)', teacher.personal_website) if teacher.personal_website %>
 </td>
 <td><%= teacher.email %></td>

@@ -51,6 +51,13 @@ class TeachersController < ApplicationController
     @readonly = !is_admin?
   end
 
+  def show
+    @teacher = Teacher.find(params[:id])
+    @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
+    @readonly = true
+  end
+
   def update
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
