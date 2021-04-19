@@ -28,7 +28,7 @@ class TeachersController < ApplicationController
     end
     @school = school_from_params
     if !@school.save
-      flash[:alert] = "An error occured! #{@school.errors.full_messages}"
+      flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
       render 'new'
       return
     end
