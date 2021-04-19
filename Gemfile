@@ -7,7 +7,7 @@ gem 'rails', '5.2.4.5'
 
 # Production app server
 gem 'puma', '~> 5'
-
+gem 'uglifier', '~> 4.2'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
