@@ -41,7 +41,7 @@ end
 Then /I can log in with Google/ do
   allow(Teacher).to receive(:validate_auth).and_return(true)
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-  page.find('button', text: /.*Log In/).click()
+  page.find('button', text: /.*Sign in with Google/).click()
 end
 
 And /The TEALS contact email is stubbed/ do
