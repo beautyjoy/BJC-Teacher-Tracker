@@ -1,7 +1,3 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
-<div id='sign-up-form-container'>
-  <% if !flash[:success] %>
-    <%= render 'form', teacher: @teacher %>
-  <% end %>
-</div>
+<%= render 'teacher_info', teacher: @teacher %>
