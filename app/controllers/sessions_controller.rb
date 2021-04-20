@@ -10,19 +10,33 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
-  def googleAuth
-    # Manages the callback from Google
-    # Get access tokens from the Google server
+  def omniauth_failure
+    redirect_to root_url
+  end
+
+  def setTokens(service, token, refresh_token, user)
+    case service
+    when :google
+      user.google_token = token
+      user.google_refresh_token = refresh_token if refresh_token.present?
+    when :microsoft
+      user.microsoft_token = token
+      user.microsoft_refresh_token = refresh_token if refresh_token.present?
+    end
+  end
+
+  def generalAuth(service)
+    # Get access tokens from the server
     access_token = request.env["omniauth.auth"]
     if Teacher.validate_access_token(access_token)
       # Tell them to register.
       user = Teacher.user_from_omniauth(access_token)
-      # Access_token is used to authenticate request made from the rails application to the Google server
-      user.google_token = access_token.credentials.token
+      # Access_token is used to authenticate request made from the Rails application to the server
+      token = access_token.credentials.token
       # Refresh_token to request new access_token
       # Note: Refresh_token is only sent once during the first request
       refresh_token = access_token.credentials.refresh_token
-      user.google_refresh_token = refresh_token if refresh_token.present?
+      setTokens(service, token, refresh_token, user)
       user.save!
       log_in(user)
       redirect_to root_path
@@ -31,24 +45,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def googleAuth
+    # Manages the callback from Google
+    generalAuth(:google)
+  end
+
   def microsoftAuth
     # Manages the callback from Microsoft
-    # Get access tokens from the Microsoft server
-    access_token = request.env["omniauth.auth"]
-    if Teacher.validate_access_token(access_token)
-      # Tell them to register.
-      user = Teacher.user_from_omniauth(access_token)
-      # Access_token is used to authenticate request made from the rails application to the Microsoft server
-      user.microsoft_token = access_token.credentials.token
-      # Refresh_token to request new access_token
-      # Note: Refresh_token is only sent once during the first request
-      refresh_token = access_token.credentials.refresh_token
-      user.microsoft_refresh_token = refresh_token if refresh_token.present?
-      user.save!
-      log_in(user)
-      redirect_to root_path
-    else
-      redirect_to root_path, alert: "Please Submit a teacher request"
-    end
+    generalAuth(:microsoft)
   end
 end

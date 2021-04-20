@@ -61,6 +61,11 @@ Then /I can log in with Google/ do
   page.find('button', text: /.*Sign in with Google/).click()
 end
 
+Then /I cannot log in with Google/ do
+  OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
+  page.find('button', text: /.*Sign in with Google/).click()
+end
+
 Then /I can log in with Microsoft/ do
   allow(Teacher).to receive(:validate_auth).and_return(true)
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:microsoft_graph]
