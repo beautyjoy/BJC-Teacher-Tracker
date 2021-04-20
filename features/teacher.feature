@@ -7,6 +7,13 @@ Feature: teacher login functionality
 Background: See data
   Given I seed data
 
+Scenario: Logging in failure redirects to new teachers page
+  Given I am on the BJC home page
+  Given I have a teacher Google email
+  And   I follow "Log In"
+  And   I cannot log in with Google
+  Then  I should be on the new teachers page
+
 Scenario: Logging in as a teacher
   Given I am on the BJC home page
   Given I have a teacher Google email
