@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :teachers # Note we're not actually using all of these...
   resources :admins   # Note we're not actually using all of these...
   resources :schools, only: [:new, :create, :index]
-
+  resources :email_templates, only: [:index, :update, :edit]
   root to: "main#index"
 
   # The line below would be unnecessary since we use Google.

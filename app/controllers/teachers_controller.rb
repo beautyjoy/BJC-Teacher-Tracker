@@ -13,7 +13,6 @@ class TeachersController < ApplicationController
   def new
     @teacher = Teacher.new
     @school = School.new
-    @action = "Submit"
     @readonly = false
   end
 
@@ -29,7 +28,7 @@ class TeachersController < ApplicationController
     end
     @school = school_from_params
     if !@school.save
-      flash[:alert] = "An error occured! #{@school.errors.full_messages}"
+      flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
       render 'new'
       return
     end
@@ -49,7 +48,6 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
-    @action = "Update"
     @readonly = !is_admin?
   end
 
@@ -62,17 +60,19 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please contact an admin."
       return
     end
-    @teacher.update(teacher_params)
-    @school.update(school_params)
+    @teacher.assign_attributes(teacher_params)
+    @school.assign_attributes(school_params)
+    # Resends form email only when pending teacher updates
+    TeacherMailer.form_submission(@teacher).deliver_now
+    # Resends TEALS email only when said teacher changes status
+    if @teacher.status_changed?
+      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
+    end
     @teacher.save!
     @school.save!
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
-    end
-    # Resends emails only when teacher (not admin) updates and not validated
-    if @teacher.application_status != "Validated"
-      TeacherMailer.form_submission(@teacher).deliver_now
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end
@@ -113,7 +113,7 @@ class TeachersController < ApplicationController
   private
 
   def deny_access
-    redirect_to new_teacher_path, alert: "Email address already in use. Please use a different email."
+    redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params

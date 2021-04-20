@@ -5,6 +5,7 @@ Feature: basic admin functionality
   I can login in an see the dashboard
 
 Background: Has an Admin in DB
+  Given I seed data
   Given the following teachers exist:
   | first_name | last_name | admin | email                        |
   | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
@@ -39,20 +40,27 @@ Scenario: Viewing all teachers as an admin
 
 # TODO: Checks for validation and deny belong here.
 
-Scenario: Logging in with random Google Account should fail
-  Given I have a random email
+Scenario: Logging in with non-admin, unregistered Google Account should fail
+  Given I have a non-admin, unregistered email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
   And I should see "Please Submit a teacher request"
+
+Scenario: Non-admin, unregistered user should not be able to see admin-only pages
+  Given I have a non-admin, unregistered email
+  Given I am on the BJC home page
+  When  I go to the dashboard page
+  Then  I should see "Only admins can access this page"
+  And   I should be on the new teachers page
 
 Scenario: Edit teacher info as an admin
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   And The TEALS contact email is stubbed
   Given I have an admin email
