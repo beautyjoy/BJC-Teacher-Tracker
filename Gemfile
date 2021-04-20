@@ -7,7 +7,7 @@ gem 'rails', '5.2.4.5'
 
 # Production app server
 gem 'puma', '~> 5'
-
+gem 'uglifier', '~> 4.2'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
@@ -29,6 +29,14 @@ gem 'attr_encrypted', '~> 3.1.0'
 # Error Tracking
 gem "sentry-ruby"
 gem "sentry-rails"
+
+# Mailer template
+gem "panoramic"
+
+# Editor
+gem 'tinymce-rails'
+#Sanitizing email templates
+gem 'liquid-rails'
 
 group :development, :test do
   gem 'annotate'

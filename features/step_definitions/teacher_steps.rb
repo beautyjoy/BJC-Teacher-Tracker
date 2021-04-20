@@ -38,7 +38,7 @@ Given(/the following teachers exist/) do |teachers_table|
     first_name: "Alonzo",
     last_name: "Church",
     email: "alonzo@snap.berkeley.edu",
-    snap: "alonzo",
+    snap: '',
     status: "Other - Please specify below.",
     education_level: 1,
     more_info: "I'm teaching a college course",
@@ -73,7 +73,7 @@ end
 
 Then /there is a TEALS email/ do
   last_email = ActionMailer::Base.deliveries.last
-  last_email.to[0].should eq "testcontactemail@berkeley.edu"
   last_email.subject.should eq "TEALS Confirmation Email"
+  last_email.to[0].should eq "testcontactemail@berkeley.edu"
   last_email.body.encoded.should include "Joe Mamoa"
 end

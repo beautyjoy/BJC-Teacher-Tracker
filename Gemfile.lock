@@ -129,6 +129,7 @@ GEM
     encryptor (3.0.0)
     erubi (1.10.0)
     erubis (2.7.0)
+    execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.1.0)
@@ -187,6 +188,18 @@ GEM
       sprockets-rails
     json (2.5.1)
     jwt (2.2.2)
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     kwalify (0.7.2)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -196,6 +209,11 @@ GEM
       actionmailer (>= 3.2)
       letter_opener (~> 1.0)
       railties (>= 3.2)
+    liquid (4.0.3)
+    liquid-rails (0.2.0)
+      kaminari (~> 1.1.1)
+      liquid (~> 4.0.0)
+      rails (>= 5.0.6)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -271,6 +289,8 @@ GEM
     omniauth-rails_csrf_protection (1.0.0)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    panoramic (0.0.6)
+      rails (>= 3.0.7)
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
@@ -403,10 +423,14 @@ GEM
       ffi (~> 1.1)
     thor (1.1.0)
     thread_safe (0.3.6)
+    tinymce-rails (5.7.1)
+      railties (>= 3.1.1)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -441,10 +465,12 @@ DEPENDENCIES
   jasmine-rails
   letter_opener
   letter_opener_web (~> 1.0)
+  liquid-rails
   metric_fu
   omniauth (~> 2.0)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
+  panoramic
   pg (~> 1.0)
   pry
   puma (~> 5)
@@ -455,7 +481,9 @@ DEPENDENCIES
   sentry-ruby
   simplecov
   spring
+  tinymce-rails
   tzinfo-data
+  uglifier (~> 4.2)
   web-console
   webpacker (~> 4)
 

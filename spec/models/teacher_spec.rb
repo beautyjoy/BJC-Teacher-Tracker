@@ -4,7 +4,7 @@
 #
 #  id                                :bigint           not null, primary key
 #  admin                             :boolean          default(FALSE)
-#  application_status                :string           default("Pending")
+#  application_status                :string           default("pending")
 #  education_level                   :integer          default(NULL)
 #  email                             :string
 #  encrypted_google_refresh_token    :string
@@ -23,8 +23,10 @@
 #
 # Indexes
 #
+#  index_teachers_on_email                 (email) UNIQUE
 #  index_teachers_on_email_and_first_name  (email,first_name)
 #  index_teachers_on_school_id             (school_id)
+#  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                (status)
 #
 require 'rails_helper'
@@ -43,11 +45,11 @@ RSpec.describe Teacher, type: :model do
   end
 
   it 'shows a text status' do
-    expect(teacher.status).to eq 'I am teaching BJC but not as an AP CS Principles course.'
+    expect(teacher.text_status).to eq 'I am teaching BJC but not as an AP CS Principles course.'
   end
 
   it 'shows a short status' do
-    expect(teacher.display_status).to eq 'Non-CSP Teacher'
+    expect(teacher.display_status).to eq 'Non CSP Teacher'
   end
 
   it 'shows an application status' do
