@@ -19,6 +19,7 @@ module NavigationHelpers
     when /^the edit page for (.*) (.*)$/i
       edit_teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
     when /^the schools page$/ then schools_path
+    when /^the new schools page$/ then new_school_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

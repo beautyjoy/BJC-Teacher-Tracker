@@ -41,7 +41,7 @@ RSpec.describe SchoolsController, type: :controller do
         expect(School.find_by(name: @create_school_name)).to be_nil
     end
 
-    it "requires all fields filed" do
+    it "requires all fields filled" do
         ApplicationController.any_instance.stub(:require_admin).and_return(true)
         expect(School.find_by(name: @create_school_name)).to be_nil
         post :create, {
@@ -98,8 +98,6 @@ RSpec.describe SchoolsController, type: :controller do
         expect(School.find_by(name: @create_school_name)).to be_nil
         assert_match(@fail_flash_alert, flash[:alert])
 
-=begin
-        #Incorrect website format (TODO: website should be of the form /.+\..+/)
         post :create, {
             params: {
                 school: {
@@ -110,10 +108,7 @@ RSpec.describe SchoolsController, type: :controller do
                 }
             }
         }
-        puts("______-----______")
-        puts(School.find_by(name: @create_school_name).website)
         expect(School.find_by(name: @create_school_name)).to be_nil
         assert_match(@fail_flash_alert, flash[:alert])
-=end
     end
 end
