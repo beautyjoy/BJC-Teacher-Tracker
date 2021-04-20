@@ -41,14 +41,21 @@ Scenario: Viewing all teachers as an admin
 # TODO: Checks for validation and deny belong here.
 
 Scenario: Logging in with non-admin, unregistered Google Account should fail
-  Given I have a non-admin, unregistered email
+  Given I have a non-admin, unregistered Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
   And I should see "Please Submit a teacher request"
 
+Scenario: Logging in with non-admin, unregistered Microsoft Account should fail
+  Given I have a non-admin, unregistered Microsoft email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Microsoft
+  And I should see "Please Submit a teacher request"
+
 Scenario: Non-admin, unregistered user should not be able to see admin-only pages
-  Given I have a non-admin, unregistered email
+  Given I have a non-admin, unregistered Google email
   Given I am on the BJC home page
   When  I go to the dashboard page
   Then  I should see "Only admins can access this page"

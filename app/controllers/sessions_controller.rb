@@ -1,10 +1,7 @@
 class SessionsController < ApplicationController
   def new; end
 
-  def create
-    redirect_to "/auth/microsoft_graph"
-    #redirect_to "/auth/google_oauth2"
-  end
+  def create; end
 
   def destroy
     # log_out if logged_in?

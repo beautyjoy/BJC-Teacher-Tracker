@@ -1,7 +1,7 @@
 require 'cucumber/rspec/doubles'
 
 # Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
-Given /I have a teacher email/ do
+Given /I have a teacher Google email/ do
   OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     provider: 'google_oauth2',
     uid: '123545',
@@ -18,6 +18,23 @@ Given /I have a teacher email/ do
   })
 end
 
+# Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
+Given /I have a teacher Microsoft email/ do
+  OmniAuth.config.mock_auth[:microsoft_graph] = OmniAuth::AuthHash.new({
+    provider: 'microsoft_graph',
+    uid: '123545',
+    info: {
+      name: 'Joseph',
+      first_name: "Joseph",
+      last_name: "Mamoa",
+      email: "testteacher@berkeley.edu",
+      school: "UC Berkeley",
+    },
+    credentials: {
+      token: 'test_token'
+    }
+  })
+end
 
 Given(/the following schools exist/) do |schools_table|
   schools_default = {name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu"}
@@ -30,8 +47,6 @@ Given(/the following schools exist/) do |schools_table|
     School.create!(school)
   end
 end
-
-
 
 Given(/the following teachers exist/) do |teachers_table|
   teachers_default = {
@@ -69,7 +84,6 @@ Given(/the following teachers exist/) do |teachers_table|
     end
   end
 end
-
 
 Then /there is a TEALS email/ do
   last_email = ActionMailer::Base.deliveries.last
