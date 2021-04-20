@@ -4,6 +4,18 @@ Feature: teacher login functionality
     So that I can edit my information
     I can login via gmail
 
+Background: See data
+  Given I seed data
+
+Scenario: Logging in as a teacher
+  Given I am on the BJC home page
+  Given I have a teacher email
+  And   I follow "Log In"
+  Then  I should see "Sign in with Google"
+  And   I should see "Sign in with Snap"
+  And   I should see "Sign in with Microsoft"
+  And   I should see "Sign in with Clever"
+
 Scenario: Logging in as a teacher should be able to edit their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
@@ -28,14 +40,15 @@ Scenario: Logging in as a teacher should be able to edit their info
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  Then  there is a TEALS email
 
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher email
   Given I am on the BJC home page
   And   I follow "Log In"
@@ -60,8 +73,8 @@ Scenario: Logged in teacher can fill a new form with their info
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher email
   Given I am on the BJC home page
   And   I follow "Log In"
