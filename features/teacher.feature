@@ -9,25 +9,51 @@ Background: See data
 
 Scenario: Logging in as a teacher
   Given I am on the BJC home page
-  Given I have a teacher email
+  Given I have a teacher Google email
   And   I follow "Log In"
   Then  I should see "Sign in with Google"
   And   I should see "Sign in with Snap"
   And   I should see "Sign in with Microsoft"
   And   I should see "Sign in with Clever"
 
-Scenario: Logging in as a teacher should be able to edit their info
+Scenario: Logging in as a teacher with Google account should be able to edit their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
-  Given I have a teacher email
+  Given I have a teacher Google email
   And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
+  And   I see a confirmation "You can edit your information"
+  Then  the "First Name" field should contain "Joseph"
+  And   I enter my "First Name" as "Joe"
+  And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
+  And   I set my education level target as "College"
+  And   I enter my "School Name" as "Cupertino High School"
+  And   I enter my "City" as "Cupertino"
+  And   I select "CA" from "State"
+  And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I press "Update"
+  Then  I see a confirmation "Successfully updated your information"
+  Then  the "First Name" field should contain "Joe"
+  Then  there is a TEALS email
+
+Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher Microsoft email
+  And   The TEALS contact email is stubbed
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Microsoft
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
   And   I enter my "First Name" as "Joe"
@@ -49,7 +75,7 @@ Scenario: Logged in teacher can fill a new form with their info
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -75,7 +101,7 @@ Scenario: Logged in teacher can fill a new form with their info
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -102,7 +128,7 @@ Scenario: Logged in teacher can only edit their own information
   | first_name | last_name | admin | email                     |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   | Jane       | Austin    | false | testteacher2@berkeley.edu |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
@@ -116,7 +142,7 @@ Scenario: Logging in as a teacher should see "Update" instead of "Submit" when e
   Given the following teachers exist:
   | first_name | last_name | admin | email                     |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   Then I should see a button named "Submit"
   Given I follow "Log In"
@@ -130,7 +156,7 @@ Scenario: Frontend should not allow Teacher to edit their email
   Given the following teachers exist:
   | first_name | last_name | admin | email                     | snap |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
