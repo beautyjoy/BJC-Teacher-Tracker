@@ -7,6 +7,15 @@ Feature: teacher login functionality
 Background: See data
   Given I seed data
 
+Scenario: Logging in as a teacher
+  Given I am on the BJC home page
+  Given I have a teacher email
+  And   I follow "Log In"
+  Then  I should see "Sign in with Google"
+  And   I should see "Sign in with Snap"
+  And   I should see "Sign in with Microsoft"
+  And   I should see "Sign in with Clever"
+
 Scenario: Logging in as a teacher should be able to edit their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
