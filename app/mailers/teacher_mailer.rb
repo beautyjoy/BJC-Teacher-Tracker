@@ -55,8 +55,9 @@ class TeacherMailer < ApplicationMailer
       'teacher_snap' => @teacher.snap,
       'teacher_school_website' => @teacher.school.website,
       'bjc_password' => BJC_PASSWORD,
-      'piazza_password' => PIAZZA_PASSWORD
+      'piazza_password' => PIAZZA_PASSWORD,
+      'reason' => @reason
     }
-      
+
   end
 end
