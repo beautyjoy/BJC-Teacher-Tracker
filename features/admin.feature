@@ -47,6 +47,13 @@ Scenario: Logging in with non-admin, unregistered Google Account should fail
   Then I can log in with Google
   And I should see "Please Submit a teacher request"
 
+Scenario: Non-admin, unregistered user should not be able to see admin-only pages
+  Given I have a non-admin, unregistered email
+  Given I am on the BJC home page
+  When  I go to the dashboard page
+  Then  I should see "Only admins can access this page"
+  And   I should be on the new teachers page
+
 Scenario: Edit teacher info as an admin
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |

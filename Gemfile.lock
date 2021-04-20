@@ -129,6 +129,7 @@ GEM
     encryptor (3.0.0)
     erubi (1.10.0)
     erubis (2.7.0)
+    execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.1.0)
@@ -428,6 +429,8 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -480,6 +483,7 @@ DEPENDENCIES
   spring
   tinymce-rails
   tzinfo-data
+  uglifier (~> 4.2)
   web-console
   webpacker (~> 4)
 
