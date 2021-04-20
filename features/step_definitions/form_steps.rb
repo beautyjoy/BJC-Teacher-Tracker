@@ -7,7 +7,7 @@ Given /a valid teacher exists/ do
 end
 
 And /^"(.*)" is not in the database$/ do |email|
-    Teacher.find_by(email: email).try(:destroy)
+    expect(Teacher.exists?(email: email)).to be false
 end
 
 Given /^I enter (?:my)? "(.*)" as "(.*)"$/ do |field_name, input|
@@ -38,4 +38,8 @@ end
 Then /^debug$/ do
     require "rubygems"; require "byebug"; byebug
     1 # intentionally force debugger context in this method
+end
+
+Then /the "(.*)" of the user with email "(.*)" should be "(.*)"/ do |field, email, expected|
+    expect(Teacher.find_by(email:email)[field]).to eq(expected)
 end

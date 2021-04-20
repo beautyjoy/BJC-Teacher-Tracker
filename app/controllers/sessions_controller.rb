@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   def destroy
     # log_out if logged_in?
     session[:logged_in] = false
+    session[:user_id] = nil
     redirect_to root_url
   end
 
