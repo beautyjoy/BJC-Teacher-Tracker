@@ -17,7 +17,7 @@ gem 'webpacker', '~> 4'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-microsoft-office365'
+gem 'omniauth-microsoft_graph'
 
 # for timezone information for windows users
 gem 'tzinfo-data'

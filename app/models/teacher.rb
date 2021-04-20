@@ -15,6 +15,8 @@
 #  encrypted_google_token_iv         :string
 #  first_name                        :string
 #  last_name                         :string
+#  microsoft_refresh_token           :string
+#  microsoft_token                   :string
 #  more_info                         :string
 #  personal_website                  :string
 #  snap                              :string
