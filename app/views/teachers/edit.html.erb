@@ -4,8 +4,8 @@
       <h1> <%= "#{@status} Edit #{@teacher.full_name}" %> </h1>
     </div>
     <% if @is_admin or @teacher.validated? %>
-      <div class='col'>
-        <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id }, class: 'btn btn-primary' %>
+      <div class='col' style="position:relative;">
+        <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id }, {:class => "btn btn-primary", :style => "width:auto;position:absolute;right:0;margin:auto;bottom:15%" } %>
       </div>
     <% end %>
   </div>
