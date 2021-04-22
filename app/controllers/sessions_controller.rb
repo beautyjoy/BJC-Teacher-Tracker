@@ -11,21 +11,21 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_failure
-    redirect_to root_url
+    redirect_to root_url, alert: "Login failed"
   end
 
-  def setTokens(service, token, refresh_token, user)
-    case service
-    when :google
+  def setTokens(token, refresh_token, user)
+    case params[:provider]
+    when "google_oauth2"
       user.google_token = token
       user.google_refresh_token = refresh_token if refresh_token.present?
-    when :microsoft
+    when "microsoft_graph"
       user.microsoft_token = token
       user.microsoft_refresh_token = refresh_token if refresh_token.present?
     end
   end
 
-  def generalAuth(service)
+  def generalAuth()
     # Get access tokens from the server
     access_token = request.env["omniauth.auth"]
     if Teacher.validate_access_token(access_token)
@@ -36,22 +36,12 @@ class SessionsController < ApplicationController
       # Refresh_token to request new access_token
       # Note: Refresh_token is only sent once during the first request
       refresh_token = access_token.credentials.refresh_token
-      setTokens(service, token, refresh_token, user)
+      setTokens(token, refresh_token, user)
       user.save!
       log_in(user)
       redirect_to root_path
     else
       redirect_to root_path, alert: "Please Submit a teacher request"
     end
-  end
-
-  def googleAuth
-    # Manages the callback from Google
-    generalAuth(:google)
-  end
-
-  def microsoftAuth
-    # Manages the callback from Microsoft
-    generalAuth(:microsoft)
   end
 end
