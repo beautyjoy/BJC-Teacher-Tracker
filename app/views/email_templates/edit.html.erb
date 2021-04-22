@@ -1,8 +1,14 @@
-<%# <script type="text/javascript" src="/assets/tinymce.js"> %>
+<head>
+  <%= tinymce_assets %>
+  <script type="text/javascript">
+    tinyMCE.init({
+      selector: 'textarea.tinymce'
+    });
+  </script>
+</head>
 <%= form_with(model: @email_template, local: true) do |form| %>
   <div class="form">
     <%= form.text_area :body, class: "tinymce", rows: 40, cols: 120  %>
-    <%= tinymce %>
   </div><div class="actions">
     <%= form.submit "Update" %>
   </div>
