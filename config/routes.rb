@@ -22,9 +22,7 @@ Rails.application.routes.draw do
   # Routes for Google authentication, note that these need to be
   # here for ominauth middleware whose route is /auth/google_oauth2,
   # which is not specified in this file, (because the middleware did it).
-  get "auth/google_oauth2/callback", to: "sessions#googleAuth"
-  get "auth/microsoft_graph/callback", to: "sessions#microsoftAuth"
-  get "auth/failure", to: redirect("/")
+  get "auth/:provider/callback", to: "sessions#generalAuth"
 
   # Route for validating forms as an admin
   # TODO: #21 - move to teachers/:id/...
