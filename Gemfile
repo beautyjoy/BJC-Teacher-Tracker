@@ -7,7 +7,7 @@ gem 'rails', '5.2.4.5'
 
 # Production app server
 gem 'puma', '~> 5'
-
+gem 'uglifier', '~> 4.2'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
@@ -17,6 +17,7 @@ gem 'webpacker', '~> 4'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-microsoft_graph'
 
 # for timezone information for windows users
 gem 'tzinfo-data'
