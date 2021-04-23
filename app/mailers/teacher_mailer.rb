@@ -11,7 +11,7 @@ class TeacherMailer < ApplicationMailer
     @teacher = teacher
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
-         subject: 'Welcome to The Beauty and Joy of Computing!'
+         subject: EmailTemplate.find_by(path: build_path("welcome_email")).subject
   end
 
   def deny_email(teacher, reason)
@@ -21,7 +21,7 @@ class TeacherMailer < ApplicationMailer
     @piazza_password = PIAZZA_PASSWORD
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
-         subject: 'Deny Email'
+         subject: EmailTemplate.find_by(path: build_path("deny_email")).subject
   end
 
   def teals_confirmation_email(teacher)
@@ -32,7 +32,7 @@ class TeacherMailer < ApplicationMailer
       @piazza_password = PIAZZA_PASSWORD
       mail to: TEALS_CONTACT_EMAIL,
            cc: CONTACT_EMAIL,
-           subject: 'TEALS Confirmation Email'
+           subject: EmailTemplate.find_by(path: build_path("teals_confirmation_email")).subject
     end
   end
 
@@ -40,7 +40,8 @@ class TeacherMailer < ApplicationMailer
     @teacher = teacher
     # Only send if teacher is pending
     if @teacher.pending?
-      mail to: CONTACT_EMAIL, subject: "A New Teacher Has Requested Access to BJC"
+      mail to: CONTACT_EMAIL,
+           subject: EmailTemplate.find_by(path: build_path("form_submission")).subject
     end
   end
 
@@ -55,8 +56,13 @@ class TeacherMailer < ApplicationMailer
       'teacher_snap' => @teacher.snap,
       'teacher_school_website' => @teacher.school.website,
       'bjc_password' => BJC_PASSWORD,
-      'piazza_password' => PIAZZA_PASSWORD
+      'piazza_password' => PIAZZA_PASSWORD,
+      'reason' => @reason
     }
-      
+  end
+
+  private
+  def build_path(email_name)
+    'teacher_mailer/' + email_name
   end
 end
