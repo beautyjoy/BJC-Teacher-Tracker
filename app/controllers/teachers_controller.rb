@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :delete, :index]
+  before_action :require_admin, only: [:validate, :deny, :delete, :index, :show]
   before_action :require_edit_permission, only: [:edit, :update]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -49,6 +49,12 @@ class TeachersController < ApplicationController
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
     @readonly = !is_admin?
+  end
+
+  def show
+    @teacher = Teacher.find(params[:id])
+    @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def update
