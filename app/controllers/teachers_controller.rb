@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :delete, :index]
+  before_action :require_admin, only: [:validate, :deny, :delete, :index, :show]
   before_action :require_edit_permission, only: [:edit, :update]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
