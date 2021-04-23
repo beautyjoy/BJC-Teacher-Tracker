@@ -6,7 +6,7 @@ module SeedData
     </p>
     <p>
       <b>Accessing the teacher's guide:</b><br>
-  
+
       To view the teacher's {{"guide" | link_to("guide", "https://bjc.edc.org/teacher")}}, you will need the username: <code>bjcteacher</code> and the case-sensitive password: <code>{{bjc_password}}</code><br>
       <br>
       After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies. <br>
@@ -21,7 +21,7 @@ module SeedData
     </p>
     <p>
       <b>Snap<em>!</em></b><br>
-  
+
       We encourage you to check out the {{'Snap! Forum' | link_to('Snap! Forum', 'https://forum.snap.berkeley.edu') }}. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at {{"contact@snap.berkeley.edu" | mail_to('contact@snap.berkeley.edu')}}.
     </p>
     <p>
@@ -56,6 +56,11 @@ module SeedData
       Website: {{ teacher_school_website | link_to(nil, teacher_school_website) }}
     </p>
   )
+  @deny_email = %Q(
+    <p>
+      {{ reason | strip_tags }}
+    </p>
+  )
   def self.emails
     [
       {
@@ -66,7 +71,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Welcome Email"
+        title: "Welcome Email",
+        subject: "Welcome to The Beauty and Joy of Computing!"
       },
 
       {
@@ -77,7 +83,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "TEALS Confirmation Email"
+        title: "TEALS Confirmation Email",
+        subject: "TEALS Confirmation Email"
       },
       {
         id: 3,
@@ -87,15 +94,26 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Form Submission Email"
+        title: "Form Submission Email",
+        subject: "Form Submission Email"
+      },
+      {
+        id: 4,
+        body: @deny_email,
+        path: "teacher_mailer/deny_email",
+        locale: nil,
+        handler: "liquid",
+        partial: false,
+        format: "html",
+        title: "Deny Email",
+        subject: "Deny Email"
       }
-
     ]
-    
+
   end
 
   def self.teachers
-      [   
+      [
           {
               first_name: 'Michael',
               last_name: 'Ball',

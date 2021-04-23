@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_233225) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
+    t.string "subject"
   end
 
   create_table "schools", force: :cascade do |t|
