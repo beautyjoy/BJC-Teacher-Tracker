@@ -65,8 +65,6 @@ class School < ApplicationRecord
     req = Net::HTTP::Get.new(uri.request_uri)
     res = http.request(req)
     data = JSON.parse(res.body)
-    puts("data:")
-    puts(data)
     unless data.nil? || data["results"].empty?
       self.lat = data["results"][0]["geometry"]["location"]["lat"]
       self.lng = data["results"][0]["geometry"]["location"]["lng"]
