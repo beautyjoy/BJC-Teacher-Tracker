@@ -9,6 +9,7 @@
 #  locale     :string
 #  partial    :boolean
 #  path       :string
+#  subject    :string
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

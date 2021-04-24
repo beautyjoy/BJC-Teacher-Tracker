@@ -61,6 +61,10 @@ When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
+When /^(?:|I )fill in TinyMCE email form with "([^"]*)"$/ do |value|
+  page.execute_script('$(tinymce.editors[0].setContent("' + value + '"))')
+end
+
 When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
   fill_in(field, :with => value)
 end
@@ -108,6 +112,16 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   else
     assert page.has_content?(text)
   end
+end
+
+Then /^(?:|I )should see hidden element "([^"]*)"$/ do |text|
+  Capybara.ignore_hidden_elements = false
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+  Capybara.ignore_hidden_elements = true
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
