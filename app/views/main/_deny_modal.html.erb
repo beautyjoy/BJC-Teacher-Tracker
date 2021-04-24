@@ -30,6 +30,6 @@
     modal.find('.modal-title').text('Deny ' + teachername);
   });
   modal.on('hidden.bs.modal', function () {
-    $(this).find("input,textarea,select").val('').end();
+    $('input[name="reason"]').val('');
   });
 </script>

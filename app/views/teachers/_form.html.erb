@@ -103,12 +103,13 @@
       <div class="form-group">
         <%= school_fields.label :website, "School Website", class: "label-required" %>
         <%= school_fields.text_field :website, placeholder: "snap.berkeley.edu",
-          class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
+          class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL.",
+          readonly: @show_mode %>
       </div>
     </div>
   <% end %>
 
   <div>
-    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary'%>
+    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
   </div>
 <% end %>

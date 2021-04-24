@@ -1,5 +1,5 @@
 class EmailTemplatesController < ApplicationController
-  before_action :require_admin 
+  before_action :require_admin
   def index
     @all_templates = EmailTemplate.all
   end
@@ -14,9 +14,9 @@ class EmailTemplatesController < ApplicationController
     template.save!
     redirect_to email_templates_path
   end
-  
+
   private
   def template_params
-    params.require(:email_template).permit(:body)
-  end 
+    params.require(:email_template).permit(:body, :subject)
+  end
 end
