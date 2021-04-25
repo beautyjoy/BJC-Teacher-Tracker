@@ -10,7 +10,7 @@ RSpec.describe TeachersController, type: :controller do
                 id: teacher.id
             }
         }
-        expect(teacher.application_status).to eq("pending")
+        expect(Teacher.find_by(first_name:"Test", last_name:"User").application_status).to eq("pending")
     end
 
     it "rejects malicious admin signup attempt" do
