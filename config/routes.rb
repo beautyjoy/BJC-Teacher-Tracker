@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   post "/admin/forms/deny/:id", to: "teachers#deny", as: "deny"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
+  post "teachers/:id/resend_welcome_email", to: "teachers#resend_welcome_email"
 end
