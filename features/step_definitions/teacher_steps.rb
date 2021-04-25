@@ -1,9 +1,10 @@
 require 'cucumber/rspec/doubles'
 
 # Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
-Given /I have a teacher Google email/ do
-  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: 'google_oauth2',
+Given /I have a teacher (.*) email/ do |login|
+  service = LOGIN_SERVICE[login]
+  OmniAuth.config.mock_auth[service] = OmniAuth::AuthHash.new({
+    provider: service,
     uid: '123545',
     info: {
       name: 'Joseph',
@@ -13,43 +14,8 @@ Given /I have a teacher Google email/ do
       school: "UC Berkeley",
     },
     credentials: {
-      token: 'test_token'
-    }
-  })
-end
-
-# Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
-Given /I have a teacher Microsoft email/ do
-  OmniAuth.config.mock_auth[:microsoft_graph] = OmniAuth::AuthHash.new({
-    provider: 'microsoft_graph',
-    uid: '123545',
-    info: {
-      name: 'Joseph',
-      first_name: "Joseph",
-      last_name: "Mamoa",
-      email: "testteacher@berkeley.edu",
-      school: "UC Berkeley",
-    },
-    credentials: {
-      token: 'test_token'
-    }
-  })
-end
-
-# Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
-Given /I have a teacher Snap email/ do
-  OmniAuth.config.mock_auth[:discourse] = OmniAuth::AuthHash.new({
-    provider: 'discourse',
-    uid: '123545',
-    info: {
-      name: 'Joseph',
-      first_name: "Joseph",
-      last_name: "Mamoa",
-      email: "testteacher@berkeley.edu",
-      school: "UC Berkeley",
-    },
-    credentials: {
-      token: 'test_token'
+      token: 'test_token',
+      refresh_token: 'test_refresh_token'
     }
   })
 end
