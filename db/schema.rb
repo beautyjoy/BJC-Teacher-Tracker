@@ -71,5 +71,4 @@ ActiveRecord::Schema.define(version: 2021_04_23_084059) do
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"
     t.index ["status"], name: "index_teachers_on_status"
   end
-
 end
