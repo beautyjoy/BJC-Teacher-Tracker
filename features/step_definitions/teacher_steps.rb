@@ -36,6 +36,24 @@ Given /I have a teacher Microsoft email/ do
   })
 end
 
+# Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
+Given /I have a teacher Snap email/ do
+  OmniAuth.config.mock_auth[:discourse] = OmniAuth::AuthHash.new({
+    provider: 'discourse',
+    uid: '123545',
+    info: {
+      name: 'Joseph',
+      first_name: "Joseph",
+      last_name: "Mamoa",
+      email: "testteacher@berkeley.edu",
+      school: "UC Berkeley",
+    },
+    credentials: {
+      token: 'test_token'
+    }
+  })
+end
+
 Given(/the following schools exist/) do |schools_table|
   schools_default = {name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu"}
   schools_table.hashes.each do |school|
