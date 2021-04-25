@@ -41,17 +41,14 @@
 
       <div class="col-sm-6">
         <h5> Education Level Target </h5>
-        <%= teacher.education_level.capitalize %>
+        <%= teacher.display_education_level %>
       </div>
     </div>
 
     <div class="row mt-5 pb-3">
       <div class="col-sm-12">
         <h5> Current Status </h5>
-        <%= teacher.status.capitalize %>
-        <% if teacher.status == "other" && !teacher.more_info.empty? %>
-          : <%= teacher.more_info %>
-        <% end %>
+        <%= truncate(teacher.display_status, length: 50) %>
       </div>
     </div>
 

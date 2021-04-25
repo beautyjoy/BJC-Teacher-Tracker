@@ -1,5 +1,15 @@
-<%= provide(:h1, "#{@status} Edit #{@teacher.full_name}") %>
-
+<div class='container'>
+  <div class='row'>
+    <div class='col'>
+      <h1> <%= "#{@status} Edit #{@teacher.full_name}" %> </h1>
+    </div>
+    <% if @is_admin or @teacher.validated? %>
+      <div class='col resend-email-div'>
+        <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id }, :class => "btn btn-primary resend-email-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 <div id='sign-up-form-container'>
   <% if !flash[:success] %>
     <%= render 'form', teacher: @teacher %>
