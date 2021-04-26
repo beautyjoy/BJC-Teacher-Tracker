@@ -22,6 +22,8 @@
 #  more_info                         :string
 #  personal_website                  :string
 #  snap                              :string
+#  snap_refresh_token                :string
+#  snap_token                        :string
 #  status                            :integer
 #  created_at                        :datetime
 #  updated_at                        :datetime

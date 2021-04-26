@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
       user.google_token = token
     when "microsoft_graph"
       user.microsoft_token = token
+    when "discourse"
+      user.snap_token = token
     when "clever"
       user.clever_token = token
     end
@@ -31,6 +33,8 @@ class SessionsController < ApplicationController
       user.google_refresh_token = refresh_token
     when "microsoft_graph"
       user.microsoft_refresh_token = refresh_token
+    when "discourse"
+      user.snap_refresh_token = refresh_token
     when "clever"
       user.clever_refresh_token = refresh_token
     end

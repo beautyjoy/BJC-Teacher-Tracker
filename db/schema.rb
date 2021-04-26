@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2021_04_26_041607) do
     t.string "application_status", default: "Pending"
     t.string "microsoft_token"
     t.string "microsoft_refresh_token"
+    t.string "snap_token"
+    t.string "snap_refresh_token"
     t.string "clever_token"
     t.string "clever_refresh_token"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
