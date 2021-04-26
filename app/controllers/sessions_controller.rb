@@ -14,14 +14,25 @@ class SessionsController < ApplicationController
     redirect_to root_url, alert: "Login failed"
   end
 
-  def setTokens(token, refresh_token, user)
+  def setToken(token, user)
     case params[:provider]
     when "google_oauth2"
       user.google_token = token
-      user.google_refresh_token = refresh_token if refresh_token.present?
     when "microsoft_graph"
       user.microsoft_token = token
-      user.microsoft_refresh_token = refresh_token if refresh_token.present?
+    when "discourse"
+      user.snap_token = token
+    end
+  end
+
+  def setRefreshToken(refresh_token, user)
+    case params[:provider]
+    when "google_oauth2"
+      user.google_refresh_token = refresh_token
+    when "microsoft_graph"
+      user.microsoft_refresh_token = refresh_token
+    when "discourse"
+      user.snap_refresh_token = refresh_token
     end
   end
 
@@ -36,7 +47,10 @@ class SessionsController < ApplicationController
       # Refresh_token to request new access_token
       # Note: Refresh_token is only sent once during the first request
       refresh_token = access_token.credentials.refresh_token
-      setTokens(token, refresh_token, user)
+      setToken(token, user)
+      if refresh_token.present?
+        setRefreshToken(refresh_token, user)
+      end
       user.save!
       log_in(user)
       redirect_to root_path
