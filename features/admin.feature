@@ -54,6 +54,13 @@ Scenario: Logging in with non-admin, unregistered Microsoft Account should fail
   Then I can log in with Microsoft
   And I should see "Please Submit a teacher request"
 
+Scenario: Logging in with non-admin, unregistered Snap Account should fail
+  Given I have a non-admin, unregistered Snap email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Snap
+  And I should see "Please Submit a teacher request"
+
 Scenario: Non-admin, unregistered user should not be able to see admin-only pages
   Given I have a non-admin, unregistered Google email
   Given I am on the BJC home page
