@@ -14,10 +14,11 @@ gem 'pg', '~> 1.0'
 gem 'webpacker', '~> 4'
 
 # Login via 3rd party services.
-gem 'omniauth', '~> 2.0'
+gem 'omniauth', '~> 1.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-microsoft_graph'
+gem 'omniauth-clever'
 
 # for timezone information for windows users
 gem 'tzinfo-data'

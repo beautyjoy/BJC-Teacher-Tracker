@@ -36,9 +36,28 @@ Given /I have a non-admin, unregistered Google email/ do
   })
 end
 
+# Returns a OAuth2 token associated with email "randomemail@gmail.com"
 Given /I have a non-admin, unregistered Microsoft email/ do
   OmniAuth.config.mock_auth[:microsoft_graph] = OmniAuth::AuthHash.new({
     provider: 'microsoft_graph',
+    uid: '123545',
+    info: {
+      name: 'Random User',
+      first_name: "Random",
+      last_name: "User",
+      email: "randomemail@microsoft.com",
+      school: "UC Berkeley",
+    },
+    credentials: {
+      token: 'test_token'
+    }
+  })
+end
+
+# Returns a OAuth2 token associated with email "randomemail@gmail.com"
+Given /I have a non-admin, unregistered Clever email/ do
+  OmniAuth.config.mock_auth[:clever] = OmniAuth::AuthHash.new({
+    provider: 'clever',
     uid: '123545',
     info: {
       name: 'Random User',
@@ -70,6 +89,12 @@ Then /I can log in with Microsoft/ do
   allow(Teacher).to receive(:validate_auth).and_return(true)
   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:microsoft_graph]
   page.find('button', text: /.*Sign in with Microsoft/).click()
+end
+
+Then /I can log in with Clever/ do
+  allow(Teacher).to receive(:validate_auth).and_return(true)
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:clever]
+  page.find('button', text: /.*Sign in with Clever/).click()
 end
 
 And /The TEALS contact email is stubbed/ do

@@ -22,6 +22,9 @@ class SessionsController < ApplicationController
     when "microsoft_graph"
       user.microsoft_token = token
       user.microsoft_refresh_token = refresh_token if refresh_token.present?
+    when "clever"
+      user.clever_token = token
+      user.cleever_refresh_token = refresh_token if refresh_token.present?
     end
   end
 
