@@ -63,17 +63,6 @@ Scenario: Logging in as a teacher with Microsoft account should be able to edit 
   Then  I can log in with Microsoft
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
-  And   I enter my "First Name" as "Joe"
-  And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
-  And   I set my education level target as "College"
-  And   I enter my "School Name" as "Cupertino High School"
-  And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "State"
-  And   I enter my "School Website" as "https://chs.fuhsd.org"
-  And   I press "Update"
-  Then  I see a confirmation "Successfully updated your information"
-  Then  the "First Name" field should contain "Joe"
-  Then  there is a TEALS email
 
 Scenario: Logging in as a teacher with Clever account should be able to edit their info
   Given the following schools exist:
@@ -89,17 +78,6 @@ Scenario: Logging in as a teacher with Clever account should be able to edit the
   Then  I can log in with Clever
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
-  And   I enter my "First Name" as "Joe"
-  And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
-  And   I set my education level target as "College"
-  And   I enter my "School Name" as "Cupertino High School"
-  And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "State"
-  And   I enter my "School Website" as "https://chs.fuhsd.org"
-  And   I press "Update"
-  Then  I see a confirmation "Successfully updated your information"
-  Then  the "First Name" field should contain "Joe"
-  Then  there is a TEALS email
 
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
