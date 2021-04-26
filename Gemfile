@@ -18,6 +18,7 @@ gem 'omniauth', '~> 1.0'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-microsoft_graph'
+gem 'omniauth-discourse'
 gem 'omniauth-clever'
 
 # for timezone information for windows users

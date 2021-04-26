@@ -279,6 +279,8 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-clever (1.2.2)
       omniauth-oauth2 (>= 1.1, <= 1.5)
+    omniauth-discourse (1.0.0)
+      omniauth (~> 1.0)
     omniauth-google-oauth2 (0.7.0)
       jwt (>= 2.0)
       omniauth (>= 1.1.1)
@@ -469,6 +471,7 @@ DEPENDENCIES
   metric_fu
   omniauth (~> 1.0)
   omniauth-clever
+  omniauth-discourse
   omniauth-google-oauth2
   omniauth-microsoft_graph
   omniauth-rails_csrf_protection
