@@ -79,6 +79,21 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
 
+  Scenario: Logging in as a teacher with Clever account should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher Clever email
+  And   The TEALS contact email is stubbed
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Clever
+  And   I see a confirmation "You can edit your information"
+  Then  the "First Name" field should contain "Joseph"
+
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |

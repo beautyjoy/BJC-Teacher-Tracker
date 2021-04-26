@@ -5,6 +5,8 @@
 #  id                                :bigint           not null, primary key
 #  admin                             :boolean          default(FALSE)
 #  application_status                :string           default("pending")
+#  clever_refresh_token              :string
+#  clever_token                      :string
 #  education_level                   :integer          default(NULL)
 #  email                             :string
 #  encrypted_google_refresh_token    :string
