@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       user.microsoft_refresh_token = refresh_token if refresh_token.present?
     when "clever"
       user.clever_token = token
-      user.cleever_refresh_token = refresh_token if refresh_token.present?
+      user.clever_refresh_token = refresh_token if refresh_token.present?
     end
   end
 
