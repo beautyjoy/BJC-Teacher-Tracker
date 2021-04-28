@@ -27,7 +27,7 @@
 
 <div class="login-form">
   <div class="wrap">
-    <h2 class="text-center">Sign in</h2>    
+    <h2 class="text-center">Sign in</h2>
     <div class="text-center social-btn">
       <%= form_tag('/auth/google_oauth2', method: 'post') do %>
         <button class="btn btn-danger btn-block">
@@ -35,9 +35,9 @@
           Sign in with <b>Google</b></button>
       <% end %>
       <%= form_tag('/auth/discourse', method: 'post') do %>
-        <button class="btn btn-warning btn-block">
+        <button class="btn btn-default btn-block" style="background-color:rgb(255, 194, 57);">
             <img src="https://raw.githubusercontent.com/beautyjoy/bjc-resources/0c86c22f08be33e2a4618b0e71914c0c9a93a66d/images/alonzo/alonzo.svg" width="10%'">
-          Sign in with <b>Snap</b></button>
+          Sign in with <b>Snap<em>!</em></b></button>
       <% end %>
       <%= form_tag('/auth/microsoft_graph', method: 'post') do %>
         <button class="btn btn-primary btn-block">
