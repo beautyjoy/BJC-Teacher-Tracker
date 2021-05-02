@@ -7,22 +7,59 @@
       <th scope="col">Location</th>
       <th scope="col">Website</th>
       <th scope="col">Teachers Count</th>
-      <th scope="col">First Teacher</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <% @schools.each do |school| %>
-    <tr>
-      <td><%= school.name %></td>
-      <td><%= school.location %></td>
-      <td>
-        <a href="<%= school.website %>" target="_blank">
-          <%= school.website %>
-        </a>
-      </td>
-      <td><%= school.teachers_count %></td>
-      <td ata-sort="<%= school.created_at %>"><%= school.created_at.strftime("%b %d, %Y") %></td>
-    </tr>
+    <% @schools.each_with_index do |school, index| %>
+      <tr>
+        <td><%= school.name %></td>
+        <td><%= school.location %></td>
+        <td>
+          <a href="<%= school.website %>" target="_blank">
+            <%= school.website %>
+          </a>
+        </td>
+        <td><%= school.teachers_count %></td>
+        <td>
+          <button class="btn btn-default dropdown-arrow" type="button" data-toggle="collapse" data-target="<%="#details_#{index}"%>" onclick> 
+            ▼
+          </button>
+        </td>
+      </tr>
+            
+      <tr class="collapse" id=<%="details_#{index}"%>>
+        <td colspan="6">
+          <table class="table">
+            <thead class="table-light">
+              <tr class="table-light">
+                <th colspan="5">Teacher Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% school.teachers.each do |teacher| %>
+                <tr class="table-light">
+                  <td>Name: <%= teacher.first_name + " " + teacher.last_name %> </td>
+                  <td>Email: <%= teacher.email %></td>
+                  <td>Education: <%= teacher.display_education_level %></td>
+                  <td>Status: <%= teacher.display_application_status%></td>
+                  <td>Date Submitted: <%= teacher.created_at.strftime("%b %d, %Y") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  $(function() {
+    $(".dropdown-arrow").click(function() {
+      $(this).text(function(i, text) {
+        return text === "▲" ? "▼": "▲";
+      })
+    });
+  })
+</script>

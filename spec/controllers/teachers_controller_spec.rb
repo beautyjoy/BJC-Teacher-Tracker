@@ -4,6 +4,7 @@ RSpec.describe TeachersController, type: :controller do
     fixtures :all
 
     before(:each) do
+        Rails.application.load_seed
         ApplicationController.any_instance.stub(:require_login).and_return(true)
     end
 
@@ -40,14 +41,34 @@ RSpec.describe TeachersController, type: :controller do
     end
 
     it "doesn't allow teacher to change their snap or email" do
-      ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
-      ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+        ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
+        ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+        ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+        short_app = Teacher.find_by(first_name: "Short")
+        post :update, :params => { :id => short_app.id, :teacher => {:id => short_app.id, :email => "wrong@berkeley.edu"} }
+        post :update, :params => { :id => short_app.id, :teacher => {:id => short_app.id, :snap => "wrong"} }
+        short_app = Teacher.find_by(first_name: "Short")
+        expect(short_app.email).to eq 'short@long.com'
+        expect(short_app.snap).to eq 'song'
+    end
+
+    it "resend a welcome_email for validated teacher" do
+      ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Ye"))
+      short_app = Teacher.find_by(first_name: "Ye")
+      post :resend_welcome_email, :params => { :id => short_app.id }
+      last_email = ActionMailer::Base.deliveries.last
+      last_email.subject.should eq "Welcome to The Beauty and Joy of Computing!"
+    end
+
+    it "denied and pending teacher can not request welcome email" do
+      ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Bob"))
+      bob_app = Teacher.find_by(first_name: "Bob")
+      post :resend_welcome_email, :params => { :id => bob_app.id }
+      ActionMailer::Base.deliveries.should be_empty
       ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
       short_app = Teacher.find_by(first_name: "Short")
-      post :update, :params => { :id => short_app.id, :teacher => {:id => short_app.id, :email => "wrong@berkeley.edu"} }
-      post :update, :params => { :id => short_app.id, :teacher => {:id => short_app.id, :snap => "wrong"} }
-      short_app = Teacher.find_by(first_name: "Short")
-      expect(short_app.email).to eq 'short@long.com'
-      expect(short_app.snap).to eq 'song'
+      post :resend_welcome_email, :params => { :id => short_app.id }
+      ActionMailer::Base.deliveries.should be_empty
     end
+
 end

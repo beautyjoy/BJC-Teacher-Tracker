@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_081000) do
+ActiveRecord::Schema.define(version: 2021_04_26_041607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_081000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
+    t.string "subject"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -60,6 +61,12 @@ ActiveRecord::Schema.define(version: 2021_04_13_081000) do
     t.string "personal_website"
     t.integer "education_level", default: -1
     t.string "application_status", default: "Pending"
+    t.string "microsoft_token"
+    t.string "microsoft_refresh_token"
+    t.string "snap_token"
+    t.string "snap_refresh_token"
+    t.string "clever_token"
+    t.string "clever_refresh_token"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
