@@ -7,23 +7,30 @@ Feature: teacher login functionality
 Background: See data
   Given I seed data
 
+Scenario: Logging in failure redirects to new teachers page
+  Given I am on the BJC home page
+  Given I have a teacher Google email
+  And   I follow "Log In"
+  And   I cannot log in with Google
+  Then  I should be on the new teachers page
+
 Scenario: Logging in as a teacher
   Given I am on the BJC home page
-  Given I have a teacher email
+  Given I have a teacher Google email
   And   I follow "Log In"
   Then  I should see "Sign in with Google"
   And   I should see "Sign in with Snap"
   And   I should see "Sign in with Microsoft"
   And   I should see "Sign in with Clever"
 
-Scenario: Logging in as a teacher should be able to edit their info
+Scenario: Logging in as a teacher with Google account should be able to edit their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
-  Given I have a teacher email
+  Given I have a teacher Google email
   And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
@@ -42,6 +49,51 @@ Scenario: Logging in as a teacher should be able to edit their info
   Then  the "First Name" field should contain "Joe"
   Then  there is a TEALS email
 
+Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher Microsoft email
+  And   The TEALS contact email is stubbed
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Microsoft
+  And   I see a confirmation "You can edit your information"
+  Then  the "First Name" field should contain "Joseph"
+
+Scenario: Logging in as a teacher with Snap account should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher Snap email
+  And   The TEALS contact email is stubbed
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Snap
+  And   I see a confirmation "You can edit your information"
+  Then  the "First Name" field should contain "Joseph"
+
+  Scenario: Logging in as a teacher with Clever account should be able to edit their info
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  Given I have a teacher Clever email
+  And   The TEALS contact email is stubbed
+  Given I am on the BJC home page
+  And   I follow "Log In"
+  Then  I can log in with Clever
+  And   I see a confirmation "You can edit your information"
+  Then  the "First Name" field should contain "Joseph"
+
 Scenario: Logged in teacher can fill a new form with their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
@@ -49,7 +101,7 @@ Scenario: Logged in teacher can fill a new form with their info
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -75,7 +127,7 @@ Scenario: Logged in teacher can fill a new form with their info
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -102,7 +154,7 @@ Scenario: Logged in teacher can only edit their own information
   | first_name | last_name | admin | email                     |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   | Jane       | Austin    | false | testteacher2@berkeley.edu |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
@@ -116,7 +168,7 @@ Scenario: Logging in as a teacher should see "Update" instead of "Submit" when e
   Given the following teachers exist:
   | first_name | last_name | admin | email                     |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   Then I should see a button named "Submit"
   Given I follow "Log In"
@@ -130,7 +182,7 @@ Scenario: Frontend should not allow Teacher to edit their email
   Given the following teachers exist:
   | first_name | last_name | admin | email                     | snap |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane |
-  Given I have a teacher email
+  Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
@@ -139,3 +191,45 @@ Scenario: Frontend should not allow Teacher to edit their email
   And  I enter my "Snap! Username" as "wrong"
   Then the "School Email" field should contain "testteacher@berkeley.edu"
   Then the "Snap!" field should contain "Jane"
+
+Scenario: Validated teacher should see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should see a button named "Resend Welcome Email"
+
+Scenario: Pending teacher should not see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Resend Welcome Email"
+
+Scenario: Denied teacher should not see resend button
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Resend Welcome Email"

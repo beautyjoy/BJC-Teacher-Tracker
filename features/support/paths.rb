@@ -16,10 +16,14 @@ module NavigationHelpers
     when /^the (BJC )?home\s?page$/ then '/'
     when /^the email templates index$/ then '/email_templates'
     when /^the new teachers page$/ then new_teacher_path
-    when /^the edit page for (.*) (.*)$/i
+    when /^the teachers page$/ then teachers_path
+    when /^the edit page for (.*) (.*)$/
       edit_teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
+    when /^the show page for (.*) (.*)$/
+      teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
     when /^the schools page$/ then schools_path
     when /^the new schools page$/ then new_school_path
+    when /^the admin dashboard$/ then dashboard_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

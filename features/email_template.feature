@@ -12,7 +12,7 @@ Background: I am logged in as an admin, and email templates are generated
     And I follow "Log In"
     Then I can log in with Google
     And I should see "BJC Teacher Dashboard"
-    
+
 Scenario: Logging in as an admin should see all email templates
     Given I am on the email templates index
     Then I should see "Welcome Email"
@@ -22,8 +22,16 @@ Scenario: Logging in as an admin should see all email templates
 Scenario: Logging in as an admin should be able to edit email templates
     Given I am on the email templates index
     And I follow "Welcome Email"
-    Then I should see "Hi {{teacher_first_name}}"
-    And I fill in "email_template_body" with "Test Edit"
+    Then I should see hidden element "Hi {{teacher_first_name}}"
+    And I fill in TinyMCE email form with "Test Edit"
     And I press "Update"
     And I follow "Welcome Email"
-    Then I should see "Test Edit"
+    Then I should see hidden element "Test Edit"
+
+Scenario: Logging in as an admin should be able to edit email subject
+    Given I am on the email templates index
+    And I follow "Welcome Email"
+    And I fill in "email_template_subject" with "Test Subject"
+    And I press "Update"
+    And I follow "Welcome Email"
+    Then the "email_template_subject" field should contain "Test Subject"

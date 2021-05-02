@@ -41,14 +41,35 @@ Scenario: Viewing all teachers as an admin
 # TODO: Checks for validation and deny belong here.
 
 Scenario: Logging in with non-admin, unregistered Google Account should fail
-  Given I have a non-admin, unregistered email
+  Given I have a non-admin, unregistered Google email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
   And I should see "Please Submit a teacher request"
 
+Scenario: Logging in with non-admin, unregistered Microsoft Account should fail
+  Given I have a non-admin, unregistered Microsoft email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Microsoft
+  And I should see "Please Submit a teacher request"
+
+Scenario: Logging in with non-admin, unregistered Snap Account should fail
+  Given I have a non-admin, unregistered Snap email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Snap
+  And I should see "Please Submit a teacher request"
+
+Scenario: Logging in with non-admin, unregistered Clever Account should fail
+  Given I have a non-admin, unregistered Clever email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Clever
+  And I should see "Please Submit a teacher request"
+
 Scenario: Non-admin, unregistered user should not be able to see admin-only pages
-  Given I have a non-admin, unregistered email
+  Given I have a non-admin, unregistered Google email
   Given I am on the BJC home page
   When  I go to the dashboard page
   Then  I should see "Only admins can access this page"
@@ -129,3 +150,64 @@ Scenario: Filter all teacher info as an admin
   Then  I should see "Peter"
   Then  I should see "Victor"
   Then  I should not see "Danny"
+
+Scenario: View teacher info as an admin
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  Given I am on the BJC home page
+  And The TEALS contact email is stubbed
+  Given I have an admin email
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the teachers page
+  When  I follow "Joseph Mamoa"
+  Then  I should see "Joseph Mamoa"
+  And   I should see "Edit Information"
+  And   I should see "School Name"
+  And   I should see "School Location"
+  And   I should see "Email"
+  And   I should see "Personal or Course Website"
+
+Scenario: Edit teacher info as an admin navigating from view only page to edit page
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      | snap   |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  Given I am on the BJC home page
+  And The TEALS contact email is stubbed
+  Given I have an admin email
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the teachers page
+  When  I follow "Joseph Mamoa"
+  Then  I should see "Joseph Mamoa"
+  And   I should see "Edit Information"
+  And   I follow "Edit Information"
+  And   I should see "Joseph"
+  And   I enter my "First Name" as "Joe"
+  And   I set my status as "Other - Please specify below."
+  And   I set my education level target as "College"
+  And   I press "Update"
+  Then  I see a confirmation "Saved"
+
+Scenario: Should be able to resend welcome email
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                    | school      | snap   | application_status |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
+  Given I am on the BJC home page
+  And The TEALS contact email is stubbed
+  Given I have an admin email
+  And   I follow "Log In"
+  Then  I can log in with Google
+  When  I go to the teachers page
+  When  I go to the edit page for Joseph Mamoa
+  Then I should see a button named "Resend Welcome Email"
