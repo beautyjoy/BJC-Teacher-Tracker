@@ -16,9 +16,4 @@ class MainController < ApplicationController
     @statuses = Teacher.validated.group(:status).count
     @schools = School.validated.order(num_validated_teachers: :desc)
   end
-
-  def logout
-    session.destroy
-    redirect_to root_url
-  end
 end
