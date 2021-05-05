@@ -23,6 +23,8 @@ import 'popper.js';
 
 import "@fortawesome/fontawesome-free/js/all";
 
+// TODO: These really out to be an 'admin' pack.
+import 'tinymce';
 import 'datatables.net';
 import "datatables.net-bs4";
 import "datatables.net-buttons-bs4";
