@@ -20,12 +20,12 @@
 </div>
 
 <script type="text/javascript">
-  modal = $('.js-denialModal');
+  let modal = $('.js-denialModal');
   modal.on('shown.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var teacherid = button.data('teacherid');
-    var teachername = button.data('teachername');
-    var newaction = '/admin/forms/deny/' + teacherid;
+    let button = $(event.relatedTarget);
+    let teacherId = button.data('teacher-id');
+    let teachername = button.data('teachername');
+    let newaction = `/teachers/${teacherId}/deny`;
     modal.find('.form-horizontal').attr('action', newaction);
     modal.find('.modal-title').text('Deny ' + teachername);
   });
