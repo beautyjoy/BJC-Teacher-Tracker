@@ -6,7 +6,6 @@ gem 'rails', '~> 5.2'
 
 # Production app server
 gem 'puma', '~> 5'
-gem 'uglifier', '~> 4.2'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
@@ -35,8 +34,6 @@ gem "sentry-rails"
 # Mailer template
 gem "panoramic"
 
-# Editor
-gem 'tinymce-rails'
 # Sanitizing email templates
 gem 'liquid-rails'
 
@@ -44,7 +41,6 @@ group :development, :test do
   gem 'annotate'
   gem 'byebug'
   gem 'pry'
-  gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
