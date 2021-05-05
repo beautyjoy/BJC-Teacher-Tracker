@@ -1,12 +1,5 @@
-<head>
-  <%= tinymce_assets %>
-  <script type="text/javascript">
-    tinyMCE.init({
-      selector: 'textarea.tinymce'
-    });
-  </script>
-</head>
-<center> <h1 text-align='center'> <%= @email_template.title %> </h1> </center>
+<h1 text-align='center'> <%= @email_template.title %> </h1>
+
 <%= form_with(model: @email_template, local: true) do |form| %>
   <div class="form">
     <h3> Subject </h3>
@@ -17,3 +10,9 @@
     <%= form.submit "Update", :class => "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  // tinyMCE.init({
+  //   selector: 'textarea.tinymce'
+  // });
+</script>
