@@ -41,7 +41,7 @@
               </a>
             <% end %>
           </td>
-          <td> <%= button_to("Validate", teacher_validate_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
+          <td> <%= button_to("Validate", validate_teacher_path(:id => teacher.id), {class: 'btn btn-success'}) %> </td>
           <td> <%= button_to("Delete", teacher_delete_path(:id => teacher.id), data: {confirm: "Are you sure you wish to delete this form?"}, class: 'btn btn-danger') %> </td>
         </tr>
         <% end %>

@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   resources :teachers do
-    post :resend_welcome_email
-    post :validate
-    post :delete
-    post :deny
+    member do
+      post :resend_welcome_email
+      post :validate
+      post :delete
+      post :deny
+    end
   end
   resources :schools
   resources :email_templates, only: [:index, :update, :edit]

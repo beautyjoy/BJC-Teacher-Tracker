@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <div class="modal-body">
-        <%= form_tag teacher_deny_path(:id => 0), method: :post, :class => "form-horizontal" do %>
+        <%= form_tag deny_teacher_path(0), method: :post, :class => "form-horizontal" do %>
           <%= label_tag 'reason', 'Reason for Denial', :class => 'control-label' %>
           <%= text_field_tag :reason, params[:reason], :class => "form-control", :id => nil %>
       </div>
