@@ -20,7 +20,20 @@ environment.config.merge({
             }
           }
         ]
-      }
+      },
+      // TinyMCE CSS files need to be copied to the js/ path to be loaded correctly.
+      {
+        test: /tinymce[\\/]skins[\\/]/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'js/[path][name].[ext]',
+              context: 'node_modules/tinymce'
+            }
+          }
+        ]
+      },
     ]
   }
 })
