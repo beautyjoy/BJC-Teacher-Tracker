@@ -38,7 +38,7 @@ gem "panoramic"
 
 # Editor
 gem 'tinymce-rails'
-#Sanitizing email templates
+# Sanitizing email templates
 gem 'liquid-rails'
 
 group :development, :test do
@@ -54,6 +54,9 @@ group :development, :test do
   # Intercept and view emails in a browser
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.0'
+
+  # TODO: Setup Linters
+  # rubocop, rubcop-rspec, pronto, etc
 end
 
 group :development do
@@ -67,11 +70,11 @@ end
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem 'rspec-rails'
-  gem 'simplecov', :require => false
-  gem 'cucumber-rails', :require => false
-  gem 'cucumber-rails-training-wheels' # basic imperative step defs
-  gem 'database_cleaner' # required by Cucumber
-  gem 'factory_bot_rails' # if using FactoryBot
-  gem 'metric_fu'        # collect code metrics
+  gem 'simplecov', require: false
+  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'metric_fu'
   gem 'selenium-webdriver'
 end
