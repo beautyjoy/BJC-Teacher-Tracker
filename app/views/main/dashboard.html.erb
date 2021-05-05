@@ -14,14 +14,14 @@
           <%= render 'teachers/teacher', teacher: teacher %>
           <td>
             <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
-              <%= button_to("✔️", teacher_validate_path(teacher_id: teacher.id),
+              <%= button_to("✔️", validate_teacher_path(teacher.id),
                  class: 'btn btn-outline-success', type: 'button') %>
               <span>
-                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" data-teacherid="<%= teacher.id %>" data-teachername="<%= teacher.full_name %>">
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" data-teacher-id="<%= teacher.id %>" data-teachername="<%= teacher.full_name %>">
                   ❌
                 </button>
               </span>
-              <%# <%= button_to("Delete", teacher_delete_path(teacher_id: teacher.id),
+              <%# <%= button_to("Delete", teacher_delete_path(teacher.id),
                  data: {confirm: "Are you sure you wish to delete this form?"},
                  class: 'btn btn-danger', type: 'button') %>
             </div>
