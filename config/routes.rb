@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
   resources :teachers do
     post :resend_welcome_email
-    post :validate, as: "validate"
-    post :delete, as: "delete"
-    post :deny, as: "deny"
+    post :validate
+    post :delete
+    post :deny
   end
   resources :schools
   resources :email_templates, only: [:index, :update, :edit]
