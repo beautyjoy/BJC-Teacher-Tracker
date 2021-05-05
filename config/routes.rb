@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :teachers # Note we're not actually using all of these...
-  resources :admins   # Note we're not actually using all of these...
-  resources :schools, only: [:new, :create, :index]
+  resources :teachers do
+    post :resend_welcome_email
+    post :validate, as: "validate"
+    post :delete, as: "delete"
+    post :deny, as: "deny"
+  end
+  resources :schools
   resources :email_templates, only: [:index, :update, :edit]
   root to: "main#index"
 
@@ -17,19 +21,11 @@ Rails.application.routes.draw do
   # and password.
   get    "/login",   to: "sessions#new"
   delete "/logout",  to: "sessions#destroy"
-  post   "/logout",  to: "main#logout"
 
   # Routes for Google authentication, note that these need to be
   # here for ominauth middleware whose route is /auth/google_oauth2,
   # which is not specified in this file, (because the middleware did it).
   get "auth/:provider/callback", to: "sessions#generalAuth"
 
-  # Route for validating forms as an admin
-  # TODO: #21 - move to teachers/:id/...
-  post "/admin/forms/validate/:id", to: "teachers#validate", as: "validate"
-  post "/admin/forms/delete/:id", to: "teachers#delete", as: "delete"
-  post "/admin/forms/deny/:id", to: "teachers#deny", as: "deny"
-
   get "/dashboard", to: "main#dashboard", as: "dashboard"
-  post "teachers/:id/resend_welcome_email", to: "teachers#resend_welcome_email"
 end
