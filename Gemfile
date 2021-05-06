@@ -2,12 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.6.6'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.4.5'
+gem 'rails', '~> 5.2'
 
 # Production app server
 gem 'puma', '~> 5'
-gem 'uglifier', '~> 4.2'
 gem 'pg', '~> 1.0'
 
 # Front-end Assets
@@ -36,16 +34,13 @@ gem "sentry-rails"
 # Mailer template
 gem "panoramic"
 
-# Editor
-gem 'tinymce-rails'
-#Sanitizing email templates
+# Sanitizing email templates
 gem 'liquid-rails'
 
 group :development, :test do
   gem 'annotate'
   gem 'byebug'
   gem 'pry'
-  gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-cucumber'
@@ -54,6 +49,9 @@ group :development, :test do
   # Intercept and view emails in a browser
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.0'
+
+  # TODO: Setup Linters
+  # rubocop, rubcop-rspec, pronto, etc
 end
 
 group :development do
@@ -67,11 +65,11 @@ end
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem 'rspec-rails'
-  gem 'simplecov', :require => false
-  gem 'cucumber-rails', :require => false
-  gem 'cucumber-rails-training-wheels' # basic imperative step defs
-  gem 'database_cleaner' # required by Cucumber
-  gem 'factory_bot_rails' # if using FactoryBot
-  gem 'metric_fu'        # collect code metrics
+  gem 'simplecov', require: false
+  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'metric_fu'
   gem 'selenium-webdriver'
 end
