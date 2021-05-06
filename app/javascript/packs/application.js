@@ -38,9 +38,9 @@ import 'tinymce/plugins/paste';
 import 'tinymce/plugins/table';
 
 // TinyMCE Skins. These need to be manually loaded.
-import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/ui/oxide/skin.css';
 import 'tinymce/skins/content/default/content.css';
-import 'tinymce/skins/ui/oxide/content.min.css';
+import 'tinymce/skins/ui/oxide/content.css';
 
 import 'datatables.net';
 import "datatables.net-bs4";
