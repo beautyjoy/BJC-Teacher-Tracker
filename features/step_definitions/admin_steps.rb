@@ -1,6 +1,11 @@
 require 'cucumber/rspec/doubles'
 
-LOGIN_SERVICE = { "Google" => :google_oauth2, "Microsoft" => :microsoft_graph, "Snap" => :discourse, "Clever" => :clever }
+LOGIN_SERVICE = {
+  Google: :google_oauth2,
+  Microsoft: :microsoft_graph,
+  Snap: :discourse,
+  Clever: :clever
+}.with_indifferent_access
 
 # Returns a OAuth2 token associated with email "testadminuser@berkeley.edu"
 Given /I have an admin email/ do

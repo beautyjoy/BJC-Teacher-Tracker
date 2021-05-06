@@ -4,7 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "@rails/webpacker": "4.2.2",
+    "@rails/webpacker": "4.2.x",
     "bootstrap": "^4.4.1",
     "datatables.net-bs4": "^1.10.20",
     "datatables.net-buttons-bs4": "^1.6.1",
@@ -12,9 +12,11 @@
     "jquery-ujs": "^1.2.2",
     "popper.js": "^1.16.0",
     "rails-ujs": "^5.2.4-1",
+    "tinymce": "^5.7",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
+    "webpack": "^4.x",
     "webpack-dev-server": "^3.10.1"
   }
 }
