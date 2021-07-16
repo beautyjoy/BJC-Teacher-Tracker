@@ -32,7 +32,7 @@
     <div class="row mt-5 pb-3">
       <div class="col-sm-6">
         <h5> Personal or Course Website </h5>
-        <% if teacher.personal_website.empty? %>
+        <% if teacher.personal_website.blank? %>
           None provided
         <% else %>
           <%= teacher.personal_website %>
