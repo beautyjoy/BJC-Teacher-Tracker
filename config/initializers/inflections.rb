@@ -12,6 +12,6 @@
 
 # These inflection rules are supported but not enabled by default:
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  # inflect.acronym 'TEALS'
-  # inflect.acronym 'CSP'
+  inflect.acronym 'TEALS'
+  inflect.acronym 'CSP'
 end

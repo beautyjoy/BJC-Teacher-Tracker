@@ -126,13 +126,18 @@ class TeachersController < ApplicationController
 
   private
 
+  def load_teacher
+    @teacher ||= Teacher.find(params[:id])
+  end
+
   def deny_access
     path = @teacher.present? ? edit_teacher_path(@teacher) : new_teacher_path
     redirect_to path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params
-    School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
+    @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school ||= School.new(school_params)
   end
 
   def teacher_params
