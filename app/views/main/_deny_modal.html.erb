@@ -5,16 +5,20 @@
         <h4 class="modal-title">Deny</h4>
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
-      <div class="modal-body">
-        <%= form_tag deny_teacher_path(0), method: :post, :class => "form-horizontal" do %>
-          <%= label_tag 'reason', 'Reason for Denial', :class => 'control-label' %>
-          <%= text_field_tag :reason, params[:reason], :class => "form-control", :id => nil %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      <%= form_tag deny_teacher_path(0), method: :post, class: "form-horizontal" do %>
+        <div class="modal-body">
+            <%= label_tag 'reason', 'Reason for Denial', class: 'control-label' %>
+            <%= text_field_tag :reason, params[:reason], class: "form-control" %>
+            <div class="form-check">
+              <%= check_box_tag :skip_email, 'skip_email', false, class: 'form-check-input' %>
+              <%= label_tag 'skip_email', 'Skip email notifcation?', class: 'form-check-label' %>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           <%= button_tag "Submit", name: nil, type: "submit", class: "btn btn-success" %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
