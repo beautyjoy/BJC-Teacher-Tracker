@@ -67,6 +67,7 @@ class TeachersController < ApplicationController
   def update
     @teacher = Teacher.find(params[:id])
     @school = @teacher.school
+    # TODO: use activerecord changed? attributes.
     old_email, old_snap = @teacher.email, @teacher.snap
     new_email, new_snap = teacher_params[:email], teacher_params[:snap]
     if ((old_email != new_email) || (old_snap != new_snap)) && !is_admin?
@@ -126,7 +127,8 @@ class TeachersController < ApplicationController
   private
 
   def deny_access
-    redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
+    path = @teacher.present? ? edit_teacher_path(@teacher) : new_teacher_path
+    redirect_to path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params
