@@ -162,6 +162,7 @@ class Teacher < ApplicationRecord
   end
 
   # TODO: Write tests, add hooks.
+  # TODO: Consider writing after_destroy hooks.
   def update_school_counts
     return unless application_status_changed?
     if validated?

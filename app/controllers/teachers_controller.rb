@@ -23,8 +23,9 @@ class TeachersController < ApplicationController
     @readonly = false
   end
 
+  # TODO: This needs to be re-written.
+  # If you are logged in and not an admin, this should fail.
   def create
-    # TODO: This needs to be re-written.
     @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
@@ -40,7 +41,7 @@ class TeachersController < ApplicationController
       return
     end
     @teacher = @school.teachers.build(teacher_params)
-    @teacher.application_status = "Pending"
+    @teacher.pending!
     if @teacher.save
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
@@ -93,7 +94,6 @@ class TeachersController < ApplicationController
 
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
-    # TODO: Clean this up so the counter doesn't need to be manually incremented.
     load_teacher
     @teacher.validated!
     @teacher.school.num_validated_teachers += 1
@@ -105,13 +105,14 @@ class TeachersController < ApplicationController
 
   def deny
     # TODO: Check if teacher is already validated (MAYBE)
-    # TODO: Clean this up so the counter doesn't need to be manually incremented.
     load_teacher
     @teacher.denied!
     @teacher.school.num_denied_teachers += 1
     @teacher.school.save!
     @teacher.save!
-    TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
+    if !params[:skip_email].present?
+      TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
+    end
     redirect_to root_path
   end
 
