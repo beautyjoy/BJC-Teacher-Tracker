@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
   end
 
   def resend_welcome_email
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     if @teacher.validated? or @is_admin
       TeacherMailer.welcome_email(@teacher).deliver_now
     end
@@ -52,20 +52,20 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
     @readonly = !is_admin?
   end
 
   def show
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def update
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
     # TODO: use activerecord changed? attributes.
     old_email, old_snap = @teacher.email, @teacher.snap
@@ -94,24 +94,24 @@ class TeachersController < ApplicationController
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
     # TODO: Clean this up so the counter doesn't need to be manually incremented.
-    teacher = Teacher.find(params[:id])
-    teacher.application_status = "Validated"
-    teacher.school.num_validated_teachers += 1
-    teacher.school.save!
-    teacher.save!
-    TeacherMailer.welcome_email(teacher).deliver_now
+    load_teacher
+    @teacher.validated!
+    @teacher.school.num_validated_teachers += 1
+    @teacher.school.save!
+    @teacher.save!
+    TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
   end
 
   def deny
     # TODO: Check if teacher is already validated (MAYBE)
     # TODO: Clean this up so the counter doesn't need to be manually incremented.
-    teacher = Teacher.find(params[:id])
-    teacher.application_status = "Denied"
-    teacher.school.num_denied_teachers += 1
-    teacher.school.save!
-    teacher.save!
-    TeacherMailer.deny_email(teacher, params[:reason]).deliver_now
+    load_teacher
+    @teacher.denied!
+    @teacher.school.num_denied_teachers += 1
+    @teacher.school.save!
+    @teacher.save!
+    TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
     redirect_to root_path
   end
 
@@ -131,8 +131,7 @@ class TeachersController < ApplicationController
   end
 
   def deny_access
-    path = @teacher.present? ? edit_teacher_path(@teacher) : new_teacher_path
-    redirect_to path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
+    redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params

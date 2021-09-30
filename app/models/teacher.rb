@@ -66,7 +66,8 @@ class Teacher < ApplicationRecord
     college: 2
   }
 
-  # The order of these must match.
+  # The order of these two lists must match.
+  # Do NOT change the values of existing options.
   enum status: {
     csp_teacher: 0,
     non_csp_teacher: 1,
@@ -106,6 +107,7 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  # TODO: Move these to helpers.
   def self.status_options
     display_order = [
       :csp_teacher,
@@ -159,4 +161,19 @@ class Teacher < ApplicationRecord
     return exists?(email: email_from_auth)
   end
 
+  # TODO: Write tests, add hooks.
+  def update_school_counts
+    return unless application_status_changed?
+    if validated?
+      school.num_validated_teachers += 1
+    elsif denied?
+      school.num_denied_teachers += 1
+    end
+    if application_status_was == 'validated'
+      school.num_validated_teachers -= 1
+    elsif application_status_was == 'denied'
+      school.num_denied_teachers -= 1
+    end
+    school.save
+  end
 end
