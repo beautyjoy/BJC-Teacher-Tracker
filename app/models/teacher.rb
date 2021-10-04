@@ -60,6 +60,14 @@ class Teacher < ApplicationRecord
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
 
+  enum education_level: {
+    middle_school: 0,
+    high_school: 1,
+    college: 2
+  }
+
+  # The order of these two lists must match.
+  # Do NOT change the values of existing options.
   enum status: {
     csp_teacher: 0,
     non_csp_teacher: 1,
@@ -67,13 +75,8 @@ class Teacher < ApplicationRecord
     teals_volunteer: 3,
     other: 4,
     teals_teacher: 5,
-    developer: 6
-  }
-
-  enum education_level: {
-    middle_school: 0,
-    high_school: 1,
-    college: 2
+    developer: 6,
+    excite: 7
   }
 
   STATUSES = [
@@ -84,6 +87,7 @@ class Teacher < ApplicationRecord
     'Other - Please specify below.',
     'I am teaching BJC through the TEALS program.',
     'I am a BJC curriculum or tool developer.',
+    'I am teaching with the ExCITE project'
   ].freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
@@ -103,8 +107,23 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  # TODO: Move these to helpers.
   def self.status_options
-    Teacher.statuses.values.map { |val| [STATUSES[val], val] }
+    display_order = [
+      :csp_teacher,
+      :non_csp_teacher,
+      :mixed_class,
+      :excite,
+      :teals_teacher,
+      :teals_volunteer,
+      :other,
+      :developer,
+    ]
+
+    display_order.map do |key|
+      status_idx = statuses[key]
+      [ STATUSES[status_idx], status_idx ]
+    end
   end
 
   def self.education_level_options
@@ -124,7 +143,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_status
-    formatted_status = status.to_s.titlecase.gsub('Csp', 'CSP').gsub('teals', 'TEALS')
+    formatted_status = status.to_s.titlecase
     return "#{formatted_status} | #{more_info}" if more_info?
     formatted_status
   end
@@ -142,4 +161,20 @@ class Teacher < ApplicationRecord
     return exists?(email: email_from_auth)
   end
 
+  # TODO: Write tests, add hooks.
+  # TODO: Consider writing after_destroy hooks.
+  def update_school_counts
+    return unless application_status_changed?
+    if validated?
+      school.num_validated_teachers += 1
+    elsif denied?
+      school.num_denied_teachers += 1
+    end
+    if application_status_was == 'validated'
+      school.num_validated_teachers -= 1
+    elsif application_status_was == 'denied'
+      school.num_denied_teachers -= 1
+    end
+    school.save
+  end
 end
