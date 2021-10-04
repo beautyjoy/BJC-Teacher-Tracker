@@ -41,8 +41,8 @@ class TeachersController < ApplicationController
       return
     end
     @teacher = @school.teachers.build(teacher_params)
-    @teacher.pending!
     if @teacher.save
+      @teacher.pending!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teals_confirmation_email(@teacher).deliver_now
@@ -95,10 +95,10 @@ class TeachersController < ApplicationController
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
     load_teacher
-    @teacher.validated!
     @teacher.school.num_validated_teachers += 1
     @teacher.school.save!
     @teacher.save!
+    @teacher.validated!
     TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
   end
