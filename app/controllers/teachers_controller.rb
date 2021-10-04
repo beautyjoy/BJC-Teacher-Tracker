@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
   end
 
   def resend_welcome_email
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     if @teacher.validated? or @is_admin
       TeacherMailer.welcome_email(@teacher).deliver_now
     end
@@ -23,8 +23,9 @@ class TeachersController < ApplicationController
     @readonly = false
   end
 
+  # TODO: This needs to be re-written.
+  # If you are logged in and not an admin, this should fail.
   def create
-    # TODO: This needs to be re-written.
     @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
@@ -40,8 +41,8 @@ class TeachersController < ApplicationController
       return
     end
     @teacher = @school.teachers.build(teacher_params)
-    @teacher.application_status = "Pending"
     if @teacher.save
+      @teacher.pending!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teals_confirmation_email(@teacher).deliver_now
@@ -52,21 +53,22 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
     @readonly = !is_admin?
   end
 
   def show
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def update
-    @teacher = Teacher.find(params[:id])
+    load_teacher
     @school = @teacher.school
+    # TODO: use activerecord changed? attributes.
     old_email, old_snap = @teacher.email, @teacher.snap
     new_email, new_snap = teacher_params[:email], teacher_params[:snap]
     if ((old_email != new_email) || (old_snap != new_snap)) && !is_admin?
@@ -92,25 +94,25 @@ class TeachersController < ApplicationController
 
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
-    # TODO: Clean this up so the counter doesn't need to be manually incremented.
-    teacher = Teacher.find(params[:id])
-    teacher.application_status = "Validated"
-    teacher.school.num_validated_teachers += 1
-    teacher.school.save!
-    teacher.save!
-    TeacherMailer.welcome_email(teacher).deliver_now
+    load_teacher
+    @teacher.school.num_validated_teachers += 1
+    @teacher.school.save!
+    @teacher.save!
+    @teacher.validated!
+    TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
   end
 
   def deny
     # TODO: Check if teacher is already validated (MAYBE)
-    # TODO: Clean this up so the counter doesn't need to be manually incremented.
-    teacher = Teacher.find(params[:id])
-    teacher.application_status = "Denied"
-    teacher.school.num_denied_teachers += 1
-    teacher.school.save!
-    teacher.save!
-    TeacherMailer.deny_email(teacher, params[:reason]).deliver_now
+    load_teacher
+    @teacher.denied!
+    @teacher.school.num_denied_teachers += 1
+    @teacher.school.save!
+    @teacher.save!
+    if !params[:skip_email].present?
+      TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
+    end
     redirect_to root_path
   end
 
@@ -125,12 +127,17 @@ class TeachersController < ApplicationController
 
   private
 
+  def load_teacher
+    @teacher ||= Teacher.find(params[:id])
+  end
+
   def deny_access
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
   def school_from_params
-    School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state]) || School.new(school_params)
+    @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school ||= School.new(school_params)
   end
 
   def teacher_params
