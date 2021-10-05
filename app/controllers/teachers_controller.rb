@@ -77,8 +77,12 @@ class TeachersController < ApplicationController
     end
     @teacher.assign_attributes(teacher_params)
     @school.assign_attributes(school_params)
-    # Resends form email only when pending teacher updates
-    TeacherMailer.form_submission(@teacher).deliver_now
+    if @teacher.denined?
+        @teacher.pending!
+    end
+    if !@teacher.validated? && !current_user.is_admin?
+      TeacherMailer.form_submission(@teacher).deliver_now
+    end
     # Resends TEALS email only when said teacher changes status
     if @teacher.status_changed?
       TeacherMailer.teals_confirmation_email(@teacher).deliver_now
