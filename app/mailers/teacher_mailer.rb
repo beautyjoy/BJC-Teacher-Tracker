@@ -24,6 +24,7 @@ class TeacherMailer < ApplicationMailer
          subject: EmailTemplate.find_by(path: build_path("deny_email")).subject
   end
 
+  # TODO: Remove this.
   def teals_confirmation_email(teacher)
     @teacher = teacher
     # Only send if teacher is a TEALS volunteer
