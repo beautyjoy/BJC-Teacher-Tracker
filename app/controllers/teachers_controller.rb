@@ -77,7 +77,7 @@ class TeachersController < ApplicationController
     end
     @teacher.assign_attributes(teacher_params)
     @school.assign_attributes(school_params)
-    if @teacher.denined?
+    if @teacher.denied?
         @teacher.pending!
     end
     if !@teacher.validated? && !current_user.is_admin?
