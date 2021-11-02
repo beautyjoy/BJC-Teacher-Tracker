@@ -210,5 +210,4 @@ Scenario: Should be able to resend welcome email
   Then  I can log in with Google
   When  I go to the teachers page
   When  I go to the edit page for Joseph Mamoa
-  Then debug
   Then I should see a button named "Resend Welcome Email"
