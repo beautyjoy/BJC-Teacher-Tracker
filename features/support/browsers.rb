@@ -42,7 +42,24 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 #### Safari (macOS only.)
+#This is what we use to test the Safari release channel.
+#You will have to install Safari Technology Preview (STP) from Apple.
 
+Capybara.register_driver :safari do |app|
+  # see standard properties here: https://www.w3.org/TR/webdriver/#capabilities
+  # STP requires a capabilities object
+  # you could use any of the properties from the link above.
+  # I just used a accept_insecure_certs for the heck of it
+  options = Selenium::WebDriver::Remote::Capabilities.safari(
+    {}
+  )
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :safari,
+    driver_path: '/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver',
+    desired_capabilities: options
+  )
+end
 
 ### Firefox
 Capybara.register_driver :firefox do |app|
@@ -58,5 +75,14 @@ Capybara.register_driver :headless_firefox do |app|
     options: options
 end
 
-Capybara.javascript_driver = ENV['GUI'] ? :chrome : :headless_chrome
-Capybara.default_driver = :headless_chrome
+if ENV['DRIVER'].present?
+  puts "FOUND DRIVER #{ENV['DRIVER'].parameterize.underscore.to_sym}"
+  # be nice and accept 'Headless Chrome', spaces, etc.
+  Capybara.default_driver = ENV['DRIVER'].parameterize.underscore.to_sym
+elsif ENV['GUI'].present?
+  Capybara.default_driver = :chrome
+else
+  Capybara.default_driver = :headless_chrome
+end
+
+puts "RUNNING CAPYBARA WITH DRIVER #{Capybara.javascript_driver}"
