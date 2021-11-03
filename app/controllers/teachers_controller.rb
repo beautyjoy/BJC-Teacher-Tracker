@@ -73,9 +73,6 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
-    if @teacher.denied?
-        @teacher.pending!
-    end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
     end
@@ -93,6 +90,7 @@ class TeachersController < ApplicationController
 
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
+    # TODO: move to model and add tests
     load_teacher
     @teacher.school.num_validated_teachers += 1
     @teacher.school.save!
