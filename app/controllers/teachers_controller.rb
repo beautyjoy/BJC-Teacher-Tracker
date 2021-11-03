@@ -68,23 +68,19 @@ class TeachersController < ApplicationController
   def update
     load_teacher
     @school = @teacher.school
-    # TODO: use activerecord changed? attributes.
-    old_email, old_snap = @teacher.email, @teacher.snap
-    new_email, new_snap = teacher_params[:email], teacher_params[:snap]
-    if ((old_email != new_email) || (old_snap != new_snap)) && !is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please contact an admin."
+    @teacher.assign_attributes(teacher_params)
+    if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
+      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
-    @teacher.assign_attributes(teacher_params)
-    @school.assign_attributes(school_params)
-    # Resends form email only when pending teacher updates
-    TeacherMailer.form_submission(@teacher).deliver_now
+    if !@teacher.validated? && !current_user.admin?
+      TeacherMailer.form_submission(@teacher).deliver_now
+    end
     # Resends TEALS email only when said teacher changes status
     if @teacher.status_changed?
       TeacherMailer.teals_confirmation_email(@teacher).deliver_now
     end
     @teacher.save!
-    @school.save!
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
@@ -94,6 +90,7 @@ class TeachersController < ApplicationController
 
   def validate
     # TODO: Check if teacher is already denied (MAYBE)
+    # TODO: move to model and add tests
     load_teacher
     @teacher.school.num_validated_teachers += 1
     @teacher.school.save!

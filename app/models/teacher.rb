@@ -94,6 +94,14 @@ class Teacher < ApplicationRecord
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
+  before_update :reset_validation_status
+
+  def reset_validation_status
+    if self.denied?
+      self.pending!
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
