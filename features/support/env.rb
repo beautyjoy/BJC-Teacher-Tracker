@@ -10,6 +10,7 @@ SimpleCov.command_name
 
 require 'cucumber/rails'
 
+require 'axe-cucumber-steps'
 # frozen_string_literal: true
 
 # Capybara defaults to CSS3 selectors rather than XPath.
