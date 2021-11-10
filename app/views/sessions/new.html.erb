@@ -1,6 +1,7 @@
 <style>
   .login-form {
-    width: 360px;
+    width: 400px;
+    max-width: 95%;
     margin: 30px auto;
   }
   .login-form .wrap {
@@ -9,7 +10,7 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
   }
-  .login-form h2 {
+  .login-form h1 {
     margin: 0 0 15px;
   }
 
@@ -62,9 +63,11 @@
   }
 </style>
 
+<%- provide :title, 'Sign In' %>
+
 <div class="login-form">
   <div class="wrap">
-    <h2 class="text-center">Sign in</h2>
+    <h1 class="text-center">Sign In as a BJC Teacher</h1>
     <div class="text-center social-btn-group">
       <%= form_tag('/auth/google_oauth2', method: 'post') do %>
         <button class="btn btn-block social-btn-google">
@@ -144,5 +147,5 @@
       <em class="hint-text small">If you are not currently logged into Snap! or the Snap! Forums, you will need to log in to the BJC Teachers app twice when using your Snap! account. We're working on fixing this. Thanks!</em>
     </div>
   </div>
-  <div class="hint-text small">Don't have an account? <a href="/" class="text-success">Sign up now!</a></div>
+  <div class="hint-text small">Don't have an account? <a href="/">Please, sign up now.</a></div>
 </div>
