@@ -14,7 +14,6 @@ Scenario: Logging in failure redirects to new teachers page
   And   I cannot log in with Google
   Then  I should be on the new teachers page
 
-@axe
 Scenario: Logging in as a teacher
   Given I am on the BJC home page
   Given I have a teacher Google email
