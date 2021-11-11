@@ -27,11 +27,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 html {
   min-height: 100%;
   position: relative;
+  --berkeley-blue: #003262;
 }
 
 body {
   margin: 0 0 255px;
   /* bottom = footer height */
+}
+
+.btn-primary {
+  background-color: var(--berkeley-blue);
 }
 
 footer {
@@ -95,7 +100,7 @@ footer .footer-links {
 }
 
 a {
-    color: #3B7EA1;
+  color: var(--indigo);
 }
 
 footer a {

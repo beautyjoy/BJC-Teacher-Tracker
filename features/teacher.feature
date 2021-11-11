@@ -22,6 +22,7 @@ Scenario: Logging in as a teacher
   And   I should see "Sign in with Snap"
   And   I should see "Sign in with Microsoft"
   And   I should see "Sign in with Clever"
+  Then  the page should be axe clean
 
 Scenario: Logging in as a teacher with Google account should be able to edit their info
   Given the following schools exist:
