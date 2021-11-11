@@ -12,7 +12,9 @@
 
   <div class="container">
     <main>
-      <h1 class="page-title"><%= yield(:h1) %></h1>
+      <%- if content_for?(:h1) %>
+        <h1 class="page-title"><%= yield(:h1) %></h1>
+    <%- end %>
       <%= render 'layouts/flash' %>
       <%= yield %>
     </main>

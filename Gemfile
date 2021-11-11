@@ -52,6 +52,10 @@ group :development, :test do
 
   # TODO: Setup Linters
   # rubocop, rubcop-rspec, pronto, etc
+
+  # Accessibility Testing
+  gem 'axe-core-rspec'
+  gem 'axe-core-cucumber'
 end
 
 group :development do
