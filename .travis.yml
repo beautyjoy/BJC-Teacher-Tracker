@@ -50,9 +50,7 @@ script:
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
   - bundle exec rspec
   - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
-  # TODO: Deprecate this step after moving to rspec
-  - bundle exec rails test
-  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  - echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
 
 after_script:
   # combine coverage from all suites, and upload to CodeClimate

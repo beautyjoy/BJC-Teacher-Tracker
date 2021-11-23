@@ -1,8 +1,14 @@
 require 'simplecov'
+require 'simplecov-csv'
+require 'simplecov-console'
+
 SimpleCov.start 'rails' do
-  command_name 'rspec'
+  command_name 'cucumber'
+  enable_coverage :branch
+
   formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::Console,
+    SimpleCov::Formatter::CSVFormatter,
     SimpleCov::Formatter::HTMLFormatter
   ])
 end
