@@ -1,9 +1,15 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
+require 'simplecov-csv'
+require 'simplecov-console'
 SimpleCov.start 'rails' do
   command_name 'rspec'
+  enable_coverage :branch
+
+  # SimpleCov::Formatter::SimpleFormatter
   formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::CSVFormatter,
+    SimpleCov::Formatter::Console,
     SimpleCov::Formatter::HTMLFormatter
   ])
 end
