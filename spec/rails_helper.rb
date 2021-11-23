@@ -1,7 +1,13 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
-SimpleCov.start 'rails'
-SimpleCov.command_name
+SimpleCov.start 'rails' do
+  command_name 'rspec'
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::SimpleFormatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ])
+end
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -82,5 +88,3 @@ OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
     }
   }
 )
-
-
