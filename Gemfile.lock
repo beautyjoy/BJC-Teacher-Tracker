@@ -47,6 +47,7 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    ansi (1.5.0)
     arel (9.0.0)
     arrayfields (4.9.2)
     ast (2.4.2)
@@ -55,9 +56,6 @@ GEM
     axe-core-api (4.3.2)
       dumb_delegator
       virtus
-    axe-core-capybara (4.3.2)
-      axe-core-api
-      dumb_delegator
     axe-core-cucumber (4.3.2)
       axe-core-api
       dumb_delegator
@@ -428,6 +426,12 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
+    simplecov-console (0.9.1)
+      ansi
+      simplecov
+      terminal-table
+    simplecov-csv (0.1.3)
+      simplecov
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
     spring (2.1.1)
@@ -440,12 +444,15 @@ GEM
       sprockets (>= 3.0.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
+    terminal-table (3.0.2)
+      unicode-display_width (>= 1.1.1, < 3)
     thor (1.1.0)
     thread_safe (0.3.6)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
+    unicode-display_width (2.1.0)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -471,7 +478,6 @@ PLATFORMS
 DEPENDENCIES
   annotate
   attr_encrypted (~> 3.1.0)
-  axe-core-capybara
   axe-core-cucumber
   axe-core-rspec
   byebug
@@ -504,6 +510,8 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   simplecov
+  simplecov-console
+  simplecov-csv
   spring
   tzinfo-data
   web-console
