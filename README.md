@@ -1,22 +1,8 @@
-# BJC-Teacher-Tracker
+# BJC Teacher Tracker
 
 [![Build Status](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.com/beautyjoy/BJC-Teacher-Tracker) •
 [![Maintainability](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/maintainability)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/maintainability) •
-[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage) •
-[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_3-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-tommywei110_BJC-Teacher-Tracker/main) •
-[![Pivotal Tracker](https://github.com/saasbook/q2q-demo/raw/main/app/assets/images/pivotal_tracker_logo.png)](https://pivotaltracker.com/n/projects/2406982)
-
-### Spring 2021:
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/maintainability)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/e8e6f05233172697c6c7/test_coverage)](https://codeclimate.com/github/tommywei110/BJC-Teacher-Tracker/test_coverage)
-
-[![Pivotal Tracker](https://github.com/saasbook/q2q-demo/blob/main/app/assets/images/pivotal_tracker_logo.png)](https://pivotaltracker.com/n/projects/2406982)
-
-[![Build Status](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker.svg?branch=master)](https://travis-ci.org/tommywei110/BJC-Teacher-Tracker)
-
-[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_3-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-GH-tommywei110_BJC-Teacher-Tracker/main)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage)
 
 ---
 
