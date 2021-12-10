@@ -92,10 +92,9 @@ class TeachersController < ApplicationController
     # TODO: Check if teacher is already denied (MAYBE)
     # TODO: move to model and add tests
     load_teacher
+    @teacher.validated!
     @teacher.school.num_validated_teachers += 1
     @teacher.school.save!
-    @teacher.save!
-    @teacher.validated!
     TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
   end
@@ -106,7 +105,6 @@ class TeachersController < ApplicationController
     @teacher.denied!
     @teacher.school.num_denied_teachers += 1
     @teacher.school.save!
-    @teacher.save!
     if !params[:skip_email].present?
       TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
     end

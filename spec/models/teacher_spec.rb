@@ -70,9 +70,8 @@ RSpec.describe Teacher, type: :model do
     it 'changes a denined status to pending' do
       expect do
         teacher.update(email: 'bob.johnson@school.edu')
-      end.to
-        change(teacher, :application_status)
-        .from('denied').to('pending')
+      end.to change(teacher, :application_status)
+             .from('denied').to('pending')
     end
   end
 
