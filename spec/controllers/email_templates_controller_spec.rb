@@ -12,8 +12,8 @@ RSpec.describe EmailTemplatesController, type: :controller do
         welcome_email = EmailTemplate.find_by(path: "teacher_mailer/welcome_email")
         post :update, :params => { :id => welcome_email.id, :email_template => {:id => welcome_email.id, :body => "<%= @teacher.first_name %>"} }
         teacher = teachers(:bob)
-		email = TeacherMailer.welcome_email(teacher)
-		email.deliver_now
+        email = TeacherMailer.welcome_email(teacher)
+        email.deliver_now
         expect(email.body.encoded).to include("@teacher.first_name")
     end
 
@@ -22,8 +22,8 @@ RSpec.describe EmailTemplatesController, type: :controller do
         welcome_email = EmailTemplate.find_by(path: "teacher_mailer/welcome_email")
         post :update, :params => { :id => welcome_email.id, :email_template => {:id => welcome_email.id, :body => "Welcome to BJC, {{teacher_first_name}}"} }
         teacher = teachers(:bob)
-		email = TeacherMailer.welcome_email(teacher)
-		email.deliver_now
+        email = TeacherMailer.welcome_email(teacher)
+        email.deliver_now
         expect(email.body.encoded).to include("Welcome to BJC, Bob")
     end
 
