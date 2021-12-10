@@ -47,9 +47,9 @@ We have worked on the adding following core features and functionality:
 ## Few Things to Know:
 
 - Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
-- To add administrators to the application you have to add the person's email to the list of emails in the environment variable `ADMIN_EMAILS`, which is separated by comma.
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber`
+- To make someone an admin use db console access
 
 ## Deployed Site:
 
