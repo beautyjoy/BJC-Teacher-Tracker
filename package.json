@@ -1,10 +1,10 @@
 {
-  "name": "BJC-Teacher-Tracker",
+  "name": "bjc-teacher-tracker",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "@rails/webpacker": "4.2.x",
+    "@rails/webpacker": "4.3.x",
     "bootstrap": "^4.4.1",
     "datatables.net-bs4": "^1.10.20",
     "datatables.net-buttons-bs4": "^1.6.1",
@@ -17,6 +17,9 @@
   },
   "devDependencies": {
     "webpack": "^4.x",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.x"
+  },
+  "engines": {
+    "node": "14.x.x"
   }
 }
