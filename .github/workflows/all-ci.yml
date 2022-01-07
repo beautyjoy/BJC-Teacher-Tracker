@@ -1,4 +1,9 @@
 name: GitHub CI
+on:
+  push:
+    branches: all
+  pull_request:
+    branches: all
 jobs:
   specs:
     runs-on: '${{ matrix.os }}'
