@@ -22,6 +22,8 @@ jobs:
       CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
       CCTR: ./cc-test-reporter
       TZ: America/Los_Angeles
+      RAILS_ENV: test
+      RUBY_ENV: test
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
