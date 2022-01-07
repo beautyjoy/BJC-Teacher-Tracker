@@ -28,6 +28,9 @@ jobs:
           ruby-version: 2.7.5
           bundler-cache: true
       - uses: nanasess/setup-chromedriver@v1
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '13'
       - run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
       - run: chmod +x $CCTR
@@ -36,7 +39,7 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: export DISPLAY=:99 bundle exec cucumber
+      - run: export DISPLAY=:99   bundle exec cucumber
       - run: >-
           $CCTR format-coverage -t simplecov --output
           coverage/codeclimate.$SUITE.json
