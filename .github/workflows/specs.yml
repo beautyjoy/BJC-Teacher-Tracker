@@ -24,6 +24,7 @@ jobs:
       TZ: America/Los_Angeles
       RAILS_ENV: test
       RUBY_ENV: test
+      attr_encrypted_key: encryption_key
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -44,7 +45,7 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: export DISPLAY=:99   bundle exec cucumber
+      - run: export DISPLAY=:99 bundle exec cucumber
       - run: >-
           $CCTR format-coverage -t simplecov --output
           coverage/codeclimate.$SUITE.json
@@ -54,5 +55,5 @@ jobs:
           coverage/codeclimate.$SUITE.json
       - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
       - run: $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
-      - run: $CCTR after-build --exit-code $TRAVIS_TEST_RESULT
+      - run: $CCTR after-build
       - run: rm -f config/application.yml
