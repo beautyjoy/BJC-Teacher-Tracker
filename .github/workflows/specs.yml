@@ -21,8 +21,6 @@ jobs:
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
-      CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
-      CCTR: ./cc-test-reporter
       TZ: America/Los_Angeles
       RAILS_ENV: test
       RUBY_ENV: test
@@ -38,11 +36,9 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
-      - uses: nanasess/setup-chromedriver@v1
-      - run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
-      - run: chmod +x $CCTR
-      - run: $CCTR before-build
+      - uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
