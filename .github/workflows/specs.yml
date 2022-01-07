@@ -50,7 +50,7 @@ jobs:
           coverage/codeclimate.${{ matrix.suite }}.json
       - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
   upload-coverage:
-    needs: tests
+    needs: specs
     runs-on: ubuntu-latest
     steps:
       - run: $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
