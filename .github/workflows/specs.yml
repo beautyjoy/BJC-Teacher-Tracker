@@ -12,6 +12,12 @@ jobs:
     services:
       postgres:
         image: postgres:13
+        env:
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
       CCTR: ./cc-test-reporter
@@ -28,9 +34,6 @@ jobs:
           ruby-version: 2.7.5
           bundler-cache: true
       - uses: nanasess/setup-chromedriver@v1
-      - uses: harmon758/postgresql-action@v1
-        with:
-          postgresql version: '13'
       - run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
       - run: chmod +x $CCTR
