@@ -4,9 +4,10 @@ on: [push, pull_request]
 
 jobs:
   specs:
+    name: Rspec & Cucumber
     runs-on: ubuntu-latest
     strategy:
-        fail-fast: false
+      fail-fast: false
       matrix:
         suite:
           - cucumber
