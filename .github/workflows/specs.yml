@@ -1,7 +1,6 @@
-name: GitHub CI
+name: Specs
 
-on:
-  - push
+on: [push, pull_request]
 
 jobs:
   specs:
@@ -22,11 +21,12 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '14'
       - name: Use Ruby
-        uses: actions/setup-ruby@v2
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.5
+          bundler-cache: true
       - run: >-
           LATEST_CHROMEDRIVER_VERSION=`curl -s
           "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
@@ -41,10 +41,6 @@ jobs:
           > $CCTR
       - run: chmod +x $CCTR
       - run: $CCTR before-build
-      - name: Bundle install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --without production
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
