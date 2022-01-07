@@ -4,11 +4,13 @@ on: [push, pull_request]
 
 jobs:
   specs:
-    runs-on: '${{ matrix.os }}'
+    runs-on: ubuntu-18.04
     strategy:
+        fail-fast: false
       matrix:
-        os:
-          - ubuntu-18.04
+        suite:
+          - cucumber
+          - rspec
     services:
       postgres:
         image: postgres:13
@@ -45,15 +47,14 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: export DISPLAY=:99 bundle exec cucumber
+      - run: export DISPLAY=:99 bundle exec ${{ matrix.suite }}
       - run: >-
           $CCTR format-coverage -t simplecov --output
-          coverage/codeclimate.$SUITE.json
-      - run: bundle exec rspec
-      - run: >-
-          $CCTR format-coverage -t simplecov --output
-          coverage/codeclimate.$SUITE.json
+          coverage/codeclimate.${{ matrix.suite }}.json
       - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
+  upload-coverage:
+    needs: tests
+    steps:
       - run: $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
       - run: $CCTR after-build
       - run: rm -f config/application.yml
