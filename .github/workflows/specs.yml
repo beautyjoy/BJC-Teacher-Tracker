@@ -27,25 +27,16 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
-      - run: >-
-          LATEST_CHROMEDRIVER_VERSION=`curl -s
-          "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
-      - run: >-
-          curl
-          "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
-          -O
-      - run: unzip chromedriver_linux64.zip -d ~/bin
-      - run: >-
-          curl -L
-          https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-          > $CCTR
+      - uses: nanasess/setup-chromedriver@v1
+      - run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
       - run: chmod +x $CCTR
       - run: $CCTR before-build
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: bundle exec cucumber
+      - run: export DISPLAY=:99 bundle exec cucumber
       - run: >-
           $CCTR format-coverage -t simplecov --output
           coverage/codeclimate.$SUITE.json
