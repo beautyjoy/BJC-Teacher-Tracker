@@ -1,7 +1,7 @@
 # replace with version(s) of Ruby that matches your Gemfile:
 language: ruby
 rvm:
-  - 2.6.6
+  - 2.7.5
 
 services:
   - postgresql
@@ -22,7 +22,7 @@ env:
     - TZ=America/Los_Angeles
 
 before_install:
-  - nvm install 12
+  - nvm install 14
 
 # steps to run BEFORE the test run
 before_script:
