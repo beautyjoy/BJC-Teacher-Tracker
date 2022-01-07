@@ -1,0 +1,59 @@
+name: GitHub CI
+jobs:
+  specs:
+    runs-on: '${{ matrix.os }}'
+    strategy:
+      matrix:
+        os:
+          - ubuntu-18.04
+    services:
+      postgres:
+        image: postgres:13
+    env:
+      - CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
+      - CCTR: ./cc-test-reporter
+      - TZ: America/Los_Angeles
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Use Ruby
+        uses: actions/setup-ruby@v2
+        with:
+          ruby-version: 2.7.5
+      - run: >-
+          LATEST_CHROMEDRIVER_VERSION=`curl -s
+          "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"`
+      - run: >-
+          curl
+          "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+          -O
+      - run: unzip chromedriver_linux64.zip -d ~/bin
+      - run: >-
+          curl -L
+          https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+          > $CCTR
+      - run: chmod +x $CCTR
+      - run: $CCTR before-build
+      - name: Bundle install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3 --without production
+      - run: bin/yarn
+      - run: bin/rails webpacker:compile
+      - run: bundle exec rake db:setup
+      - run: bundle exec rake db:migrate
+      - run: bundle exec cucumber
+      - run: >-
+          $CCTR format-coverage -t simplecov --output
+          coverage/codeclimate.$SUITE.json
+      - run: bundle exec rspec
+      - run: >-
+          $CCTR format-coverage -t simplecov --output
+          coverage/codeclimate.$SUITE.json
+      - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
+      - run: $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
+      - run: $CCTR after-build --exit-code $TRAVIS_TEST_RESULT
+      - run: rm -f config/application.yml
