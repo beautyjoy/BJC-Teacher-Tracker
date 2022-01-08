@@ -44,11 +44,11 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: export DISPLAY=:99 bundle exec ${{ matrix.suite }}
+      - run: export DISPLAY=:99 && bundle exec ${{ matrix.suite }}
       # - run: >-
       #     $CCTR format-coverage -t simplecov --output
       #     coverage/codeclimate.${{ matrix.suite }}.json
-      - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
+      # - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
   # upload-coverage:
   #   needs: specs
   #   runs-on: ubuntu-latest
