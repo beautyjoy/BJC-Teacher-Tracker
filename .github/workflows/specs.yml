@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   specs:
-    name: Rspec & Cucumber
+    name: Tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -48,7 +48,9 @@ jobs:
       # - run: >-
       #     $CCTR format-coverage -t simplecov --output
       #     coverage/codeclimate.${{ matrix.suite }}.json
-      # - run: echo 'SIMPLECOV TEST COVERAGE OUTPUT:' && cat coverage/results.csv
+      - run: |
+          echo 'SIMPLECOV TEST COVERAGE OUTPUT:'
+          cat /home/runner/work/BJC-Teacher-Tracker/BJC-Teacher-Tracker/coverage/results.csv
   # upload-coverage:
   #   needs: specs
   #   runs-on: ubuntu-latest
