@@ -3,15 +3,9 @@ name: All Specs
 on: [push, pull_request]
 
 jobs:
-  specs:
-    name: Tests
+  build:
+    name: build
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        suite:
-          - cucumber
-          - rspec
     services:
       postgres:
         image: postgres:13
@@ -19,13 +13,6 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    env:
-      TZ: America/Los_Angeles
-      RAILS_ENV: test
-      RUBY_ENV: test
-      attr_encrypted_key: '12345678912345678912345678912345'
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -37,24 +24,25 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
-      # - uses: paambaati/codeclimate-action@v2.2.4
-      #   env:
-      #     CC_TEST_REPORTER_ID: fe401f4d3e1593b8166a45aa101e0f59da8324d51b44fbabcd1984ef75be17fe
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: export DISPLAY=:99 && bundle exec ${{ matrix.suite }}
-      # - run: >-
-      #     $CCTR format-coverage -t simplecov --output
-      #     coverage/codeclimate.${{ matrix.suite }}.json
-      # - run: |
-      #     echo 'SIMPLECOV TEST COVERAGE OUTPUT:'
-      #     cat /home/runner/work/BJC-Teacher-Tracker/BJC-Teacher-Tracker/coverage/results.csv
-  # upload-coverage:
-  #   needs: specs
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
-  #     - run: $CCTR after-build
-  #     - run: rm -f config/application.yml
+  specs:
+    name: Tests
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - cucumber
+          - rspec
+    env:
+      TZ: America/Los_Angeles
+      RAILS_ENV: test
+      RUBY_ENV: test
+      attr_encrypted_key: '12345678912345678912345678912345'
+      DISPLAY: ':99' # For chromedriver
+    steps:
+      - run: bundle exec ${{ matrix.suite }}
