@@ -1,14 +1,12 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
 default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
   host: localhost
+  port: <%= ENV['DB_PORT'] || '5432' %>
+  username: <%= ENV['DB_USER'] || 'postgres' %>
+  password: <%= ENV['DB_PASSWORD'] || 'password' %>
+  database: <%= ENV['DB_NAME'] || 'postgres' %>
 
 development:
   <<: *default
@@ -25,5 +23,4 @@ production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: my_database_production
-  
+  database: bjc_teachers_prod
