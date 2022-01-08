@@ -25,7 +25,7 @@ jobs:
       TZ: America/Los_Angeles
       RAILS_ENV: test
       RUBY_ENV: test
-      attr_encrypted_key: encryption_key
+      attr_encrypted_key: 12345678912345678912345678912345
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
