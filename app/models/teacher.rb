@@ -98,9 +98,6 @@ class Teacher < ApplicationRecord
   after_commit :update_school_counts
 
   def reset_validation_status
-    puts "Reset Called"
-    puts self
-    puts application_status_change
     return if application_status_changed?
     if denied?
       pending!
