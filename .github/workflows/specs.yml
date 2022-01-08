@@ -3,8 +3,8 @@ name: All Specs
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: build
+  specs:
+    name: Tests
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -13,8 +13,18 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - cucumber
+          - rspec
     env:
+      TZ: America/Los_Angeles
+      RAILS_ENV: test
+      RUBY_ENV: test
       attr_encrypted_key: '12345678912345678912345678912345'
+      DISPLAY: ':99' # For chromedriver
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -30,21 +40,4 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-  specs:
-    name: Tests
-    needs: build
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        suite:
-          - cucumber
-          - rspec
-    env:
-      TZ: America/Los_Angeles
-      RAILS_ENV: test
-      RUBY_ENV: test
-      attr_encrypted_key: '12345678912345678912345678912345'
-      DISPLAY: ':99' # For chromedriver
-    steps:
       - run: bundle exec ${{ matrix.suite }}
