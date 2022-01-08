@@ -48,17 +48,14 @@ Given(/the following teachers exist/) do |teachers_table|
 
   teachers_table.hashes.each do |teacher|
     teachers_default.each do |key, value|
-      if teacher[key] == nil
-        teacher[key] = value
-      end
+      teacher[key] = teacher[key].presence || value
     end
 
     # Extract extra parameter 'school'
     school_name = teacher.delete("school")
-
     new_teacher = Teacher.create!(teacher)
 
-    #Create an association between teacher and school
+    # Create an association between teacher and school
     if school_name != nil
       school = School.find_by(name: school_name)
       if school != nil
