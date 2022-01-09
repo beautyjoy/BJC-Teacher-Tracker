@@ -74,16 +74,17 @@ class Teacher < ApplicationRecord
     middle_school_bjc: 8,
   }
 
+  # Always add to the bottom of the list!
   STATUSES = [
     'I am teaching BJC as an AP CS Principles course.',
-    'I am teaching Middle School BJC.',
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
     'Other - Please specify below.',
     'I am teaching BJC through the TEALS program.',
     'I am a BJC curriculum or tool developer.',
-    'I am teaching with the ExCITE project'
+    'I am teaching with the ExCITE project',
+    'I am teaching Middle School BJC.',
   ].freeze
 
   attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
