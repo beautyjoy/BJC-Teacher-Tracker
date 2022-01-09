@@ -39,7 +39,6 @@ class TeacherMailer < ApplicationMailer
 
   def form_submission(teacher)
     @teacher = teacher
-    # Only send if teacher is pending
     if @teacher.pending?
       mail to: CONTACT_EMAIL,
            subject: EmailTemplate.find_by(path: build_path("form_submission")).subject
@@ -64,6 +63,6 @@ class TeacherMailer < ApplicationMailer
 
   private
   def build_path(email_name)
-    'teacher_mailer/' + email_name
+    "teacher_mailer/#{email_name}"
   end
 end
