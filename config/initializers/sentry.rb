@@ -1,5 +1,5 @@
 Sentry.init do |config|
-  config.enabled_environments = %w|production staging development|
+  config.enabled_environments = %w|production staging|
 
   config.dsn = ENV['SENTRY_DSN']
   config.breadcrumbs_logger = [:active_support_logger]
