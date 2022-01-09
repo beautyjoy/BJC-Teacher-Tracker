@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'simplecov'
-require 'simplecov-console'
-require 'simplecov_json_formatter'
+require "simplecov"
+require "simplecov-console"
+require "simplecov_json_formatter"
 
-SimpleCov.start 'rails' do
-  command_name 'rspec'
+SimpleCov.start "rails" do
+  command_name "rspec"
   enable_coverage :branch
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
@@ -16,16 +16,16 @@ SimpleCov.start 'rails' do
   ])
 end
 
-require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
+require "spec_helper"
+ENV["RAILS_ENV"] ||= "test"
 
-require File.expand_path('../config/environment', __dir__)
+require File.expand_path("../config/environment", __dir__)
 
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
-require 'rspec/rails'
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'support/factory_bot'
+require "support/factory_bot"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -84,15 +84,15 @@ end
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: 'google_oauth2',
-    uid: '123456789',
+    provider: "google_oauth2",
+    uid: "123456789",
     info: {
-      name: 'Tony Stark',
-      email: 'tony@stark.com'
+      name: "Tony Stark",
+      email: "tony@stark.com"
     },
     credentials: {
-      token: 'token',
-      refresh_token: 'refresh token'
+      token: "token",
+      refresh_token: "refresh token"
     }
   }
                                                                   )

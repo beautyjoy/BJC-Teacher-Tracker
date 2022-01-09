@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class TeacherMailer < ApplicationMailer
-  CONTACT_EMAIL = 'Lauren Mock <lmock@berkeley.edu>'
+  CONTACT_EMAIL = "Lauren Mock <lmock@berkeley.edu>"
   TEALS_CONTACT_EMAIL = Rails.application.secrets[:teals_contact_email]&.freeze
-  BJC_EMAIL = 'BJC <contact@bjc.berkeley.edu>'
+  BJC_EMAIL = "BJC <contact@bjc.berkeley.edu>"
 
   before_action :email_template
-  default content_type: 'text/html',
-          template_name: 'main'
+  default content_type: "text/html",
+          template_name: "main"
 
   def welcome_email(teacher)
     @teacher = teacher
