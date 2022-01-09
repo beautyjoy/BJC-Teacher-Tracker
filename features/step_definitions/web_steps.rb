@@ -250,10 +250,9 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}
   expected_params = {}
-  expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')}
+  expected_pairs.rows_hash.each_pair { |k, v| expected_params[k] = v.split(',') }
 
   expect(actual_params).to eq expected_params
-
 end
 
 Then /^show me the page$/ do

@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 describe TeacherMailer do
-	fixtures :all
+  fixtures :all
   before(:all) do
-        Rails.application.load_seed
-  end 
+    Rails.application.load_seed
+  end
   it 'Sends Welcome Email' do
-		teacher = teachers(:bob)
-		email = TeacherMailer.welcome_email(teacher)
-		email.deliver_now
-		expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-		expect(email.to[0]).to eq("bob@gmail.com")
-		expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
-        expect(email.body.encoded).to include("Hi Bob")
-	end
+     teacher = teachers(:bob)
+     email = TeacherMailer.welcome_email(teacher)
+     email.deliver_now
+     expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+     expect(email.to[0]).to eq("bob@gmail.com")
+     expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
+     expect(email.body.encoded).to include("Hi Bob")
+   end
 
 
   it 'Sends Deny Email' do

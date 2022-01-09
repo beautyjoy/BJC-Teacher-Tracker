@@ -93,4 +93,4 @@ OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       :refresh_token => "refresh token"
     }
   }
-)
+                                                                  )

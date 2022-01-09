@@ -16,7 +16,7 @@ class EmailTemplatesController < ApplicationController
   end
 
   private
-  def template_params
-    params.require(:email_template).permit(:body, :subject)
-  end
+    def template_params
+      params.require(:email_template).permit(:body, :subject)
+    end
 end
