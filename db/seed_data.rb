@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SeedData
   @welcome_email = <<-WELCOME_EMAIL
     <p>Hi {{teacher_first_name}},<br /><br />Thanks for teaching with BJC!</p>
