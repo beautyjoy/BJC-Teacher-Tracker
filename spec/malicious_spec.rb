@@ -6,15 +6,14 @@ RSpec.describe TeachersController, type: :controller do
   fixtures :all
 
   it "does not allow non-admin to accept a user" do
-    teacher = Teacher.create(first_name: "Test", last_name: "User", email: "steven.yu@berkeley.edu", status: 0, snap: "user")
-    expect(teacher.application_status).to eq "pending"
     post :validate, {
         params: {
             id: 1
         }
     }
-    expect(response).to have_http_status(401)
-    expect(teacher.reload.application_status).to eq "pending"
+    expect(response).to have_http_status(302)
+    expect(response).to redirect_to(root_path)
+    expect(flash[:danger]).to eq "Only admins can access this page."
   end
 
   it "rejects malicious admin signup attempt" do

@@ -38,10 +38,8 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
-group :development, :test do
+group :development do
   gem "annotate"
-  gem "byebug"
-  gem "pry"
   gem "guard"
   gem "guard-rspec", require: false
   gem "guard-cucumber"
@@ -50,13 +48,13 @@ group :development, :test do
   # Intercept and view emails in a browser
   gem "letter_opener"
   gem "letter_opener_web", "~> 2"
-
-  # Accessibility Testing
-  gem "axe-core-rspec"
-  gem "axe-core-cucumber"
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console"
+end
+
+group :development, :test do
+  gem "byebug"
+  gem "pry"
 end
 
 group :linters, :development, :test do
@@ -84,4 +82,8 @@ group :test do
   gem "factory_bot_rails"
   gem "metric_fu"
   gem "selenium-webdriver"
+
+  # Accessibility Testing
+  gem "axe-core-rspec"
+  gem "axe-core-cucumber"
 end
