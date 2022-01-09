@@ -89,27 +89,26 @@ module SeedData
         subject: "Deny Email"
       }
     ]
-
   end
 
   def self.teachers
-      [
-          {
-              first_name: 'Michael',
-              last_name: 'Ball',
-              email: 'ball@berkeley.edu',
-              admin: true,
-              status: 0,
-              application_status: 'Validated'
-          },
-          {
-              first_name: 'Lauren',
-              last_name: 'Mock',
-              email: 'lmock@berkeley.edu',
-              admin: true,
-              status: 0,
-              application_status: 'Validated'
-          }
-      ]
+    [
+        {
+            first_name: 'Michael',
+            last_name: 'Ball',
+            email: 'ball@berkeley.edu',
+            admin: true,
+            status: 0,
+            application_status: 'Validated'
+        },
+        {
+            first_name: 'Lauren',
+            last_name: 'Mock',
+            email: 'lmock@berkeley.edu',
+            admin: true,
+            status: 0,
+            application_status: 'Validated'
+        }
+    ]
   end
 end

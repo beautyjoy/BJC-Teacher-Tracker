@@ -285,6 +285,3 @@ Performance/DeletePrefix:
 
 Performance/DeleteSuffix:
   Enabled: true
-
-Minitest/UnreachableAssertion:
-  Enabled: true

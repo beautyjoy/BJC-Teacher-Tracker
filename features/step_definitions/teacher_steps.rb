@@ -21,7 +21,7 @@ Given /I have a teacher (.*) email/ do |login|
 end
 
 Given(/the following schools exist/) do |schools_table|
-  schools_default = {name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu"}
+  schools_default = { name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu" }
   schools_table.hashes.each do |school|
     schools_default.each do |key, value|
       if school[key] == nil

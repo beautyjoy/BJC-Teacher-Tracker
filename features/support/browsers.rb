@@ -42,8 +42,8 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 #### Safari (macOS only.)
-#This is what we use to test the Safari release channel.
-#You will have to install Safari Technology Preview (STP) from Apple.
+# This is what we use to test the Safari release channel.
+# You will have to install Safari Technology Preview (STP) from Apple.
 
 Capybara.register_driver :safari do |app|
   # see standard properties here: https://www.w3.org/TR/webdriver/#capabilities
