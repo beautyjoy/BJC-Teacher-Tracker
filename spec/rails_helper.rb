@@ -1,15 +1,16 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
 require 'simplecov-console'
+require 'simplecov_json_formatter'
 
 SimpleCov.start 'rails' do
   command_name 'rspec'
   enable_coverage :branch
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::JSONFormatter,
     SimpleCov::Formatter::Console,
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::SimpleFormatter
+    SimpleCov::Formatter::HTMLFormatter
   ])
 end
 
