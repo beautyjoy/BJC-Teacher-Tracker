@@ -43,7 +43,7 @@ RSpec.describe Teacher, type: :model do
   let(:teacher) { teachers(:bob) }
 
   it 'shows email names correct' do
-    expect(teacher.email_name).to eq "Bob Johnson <bob@gmail.com>"
+    expect(teacher.email_name).to eq 'Bob Johnson <bob@gmail.com>'
   end
 
   it 'should be valid' do

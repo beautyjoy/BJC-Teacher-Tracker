@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
   def omniauth_callback
     # Get access tokens from the server
-    access_token = request.env["omniauth.auth"]
+    access_token = request.env['omniauth.auth']
     if Teacher.validate_access_token(access_token)
       # Tell them to register.
       user = Teacher.user_from_omniauth(access_token)
@@ -26,27 +26,27 @@ class SessionsController < ApplicationController
       log_in(user)
       redirect_to root_path
     else
-      redirect_to root_path, alert: "Please Submit a teacher request"
+      redirect_to root_path, alert: 'Please Submit a teacher request'
     end
   end
 
   def omniauth_failure
-    redirect_to root_url, alert: "Login failed"
+    redirect_to root_url, alert: 'Login failed'
   end
 
   private
     def setTokens(token, refresh_token, user)
       case params[:provider]
-      when "google_oauth2"
+      when 'google_oauth2'
         user.google_token = token
         user.google_refresh_token = refresh_token || user.google_refresh_token
-      when "microsoft_graph"
+      when 'microsoft_graph'
         user.microsoft_token = token
         user.microsoft_refresh_token = refresh_token || user.microsoft_refresh_token
-      when "discourse"
+      when 'discourse'
         user.snap_token = token
         user.snap_refresh_token = refresh_token || user.snap_refresh_token
-      when "clever"
+      when 'clever'
         user.clever_token = token
         user.clever_refresh_token = refresh_token || user.clever_refresh_token
       end

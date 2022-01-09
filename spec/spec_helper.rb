@@ -21,7 +21,7 @@ RSpec.configure do |config|
     # Use the documentation formatter for detailed output,
     # unless a formatter has already been configured
     # (e.g. via a command-line flag).
-    config.default_formatter = "doc"
+    config.default_formatter = 'doc'
   end
   # config.include Rails.application.routes.url_helpers
   # rspec-expectations config goes here. You can use an alternate

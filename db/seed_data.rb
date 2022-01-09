@@ -10,7 +10,7 @@ module SeedData
 
     <p>Thank you! <br />&mdash; The BJC Team</p>
   )
-  @teals_confirmation_email = %Q(
+  @teals_confirmation_email = "
     <p>
       Hi,<br><br>
 
@@ -24,8 +24,8 @@ module SeedData
       Thank You,<br>
       - The BJC Team
     </p>
-  )
-  @form_submission = %Q(
+  "
+  @form_submission = "
     <p>
       Here is the information that was submitted: <br>
       Name: {{teacher_first_name}} {{teacher_last_name}} <br>
@@ -35,58 +35,58 @@ module SeedData
       Location: {{teacher_school_city}}, {{teacher_school_state}} <br>
       Website: {{ teacher_school_website | link_to(nil, teacher_school_website) }}
     </p>
-  )
-  @deny_email = %Q(
+  "
+  @deny_email = "
     <p>
       {{ reason | strip_tags }}
     </p>
-  )
+  "
   def self.emails
     [
       {
         id: 1,
         body: @welcome_email,
-        path: "teacher_mailer/welcome_email",
+        path: 'teacher_mailer/welcome_email',
         locale: nil,
-        handler: "liquid",
+        handler: 'liquid',
         partial: false,
-        format: "html",
-        title: "Welcome Email",
-        subject: "Welcome to The Beauty and Joy of Computing!"
+        format: 'html',
+        title: 'Welcome Email',
+        subject: 'Welcome to The Beauty and Joy of Computing!'
       },
 
       {
         id: 2,
         body: @teals_confirmation_email,
-        path: "teacher_mailer/teals_confirmation_email",
+        path: 'teacher_mailer/teals_confirmation_email',
         locale: nil,
-        handler: "liquid",
+        handler: 'liquid',
         partial: false,
-        format: "html",
-        title: "TEALS Confirmation Email",
-        subject: "TEALS Confirmation Email"
+        format: 'html',
+        title: 'TEALS Confirmation Email',
+        subject: 'TEALS Confirmation Email'
       },
       {
         id: 3,
         body: @form_submission,
-        path: "teacher_mailer/form_submission",
+        path: 'teacher_mailer/form_submission',
         locale: nil,
-        handler: "liquid",
+        handler: 'liquid',
         partial: false,
-        format: "html",
-        title: "Form Submission",
-        subject: "Form Submission"
+        format: 'html',
+        title: 'Form Submission',
+        subject: 'Form Submission'
       },
       {
         id: 4,
         body: @deny_email,
-        path: "teacher_mailer/deny_email",
+        path: 'teacher_mailer/deny_email',
         locale: nil,
-        handler: "liquid",
+        handler: 'liquid',
         partial: false,
-        format: "html",
-        title: "Deny Email",
-        subject: "Deny Email"
+        format: 'html',
+        title: 'Deny Email',
+        subject: 'Deny Email'
       }
     ]
   end

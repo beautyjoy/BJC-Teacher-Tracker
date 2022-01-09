@@ -55,14 +55,14 @@ class TeachersController < ApplicationController
   def edit
     load_teacher
     @school = @teacher.school
-    @status = is_admin? ? "Admin" : "Teacher"
+    @status = is_admin? ? 'Admin' : 'Teacher'
     @readonly = !is_admin?
   end
 
   def show
     load_teacher
     @school = @teacher.school
-    @status = is_admin? ? "Admin" : "Teacher"
+    @status = is_admin? ? 'Admin' : 'Teacher'
   end
 
   def update
@@ -70,7 +70,7 @@ class TeachersController < ApplicationController
     @school = @teacher.school
     @teacher.assign_attributes(teacher_params)
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
+      redirect_to edit_teacher_path(current_user.id), alert: 'Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu.'
       return
     end
     if !@teacher.validated? && !current_user.admin?
@@ -85,7 +85,7 @@ class TeachersController < ApplicationController
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
     end
-    redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+    redirect_to edit_teacher_path(current_user.id), notice: 'Successfully updated your information'
   end
 
   def validate
@@ -113,7 +113,7 @@ class TeachersController < ApplicationController
 
   def delete
     if !is_admin?
-      redirect_to root_path, alert: "Only administrators can delete!"
+      redirect_to root_path, alert: 'Only administrators can delete!'
     else
       Teacher.delete(params[:id])
       redirect_to root_path
@@ -126,7 +126,7 @@ class TeachersController < ApplicationController
     end
 
     def deny_access
-      redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
+      redirect_to new_teacher_path, alert: 'Email address or Snap username already in use. Please use a different email or Snap username.'
     end
 
     def school_from_params

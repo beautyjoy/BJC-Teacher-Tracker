@@ -20,7 +20,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_bot'
@@ -82,15 +82,15 @@ end
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    :provider => "google_oauth2",
-    :uid => "123456789",
-    :info => {
-      :name => "Tony Stark",
-      :email => "tony@stark.com"
+    provider: 'google_oauth2',
+    uid: '123456789',
+    info: {
+      name: 'Tony Stark',
+      email: 'tony@stark.com'
     },
-    :credentials => {
-      :token => "token",
-      :refresh_token => "refresh token"
+    credentials: {
+      token: 'token',
+      refresh_token: 'refresh token'
     }
   }
                                                                   )

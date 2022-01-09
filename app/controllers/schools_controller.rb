@@ -6,7 +6,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      redirect_to root_path, alert: "Failed to submit information :("
+      redirect_to root_path, alert: 'Failed to submit information :('
     end
   end
 

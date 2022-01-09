@@ -41,11 +41,11 @@ class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
 
   enum application_status: {
-    validated: "Validated",
-    denied: "Denied",
-    pending: "Pending"
+    validated: 'Validated',
+    denied: 'Denied',
+    pending: 'Pending'
   }
-  validates_inclusion_of :application_status, :in => application_statuses.keys
+  validates_inclusion_of :application_status, in: application_statuses.keys
 
   belongs_to :school, counter_cache: true
 
@@ -87,7 +87,7 @@ class Teacher < ApplicationRecord
     'I am teaching Middle School BJC.',
   ].freeze
 
-  attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
+  attr_encrypted_options.merge!(key: Figaro.env.attr_encrypted_key!)
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
@@ -140,9 +140,9 @@ class Teacher < ApplicationRecord
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
-      return "Unknown"
+      'Unknown'
     else
-      return education_level.to_s.titlecase
+      education_level.to_s.titlecase
     end
   end
 
@@ -157,7 +157,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    return Teacher.application_statuses[application_status]
+    Teacher.application_statuses[application_status]
   end
 
   def self.user_from_omniauth(auth)
@@ -166,7 +166,7 @@ class Teacher < ApplicationRecord
 
   def self.validate_access_token(auth)
     email_from_auth = auth.info.email
-    return exists?(email: email_from_auth)
+    exists?(email: email_from_auth)
   end
 
   # TODO: Write tests, add hooks.

@@ -2,22 +2,22 @@ require 'rails_helper'
 
 RSpec.describe TeachersController, type: :controller do
   fixtures :all
-  it "rejects invalid signup information" do
+  it 'rejects invalid signup information' do
     previous_count = Teacher.count
     post :create, {
         params: {
             school: {
-                name: "invalid",
-                city: "Berkeley",
-                state: "CA",
-                website: "invalid.com"
+                name: 'invalid',
+                city: 'Berkeley',
+                state: 'CA',
+                website: 'invalid.com'
             },
             teacher: {
-                first_name: "",
-                last_name: "invalid",
-                email: "invalid@invalid.edu",
-                status: "invalid",
-                snap: "invalid"
+                first_name: '',
+                last_name: 'invalid',
+                email: 'invalid@invalid.edu',
+                status: 'invalid',
+                snap: 'invalid'
             }
         }
     }
@@ -26,22 +26,22 @@ RSpec.describe TeachersController, type: :controller do
     assert_match(/First name can't be blank/, flash[:alert])
   end
 
-  it "rejects invalid signup school information" do
+  it 'rejects invalid signup school information' do
     previous_count = Teacher.count
     post :create, {
         params: {
             school: {
-                name: "",
-                city: "Berkeley",
-                state: "CA",
-                website: "invalid.com"
+                name: '',
+                city: 'Berkeley',
+                state: 'CA',
+                website: 'invalid.com'
             },
             teacher: {
-                first_name: "invalid",
-                last_name: "invalid",
-                email: "invalid@invalid.edu",
-                status: "invalid",
-                snap: "invalid"
+                first_name: 'invalid',
+                last_name: 'invalid',
+                email: 'invalid@invalid.edu',
+                status: 'invalid',
+                snap: 'invalid'
             }
         }
     }
@@ -50,22 +50,22 @@ RSpec.describe TeachersController, type: :controller do
     assert_match(/Name can't be blank/, flash[:alert])
   end
 
-  it "accepts valid signup information" do
+  it 'accepts valid signup information' do
     previous_count = Teacher.count
     post :create, {
         params: {
             school: {
-                name: "valid_example",
-                city: "Berkeley",
-                state: "CA",
-                website: "valid_example.com"
+                name: 'valid_example',
+                city: 'Berkeley',
+                state: 'CA',
+                website: 'valid_example.com'
             },
             teacher: {
-                first_name: "valid_example",
-                last_name: "valid_example",
-                email: "valid_example@valid_example.edu",
+                first_name: 'valid_example',
+                last_name: 'valid_example',
+                email: 'valid_example@valid_example.edu',
                 status: 0,
-                snap: "valid_example"
+                snap: 'valid_example'
             }
         }
     }
