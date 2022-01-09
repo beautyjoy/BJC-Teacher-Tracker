@@ -61,12 +61,8 @@ Given(/the following teachers exist/) do |teachers_table|
     new_teacher = Teacher.create(teacher)
 
     # Create an association between teacher and school
-    if school_name != nil
-      school = School.find_by(name: school_name || "UC Berkeley")
-      if school != nil
-        new_teacher.school = school
-      end
-    end
+    school = School.find_by(name: school_name || "UC Berkeley")
+    new_teacher.school = school
     new_teacher.save!
   end
 end
