@@ -5,9 +5,9 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@rails/webpacker": "4.3.x",
-    "bootstrap": "^4.4.1",
-    "datatables.net-bs4": "^1.10.20",
-    "datatables.net-buttons-bs4": "^1.6.1",
+    "bootstrap": "^4.x.x",
+    "datatables.net-bs4": "^1.x.x",
+    "datatables.net-buttons-bs4": "^1.x.x",
     "jquery": "^3.5.0",
     "jquery-ujs": "^1.2.2",
     "popper.js": "^1.16.0",
