@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Original Source
 # https://gist.github.com/bbonamin/4b01be9ed5dd1bdaf909462ff4fdca95
 require 'capybara/rspec'

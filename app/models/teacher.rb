@@ -87,7 +87,7 @@ class Teacher < ApplicationRecord
     'I am teaching Middle School BJC.',
   ].freeze
 
-  attr_encrypted_options.merge!(key: Figaro.env.attr_encrypted_key!)
+  attr_encrypted_options[:key] = Figaro.env.attr_encrypted_key!
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
@@ -95,7 +95,7 @@ class Teacher < ApplicationRecord
   after_commit :update_school_counts
 
   def reset_validation_status
-    return if application_status_changed? or school_id_changed?
+    return if application_status_changed? || school_id_changed?
     if denied?
       pending!
     end

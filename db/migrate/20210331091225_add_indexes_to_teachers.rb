@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIndexesToTeachers < ActiveRecord::Migration[5.2]
   def change
     add_index :teachers, :school_id

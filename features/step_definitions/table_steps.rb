@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^I should see "(.*)" with "(.*)" in a table row$/) do |field_1, field_2|
   both = false
   page.find_all('tr').each do |table_row|
@@ -10,7 +12,7 @@ Given(/^I should see "(.*)" with "(.*)" in a table row$/) do |field_1, field_2|
         field_2_present = true
       end
     end
-    if field_1_present and field_2_present
+    if field_1_present && field_2_present
       both = true
       break
     end

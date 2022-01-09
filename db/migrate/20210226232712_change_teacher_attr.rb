@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeTeacherAttr < ActiveRecord::Migration[5.2]
   def self.up
     rename_column :teachers, :google_token, :encrypted_google_token

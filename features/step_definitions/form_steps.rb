@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 STATUS_FIELD = "What's your current status?"
 EDUCATION_FIELD = "What's your education level target?"
 

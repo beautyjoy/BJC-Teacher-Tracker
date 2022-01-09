@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cucumber/rspec/doubles'
 
 # Returns a OAuth2 token associated with email "testteacher@berkeley.edu"

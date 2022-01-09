@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailTemplatesController < ApplicationController
   before_action :require_admin
   def index

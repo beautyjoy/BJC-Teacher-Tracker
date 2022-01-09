@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
@@ -12,7 +14,7 @@ class TeachersController < ApplicationController
 
   def resend_welcome_email
     load_teacher
-    if @teacher.validated? or @is_admin
+    if @teacher.validated? || @is_admin
       TeacherMailer.welcome_email(@teacher).deliver_now
     end
   end
@@ -29,7 +31,7 @@ class TeachersController < ApplicationController
     @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher and defined?(current_user.id) and current_user.id == @teacher.id
+    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
       return
