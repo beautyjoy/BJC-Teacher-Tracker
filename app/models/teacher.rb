@@ -71,7 +71,7 @@ class Teacher < ApplicationRecord
     teals_teacher: 5,
     developer: 6,
     excite: 7,
-    middle_school: 8,
+    middle_school_bjc: 8,
   }
 
   STATUSES = [
@@ -117,7 +117,7 @@ class Teacher < ApplicationRecord
   def self.status_options
     display_order = [
       :csp_teacher,
-      :middle_school,
+      :middle_school_bjc,
       :non_csp_teacher,
       :mixed_class,
       :excite,

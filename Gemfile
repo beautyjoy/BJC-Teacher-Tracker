@@ -35,10 +35,8 @@ gem 'attr_encrypted', '~> 3.1.0'
 gem "sentry-ruby"
 gem "sentry-rails"
 
-# Mailer template
-gem "panoramic"
-
-gem 'liquid-rails', github: 'andreslemik/liquid-rails'
+# Render email templates
+gem 'liquid'
 
 group :development, :test do
   gem 'annotate'
