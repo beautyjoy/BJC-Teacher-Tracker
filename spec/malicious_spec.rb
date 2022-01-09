@@ -13,7 +13,7 @@ RSpec.describe TeachersController, type: :controller do
     }
     expect(response).to have_http_status(302)
     expect(response).to redirect_to(root_path)
-    expect(flash[:danger]).to eq "Only admins can access this page."
+    expect(flash[:danger]).to eq "You need to log in to access this."
   end
 
   it "rejects malicious admin signup attempt" do
