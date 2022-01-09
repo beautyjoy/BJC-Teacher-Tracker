@@ -70,11 +70,13 @@ class Teacher < ApplicationRecord
     other: 4,
     teals_teacher: 5,
     developer: 6,
-    excite: 7
+    excite: 7,
+    middle_school: 8,
   }
 
   STATUSES = [
     'I am teaching BJC as an AP CS Principles course.',
+    'I am teaching Middle School BJC.',
     'I am teaching BJC but not as an AP CS Principles course.',
     'I am using BJC as a resource, but not teaching with it.',
     'I am a TEALS volunteer, and am teaching the BJC curriculum.',
@@ -115,6 +117,7 @@ class Teacher < ApplicationRecord
   def self.status_options
     display_order = [
       :csp_teacher,
+      :middle_school,
       :non_csp_teacher,
       :mixed_class,
       :excite,
