@@ -29,7 +29,7 @@ Given(/the following schools exist/) do |schools_table|
     state: "CA",
     website: "https://www.berkeley.edu"
   }
-  schools_table.hashes.each do |school|
+  schools_table.symbolic_hashes.each do |school|
     schools_default.each do |key, value|
       school[key] = value if school[key].nil?
     end
@@ -51,19 +51,15 @@ Given(/the following teachers exist/) do |teachers_table|
     application_status: "Pending"
   }
 
-  teachers_table.hashes.each do |teacher|
+  teachers_table.symbolic_hashes.each do |teacher|
     teachers_default.each do |key, value|
       teacher[key] = teacher[key].presence || value
     end
 
-    # Extract extra parameter 'school'
-    school_name = teacher.delete("school")
-    new_teacher = Teacher.create(teacher)
-
-    # Create an association between teacher and school
+    school_name = teacher.delete(:school)
     school = School.find_by(name: school_name || "UC Berkeley")
-    new_teacher.school = school
-    new_teacher.save!
+    teacher[:school] = school
+    Teacher.create!(teacher)
   end
 end
 
