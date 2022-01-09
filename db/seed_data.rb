@@ -1,34 +1,14 @@
 module SeedData
   @welcome_email = %Q(
-    <p>
-      Hi {{teacher_first_name}},<br><br>
-      Thanks for teaching with BJC!<br>
-    </p>
-    <p>
-      <b>Accessing the teacher's guide:</b><br>
+    <p>Hi {{teacher_first_name}},<br /><br />Thanks for teaching with BJC!</p>
 
-      To view the teacher's {{"guide" | link_to("guide", "https://bjc.edc.org/teacher")}}, you will need the username: <code>bjcteacher</code> and the case-sensitive password: <code>{{bjc_password}}</code><br>
-      <br>
-      After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies. <br>
-      <br>
-      Please note that only the Teacher Guide <em>solutions</em> pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.
-    </p>
-    <p>
-      <b>Piazza:</b>
-      <br>
-      We have a teacher's forum on {{"Piazza" | link_to('Piazza', 'https://piazza.com' ) }}, where we will share updates and you can get your questions answered. If you have not been added to Piazza, you can add yourself using this email address. Go to our {{'BJC Teachers Forum' | link_to('BJC Teachers Forum', 'https://piazza.com/cs10k/other/bjcteachers') }}: https://piazza.com/cs10k/other/bjcteachers/home. Then enter the code <code>{{piazza_password}}</code> to get access. Please do not share this login information with anyone!
-      <br>
-    </p>
-    <p>
-      <b>Snap<em>!</em></b><br>
+    <p><strong>Accessing the teacher's guide:</strong><br />To view the <a title="teacher's guide" href="https://bjc.edc.org/teacher" target="_blank" rel="noopener">teacher's guide</a>, you will need the username: <code>bjcteacher</code> and the case-sensitive password: <code>{{bjc_password}}</code><br /><br />After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies. <br /><br />Please note that only the Teacher Guide <em>solutions</em> pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.</p>
 
-      We encourage you to check out the {{'Snap! Forum' | link_to('Snap! Forum', 'https://forum.snap.berkeley.edu') }}. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at {{"contact@snap.berkeley.edu" | mail_to('contact@snap.berkeley.edu')}}.
-    </p>
-    <p>
-      Thank you!
-      <br>
-      — The BJC Team
-    </p>
+    <p><strong>Piazza:</strong> <br />We have a teacher's forum on <a href="https://piazza.com" target="_blank" rel="noopener">Piazza</a>, where we will share updates and you can get your questions answered. If you have not been added to Piazza, you can add yourself using this email address. Go to our <a href="https://piazza.com/cs10k/other/bjcteachers" target="_blank" rel="noopener">BJC Teachers Forum</a>&nbsp;(<a href="https://piazza.com/cs10k/other/bjcteachers" target="_blank" rel="noopener">https://piazza.com/cs10k/other/bjcteachers/home</a>). Then enter the code <code>{{piazza_password}}</code> to get access. Please do not share this login information with anyone!</p>
+
+    <p><strong>Snap<em>!</em></strong><br />We encourage you to check out the <a href="https://forum.snap.berkeley.edu'" target="_blank" rel="noopener">Snap<em>!</em> Forum</a>. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at <a href="mailto:contact@snap.berkeley.edu" target="_blank" rel="noopener">contact@snap.berkeley.edu</a>.</p>
+
+    <p>Thank you! <br />&mdash; The BJC Team</p>
   )
   @teals_confirmation_email = %Q(
     <p>
@@ -94,8 +74,8 @@ module SeedData
         handler: "liquid",
         partial: false,
         format: "html",
-        title: "Form Submission Email",
-        subject: "Form Submission Email"
+        title: "Form Submission",
+        subject: "Form Submission"
       },
       {
         id: 4,

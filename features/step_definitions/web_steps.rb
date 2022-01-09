@@ -243,11 +243,7 @@ end
 
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
-  if current_path.respond_to? :should
-    current_path.should == path_to(page_name)
-  else
-    assert_equal path_to(page_name), current_path
-  end
+  expect(current_path).to eq path_to(page_name)
 end
 
 Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
@@ -256,11 +252,8 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   expected_params = {}
   expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')}
 
-  if actual_params.respond_to? :should
-    actual_params.should == expected_params
-  else
-    assert_equal expected_params, actual_params
-  end
+  expect(actual_params).to eq expected_params
+
 end
 
 Then /^show me the page$/ do
@@ -268,7 +261,7 @@ Then /^show me the page$/ do
 end
 
 Then /^(?:|I )should see a button named "([^"]*)"$/ do |text|
-  page.should have_button(text)
+  expect(page).to have_button(text)
 end
 
 Given /I seed data/ do

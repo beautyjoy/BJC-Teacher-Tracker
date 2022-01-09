@@ -1,3 +1,11 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
 <%= render 'teacher_info', teacher: @teacher %>
+
+<div class='row'>
+  <div class='col-12'>
+    <hr>
+    <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id },
+        class: "btn btn-secondary" %>
+  </div>
+</div>
