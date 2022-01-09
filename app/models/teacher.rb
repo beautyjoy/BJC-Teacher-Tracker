@@ -37,12 +37,6 @@
 #  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                (status)
 #
-
-#  index_teachers_on_email                 (email) UNIQUE
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_status                (status)
-#
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
 
@@ -55,7 +49,7 @@ class Teacher < ApplicationRecord
 
   belongs_to :school, counter_cache: true
 
-  # Non-admin teachers who have not been denied nor accepted
+  # # Non-admin teachers who have not been denied nor accepted
   scope :unvalidated, -> { where('application_status=? AND admin=?', application_statuses[:pending], 'false') }
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
