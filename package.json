@@ -7,7 +7,7 @@
     "@rails/webpacker": "4.3.x",
     "bootstrap": "^4.x.x",
     "datatables.net-bs4": "^1.x.x",
-    "datatables.net-buttons-bs4": "^1.x.x",
+    "datatables.net-buttons-bs4": "^2.x.x",
     "jquery": "^3.5.0",
     "jquery-ujs": "^1.2.3",
     "popper.js": "^1.16.0",
