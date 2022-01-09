@@ -6,6 +6,7 @@ jobs:
   specs:
     name: Tests
     runs-on: ubuntu-latest
+    continue-on-error: true
     services:
       postgres:
         image: postgres:13
@@ -41,3 +42,7 @@ jobs:
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - run: bundle exec ${{ matrix.suite }}
+      - uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/coverage.json

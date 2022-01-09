@@ -35,11 +35,8 @@ gem 'attr_encrypted', '~> 3.1.0'
 gem "sentry-ruby"
 gem "sentry-rails"
 
-# Mailer template
-gem "panoramic"
-
-# Sanitizing email templates
-gem 'liquid-rails'
+# Render email templates
+gem 'liquid'
 
 group :development, :test do
   gem 'annotate'
@@ -54,12 +51,22 @@ group :development, :test do
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.0'
 
-  # TODO: Setup Linters
-  # rubocop, rubcop-rspec, pronto, etc
-
   # Accessibility Testing
   gem 'axe-core-rspec'
   gem 'axe-core-cucumber'
+end
+
+group :linters, :development, :test do
+  gem 'pronto', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'haml-lint', require: false
+  gem 'pronto-flay', require: false
+  gem 'pronto-haml', require: false
+  gem 'pronto-rubocop', require: false
+  gem 'rubocop-faker', require: false
 end
 
 group :development do
@@ -76,8 +83,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-csv', require: false
   gem 'simplecov-console', require: false
+  gem 'simplecov_json_formatter', require: false
   gem 'cucumber-rails', require: false
-  gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'metric_fu'

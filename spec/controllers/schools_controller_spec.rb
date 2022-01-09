@@ -10,10 +10,10 @@ RSpec.describe SchoolsController, type: :controller do
     end
 
     it "allows admin to create" do
-        ApplicationController.any_instance.stub(:require_admin).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
         expect(School.find_by(name: @create_school_name)).to be_nil
         post :create, {
-            params: { 
+            params: {
                 school: {
                     name: @create_school_name,
                     city: "Berkeley",
@@ -23,10 +23,10 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).not_to be_nil
-        assert_match(@success_flash_alert, flash[:success])
+        expect(@success_flash_alert).to match flash[:success]
     end
 
-    it "denies teacher to create" do 
+    it "denies teacher to create" do
         expect(School.find_by(name: @create_school_name)).to be_nil
         post :create, {
             params: {
@@ -42,7 +42,7 @@ RSpec.describe SchoolsController, type: :controller do
     end
 
     it "requires all fields filled" do
-        ApplicationController.any_instance.stub(:require_admin).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
         expect(School.find_by(name: @create_school_name)).to be_nil
         post :create, {
             params: {
@@ -54,7 +54,7 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).to be_nil
-        assert_match(@fail_flash_alert, flash[:alert])
+        expect(@fail_flash_alert).to match flash[:alert]
 
         post :create, {
             params: {
@@ -66,7 +66,7 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).to be_nil
-        assert_match(@fail_flash_alert, flash[:alert])
+        expect(@fail_flash_alert).to match flash[:alert]
 
         post :create, {
             params: {
@@ -78,13 +78,13 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).to be_nil
-        assert_match(@fail_flash_alert, flash[:alert])
+        expect(@fail_flash_alert).to match flash[:alert]
     end
 
     it "requires proper inputs for fields" do
-        ApplicationController.any_instance.stub(:require_admin).and_return(true)
+        allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
         expect(School.find_by(name: @create_school_name)).to be_nil
-        #Incorrect state (not chosen from enum list)
+        # Incorrect state (not chosen from enum list)
         post :create, {
             params: {
                 school: {
@@ -96,7 +96,7 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).to be_nil
-        assert_match(@fail_flash_alert, flash[:alert])
+        expect(@fail_flash_alert).to match flash[:alert]
 
         post :create, {
             params: {
@@ -109,6 +109,6 @@ RSpec.describe SchoolsController, type: :controller do
             }
         }
         expect(School.find_by(name: @create_school_name)).to be_nil
-        assert_match(@fail_flash_alert, flash[:alert])
+        expect(@fail_flash_alert).to match flash[:alert]
     end
 end
