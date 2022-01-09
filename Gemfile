@@ -49,11 +49,14 @@ group :development, :test do
 
   # Intercept and view emails in a browser
   gem "letter_opener"
-  gem "letter_opener_web", "~> 1.0"
+  gem "letter_opener_web", "~> 2"
 
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem "web-console"
 end
 
 group :linters, :development, :test do
@@ -67,11 +70,6 @@ group :linters, :development, :test do
   gem "pronto-haml", require: false
   gem "pronto-rubocop", require: false
   gem "rubocop-faker", require: false
-end
-
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem "web-console"
 end
 
 # setup Cucumber, RSpec, Guard support
