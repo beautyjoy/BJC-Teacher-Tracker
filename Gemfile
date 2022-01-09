@@ -38,7 +38,6 @@ gem "sentry-rails"
 # Mailer template
 gem "panoramic"
 
-# Sanitizing email templates
 gem 'liquid-rails', github: 'andreslemik/liquid-rails'
 
 group :development, :test do
@@ -54,12 +53,22 @@ group :development, :test do
   gem 'letter_opener'
   gem 'letter_opener_web', '~> 1.0'
 
-  # TODO: Setup Linters
-  # rubocop, rubcop-rspec, pronto, etc
-
   # Accessibility Testing
   gem 'axe-core-rspec'
   gem 'axe-core-cucumber'
+end
+
+group :linters, :development, :test do
+  gem 'pronto', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'haml-lint', require: false
+  gem 'pronto-flay', require: false
+  gem 'pronto-haml', require: false
+  gem 'pronto-rubocop', require: false
+  gem 'rubocop-faker', require: false
 end
 
 group :development do
