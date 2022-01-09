@@ -63,7 +63,7 @@ class TeacherMailer < ApplicationMailer
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
       reason: @reason
-    }
+    }.with_indifferent_access
   end
 
   def email_template
