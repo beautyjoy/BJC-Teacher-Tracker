@@ -884,10 +884,10 @@
   resolved "https://registry.npmjs.org/@csstools/convert-colors/-/convert-colors-1.4.0.tgz"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@fortawesome/fontawesome-free@^5.15.1":
-  version "5.15.3"
-  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.3.tgz"
-  integrity sha512-rFnSUN/QOtnOAgqFRooTA3H57JLDm0QEG/jPdk+tLQNL/eWd+Aok8g3qCI+Q1xuDPWpGW/i9JySpJVsq8Q0s9w==
+"@fortawesome/fontawesome-free@^5.x":
+  version "5.15.4"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz#ecda5712b61ac852c760d8b3c79c96adca5554e5"
+  integrity sha512-eYm8vijH/hpzr/6/1CJ/V/Eb1xQFW2nnUKArb3z+yUWv7HTwj6M7SP957oMjfZjAHU6qpoNc2wQvIxBLWYa/Jg==
 
 "@gar/promisify@^1.0.1":
   version "1.1.2"
@@ -909,6 +909,11 @@
   dependencies:
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
+
+"@rails/ujs@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.0.1.tgz#cb515d52c85be107908dd00822042f04e52cdea7"
+  integrity sha512-ZUkgsbz5KFLfBwjIQ2D/kvyq+2w5BuNnkUJf3940VVJxov9GECu6n2BSXUTmyNAx+R6JQdibzXBuR7nz3crZYw==
 
 "@rails/webpacker@4.3.x":
   version "4.3.0"
@@ -1570,10 +1575,10 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-bootstrap@^4.4.1:
-  version "4.6.0"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-4.6.0.tgz"
-  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
+bootstrap@^4.x.x:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.1.tgz#bc25380c2c14192374e8dec07cf01b2742d222a2"
+  integrity sha512-0dj+VgI9Ecom+rvvpNZ4MUZJz8dcX7WCX+eTID9+/8HgOkv3dsRzi8BGeZJCQU6flWQVYxwTQnEZFrmJSEO7og==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -2490,35 +2495,35 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-datatables.net-bs4@^1.10.15, datatables.net-bs4@^1.10.20:
-  version "1.10.24"
-  resolved "https://registry.npmjs.org/datatables.net-bs4/-/datatables.net-bs4-1.10.24.tgz"
-  integrity sha512-NgjQMqCo5pg49c5TWsc78UYhcvWPAFkZ7qH4yKAb1e0eLNCAo+TLeaIsDiAPpcWwP7xpjdAmZIIbXDpspNTCkg==
+datatables.net-bs4@>=1.11.3, datatables.net-bs4@^1.x.x:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.11.3.tgz#04817c5d9457f1b9807a1330f12c37a541596328"
+  integrity sha512-UPT2F1nvZZzKJSSHb+3+bTeQy1ULLMT1BexBHCkh5PhMnAZNPbTEZD+6To1RCBfUF1rtPwIJTwJ+Jjjxy86xRw==
   dependencies:
-    datatables.net "1.10.24"
+    datatables.net ">=1.10.25"
     jquery ">=1.7"
 
-datatables.net-buttons-bs4@^1.6.1:
-  version "1.7.0"
-  resolved "https://registry.npmjs.org/datatables.net-buttons-bs4/-/datatables.net-buttons-bs4-1.7.0.tgz"
-  integrity sha512-ZqZOB3nwXiV8vIjVLATUMUvp13eOC46cR9C/Ib1MZtxXMck8HKrspPZZ00BJrS/lLAvMCj0M7qbzug7AJuGznQ==
+datatables.net-buttons-bs4@^2.x.x:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/datatables.net-buttons-bs4/-/datatables.net-buttons-bs4-2.1.1.tgz#19a8279466f3c9e851f44b4b14de8c2c4245e24a"
+  integrity sha512-o2MrkGzg2IqZ5j7kXOqm4ukpwAyxqAB2ugTTnmjn7VXQwNbERrzmeA05pXcqw80fBUx5/Jn4arczXoInNQuBTw==
   dependencies:
-    datatables.net-bs4 "^1.10.15"
-    datatables.net-buttons "1.7.0"
+    datatables.net-bs4 ">=1.11.3"
+    datatables.net-buttons ">=2.0.1"
     jquery ">=1.7"
 
-datatables.net-buttons@1.7.0:
-  version "1.7.0"
-  resolved "https://registry.npmjs.org/datatables.net-buttons/-/datatables.net-buttons-1.7.0.tgz"
-  integrity sha512-3bWeKBO+lR+aA/KTlJErWIYMrDD54eGbtd7todgLlRoMezQFZVpCyXzOsMaC611D+E4uvOgPnNrLuh3GlmMcRg==
+datatables.net-buttons@>=2.0.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-2.1.1.tgz#5969913415aac9013ed269dbb61d7f732399f06c"
+  integrity sha512-MLHKIOlwWfZ1I6vI+w7B0w7szWDkuelTVnwuNXGhh0nMV2hP9nL7t0zgfxPraOmbVXAmJnHQa4o7pd1PfKbJ3g==
   dependencies:
-    datatables.net "^1.10.15"
+    datatables.net ">=1.11.3"
     jquery ">=1.7"
 
-datatables.net@1.10.24, datatables.net@^1.10.15:
-  version "1.10.24"
-  resolved "https://registry.npmjs.org/datatables.net/-/datatables.net-1.10.24.tgz"
-  integrity sha512-CwXixvOdinvBCLXvcTloDinWiEM7Geaz+GwyjPrZL+MXIGPcLv4Op1bbWn8ErsI1JWMIWC8Cuf1rnDU2RrFV5w==
+datatables.net@>=1.10.25, datatables.net@>=1.11.3:
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.11.3.tgz#80e691036efcd62467558ee64c07dd566cb761b4"
+  integrity sha512-VMj5qEaTebpNurySkM6jy6sGpl+s6onPK8xJhYr296R/vUBnz1+id16NVqNf9z5aR076OGcpGHCuiTuy4E05oQ==
   dependencies:
     jquery ">=1.7"
 
@@ -4135,14 +4140,12 @@ jest-worker@^25.4.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jquery-ujs@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/jquery-ujs/-/jquery-ujs-1.2.2.tgz"
-  integrity sha1-ao7xAg5rbdo4W5CkvdwSjCHFY5c=
-  dependencies:
-    jquery ">=1.8.0"
+jquery-ujs@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.3.tgz#dcac6026ab7268e5ee41faf9d31c997cd4ddd603"
+  integrity sha512-59wvfx5vcCTHMeQT1/OwFiAj+UffLIwjRIoXdpO7Z7BCFGepzq9T9oLVeoItjTqjoXfUrHJvV7QU6pUR+UzOoA==
 
-jquery@>=1.7, jquery@>=1.8.0, jquery@^3.5.0:
+jquery@>=1.7, jquery@^3.5.0:
   version "3.6.0"
   resolved "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
@@ -6097,11 +6100,6 @@ querystringify@^2.1.1:
   resolved "https://registry.npmjs.org/querystringify/-/querystringify-2.2.0.tgz"
   integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
-rails-ujs@^5.2.4-1:
-  version "5.2.6"
-  resolved "https://registry.npmjs.org/rails-ujs/-/rails-ujs-5.2.6.tgz"
-  integrity sha512-JpUq5RlA4p5XE69dz0ZOIkn1xXQn9H8VDXQJWuVPRtFBOFylWFriaDVpxFmdQuARPo4bm2l67uIMMBpX6KNY+g==
-
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/randombytes/-/randombytes-2.1.0.tgz"
@@ -7159,10 +7157,10 @@ timsort@^0.3.0:
   resolved "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
 
-tinymce@^5.10:
-  version "5.10.0"
-  resolved "https://registry.npmjs.org/tinymce/-/tinymce-5.10.0.tgz"
-  integrity sha512-SaqBK8GtTKYSsTfhKdN0+NrZRgmVWO+j3fvgzLjt0t/g0osNzRH5os8icm2Rv5HvaeTd4TpxetUuLE+R9yg/yg==
+tinymce@^5.x:
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.10.2.tgz#cf1ff01025909be26c64348509e6de8e70d58e1d"
+  integrity sha512-5QhnZ6c8F28fYucLLc00MM37fZoAZ4g7QCYzwIl38i5TwJR5xGqzOv6YMideyLM4tytCzLCRwJoQen2LI66p5A==
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"

@@ -11,10 +11,8 @@
             <%= link_to name, url, class: "nav-link" %>
           </li>
         <% end %>
-        <li class='nav-item'>
-          <a class='nav-link' href='/logout' data-method='delete'>Logout</a>
-        </li>
-      <% elsif @is_teacher %>
+      <% end %>
+      <% if current_user %>
         <li class='nav-item'>
           <a class='nav-link' href='/logout' data-method='delete'>Logout</a>
         </li>
