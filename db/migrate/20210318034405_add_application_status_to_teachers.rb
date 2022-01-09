@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class AddApplicationStatusToTeachers < ActiveRecord::Migration[5.2]
   def change
     add_column :teachers, :application_status, :string, default: 'Pending'
     Teacher.all.each do |t|
-      if t.validated and not t.denied
+      if t.validated && (not t.denied)
         t.update! application_status: 'Validated'
-      elsif not t.validated and t.denied
+      elsif (not t.validated) && t.denied
         t.update! application_status: 'Denied'
       else
         t.update! application_status: 'Pending'

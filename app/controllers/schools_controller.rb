@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchoolsController < ApplicationController
   before_action :require_admin
   def create

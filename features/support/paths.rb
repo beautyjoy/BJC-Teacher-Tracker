@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TL;DR: YOU SHOULD DELETE THIS FILE
 #
 # This file is used by web_steps.rb, which you should also delete

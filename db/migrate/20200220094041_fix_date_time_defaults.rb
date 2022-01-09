@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixDateTimeDefaults < ActiveRecord::Migration[5.2]
   def change
     change_column_default :admins, :created_at, -> { 'NOW()' }

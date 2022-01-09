@@ -31,7 +31,7 @@ class TeacherMailer < ApplicationMailer
     @teacher = teacher
     set_body
     # Only send if teacher is a TEALS volunteer
-    if !@teacher.status.nil? and @teacher.teals_volunteer?
+    if !@teacher.status.nil? && @teacher.teals_volunteer?
       mail to: TEALS_CONTACT_EMAIL,
            cc: CONTACT_EMAIL,
            subject: email_template.subject

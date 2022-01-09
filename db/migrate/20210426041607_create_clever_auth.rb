@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCleverAuth < ActiveRecord::Migration[5.2]
   def change
     add_column :teachers, :clever_token, :string

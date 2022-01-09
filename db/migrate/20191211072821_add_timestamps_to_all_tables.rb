@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTimestampsToAllTables < ActiveRecord::Migration
   def change
     add_timestamps :schools, default: DateTime.now
