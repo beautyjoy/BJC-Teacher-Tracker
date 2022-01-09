@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
@@ -11,6 +13,5 @@ RSpec.describe SessionsController, type: :controller do
       expect(session[:logged_in]).to be false
       expect(session[:user_id]).to be_nil
     end
-
   end
 end

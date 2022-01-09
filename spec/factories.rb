@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # This will guess the User class
 FactoryBot.define do
   factory :school do
     name { "Basic School" }
-    city { "Berkeley"}
+    city { "Berkeley" }
     state { "CA" }
     website { "https://www.school.edu" }
   end
@@ -11,7 +13,7 @@ FactoryBot.define do
     first_name { "Teacher" }
     last_name  { "User" }
     snap { "teacher" }
-    email { "teacher@example.edu"}
+    email { "teacher@example.edu" }
     status { 0 }
     application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
@@ -21,6 +23,6 @@ FactoryBot.define do
   factory :admin do
     first_name { "Admin" }
     last_name  { "User" }
-    email { "admin@berkeley.edu"}
+    email { "admin@berkeley.edu" }
   end
 end

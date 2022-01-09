@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddMoreInfoToTeachers < ActiveRecord::Migration[5.2]
   def change
     add_column :teachers, :more_info, :string

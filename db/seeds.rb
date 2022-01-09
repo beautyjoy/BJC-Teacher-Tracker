@@ -1,4 +1,6 @@
-require_relative 'seed_data'
+# frozen_string_literal: true
+
+require_relative "seed_data"
 
 SeedData.emails.each { |email| EmailTemplate.find_or_create_by(email) }
 

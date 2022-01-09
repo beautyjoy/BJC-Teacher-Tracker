@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 OTHER = 4
 Teacher.all.find_in_batches do |group|
   group.each do |teacher|

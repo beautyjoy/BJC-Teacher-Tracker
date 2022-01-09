@@ -1,26 +1,28 @@
+# frozen_string_literal: true
+
 # Original Source
 # https://gist.github.com/bbonamin/4b01be9ed5dd1bdaf909462ff4fdca95
-require 'capybara/rspec'
-require 'selenium/webdriver'
-require 'cucumber'
+require "capybara/rspec"
+require "selenium/webdriver"
+require "cucumber"
 
 
 ### Google Chrome
 
 chrome_options = Selenium::WebDriver::Chrome::Options.new
 chrome_options.add_preference(:download, prompt_for_download: false,
-                                  default_directory: '/tmp/downloads')
+                                  default_directory: "/tmp/downloads")
 
-chrome_options.add_preference(:browser, set_download_behavior: { behavior: 'allow' })
+chrome_options.add_preference(:browser, set_download_behavior: { behavior: "allow" })
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
 end
 
 Capybara.register_driver :headless_chrome do |app|
-  chrome_options.add_argument('--headless')
-  chrome_options.add_argument('--disable-gpu')
-  chrome_options.add_argument('--window-size=1680,1050')
+  chrome_options.add_argument("--headless")
+  chrome_options.add_argument("--disable-gpu")
+  chrome_options.add_argument("--window-size=1680,1050")
 
   driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
 
@@ -28,13 +30,12 @@ Capybara.register_driver :headless_chrome do |app|
   ### https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
   bridge = driver.browser.send(:bridge)
 
-  path = '/session/:session_id/chromium/send_command'
-  path[':session_id'] = bridge.session_id
+  path = "/session/#{bridge.session_id}/chromium/send_command"
 
-  bridge.http.call(:post, path, cmd: 'Page.setDownloadBehavior',
+  bridge.http.call(:post, path, cmd: "Page.setDownloadBehavior",
                                 params: {
-                                  behavior: 'allow',
-                                  downloadPath: '/tmp/downloads'
+                                  behavior: "allow",
+                                  downloadPath: "/tmp/downloads"
                                 })
   ###
 
@@ -42,8 +43,8 @@ Capybara.register_driver :headless_chrome do |app|
 end
 
 #### Safari (macOS only.)
-#This is what we use to test the Safari release channel.
-#You will have to install Safari Technology Preview (STP) from Apple.
+# This is what we use to test the Safari release channel.
+# You will have to install Safari Technology Preview (STP) from Apple.
 
 Capybara.register_driver :safari do |app|
   # see standard properties here: https://www.w3.org/TR/webdriver/#capabilities
@@ -56,7 +57,7 @@ Capybara.register_driver :safari do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :safari,
-    driver_path: '/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver',
+    driver_path: "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver",
     desired_capabilities: options
   )
 end
@@ -75,11 +76,11 @@ Capybara.register_driver :headless_firefox do |app|
     options: options
 end
 
-if ENV['DRIVER'].present?
+if ENV["DRIVER"].present?
   puts "FOUND DRIVER #{ENV['DRIVER'].parameterize.underscore.to_sym}"
   # be nice and accept 'Headless Chrome', spaces, etc.
-  Capybara.default_driver = ENV['DRIVER'].parameterize.underscore.to_sym
-elsif ENV['GUI'].present?
+  Capybara.default_driver = ENV["DRIVER"].parameterize.underscore.to_sym
+elsif ENV["GUI"].present?
   Capybara.default_driver = :chrome
 else
   Capybara.default_driver = :headless_chrome

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeEmailUnique < ActiveRecord::Migration[5.2]
   def up
     add_index :teachers, :email, unique: true

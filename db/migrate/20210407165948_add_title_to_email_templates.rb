@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddTitleToEmailTemplates < ActiveRecord::Migration[5.2]
   def change
     add_column :email_templates, :title, :string

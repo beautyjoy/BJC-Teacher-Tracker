@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SchoolsController < ApplicationController
   before_action :require_admin
   def create
@@ -19,8 +21,7 @@ class SchoolsController < ApplicationController
   end
 
   private
-
-  def school_params
-    params.require(:school).permit(:name, :city, :state, :website)
-  end
+    def school_params
+      params.require(:school).permit(:name, :city, :state, :website)
+    end
 end

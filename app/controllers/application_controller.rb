@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :set_sentry_user
   before_action :check_teacher_admin
@@ -18,14 +20,14 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      flash[:danger] = 'You need to log in to access this.'
+      flash[:danger] = "You need to log in to access this."
       redirect_to root_path
     end
   end
 
   def require_admin
     unless is_admin?
-      flash[:danger] = 'Only admins can access this page.'
+      flash[:danger] = "Only admins can access this page."
       redirect_to root_path
     end
   end
@@ -37,13 +39,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def check_teacher_admin
+      is_admin?
+      is_teacher?
+    end
 
-  def check_teacher_admin
-    is_admin?
-    is_teacher?
-  end
-
-  def set_sentry_user
-    Sentry.set_user(id: session[:user_id]) # or anything else in session
-  end
+    def set_sentry_user
+      Sentry.set_user(id: session[:user_id]) # or anything else in session
+    end
 end
