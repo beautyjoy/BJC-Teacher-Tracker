@@ -36,9 +36,9 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
-      - uses: codecov/codecov-action@v2
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - run: bundle exec ${{ matrix.suite }}
+      - uses: codecov/codecov-action@v2
