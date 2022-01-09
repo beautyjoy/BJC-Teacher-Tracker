@@ -97,6 +97,15 @@ module SeedData
     ]
   end
 
+  def self.create_schools
+    School.find_or_create_by(
+      name: "UC Berkeley",
+      city: "Berkeley",
+      state: "CA",
+      website: "https://bjc.berkeley.edu"
+    )
+  end
+
   def self.teachers
     [
         {
@@ -105,7 +114,8 @@ module SeedData
             email: "ball@berkeley.edu",
             admin: true,
             status: 0,
-            application_status: "Validated"
+            application_status: "Validated",
+            school: School.find_by(name: "UC Berkeley")
         },
         {
             first_name: "Lauren",
@@ -113,7 +123,8 @@ module SeedData
             email: "lmock@berkeley.edu",
             admin: true,
             status: 0,
-            application_status: "Validated"
+            application_status: "Validated",
+            school: School.find_by(name: "UC Berkeley")
         }
     ]
   end

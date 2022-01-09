@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.5"
 
-gem "rails", "~> 5.2"
+gem "rails", "~> 6"
 
 # Production app server
 gem "puma", "~> 5"
@@ -14,6 +14,9 @@ gem "pg", "~> 1.0"
 
 # Front-end Assets
 gem "webpacker", "~> 4"
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", ">= 1.4.4", require: false
 
 # Login via 3rd party services.
 gem "omniauth", "~> 1.0"
@@ -38,10 +41,8 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
-group :development, :test do
+group :development do
   gem "annotate"
-  gem "byebug"
-  gem "pry"
   gem "guard"
   gem "guard-rspec", require: false
   gem "guard-cucumber"
@@ -49,11 +50,20 @@ group :development, :test do
 
   # Intercept and view emails in a browser
   gem "letter_opener"
-  gem "letter_opener_web", "~> 1.0"
+  gem "letter_opener_web", "~> 2"
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem "web-console"
 
-  # Accessibility Testing
-  gem "axe-core-rspec"
-  gem "axe-core-cucumber"
+  gem "rack-mini-profiler", "~> 2.0"
+  gem "listen", "~> 3.3"
+end
+
+group :development, :test do
+  gem "byebug"
+  gem "pry"
+  gem "pry-byebug", "~> 3.9"
+
+  gem "spring"
 end
 
 group :linters, :development, :test do
@@ -69,14 +79,6 @@ group :linters, :development, :test do
   gem "rubocop-faker", require: false
 end
 
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem "web-console"
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "spring"
-end
-
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem "rspec-rails"
@@ -89,4 +91,9 @@ group :test do
   gem "factory_bot_rails"
   gem "metric_fu"
   gem "selenium-webdriver"
+
+  gem "webdrivers"
+  # Accessibility Testing
+  gem "axe-core-rspec"
+  gem "axe-core-cucumber"
 end

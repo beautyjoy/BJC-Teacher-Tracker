@@ -4,15 +4,16 @@ require "rails_helper"
 
 RSpec.describe TeachersController, type: :controller do
   fixtures :all
+
   it "does not allow non-admin to accept a user" do
-    teacher = Teacher.create(first_name: "Test", last_name: "User", email: "steven.yu@berkeley.edu", status: 0, snap: "user")
-    expect(teacher.application_status).to eq("pending")
     post :validate, {
         params: {
-            id: teacher.id
+            id: 1
         }
     }
-    expect(Teacher.find_by(first_name: "Test", last_name: "User").application_status).to eq("pending")
+    expect(response).to have_http_status(302)
+    expect(response).to redirect_to(root_path)
+    expect(flash[:danger]).to eq "You need to log in to access this."
   end
 
   it "rejects malicious admin signup attempt" do
