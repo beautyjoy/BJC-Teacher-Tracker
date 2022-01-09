@@ -1,16 +1,16 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe MainController, type: :controller do
   fixtures :all
-  describe "#index" do
+  describe '#index' do
     subject { get :index }
 
-    it "should get to root" do
+    it 'should get to root' do
       expect(subject).to redirect_to(new_teacher_path)
     end
   end
 
-  describe "dashboard" do
+  describe 'dashboard' do
     before(:each) do
       @controller_stub = MainController.new
       @controller_stub.dashboard

@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def require_edit_permission
     unless current_user.id == params[:id].to_i || is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: "You can only edit your own information"
+      redirect_to edit_teacher_path(current_user.id), alert: 'You can only edit your own information'
     end
   end
 

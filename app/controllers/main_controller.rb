@@ -4,7 +4,7 @@ class MainController < ApplicationController
     if is_admin?
       redirect_to dashboard_path
     elsif is_teacher?
-      redirect_to edit_teacher_path(current_user.id), notice: "You can edit your information"
+      redirect_to edit_teacher_path(current_user.id), notice: 'You can edit your information'
     else
       redirect_to new_teacher_path
     end

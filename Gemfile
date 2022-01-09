@@ -32,8 +32,8 @@ gem 'figaro'
 gem 'attr_encrypted', '~> 3.1.0'
 
 # Error Tracking
-gem "sentry-ruby"
-gem "sentry-rails"
+gem 'sentry-ruby'
+gem 'sentry-rails'
 
 # Render email templates
 gem 'liquid'
