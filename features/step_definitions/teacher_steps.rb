@@ -23,12 +23,15 @@ Given(/I have a teacher (.*) email/) do |login|
 end
 
 Given(/the following schools exist/) do |schools_table|
-  schools_default = { name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu" }
-  schools_table.hashes.each do |school|
+  schools_default = {
+    name: "UC Berkeley",
+    city: "Berkeley",
+    state: "CA",
+    website: "https://www.berkeley.edu"
+  }
+  schools_table.symbolic_hashes.each do |school|
     schools_default.each do |key, value|
-      if school[key] == nil
-        school[key] = value
-      end
+      school[key] = value if school[key].nil?
     end
     School.create!(school)
   end
@@ -48,23 +51,15 @@ Given(/the following teachers exist/) do |teachers_table|
     application_status: "Pending"
   }
 
-  teachers_table.hashes.each do |teacher|
+  teachers_table.symbolic_hashes.each do |teacher|
     teachers_default.each do |key, value|
       teacher[key] = teacher[key].presence || value
     end
 
-    # Extract extra parameter 'school'
-    school_name = teacher.delete("school")
-    new_teacher = Teacher.create!(teacher)
-
-    # Create an association between teacher and school
-    if school_name != nil
-      school = School.find_by(name: school_name)
-      if school != nil
-        new_teacher.school = school
-        new_teacher.save!
-      end
-    end
+    school_name = teacher.delete(:school)
+    school = School.find_by(name: school_name || "UC Berkeley")
+    teacher[:school] = school
+    Teacher.create!(teacher)
   end
 end
 

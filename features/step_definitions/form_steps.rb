@@ -4,8 +4,8 @@ STATUS_FIELD = "What's your current status?"
 EDUCATION_FIELD = "What's your education level target?"
 
 Given(/a valid teacher exists/) do
-  create(:teacher)
-  create(:school)
+  school = create(:school)
+  create(:teacher, school: school)
 end
 
 And(/^"(.*)" is not in the database$/) do |email|

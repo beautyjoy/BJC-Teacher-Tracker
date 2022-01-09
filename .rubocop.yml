@@ -14,6 +14,7 @@ AllCops:
     - '**/templates/**/*'
     - '**/vendor/**/*'
     - '**/node_modules/**/*'
+    - 'bin/*'
 
 Performance:
   Exclude:

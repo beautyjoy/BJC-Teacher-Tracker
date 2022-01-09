@@ -4,6 +4,7 @@ Feature: access control for new users or non-admin users
   I cannot access pages for admins
 
 Background: Has an Admin and a teacher in DB
+  Given I seed data
   Given the following teachers exist:
   | first_name | last_name | admin | email                       |
   | Alice      | Admin     | true   | testadminuser@berkeley.edu |
