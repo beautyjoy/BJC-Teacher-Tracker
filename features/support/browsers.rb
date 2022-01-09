@@ -30,8 +30,7 @@ Capybara.register_driver :headless_chrome do |app|
   ### https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
   bridge = driver.browser.send(:bridge)
 
-  path = "/session/:session_id/chromium/send_command"
-  path[":session_id"] = bridge.session_id
+  path = "/session/#{bridge.session_id}/chromium/send_command"
 
   bridge.http.call(:post, path, cmd: "Page.setDownloadBehavior",
                                 params: {
