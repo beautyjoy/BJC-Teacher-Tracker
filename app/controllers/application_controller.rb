@@ -20,21 +20,21 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      flash[:danger] = 'You need to log in to access this.'
+      flash[:danger] = "You need to log in to access this."
       redirect_to root_path
     end
   end
 
   def require_admin
     unless is_admin?
-      flash[:danger] = 'Only admins can access this page.'
+      flash[:danger] = "Only admins can access this page."
       redirect_to root_path
     end
   end
 
   def require_edit_permission
     unless current_user.id == params[:id].to_i || is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: 'You can only edit your own information'
+      redirect_to edit_teacher_path(current_user.id), alert: "You can only edit your own information"
     end
   end
 

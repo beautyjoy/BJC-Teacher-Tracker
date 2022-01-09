@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'simplecov'
-require 'simplecov-console'
-require 'simplecov_json_formatter'
+require "simplecov"
+require "simplecov-console"
+require "simplecov_json_formatter"
 
-SimpleCov.start 'rails' do
-  command_name 'cucumber'
+SimpleCov.start "rails" do
+  command_name "cucumber"
   enable_coverage :branch
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
@@ -21,9 +21,9 @@ end
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'cucumber/rails'
+require "cucumber/rails"
 
-require 'axe-cucumber-steps'
+require "axe-cucumber-steps"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
@@ -52,7 +52,7 @@ ActionController::Base.allow_rescue = false
 begin
   DatabaseCleaner.strategy = :truncation
 rescue NameError
-  raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
+  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

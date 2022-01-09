@@ -52,47 +52,47 @@ module SeedData
       {
         id: 1,
         body: @welcome_email,
-        path: 'teacher_mailer/welcome_email',
+        path: "teacher_mailer/welcome_email",
         locale: nil,
-        handler: 'liquid',
+        handler: "liquid",
         partial: false,
-        format: 'html',
-        title: 'Welcome Email',
-        subject: 'Welcome to The Beauty and Joy of Computing!'
+        format: "html",
+        title: "Welcome Email",
+        subject: "Welcome to The Beauty and Joy of Computing!"
       },
 
       {
         id: 2,
         body: @teals_confirmation_email,
-        path: 'teacher_mailer/teals_confirmation_email',
+        path: "teacher_mailer/teals_confirmation_email",
         locale: nil,
-        handler: 'liquid',
+        handler: "liquid",
         partial: false,
-        format: 'html',
-        title: 'TEALS Confirmation Email',
-        subject: 'TEALS Confirmation Email'
+        format: "html",
+        title: "TEALS Confirmation Email",
+        subject: "TEALS Confirmation Email"
       },
       {
         id: 3,
         body: @form_submission,
-        path: 'teacher_mailer/form_submission',
+        path: "teacher_mailer/form_submission",
         locale: nil,
-        handler: 'liquid',
+        handler: "liquid",
         partial: false,
-        format: 'html',
-        title: 'Form Submission',
-        subject: 'Form Submission'
+        format: "html",
+        title: "Form Submission",
+        subject: "Form Submission"
       },
       {
         id: 4,
         body: @deny_email,
-        path: 'teacher_mailer/deny_email',
+        path: "teacher_mailer/deny_email",
         locale: nil,
-        handler: 'liquid',
+        handler: "liquid",
         partial: false,
-        format: 'html',
-        title: 'Deny Email',
-        subject: 'Deny Email'
+        format: "html",
+        title: "Deny Email",
+        subject: "Deny Email"
       }
     ]
   end
@@ -100,20 +100,20 @@ module SeedData
   def self.teachers
     [
         {
-            first_name: 'Michael',
-            last_name: 'Ball',
-            email: 'ball@berkeley.edu',
+            first_name: "Michael",
+            last_name: "Ball",
+            email: "ball@berkeley.edu",
             admin: true,
             status: 0,
-            application_status: 'Validated'
+            application_status: "Validated"
         },
         {
-            first_name: 'Lauren',
-            last_name: 'Mock',
-            email: 'lmock@berkeley.edu',
+            first_name: "Lauren",
+            last_name: "Mock",
+            email: "lmock@berkeley.edu",
             admin: true,
             status: 0,
-            application_status: 'Validated'
+            application_status: "Validated"
         }
     ]
   end

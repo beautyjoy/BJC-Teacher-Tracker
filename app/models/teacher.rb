@@ -41,18 +41,18 @@ class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
 
   enum application_status: {
-    validated: 'Validated',
-    denied: 'Denied',
-    pending: 'Pending'
+    validated: "Validated",
+    denied: "Denied",
+    pending: "Pending"
   }
   validates_inclusion_of :application_status, in: application_statuses.keys
 
   belongs_to :school, counter_cache: true
 
   # # Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where('application_status=? AND admin=?', application_statuses[:pending], 'false') }
+  scope :unvalidated, -> { where("application_status=? AND admin=?", application_statuses[:pending], "false") }
   # Non-admin teachers who have been accepted/validated
-  scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
+  scope :validated, -> { where("application_status=? AND admin=?", application_statuses[:validated], "false") }
 
   enum education_level: {
     middle_school: 0,
@@ -76,15 +76,15 @@ class Teacher < ApplicationRecord
 
   # Always add to the bottom of the list!
   STATUSES = [
-    'I am teaching BJC as an AP CS Principles course.',
-    'I am teaching BJC but not as an AP CS Principles course.',
-    'I am using BJC as a resource, but not teaching with it.',
-    'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
-    'I am teaching BJC through the TEALS program.',
-    'I am a BJC curriculum or tool developer.',
-    'I am teaching with the ExCITE project',
-    'I am teaching Middle School BJC.',
+    "I am teaching BJC as an AP CS Principles course.",
+    "I am teaching BJC but not as an AP CS Principles course.",
+    "I am using BJC as a resource, but not teaching with it.",
+    "I am a TEALS volunteer, and am teaching the BJC curriculum.",
+    "Other - Please specify below.",
+    "I am teaching BJC through the TEALS program.",
+    "I am a BJC curriculum or tool developer.",
+    "I am teaching with the ExCITE project",
+    "I am teaching Middle School BJC.",
   ].freeze
 
   attr_encrypted_options[:key] = Figaro.env.attr_encrypted_key!
@@ -140,7 +140,7 @@ class Teacher < ApplicationRecord
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
-      'Unknown'
+      "Unknown"
     else
       education_level.to_s.titlecase
     end
@@ -178,9 +178,9 @@ class Teacher < ApplicationRecord
     elsif denied?
       school.num_denied_teachers += 1
     end
-    if application_status_was == 'validated'
+    if application_status_was == "validated"
       school.num_validated_teachers -= 1
-    elsif application_status_was == 'denied'
+    elsif application_status_was == "denied"
       school.num_denied_teachers -= 1
     end
     school.save

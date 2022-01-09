@@ -25,7 +25,7 @@ Given(/^I set my education level target as "(.*)"$/) do |input|
 end
 
 Then(/I see a confirmation "(.*)"/) do |string|
-  page.should have_css '.alert', text: /#{string}/
+  page.should have_css ".alert", text: /#{string}/
 end
 
 Then(/The "(.*)" form is invalid/) do |id|
@@ -38,7 +38,7 @@ Then(/^debug javascript$/) do
 end
 
 Then(/^debug$/) do
-  require 'rubygems'; require 'byebug'; byebug
+  require "rubygems"; require "byebug"; byebug
   1 # intentionally force debugger context in this method
 end
 

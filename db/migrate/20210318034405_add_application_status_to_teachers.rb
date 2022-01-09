@@ -2,14 +2,14 @@
 
 class AddApplicationStatusToTeachers < ActiveRecord::Migration[5.2]
   def change
-    add_column :teachers, :application_status, :string, default: 'Pending'
+    add_column :teachers, :application_status, :string, default: "Pending"
     Teacher.all.each do |t|
       if t.validated && (not t.denied)
-        t.update! application_status: 'Validated'
+        t.update! application_status: "Validated"
       elsif (not t.validated) && t.denied
-        t.update! application_status: 'Denied'
+        t.update! application_status: "Denied"
       else
-        t.update! application_status: 'Pending'
+        t.update! application_status: "Pending"
       end
     end
 
