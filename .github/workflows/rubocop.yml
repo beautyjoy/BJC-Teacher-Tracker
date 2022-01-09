@@ -15,5 +15,5 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true
-    # - name: Run RuboCop
-    #   run: bundle exec rubocop --parallel
+    - name: Run RuboCop
+      run: bundle exec rubocop --parallel

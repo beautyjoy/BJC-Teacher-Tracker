@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropBooleanFromTeachers < ActiveRecord::Migration
   def change
     remove_column :teachers, :boolean

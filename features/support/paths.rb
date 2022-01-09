@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # TL;DR: YOU SHOULD DELETE THIS FILE
 #
 # This file is used by web_steps.rb, which you should also delete
@@ -13,14 +15,14 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
-    when /^the (BJC )?home\s?page$/ then '/'
-    when /^the email templates index$/ then '/email_templates'
+    when /^the (BJC )?home\s?page$/ then "/"
+    when /^the email templates index$/ then "/email_templates"
     when /^the new teachers page$/ then new_teacher_path
     when /^the teachers page$/ then teachers_path
     when /^the edit page for (.*) (.*)$/
-      edit_teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
+      edit_teacher_path(Teacher.find_by(first_name: $1, last_name: $2))
     when /^the show page for (.*) (.*)$/
-      teacher_path(Teacher.find_by(first_name:$1, last_name:$2))
+      teacher_path(Teacher.find_by(first_name: $1, last_name: $2))
     when /^the schools page$/ then schools_path
     when /^the new schools page$/ then new_school_path
     when /^the admin dashboard$/ then dashboard_path
@@ -33,7 +35,7 @@ module NavigationHelpers
       begin
         page_name =~ /^the (.*) page$/
         path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
+        self.send(path_components.push("path").join("_").to_sym)
       rescue NoMethodError, ArgumentError
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"

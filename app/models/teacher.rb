@@ -45,14 +45,14 @@ class Teacher < ApplicationRecord
     denied: "Denied",
     pending: "Pending"
   }
-  validates_inclusion_of :application_status, :in => application_statuses.keys
+  validates_inclusion_of :application_status, in: application_statuses.keys
 
   belongs_to :school, counter_cache: true
 
   # # Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where('application_status=? AND admin=?', application_statuses[:pending], 'false') }
+  scope :unvalidated, -> { where("application_status=? AND admin=?", application_statuses[:pending], "false") }
   # Non-admin teachers who have been accepted/validated
-  scope :validated, -> { where('application_status=? AND admin=?', application_statuses[:validated], 'false') }
+  scope :validated, -> { where("application_status=? AND admin=?", application_statuses[:validated], "false") }
 
   enum education_level: {
     middle_school: 0,
@@ -76,18 +76,18 @@ class Teacher < ApplicationRecord
 
   # Always add to the bottom of the list!
   STATUSES = [
-    'I am teaching BJC as an AP CS Principles course.',
-    'I am teaching BJC but not as an AP CS Principles course.',
-    'I am using BJC as a resource, but not teaching with it.',
-    'I am a TEALS volunteer, and am teaching the BJC curriculum.',
-    'Other - Please specify below.',
-    'I am teaching BJC through the TEALS program.',
-    'I am a BJC curriculum or tool developer.',
-    'I am teaching with the ExCITE project',
-    'I am teaching Middle School BJC.',
+    "I am teaching BJC as an AP CS Principles course.",
+    "I am teaching BJC but not as an AP CS Principles course.",
+    "I am using BJC as a resource, but not teaching with it.",
+    "I am a TEALS volunteer, and am teaching the BJC curriculum.",
+    "Other - Please specify below.",
+    "I am teaching BJC through the TEALS program.",
+    "I am a BJC curriculum or tool developer.",
+    "I am teaching with the ExCITE project",
+    "I am teaching Middle School BJC.",
   ].freeze
 
-  attr_encrypted_options.merge!(:key => Figaro.env.attr_encrypted_key!)
+  attr_encrypted_options[:key] = Figaro.env.attr_encrypted_key!
   attr_encrypted :google_token
   attr_encrypted :google_refresh_token
 
@@ -95,7 +95,7 @@ class Teacher < ApplicationRecord
   after_commit :update_school_counts
 
   def reset_validation_status
-    return if application_status_changed? or school_id_changed?
+    return if application_status_changed? || school_id_changed?
     if denied?
       pending!
     end
@@ -140,9 +140,9 @@ class Teacher < ApplicationRecord
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
-      return "Unknown"
+      "Unknown"
     else
-      return education_level.to_s.titlecase
+      education_level.to_s.titlecase
     end
   end
 
@@ -157,7 +157,7 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    return Teacher.application_statuses[application_status]
+    Teacher.application_statuses[application_status]
   end
 
   def self.user_from_omniauth(auth)
@@ -166,7 +166,7 @@ class Teacher < ApplicationRecord
 
   def self.validate_access_token(auth)
     email_from_auth = auth.info.email
-    return exists?(email: email_from_auth)
+    exists?(email: email_from_auth)
   end
 
   # TODO: Write tests, add hooks.
@@ -178,9 +178,9 @@ class Teacher < ApplicationRecord
     elsif denied?
       school.num_denied_teachers += 1
     end
-    if application_status_was == 'validated'
+    if application_status_was == "validated"
       school.num_validated_teachers -= 1
-    elsif application_status_was == 'denied'
+    elsif application_status_was == "denied"
       school.num_denied_teachers -= 1
     end
     school.save

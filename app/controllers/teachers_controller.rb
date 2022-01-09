@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
@@ -12,7 +14,7 @@ class TeachersController < ApplicationController
 
   def resend_welcome_email
     load_teacher
-    if @teacher.validated? or @is_admin
+    if @teacher.validated? || @is_admin
       TeacherMailer.welcome_email(@teacher).deliver_now
     end
   end
@@ -29,7 +31,7 @@ class TeachersController < ApplicationController
     @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher and defined?(current_user.id) and current_user.id == @teacher.id
+    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
       return
@@ -37,7 +39,7 @@ class TeachersController < ApplicationController
     @school = school_from_params
     if !@school.save
       flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
-      render 'new'
+      render "new"
       return
     end
     @teacher = @school.teachers.build(teacher_params)
@@ -121,37 +123,36 @@ class TeachersController < ApplicationController
   end
 
   private
+    def load_teacher
+      @teacher ||= Teacher.find(params[:id])
+    end
 
-  def load_teacher
-    @teacher ||= Teacher.find(params[:id])
-  end
+    def deny_access
+      redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
+    end
 
-  def deny_access
-    redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
-  end
+    def school_from_params
+      @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+      @school ||= School.new(school_params)
+    end
 
-  def school_from_params
-    @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-    @school ||= School.new(school_params)
-  end
+    def teacher_params
+      params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap,
+        :more_info, :personal_website, :education_level)
+    end
 
-  def teacher_params
-    params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website, :education_level)
-  end
+    def school_params
+      params.require(:school).permit(:name, :city, :state, :website)
+    end
 
-  def school_params
-    params.require(:school).permit(:name, :city, :state, :website)
-  end
-
-  def sanitize_params
-    if params[:teacher]
-      if params[:teacher][:status]
-        params[:teacher][:status] = params[:teacher][:status].to_i
-      end
-      if params[:teacher][:education_level]
-        params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+    def sanitize_params
+      if params[:teacher]
+        if params[:teacher][:status]
+          params[:teacher][:status] = params[:teacher][:status].to_i
+        end
+        if params[:teacher][:education_level]
+          params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+        end
       end
     end
-  end
 end

@@ -1,8 +1,10 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
 
-require 'net/http'
-require 'openssl'
-require 'resolv-replace'
+require File.expand_path("../boot", __FILE__)
+
+require "net/http"
+require "openssl"
+require "resolv-replace"
 
 require "rails"
 # Pick the frameworks you want:

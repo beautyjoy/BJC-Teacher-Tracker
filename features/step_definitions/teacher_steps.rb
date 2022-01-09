@@ -1,27 +1,29 @@
-require 'cucumber/rspec/doubles'
+# frozen_string_literal: true
+
+require "cucumber/rspec/doubles"
 
 # Returns a OAuth2 token associated with email "testteacher@berkeley.edu"
-Given /I have a teacher (.*) email/ do |login|
+Given(/I have a teacher (.*) email/) do |login|
   service = LOGIN_SERVICE[login]
   OmniAuth.config.mock_auth[service] = OmniAuth::AuthHash.new({
     provider: service,
-    uid: '123545',
+    uid: "123545",
     info: {
-      name: 'Joseph',
+      name: "Joseph",
       first_name: "Joseph",
       last_name: "Mamoa",
       email: "testteacher@berkeley.edu",
       school: "UC Berkeley",
     },
     credentials: {
-      token: 'test_token',
-      refresh_token: 'test_refresh_token'
+      token: "test_token",
+      refresh_token: "test_refresh_token"
     }
   })
 end
 
 Given(/the following schools exist/) do |schools_table|
-  schools_default = {name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu"}
+  schools_default = { name: "UC Berkeley", city: "Berkeley", state: "CA", website: "https://www.berkeley.edu" }
   schools_table.hashes.each do |school|
     schools_default.each do |key, value|
       if school[key] == nil
@@ -37,7 +39,7 @@ Given(/the following teachers exist/) do |teachers_table|
     first_name: "Alonzo",
     last_name: "Church",
     email: "alonzo@snap.berkeley.edu",
-    snap: '',
+    snap: "",
     status: "Other - Please specify below.",
     education_level: 1,
     more_info: "I'm teaching a college course",
@@ -66,7 +68,7 @@ Given(/the following teachers exist/) do |teachers_table|
   end
 end
 
-Then /there is a TEALS email/ do
+Then(/there is a TEALS email/) do
   last_email = ActionMailer::Base.deliveries.last
   last_email.subject.should eq "TEALS Confirmation Email"
   last_email.to[0].should eq "testcontactemail@berkeley.edu"

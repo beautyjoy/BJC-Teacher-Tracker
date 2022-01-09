@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def alert_class(name)
     case name
-    when 'alert'
-      'danger'
-    when 'notice'
-      'info'
+    when "alert"
+      "danger"
+    when "notice"
+      "info"
     else
       name
     end

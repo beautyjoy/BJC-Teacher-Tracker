@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailTemplatesController < ApplicationController
   before_action :require_admin
   def index
@@ -16,7 +18,7 @@ class EmailTemplatesController < ApplicationController
   end
 
   private
-  def template_params
-    params.require(:email_template).permit(:body, :subject)
-  end
+    def template_params
+      params.require(:email_template).permit(:body, :subject)
+    end
 end

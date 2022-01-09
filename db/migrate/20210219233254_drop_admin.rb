@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropAdmin < ActiveRecord::Migration[5.2]
   def up
     drop_table :admins
