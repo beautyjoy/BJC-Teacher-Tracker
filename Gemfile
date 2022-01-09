@@ -15,6 +15,9 @@ gem "pg", "~> 1.0"
 # Front-end Assets
 gem "webpacker", "~> 4"
 
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.4.4', require: false
+
 # Login via 3rd party services.
 gem "omniauth", "~> 1.0"
 gem "omniauth-rails_csrf_protection"
@@ -50,6 +53,9 @@ group :development do
   gem "letter_opener_web", "~> 2"
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console"
+
+  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'listen', '~> 3.3'
 end
 
 group :development, :test do
@@ -85,6 +91,7 @@ group :test do
   gem "metric_fu"
   gem "selenium-webdriver"
 
+  gem "webdrivers"
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
