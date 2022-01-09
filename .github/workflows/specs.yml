@@ -37,8 +37,6 @@ jobs:
           ruby-version: 2.7.5
           bundler-cache: true
       - uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
