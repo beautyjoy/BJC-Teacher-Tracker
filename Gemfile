@@ -16,7 +16,7 @@ gem "pg", "~> 1.0"
 gem "webpacker", "~> 4"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+gem "bootsnap", ">= 1.4.4", require: false
 
 # Login via 3rd party services.
 gem "omniauth", "~> 1.0"
@@ -54,8 +54,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console"
 
-  gem 'rack-mini-profiler', '~> 2.0'
-  gem 'listen', '~> 3.3'
+  gem "rack-mini-profiler", "~> 2.0"
+  gem "listen", "~> 3.3"
 end
 
 group :development, :test do
