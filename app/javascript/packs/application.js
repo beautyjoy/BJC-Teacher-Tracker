@@ -23,6 +23,9 @@ import 'popper.js';
 
 import "@fortawesome/fontawesome-free/js/all";
 
+import Rails from '@rails/ujs';
+Rails.start();
+
 // TODO: These really out to be an 'admin' pack.
 // Import TinyMCE
 import 'tinymce';
