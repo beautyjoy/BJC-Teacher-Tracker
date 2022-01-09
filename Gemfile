@@ -61,8 +61,7 @@ end
 group :development, :test do
   gem "byebug"
   gem "pry"
-  gem "pry-byebug"
-  gem "pry-rails"
+  gem "pry-byebug", "~> 3.9"
 
   gem "spring"
 end
