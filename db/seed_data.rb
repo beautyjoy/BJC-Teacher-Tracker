@@ -8,7 +8,7 @@ module SeedData
 
     <p><strong>Snap<em>!</em></strong><br />We encourage you to check out the <a href="https://forum.snap.berkeley.edu'" target="_blank" rel="noopener">Snap<em>!</em> Forum</a>. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at <a href="mailto:contact@snap.berkeley.edu" target="_blank" rel="noopener">contact@snap.berkeley.edu</a>.</p>
 
-    <p>Thank you! <br />&mdash; The BJC Team</p>"
+    <p>Thank you! <br />&mdash; The BJC Team</p>
   )
   @teals_confirmation_email = %Q(
     <p>

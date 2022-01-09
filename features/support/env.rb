@@ -2,6 +2,7 @@
 
 require 'simplecov'
 require 'simplecov-console'
+require 'simplecov_json_formatter'
 
 SimpleCov.start 'rails' do
   command_name 'cucumber'
@@ -10,7 +11,7 @@ SimpleCov.start 'rails' do
   formatter SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::Console,
     SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::SimpleFormatter
+    SimpleCov::Formatter::JSONFormatter
   ])
 end
 
