@@ -1,5 +1,5 @@
 module SeedData
-  @welcome_email = %Q(
+  @welcome_email = <<-WELCOME_EMAIL
     <p>Hi {{teacher_first_name}},<br /><br />Thanks for teaching with BJC!</p>
 
     <p><strong>Accessing the teacher's guide:</strong><br />To view the <a title="teacher's guide" href="https://bjc.edc.org/teacher" target="_blank" rel="noopener">teacher's guide</a>, you will need the username: <code>bjcteacher</code> and the case-sensitive password: <code>{{bjc_password}}</code><br /><br />After you enter the password once it will be stored in a cookie for that browser; if you delete your browser cookies, you will need to reenter it. If you use this password on a computer that students also use, they will have access to these pages until you clear the cookies. <br /><br />Please note that only the Teacher Guide <em>solutions</em> pages are affected by this. Students will still be able to see the Teacher Guide course overview page, the Teacher Resources page, and the Teacher Guide unit overview pages.</p>
@@ -9,8 +9,9 @@ module SeedData
     <p><strong>Snap<em>!</em></strong><br />We encourage you to check out the <a href="https://forum.snap.berkeley.edu'" target="_blank" rel="noopener">Snap<em>!</em> Forum</a>. If you have Snap<em>!</em>-specific questions, you can reach out to the Snap<em>!</em> team at <a href="mailto:contact@snap.berkeley.edu" target="_blank" rel="noopener">contact@snap.berkeley.edu</a>.</p>
 
     <p>Thank you! <br />&mdash; The BJC Team</p>
-  )
-  @teals_confirmation_email = "
+  WELCOME_EMAIL
+
+  @teals_confirmation_email = <<-TEALS_EMAIL
     <p>
       Hi,<br><br>
 
@@ -24,8 +25,9 @@ module SeedData
       Thank You,<br>
       - The BJC Team
     </p>
-  "
-  @form_submission = "
+  TEALS_EMAIL
+
+  @form_submission = <<-FORM_SUBMISSION
     <p>
       Here is the information that was submitted: <br>
       Name: {{teacher_first_name}} {{teacher_last_name}} <br>
@@ -35,12 +37,14 @@ module SeedData
       Location: {{teacher_school_city}}, {{teacher_school_state}} <br>
       Website: {{ teacher_school_website | link_to(nil, teacher_school_website) }}
     </p>
-  "
-  @deny_email = "
+  FORM_SUBMISSION
+
+  @deny_email = <<-DENY_EMAIL
     <p>
       {{ reason | strip_tags }}
     </p>
-  "
+  DENY_EMAIL
+
   def self.emails
     [
       {
