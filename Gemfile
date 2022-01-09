@@ -39,7 +39,7 @@ gem "sentry-rails"
 gem "panoramic"
 
 # Sanitizing email templates
-gem 'liquid-rails'
+gem 'liquid-rails', github: 'andreslemik/liquid-rails'
 
 group :development, :test do
   gem 'annotate'
