@@ -2,14 +2,14 @@
 
 require "simplecov"
 require "simplecov-console"
-require "simplecov_json_formatter"
+require "simplecov-cobertura"
 
 SimpleCov.start "rails" do
   command_name "cucumber"
   enable_coverage :branch
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::JSONFormatter,
+    SimpleCov::Formatter::CoberturaFormatter,
     SimpleCov::Formatter::Console,
     SimpleCov::Formatter::HTMLFormatter
   ])
