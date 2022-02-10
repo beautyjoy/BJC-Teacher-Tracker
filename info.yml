@@ -1,19 +1,22 @@
 project:
   name: 'BJC Teacher Tracker'
-  owner: 'Michael Ball'
-  coach: 'Nick Mecklenburg'
-  teamId: '3'
+  owner: 'CS169L-22'
+  teamId: 'BJC Teacher Tracker'
   identities:
     pivotal:
       url: 'https://www.pivotaltracker.com/n/projects/2406982'
     heroku:
-      url: 'https://bjc-sp21.herokuapp.com'
-    travis:
-      url: 'https://travis-ci.org/github/tommywei110/BJC-Teacher-Tracker'
+      url: 'https://bjc-teacher-tracker-2022.herokuapp.com/'
   members:
     member1:
-      name: 'Justin'
-      surname: 'Phyo' 
-      githubUsername: 'justinphyo'
-      pivotalUsername: 'justinphyo'
-      herokuEmail: 'justinphyo@berkeley.edu'
+      name: 'Governify'
+      surname: 'Auditor' 
+      githubUsername: 'governifyauditor'
+      pivotalUsername: 'governifyauditor'
+      herokuEmail: 'governify.auditor@gmail.com'
+    member2:
+      name: 'Mitchell'
+      surname: 'Wong' 
+      githubUsername: 'mitchell2001wong'
+      pivotalUsername: 'mitchell2001wong'
+      herokuEmail: 'mitchell2001wong@gmail.com'
