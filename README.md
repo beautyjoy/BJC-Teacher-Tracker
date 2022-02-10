@@ -1,7 +1,7 @@
 # BJC Teacher Tracker
 ![Specs Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg) •
 [![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
-[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/tree/master/app/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
+[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/tree/test_specs_build/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
 ---
 
 ## Description
