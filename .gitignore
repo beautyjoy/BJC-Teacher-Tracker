@@ -148,7 +148,6 @@ fabric.properties
 
 
 # Ignore application configuration
-/config/application.yml
 /config/database.yml
 
 /public/packs
