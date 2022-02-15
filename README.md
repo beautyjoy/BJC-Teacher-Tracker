@@ -1,13 +1,12 @@
 # BJC Teacher Tracker
 ![Specs Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg) •
 [![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
-[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/blob/test_specs_build/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
 ---
 
 ## CS169L Badges (Delete These When Merged into Golden Repo):
 <a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/maintainability"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/maintainability" /></a>
 <a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/test_coverage"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/test_coverage" /></a>
-https://www.pivotaltracker.com/n/projects/2406982
+[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/blob/test_specs_build/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
 ---
 
 ## Description
