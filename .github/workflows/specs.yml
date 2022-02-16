@@ -41,7 +41,21 @@ jobs:
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
+
+      - name: Setup CodeClimate test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
+          chmod +x $CCTR
+          $CCTR before-build
+
       - run: bundle exec ${{ matrix.suite }}
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      
+      - name: Publish code coverage
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          $CCTR sum-coverage coverage/codeclimate.*.json
+          $CCTR upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
+          $CCTR after-build --id ${{ secrets.CC_TEST_REPORTER_ID }}
