@@ -26,7 +26,6 @@ jobs:
       RUBY_ENV: test
       attr_encrypted_key: '12345678912345678912345678912345'
       DISPLAY: ':99' # For chromedriver
-      CCTR: ./cc-test-reporter
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -41,20 +40,8 @@ jobs:
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
-      - run: bundle exec rake db:migrate
-
-      - name: Setup CodeClimate test-reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
-          chmod +x $CCTR
-          $CCTR before-build
-
+      - run: bundle exec rake db:migratez
       - run: bundle exec ${{ matrix.suite }}
       - uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      
-      - name: Publish code coverage
-        run: |
-          $CCTR upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
-          $CCTR after-build --id ${{ secrets.CC_TEST_REPORTER_ID }}
