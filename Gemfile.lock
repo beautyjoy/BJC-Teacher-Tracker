@@ -616,7 +616,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
-  simplecov (= 0.17)
+  simplecov
   simplecov-cobertura
   simplecov-console
   simplecov-csv
