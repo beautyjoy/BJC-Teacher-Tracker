@@ -82,7 +82,7 @@ end
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem "rspec-rails"
-  gem 'simplecov', '= 0.17', :require => false # version is for github actions to work
+  gem "simplecov", "= 0.17", require: false # version is for github actions to work
   gem "simplecov-console", require: false
   gem "simplecov-cobertura", require: false
   gem "simplecov-csv", require: false
