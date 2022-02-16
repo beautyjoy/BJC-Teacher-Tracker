@@ -6,7 +6,7 @@
 ## CS169L Badges (Delete These When Merged into Golden Repo):
 <a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/maintainability"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/maintainability" /></a>
 <a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/test_coverage"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/test_coverage" /></a>
-[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/blob/test_specs_build/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982) •
+[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/blob/test_specs_build/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
 [![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_BJC Teacher Tracker-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-22-GH-mitchell2001wong_BJC-Teacher-Tracker/main)
 ---
 
