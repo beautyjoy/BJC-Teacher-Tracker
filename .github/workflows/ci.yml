@@ -18,7 +18,6 @@ jobs:
       matrix:
         suite:
           - cucumber
-          - rspec
 
     env:
       CCTR: ./cc-test-reporter
