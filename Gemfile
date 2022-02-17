@@ -83,6 +83,7 @@ end
 group :test do
   gem "rspec-rails"
   gem "simplecov", require: false
+  gem "simplecov-json", require: false
   gem "simplecov-console", require: false
   gem "simplecov-cobertura", require: false
   gem "simplecov-csv", require: false
