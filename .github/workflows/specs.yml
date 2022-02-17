@@ -42,6 +42,11 @@ jobs:
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - run: bundle exec ${{ matrix.suite }}
-      - uses: codecov/codecov-action@v2
+      - name: CodeCov Coverage
+        uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Code Climate coveragem
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
