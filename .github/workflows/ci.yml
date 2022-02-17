@@ -41,12 +41,14 @@ jobs:
       - name: run RSpec tests and capture coverage
         run: |
           bundle exec rspec
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type cobertura
+          cp coverage/coverage.json
+          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
           
       - name: run Cucumber tests and capture coverage
         run: |
-          bundle exec cucumber --retry 2
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
+          bundle exec cucumber
+          cp coverage/coverage.xml
+          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type cobertura
     
       - name: Publish code coverage
         run: |
