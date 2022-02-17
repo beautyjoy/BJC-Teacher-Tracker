@@ -12,6 +12,14 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
+
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - cucumber
+          - rspec
+
     env:
       CCTR: ./cc-test-reporter
       BUNDLE_WITHOUT: production
@@ -38,17 +46,13 @@ jobs:
           chmod +x $CCTR
           $CCTR before-build
 
-      - name: run RSpec tests and capture coverage
+      - name: Run ${{ matrix.suite }}
+        # SimpleCov runs with the Cobertura formatter for codeclimate
+        # CCTR expects a file named cobertura.xml
         run: |
-          bundle exec rspec
-          cp coverage/coverage.json
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
-          
-      - name: run Cucumber tests and capture coverage
-        run: |
-          bundle exec cucumber
-          cp coverage/coverage.xml
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type cobertura
+          bundle exec ${{ matrix.suite }}
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.${{ matrix.suite }}.json -t cobertura
     
       - name: Publish code coverage
         run: |
