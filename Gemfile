@@ -85,6 +85,8 @@ group :test do
   gem "simplecov", require: false
   gem "simplecov-json", require: false
   gem "simplecov-console", require: false
+  gem "simplecov-cobertura", require: false
+  gem "simplecov-csv", require: false
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails"
