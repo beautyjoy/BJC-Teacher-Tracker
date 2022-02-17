@@ -42,7 +42,6 @@ jobs:
       - name: run RSpec tests and capture coverage
         run: |
           bundle exec rspec
-          cp coverage/coverage.json ./.resulset.json
           $CCTR format-coverage --output coverage/codeclimate.$SUITE.json -t simplecov
           
       - name: run Cucumber tests and capture coverage
