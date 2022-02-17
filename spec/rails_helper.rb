@@ -4,6 +4,7 @@
 require "simplecov"
 require "simplecov-cobertura"
 require "simplecov-console"
+require "simplecov-json"
 
 SimpleCov.start "rails" do
   command_name "rspec"
@@ -13,6 +14,7 @@ SimpleCov.start "rails" do
     SimpleCov::Formatter::CoberturaFormatter,
     SimpleCov::Formatter::Console,
     SimpleCov::Formatter::HTMLFormatter
+    SimpleCov::Formatter::JSONFormatter
   ])
 end
 
