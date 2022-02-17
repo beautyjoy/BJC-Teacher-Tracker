@@ -49,9 +49,12 @@ jobs:
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - name: Run ${{ matrix.suite }}
+        # SimpleCov runs with the Cobertura formatter for codeclimate
+        # CCTR expects a file named cobertura.xml
         run: |
           bundle exec ${{ matrix.suite }}
-          $CCTR format-coverage -o coverage/codeclimate.${{ matrix.suite }}.json -t simplecov
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.${{ matrix.suite }}.json -t cobertura
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
