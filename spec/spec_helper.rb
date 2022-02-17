@@ -15,26 +15,6 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-if ENV['COVERAGE']
-  require 'simplecov'
-  require 'simplecov_json_formatter'
-
-  SIMPLECOV_FORMATTERS = [
-    SimpleCov::Formatter::SimpleFormatter,
-    SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::JSONFormatter
-  ].freeze
-
-  SimpleCov.start :rails do
-    add_group 'Controllers', 'app/controllers'
-    add_group 'Decorators', 'app/decorators'
-    add_group 'Helpers', 'app/helpers'
-    add_group 'Models', 'app/models'
-
-    formatter SimpleCov::Formatter::MultiFormatter.new(SIMPLECOV_FORMATTERS)
-  end
-end
-
 
 RSpec.configure do |config|
   config.filter_run focus: true
