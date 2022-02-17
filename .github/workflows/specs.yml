@@ -37,6 +37,11 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
+      - name: Setup Code Climate
+        run: |
+            export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reportere
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
@@ -46,10 +51,16 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Code Climate coveragem
-        uses: paambaati/codeclimate-action@v3.0.0
+      - name: Publish Code Climate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: simplecov
-          debug: true
+        run: |
+          ./cc-test-reporter format-coverage -t simplecov coverage/coverage.xml
+          ./cc-test-reporter upload-coverage
+      # - name: Code Climate coveragem
+      #   uses: paambaati/codeclimate-action@v3.0.0
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #   with:
+      #     coverageLocations: simplecov
+      #     debug: true
