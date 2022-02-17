@@ -2,7 +2,7 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "simplecov"
-require "simplecov-cobertura"
+require "simplecov-json"
 require "simplecov-console"
 
 SimpleCov.start "rails" do
@@ -10,7 +10,7 @@ SimpleCov.start "rails" do
   enable_coverage :branch
 
   formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::CoberturaFormatter,
+    SimpleCov::Formatter::JSONFormatter,
     SimpleCov::Formatter::Console,
     SimpleCov::Formatter::HTMLFormatter,
   ])

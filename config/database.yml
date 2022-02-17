@@ -4,8 +4,8 @@ default: &default
   timeout: 5000
   host: localhost
   port: <%= ENV['DB_PORT'] || '5432' %>
-  username: <%= ENV['DB_USER'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || 'password' %>
+  username: bjcadmin
+  password: bjcadmin
   database: <%= ENV['DB_NAME'] || 'postgres' %>
 
 development:
