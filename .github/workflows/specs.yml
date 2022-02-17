@@ -42,14 +42,15 @@ jobs:
         run: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
             chmod +x $CCTR
+            $CCTR before-build
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - name: Run ${{ matrix.suite }}
-        run:
+        run: |
           bundle exec ${{ matrix.suite }}
-          $CCTR format-coverage --output coverage/codeclimate.${{ matrix.suite }}.json --input-type simplecov
+          $CCTR format-coverage -o coverage/codeclimate.${{ matrix.suite }}.json -t simplecov
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
