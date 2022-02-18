@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   specs:
-    name: Tests
+    name: CI
     runs-on: ubuntu-latest
     continue-on-error: true
     services:
@@ -16,16 +16,18 @@ jobs:
           - 5432:5432
     strategy:
       fail-fast: false
-      matrix:
-        suite:
-          - cucumber
-          - rspec
+      # matrix:
+      #   suite:
+      #     - cucumber
+      #     - rspec
     env:
       TZ: America/Los_Angeles
       RAILS_ENV: test
       RUBY_ENV: test
       attr_encrypted_key: '12345678912345678912345678912345'
       DISPLAY: ':99' # For chromedriver
+      CCTR: ./cc-test-reporter
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -37,11 +39,31 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
+      - name: Setup Code Climate
+        run: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
+            chmod +x $CCTR
+            $CCTR before-build
       - run: bin/yarn
       - run: bin/rails webpacker:compile
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
-      - run: bundle exec ${{ matrix.suite }}
-      - uses: codecov/codecov-action@v2
+      - name: Run ${{ matrix.suite }}
+        # SimpleCov runs with the Cobertura formatter for codeclimate
+        # CCTR expects a file named cobertura.xml
+        run: |
+          bundle exec cucumber
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.cucumber.json -t cobertura
+          bundle exec rspec
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.rspec.json -t cobertura
+      - name: CodeCov Coverage
+        uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Publish Code Climate
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          $CCTR sum-coverage coverage/codeclimate.*.json
+          $CCTR upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
