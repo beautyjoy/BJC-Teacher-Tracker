@@ -97,7 +97,7 @@ Rails.application.configure do
     address: "BJCemail2022@gmail.com",
     port: 587,
     user_name: "BJCemail2022",
-    password: beautyandjoy1,
+    password: "beautyandjoy1",
     authentication: :login,
     enable_starttls_auto: true,
   }
