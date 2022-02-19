@@ -96,7 +96,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "email-smtp.us-west-2.amazonaws.com",
     port: 587,
-    user_name: "AKIA6JV7O2DSLSCZFINV",
+    user_name: "bjct90495@gmail.com",
     password: Figaro.env.email_password,
     authentication: :login,
     enable_starttls_auto: true,
