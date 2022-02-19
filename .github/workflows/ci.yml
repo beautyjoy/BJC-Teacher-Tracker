@@ -16,6 +16,7 @@ jobs:
     env:
       CCTR: ./cc-test-reporter
       BUNDLE_WITHOUT: production
+      attr_encrypted_key: ${{ secrets.attr_encrypted_key }}
       
     steps:
       - uses: actions/checkout@v2
