@@ -1,0 +1,3 @@
+attr_encrypted_key: ${{ secrets.attr_encrypted_key }}
+BJC_PASSWORD: ${{ secrets.BJC_PASSWORD }}
+teacher_key: ${{ secrets.teacher_key }}
