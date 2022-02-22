@@ -47,7 +47,7 @@
           :status,
           options_for_select(Teacher.status_options, teacher.status_before_type_cast),
           { include_blank: "Select an option" },
-          { class: 'form-control', required: true }
+          { class: 'form-control', required: true, onchange: 'logStatus();' }
         ) %>
       </div>
     </div>
@@ -86,3 +86,12 @@
     <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script>
+  function logStatus() {
+    var status_text = $( "#teacher_status option:selected" ).text();
+    var status_val = $( "#teacher_status" ).val();
+    console.log(status_text);
+    console.log(status_val);
+  }
+</script>
