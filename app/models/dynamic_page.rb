@@ -5,4 +5,5 @@ class DynamicPage < ApplicationRecord
     if DynamicPage.find_by(slug: params[:slug]).blank?
       DynamicPage.create!(dynamic_page_hash)
     end
+  end
 end
