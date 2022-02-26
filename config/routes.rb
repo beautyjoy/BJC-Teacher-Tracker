@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "sessions#omniauth_callback"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
+
+  get "/pages", to: "dynamic_pages#create_dynamic_page"
 end
