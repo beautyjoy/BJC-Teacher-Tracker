@@ -12,9 +12,7 @@ class DynamicPagesController < ApplicationController
   end
 
   def show
-    @dynamic_page = DynamicPage.find_by(
-      slug: params[:slug]
-    )
+    @dynamic_page = DynamicPage.find_by(slug: params[:slug])
   end
 
   private

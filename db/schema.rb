@@ -13,7 +13,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2022_02_26_023320) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,5 +83,4 @@ ActiveRecord::Schema.define(version: 2022_02_26_023320) do
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"
     t.index ["status"], name: "index_teachers_on_status"
   end
-  
 end
