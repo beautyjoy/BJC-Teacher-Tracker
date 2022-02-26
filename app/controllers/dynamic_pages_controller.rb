@@ -7,16 +7,19 @@ class DynamicPagesController < ApplicationController
   end
 
   def new
-    DynamicPage.create_dynamic_page(dynamic_page_params)
-    redirect_to email_templates_path
+  end
+
+  def create
+    # DynamicPage.create_dynamic_page(dynamic_page_params)
+    # redirec to show
   end
 
   def show
-    @dynamic_page = DynamicPage.find_by(slug: params[:slug])
+    # @dynamic_page = DynamicPage.find_by(slug: params[:slug])
   end
 
   private
     def dynamic_page_params
-      params.require(:slug).permit(:body, :subject, :permissions)
+      # params.require(:slug).permit(:body, :subject, :permissions)
     end
 end

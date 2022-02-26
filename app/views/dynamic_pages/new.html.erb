@@ -1,1 +1,33 @@
-Hi
+<h2> Create a New Page </h1>
+<hr />
+
+<%= form_with(model: @dynamic_page, local: true) do |form| %>
+  <div class="form">
+    <label for="dynamic_page_title"><h3>Title</h3></label>
+    <%= form.text_field :title, class: "form-control" %>
+    <label for="dynamic_page_slug"><h3>Slug</h3></label>
+    <%= form.text_field :slug, class: "form-control" %>
+    <label for="dynamic_page_body"><h3>Body</h3></label>
+    <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  tinyMCE.init({
+    selector: 'textarea.tinymce',
+    height: 500,
+    menubar: 'edit table',
+    plugins: [
+      'image', 'paste', 'link', 'table'
+    ],
+    toolbar: 'undo redo | formatselect | ' +
+      'bold italic backcolor | alignleft aligncenter ' +
+      'alignright alignjustify | bullist numlist outdent indent | ' +
+      'table tabledelete | tableprops tablerowprops tablecellprops | ' +
+      'removeformat'
+  });
+</script>
