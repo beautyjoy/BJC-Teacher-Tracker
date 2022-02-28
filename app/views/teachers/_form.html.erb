@@ -47,7 +47,7 @@
           :status,
           options_for_select(Teacher.status_options, teacher.status_before_type_cast),
           { include_blank: "Select an option" },
-          { class: 'form-control', required: true }
+          { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
         ) %>
       </div>
     </div>
@@ -86,3 +86,20 @@
     <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+<script>
+  function requireVolunteerHostTeacher() {
+    var status_val = $( "#teacher_status" ).val();
+
+    if(status_val == 3) {
+      $(".row:nth-child(7) label").prop('class', "label-required")
+      $("#teacher_more_info").prop('required', true);
+      $("#teacher_more_info").prop('placeholder', "Please type the name of your host teacher here (Required)");
+    }
+    else if(status_val != 3) {
+      $(".row:nth-child(7) label").prop('class', "")
+      $("#teacher_more_info").prop('required', false);
+      $("#teacher_more_info").prop('placeholder', "ex. I'm teaching a college course");
+    }
+  }
+</script>
