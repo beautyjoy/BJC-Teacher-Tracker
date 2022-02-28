@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 
   resources :dynamic_pages
+  get "dynamic_pages/page/:slug", to: "dynamic_pages#show", as: "dynamic_pages_page" # Maybe fix this ??
 end
