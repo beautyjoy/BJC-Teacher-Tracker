@@ -14,7 +14,7 @@ class DynamicPagesController < ApplicationController
     @dynamic_page = DynamicPage.new(dynamic_page_params)
     if @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
-      redirect_to dynamic_pages_page(@dynamic_page.slug) # FIX THIS!!!
+      redirect_to ({ action: "show", slug: @dynamic_page.slug })
     else
       redirect_to root_path, alert: "Failed to submit information :("
     end
