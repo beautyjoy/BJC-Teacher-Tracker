@@ -30,5 +30,5 @@ Rails.application.routes.draw do
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 
   resources :dynamic_pages, except: [:show]
-  get "dynamic_pages/page/:slug", to: "dynamic_pages#show"
+  get "dynamic_pages/pages/:slug", to: "dynamic_pages#show"
 end

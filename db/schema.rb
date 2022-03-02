@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_02_26_023320) do
   enable_extension "plpgsql"
 
   create_table "dynamic_pages", force: :cascade do |t|
-    t.string "slug", null: false, unique: true
+    t.string "slug", null: false
     t.string "title"
     t.text "body"
     t.string "permissions"
