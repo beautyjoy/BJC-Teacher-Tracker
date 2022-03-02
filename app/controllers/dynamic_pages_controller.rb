@@ -28,6 +28,6 @@ class DynamicPagesController < ApplicationController
 
   private
     def dynamic_page_params
-      params.require(:dynamic_page).permit(:slug, :body, :title, :permissions, :creator_id, :lasted_editor)
+      params.require(:dynamic_page).permit(:slug, :body, :title, :permissions, :creator_id, :last_editor)
     end
 end
