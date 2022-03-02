@@ -15,10 +15,5 @@
 #  creator_id  :bigint
 #
 class DynamicPage < ApplicationRecord
-  # Delete this
-  def self.create_dynamic_page(dynamic_page_params)
-    if DynamicPage.find_by(slug: params[:slug]).blank?
-      DynamicPage.create!(dynamic_page_params)
-    end
-  end
+  def placeholder; end
 end
