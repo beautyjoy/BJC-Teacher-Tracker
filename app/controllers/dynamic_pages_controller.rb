@@ -12,7 +12,9 @@ class DynamicPagesController < ApplicationController
 
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
-    if @dynamic_page.save
+    if DynamicPage.find_by(slug: @dynamic_page.slug)
+      redirect_to({ action: "new" }, alert:  "That slug already exists :(")
+    elsif @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
       redirect_to ({ action: "show", slug: @dynamic_page.slug })
     else
