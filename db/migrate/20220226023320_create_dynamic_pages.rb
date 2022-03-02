@@ -7,8 +7,6 @@ class CreateDynamicPages < ActiveRecord::Migration[6.1]
       t.string "title"
       t.text "body"
       t.string "permissions"
-      t.bigint "creator_id"
-      t.bigint "lasted_editor"
 
       t.timestamps
     end
