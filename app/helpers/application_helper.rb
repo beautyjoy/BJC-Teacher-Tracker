@@ -19,7 +19,8 @@ module ApplicationHelper
       "New School": new_school_path,
       "All Schools": schools_path,
       "All Teachers": teachers_path,
-      "Email Templates": email_templates_path
+      "Email Templates": email_templates_path,
+      "Dynamic Pages": dynamic_pages_path
     }
   end
 end
