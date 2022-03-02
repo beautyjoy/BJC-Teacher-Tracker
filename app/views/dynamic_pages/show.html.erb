@@ -1,5 +1,7 @@
-<%= @dynamic_page.title %>
+<h1>
+  <%= @dynamic_page.title %>
+</h1>
 
-<%= @dynamic_page.slug %>
-
-<%= @dynamic_page.body %>
+<body>
+  <%=raw @dynamic_page.body %> 
+</body>
