@@ -3,10 +3,10 @@
 
 <%= form_with(model: @dynamic_page, local: true) do |form| %>
   <div class="form">
-    <label for="dynamic_page_title"><h3>Title</h3></label>
-    <%= form.text_field :title, class: "form-control" %>
-    <label for="dynamic_page_slug"><h3>Slug</h3></label>
-    <%= form.text_field :slug, class: "form-control" %>
+    <label for="dynamic_page_title"><h3 class="label-required">Title</h3></label>
+    <%= form.text_field :title, class: "form-control", required: true %>
+    <label for="dynamic_page_slug"><h3 class="label-required">Slug</h3></label>
+    <%= form.text_field :slug, class: "form-control", required: true %>
     <label for="dynamic_page_body"><h3>Body</h3></label>
     <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
   </div>
