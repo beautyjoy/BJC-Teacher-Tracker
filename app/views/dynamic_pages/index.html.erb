@@ -1,1 +1,20 @@
-TODO
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+    <th scope="col">Title</th>
+    <th scope="col">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_dynamic_pages.each do |p| %>
+    <tr>
+      <td> <%= link_to(p.title,controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
+        <td> <%= p.body %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="btn-group" role="group" aria-label="New Page">
+  <%= button_to("Add New Page", action: "new" validate_teacher_path), class: 'btn btn-outline-success', type: 'button' %>
+  <% end %>
+</div>
