@@ -15,6 +15,5 @@
   </tbody>
 </table>
 <div class="btn-group" role="group" aria-label="New Page">
-  <%= button_to("Add New Page", action: "new" validate_teacher_path), class: 'btn btn-outline-success', type: 'button' %>
-  <% end %>
+  <%= button_to("Add New Page", {action: "new"}, method: :get) %>
 </div>
