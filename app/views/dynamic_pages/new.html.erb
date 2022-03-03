@@ -1,7 +1,7 @@
 <h2> Create a New Page </h1>
 <hr />
 
-<%= form_with(model: @dynamic_page, local: true) do |form| %>
+<%= form_with(model: @dynamic_page, local: true, class: "new_dynamic_page", id: "new_dynamic_page") do |form| %>
   <div class="form">
     <label for="dynamic_page_title"><h3 class="label-required">Title</h3></label>
     <%= form.text_field :title, class: "form-control", required: true %>
