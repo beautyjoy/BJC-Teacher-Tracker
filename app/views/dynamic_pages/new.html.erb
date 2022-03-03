@@ -9,6 +9,8 @@
     <%= form.text_field :slug, class: "form-control", required: true %>
     <label for="dynamic_page_body"><h3>Body</h3></label>
     <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
+    <%= form.hidden_field :creator_id, value: session[:user_id] %>
+    <%= form.hidden_field :last_editor, value: session[:user_id] %>
   </div>
   <br>
   <div class="actions">
