@@ -26,6 +26,8 @@ module NavigationHelpers
     when /^the schools page$/ then schools_path
     when /^the new schools page$/ then new_school_path
     when /^the admin dashboard$/ then dashboard_path
+    when /^the dynamic pages index$/ then "/dynamic_pages"
+    when /^the dynamic pages new$/ then "/dynamic_pages/new"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
