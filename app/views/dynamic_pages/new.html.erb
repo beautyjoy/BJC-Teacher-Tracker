@@ -7,6 +7,22 @@
     <%= form.text_field :title, class: "form-control", required: true %>
     <label for="dynamic_page_slug"><h3 class="label-required">Slug</h3></label>
     <%= form.text_field :slug, class: "form-control", required: true %>
+    <label for="dynamic_page_permissions"><h3 class="label-required">Permissions</h3></label>
+    <div class="row">
+      <label for="dynamic_page_permissions" class="radio-label">
+        Admins
+        <%= form.radio_button :permissions, 'Admins', class: "radio-button" %>
+      </label>
+      <label for="dynamic_page_permissions" class="radio-label">
+        Verified Teachers
+        <%= form.radio_button :permissions, 'Verified Teachers', class: "radio-button" %>
+      </label>
+      <label for="dynamic_page_permissions" class="radio-label">
+        Public
+        <%= form.radio_button :permissions, 'Public', class: "radio-button" %>
+      </label>
+    </div>
+
     <label for="dynamic_page_body"><h3>Body</h3></label>
     <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
     <%= form.hidden_field :creator_id, value: session[:user_id] %>
