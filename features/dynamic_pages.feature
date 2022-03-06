@@ -81,3 +81,12 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I fill in "dynamic_page_slug" with "test_slug"
     And I press "Submit"
     Then I should be on the dynamic pages new
+  Scenario: Can delete a page
+  Scenario: I create a new page and I can see it on the index page
+      Given I am on the dynamic pages new
+      And I fill in "dynamic_page_title" with "Test Title"
+      And I fill in "dynamic_page_slug" with "test_slug"
+      And I press "Submit"
+      And I follow "Dynamic Pages"
+      When I press "Delete" button for "test_slug"
+      Then I should not see "test_slug"

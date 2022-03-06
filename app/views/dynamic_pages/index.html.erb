@@ -18,6 +18,7 @@
       <td> <%= p.slug %> </td>
       <td> <%= p.creator_id %> </td>
       <td> <%= p.last_editor %> </td>
+      <td id = p.id><%= button_to "Delete", p, method: :delete,action: 'delete' %><td>
     </tr>
     <% end %>
   </tbody>

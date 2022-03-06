@@ -5,11 +5,17 @@ class DynamicPagesController < ApplicationController
   def index
     @all_dynamic_pages = DynamicPage.all
   end
-
+  def destroy
+    if !is_admin?
+      redirect_to dynamic_pages_path, alert: "Only administrators can delete!"
+    else
+      DynamicPage.delete(params[:id])
+      redirect_to dynamic_pages_path
+    end
+  end
   def new
     @dynamic_page = DynamicPage.new
   end
-
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
     if DynamicPage.find_by(slug: @dynamic_page.slug)
@@ -21,11 +27,9 @@ class DynamicPagesController < ApplicationController
       redirect_to root_path, alert: "Failed to submit information :("
     end
   end
-
   def show
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
   end
-
   private
     def dynamic_page_params
       params.require(:dynamic_page).require(:slug)
