@@ -9,20 +9,35 @@
     <%= form.text_field :slug, class: "form-control", required: true %>
     <label for="dynamic_page_permissions"><h3 class="label-required">Permissions</h3></label>
     <div class="row">
-      <label for="dynamic_page_permissions" class="radio-label">
-        Admins
-        <%= form.radio_button :permissions, 'Admins', class: "radio-button" %>
-      </label>
-      <label for="dynamic_page_permissions" class="radio-label">
-        Verified Teachers
-        <%= form.radio_button :permissions, 'Verified Teachers', class: "radio-button" %>
-      </label>
-      <label for="dynamic_page_permissions" class="radio-label">
-        Public
-        <%= form.radio_button :permissions, 'Public', class: "radio-button" %>
-      </label>
+      <div class="col">
+        <%= form.radio_button :permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioAdmin">Admin</label>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <%= form.radio_button :permissions, 'Verified Teacher', class: "form-check-input", id: "inlineRadioTeacher", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioTeacher">Verified Teacher</label>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <%= form.radio_button :permissions, 'Public', class: "form-check-input", id: "inlineRadioPublic", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioPublic">Public</label>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
     </div>
-
     <label for="dynamic_page_body"><h3>Body</h3></label>
     <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
     <%= form.hidden_field :creator_id, value: session[:user_id] %>
