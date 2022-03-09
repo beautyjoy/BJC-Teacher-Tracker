@@ -1,5 +1,5 @@
-<div class="btn-group" role="group" aria-label="New Page">
-  <%= button_to("Add New Page", {action: "new"}, method: :get) %>
+<div class="btn btn-primary">
+  <%= link_to 'Add New Page', new_dynamic_page_path, :class => "btn" %>
 </div>
 
 <table class="table js-dataTable">
