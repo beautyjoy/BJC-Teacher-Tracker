@@ -22,7 +22,7 @@ RSpec.describe DynamicPagesController, type: :controller do
                 slug: @dynamic_page_slug,
                 title: @dynamic_page_title,
                 body: "<p>Test page body.</p>",
-                permissions: "placeholder, change me!!!!",
+                permissions: "Admin",
                 creator_id: 0,
                 last_editor: 0
             }
@@ -40,14 +40,13 @@ RSpec.describe DynamicPagesController, type: :controller do
             slug: @dynamic_page_slug,
             title: @dynamic_page_title,
             body: "<p>Test page body.</p>",
-            permissions: "placeholder, change me!!!!",
+            permissions: "Admin",
             creator_id: 0,
             last_editor: 0
           }
         }
     }
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    # expect(@fail_flash_alert).to match flash[:alert]
   end
 
   it "requires slug to create" do
@@ -57,14 +56,13 @@ RSpec.describe DynamicPagesController, type: :controller do
           dynamic_page: {
             title: @dynamic_page_title,
             body: "<p>Test page body.</p>",
-            permissions: "placeholder, change me!!!!",
+            permissions: "Admin",
             creator_id: 0,
             last_editor: 0
           }
         }
     }
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    # expect(@fail_flash_alert).to match flash[:alert]
   end
 
   it "requires title to create" do
@@ -74,14 +72,29 @@ RSpec.describe DynamicPagesController, type: :controller do
           dynamic_page: {
             slug: @dynamic_page_slug,
             body: "<p>Test page body.</p>",
-            permissions: "placeholder, change me!!!!",
+            permissions: "Admin",
             creator_id: 0,
             last_editor: 0
           }
         }
     }
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    # expect(@fail_flash_alert).to match flash[:alert]
+  end
+
+  it "requires permissions to create" do
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+    post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            creator_id: 0,
+            last_editor: 0
+          }
+        }
+    }
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
   it "prevents submitting multiple pages with same slug" do
@@ -93,7 +106,7 @@ RSpec.describe DynamicPagesController, type: :controller do
                 slug: @dynamic_page_slug,
                 title: @dynamic_page_title,
                 body: "<p>Test page body.</p>",
-                permissions: "placeholder, change me!!!!",
+                permissions: "Admin",
                 creator_id: 0,
                 last_editor: 0
             }
@@ -108,7 +121,7 @@ RSpec.describe DynamicPagesController, type: :controller do
                 slug: @dynamic_page_slug,
                 title: @dynamic_page_title,
                 body: "<p>Test page body.</p>",
-                permissions: "placeholder, change me!!!!",
+                permissions: "Admin",
                 creator_id: 0,
                 last_editor: 0
             }
