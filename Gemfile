@@ -41,10 +41,6 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
-# # Create and edit dynamic pages | ??? Is this required ???
-# gem "actiontext" # , github: "rails/actiontext", require: "action_text"
-# gem "image_processing", "~> 1.2" # for Active Storage variants
-
 group :development do
   gem "annotate"
   gem "guard"
