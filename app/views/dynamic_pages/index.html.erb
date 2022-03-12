@@ -20,8 +20,12 @@
       <td> <%= p.slug %> </td>
       <td> <%= p.creator_id %> </td>
       <td> <%= p.last_editor %> </td>
+<<<<<<< HEAD
       <td><button class = "btn btn-default" id = p.slug><%= button_to "Delete", p, method: :delete, action: 'delete' %></button></td>
       <td><button class = "btn btn-default" id = p.slug><%= link_to("Edit", controller: "dynamic_pages", action: "edit", slug: p.slug) %></button></td>
+=======
+      <td><%= button_to "Delete", p, method: :delete,action: 'delete',class: "btn btn-primary btn-sm" %></td>
+>>>>>>> 7ac0fd2e3a6607c4bd325c02d48f86685eec3a93
     </tr>
     <% end %>
   </tbody>
