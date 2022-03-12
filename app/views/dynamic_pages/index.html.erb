@@ -9,6 +9,8 @@
     <th scope="col">Slug</th>
     <th scope="col">Creator</th>
     <th scope="col">Last Editor</th>
+    <th scope="col">Edit</th>
+    <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +20,8 @@
       <td> <%= p.slug %> </td>
       <td> <%= p.creator_id %> </td>
       <td> <%= p.last_editor %> </td>
-      <button class = "btn btn-default" id = p.slug><%= button_to "Delete", p, method: :delete,action: 'delete' %></button>
+      <td><button class = "btn btn-default" id = p.slug><%= button_to "Delete", p, method: :delete, action: 'delete' %></button></td>
+      <td><button class = "btn btn-default" id = p.slug><%= link_to("Edit", controller: "dynamic_pages", action: "edit", slug: p.slug) %></button></td>
     </tr>
     <% end %>
   </tbody>

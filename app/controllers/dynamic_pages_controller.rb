@@ -30,6 +30,16 @@ class DynamicPagesController < ApplicationController
   def show
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
   end
+  def editing
+    @dynamic_page = DynamicPage.find_by(slug: params[:slug])
+    @dynamic_page.slug = params[:slug]
+    @dynamic_page.title = params[:title]
+    @dynamic_page.body = params[:body]
+    @dynamic_page.permissions = params[:permissions]
+    @dynamic_page.last_editor = params[:last_editor]
+    @dynamic_page.save
+    redirect_to dynamic_pages_path
+  end
   private
     def dynamic_page_params
       params.require(:dynamic_page).require(:slug)

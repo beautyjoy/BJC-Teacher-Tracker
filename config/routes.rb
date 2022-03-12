@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   end
 
   get "dynamic_pages/pages/:slug", to: "dynamic_pages#show"
+  get "dynamic_pages/pages/edit/:slug", to: "dynamic_pages#edit"
 end

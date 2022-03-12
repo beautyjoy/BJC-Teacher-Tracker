@@ -1,0 +1,50 @@
+<h2> Edit a Page </h1>
+<hr />
+
+<%= form_with(model: @dynamic_page, local: true, class: "edit_dynamic_page", id: "edit_dynamic_page") do |form| %>
+  <div class="form">
+    <label for="dynamic_page_title"><h3 class="label-required">Title</h3></label>
+    <%= form.text_field :title, class: "form-control", required: true, value: @dynamic_page.title %>
+    <label for="dynamic_page_slug"><h3 class="label-required">Slug</h3></label>
+    <%= form.text_field :slug, class: "form-control", required: true, value: @dynamic_page.slug %>
+    <label for="dynamic_page_permissions"><h3 class="label-required">Permissions</h3></label>
+    <div class="row">
+      <div class="col">
+        <%= form.radio_button :permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioAdmin">Admin</label>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <%= form.radio_button :permissions, 'Verified Teacher', class: "form-check-input", id: "inlineRadioTeacher", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioTeacher">Verified Teacher</label>
+      </div>
+      <div class="col"></div>
+      <div class="col">
+        <%= form.radio_button :permissions, 'Public', class: "form-check-input", id: "inlineRadioPublic", required: true %>
+      </div>
+      <div class="col">
+        <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioPublic">Public</label>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+    <label for="dynamic_page_body"><h3>Body</h3></label>
+    <%= form.rich_text_area :body, rows: 20, style: 'height: 500px; overflow-y: auto;', value: @dynamic_page.body %>
+    <%= form.hidden_field :creator_id, value: @dynamic_page.creator_id %>
+    <%= form.hidden_field :last_editor, value: session[:user_id] %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
