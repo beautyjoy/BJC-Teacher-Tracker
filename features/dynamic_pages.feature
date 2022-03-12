@@ -116,3 +116,14 @@ Scenario: Can create pages with any selection for permissions
     And I fill in "dynamic_page_slug" with "test_slug_3"
     And I choose "inlineRadioPublic"
     And I press "Submit"
+
+Scenario: Correctly store user's full name and create date.
+    Given I am on the dynamic pages index
+    And I press "Add New Page"
+    Then I should be on the dynamic pages new
+    And I fill in "dynamic_page_title" with "Test page"
+    And I fill in "dynamic_page_slug" with "Test"
+    And I choose "inlineRadioAdmin"
+    And I press "Submit"
+    And I follow "Dynamic Pages"
+    And I should see "Joseph Mamoa"

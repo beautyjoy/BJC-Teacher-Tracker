@@ -7,8 +7,8 @@
     <tr>
     <th scope="col">Title</th>
     <th scope="col">Slug</th>
-    <th scope="col">Creator</th>
     <th scope="col">Last Editor</th>
+    <th scope="col">Created At</th>
     </tr>
   </thead>
   <tbody>
@@ -16,8 +16,8 @@
     <tr>
       <td> <%= link_to(p.title,controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
       <td> <%= p.slug %> </td>
-      <td> <%= p.creator_id %> </td>
-      <td> <%= p.last_editor %> </td>
+      <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+      <td> <%= p.created_at %> </td>
     </tr>
     <% end %>
   </tbody>
