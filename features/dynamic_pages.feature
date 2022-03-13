@@ -97,7 +97,6 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should be on the dynamic pages new
-<<<<<<< HEAD
   Scenario: Can delete a page
   Scenario: I create a new page and I can see it on the index page
       Given I am on the dynamic pages new
@@ -107,7 +106,6 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
       And I follow "Dynamic Pages"
       When I press "Delete" button for "test_slug"
       Then I should not see "test_slug"
-=======
 
 Scenario: Can create pages with any selection for permissions
     Given I am on the dynamic pages new
@@ -138,4 +136,3 @@ Scenario: Correctly store user's full name and create date.
     And I press "Submit"
     And I follow "Dynamic Pages"
     And I should see "Joseph Mamoa"
->>>>>>> b376ccd6fb1b20d9c168612cca17e490ea261dcf
