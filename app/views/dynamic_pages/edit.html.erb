@@ -1,0 +1,10 @@
+<h2> Edit Page </h1>
+<hr />
+
+<div id='edit-dynamic-pages-form-container'>
+  <% if Teacher.find(session[:user_id]).admin %>
+    <%= render 'form', dynamic_page: @dynamic_page %>
+  <% else %>
+    <%= flash[:error] = "Only Admin can edit pages!"%>
+  <% end %>
+</div>

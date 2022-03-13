@@ -137,11 +137,37 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I select "CA" from "State"
     And I enter my "School Website" as "cvhs.cv.k12.ca.us"
     And I press "Submit"
-    
+
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
     Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
     Then the "snap" of the user with email "bbaker@berkeley.edu" should be "bbbbbaker"
     Then the "status" of the user with email "bbaker@berkeley.edu" should be "teals_teacher"
     Then the "more_info" of the user with email "bbaker@berkeley.edu" should be "I am a TEALS program employee!"
+    Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
+    Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
+
+  Scenario: Filling out the form with correct information as a host
+    Given "bbaker@berkeley.edu" is not in the database
+    And I am on the BJC home page
+    And I enter my "First Name" as "Bob"
+    And I enter my "Last Name" as "Baker"
+    And I enter my "School Email" as "bbaker@berkeley.edu"
+    And I enter my "Personal or Course Website" as "https://www.bobbaker.io"
+    And I enter my "Snap! Username" as "bbbbbaker"
+    And I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
+    Then I should not see "ex. Im teaching a college course"
+    And I fill in "More Information" with "Rebecca"
+    And I set my education level target as "High School"
+    And I enter my "School Name" as "Castro Valley High School"
+    And I enter my "City" as "Castro Valley"
+    And I select "CA" from "State"
+    And I enter my "School Website" as "cvhs.cv.k12.ca.us"
+    And I press "Submit"
+
+    Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
+    Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
+    Then the "snap" of the user with email "bbaker@berkeley.edu" should be "bbbbbaker"
+    Then the "status" of the user with email "bbaker@berkeley.edu" should be "teals_volunteer"
+    Then the "more_info" of the user with email "bbaker@berkeley.edu" should be "Rebecca"
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
     Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"

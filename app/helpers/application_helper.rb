@@ -20,7 +20,7 @@ module ApplicationHelper
       "All Schools": schools_path,
       "All Teachers": teachers_path,
       "Email Templates": email_templates_path,
-      "Dynamic Pages": dynamic_pages_path
+      "Pages": dynamic_pages_path
     }
   end
 end

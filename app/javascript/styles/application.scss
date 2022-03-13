@@ -24,6 +24,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import 'forms';
 @import 'edit_teachers';
 
+@import "./actiontext.scss";
+
 html {
   min-height: 100%;
   position: relative;

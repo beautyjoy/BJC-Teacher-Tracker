@@ -15,5 +15,6 @@
 #  creator_id  :bigint
 #
 class DynamicPage < ApplicationRecord
+  has_rich_text :body
   def placeholder; end
 end
