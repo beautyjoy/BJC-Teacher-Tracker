@@ -7,10 +7,8 @@
     <tr>
     <th scope="col">Title</th>
     <th scope="col">Slug</th>
-    <th scope="col">Created At</th>
     <th scope="col">Last Editor</th>
-    <th scope="col">Edit</th>
-    <th scope="col">Delete</th>
+    <th scope="col">Created At</th>
     </tr>
   </thead>
   <tbody>
@@ -19,10 +17,11 @@
     <tr>
       <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
       <td> <%= p.slug %> </td>
-      <td> <%= p.created_at %> </td>
       <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+      <td> <%= p.created_at %> </td>
       <td><%= link_to("Edit",controller: "dynamic_pages", action: "edit", slug: p.slug) %></button></td>
       <td><%= button_to "Delete", p, method: :delete, action: 'delete',class: "btn btn-primary btn-sm" %></td>
+      
     </tr>
     <% end %>
     <% end %>
