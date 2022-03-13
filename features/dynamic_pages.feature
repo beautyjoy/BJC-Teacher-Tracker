@@ -66,7 +66,7 @@ Scenario: I create a new page and I can see it on the index page
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
-    And I follow "Dynamic Pages"
+    And I follow "Pages"
     Then I should see "Test Title"
     And I should see "test_slug"
 
@@ -97,15 +97,15 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should be on the dynamic pages new
-  Scenario: Can delete a page
-  Scenario: I create a new page and I can see it on the index page
-      Given I am on the dynamic pages new
-      And I fill in "dynamic_page_title" with "Test Title"
-      And I fill in "dynamic_page_slug" with "test_slug"
-      And I press "Submit"
-      And I follow "Pages"
-      When I press "Delete" button for "test_slug"
-      Then I should not see "test_slug"
+
+Scenario: I create a new page and I can see it on the index page
+    Given I am on the dynamic pages new
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I press "Submit"
+    And I follow "Pages"
+    When I press "Delete" button for "test_slug"
+    Then I should not see "test_slug"
 
 Scenario: Can create pages with any selection for permissions
     Given I am on the dynamic pages new
@@ -136,3 +136,16 @@ Scenario: Correctly store user's full name and create date.
     And I press "Submit"
     And I follow "Pages"
     And I should see "Joseph Mamoa"
+
+Scenario: Can edit pages with correct prefilled content in the form.
+    Given I am on the dynamic pages new
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I fill in "dynamic_page_body" with "This is a test"
+    And I press "Submit"
+    And I follow "Pages"
+    And I press "Edit" button for "test_slug"
+    Then I should be on the dynamic pages edit
+    And I should see "Test Title"
+    And I should see "test_slug"
+    And I should see "This is a test"
