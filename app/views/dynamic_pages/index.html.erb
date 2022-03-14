@@ -24,8 +24,8 @@
       <td> <%= p.slug %> </td>
       <td> <%= Teacher.find(p.last_editor).full_name %> </td>
       <td> <%= p.created_at %> </td>
-      <td type: button><%= button_to "Edit", {controller: "dynamic_pages", action: "edit", slug: p.slug}, {class: "btn btn-primary", id: "edit_"+p.slug} %></td>
-      <td type: button><%= button_to "Delete", p, method: :delete, action: "delete", class: "btn btn-danger", id: "delete_"+p.slug %></td>
+      <td type= button><%= button_to "Edit", {controller: "dynamic_pages", action: "edit", slug: "edit_"+p.slug}, {class: "btn btn-primary"} %></td>
+      <td type= button id= <%=p.slug%>><%= button_to "Delete", {controller: "dynamic_pages", action: "delete", id: p.id},{class: "btn btn-danger",id: "delete_"+p.slug} %></td>
     </tr>
     <% end %>
     <% end %>
