@@ -32,9 +32,11 @@ Scenario: Successfully creating a new dynamic page redirects to that page
     Given I am on the dynamic pages new
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
+    And I fill in the dynamic_page_body with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Test Title"
+    Then I should see "This is a test"
 
 Scenario: Creating a page without a title fails
     Given I am on the dynamic pages new
@@ -98,13 +100,13 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I press "Submit"
     Then I should be on the dynamic pages new
 
-Scenario: I create a new page and I can see it on the index page
+Scenario: I can delete pages
     Given I am on the dynamic pages new
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I press "Submit"
     And I follow "Pages"
-    When I press "Delete" button for "test_slug"
+    When I press the delete button for "test_slug"
     Then I should not see "test_slug"
 
 Scenario: Can create pages with any selection for permissions
@@ -141,7 +143,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
     Given I am on the dynamic pages new
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
-    And I fill in "dynamic_page_body" with "This is a test"
+    And I fill in the dynamic_page_body with "This is a test"
     And I press "Submit"
     And I follow "Pages"
     And I press "Edit" button for "test_slug"
