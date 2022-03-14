@@ -5,9 +5,13 @@ When(/^I press the delete button for "(.*)"$/) do |slug|
   # button = find_button(id: slug)
   # click_button(button)
   # Capybara.ignore_hidden_elements = true
-  # find(slug).click
+  # find('#delete_'+slug).click
   # click_link_or_button(id: slug)
-  find('#delete_'+slug).find('btn').find('btn-danger').click
+  # click_button('#delete_'+slug)
+  # find_button('#delete_'+slug).click
+  # button_id = '#delete_'+slug
+  # find('#delete_test_slug').click_button("Delete")
+  page.find('form', class: 'button_to').click_button("Delete")
 end
 
 When(/^(?:|I )fill in the dynamic_page_body with "([^"]*)"$/) do |value|
