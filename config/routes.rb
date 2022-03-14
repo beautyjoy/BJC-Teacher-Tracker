@@ -37,4 +37,5 @@ Rails.application.routes.draw do
 
   get "pages/:slug", to: "dynamic_pages#show"
   post "dynamic_pages/pages/edit/:slug", to: "dynamic_pages#edit"
+  post "dynamic_pages/pages/delete/:slug", to: "dynamic_pages#delete"
 end

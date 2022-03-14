@@ -5,11 +5,11 @@ class DynamicPagesController < ApplicationController
   def index
     @all_dynamic_pages = DynamicPage.all
   end
-  def destroy
+  def delete
     if !is_admin?
       redirect_to dynamic_pages_path, alert: "Only administrators can delete!"
     else
-      DynamicPage.delete(params[:id])
+      DynamicPage.destroy(params[:id])
       redirect_to dynamic_pages_path
     end
   end
