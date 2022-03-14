@@ -23,13 +23,13 @@ Scenario: Pressing "Dynamic Pages" button on navbar should take me to a list of 
 Scenario: Pressing "Add New Page" button should take user to new page form
     Given I am on the dynamic pages index
     And I press "Add New Page"
-    Then I should be on the dynamic pages new
+    Then I should be on the new dynamic pages page
     And I should see "Title"
     And I should see "Slug"
     And I should see "Body"
 
 Scenario: Successfully creating a new dynamic page redirects to that page
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I fill in the dynamic_page_body with "This is a test"
@@ -39,31 +39,31 @@ Scenario: Successfully creating a new dynamic page redirects to that page
     Then I should see "This is a test"
 
 Scenario: Creating a page without a title fails
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then The "#new_dynamic_page" form is invalid
-    And I should be on the dynamic pages new
+    And I should be on the new dynamic pages page
 
 Scenario: Creating a page without a slug fails
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then The "#new_dynamic_page" form is invalid
-    And I should be on the dynamic pages new
+    And I should be on the new dynamic pages page
 
 Scenario: Creating a page without choosing permissions fails
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I press "Submit"
     Then The "#new_dynamic_page" form is invalid
-    And I should be on the dynamic pages new
+    And I should be on the new dynamic pages page
 
 Scenario: I create a new page and I can see it on the index page
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -73,7 +73,7 @@ Scenario: I create a new page and I can see it on the index page
     And I should see "test_slug"
 
 Scenario: Can create a new page with the same title as a page that already exists
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -87,7 +87,7 @@ Scenario: Can create a new page with the same title as a page that already exist
     Then I should see "Test Title"
 
 Scenario: (Prob need to edit this later) Can't create a page with a slug that already exists
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -98,19 +98,20 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
-    Then I should be on the dynamic pages new
+    Then I should be on the new dynamic pages page
 
 Scenario: I can delete pages
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     When I press the delete button for "test_slug"
     Then I should not see "test_slug"
 
 Scenario: Can create pages with any selection for permissions
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Admin Permissions"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -131,7 +132,7 @@ Scenario: Can create pages with any selection for permissions
 Scenario: Correctly store user's full name and create date.
     Given I am on the dynamic pages index
     And I press "Add New Page"
-    Then I should be on the dynamic pages new
+    Then I should be on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test page"
     And I fill in "dynamic_page_slug" with "Test"
     And I choose "inlineRadioAdmin"
@@ -140,14 +141,15 @@ Scenario: Correctly store user's full name and create date.
     And I should see "Joseph Mamoa"
 
 Scenario: Can edit pages with correct prefilled content in the form.
-    Given I am on the dynamic pages new
+    Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
     And I fill in the dynamic_page_body with "This is a test"
     And I press "Submit"
     And I follow "Pages"
-    And I press "Edit" button for "test_slug"
-    Then I should be on the dynamic pages edit
-    And I should see "Test Title"
-    And I should see "test_slug"
+    And I press the edit button for "test_slug"
+    Then I should be on the edit dynamic pages page for "test_slug"
+    And the "dynamic_page_title" field should contain "Test Title"
+    And the "dynamic_page_slug" field should contain "test_slug"
     And I should see "This is a test"

@@ -32,10 +32,10 @@ Rails.application.routes.draw do
   resources :dynamic_pages do
     member do
       post :delete
+      get :new
     end
   end
 
   get "pages/:slug", to: "dynamic_pages#show"
-  post "dynamic_pages/pages/edit/:slug", to: "dynamic_pages#edit"
-  post "dynamic_pages/pages/delete/:slug", to: "dynamic_pages#delete"
+  post "pages/edit/:slug", to: "dynamic_pages#edit"
 end
