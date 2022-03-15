@@ -22,7 +22,7 @@ Scenario: Pressing "Dynamic Pages" button on navbar should take me to a list of 
 
 Scenario: Pressing "Add New Page" button should take user to new page form
     Given I am on the dynamic pages index
-    And I press "Add New Page"
+    And I follow "Add New Page"
     Then I should be on the new dynamic pages page
     And I should see "Title"
     And I should see "Slug"
@@ -79,7 +79,7 @@ Scenario: Can create a new page with the same title as a page that already exist
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
-    And I press "Add New Page"
+    And I follow "Add New Page"
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug_2"
     And I choose "inlineRadioAdmin"
@@ -93,7 +93,7 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
-    And I press "Add New Page"
+    And I follow "Add New Page"
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -117,13 +117,13 @@ Scenario: Can create pages with any selection for permissions
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
-    And I press "Add New Page"
+    And I follow "Add New Page"
     And I fill in "dynamic_page_title" with "Verified Teacher Permissions"
     And I fill in "dynamic_page_slug" with "test_slug_2"
     And I choose "inlineRadioTeacher"
     And I press "Submit"
     And I follow "Pages"
-    And I press "Add New Page"
+    And I follow "Add New Page"
     And I fill in "dynamic_page_title" with "Public Permissions"
     And I fill in "dynamic_page_slug" with "test_slug_3"
     And I choose "inlineRadioPublic"
@@ -131,7 +131,7 @@ Scenario: Can create pages with any selection for permissions
 
 Scenario: Correctly store user's full name and create date.
     Given I am on the dynamic pages index
-    And I press "Add New Page"
+    And I follow "Add New Page"
     Then I should be on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test page"
     And I fill in "dynamic_page_slug" with "Test"
