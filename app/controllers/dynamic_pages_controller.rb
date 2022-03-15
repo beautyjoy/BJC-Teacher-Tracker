@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DynamicPagesController < ApplicationController
-  before_action :require_admin
   def index
     @all_dynamic_pages = DynamicPage.all
   end
