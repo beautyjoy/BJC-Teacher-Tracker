@@ -1,8 +1,16 @@
-<div class="mt-3 mb-3" align="right">
-   <div class="btn btn-blue">
-     <%= link_to 'Add New Page', new_dynamic_page_path, :class => "btn", id: "Add New Page" %>
-   </div>
- </div>
+<div class="page-title">
+  <div class="row">
+    <div class="col-9">
+      <h1> BJC Pages </h1>
+    </div>
+
+    <div class="col-3">
+      <% if Teacher.find(session[:user_id]).admin %>
+        <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <table class="table js-dataTable">
   <thead class="thead-dark">
