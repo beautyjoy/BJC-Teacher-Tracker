@@ -24,7 +24,7 @@
           <td> <%= p.slug %> </td>
           <td> <%= Teacher.find(p.last_editor).full_name %> </td>
           <td> <%= p.created_at %> </td>
-          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
           <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
         </tr>
       <% end %>
