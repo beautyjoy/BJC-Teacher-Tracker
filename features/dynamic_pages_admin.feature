@@ -86,7 +86,7 @@ Scenario: Can create a new page with the same title as a page that already exist
     And I press "Submit"
     Then I should see "Test Title"
 
-Scenario: (Prob need to edit this later) Can't create a page with a slug that already exists
+Scenario: Can't create a page with a slug that already exists
     Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
@@ -99,6 +99,26 @@ Scenario: (Prob need to edit this later) Can't create a page with a slug that al
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should be on the new dynamic pages page
+
+Scenario: Attempting to create page with taken slug doesn't delete form input
+    Given I am on the new dynamic pages page
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I fill in the dynamic_page_body with "Don't see this"
+    And I choose "inlineRadioAdmin"
+    And I press "Submit"
+    And I follow "Pages"
+    And I press "New Page"
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I fill in the dynamic_page_body with "This is a test"
+    And I choose "inlineRadioAdmin"
+    And I press "Submit"
+    Then I should be on the new dynamic pages page
+    And the "dynamic_page_title" field should contain "Test Title"
+    And the "dynamic_page_slug" field should contain "test_slug"
+    And I should see "This is a test"
+    And I should not see "Don't see this"
 
 Scenario: I can delete pages
     Given I am on the new dynamic pages page
@@ -153,3 +173,53 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And the "dynamic_page_title" field should contain "Test Title"
     And the "dynamic_page_slug" field should contain "test_slug"
     And I should see "This is a test"
+    Then I fill in "dynamic_page_title" with "New Title"
+    And I fill in "dynamic_page_slug" with "new_slug"
+    And I choose "inlineRadioPublic"
+    And I fill in the dynamic_page_body with "This is a test 2"
+    And I press "Update"
+    Then I should see "New Title"
+    And I should see "new_slug"
+    Then I should be on the dynamic pages index
+    And I should not see "Test Title"
+    And I should not see "test_slug"
+
+Scenario: Can update page even if no changes
+    Given I am on the new dynamic pages page
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
+    And I fill in the dynamic_page_body with "This is a test"
+    And I press "Submit"
+    And I follow "Pages"
+    And I press the edit button for "test_slug"
+    Then I should be on the edit dynamic pages page for "test_slug"
+    And I press "Update"
+    Then I should be on the dynamic pages index
+    And I should see "Test Title"
+    And I should see "test_slug"
+
+Scenario: Attempting to update page with taken slug doesn't delete form input
+    Given I am on the new dynamic pages page
+    And I fill in "dynamic_page_title" with "Test Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
+    And I fill in the dynamic_page_body with "This is a test"
+    And I press "Submit"
+    Given I am on the new dynamic pages page
+    And I fill in "dynamic_page_title" with "Test Title 2"
+    And I fill in "dynamic_page_slug" with "test_slug_2"
+    And I choose "inlineRadioAdmin"
+    And I fill in the dynamic_page_body with "This is a test"
+    And I press "Submit"
+    Then I follow "Pages"
+    And I press the edit button for "test_slug_2"
+    Then I should be on the edit dynamic pages page for "test_slug_2"
+    And I fill in "dynamic_page_title" with "New Title"
+    And I fill in "dynamic_page_slug" with "test_slug"
+    And I fill in the dynamic_page_body with "New page body."
+    And I press "Update"
+    Then I should be on the edit dynamic pages page for "test_slug_2"
+    And the "dynamic_page_title" field should contain "New Title"
+    And the "dynamic_page_slug" field should contain "test_slug"
+    And I should see "New page body."
