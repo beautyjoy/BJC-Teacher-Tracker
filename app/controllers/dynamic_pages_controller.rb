@@ -10,11 +10,12 @@ class DynamicPagesController < ApplicationController
     redirect_to dynamic_pages_path
   end
   def new
-    @dynamic_page = DynamicPage.new
+    @dynamic_page = DynamicPage.new(flash[:dynamic_page])
   end
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
     if DynamicPage.find_by(slug: @dynamic_page.slug)
+      flash[:dynamic_page] = params[:dynamic_page]
       redirect_to({ action: "new" }, alert:  "That slug already exists :(")
     elsif @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
@@ -28,12 +29,26 @@ class DynamicPagesController < ApplicationController
   end
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
+    @dynamic_page.assign_attributes(flash[:dynamic_page])
   end
   def update
     @dynamic_page ||= DynamicPage.find(params[:id])
+    temp_slug = @dynamic_page.slug
     @dynamic_page.assign_attributes(dynamic_page_params)
-    @dynamic_page.save
-    redirect_to dynamic_pages_path
+    if temp_slug == @dynamic_page.slug # Slug didn't change
+      @dynamic_page.save
+      flash[:success] = "Updated #{@dynamic_page.title} page successfully."
+      redirect_to dynamic_pages_path
+    elsif not DynamicPage.find_by(slug: @dynamic_page.slug) # No other page with this slug in db
+      @dynamic_page.save
+      flash[:success] = "Updated #{@dynamic_page.title} page successfully."
+      redirect_to dynamic_pages_path
+    elsif DynamicPage.find_by(slug: @dynamic_page.slug) # There is another page with this slug already
+      flash[:dynamic_page] = params[:dynamic_page]
+      redirect_to({ action: "edit", slug: temp_slug }, alert:  "That slug already exists :(")
+    else
+      redirect_to root_path, alert: "Failed to submit information :("
+    end
   end
 
   private
