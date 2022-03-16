@@ -50,8 +50,9 @@ RSpec.describe DynamicPagesController, type: :controller do
   end
 
   it "requires slug to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             title: @dynamic_page_title,
@@ -61,13 +62,15 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
   it "requires title to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             slug: @dynamic_page_slug,
@@ -77,13 +80,15 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
   it "requires permissions to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             title: @dynamic_page_title,
@@ -93,7 +98,44 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+  end
+
+  it "requires creator_id to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+    expect { post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
+            last_editor: 0
+          }
+        }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+  end
+
+  it "requires last_editor to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+    expect { post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
+            last_editor: 0
+          }
+        }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
