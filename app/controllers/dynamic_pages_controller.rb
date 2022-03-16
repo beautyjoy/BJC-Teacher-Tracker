@@ -14,11 +14,12 @@ class DynamicPagesController < ApplicationController
     end
   end
   def new
-    @dynamic_page = DynamicPage.new
+    @dynamic_page = DynamicPage.new(flash[:dynamic_page])
   end
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
     if DynamicPage.find_by(slug: @dynamic_page.slug)
+      flash[:dynamic_page] = params[:dynamic_page]
       redirect_to({ action: "new" }, alert:  "That slug already exists :(")
     elsif @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
@@ -38,12 +39,10 @@ class DynamicPagesController < ApplicationController
     temp_slug = @dynamic_page.slug
     @dynamic_page.assign_attributes(dynamic_page_params)
     if temp_slug == @dynamic_page.slug
-      # redirect_to({ action: "edit", slug: temp_slug }, alert:  "That slug already exists :(")
       @dynamic_page.save
       redirect_to dynamic_pages_path
     elsif not DynamicPage.find_by(slug: @dynamic_page.slug) # nil?
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
-      # redirect_to ({ action: "show", slug: @dynamic_page.slug })
       @dynamic_page.save
       redirect_to dynamic_pages_path
     elsif DynamicPage.find_by(slug: @dynamic_page.slug) # not nil?
