@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-3">
-      <% if Teacher.find(session[:user_id]).admin %>
+      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
         <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
       <% end %>
     </div>
@@ -19,20 +19,35 @@
     <th scope="col">Slug</th>
     <th scope="col">Last Editor</th>
     <th scope="col">Created At</th>
-    <th scope="col">Edit</th>
-    <th scope="col">Delete</th>
+    <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    <% end %>
     </tr>
   </thead>
   <tbody>
     <% @all_dynamic_pages.each do |p| %>
-      <% if p.permissions ==  "Admin" || Teacher.find(session[:user_id]).admin %>
+      <% if p.permissions == "Public" %>
         <tr align = "center">
           <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
           <td> <%= p.slug %> </td>
           <td> <%= Teacher.find(p.last_editor).full_name %> </td>
           <td> <%= p.created_at %> </td>
-          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
-          <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+          <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+            <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+            <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+          <% end %>
+        </tr>
+      <% elsif session[:user_id] && (Teacher.find(session[:user_id]).admin || p.permissions != "Admin") %>
+        <tr align = "center">
+          <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
+          <td> <%= p.slug %> </td>
+          <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+          <td> <%= p.created_at %> </td>
+          <% if Teacher.find(session[:user_id]).admin %>
+            <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+            <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>

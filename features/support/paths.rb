@@ -29,6 +29,7 @@ module NavigationHelpers
     when /^the dynamic pages index$/ then dynamic_pages_path
     when /^the new dynamic pages page$/ then "/dynamic_pages/new"
     when /^the edit dynamic pages page for (.*)$/ then "/pages/edit/" + $1[1..-2]
+    when /^the dynamic page for slug (.*)$/ then "/pages/" + $1[1..-2]
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

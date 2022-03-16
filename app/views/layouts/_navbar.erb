@@ -12,6 +12,9 @@
           </li>
         <% end %>
       <% end %>
+      <li class='nav-item'>
+        <%= link_to "Pages", dynamic_pages_path, class: "nav-link" %>
+      </li>
       <% if current_user %>
         <li class='nav-item'>
           <a class='nav-link' href='/logout' data-method='delete'>Logout</a>

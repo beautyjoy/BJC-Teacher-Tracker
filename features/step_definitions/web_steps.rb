@@ -265,6 +265,10 @@ Then(/^(?:|I )should see a button named "([^"]*)"$/) do |text|
   expect(page).to have_button(text)
 end
 
+Then(/^(?:|I )should not see a button named "([^"]*)"$/) do |text|
+  expect(page).to have_no_button(text)
+end
+
 Given(/I seed data/) do
   Rails.application.load_seed
 end

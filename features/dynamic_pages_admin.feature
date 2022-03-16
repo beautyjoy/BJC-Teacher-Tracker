@@ -1,4 +1,4 @@
-Feature: dynamic pages features
+Feature: dynamic pages features as an admin
 
     As an admin, I should be able to create, view, and edit dynamic pages
 
