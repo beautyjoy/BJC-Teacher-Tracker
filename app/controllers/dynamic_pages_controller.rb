@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 class DynamicPagesController < ApplicationController
-  before_action :require_admin
+  before_action :require_admin, except: [:index, :show]
   def index
     @all_dynamic_pages = DynamicPage.all
   end
   def delete
-    if !is_admin?
-      redirect_to dynamic_pages_path, alert: "Only administrators can delete!"
-    else
-      DynamicPage.destroy(params[:id])
-      redirect_to dynamic_pages_path
-    end
+    DynamicPage.destroy(params[:id])
+    redirect_to dynamic_pages_path
   end
   def new
     @dynamic_page = DynamicPage.new
