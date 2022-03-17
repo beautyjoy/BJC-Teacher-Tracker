@@ -148,7 +148,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     thetest = DynamicPage.find_by(slug: "Test_slug")
-    post :update, params: { id: thetest.id, dynamic_page: {permissions:"teacher",title:"title",id: thetest.id ,body: "This is an edited body",slug: "Test_slug"} }
+    post :update, params: {id: thetest.id, dynamic_page: {permissions:"teacher",title:"title",id: thetest.id,body: "This is an edited body",slug: "Test_slug"} }
     expect(thetest.body).to eq("This is an edited body")
   end
 end
