@@ -1,0 +1,4 @@
+dynamic_pages_thepage:
+  record: thepage (dynamic_page) # record: record name (in_yml) in association (ModelName)
+  name: body                                  # has_rich_text :name_of_rich_text_attribute
+  body: <p>This is a Test slug.</p>   # actual rich text content

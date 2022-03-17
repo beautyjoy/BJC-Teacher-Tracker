@@ -50,8 +50,9 @@ RSpec.describe DynamicPagesController, type: :controller do
   end
 
   it "requires slug to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             title: @dynamic_page_title,
@@ -61,13 +62,15 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
   it "requires title to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             slug: @dynamic_page_slug,
@@ -77,13 +80,15 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
   it "requires permissions to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    post :create, {
+    expect { post :create, {
         params: {
           dynamic_page: {
             title: @dynamic_page_title,
@@ -93,7 +98,44 @@ RSpec.describe DynamicPagesController, type: :controller do
             last_editor: 0
           }
         }
-    }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+  end
+
+  it "requires creator_id to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+    expect { post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
+            last_editor: 0
+          }
+        }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+  end
+
+  it "requires last_editor to create" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
+    expect { post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
+            last_editor: 0
+          }
+        }
+      }
+    }.to raise_error(ActionController::ParameterMissing)
     expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
   end
 
@@ -129,6 +171,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     }
     expect(@slug_exists_flash_alert).to match flash[:alert]
   end
+
   it "able to delete a page" do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
@@ -144,11 +187,14 @@ RSpec.describe DynamicPagesController, type: :controller do
     post :delete, params: { id: long_app.id }
     expect(DynamicPage.find_by(slug: "Test_slug")).not_to be_nil
   end
+
   it "should allow admin to edit page" do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     thetest = DynamicPage.find_by(slug: "Test_slug")
-    post :update, params: {id: thetest.id, dynamic_page: {permissions:"teacher",title:"title",id: thetest.id,body: "This is an edited body",slug: "Test_slug"} }
+    byebug
+    post :update, params: {id: thetest.id, dynamic_page: {permissions:"teacher",title:"title",slug: thetest.slug,body: "This is an edited body",creator_id: 5,last_editor: "Darwin"} }
+    bodyfor = thetest.body
     expect(thetest.body).to eq("This is an edited body")
   end
 end
