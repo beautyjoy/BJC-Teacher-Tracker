@@ -6,7 +6,7 @@
 
     <div class="col-3">
       <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
-        <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
+        <%= button_to("New Teacher", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
       <% end %>
     </div>
   </div>
