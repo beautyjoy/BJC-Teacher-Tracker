@@ -34,14 +34,11 @@ class DynamicPagesController < ApplicationController
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
   end
   def update
-    @dynamic_page ||= DynamicPage.find(params[:id])
-    if DynamicPage.find_by(slug: @dynamic_page.slug)
-      redirect_to({ action: "new" }, alert:  "That slug already exists :(")
-    else
-      @dynamic_page.assign_attributes(dynamic_page_params)
-      @dynamic_page.save
-      redirect_to dynamic_pages_path
-    end
+    @dynamic_page = DynamicPage.find_by(slug: session[:slug])
+    @dynamic_page.assign_attributes(dynamic_page_params)
+    @dynamic_page.save
+    redirect_to dynamic_pages_path
+
   end
 
   private

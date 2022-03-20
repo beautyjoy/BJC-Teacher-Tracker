@@ -1,5 +1,9 @@
 <%= provide(:h1, "All BJC Teachers") %>
 
+<div class="btn-group" role="group" aria-label="New Page">
+  <%= button_to("Add New Teacher", {action: "new"}, method: :get) %>
+</div>
+
 <div class="custom-control custom-checkbox custom-control-inline float-right">
   <input class="custom-control-input" type="checkbox" name="Application Status" id="Validated" value="Validated">
   <label class="custom-control-label" for="Validated">Validated</label>
