@@ -1,7 +1,15 @@
-<%= provide(:h1, "All BJC Teachers") %>
+<div class="page-title">
+  <div class="row">
+    <div class="col-9">
+      <h1> BJC Teachers </h1>
+    </div>
 
-<div class="btn-group" role="group" aria-label="New Page">
-  <%= button_to("Add New Teacher", {action: "new"}, method: :get) %>
+    <div class="col-3">
+      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+        <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="custom-control custom-checkbox custom-control-inline float-right">
