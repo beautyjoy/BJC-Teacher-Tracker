@@ -3,7 +3,6 @@
 class SchoolsController < ApplicationController
   before_action :require_admin
   def create
-    byebug
     other_school = School.find_by(name: school_params[:name])
     @school = School.new(school_params)
     if @school.equal(other_school)== false && @school.save
