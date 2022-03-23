@@ -3,9 +3,13 @@
 class SchoolsController < ApplicationController
   before_action :require_admin
   def create
+    byebug
+    other_school = School.find_by(name: school_params[:name])
     @school = School.new(school_params)
-    if @school.save
+    if @school.equal(other_school)== false && @school.save
       flash[:success] = "Created #{@school.name} successfully."
+      redirect_to schools_path
+    elsif@school.equal(other_school)== true
       redirect_to schools_path
     else
       redirect_to root_path, alert: "Failed to submit information :("

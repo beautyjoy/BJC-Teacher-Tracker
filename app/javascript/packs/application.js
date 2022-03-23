@@ -58,3 +58,4 @@ import '../styles/application.scss';
 
 require("trix")
 require("@rails/actiontext")
+require("selectize")

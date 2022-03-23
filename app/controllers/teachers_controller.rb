@@ -21,14 +21,18 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
-    @school = School.new
+    @school = School.new #maybe delegate this
     @readonly = false
   end
 
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
+    other_school = School.find_by(name: school_params[:name])
     @school = School.new(school_params)
+    if @school.equal(other_school) == true
+      @school = other_school
+    end
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
@@ -36,8 +40,8 @@ class TeachersController < ApplicationController
       update
       return
     end
-    @school = school_from_params
-    if !@school.save
+
+    if @school.equal(other_school) == false && !@school.save
       flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
       render "new"
       return
