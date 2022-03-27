@@ -223,3 +223,12 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And the "dynamic_page_title" field should contain "New Title"
     And the "dynamic_page_slug" field should contain "test_slug"
     And I should see "New page body."
+
+Scenario: Clicking radio button text selects that radio button
+    Given I am on the new dynamic pages page
+    And I choose "Admin"
+    Then The radio button "inlineRadioAdmin" should be checked
+    And I choose "Verified Teacher"
+    Then The radio button "inlineRadioTeacher" should be checked
+    And I choose "Public"
+    Then The radio button "inlineRadioPublic" should be checked

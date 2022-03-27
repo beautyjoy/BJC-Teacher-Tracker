@@ -28,3 +28,7 @@ end
 When(/^I press the edit button for "(.*)"$/) do |slug|
   click_button("edit_" + slug)
 end
+
+Then(/^The radio button "(.*)" should be checked$/) do |radio_button_name|
+  expect(find_field(radio_button_name)).to be_checked
+end
