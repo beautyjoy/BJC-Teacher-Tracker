@@ -1,4 +1,4 @@
-<div class= class='col-6>
+<div >
     <%= fields.label :name, "School Name", class: "label-required" %>
     <%= fields.select :name,School.distinct.pluck(:name), {},
      {class: "select"}%>

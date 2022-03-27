@@ -60,6 +60,3 @@ require("trix")
 require("@rails/actiontext")
 require("selectize")
 require("packs/schools.js")
-$(document).on('turbolinks:load', function() {
-  $('.select').selectize();
-});
