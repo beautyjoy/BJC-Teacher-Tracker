@@ -1,25 +1,9 @@
-<div >
+<div  class='form-group row' >
+  <div class='col-12'>
     <%= fields.label :name, "School Name", class: "label-required" %>
     <%= fields.select :name,School.distinct.pluck(:name), {},
      {class: "select"}%>
-     </div>
-<div class='form-group row'>
   <%= javascript_pack_tag 'schools' %>
   <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>
   <%= csrf_meta_tags %>
-    <div class='col-2'>
-        <%= fields.label :state, class: "label-required" %>
-        <%= fields.select(
-            :state,
-            School::VALID_STATES,
-            {include_blank: "State"},
-            { class: 'form-control', required: true }
-        ) %>
-    </div>
-</div>
-
-<div class="form-group">
-<%= fields.label :website, "School Website", class: "label-required" %>
-<%= fields.text_field :website, placeholder: "snap.berkeley.edu",
-    class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
 </div>
