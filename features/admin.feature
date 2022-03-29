@@ -213,12 +213,22 @@ Scenario: Should be able to resend welcome email
   Then I should see a button named "Resend Welcome Email"
 
   Scenario: Admin can access new teacher button at teacher index page
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I should see "BJC Teacher Dashboard"
   Given I follow "All Teachers"
   Then I should see "BJC Teachers"
   And I press "New Teacher"
   Then I should see "Request Access to Teacher Materials"
 
   Scenario: Admin can access new school button at teacher index page
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I should see "BJC Teacher Dashboard"
   Given I follow "All Schools"
   Then I should see "BJC Schools"
   And I press "New School"
