@@ -39,7 +39,6 @@ class School < ApplicationRecord
   def website
     prefix_url(self[:website])
   end
-
   def location
     "#{city}, #{state}"
   end
