@@ -41,6 +41,9 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
+# Render images for file uploads in dynamic pages
+gem "image_processing", ">= 1.2"
+
 group :development do
   gem "annotate"
   gem "guard"
