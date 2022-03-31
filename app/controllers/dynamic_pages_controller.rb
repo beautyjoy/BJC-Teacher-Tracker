@@ -3,7 +3,7 @@
 class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   def index
-    if session[:user_id]
+    if logged_in?
       @current_user_is_admin = is_admin?
       @current_user_is_teacher = is_teacher?
       @current_user_is_verified_teacher = is_verified_teacher?
