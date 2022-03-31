@@ -105,6 +105,14 @@ Scenario: Teachers can access teacher pages
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
 
+Scenario: Teachers can't access admin pages
+    Given I am on the BJC home page
+    Given I have a teacher Google email
+    And I follow "Log In"
+    Then I can log in with Google
+    Given I am on the dynamic page for slug "test_slug_admin"
+    Then I should be on the dynamic pages index
+
 Scenario: Public can access public pages
     Given I am on the BJC home page
     Then I follow "Pages"
@@ -113,3 +121,11 @@ Scenario: Public can access public pages
     Then I should be on the dynamic page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
+
+Scenario: Public can't access verified teacher pages
+    Given I am on the dynamic page for slug "test_slug_verified_teacher"
+    Then I should be on the dynamic pages index
+
+Scenario: Public can't access admin pages
+    Given I am on the dynamic page for slug "test_slug_admin"
+    Then I should be on the dynamic pages index
