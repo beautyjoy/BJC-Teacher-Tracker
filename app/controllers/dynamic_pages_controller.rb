@@ -26,6 +26,11 @@ class DynamicPagesController < ApplicationController
   end
   def show
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
+    if @dynamic_page.permissions == "Admin" && !is_admin?
+      redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
+    elsif @dynamic_page.permissions == "Verified Teacher" && (!logged_in?)
+      redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
+    end
   end
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
