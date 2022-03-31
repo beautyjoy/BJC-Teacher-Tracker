@@ -98,5 +98,5 @@ group :test do
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
 
-  gem 'rails-controller-testing'
+  gem "rails-controller-testing"
 end

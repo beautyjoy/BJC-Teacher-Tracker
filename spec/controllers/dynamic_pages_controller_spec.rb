@@ -17,7 +17,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     it "renders the index template" do
       expect(DynamicPage).to receive(:all)
       get :index
-      expect(response).to render_template('index')
+      expect(response).to render_template("index")
     end
   end
 
@@ -203,5 +203,4 @@ RSpec.describe DynamicPagesController, type: :controller do
       expect(@slug_exists_flash_alert).to match flash[:alert]
     end
   end
-
 end
