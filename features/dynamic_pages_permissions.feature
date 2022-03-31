@@ -5,14 +5,14 @@ Feature: dynamic pages features a verified teacher
 Background: Has admin and teacher in DB along with pages of each permission type
     Given I seed data
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        |
-    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
-    | Todd       | Teacher   | false | testteacher@berkeley.edu     |
+    | first_name | last_name | admin | email                        | application_status |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
+    | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following dynamic pages exist:
-    | slug | title | body | permissions                        |
-    | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin   |
+    | slug                       | title             | body               | permissions      |
+    | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin            |
     | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher |
-    | test_slug_public           | Test Public Page  | Test public body.  | Public   |
+    | test_slug_public           | Test Public Page  | Test public body.  | Public           |
 
 Scenario: Admins can see everything
     Given I am on the BJC home page
