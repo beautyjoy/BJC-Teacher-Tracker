@@ -1,4 +1,4 @@
-<h2> <%= @email_template.title %> </h1>
+<%= provide(:h1, @email_template.title) %>
 <hr />
 
 <%= form_with(model: @email_template, local: true) do |form| %>
