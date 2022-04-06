@@ -100,4 +100,6 @@ group :test do
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
+
+  gem "rails-controller-testing"
 end

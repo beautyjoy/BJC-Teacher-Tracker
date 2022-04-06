@@ -3,6 +3,11 @@
 class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   def index
+    if logged_in?
+      @current_user_is_admin = is_admin?
+      @current_user_is_teacher = is_teacher?
+      @current_user_is_verified_teacher = is_verified_teacher?
+    end
     @all_dynamic_pages = DynamicPage.all
   end
   def delete
@@ -26,6 +31,11 @@ class DynamicPagesController < ApplicationController
   end
   def show
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
+    if @dynamic_page.permissions == "Admin" && !is_admin?
+      redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
+    elsif @dynamic_page.permissions == "Verified Teacher" && (!is_admin?) && (!is_verified_teacher?)
+      redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
+    end
   end
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
