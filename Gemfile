@@ -41,6 +41,9 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
+# Store uploaded files
+gem "aws-sdk-s3", require: false
+
 # Render images for file uploads in dynamic pages
 gem "image_processing", ">= 1.2"
 
