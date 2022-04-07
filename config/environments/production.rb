@@ -94,14 +94,12 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "email-smtp.us-west-2.amazonaws.com",
     port: 587,
-    domain: "smtp.gmail.com",
-    user_name: Figaro.env.email_user_name,
+    user_name: "AKIA6JV7O2DSLSCZFINV",
     password: Figaro.env.email_password,
-    authentication: "plain",
+    authentication: :login,
     enable_starttls_auto: true,
-    openssl_verify_mode: "none",
   }
 
   # Store files on Amazon S3. (Uncomment this when S3 is setup)

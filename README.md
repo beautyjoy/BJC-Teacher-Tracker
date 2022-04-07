@@ -3,14 +3,6 @@
 [![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
 ---
 
-## CS169L Badges (Delete These When Merged into Golden Repo):
-![Specs Status](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/actions/workflows/ci.yml/badge.svg)
-<a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/maintainability"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/maintainability" /></a>
-<a href="https://codeclimate.com/github/mitchell2001wong/BJC-Teacher-Tracker/test_coverage"><img src="https://api.codeclimate.com/v1/badges/7fb9c619d24e6996887a/test_coverage" /></a>
-[![Pivotal Tracker](https://github.com/mitchell2001wong/BJC-Teacher-Tracker/blob/master/app/assets/images/pivotal_tracker_logo.png)](https://www.pivotaltracker.com/n/projects/2406982)
-[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_BJC%20Teacher%20Tracker-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-22-GH-mitchell2001wong_BJC-Teacher-Tracker/main)
----
-
 ## Description
 
 The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering.
