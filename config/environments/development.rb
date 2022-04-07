@@ -69,5 +69,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Store files locally
+  # config.active_storage.service = :amazon
   config.active_storage.service = :local
 end

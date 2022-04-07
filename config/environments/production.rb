@@ -104,6 +104,6 @@ Rails.application.configure do
     openssl_verify_mode: "none",
   }
 
-  # # Store files on Amazon S3. (Uncomment this when S3 is setup)
-  # config.active_storage.service = :amazon
+  # Store files on Amazon S3. (Uncomment this when S3 is setup)
+  config.active_storage.service = :amazon
 end
