@@ -16,10 +16,9 @@
   <thead class="thead-dark">
     <tr align = "center">
     <th scope="col">Title</th>
-    <th scope="col">Slug</th>
     <th scope="col">Last Editor</th>
-    <th scope="col">Created At</th>
     <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+      <th scope="col">Permissions</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     <% end %>
@@ -33,10 +32,9 @@
       %>
         <tr align = "center">
           <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
-          <td> <%= p.slug %> </td>
           <td> <%= Teacher.find(p.last_editor).full_name %> </td>
-          <td> <%= p.created_at %> </td>
           <% if @current_user_is_admin %>
+            <td> <%= p.permissions %> </td>
             <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
             <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
           <% end %>

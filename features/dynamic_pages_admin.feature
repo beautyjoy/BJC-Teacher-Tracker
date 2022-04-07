@@ -17,7 +17,7 @@ Scenario: Pressing "Dynamic Pages" button on navbar should take me to a list of 
     Given I follow "Pages"
     Then I should be on the dynamic pages index
     And I should see "Title"
-    And I should see "Slug"
+    And I should see "Permissions"
     And I should not see "Body"
 
 Scenario: Pressing "New Page" button should take user to new page form
@@ -70,7 +70,7 @@ Scenario: I create a new page and I can see it on the index page
     And I press "Submit"
     And I follow "Pages"
     Then I should see "Test Title"
-    And I should see "test_slug"
+    And I should see "Admin"
 
 Scenario: Can create a new page with the same title as a page that already exists
     Given I am on the new dynamic pages page
@@ -179,7 +179,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I fill in the dynamic_page_body with "This is a test 2"
     And I press "Update"
     Then I should see "New Title"
-    And I should see "new_slug"
+    And I should see "Public"
     Then I should be on the dynamic pages index
     And I should not see "Test Title"
     And I should not see "test_slug"
@@ -197,7 +197,7 @@ Scenario: Can update page even if no changes
     And I press "Update"
     Then I should be on the dynamic pages index
     And I should see "Test Title"
-    And I should see "test_slug"
+    And I should see "Admin"
 
 Scenario: Attempting to update page with taken slug doesn't delete form input
     Given I am on the new dynamic pages page
