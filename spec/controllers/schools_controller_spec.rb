@@ -113,4 +113,30 @@ RSpec.describe SchoolsController, type: :controller do
     expect(School.find_by(name: @create_school_name)).to be_nil
     expect(@fail_flash_alert).to match flash[:alert]
   end
+
+  it "doesnt creation of the same school" do
+    allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    post :create, {
+        params: {
+            school: {
+                name: @create_school_name,
+                city: "Berkeley",
+                state: "CA",
+                website: "www.berkeley.edu"
+            }
+        }
+    }
+    expect(School.where(name: @create_school_name).count).to be 1
+    post :create, {
+        params: {
+            school: {
+                name: @create_school_name,
+                city: "Berkeley",
+                state: "CA",
+                website: "www.berkeley.edu"
+            }
+        }
+    }
+    expect(School.where(name: @create_school_name).count).to be 1
+  end
 end
