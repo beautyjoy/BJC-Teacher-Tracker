@@ -1,7 +1,13 @@
 <%= provide(:h1, "Add a School") %>
 
-<%= form_for @school do |f| %>
-  <%= render 'schools/form', fields: f %>
 
-  
+<%= form_for @school do |f| %>
+<%= render 'schools/form', f: f %>
+
+<div>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+</div>
 <% end %>
+<script>
+  $(".btn-primary").hide();
+  </script>

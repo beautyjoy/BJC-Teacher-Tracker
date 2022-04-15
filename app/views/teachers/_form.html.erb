@@ -81,12 +81,13 @@
   <div class = 'form-group form-input-group'>
         <%= fields_for :school, @teacher.school do |school_fields| %>
           <h2>Your School</h2>
-          <%= render 'schools/form', fields: school_fields %>
+          <%= render 'schools/form', f: school_fields %>
           <% end %>
-    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
-    <% end %>
 </div>
-
+<div>
+  <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
+  <% end %>
+  </div>
 
 
 

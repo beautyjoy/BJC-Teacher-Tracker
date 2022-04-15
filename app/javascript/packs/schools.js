@@ -1,4 +1,4 @@
-console.log("why")
+
 import '../styles/selectize.scss';
 //= require turbolinks
 require("turbolinks")
@@ -6,21 +6,9 @@ require("selectize")
 require ("bootstrap")
 require ("jquery")
 
-  //  $(".selectize").selectize(
-      //  );
 
 
-var selectizeCallback = null;
 
-$(".school-modal").on("hide.bs.modal", function(e) {
-if (selectizeCallback != null) {
-selectizeCallback();
-selecitzeCallback = null;
-}
-
-$("#new_school").trigger("reset");
-$.rails.enableFormElements($("#new_school"));
-});
 
 $("#new_school").on("submit", function(e) {
 e.preventDefault();
@@ -37,12 +25,30 @@ success: function(response) {
 }
 });
 });
+let create_school = function(input,callback){
+  selectizeCallback = callback;
+  window.Selectize = require('selectize');
+  $('#school_form').show();
+  $(".btn-primary").show();
+  var form = $("#school_form").find("#inner_form").find("#innest_form").find("#close_button");
+  var name_input = $("#school_form").find("#inner_form").find("#name_input").find("#school_name");
+  name_input.val(input);
+  var selectizeCallback = null;
+  form.click(function(e) {
+    if (selectizeCallback != null) {
+    selectizeCallback();
+    selecitzeCallback = null;
+  }
+  var $select = $('.select').selectize();
+ var control = $select[0].selectize;
+ control.clear();
+ location.reload();
+  $('#school_form').hide();
+  });
 
-$(".select").selectize({
-create: function(input, callback) {
-selectizeCallback = callback;
 
-$(".school-modal").modal();
-$(".modal fade school-modal .modal-dialog modal-sm .modal-content .modal-body #school_name").val(input);
 }
-});
+var selecting = $(".select").selectize({
+create: create_school
+, createOnBlur: true,
+ highlight: true});
