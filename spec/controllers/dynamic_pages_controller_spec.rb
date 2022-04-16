@@ -181,7 +181,6 @@ RSpec.describe DynamicPagesController, type: :controller do
   end
 
   it "doesn't allow teacher to delete a page" do
-    ApplicationController.any_instance.stub(:require_admin).and_return(false)
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     long_app = DynamicPage.find_by(slug: "Test_slug")
     post :delete, params: { id: long_app.id }
