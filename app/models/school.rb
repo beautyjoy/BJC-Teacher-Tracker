@@ -40,6 +40,23 @@ class School < ApplicationRecord
   MAPS_API_KEY = ENV["MAPS_API_KEY"]
   GOOGLE_MAPS = "https://maps.googleapis.com/maps/api/geocode/"
 
+  enum grade_level: {
+    elementary: 0,
+    middle_school: 1,
+    high_school: 2,
+    community_college: 3,
+    university: 4
+  }
+
+  enum type: {
+    public: 0,
+    private: 1,
+    charter: 2,
+    magnet: 3,
+    alternative: 4,
+    other: 5
+  }, _prefix: :school_type
+
   def website
     prefix_url(self[:website])
   end
