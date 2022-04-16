@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_232458) do
+ActiveRecord::Schema.define(version: 2022_04_16_215843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,10 @@ ActiveRecord::Schema.define(version: 2022_03_29_232458) do
     t.datetime "created_at", default: -> { "now()" }
     t.datetime "updated_at", default: -> { "now()" }
     t.integer "num_denied_teachers", default: 0
+    t.integer "grade_level"
+    t.integer "type"
+    t.text "tags", default: [], array: true
+    t.integer "nces_id"
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
