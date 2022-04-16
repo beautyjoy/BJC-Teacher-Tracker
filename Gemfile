@@ -98,4 +98,4 @@ group :test do
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
 end
-gem 'selectize-rails'
+gem "selectize-rails"

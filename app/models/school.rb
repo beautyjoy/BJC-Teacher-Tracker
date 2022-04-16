@@ -43,12 +43,13 @@ class School < ApplicationRecord
     "#{city}, #{state}"
   end
   def equal(school)
-    if school!=nil && self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
+    if school != nil && self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
       true
-  else
-    false
+    else
+      false
+    end
   end
-  end
+
   private
     def prefix_url(url)
       return unless url
