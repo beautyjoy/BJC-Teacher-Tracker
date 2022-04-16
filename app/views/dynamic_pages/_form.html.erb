@@ -5,26 +5,32 @@
       <label for="dynamic_page_slug"><h3 class="label-required">Slug</h3></label>
       <%= form.text_field :slug, class: "form-control", required: true %>
       <label for="dynamic_page_permissions"><h3 class="label-required">Permissions</h3></label>
-      <div class="row", style = "width: 60%;">
-        <div class="col-1">
-          <%= form.radio_button :permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
-        </div>
-        <div class="col-2">
-          <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioAdmin">Admin</label>
+      <div class="row container">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-4 row">
+          <div class="col-1">
+            <%= form.radio_button :permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
+          </div>
+          <div class="col-2">
+            <label class="form-check-label" for="inlineRadioAdmin">Admin</label>
+          </div>
         </div>
         
-        <div class="col-1">
-          <%= form.radio_button :permissions, 'Verified Teacher', class: "form-check-input", id: "inlineRadioTeacher", required: true %>
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-4 row">
+          <div class="col-1">
+            <%= form.radio_button :permissions, 'Verified Teacher', class: "form-check-input", id: "inlineRadioTeacher", required: true %>
+          </div>
+          <div class="col-2">
+            <label class="form-check-label" for="inlineRadioTeacher">Verified Teacher</label>
+          </div>
         </div>
-        <div class="col-2">
-          <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioTeacher">Verified Teacher</label>
-        </div>
-       
-        <div class="col-1">
-          <%= form.radio_button :permissions, 'Public', class: "form-check-input", id: "inlineRadioPublic", required: true %>
-        </div>
-        <div class="col-2">
-          <label for="dynamic_page_permissions" class="form-check-label" for="inlineRadioPublic">Public</label>
+
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-4 row">
+          <div class="col-1">
+            <%= form.radio_button :permissions, 'Public', class: "form-check-input", id: "inlineRadioPublic", required: true %>
+          </div>
+          <div class="col-2">
+            <label  class="form-check-label" for="inlineRadioPublic">Public</label>
+          </div>
         </div>
       </div>
       <label for="dynamic_page_body"><h3>Body</h3></label>
