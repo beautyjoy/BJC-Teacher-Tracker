@@ -46,7 +46,7 @@ class School < ApplicationRecord
     high_school: 2,
     community_college: 3,
     university: 4
-  }
+  } 
 
   enum type: {
     public: 0,
@@ -63,6 +63,14 @@ class School < ApplicationRecord
 
   def location
     "#{city}, #{state}"
+  end
+
+  def self.grade_level_options
+    School.grade_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.school_type_options
+    School.types.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
   private
