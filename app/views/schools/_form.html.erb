@@ -29,22 +29,22 @@
 </div>
 
 <div class="form-group">
-  <%= fields.label :grade_level, "Grade Level", class: "label-required" %>
+  <%= fields.label :grade_level, "Grade Level" %>
   <%= fields.select(
           :grade_level,
           options_for_select(School.grade_level_options),
           { include_blank: "Select an option" },
-          { class: 'form-control', required: true }
+          { class: 'form-control', required: false }
         ) %>
 </div>
 
 <div class="form-group">
-  <%= fields.label :school_type, "School Type", class: "label-required" %>
+  <%= fields.label :school_type, "School Type" %>
   <%= fields.select(
           :school_type,
           options_for_select(School.school_type_options),
           { include_blank: "Select an option" },
-          { class: 'form-control', required: true }
+          { class: 'form-control', required: false }
         ) %>
 </div>
 
