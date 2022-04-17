@@ -19,7 +19,7 @@
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
-#  nces_id                :integer
+#  nces_id                :bigint
 #
 # Indexes
 #
@@ -46,7 +46,7 @@ class School < ApplicationRecord
     high_school: 2,
     community_college: 3,
     university: 4
-  } 
+  }
 
   enum school_type: {
     public: 0,

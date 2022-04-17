@@ -17,7 +17,7 @@
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
-#  nces_id                :integer
+#  nces_id                :bigint
 #
 # Indexes
 #
