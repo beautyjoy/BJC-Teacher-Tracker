@@ -234,3 +234,48 @@ Scenario: Denied teacher should not see resend button
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   Then I should not see "Resend Welcome Email"
+
+Scenario: Validated teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"
+
+Scenario: Pending teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"
+
+Scenario: Denied teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"

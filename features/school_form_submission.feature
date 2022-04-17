@@ -27,6 +27,18 @@ Scenario: Viewing the schools page should show the all current schools
     And I should see "UC Irvine" with "1" in a table row
     And I should see "UC Scam Diego" with "0" in a table row
 
+Scenario: Admins can see Tags and NCES ID
+    Given the following teachers exist:
+    | first_name | last_name | admin | email                        |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+    Given I am on the BJC home page
+    Given I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the new schools page
+    Then I should see "Tags"
+    And I should see "NCES ID"
+
 Scenario: Admins can create new schools
     Given the following teachers exist:
     | first_name | last_name | admin | email                        |
@@ -42,7 +54,7 @@ Scenario: Admins can create new schools
     And I fill in "School Website" with "https://www.berkeley.edu/"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
-    And I fill in "NCES ID" with "012345678910"
+    And I fill in "NCES ID" with "123456789100"
     And I press "Submit"
     Then I should see "Created New UC Berkeley successfully"
     And I should see "New UC Berkeley" with "0" in a table row

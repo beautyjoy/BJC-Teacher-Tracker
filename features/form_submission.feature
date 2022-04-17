@@ -189,3 +189,8 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then the "more_info" of the user with email "bbaker@berkeley.edu" should be "Rebecca"
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
     Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
+
+Scenario: Teachers creating their account should not be able to input Tags or NCES ID for their school.
+    Given I am on the BJC home page
+    Then I should not see "Tags"
+    And I should not see "NCIS ID"
