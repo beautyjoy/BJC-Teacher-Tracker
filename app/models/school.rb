@@ -6,16 +6,20 @@
 #
 #  id                     :bigint           not null, primary key
 #  city                   :string
+#  grade_level            :integer
 #  lat                    :float
 #  lng                    :float
 #  name                   :string
 #  num_denied_teachers    :integer          default(0)
 #  num_validated_teachers :integer          default(0)
+#  school_type            :integer
 #  state                  :string
+#  tags                   :text             default([]), is an Array
 #  teachers_count         :integer          default(0)
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
+#  nces_id                :bigint
 #
 # Indexes
 #
@@ -36,12 +40,37 @@ class School < ApplicationRecord
   MAPS_API_KEY = ENV["MAPS_API_KEY"]
   GOOGLE_MAPS = "https://maps.googleapis.com/maps/api/geocode/"
 
+  enum grade_level: {
+    elementary: 0,
+    middle_school: 1,
+    high_school: 2,
+    community_college: 3,
+    university: 4
+  }
+
+  enum school_type: {
+    public: 0,
+    private: 1,
+    charter: 2,
+    magnet: 3,
+    alternative: 4,
+    other: 5
+  }, _prefix: :school_type
+
   def website
     prefix_url(self[:website])
   end
 
   def location
     "#{city}, #{state}"
+  end
+
+  def self.grade_level_options
+    School.grade_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.school_type_options
+    School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
   private
