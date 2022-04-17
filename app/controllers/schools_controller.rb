@@ -23,6 +23,12 @@ class SchoolsController < ApplicationController
 
   private
     def school_params
+      if params[:school] # Validate input for nces_id
+        if params[:school][:nces_id] && (params[:school][:nces_id].to_i < 0 || 999999999999 < params[:school][:nces_id].to_i)
+          raise ArgumentError.new("Invalid nces_id")
+        end
+      end
+
       params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id)
     end
 
