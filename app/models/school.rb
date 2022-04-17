@@ -12,10 +12,10 @@
 #  name                   :string
 #  num_denied_teachers    :integer          default(0)
 #  num_validated_teachers :integer          default(0)
+#  school_type            :integer
 #  state                  :string
 #  tags                   :text             default([]), is an Array
 #  teachers_count         :integer          default(0)
-#  type                   :integer
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -48,7 +48,7 @@ class School < ApplicationRecord
     university: 4
   } 
 
-  enum type: {
+  enum school_type: {
     public: 0,
     private: 1,
     charter: 2,
@@ -70,7 +70,7 @@ class School < ApplicationRecord
   end
 
   def self.school_type_options
-    School.types.map { |sym, val| [sym.to_s.titlecase, val] }
+    School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
   private

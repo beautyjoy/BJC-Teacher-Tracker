@@ -142,7 +142,7 @@ class TeachersController < ApplicationController
     end
 
     def school_params
-      params.require(:school).permit(:name, :city, :state, :website)
+      params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id)
     end
 
     def sanitize_params
@@ -152,6 +152,15 @@ class TeachersController < ApplicationController
         end
         if params[:teacher][:education_level]
           params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+        end
+      end
+
+      if params[:school]
+        if params[:school][:grade_level]
+          params[:school][:grade_level] = params[:school][:grade_level].to_i
+        end
+        if params[:school][:school_type]
+          params[:school][:school_type] = params[:school][:school_type].to_i
         end
       end
     end

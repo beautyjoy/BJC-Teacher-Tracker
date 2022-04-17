@@ -39,9 +39,9 @@
 </div>
 
 <div class="form-group">
-  <%= fields.label :type, "School Type", class: "label-required" %>
+  <%= fields.label :school_type, "School Type", class: "label-required" %>
   <%= fields.select(
-          :type,
+          :school_type,
           options_for_select(School.school_type_options),
           { include_blank: "Select an option" },
           { class: 'form-control', required: true }
@@ -80,7 +80,7 @@
 
   <div class="form-group">
     <%= fields.label :nces_id, "NCES ID", class: "label-required" %>
-    <%= fields.number_field :website, placeholder: "000000000000",
+    <%= fields.number_field :nces_id, placeholder: "000000000000",
         class: "form-control", required: true, pattern: "^\d{12}$", title: "Please enter a valid NCES ID." %>
   </div>
 <% end %>

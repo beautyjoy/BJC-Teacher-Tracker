@@ -10,10 +10,10 @@
 #  name                   :string
 #  num_denied_teachers    :integer          default(0)
 #  num_validated_teachers :integer          default(0)
+#  school_type            :integer
 #  state                  :string
 #  tags                   :text             default([]), is an Array
 #  teachers_count         :integer          default(0)
-#  type                   :integer
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
