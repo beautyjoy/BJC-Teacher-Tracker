@@ -81,6 +81,6 @@
   <div class="form-group">
     <%= fields.label :nces_id, "NCES ID", class: "label-required" %>
     <%= fields.number_field :nces_id, placeholder: "000000000000",
-        class: "form-control", required: true, pattern: "^\d{12}$", title: "Please enter a valid NCES ID." %>
+        class: "form-control", required: true, max: 999999999999, title: "Please enter a valid NCES ID." %>
   </div>
 <% end %>
