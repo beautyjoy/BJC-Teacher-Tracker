@@ -23,6 +23,9 @@ class SchoolsController < ApplicationController
     @schools = School.all
   end
 
+  def search
+    return School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
+  end
   private
     def school_params
       params.require(:school).permit(:name, :city, :state, :website)

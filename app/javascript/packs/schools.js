@@ -39,16 +39,33 @@ let create_school = function(input,callback){
     selectizeCallback();
     selecitzeCallback = null;
   }
-  var $select = $('.select').selectize();
- var control = $select[0].selectize;
- control.clear();
- location.reload();
+  //var $select = $('.select').selectize();
+ //var control = $select[0].selectize;
+ //control.clear();
+ //location.reload();
+ $('.select').selectize()[0].selectize.clear();
+ selectize.load();
   $('#school_form').hide();
   });
-
-
 }
+let loading_funct = function(query,callback){
+        $.ajax({
+            url: '/school/search',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+
+            },
+            error: function () {
+                callback();
+            },
+            success: function (res) {
+              byebug
+                callback(res);
+            }
+})
+};
 var selecting = $(".select").selectize({
-create: create_school
+create: create_school, load: loading_funct
 , createOnBlur: true,
  highlight: true});
