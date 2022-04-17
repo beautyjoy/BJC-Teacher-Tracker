@@ -40,6 +40,9 @@ Scenario: Admins can create new schools
     And I fill in "City" with "Berkeley"
     And I select "CA" from "State"
     And I fill in "School Website" with "https://www.berkeley.edu/"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
+    And I fill in "NCES ID" with "012345678910"
     And I press "Submit"
     Then I should see "Created New UC Berkeley successfully"
     And I should see "New UC Berkeley" with "0" in a table row

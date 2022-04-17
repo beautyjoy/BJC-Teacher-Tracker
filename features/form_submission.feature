@@ -23,6 +23,8 @@ Scenario: Correctly filling out and succesful form submission
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
     And   I enter my "School Website" as "https://chs.fuhsd.org"
+    And   I select "University" from "Grade Level"
+    And   I select "Public" from "School Type"
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
 
@@ -35,6 +37,8 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
     And   I enter my "School Website" as "chs.fuhsd.org"
+    And   I select "University" from "Grade Level"
+    And   I select "Public" from "School Type"
     And   I press "Submit"
     Then  The "#new_teacher" form is invalid
     And  I am on the BJC home page
@@ -51,6 +55,8 @@ Scenario: Websites validation - two invalid websites
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "stafford"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
     Then The "#new_teacher" form is invalid
     And  I am on the BJC home page
@@ -66,6 +72,8 @@ Scenario: Websites validation - one invalid website
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "stafford"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
     Then The "#new_teacher" form is invalid
     And  I am on the BJC home page
@@ -81,6 +89,8 @@ Scenario: Websites validation - one valid website
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://stafford.edu"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
     Then I see a confirmation "Thanks for signing up for BJC"
 
@@ -98,6 +108,8 @@ Scenario: Filling out new form with existing email should not update information
     And I enter my "City" as "Cupertino"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://chs.fuhsd.org"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
     Then I should see "Email address or Snap username already in use."
     Then the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
@@ -117,6 +129,8 @@ Scenario: Filling out new form with existing Snap should not create new teacher
     And I enter my "City" as "Cupertino"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://chs.fuhsd.org"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
     Then I should see "Email address or Snap username already in use."
     And "mallory@berkeley.edu" is not in the database
@@ -136,6 +150,8 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
     And I enter my "School Website" as "cvhs.cv.k12.ca.us"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
 
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
@@ -162,6 +178,8 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
     And I enter my "School Website" as "cvhs.cv.k12.ca.us"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
     And I press "Submit"
 
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
