@@ -2,6 +2,9 @@
 
 class SchoolsController < ApplicationController
   before_action :require_admin
+  def search
+    return School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
+  end
   def create
     other_school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
     @school = School.new(school_params)
@@ -21,10 +24,6 @@ class SchoolsController < ApplicationController
 
   def index
     @schools = School.all
-  end
-
-  def search
-    return School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
   end
   private
     def school_params

@@ -43,15 +43,15 @@ let create_school = function(input,callback){
  //var control = $select[0].selectize;
  //control.clear();
  //location.reload();
- $('.select').selectize()[0].selectize.clear();
- selectize.load();
+ $('.select').selectize()[0].selectize.reset();
+ //selectize.load();
   $('#school_form').hide();
   });
 }
 let loading_funct = function(query,callback){
         $.ajax({
             url: '/school/search',
-            type: 'GET',
+            type: 'get',
             dataType: 'json',
             data: {
 

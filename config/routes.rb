@@ -14,7 +14,11 @@ Rails.application.routes.draw do
       post :deny
     end
   end
-  resources :schools
+  resources :schools do
+    member do
+      get :search
+    end
+  end
   resources :email_templates, only: [:index, :update, :edit]
   root to: "main#index"
 
