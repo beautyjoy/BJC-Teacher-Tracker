@@ -108,4 +108,4 @@ group :test do
 end
 
 gem "smarter_csv", "~> 1.4"
-gem 'activerecord-import', require: false
+gem "activerecord-import", require: false

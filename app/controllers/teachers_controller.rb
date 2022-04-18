@@ -1,6 +1,8 @@
 # frozen_string_literal: true
-require 'smarter_csv'
-require 'activerecord-import'
+
+require "smarter_csv"
+
+require "activerecord-import"
 
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
