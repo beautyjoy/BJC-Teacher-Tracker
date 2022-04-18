@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 require 'smarter_csv'
-require 'csv'
-require 'active_record'
 require 'activerecord-import'
 
 class TeachersController < ApplicationController
