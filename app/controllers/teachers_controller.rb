@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 require 'smarter_csv'
+require 'csv'
+require 'active_record'
+require 'activerecord-import'
 
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
@@ -26,27 +29,22 @@ class TeachersController < ApplicationController
     @readonly = false
   end
 
-  def import_csv
+  def import
     csv_file = params[:file]
-    #byebug
-    #puts params
-    #puts csv_file
-    #puts csv_file.path
-    file_path = "../../tmp/" + csv_file
-    teacher_hash_array = SmarterCSV.process(file_path)
+    teacher_hash_array = SmarterCSV.process(csv_file)
+    school_value = []
+    school_column = [:name, :city, :state, :website, :grade_level, :school_type, :tags]
+    teacher_value = []
+    teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
     teacher_hash_array.each do |row|
-      if row.key?("first_name") && row.key?("last_name") && row.key?("email") && row.key?("status") && row.key?("education_level") && row.key?("school_id") && row.key?("school_name") && row.key?("school_city") && row.key?("school_state") && row.key?("school_website")
-        curr_params = 
-        {
-          :teacher=> 
-            {:first_name => row[:first_name], :last_name => row[:last_name], :education_level => row[:education_level], :email => row[:email], :more_info => row[:more_info], :personal_website => [:personal_website], :snap => row[:snap], :status => row[:status]}, 
-          :school => 
-            {:nces_id => row[:school_id], :name => row[:school_name], :city => row[:school_city], :state => row[:school_state], :website => row[:school_website], :grade_level => row[:school_grade_level], :school_type => row[:school_type], :tags => row[:school_tags]}
-        }
-      end
-      create(curr_params)
-    end  
+      teacher_value.append([row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]])
+      school_value.append([row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags]])
+    end
+    Teacher.import teacher_column, teacher_value
+    School.import school_column, school_value
+    redirect_to teachers_path
   end
+
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create

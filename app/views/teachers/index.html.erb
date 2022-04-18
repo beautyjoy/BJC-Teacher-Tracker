@@ -9,7 +9,7 @@
         <%= button_to("New Teacher", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
       <% end %>
     </div>
-    <%= form_tag import_csv_teacher_path(0), method: :post do %>
+    <%= form_tag import_teachers_path,  multipart: true do %>
       <%= file_field_tag :file %>
       <%= submit_tag( "Upload csv" ) %>
   <% end %>

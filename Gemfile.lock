@@ -47,6 +47,8 @@ GEM
     activerecord (6.1.4.4)
       activemodel (= 6.1.4.4)
       activesupport (= 6.1.4.4)
+    activerecord-import (1.4.0)
+      activerecord (>= 4.2)
     activestorage (6.1.4.4)
       actionpack (= 6.1.4.4)
       activejob (= 6.1.4.4)
@@ -604,6 +606,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   annotate
   attr_encrypted (~> 3.1.0)
   aws-sdk-s3

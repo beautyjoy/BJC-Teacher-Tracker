@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       post :validate
       post :delete
       post :deny
-      post :import_csv
     end
+    collection { post :import }
   end
   resources :schools
   resources :email_templates, only: [:index, :update, :edit]
