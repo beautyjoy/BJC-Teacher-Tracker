@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'smarter_csv'
 
 class TeachersController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
@@ -25,6 +26,27 @@ class TeachersController < ApplicationController
     @readonly = false
   end
 
+  def import_csv
+    csv_file = params[:file]
+    #byebug
+    #puts params
+    #puts csv_file
+    #puts csv_file.path
+    file_path = "../../tmp/" + csv_file
+    teacher_hash_array = SmarterCSV.process(file_path)
+    teacher_hash_array.each do |row|
+      if row.key?("first_name") && row.key?("last_name") && row.key?("email") && row.key?("status") && row.key?("education_level") && row.key?("school_id") && row.key?("school_name") && row.key?("school_city") && row.key?("school_state") && row.key?("school_website")
+        curr_params = 
+        {
+          :teacher=> 
+            {:first_name => row[:first_name], :last_name => row[:last_name], :education_level => row[:education_level], :email => row[:email], :more_info => row[:more_info], :personal_website => [:personal_website], :snap => row[:snap], :status => row[:status]}, 
+          :school => 
+            {:nces_id => row[:school_id], :name => row[:school_name], :city => row[:school_city], :state => row[:school_state], :website => row[:school_website], :grade_level => row[:school_grade_level], :school_type => row[:school_type], :tags => row[:school_tags]}
+        }
+      end
+      create(curr_params)
+    end  
+  end
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create

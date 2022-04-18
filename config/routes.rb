@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :validate
       post :delete
       post :deny
+      post :import_csv
     end
   end
   resources :schools
