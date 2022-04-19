@@ -83,7 +83,6 @@
           <h2>Your School</h2>
           <%= render 'schools/form', f: school_fields %>
           <% end %>
-          <%byebug%>
 </div>
 <div>
   <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
@@ -110,4 +109,7 @@
     }
   }
 
+  $("#new_teacher").on("submit", function(e) {
+
+  });
 </script>
