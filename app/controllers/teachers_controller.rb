@@ -37,8 +37,10 @@ class TeachersController < ApplicationController
     teacher_value = []
     teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
     teacher_hash_array.each do |row|
-      teacher_value.append([row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]])
-      school_value.append([row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags]])
+      if School.find_by(id: row[:school_id])
+        teacher_value.append([row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]])
+        school_value.append([row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags]])
+      end
     end
     Teacher.import teacher_column, teacher_value
     School.import school_column, school_value
