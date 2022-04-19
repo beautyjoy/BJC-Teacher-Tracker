@@ -32,18 +32,22 @@ class TeachersController < ApplicationController
   def import
     csv_file = params[:file]
     teacher_hash_array = SmarterCSV.process(csv_file)
-    school_value = []
     school_column = [:name, :city, :state, :website, :grade_level, :school_type, :tags]
     teacher_value = []
     teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
     teacher_hash_array.each do |row|
-      if School.find_by(id: row[:school_id])
+      if School.find_by(id: row[:school_id]) #If there is a valid school id
         teacher_value.append([row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]])
-        school_value.append([row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags]])
+      elsif !row[:school_id] #If there is no school id (different from having invalid school id)
+        new_school = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags]]]
+        School.import school_column, new_school
+        @newSchool = School.find_by(name: row[:school_name])
+        if (@newSchool)
+          teacher_value.append([row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], @newSchool.id])
+        end
       end
     end
     Teacher.import teacher_column, teacher_value
-    School.import school_column, school_value
     redirect_to teachers_path
   end
 
