@@ -17,11 +17,8 @@ method: "POST",
 url: $(this).attr("action"),
 data: $(this).serialize(),
 success: function(response) {
-  selectizeCallback({value: response.id, text: response.name});
+window.location = "/schools"
   selectizeCallback = null;
-  $(".school-modal").modal('toggle');
-  window.location.replace("/schools");
-  selectize.clear();
 }
 });
 });
