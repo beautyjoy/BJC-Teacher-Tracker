@@ -18,14 +18,14 @@
 
     <div class='col-11' id ="name_input">
         <%= f.label :name, "School Name", class: "label-required" %>
-        <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
+        <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control', id: 'school_name',
         required: true %>
     </div>
 
 
     <div class='col-3'>
         <%= f.label :city, class: "label-required" %>
-        <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
+        <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control', id: 'city',
         required: true %>
     </div>
 
@@ -35,17 +35,17 @@
             :state,
             School::VALID_STATES,
             {include_blank: "State"},
-            { class: 'form-control', required: true }
+            { class: 'form-control',id:'state', required: true }
         ) %>
     </div>
     <div class ="col-6">
     <div class="form-group">
     <%= f.label :website, "School Website", class: "label-required" %>
     <%= f.text_field :website, placeholder: "snap.berkeley.edu",
-        class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
+        class: "form-control",id:'school_website', required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
     </div>
     </div>
-    
+
 
 
 
@@ -114,5 +114,9 @@
 </div>
 </div>
 <script>
+$('#school_name').prop('required',false);
+$('#city').prop('required',false);
+$('#state').prop('required',false);
+$('#school_website').prop('required',false);
 $('#school_form').hide();
   </script>

@@ -28,6 +28,7 @@ class TeachersController < ApplicationController
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
+    byebug
     other_school = School.find_by(name: school_params[:name])
     @school = School.new(school_params)
     if @school.equal(other_school) == true
