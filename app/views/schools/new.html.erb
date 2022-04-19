@@ -5,9 +5,9 @@
 <%= render 'schools/form', f: f %>
 
 <div>
-  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
 </div>
 <% end %>
 <script>
-  $(".btn-primary").hide();
+  $("#submit_button").hide();
   </script>
