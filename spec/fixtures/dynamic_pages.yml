@@ -1,7 +1,20 @@
+# == Schema Information
+#
+# Table name: dynamic_pages
+#
+#  id          :bigint           not null, primary key
+#  last_editor :bigint
+#  permissions :string
+#  slug        :string           not null
+#  title       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  creator_id  :bigint
+#
 thepage:
   slug: Test_slug
-  title: shit
+  title: test_page
   permissions: "teacher"
   creator_id: 5
   last_editor: Darwin
-  body: <%= {body: dynamic_pages_thepage} %>
+  

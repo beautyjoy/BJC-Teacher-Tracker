@@ -5,7 +5,6 @@
 # Table name: dynamic_pages
 #
 #  id          :bigint           not null, primary key
-#  body        :text
 #  last_editor :bigint
 #  permissions :string
 #  slug        :string           not null
@@ -16,5 +15,4 @@
 #
 class DynamicPage < ApplicationRecord
   has_rich_text :body
-  def placeholder; end
 end

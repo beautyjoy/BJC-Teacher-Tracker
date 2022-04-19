@@ -77,8 +77,8 @@ Scenario: Non-admin, unregistered user should not be able to see admin-only page
 
 Scenario: Edit teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -98,8 +98,8 @@ Scenario: Edit teacher info as an admin
 
 Scenario: Deny teacher as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -120,8 +120,8 @@ Scenario: Deny teacher as an admin
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -130,8 +130,8 @@ Scenario: Not logged in should not have access to edit
 
 Scenario: Filter all teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name  | admin | email                     | school      | application_status |
   | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
@@ -153,8 +153,8 @@ Scenario: Filter all teacher info as an admin
 
 Scenario: View teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -174,8 +174,8 @@ Scenario: View teacher info as an admin
 
 Scenario: Edit teacher info as an admin navigating from view only page to edit page
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -198,8 +198,8 @@ Scenario: Edit teacher info as an admin navigating from view only page to edit p
 
 Scenario: Should be able to resend welcome email
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   | application_status |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |

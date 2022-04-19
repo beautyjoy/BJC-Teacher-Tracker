@@ -21,13 +21,14 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
-    @school = School.new #maybe delegate this
+    @school = School.new # maybe delegate this
     @readonly = false
   end
 
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
+    byebug
     other_school = School.find_by(name: school_params[:name])
     @school = School.new(school_params)
     if @school.equal(other_school) == true
@@ -146,7 +147,7 @@ class TeachersController < ApplicationController
     end
 
     def school_params
-      params.require(:school).permit(:name, :city, :state, :website)
+      params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id)
     end
 
     def sanitize_params
@@ -156,6 +157,15 @@ class TeachersController < ApplicationController
         end
         if params[:teacher][:education_level]
           params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+        end
+      end
+
+      if params[:school]
+        if params[:school][:grade_level]
+          params[:school][:grade_level] = params[:school][:grade_level].to_i
+        end
+        if params[:school][:school_type]
+          params[:school][:school_type] = params[:school][:school_type].to_i
         end
       end
     end
