@@ -11,11 +11,10 @@
   <%= csrf_meta_tags %>
 
 <div class = "row col-12" id = "school_form">
-<div class='form-group row' id ="inner_form">
-  <div class = "col-12 d-flex justify-content-end"" id ="innest_form">
-  <button type="button" class="btn-close" aria-label="Close" id = "close_button">X
-</button>
-</div>
+  <div class='form-group row' id ="inner_form">
+    <div class = "col-12 d-flex justify-content-end"" id ="innest_form">
+      <button type="button" class="btn-close" aria-label="Close" id = "close_button">X</button>
+    </div>
 
     <div class='col-11' id ="name_input">
         <%= f.label :name, "School Name", class: "label-required" %>
@@ -46,7 +45,12 @@
         class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
     </div>
     </div>
-    <div class="form-group">
+    
+
+
+
+    </div>
+    <div class="form-group row">
       <%= f.label :grade_level, "Grade Level" %>
       <%= f.select(
               :grade_level,
@@ -103,10 +107,9 @@
       </div>
     <% end %>
 
-
-
-    </div>
 </div>
+
+
 
 </div>
 </div>
