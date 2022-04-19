@@ -46,8 +46,68 @@
         class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
     </div>
     </div>
+    <div class="form-group">
+      <%= f.label :grade_level, "Grade Level" %>
+      <%= f.select(
+              :grade_level,
+              options_for_select(School.grade_level_options),
+              { include_blank: "Select an option" },
+              { class: 'form-control', required: false }
+            ) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :school_type, "School Type" %>
+      <%= f.select(
+              :school_type,
+              options_for_select(School.school_type_options),
+              { include_blank: "Select an option" },
+              { class: 'form-control', required: false }
+            ) %>
+    </div>
+
+    <% if logged_in? ? current_user.admin : false %>
+    <div class = "col-12">
+    <%= f.label :tags, "Tags" %>
+    </div>
+      <div class="form-group row">
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+        <div class='col-2'>
+          <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+              class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :nces_id, "NCES ID" %>
+        <%= f.number_field :nces_id, placeholder: "000000000000",
+            class: "form-control", max: 999999999999, title: "Please enter a valid NCES ID." %>
+      </div>
+    <% end %>
+
+
+
+    </div>
 </div>
-</div>
+
 </div>
 </div>
 <script>
