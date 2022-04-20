@@ -7,15 +7,16 @@ class SchoolsController < ApplicationController
     School.all.collect { |school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
   end
   def create
-    other_school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-    @school = School.new(school_params)
-    if @school.equal(other_school) == false && @school.save
-      flash[:success] = "Created #{@school.name} successfully."
-      redirect_to schools_path
-    elsif @school.equal(other_school) == true
-      redirect_to schools_path
-    else
-      redirect_to root_path, alert: "Failed to submit information :("
+    @school = School.find_by(name: school_params[:name])
+    if !@school # School doesn't exist
+      @school = School.new(school_params)
+      if !@school.save
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        render "new"
+      else
+        flash[:success] = "Created #{@school.name} successfully."
+        redirect_to schools_path
+      end
     end
   end
 
