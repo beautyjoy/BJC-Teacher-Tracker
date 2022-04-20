@@ -10,12 +10,11 @@ class SchoolsController < ApplicationController
     @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
     if !@school # School doesn't exist
       @school = School.new(school_params)
-      if !@school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
-        render "new"
-      else
+      if @school.save
         flash[:success] = "Created #{@school.name} successfully."
         redirect_to schools_path
+      else
+        redirect_to root_path, alert: "Failed to submit information :("
       end
     end
   end
