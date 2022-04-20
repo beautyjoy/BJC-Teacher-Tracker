@@ -27,12 +27,12 @@ let create_school = function(input,callback){
   window.Selectize = require('selectize');
   $('#school_form').show();
   $('#school_name').prop('required',true);
-  $('#city').prop('required',true);
-  $('#state').prop('required',true);
+  $('#school_city').prop('required',true);
+  $('#school_state').prop('required',true);
   $('#school_website').prop('required',true);
   $(".btn-primary").show();
-  var form = $("#school_form").find("#inner_form").find("#innest_form").find("#close_button");
-  var name_input = $("#school_form").find("#inner_form").find("#name_input").find("#school_name");
+  var form = $("#close_button");
+  var name_input = $("#school_name");
   name_input.val(input);
   form.click(function(e) {
     if (selectizeCallback != null) {
