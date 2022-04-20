@@ -45,7 +45,6 @@ class DynamicPagesController < ApplicationController
     @dynamic_page ||= DynamicPage.find(params[:id])
     temp_slug = @dynamic_page.slug
     @dynamic_page.assign_attributes(dynamic_page_params)
-    byebug
     if temp_slug == @dynamic_page.slug # Slug didn't change
       @dynamic_page.save
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
