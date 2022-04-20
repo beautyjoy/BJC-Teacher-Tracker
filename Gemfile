@@ -106,3 +106,6 @@ group :test do
 
   gem "rails-controller-testing"
 end
+
+gem "smarter_csv", "~> 1.4"
+gem "activerecord-import", require: false
