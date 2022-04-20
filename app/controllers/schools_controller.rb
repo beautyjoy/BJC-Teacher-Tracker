@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
         end
       end
 
-      params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id)
+      params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, { tags: [] }, :nces_id)
     end
 
     def sanitize_params
