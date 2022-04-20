@@ -109,6 +109,8 @@
 
 
 <script>
+  $('#school_form').hide();
+  
   function autofillSchoolFields() {
     var school_arr = $("#school_selectize").val().split(" * ", 4); // Format: [name, city, state, website]
     $("#school_name").prop('value', school_arr[0]);
