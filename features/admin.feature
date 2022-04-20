@@ -233,3 +233,23 @@ Scenario: Should be able to resend welcome email
   Then I should see "BJC Schools"
   And I press "New School"
   Then I should see "Add a School"
+
+  Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I should see "BJC Teacher Dashboard"
+  Given I follow "All Teachers"
+  And I press "Upload CSV"
+  Then I should see "Please select a file."
+  Then I upload a file with teachers data
+  Then I should see "ank sha"
+  Then I should not see "Steve Gao"
+  Then I should not see "Haha He"
+  Then I should see "Wuho He"
+  Then I follow "All Schools"
+  Then I should see "uci"
