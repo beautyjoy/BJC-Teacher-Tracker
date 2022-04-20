@@ -2,7 +2,10 @@
 <div class="form-group">
   <%= f.label :name, "School Name", class: "label-required" %>
   <%= f.select :name, 
-    options_for_select(School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }), 
+    options_for_select(School.all.collect {|school| [
+      "#{school.name}, #{school.city}, #{school.state}", 
+      "#{school.name} * #{school.city} * #{school.state} * #{school.website}"] # using " * " as delim. Probably really bad and should be changed
+    }),
     {:prompt => 'Search School'},
     {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
   <%= javascript_pack_tag 'schools' %>
@@ -106,14 +109,11 @@
 
 
 <script>
-  $('#school_name').prop('required',false);
-  $('#school_city').prop('required',false);
-  $('#school_state').prop('required',false);
-  $('#school_website').prop('required',false);
-  $('#school_form').hide();
-
   function autofillSchoolFields() {
-    var school_name = $("#school_selectize").val();
-    $("#school_name").prop('value', school_name);
+    var school_arr = $("#school_selectize").val().split(" * ", 4); // Format: [name, city, state, website]
+    $("#school_name").prop('value', school_arr[0]);
+    $("#school_city").prop('value', school_arr[1]);
+    $("#school_state").prop('value', school_arr[2]);
+    $("#school_website").prop('value', school_arr[3]);
   }
 </script>

@@ -36,7 +36,7 @@ class TeachersController < ApplicationController
       return
     end
 
-    @school = School.find_by(name: school_params[:name])
+    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
     if !@school # School doesn't exist
       @school = School.new(school_params)
       if !@school.save
