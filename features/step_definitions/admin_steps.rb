@@ -71,8 +71,3 @@ Then(/I can send a deny email/) do
   last_email.subject.should eq "Deny Email"
   last_email.body.encoded.should include "Denial Reason"
 end
-
-Then /^I upload a file with teachers data$/ do
-  attach_file(:csv_file, File.join(RAILS_ROOT, 'features', 'Test_utils', 'test_teacher.csv'))
-  click_button "Upload CSV"
-end
