@@ -4,7 +4,7 @@
 
   <div class='col-12'>
     <%= f.label :name, "School Name", class: "label-required" %>
-    <%= f.select :name,options_for_select(School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }), {:prompt => 'Search School'},
+    <%= f.select :school_type,options_for_select(School.all.collect {|school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }), {:prompt => 'Search School'},
      {class: "select", id: "school_selectize"}%>
   <%= javascript_pack_tag 'schools' %>
   <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>
