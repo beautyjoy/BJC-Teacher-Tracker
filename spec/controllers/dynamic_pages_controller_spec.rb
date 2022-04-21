@@ -203,4 +203,28 @@ RSpec.describe DynamicPagesController, type: :controller do
       expect(@slug_exists_flash_alert).to match flash[:alert]
     end
   end
+
+  it "able to delete a page" do
+    ApplicationController.any_instance.stub(:require_admin).and_return(true)
+    ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+    long_app = DynamicPage.find_by(slug: "Test_slug")
+    post :delete, params: { id: long_app.id }
+    expect(DynamicPage.find_by(slug: "Test_slug")).to be_nil
+  end
+
+  it "doesn't allow teacher to delete a page" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    long_app = DynamicPage.find_by(slug: "Test_slug")
+    post :delete, params: { id: long_app.id }
+    expect(DynamicPage.find_by(slug: "Test_slug")).not_to be_nil
+  end
+
+  it "should allow admin to edit page" do
+    ApplicationController.any_instance.stub(:require_admin).and_return(true)
+    ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+    thetest = DynamicPage.find_by(slug: "Test_slug")
+    post :update, params: { id: thetest.id, dynamic_page: { permissions: "teacher", title: "title", slug: thetest.slug, creator_id: 5, last_editor: "Darwin" } }
+    thetest = DynamicPage.find_by(slug: "Test_slug")
+    expect(thetest.title).to eq("title")
+  end
 end
