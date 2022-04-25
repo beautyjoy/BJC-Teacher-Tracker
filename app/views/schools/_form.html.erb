@@ -1,6 +1,6 @@
 
 <div class="form-group">
-  <%= f.label :name, "School Name", class: "label-required" %>
+  <%= f.label :name, "School Name", class: "label-required", for: "school_selectize" %>
   <%= f.select :name, 
     options_for_select(School.all.collect {|school| [
       "#{school.name}, #{school.city}, #{school.state}", 
@@ -26,13 +26,13 @@
       </div>
 
       <div class='col-4'>
-          <%= f.label :city, class: "label-required" %>
+          <%= f.label :city, class: "label-required", for: "school_city" %>
           <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
           required: true, id: 'school_city' %>
       </div>
 
       <div class='col-2'>
-          <%= f.label :state, class: "label-required" %>
+          <%= f.label :state, class: "label-required", for: "school_state" %>
           <%= f.select(
               :state,
               School::VALID_STATES,
@@ -43,29 +43,29 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :website, "School Website", class: "label-required" %>
+    <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
     <%= f.text_field :website, placeholder: "snap.berkeley.edu",
         class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL.",
         id: 'school_website' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :grade_level, "Grade Level" %>
+    <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
     <%= f.select(
         :grade_level,
         options_for_select(School.grade_level_options),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: false }
+        { class: 'form-control', required: false, id: 'school_grade_level' }
       ) %>
   </div>
 
   <div class="form-group">
-    <%= f.label :school_type, "School Type" %>
+    <%= f.label :school_type, "School Type", for: 'school_type' %>
     <%= f.select(
         :school_type,
         options_for_select(School.school_type_options),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: false }
+        { class: 'form-control', required: false, id: 'school_type' }
       ) %>
   </div>
 
@@ -100,9 +100,9 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :nces_id, "NCES ID" %>
+      <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
       <%= f.number_field :nces_id, placeholder: "000000000000",
-          class: "form-control", max: 999999999999, title: "Please enter a valid NCES ID." %>
+          class: "form-control", max: 999999999999, title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
     </div>
   <% end %>
 </div>
@@ -110,7 +110,7 @@
 
 <script>
   $('#school_form').hide();
-  
+
   function autofillSchoolFields() {
     var school_arr = $("#school_selectize").val().split(" * ", 4); // Format: [name, city, state, website]
     $("#school_name").prop('value', school_arr[0]);

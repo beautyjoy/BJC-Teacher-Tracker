@@ -19,7 +19,7 @@ Scenario: Correctly filling out and succesful form submission
     And   I set my education level target as "High School"
     And   I fill in "More Information" with "I am after school volunteer"
     And   I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
-    And   I enter my "School Name" as "Cupertino High School"
+    And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
     And   I enter my "School Website" as "https://chs.fuhsd.org"
@@ -33,7 +33,7 @@ Scenario: Not Correctly filling out and unsuccesful form submission
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
     And   I set my status as "I am teaching BJC as an AP CS Principles course."
-    And   I enter my "School Name" as "Cupertino High School"
+    And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I enter my "City" as "Cupertino"
     And   I select "CA" from "State"
     And   I enter my "School Website" as "chs.fuhsd.org"
@@ -51,7 +51,7 @@ Scenario: Websites validation - two invalid websites
     And I enter my "Personal or Course Website" as "jonathancenacom"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Stafford High School"
+    And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "stafford"
@@ -68,7 +68,7 @@ Scenario: Websites validation - one invalid website
     And I enter my "School Email" as "jonathancena@wwe.com"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Stafford High School"
+    And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "stafford"
@@ -85,7 +85,7 @@ Scenario: Websites validation - one valid website
     And I enter my "School Email" as "jonathancena@wwe.com"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Stafford High School"
+    And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://stafford.edu"
@@ -104,7 +104,7 @@ Scenario: Filling out new form with existing email should not update information
     And I enter my "School Email" as "alice@berkeley.edu"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Cupertino High School"
+    And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And I enter my "City" as "Cupertino"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://chs.fuhsd.org"
@@ -125,7 +125,7 @@ Scenario: Filling out new form with existing Snap should not create new teacher
     And I enter my "Snap! Username" as "aliceadams"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Cupertino High School"
+    And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And I enter my "City" as "Cupertino"
     And I select "CA" from "State"
     And I enter my "School Website" as "https://chs.fuhsd.org"
@@ -146,7 +146,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I set my status as "I am teaching BJC through the TEALS program."
     And I fill in "More Information" with "I am a TEALS program employee!"
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Castro Valley High School"
+    And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
     And I enter my "School Website" as "cvhs.cv.k12.ca.us"
@@ -174,7 +174,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then I should not see "ex. Im teaching a college course"
     And I fill in "More Information" with "Rebecca"
     And I set my education level target as "High School"
-    And I enter my "School Name" as "Castro Valley High School"
+    And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
     And I enter my "School Website" as "cvhs.cv.k12.ca.us"

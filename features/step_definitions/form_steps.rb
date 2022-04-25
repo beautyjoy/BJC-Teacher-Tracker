@@ -45,6 +45,8 @@ end
 Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, email, expected|
   expect(Teacher.find_by(email: email)[field]).to eq(expected)
 end
-Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value, field, selector|
-  find("#school_selectize").click.set(value)
+
+When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|
+  fill_in("School Name", with: text)
+  page.find(".label-required", text: "School Name").click
 end
