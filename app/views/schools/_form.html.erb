@@ -3,7 +3,7 @@
   <%= f.label :name, "School Name", class: "label-required", for: "school_selectize" %>
   <%= f.select :name, 
     options_for_select(School.all.collect {|school| [
-      "#{school.name}, #{school.city}, #{school.state}", 
+      "#{school.name}, #{school.city}, #{school.state}",
       "#{school.name} * #{school.city} * #{school.state} * #{school.website}"] # using " * " as delim. Probably really bad and should be changed
     }),
     {:prompt => 'Search School'},
@@ -13,7 +13,7 @@
   <%= csrf_meta_tags %>
 </div>
 
-<div id ="school_form"> 
+<div id ="school_form">
   <div class = "col-12 d-flex justify-content-end" id ="innest_form">
     <button type="button" class="btn-close" aria-label="Close" id = "close_button">X</button>
   </div>
