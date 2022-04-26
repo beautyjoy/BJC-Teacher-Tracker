@@ -59,19 +59,19 @@ Scenario: Admins can create new schools
     And I press "Submit"
     And I should see "New UC Berkeley" with "0" in a table row
 
-# Scenario: Selectize option created is available
-#     Given the following teachers exist:
-#     | first_name | last_name | admin | email                        |
-#     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
-#     Given I am on the BJC home page
-#     Given I have an admin email
-#     And I follow "Log In"
-#     Then I can log in with Google
-#     When I go to the new schools page
-#     And I fill in the school name selectize box with "New UC Berkeley" and choose to add a new school
-#     And I fill in "City" with "Berkeley"
-#     And I select "CA" from "State"
-#     And I fill in "School Website" with "https://www.berkeley.edu/"
-#     And I press "Submit"
-#     When I go to the new schools page
-#     Then I should see "New UC Berkeley"
+ Scenario: Selectize option created is available
+     Given the following teachers exist:
+     | first_name | last_name | admin | email                        |
+     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+     Given I am on the BJC home page
+     Given I have an admin email
+     And I follow "Log In"
+     Then I can log in with Google
+     When I go to the new schools page
+     And I fill in the school name selectize box with "New UC Berkeley" and choose to add a new school
+     And I fill in "City" with "Berkeley"
+     And I select "CA" from "State"
+     And I fill in "School Website" with "https://www.berkeley.edu/"
+     And I press "Submit"
+     When I go to the new schools page
+     Then I should see "New UC Berkeley"
