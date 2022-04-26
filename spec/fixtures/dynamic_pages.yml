@@ -1,0 +1,7 @@
+thepage:
+  slug: Test_slug
+  title: shit
+  permissions: "teacher"
+  creator_id: 5
+  last_editor: Darwin
+  body: <%= {body: dynamic_pages_thepage} %>
