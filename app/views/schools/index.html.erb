@@ -19,6 +19,7 @@
       <th scope="col">Location</th>
       <th scope="col">Website</th>
       <th scope="col">Teachers Count</th>
+      <th scope="col">Grade Level</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -33,6 +34,7 @@
           </a>
         </td>
         <td><%= school.teachers_count %></td>
+        <td><%= school.display_grade_level %></td>
         <td>
           <button class="btn btn-default dropdown-arrow" type="button" data-toggle="collapse" data-target="<%="#details_#{index}"%>" onclick> 
             ▼
