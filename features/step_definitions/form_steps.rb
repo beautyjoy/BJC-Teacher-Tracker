@@ -48,5 +48,9 @@ end
 
 When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|
   fill_in("School Name", with: text)
-  page.find(".label-required", text: "School Name").click
+  page.find(".label-required", text: "School Name",visible => :all).click
 end
+Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value|
+  find("#school_selectize",visible: all).click.set(value)
+end
+
