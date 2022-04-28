@@ -2,6 +2,7 @@
 
 class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
+
   def index
     if logged_in?
       @current_user_is_admin = is_admin?
@@ -10,19 +11,23 @@ class DynamicPagesController < ApplicationController
     end
     @all_dynamic_pages = DynamicPage.all
   end
+
   def delete
     DynamicPage.destroy(params[:id])
     redirect_to dynamic_pages_path
   end
+
   def new
-    @dynamic_page = DynamicPage.new(flash[:dynamic_page])
+    @dynamic_page = DynamicPage.new(flash[:dynamic_page_params_flash])
   end
+
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
     @dynamic_page.creator_id = current_user.id
     @dynamic_page.last_editor = current_user.id
+
     if DynamicPage.find_by(slug: @dynamic_page.slug)
-      flash[:dynamic_page] = params[:dynamic_page]
+      flash[:dynamic_page_params_flash] = params[:dynamic_page]
       redirect_to({ action: "new" }, alert:  "That slug already exists :(")
     elsif @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
@@ -31,6 +36,7 @@ class DynamicPagesController < ApplicationController
       redirect_to root_path, alert: "Failed to submit information :("
     end
   end
+
   def show
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
     if @dynamic_page.permissions == "Admin" && !is_admin?
@@ -39,17 +45,20 @@ class DynamicPagesController < ApplicationController
       redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
     end
   end
+
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
-    @dynamic_page.assign_attributes(flash[:dynamic_page]) # Assigns attrs if tried to use duplicate slug and redirected here
+    @dynamic_page.assign_attributes(flash[:dynamic_page_params_flash]) # Assigns attrs if tried to use duplicate slug and redirected here
   end
+
   def update
     @dynamic_page ||= DynamicPage.find(params[:id])
     @dynamic_page.assign_attributes(dynamic_page_params)
     @dynamic_page.last_editor = current_user.id
 
     if @dynamic_page.slug_changed? && DynamicPage.find_by(slug: @dynamic_page.slug)
-      flash[:dynamic_page] = params[:dynamic_page]
+      # Need this case b/c @dynamic_page.save throws ActiveRecord::RecordNotUnique exception if @dynamic_page has a duplicate slug
+      flash[:dynamic_page_params_flash] = params[:dynamic_page]
       redirect_to({ action: "edit", slug: @dynamic_page.slug_was }, alert:  "That slug already exists :(")
     elsif @dynamic_page.save
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
