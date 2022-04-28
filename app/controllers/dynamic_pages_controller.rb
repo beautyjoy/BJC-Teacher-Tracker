@@ -19,6 +19,8 @@ class DynamicPagesController < ApplicationController
   end
   def create
     @dynamic_page = DynamicPage.new(dynamic_page_params)
+    @dynamic_page.creator_id = session[:user_id]
+    @dynamic_page.last_editor = session[:user_id]
     if DynamicPage.find_by(slug: @dynamic_page.slug)
       flash[:dynamic_page] = params[:dynamic_page]
       redirect_to({ action: "new" }, alert:  "That slug already exists :(")
@@ -45,6 +47,7 @@ class DynamicPagesController < ApplicationController
     @dynamic_page ||= DynamicPage.find(params[:id])
     temp_slug = @dynamic_page.slug
     @dynamic_page.assign_attributes(dynamic_page_params)
+    @dynamic_page.last_editor = session[:user_id]
     if temp_slug == @dynamic_page.slug # Slug didn't change
       @dynamic_page.save
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
@@ -63,11 +66,6 @@ class DynamicPagesController < ApplicationController
 
   private
     def dynamic_page_params
-      params.require(:dynamic_page).require(:slug)
-      params.require(:dynamic_page).require(:title)
-      params.require(:dynamic_page).require(:permissions)
-      params.require(:dynamic_page).require(:creator_id)
-      params.require(:dynamic_page).require(:last_editor)
-      params.require(:dynamic_page).permit(:slug, :body, :title, :permissions, :creator_id, :last_editor)
+      params.require(:dynamic_page).permit(:slug, :body, :title, :permissions)
     end
 end
