@@ -10,6 +10,7 @@ class DynamicPagesController < ApplicationController
     end
     @all_dynamic_pages = DynamicPage.all
   end
+
   def delete
     DynamicPage.destroy(params[:id])
     redirect_to dynamic_pages_path
