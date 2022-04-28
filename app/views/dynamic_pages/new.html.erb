@@ -1,5 +1,9 @@
 <% provide(:h1, "Create a New Page") %>
 
-<div id='new-dynamic-pages-form-container'>
-  <%= render 'form', dynamic_page: @dynamic_page %>
-</div>
+<%= form_for @dynamic_page, url: { action: :create, slug: @dynamic_page.slug } do |f| %>
+  <%= render 'dynamic_pages/form', fields: f %>
+
+  <div class="actions">
+      <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
+    </div>
+<% end %>

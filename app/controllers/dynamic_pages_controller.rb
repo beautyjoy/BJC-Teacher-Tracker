@@ -41,26 +41,22 @@ class DynamicPagesController < ApplicationController
   end
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
-    @dynamic_page.assign_attributes(flash[:dynamic_page])
+    @dynamic_page.assign_attributes(flash[:dynamic_page]) # Assigns attrs if tried to use duplicate slug and redirected here
   end
   def update
     @dynamic_page ||= DynamicPage.find(params[:id])
-    temp_slug = @dynamic_page.slug
     @dynamic_page.assign_attributes(dynamic_page_params)
     @dynamic_page.last_editor = session[:user_id]
-    if temp_slug == @dynamic_page.slug # Slug didn't change
-      @dynamic_page.save
-      flash[:success] = "Updated #{@dynamic_page.title} page successfully."
-      redirect_to dynamic_pages_path
-    elsif not DynamicPage.find_by(slug: @dynamic_page.slug) # No other page with this slug in db
-      @dynamic_page.save
-      flash[:success] = "Updated #{@dynamic_page.title} page successfully."
-      redirect_to dynamic_pages_path
-    elsif DynamicPage.find_by(slug: @dynamic_page.slug) # There is another page with this slug already
+
+    if @dynamic_page.slug_changed? && DynamicPage.find_by(slug: @dynamic_page.slug)
       flash[:dynamic_page] = params[:dynamic_page]
-      redirect_to({ action: "edit", slug: temp_slug }, alert:  "That slug already exists :(")
+      redirect_to({ action: "edit", slug: @dynamic_page.slug_was }, alert:  "That slug already exists :(")
+    elsif @dynamic_page.save
+      flash[:success] = "Updated #{@dynamic_page.title} page successfully."
+      redirect_to dynamic_pages_path
     else
-      redirect_to root_path, alert: "Failed to submit information :("
+      flash[:alert] = "An error occurred! #{@dynamic_page.errors.full_messages}"
+      redirect_to dynamic_pages_path
     end
   end
 
