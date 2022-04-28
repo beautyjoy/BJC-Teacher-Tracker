@@ -73,10 +73,10 @@ RSpec.describe DynamicPagesController, type: :controller do
               title: @dynamic_page_title,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-            },
-            session: {
-              user_id: 0
             }
+          },
+          session: {
+            user_id: 0
           }
       }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
@@ -91,10 +91,10 @@ RSpec.describe DynamicPagesController, type: :controller do
               title: @dynamic_page_title,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-            },
-            session: {
-              user_id: 0
             }
+          },
+          session: {
+            user_id: 0
           }
         }
       }.to raise_error(ActiveRecord::NotNullViolation)
@@ -152,7 +152,7 @@ RSpec.describe DynamicPagesController, type: :controller do
             }
           } # No user_id in the session
         }
-      }.to raise_error(ActiveRecord::NotNullViolation)
+      }.to raise_error(NoMethodError) # b/c current_user.id => null has no method id
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
@@ -211,7 +211,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     thetest = DynamicPage.find_by(slug: "Test_slug")
-    post :update, params: { id: thetest.id, dynamic_page: { permissions: "Verified Teacher", title: "title", slug: thetest.slug, creator_id: 5, last_editor: 5 } }, session: { user_id: 5 }
+    post :update, params: { id: thetest.id, dynamic_page: { permissions: "Verified Teacher", title: "title", slug: thetest.slug, creator_id: 2, last_editor: 2 } }, session: { user_id: 2 }
     thetest = DynamicPage.find_by(slug: "Test_slug")
     expect(thetest.title).to eq("title")
   end
