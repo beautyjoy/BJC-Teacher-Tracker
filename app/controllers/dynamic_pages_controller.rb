@@ -18,7 +18,7 @@ class DynamicPagesController < ApplicationController
   end
 
   def new
-    @dynamic_page = DynamicPage.new(flash[:dynamic_page_params_flash])
+    @dynamic_page = DynamicPage.new()
   end
 
   def create
@@ -27,8 +27,9 @@ class DynamicPagesController < ApplicationController
     @dynamic_page.last_editor = current_user.id
 
     if DynamicPage.find_by(slug: @dynamic_page.slug)
-      flash[:dynamic_page_params_flash] = params[:dynamic_page]
-      redirect_to({ action: "new" }, alert:  "That slug already exists :(")
+      # Need this case b/c @dynamic_page.save throws ActiveRecord::RecordNotUnique exception if @dynamic_page has a duplicate slug
+      flash[:alert] = "That slug already exists :("
+      render "edit"
     elsif @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
       redirect_to ({ action: "show", slug: @dynamic_page.slug })
@@ -48,7 +49,6 @@ class DynamicPagesController < ApplicationController
 
   def edit
     @dynamic_page = DynamicPage.find_by(slug: params[:slug])
-    @dynamic_page.assign_attributes(flash[:dynamic_page_params_flash]) # Assigns attrs if tried to use duplicate slug and redirected here
   end
 
   def update
@@ -58,8 +58,8 @@ class DynamicPagesController < ApplicationController
 
     if @dynamic_page.slug_changed? && DynamicPage.find_by(slug: @dynamic_page.slug)
       # Need this case b/c @dynamic_page.save throws ActiveRecord::RecordNotUnique exception if @dynamic_page has a duplicate slug
-      flash[:dynamic_page_params_flash] = params[:dynamic_page]
-      redirect_to({ action: "edit", slug: @dynamic_page.slug_was }, alert:  "That slug already exists :(")
+      flash[:alert] = "That slug already exists :("
+      render "edit"
     elsif @dynamic_page.save
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
       redirect_to dynamic_pages_path
