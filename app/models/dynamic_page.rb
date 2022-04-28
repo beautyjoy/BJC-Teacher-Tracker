@@ -5,13 +5,13 @@
 # Table name: dynamic_pages
 #
 #  id          :bigint           not null, primary key
-#  last_editor :bigint
-#  permissions :string
+#  last_editor :bigint           not null
+#  permissions :string           not null
 #  slug        :string           not null
-#  title       :string
+#  title       :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  creator_id  :bigint
+#  creator_id  :bigint           not null
 #
 # Indexes
 #

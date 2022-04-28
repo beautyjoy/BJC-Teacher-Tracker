@@ -54,9 +54,10 @@ RSpec.describe DynamicPagesController, type: :controller do
                   title: @dynamic_page_title,
                   body: "<p>Test page body.</p>",
                   permissions: "Admin",
-                  creator_id: 0,
-                  last_editor: 0
               }
+          },
+          session: {
+            user_id: 0
           }
       }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).not_to be_nil
@@ -72,8 +73,9 @@ RSpec.describe DynamicPagesController, type: :controller do
               title: @dynamic_page_title,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-              creator_id: 0,
-              last_editor: 0
+            },
+            session: {
+              user_id: 0
             }
           }
       }
@@ -89,12 +91,13 @@ RSpec.describe DynamicPagesController, type: :controller do
               title: @dynamic_page_title,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-              creator_id: 0,
-              last_editor: 0
+            },
+            session: {
+              user_id: 0
             }
           }
         }
-      }.to raise_error(ActionController::ParameterMissing)
+      }.to raise_error(ActiveRecord::NotNullViolation)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
@@ -107,12 +110,13 @@ RSpec.describe DynamicPagesController, type: :controller do
               slug: @dynamic_page_slug,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-              creator_id: 0,
-              last_editor: 0
             }
+          },
+          session: {
+            user_id: 0
           }
         }
-      }.to raise_error(ActionController::ParameterMissing)
+      }.to raise_error(ActiveRecord::NotNullViolation)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
@@ -125,16 +129,17 @@ RSpec.describe DynamicPagesController, type: :controller do
               title: @dynamic_page_title,
               slug: @dynamic_page_slug,
               body: "<p>Test page body.</p>",
-              creator_id: 0,
-              last_editor: 0
             }
+          },
+          session: {
+            user_id: 0
           }
         }
-      }.to raise_error(ActionController::ParameterMissing)
+      }.to raise_error(ActiveRecord::NotNullViolation)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
-    it "requires creator_id to create" do
+    it "requires :user_id in session to assign creator_id and last_editor" do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
       expect { post :create, {
@@ -144,29 +149,10 @@ RSpec.describe DynamicPagesController, type: :controller do
               slug: @dynamic_page_slug,
               body: "<p>Test page body.</p>",
               permissions: "Admin",
-              last_editor: 0
             }
-          }
+          } # No user_id in the session
         }
-      }.to raise_error(ActionController::ParameterMissing)
-      expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-    end
-
-    it "requires last_editor to create" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-      expect { post :create, {
-          params: {
-            dynamic_page: {
-              title: @dynamic_page_title,
-              slug: @dynamic_page_slug,
-              body: "<p>Test page body.</p>",
-              permissions: "Admin",
-              last_editor: 0
-            }
-          }
-        }
-      }.to raise_error(ActionController::ParameterMissing)
+      }.to raise_error(ActiveRecord::NotNullViolation)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
@@ -174,31 +160,33 @@ RSpec.describe DynamicPagesController, type: :controller do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
       post :create, {
-          params: {
-              dynamic_page: {
-                  slug: @dynamic_page_slug,
-                  title: @dynamic_page_title,
-                  body: "<p>Test page body.</p>",
-                  permissions: "Admin",
-                  creator_id: 0,
-                  last_editor: 0
-              }
+        params: {
+          dynamic_page: {
+            slug: @dynamic_page_slug,
+            title: @dynamic_page_title,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
           }
+        },
+        session: {
+          user_id: 0
+        }
       }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).not_to be_nil
       expect(@success_flash_alert).to match flash[:success]
 
       post :create, {
-          params: {
-              dynamic_page: {
-                  slug: @dynamic_page_slug,
-                  title: @dynamic_page_title,
-                  body: "<p>Test page body.</p>",
-                  permissions: "Admin",
-                  creator_id: 0,
-                  last_editor: 0
-              }
+        params: {
+          dynamic_page: {
+            slug: @dynamic_page_slug,
+            title: @dynamic_page_title,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
           }
+        },
+        session: {
+          user_id: 0
+        }
       }
       expect(@slug_exists_flash_alert).to match flash[:alert]
     end
@@ -223,7 +211,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     thetest = DynamicPage.find_by(slug: "Test_slug")
-    post :update, params: { id: thetest.id, dynamic_page: { permissions: "teacher", title: "title", slug: thetest.slug, creator_id: 5, last_editor: "Darwin" } }
+    post :update, params: { id: thetest.id, dynamic_page: { permissions: "Verified Teacher", title: "title", slug: thetest.slug, creator_id: 5, last_editor: 5 } }, session: { user_id: 5 }
     thetest = DynamicPage.find_by(slug: "Test_slug")
     expect(thetest.title).to eq("title")
   end
