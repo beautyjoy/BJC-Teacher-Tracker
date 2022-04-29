@@ -4,12 +4,7 @@ class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
 
   def index
-    if logged_in?
-      @current_user_is_admin = is_admin?
-      @current_user_is_teacher = is_teacher?
-      @current_user_is_verified_teacher = is_verified_teacher?
-    end
-    @all_dynamic_pages = DynamicPage.all
+    @dynamic_pages = DynamicPage.where(permissions: get_permissions)
   end
 
   def delete
@@ -72,5 +67,15 @@ class DynamicPagesController < ApplicationController
   private
     def dynamic_page_params
       params.require(:dynamic_page).permit(:slug, :body, :title, :permissions)
+    end
+
+    def get_permissions
+      if is_admin?
+        @permissions ||= ["Admin", "Verified Teacher", "Public"]
+      elsif is_verified_teacher?
+        @permissions ||= ["Verified Teacher", "Public"]
+      else
+        @permissions ||= ["Public"]
+      end
     end
 end

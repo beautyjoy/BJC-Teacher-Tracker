@@ -15,7 +15,7 @@ RSpec.describe DynamicPagesController, type: :controller do
 
   describe "#index" do
     it "renders the index template" do
-      expect(DynamicPage).to receive(:all)
+      expect(DynamicPage).to receive(:where)
       get :index
       expect(response).to render_template("index")
     end

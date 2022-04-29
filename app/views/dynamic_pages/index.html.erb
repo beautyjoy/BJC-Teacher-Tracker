@@ -25,21 +25,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @all_dynamic_pages.each do |p| %>
-      <% if p.permissions == "Public" || 
-            @current_user_is_admin ||
-            (p.permissions == "Verified Teacher" && @current_user_is_verified_teacher)
-      %>
-        <tr align = "center">
-          <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
-          <td> <%= Teacher.find(p.last_editor).full_name %> </td>
-          <% if @current_user_is_admin %>
-            <td> <%= p.permissions %> </td>
-            <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
-            <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
-          <% end %>
-        </tr>
-      <% end %>
+    <% @dynamic_pages.each do |p| %>
+      <tr align = "center">
+        <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
+        <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+        <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+          <td> <%= p.permissions %> </td>
+          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+          <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+        <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
