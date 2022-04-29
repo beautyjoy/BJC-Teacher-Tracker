@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-3">
-      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+      <% if logged_in? && current_user.admin? %>
         <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
       <% end %>
     </div>
@@ -17,7 +17,7 @@
     <tr align = "center">
     <th scope="col">Title</th>
     <th scope="col">Last Editor</th>
-    <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+    <% if logged_in? && current_user.admin? %>
       <th scope="col">Permissions</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
@@ -29,7 +29,7 @@
       <tr align = "center">
         <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
         <td> <%= Teacher.find(p.last_editor).full_name %> </td>
-        <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+        <% if logged_in? && current_user.admin? %>
           <td> <%= p.permissions %> </td>
           <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
           <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
