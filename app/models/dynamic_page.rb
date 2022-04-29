@@ -19,4 +19,12 @@
 #
 class DynamicPage < ApplicationRecord
   has_rich_text :body
+
+  def admin_permissions? 
+    permissions == 'Admin' 
+  end
+
+  def verified_teacher_permissions? 
+    permissions == 'Verified Teacher' 
+  end
 end
