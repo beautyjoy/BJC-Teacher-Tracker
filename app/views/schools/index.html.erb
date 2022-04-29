@@ -1,16 +1,5 @@
-<div class="page-title">
-  <div class="row">
-    <div class="col-9">
-      <h1> BJC Schools </h1>
-    </div>
-
-    <div class="col-3">
-      <% if current_user.admin? %>
-        <%= button_to("New School", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= provide(:h1, "BJC Schools") %>
+<%= provide(:header_button, "New School") %>
 
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
