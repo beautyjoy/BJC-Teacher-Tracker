@@ -21,15 +21,12 @@ class DynamicPagesController < ApplicationController
     @dynamic_page.creator_id = current_user.id
     @dynamic_page.last_editor = current_user.id
 
-    if DynamicPage.find_by(slug: @dynamic_page.slug)
-      # Need this case b/c @dynamic_page.save throws ActiveRecord::RecordNotUnique exception if @dynamic_page has a duplicate slug
-      flash[:alert] = "That slug already exists :("
-      render "edit"
-    elsif @dynamic_page.save
+    if @dynamic_page.save
       flash[:success] = "Created #{@dynamic_page.title} page successfully."
       redirect_to ({ action: "show", slug: @dynamic_page.slug })
     else
-      redirect_to root_path, alert: "Failed to submit information :("
+      flash.now[:alert] = "An error occurred! #{@dynamic_page.errors.full_messages}"
+      render "new"
     end
   end
 
@@ -51,16 +48,12 @@ class DynamicPagesController < ApplicationController
     @dynamic_page.assign_attributes(dynamic_page_params)
     @dynamic_page.last_editor = current_user.id
 
-    if @dynamic_page.slug_changed? && DynamicPage.find_by(slug: @dynamic_page.slug)
-      # Need this case b/c @dynamic_page.save throws ActiveRecord::RecordNotUnique exception if @dynamic_page has a duplicate slug
-      flash[:alert] = "That slug already exists :("
-      render "edit"
-    elsif @dynamic_page.save
+    if @dynamic_page.save
       flash[:success] = "Updated #{@dynamic_page.title} page successfully."
       redirect_to dynamic_pages_path
     else
-      flash[:alert] = "An error occurred! #{@dynamic_page.errors.full_messages}"
-      redirect_to dynamic_pages_path
+      flash.now[:alert] = "An error occurred! #{@dynamic_page.errors.full_messages}"
+      render "edit"
     end
   end
 

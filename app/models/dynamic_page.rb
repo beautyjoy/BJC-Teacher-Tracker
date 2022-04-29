@@ -18,6 +18,7 @@
 #  index_dynamic_pages_on_slug  (slug) UNIQUE
 #
 class DynamicPage < ApplicationRecord
+  validates :slug, uniqueness: true
   has_rich_text :body
 
   def admin_permissions?

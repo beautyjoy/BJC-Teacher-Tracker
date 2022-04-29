@@ -9,7 +9,7 @@ RSpec.describe DynamicPagesController, type: :controller do
     @dynamic_page_slug = "test_slug_1"
     @dynamic_page_title = "Test Page Title 1"
     @fail_flash_alert = /Failed to submit information :\(/
-    @slug_exists_flash_alert = /That slug already exists :\(/
+    @slug_exists_flash_alert = "An error occurred! [\"Slug has already been taken\"]"
     @success_flash_alert = Regexp.new("Created #{@dynamic_page_title} page successfully.")
   end
 
