@@ -1,10 +1,10 @@
 <%= provide(:h1, "Edit Page") %>
 <hr />
 
-<div id='edit-dynamic-pages-form-container'>
-  <% if Teacher.find(session[:user_id]).admin %>
-    <%= render 'form', dynamic_page: @dynamic_page %>
-  <% else %>
-    <%= flash[:error] = "Only Admin can edit pages!"%>
-  <% end %>
-</div>
+<%= form_for @dynamic_page do |f| %>
+  <%= render 'dynamic_pages/form', fields: f %>
+
+  <div class="actions">
+      <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
+    </div>
+<% end %>

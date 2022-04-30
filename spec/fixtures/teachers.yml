@@ -37,6 +37,7 @@
 #
 
 ye:
+  id: 0
   first_name: Ye
   last_name: Wang
   status: 4
@@ -48,6 +49,7 @@ ye:
   school: stanfurd
 
 bob:
+  id: 1
   first_name: Bob
   last_name: Johnson
   snap: BobJohnson
@@ -59,6 +61,7 @@ bob:
   education_level: -1
 
 long:
+  id: 2
   first_name: Short
   last_name: Long
   snap: song

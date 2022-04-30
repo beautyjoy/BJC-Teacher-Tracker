@@ -1,23 +1,12 @@
-<div class="page-title">
-  <div class="row">
-    <div class="col-9">
-      <h1> BJC Pages </h1>
-    </div>
-
-    <div class="col-3">
-      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
-        <%= button_to("New Page", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= provide(:h1, "BJC Pages") %>
+<%= provide(:header_button, "New Page") %>
 
 <table class="table js-dataTable">
   <thead class="thead-dark">
     <tr align = "center">
     <th scope="col">Title</th>
     <th scope="col">Last Editor</th>
-    <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
+    <% if logged_in? && current_user.admin? %>
       <th scope="col">Permissions</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
@@ -25,21 +14,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @all_dynamic_pages.each do |p| %>
-      <% if p.permissions == "Public" || 
-            @current_user_is_admin ||
-            (p.permissions == "Verified Teacher" && @current_user_is_verified_teacher)
-      %>
-        <tr align = "center">
-          <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
-          <td> <%= Teacher.find(p.last_editor).full_name %> </td>
-          <% if @current_user_is_admin %>
-            <td> <%= p.permissions %> </td>
-            <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
-            <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
-          <% end %>
-        </tr>
-      <% end %>
+    <% @dynamic_pages.each do |p| %>
+      <tr align = "center">
+        <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
+        <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+        <% if logged_in? && current_user.admin? %>
+          <td> <%= p.permissions %> </td>
+          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+          <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+        <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
