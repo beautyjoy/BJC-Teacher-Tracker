@@ -19,6 +19,15 @@
 #
 class DynamicPage < ApplicationRecord
   validates :slug, uniqueness: true
+  validates :last_editor, :permissions, :slug, :title, :creator_id, presence: true
+  validate :validate_permissions
+
+  def validate_permissions
+    if !["Admin", "Verified Teacher", "Public"].include?(permissions)
+      errors.add :base, "That permissions is not valid"
+    end
+  end
+
   has_rich_text :body
 
   def admin_permissions?
