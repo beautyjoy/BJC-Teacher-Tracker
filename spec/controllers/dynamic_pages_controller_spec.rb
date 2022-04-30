@@ -85,57 +85,54 @@ RSpec.describe DynamicPagesController, type: :controller do
     it "requires slug to create" do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-      expect { post :create, {
-          params: {
-            dynamic_page: {
-              title: @dynamic_page_title,
-              body: "<p>Test page body.</p>",
-              permissions: "Admin",
-            }
-          },
-          session: {
-            user_id: 0
+      post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
           }
+        },
+        session: {
+          user_id: 0
         }
-      }.to raise_error(ActiveRecord::NotNullViolation)
+      }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
     it "requires title to create" do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-      expect { post :create, {
-          params: {
-            dynamic_page: {
-              slug: @dynamic_page_slug,
-              body: "<p>Test page body.</p>",
-              permissions: "Admin",
-            }
-          },
-          session: {
-            user_id: 0
+      post :create, {
+        params: {
+          dynamic_page: {
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
+            permissions: "Admin",
           }
+        },
+        session: {
+          user_id: 0
         }
-      }.to raise_error(ActiveRecord::NotNullViolation)
+      }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
     it "requires permissions to create" do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
-      expect { post :create, {
-          params: {
-            dynamic_page: {
-              title: @dynamic_page_title,
-              slug: @dynamic_page_slug,
-              body: "<p>Test page body.</p>",
-            }
-          },
-          session: {
-            user_id: 0
+      post :create, {
+        params: {
+          dynamic_page: {
+            title: @dynamic_page_title,
+            slug: @dynamic_page_slug,
+            body: "<p>Test page body.</p>",
           }
+        },
+        session: {
+          user_id: 0
         }
-      }.to raise_error(ActiveRecord::NotNullViolation)
+      }
       expect(DynamicPage.find_by(slug: @dynamic_page_slug)).to be_nil
     end
 
