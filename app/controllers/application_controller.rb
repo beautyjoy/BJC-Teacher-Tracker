@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_verified_teacher?
-    @is_verified_teacher ||= logged_in? ? (!current_user.admin) && (current_user.display_application_status == "Validated") : false
+    @is_verified_teacher ||= logged_in? ? !current_user.admin && current_user.display_application_status == "Validated" : false
   end
 
   def require_login

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: dynamic_pages
@@ -17,15 +15,9 @@
 #
 #  index_dynamic_pages_on_slug  (slug) UNIQUE
 #
-class DynamicPage < ApplicationRecord
-  validates :slug, uniqueness: true
-  has_rich_text :body
-
-  def admin_permissions?
-    permissions == "Admin"
-  end
-
-  def verified_teacher_permissions?
-    permissions == "Verified Teacher"
-  end
-end
+thepage:
+  slug: Test_slug
+  title: test_page
+  permissions: "Verified Teacher"
+  creator_id: 5
+  last_editor: 5
