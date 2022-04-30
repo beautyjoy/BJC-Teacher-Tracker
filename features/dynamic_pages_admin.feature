@@ -98,7 +98,8 @@ Scenario: Can't create a page with a slug that already exists
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
-    Then I should be on the new dynamic pages page
+    Then I should see "Create a New Page"
+    And I should see "Slug has already been taken"
 
 Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new dynamic pages page
@@ -114,7 +115,8 @@ Scenario: Attempting to create page with taken slug doesn't delete form input
     And I fill in the dynamic_page_body with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
-    Then I should be on the new dynamic pages page
+    Then I should see "Create a New Page"
+    And I should see "Slug has already been taken"
     And the "dynamic_page_title" field should contain "Test Title"
     And the "dynamic_page_slug" field should contain "test_slug"
     And I should see "This is a test"
@@ -219,7 +221,8 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I fill in "dynamic_page_slug" with "test_slug"
     And I fill in the dynamic_page_body with "New page body."
     And I press "Update"
-    Then I should be on the edit dynamic pages page for "test_slug_2"
+    Then I should see "Edit Page"
+    And I should see "Slug has already been taken"
     And the "dynamic_page_title" field should contain "New Title"
     And the "dynamic_page_slug" field should contain "test_slug"
     And I should see "New page body."
