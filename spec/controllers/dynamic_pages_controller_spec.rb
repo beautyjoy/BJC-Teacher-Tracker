@@ -36,7 +36,7 @@ RSpec.describe DynamicPagesController, type: :controller do
       post :delete, params: { id: long_app.id }
       expect(DynamicPage.find_by(slug: "Test_slug")).to be_nil
     end
-  
+
     it "doesn't allow teacher to delete a page" do
       ApplicationController.any_instance.stub(:is_admin?).and_return(false)
       long_app = DynamicPage.find_by(slug: "Test_slug")
