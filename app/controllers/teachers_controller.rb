@@ -35,23 +35,69 @@ class TeachersController < ApplicationController
     school_column = [:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id]
     teacher_value = [[]]
     teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
+    success_teacher_count = 0
+    failed_teacher_email_count = 0
+    failed_teacher_noemail_count = 0
+    update_teacher_count = 0
+    failed_teacher_email = []
+    new_school_count = 0
+
     teacher_hash_array.each do |row|
-      if Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap]) # make sure teacher doesn't already exist
+      if Teacher.find_by(email: row[:email])
+        # make sure teacher doesn't already exist
+        # teacher_db = Teacher.find_by(email: row[:email])
+        # teacher_db.first_name = row[:first_name]
+        # teacher_db.last_name = row[:last_name]
+        # teacher_db.education_level = row[:education_level]
+        # teacher_db.email = row[:email]
+        # teacher_db.more_info = row[:more_info]
+        # teacher_db.personal_website = row[:personal_website]
+        # teacher_db.snap = row[:snap]
+        # teacher_db.status = row[:status]
+        # teacher_db.school_id = row[:school_id]
+        # if teacher_db.save
+        #   update_teacher_count += 1
+        # else
+        #   failed_teacher_email_count += 1
+        #   failed_teacher_email.append(row[:email])
+        # end
         next
-      elsif !row[:school_id] # If there is no school id (different from having invalid school id)
+      elsif !row[:school_id] 
+        # If there is no school id (different from having invalid school id)
         new_school = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags], row[:school_nces_id]]]
         School.import school_column, new_school
+        new_school_count += 1
         @newSchool = School.find_by(name: row[:school_name])
         if @newSchool
           teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], @newSchool.id]]
         end
-      elsif School.find_by(id: row[:school_id]) # If there is a valid school id
+      elsif School.find_by(id: row[:school_id]) 
+        # If there is a valid school id
         teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]]]
-      else # school_id is provided, but invalid
+      else 
+        # school_id is provided, but invalid
+        if row[:email]
+          failed_teacher_email_count += 1
+          failed_teacher_email.append(row[:email])
+        else
+          failed_teacher_noemail_count += 1
+        
+        end
         next
       end
       Teacher.import teacher_column, teacher_value
+      success_teacher_count += 1
     end
+    flash[:notice] = "Import successfully!"
+    flash[:notice] = "#{success_teacher_count} teachers has been created"
+    flash[:notice] = "#{new_school_count} schools has been created"
+    flash[:notice] = "#{failed_teacher_email_count} teachers has failed with following emails:"
+    for email in failed_teacher_email do
+      flash[:notice] = "#{email}"
+    end
+    flash[:notice] = "#{failed_teacher_noemail_count} teachers has failed without emails"
+    flash[:notice] = "#{update_teacher_count} teachers has been updated"
+
     redirect_to teachers_path
   end
 

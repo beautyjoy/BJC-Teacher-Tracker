@@ -278,3 +278,7 @@ Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |v
     field_labeled(field).find(:xpath, ".//option[@selected = 'selected'][text() = '#{value}']").should be_present
   end
 end
+
+Then (/^(?:|I ) should see flash messages "([^"]*)"$/) do |messages|
+  page.should have_selector ".alert", text: "Logged in!"
+end

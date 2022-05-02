@@ -1,6 +1,10 @@
 <%= provide(:h1, "BJC Teachers") %>
 <%= provide(:header_button, "New Teacher") %>
 
+<% if flash.any? %>
+  <%= flash[:notice].join("<br>") %>
+<% end %>
+
 <div class="page-title">
   <div class="row">
     <div class="col-9">
@@ -28,7 +32,6 @@
   <input class="custom-control-input" type="checkbox" name="Application Status" id="Pending" value="Pending">
   <label class="custom-control-label" for="Pending">Pending</label>
 </div>
-
 
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
