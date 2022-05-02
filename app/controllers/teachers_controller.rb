@@ -44,17 +44,28 @@ class TeachersController < ApplicationController
 
     teacher_hash_array.each do |row|
       if Teacher.find_by(email: row[:email])
-        # make sure teacher doesn't already exist
+        #make sure teacher doesn't already exist
         # teacher_db = Teacher.find_by(email: row[:email])
-        # teacher_db.first_name = row[:first_name]
-        # teacher_db.last_name = row[:last_name]
-        # teacher_db.education_level = row[:education_level]
-        # teacher_db.email = row[:email]
-        # teacher_db.more_info = row[:more_info]
-        # teacher_db.personal_website = row[:personal_website]
-        # teacher_db.snap = row[:snap]
-        # teacher_db.status = row[:status]
-        # teacher_db.school_id = row[:school_id]
+        # if !row[:school_id]
+        #   # If there is no school id
+        #   failed_teacher_email_count += 1
+        #   failed_teacher_email.append(row[:email])
+        #   next
+        # elsif School.find_by(id: row[:school_id])
+        #   # If there is a valid school id
+        #   teacher_value = {first_name: row[:first_name], last_name: row[:last_name], education_level: row[:education_level], email: row[:email], 
+        #   more_info: row[:more_info], personal_website: row[:personal_website], snap: row[:snap], status: row[:status], school_id: row[:school_id]}
+        # end
+        # teacher_db.assign_attributes(teacher_value)
+        # # teacher_db.first_name = row[:first_name]
+        # # teacher_db.last_name = row[:last_name]
+        # # teacher_db.education_level = row[:education_level]
+        # # teacher_db.email = row[:email]
+        # # teacher_db.more_info = row[:more_info]
+        # # teacher_db.personal_website = row[:personal_website]
+        # # teacher_db.snap = row[:snap]
+        # # teacher_db.status = row[:status]
+        # # teacher_db.school_id = row[:school_id]
         # if teacher_db.save
         #   update_teacher_count += 1
         # else
@@ -81,7 +92,6 @@ class TeachersController < ApplicationController
           failed_teacher_email.append(row[:email])
         else
           failed_teacher_noemail_count += 1
-        
         end
         next
       end
