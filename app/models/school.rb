@@ -79,6 +79,7 @@ class School < ApplicationRecord
       grade_level.to_s.titlecase
     end
   end
+
   private
     def prefix_url(url)
       return unless url
