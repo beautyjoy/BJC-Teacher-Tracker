@@ -254,3 +254,4 @@ Scenario: Should be able to resend welcome email
   Then I should see "Wuho He"
   Then I follow "All Schools"
   Then I should see "uci"
+  Then I should see "Successfully imported 2 teachers"
