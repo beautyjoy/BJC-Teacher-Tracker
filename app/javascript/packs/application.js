@@ -55,3 +55,6 @@ import './datatables.js';
 import '../styles/application.scss';
 
 // export default {};
+
+require("trix")
+require("@rails/actiontext")

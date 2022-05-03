@@ -3,18 +3,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require "simplecov"
 require "simplecov-cobertura"
-require "simplecov-console"
 
-SimpleCov.start "rails" do
-  command_name "rspec"
-  enable_coverage :branch
-
-  formatter SimpleCov::Formatter::MultiFormatter.new([
-    SimpleCov::Formatter::CoberturaFormatter,
-    SimpleCov::Formatter::Console,
-    SimpleCov::Formatter::HTMLFormatter
-  ])
-end
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+SimpleCov.start "rails"
 
 require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"

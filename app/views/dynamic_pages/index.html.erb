@@ -1,0 +1,29 @@
+<%= provide(:h1, "BJC Pages") %>
+<%= provide(:header_button, "New Page") %>
+
+<table class="table js-dataTable">
+  <thead class="thead-dark">
+    <tr align = "center">
+    <th scope="col">Title</th>
+    <th scope="col">Last Editor</th>
+    <% if logged_in? && current_user.admin? %>
+      <th scope="col">Permissions</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dynamic_pages.each do |p| %>
+      <tr align = "center">
+        <td> <%= link_to(p.title, controller: "dynamic_pages", action: "show", slug: p.slug) %> </td>
+        <td> <%= Teacher.find(p.last_editor).full_name %> </td>
+        <% if logged_in? && current_user.admin? %>
+          <td> <%= p.permissions %> </td>
+          <td> <%= button_to("Edit", {action: "edit", slug: p.slug}, method: :get, class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
+          <td> <%= button_to("Delete", {action: "delete", id: p.id}, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     @is_teacher ||= logged_in? ? !current_user.admin : false
   end
 
+  def is_verified_teacher?
+    @is_verified_teacher ||= logged_in? ? !current_user.admin && current_user.display_application_status == "Validated" : false
+  end
+
   def require_login
     unless logged_in?
       flash[:danger] = "You need to log in to access this."

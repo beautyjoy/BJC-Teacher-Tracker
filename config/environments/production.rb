@@ -101,4 +101,7 @@ Rails.application.configure do
     authentication: :login,
     enable_starttls_auto: true,
   }
+
+  # Store files on Amazon S3. (Uncomment this when S3 is setup)
+  config.active_storage.service = :amazon
 end

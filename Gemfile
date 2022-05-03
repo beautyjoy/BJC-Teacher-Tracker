@@ -41,6 +41,12 @@ gem "sentry-rails"
 # Render email templates
 gem "liquid"
 
+# Store uploaded files
+gem "aws-sdk-s3", require: false
+
+# Render images for file uploads in dynamic pages
+gem "image_processing", ">= 1.2"
+
 group :development do
   gem "annotate"
   gem "guard"
@@ -83,6 +89,7 @@ end
 group :test do
   gem "rspec-rails"
   gem "simplecov", require: false
+  gem "simplecov-json", require: false
   gem "simplecov-console", require: false
   gem "simplecov-cobertura", require: false
   gem "simplecov-csv", require: false
@@ -96,4 +103,6 @@ group :test do
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
+
+  gem "rails-controller-testing"
 end

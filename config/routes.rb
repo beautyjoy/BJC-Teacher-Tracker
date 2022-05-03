@@ -28,4 +28,13 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "sessions#omniauth_callback"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
+
+  resources :dynamic_pages, except: [:edit] do
+    member do
+      post :delete
+    end
+  end
+
+  get "pages/:slug", to: "dynamic_pages#show"
+  get "pages/edit/:slug", to: "dynamic_pages#edit"
 end
