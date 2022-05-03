@@ -1,12 +1,6 @@
 <%= provide(:h1, "BJC Teachers") %>
 <%= provide(:header_button, "New Teacher") %>
 
-<%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
-  <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
-  <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
-<% end %>
-<%= submit_tag "Upload CSV", class: "btn btn-primary", onclick: "openFileExplorer();" %>
-
 <div class="custom-control custom-checkbox custom-control-inline float-right">
   <input class="custom-control-input" type="checkbox" name="Application Status" id="Validated" value="Validated">
   <label class="custom-control-label" for="Validated">Validated</label>
@@ -34,6 +28,48 @@
     <% end %>
   </tbody>
 </table>
+
+<br/>
+
+<%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
+  <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
+  <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
+<% end %>
+
+<div class="row">
+  <div class="col-6">
+    <%= submit_tag "Upload CSV", class: "btn btn-primary", onclick: "openFileExplorer();" %>
+  </div>
+
+  <div class="col-6">
+    <%= submit_tag "Fields for CSV", class: "btn btn-primary", data: { toggle: "collapse", target: "#csvFields" } %>
+  </div>
+</div>
+
+<div class="collapse" id="csvFields">
+  <div class="card card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">first_name</li>
+      <li class="list-group-item">last_name</li>
+      <li class="list-group-item">education_level</li>
+      <li class="list-group-item">email</li>
+      <li class="list-group-item">more_info</li>
+      <li class="list-group-item">personal_website</li>
+      <li class="list-group-item">snap</li>
+      <li class="list-group-item">status</li>
+      <li class="list-group-item">school_id</li>
+      <li class="list-group-item">school_name</li>
+      <li class="list-group-item">school_city</li>
+      <li class="list-group-item">school_state</li>
+      <li class="list-group-item">school_website</li>
+      <li class="list-group-item">school_grade_level</li>
+      <li class="list-group-item">school_type</li>
+      <li class="list-group-item">school_tags</li>
+      <li class="list-group-item">school_nces_id</li>
+    </ul>
+  </div>
+</div>
+
 
 <script type="text/javascript">
   $("#hidden_csv_form").hide();
