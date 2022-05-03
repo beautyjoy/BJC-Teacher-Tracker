@@ -17,6 +17,7 @@ module CsvProcess
       teacher_db = Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap])
       if teacher_db
         # make sure teacher doesn't already exist
+        flag = false
         if !row[:school_id]
           # If there is no school id
           failed_email_count += 1
@@ -26,10 +27,14 @@ module CsvProcess
           # If there is a valid school id
           teacher_value = { first_name: row[:first_name], last_name: row[:last_name], education_level: row[:education_level],
           more_info: row[:more_info], personal_website: row[:personal_website], status: row[:status], school_id: row[:school_id] }
+          teacher_db.assign_attributes(teacher_value)
+          flag = true
         end
-        teacher_db.assign_attributes(teacher_value)
         if teacher_db.save
-          update_count += 1
+          if flag
+            update_count += 1
+          end
+          next
         else
           failed_email_count += 1
           failed_email.append(row[:email])
