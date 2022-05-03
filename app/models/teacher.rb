@@ -39,7 +39,7 @@
 #
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
-  validates :email, :snap, uniqueness: true
+  validates :email, uniqueness: true
 
   enum application_status: {
     validated: "Validated",

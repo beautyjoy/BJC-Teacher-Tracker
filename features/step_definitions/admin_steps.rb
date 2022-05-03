@@ -71,3 +71,9 @@ Then(/I can send a deny email/) do
   last_email.subject.should eq "Deny Email"
   last_email.body.encoded.should include "Denial Reason"
 end
+
+Then(/I attach the csv "([^"]*)"$/) do |path|
+  Capybara.ignore_hidden_elements = false
+  attach_file("file", File.expand_path(path))
+  Capybara.ignore_hidden_elements = true
+end
