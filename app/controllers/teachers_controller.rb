@@ -44,7 +44,7 @@ class TeachersController < ApplicationController
 
     teacher_hash_array.each do |row|
       if Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap])
-        #make sure teacher doesn't already exist
+        # make sure teacher doesn't already exist
         teacher_db = Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap])
 
         if !row[:school_id]
@@ -54,8 +54,8 @@ class TeachersController < ApplicationController
           next
         elsif School.find_by(id: row[:school_id])
           # If there is a valid school id
-          teacher_value = {first_name: row[:first_name], last_name: row[:last_name], education_level: row[:education_level], 
-          more_info: row[:more_info], personal_website: row[:personal_website], status: row[:status], school_id: row[:school_id]}
+          teacher_value = { first_name: row[:first_name], last_name: row[:last_name], education_level: row[:education_level],
+          more_info: row[:more_info], personal_website: row[:personal_website], status: row[:status], school_id: row[:school_id] }
         end
         teacher_db.assign_attributes(teacher_value)
         if teacher_db.save
@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
           failed_teacher_email.append(row[:email])
         end
         next
-      elsif !row[:school_id] 
+      elsif !row[:school_id]
         # If there is no school id (different from having invalid school id)
         new_school = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags], row[:school_nces_id]]]
         School.import school_column, new_school
@@ -74,10 +74,10 @@ class TeachersController < ApplicationController
         if @newSchool
           teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], @newSchool.id]]
         end
-      elsif School.find_by(id: row[:school_id]) 
+      elsif School.find_by(id: row[:school_id])
         # If there is a valid school id
         teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]]]
-      else 
+      else
         # school_id is provided, but invalid
         if row[:email]
           failed_teacher_email_count += 1
@@ -100,10 +100,10 @@ class TeachersController < ApplicationController
     if failed_teacher_email_count > 0
       flash[:alert] = "#{failed_teacher_email_count} teachers has failed with following emails:   "
       for email in failed_teacher_email do
-        flash[:alert]+= " [ #{email} ] "
+        flash[:alert] += " [ #{email} ] "
       end
     end
-    
+
     if failed_teacher_noemail_count > 0
       flash[:warning] = "#{failed_teacher_noemail_count} teachers has failed without emails"
     end
