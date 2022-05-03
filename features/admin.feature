@@ -245,9 +245,8 @@ Scenario: Should be able to resend welcome email
   And I should see "BJC Teacher Dashboard"
   Given I follow "All Teachers"
   And I press "Upload CSV"
-  Then The "#file" form is invalid
-  Then I attach the file "features/test_utils/test_teacher.csv" to "file"
-  And I press "Upload CSV"
+  Then The "#hidden_file_select_input" form is invalid
+  Then I attach the csv "features/test_utils/test_teacher.csv"
   Then I should see "ank sha"
   Then I should not see "Steve Gao"
   Then I should not see "Haha He"

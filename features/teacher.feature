@@ -280,18 +280,3 @@ Scenario: Denied teacher should not see Tags or NCES ID
   When I go to the edit page for Jane Austin
   Then I should not see "Tags"
   And I should not see "NCIS ID"
-
-Scenario: Upload valid record csv
-  Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
-  Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
-  Given I have a teacher Microsoft email
-  And   The TEALS contact email is stubbed
-  Given I am on the BJC home page
-  And   I follow "Log In"
-  Then  I can log in with Microsoft
-  And   I see a confirmation "You can edit your information"
-  Then  the "First Name" field should contain "Joseph"

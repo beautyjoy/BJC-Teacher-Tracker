@@ -1,20 +1,11 @@
 <%= provide(:h1, "BJC Teachers") %>
 <%= provide(:header_button, "New Teacher") %>
 
-<div class="page-title">
-  <div class="row">
-    <div class="col-9">
-    </div>
-    <div class="col-3">
-    </div>
-    <div class = "col-3">
-    <%= form_tag import_teachers_path,  multipart: true do %>
-      <%= file_field_tag :file, required: true %>
-      <%= submit_tag "Upload CSV", class: 'btn btn-primary' %>
-    <% end %>
-    </div>
-  </div>
-</div>
+<%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
+  <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
+  <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
+<% end %>
+<%= submit_tag "Upload CSV", class: "btn btn-primary", onclick: "openFileExplorer();" %>
 
 <div class="custom-control custom-checkbox custom-control-inline float-right">
   <input class="custom-control-input" type="checkbox" name="Application Status" id="Validated" value="Validated">
@@ -28,7 +19,6 @@
   <input class="custom-control-input" type="checkbox" name="Application Status" id="Pending" value="Pending">
   <label class="custom-control-label" for="Pending">Pending</label>
 </div>
-
 
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
@@ -46,6 +36,8 @@
 </table>
 
 <script type="text/javascript">
+  $("#hidden_csv_form").hide();
+
   $(function() {
     otable = $('#DataTables_Table_0').dataTable();
   })
@@ -58,4 +50,12 @@
   $(".custom-checkbox").change(function() {
     filterme()
   });
+
+  function openFileExplorer() {
+    $("#hidden_file_select_input").click();
+  }
+
+  function submitFile() {
+    $("#hidden_submit_button").click();
+  }
 </script>
