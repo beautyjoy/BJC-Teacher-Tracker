@@ -50,12 +50,12 @@ module CsvProcess
           school_count += 1
           if new_school
             teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], new_school.id]]
-            new_school.assign_attributes({teachers_count: 1})
+            new_school.assign_attributes({ teachers_count: 1 })
             new_school.save
           end
         else
           teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], exist_shool.id]]
-        end  
+        end
       elsif School.find_by(id: row[:school_id])
         # If there is a valid school id
         teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]]]
