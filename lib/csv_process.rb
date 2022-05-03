@@ -42,13 +42,20 @@ module CsvProcess
         next
       elsif !row[:school_id]
         # If there is no school id (different from having invalid school id)
-        new_school = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags], row[:school_nces_id]]]
-        School.import school_column, new_school
-        school_count += 1
-        @newSchool = School.find_by(name: row[:school_name])
-        if @newSchool
-          teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], @newSchool.id]]
-        end
+        exist_shool = School.find_by(name: row[:school_name])
+        if !exist_shool
+          new_school_value = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags], row[:school_nces_id]]]
+          School.import school_column, new_school_value
+          new_school = School.find_by(name: row[:school_name])
+          school_count += 1
+          if new_school
+            teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], new_school.id]]
+            new_school.assign_attributes({teachers_count: 1})
+            new_school.save
+          end
+        else
+          teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], exist_shool.id]]
+        end  
       elsif School.find_by(id: row[:school_id])
         # If there is a valid school id
         teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]]]
