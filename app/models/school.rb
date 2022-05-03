@@ -60,9 +60,15 @@ class School < ApplicationRecord
   def website
     prefix_url(self[:website])
   end
-
   def location
     "#{city}, #{state}"
+  end
+  def equal(school)
+    if school != nil && self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
+      true
+    else
+      false
+    end
   end
 
   def self.grade_level_options

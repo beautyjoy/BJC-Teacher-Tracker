@@ -36,6 +36,7 @@ Scenario: Admins can see Tags and NCES ID
     And I follow "Log In"
     Then I can log in with Google
     When I go to the new schools page
+    And I fill in the school name selectize box with "Any value" and choose to add a new school
     Then I should see "Tags"
     And I should see "NCES ID"
 
@@ -48,7 +49,7 @@ Scenario: Admins can create new schools
     And I follow "Log In"
     Then I can log in with Google
     When I go to the new schools page
-    And I fill in "School Name" with "New UC Berkeley"
+    And I fill in the school name selectize box with "New UC Berkeley" and choose to add a new school
     And I fill in "City" with "Berkeley"
     And I select "CA" from "State"
     And I fill in "School Website" with "https://www.berkeley.edu/"
@@ -56,5 +57,4 @@ Scenario: Admins can create new schools
     And I select "Public" from "School Type"
     And I fill in "NCES ID" with "123456789100"
     And I press "Submit"
-    Then I should see "Created New UC Berkeley successfully"
     And I should see "New UC Berkeley" with "0" in a table row

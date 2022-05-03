@@ -3,13 +3,19 @@
 class SchoolsController < ApplicationController
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_admin
+  def search
+    School.all.collect { |school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
+  end
   def create
-    @school = School.new(school_params)
-    if @school.save
-      flash[:success] = "Created #{@school.name} successfully."
-      redirect_to schools_path
-    else
-      redirect_to root_path, alert: "Failed to submit information :("
+    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    if !@school # School doesn't exist
+      @school = School.new(school_params)
+      if @school.save
+        flash[:success] = "Created #{@school.name} successfully."
+        redirect_to schools_path
+      else
+        redirect_to root_path, alert: "Failed to submit information :("
+      end
     end
   end
 

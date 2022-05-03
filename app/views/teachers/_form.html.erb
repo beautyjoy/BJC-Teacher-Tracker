@@ -1,4 +1,6 @@
 <%= form_for teacher do |f| %>
+
+
   <div class='form-group form-input-group'>
     <h2>Your Information</h2>
     <div class='form-group row'>
@@ -65,27 +67,27 @@
     </div>
 
     <div class='form-group row'>
-      <div class='col-12'>
         <%= f.label :more_info, "More Information" %>
+        <div class='col-12'>
         <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
           class: "form-control" %>
         </div>
     </div>
-
   </div>
-
-  <%= fields_for :school, @teacher.school do |school_fields| %>
-    <div class='form-input-group'>
-      <h2>Your School</h2>
-
-      <%= render 'schools/form', fields: school_fields %>
-    </div>
+  <div class = 'form-group form-input-group'>
+        <%= fields_for :school, @teacher.school do |school_fields| %>
+          <h2>Your School</h2>
+          <%= render 'schools/form', f: school_fields %>
+          <% end %>
+</div>
+<div>
+  <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
   <% end %>
-
-  <div>
-    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
   </div>
-<% end %>
+
+
+
+
 
 <script>
   function requireVolunteerHostTeacher() {
@@ -102,4 +104,11 @@
       $("#teacher_more_info").prop('placeholder', "ex. I'm teaching a college course");
     }
   }
+
+$("#new_teacher").on("submit", function(e) {
+var selected = document.getElementById("school_selectize").value;
+if(selected != ''){
+
+}
+  });
 </script>
