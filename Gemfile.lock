@@ -47,6 +47,8 @@ GEM
     activerecord (6.1.4.4)
       activemodel (= 6.1.4.4)
       activesupport (= 6.1.4.4)
+    activerecord-import (1.4.0)
+      activerecord (>= 4.2)
     activestorage (6.1.4.4)
       actionpack (= 6.1.4.4)
       activejob (= 6.1.4.4)
@@ -553,6 +555,7 @@ GEM
       json
       simplecov
     simplecov_json_formatter (0.1.4)
+    smarter_csv (1.4.2)
     spring (4.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -604,6 +607,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   annotate
   attr_encrypted (~> 3.1.0)
   aws-sdk-s3
@@ -658,6 +662,7 @@ DEPENDENCIES
   simplecov-console
   simplecov-csv
   simplecov-json
+  smarter_csv (~> 1.4)
   spring
   tzinfo-data
   web-console

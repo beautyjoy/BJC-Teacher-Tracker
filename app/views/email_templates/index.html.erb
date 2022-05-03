@@ -1,17 +1,24 @@
-<%= provide(:h1, "Email Templates") %>
+<div class="page-title">
+  <div class="row">
+    <div class="col-9">
+      <h1> Email Templates </h1>
+    </div>
+  </div>
+</div>
 
-
-<div class="col-12">
-  <table class="table table-striped js-dataTable">
-    <thead class="thead-dark">
-      Purpose
-    </thead>
-    <tbody>
-      <% @all_templates.each do |template| %>
-      <tr>
-        <td><%= link_to(template.title, edit_email_template_path(template)) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped js-dataTable">
+      <thead class="thead-dark">
+        Purpose
+      </thead>
+      <tbody>
+        <% @all_templates.each do |template| %>
+        <tr>
+          <td><%= link_to(template.title, edit_email_template_path(template)) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

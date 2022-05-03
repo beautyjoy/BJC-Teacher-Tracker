@@ -1,16 +1,5 @@
-<div class="page-title">
-  <div class="row">
-    <div class="col-9">
-      <h1> BJC Schools </h1>
-    </div>
-
-    <div class="col-3">
-      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
-        <%= button_to("New School", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= provide(:h1, "BJC Schools") %>
+<%= provide(:header_button, "New School") %>
 
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
@@ -19,6 +8,7 @@
       <th scope="col">Location</th>
       <th scope="col">Website</th>
       <th scope="col">Teachers Count</th>
+      <th scope="col">Grade Level</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -33,6 +23,7 @@
           </a>
         </td>
         <td><%= school.teachers_count %></td>
+        <td><%= school.display_grade_level %></td>
         <td>
           <button class="btn btn-default dropdown-arrow" type="button" data-toggle="collapse" data-target="<%="#details_#{index}"%>" onclick> 
             ▼

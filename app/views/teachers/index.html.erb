@@ -1,13 +1,17 @@
+<%= provide(:h1, "BJC Teachers") %>
+<%= provide(:header_button, "New Teacher") %>
+
 <div class="page-title">
   <div class="row">
     <div class="col-9">
-      <h1> BJC Teachers </h1>
     </div>
-
     <div class="col-3">
-      <% if session[:user_id] && Teacher.find(session[:user_id]).admin %>
-        <%= button_to("New Teacher", {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-      <% end %>
+    </div>
+    <div class = "col-3">
+    <%= form_tag import_teachers_path,  multipart: true do %>
+      <%= file_field_tag :file, required: true %>
+      <%= submit_tag "Upload CSV", class: 'btn btn-primary' %>
+    <% end %>
     </div>
   </div>
 </div>
@@ -25,22 +29,21 @@
   <label class="custom-control-label" for="Pending">Pending</label>
 </div>
 
-<div class="col-12">
-  <table class="table table-striped js-dataTable">
-    <thead class="thead-dark">
-      <tr>
-        <%= render 'table_headers' %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @all_teachers.each do |teacher| %>
-      <tr>
-        <%= render 'teacher', teacher: teacher %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+
+<table class="table table-striped js-dataTable">
+  <thead class="thead-dark">
+    <tr>
+      <%= render 'table_headers' %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_teachers.each do |teacher| %>
+    <tr>
+      <%= render 'teacher', teacher: teacher %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <script type="text/javascript">
   $(function() {
