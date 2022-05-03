@@ -72,6 +72,13 @@ class School < ApplicationRecord
   def self.school_type_options
     School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
   end
+  def display_grade_level
+    if grade_level_before_type_cast.to_i == -1
+      "Unknown"
+    else
+      grade_level.to_s.titlecase
+    end
+  end
 
   private
     def prefix_url(url)
