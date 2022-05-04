@@ -20,7 +20,7 @@ window.$ = $;
 import 'jquery-ujs/src/rails';
 import 'bootstrap';
 import 'popper.js';
-
+import 'selectize';
 import "@fortawesome/fontawesome-free/js/all";
 
 import Rails from '@rails/ujs';
@@ -51,10 +51,12 @@ import "datatables.net-buttons-bs4";
 import  'datatables.net-buttons/js/buttons.html5.js';
 
 import './datatables.js';
-
 import '../styles/application.scss';
+import './schools.js';
 
 // export default {};
 
 require("trix")
 require("@rails/actiontext")
+require("selectize")
+require("packs/schools.js")

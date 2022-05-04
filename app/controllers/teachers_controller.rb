@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
+require "smarter_csv"
+require "csv_process"
+require "activerecord-import"
+
 class TeachersController < ApplicationController
+  include CsvProcess
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :delete, :index, :show]
@@ -21,14 +26,21 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
-    @school = School.new
+    @school = School.new # maybe delegate this
     @readonly = false
+  end
+
+  def import
+    csv_file = params[:file]
+    teacher_hash_array = SmarterCSV.process(csv_file)
+    count = process_record(teacher_hash_array)
+    add_flash_message(count)
+    redirect_to teachers_path
   end
 
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
-    @school = School.new(school_params)
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
@@ -36,12 +48,18 @@ class TeachersController < ApplicationController
       update
       return
     end
-    @school = school_from_params
-    if !@school.save
-      flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
-      render "new"
-      return
+
+    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    if !@school # School doesn't exist
+      @school = School.new(school_params)
+      if !@school.save
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        render "new"
+        return
+      end
     end
+
+
     @teacher = @school.teachers.build(teacher_params)
     if @teacher.save
       @teacher.pending!
@@ -142,7 +160,7 @@ class TeachersController < ApplicationController
     end
 
     def school_params
-      params.require(:school).permit(:name, :city, :state, :website)
+      params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, { tags: [] }, :nces_id)
     end
 
     def sanitize_params
@@ -152,6 +170,15 @@ class TeachersController < ApplicationController
         end
         if params[:teacher][:education_level]
           params[:teacher][:education_level] = params[:teacher][:education_level].to_i
+        end
+      end
+
+      if params[:school]
+        if params[:school][:grade_level]
+          params[:school][:grade_level] = params[:school][:grade_level].to_i
+        end
+        if params[:school][:school_type]
+          params[:school][:school_type] = params[:school][:school_type].to_i
         end
       end
     end

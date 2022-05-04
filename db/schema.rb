@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2022_04_28_021006) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.bigint "last_editor", null: false
+    t.bigint "teachers_id"
     t.index ["slug"], name: "index_dynamic_pages_on_slug", unique: true
+    t.index ["teachers_id"], name: "index_dynamic_pages_on_teachers_id"
   end
 
   create_table "email_templates", force: :cascade do |t|
@@ -130,4 +132,5 @@ ActiveRecord::Schema.define(version: 2022_04_28_021006) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "dynamic_pages", "teachers", column: "teachers_id"
 end
