@@ -29,6 +29,7 @@ RSpec.describe DynamicPagesController, type: :controller do
       delete :delete, { params: { id: id_to_delete } }
       expect(response).to redirect_to(dynamic_pages_path)
     end
+
     it "able to delete a page" do
       ApplicationController.any_instance.stub(:require_admin).and_return(true)
       ApplicationController.any_instance.stub(:is_admin?).and_return(true)

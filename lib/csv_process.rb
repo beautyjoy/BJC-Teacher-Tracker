@@ -2,6 +2,27 @@
 
 module CsvProcess
   def process_record(teacher_hash_array)
+    # Creates or updates a teacher / school for each hash element in teacher_hash_array.
+    # For each entry in the csv:
+    #   If invalid :school_id => create/update fails.
+    #   If no :school_id => create the school data from hash if no school w/ same name exists
+    #   If no :email => fails to create/update teacher, no school is created
+    #
+    # Params:
+    #   teacher_hash_array: Array of hash elements where each hash represents a row in the csv.
+    #     Each hash contains the following keys: :first_name, :last_name, :education_level, :email,
+    #       :more_info, :personal_website, :snap, :status, :school_id, :school_name, :school_city,
+    #       :school_state, :school_website, :school_grade_level, :school_type, :school_tags, :school_nces_id
+    #
+    # Returns:
+    #   An array [
+    #     success_count (int),
+    #     school_count (int),
+    #     failed_email ([str]),
+    #     failed_email_count (int),
+    #     failed_noemail_count (int),
+    #     update_count (int)
+    #   ]
     school_column = [:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id]
     teacher_value = [[]]
     teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
@@ -76,6 +97,19 @@ module CsvProcess
   end
 
   def add_flash_message(count)
+    # Assigns the flash messages for teacher csv upload
+    #
+    # Params:
+    #   count: An array [
+    #     success_count (int),
+    #     school_count (int),
+    #     failed_email ([str]),
+    #     failed_email_count (int),
+    #     failed_noemail_count (int),
+    #     update_count (int)
+    #   ]
+    #
+    # Returns: Nothing
     success_count = count[0]
     school_count = count[1]
     failed_email = count[2]
