@@ -251,7 +251,7 @@ Scenario: Admin can import csv file. The loader should filter invalid record and
   Then I should not see "Steve Gao"
   Then I should not see "Haha He"
   Then I should see "Wuho He"
-  Then I should see "Successfully imported 2 teachers"
+  Then I should see "Successfully created/updated 2 teachers"
   Then I should see "1 schools has been created"
   Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
   Then I follow "All Schools"
@@ -260,7 +260,7 @@ Scenario: Admin can import csv file. The loader should filter invalid record and
   Then I attach the csv "features/test_utils/test_teacher_second.csv"
   Then I should see "anke sha"
   Then I should see "Steve He"
-  Then I should see "2 teachers has been updated"
+  Then I should see "Successfully created/updated 2 teachers"
   Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
 
 Scenario: Importing with new schools model fields works
@@ -280,6 +280,6 @@ Scenario: Importing with new schools model fields works
   Then I should not see "Steve Gao"
   Then I should not see "Haha He"
   Then I should see "Wuho He"
-  Then I should see "Successfully imported 2 teachers"
+  Then I should see "Successfully created/updated 2 teachers"
   Then I should see "1 schools has been created"
   Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
