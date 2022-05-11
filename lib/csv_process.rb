@@ -15,126 +15,111 @@ module CsvProcess
     #       :school_state, :school_website, :school_grade_level, :school_type, :school_tags, :school_nces_id
     #
     # Returns:
-    #   An array [
-    #     success_count (int),
-    #     school_count (int),
-    #     failed_email ([str]),
-    #     failed_email_count (int),
-    #     failed_noemail_count (int),
-    #     update_count (int)
-    #   ]
-    school_column = [:name, :city, :state, :website, :grade_level, :school_type, :tags, :nces_id]
-    teacher_value = [[]]
-    teacher_column = [:first_name, :last_name, :education_level, :email, :more_info, :personal_website, :snap, :status, :school_id]
-
-    success_count = 0
-    failed_email_count = 0
-    failed_noemail_count = 0
-    update_count = 0
-    failed_email = []
-    school_count = 0
+    #   csv_import_summary_hash: A hash {
+    #     success_count : (int),
+    #     school_count : (int),
+    #     failed_emails : Array of strings,
+    #     failed_email_count : (int),
+    #   }
+    csv_import_summary_hash = { school_count: 0, success_count: 0, fail_count: 0, failed_emails: [] }
 
     teacher_hash_array.each do |row|
-      teacher_db = Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap])
-      if teacher_db
-        # make sure teacher doesn't already exist
-        flag = false
-        if !row[:school_id]
-          # If there is no school id
-          failed_email_count += 1
-          failed_email.append(row[:email])
-          next
-        elsif School.find_by(id: row[:school_id])
-          # If there is a valid school id
-          teacher_value = { first_name: row[:first_name], last_name: row[:last_name], education_level: row[:education_level],
-          more_info: row[:more_info], personal_website: row[:personal_website], status: row[:status], school_id: row[:school_id] }
-          teacher_db.assign_attributes(teacher_value)
-          flag = true
-        end
-        if teacher_db.save
-          if flag
-            update_count += 1
+      school = School.find_by(id: row[:school_id])
+      if !row[:school_id] # If there is no school id (different from having invalid school id)
+        school = School.find_by(name: row[:school_name])
+        if !school # Prevent creating the same school multiple times if same csv uploaded again
+          school = School.new(school_params_from_row(row))
+          school.assign_attributes({ teachers_count: 1 })
+          if school.save
+            row[:school_id] = school.id
+            csv_import_summary_hash[:school_count] += 1
+          else
+            csv_import_summary_hash[:fail_count] += 1
+            csv_import_summary_hash[:failed_emails].append(row[:email])
+            next # don't try to create teacher
           end
-          next
-        else
-          failed_email_count += 1
-          failed_email.append(row[:email])
         end
-        next
-      elsif !row[:school_id]
-        # If there is no school id (different from having invalid school id)
-        exist_shool = School.find_by(name: row[:school_name])
-        if !exist_shool
-          new_school_value = [[row[:school_name], row[:school_city], row[:school_state], row[:school_website], row[:school_grade_level], row[:school_type], row[:school_tags], row[:school_nces_id]]]
-          School.import school_column, new_school_value
-          new_school = School.find_by(name: row[:school_name])
-          school_count += 1
-          if new_school
-            teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], new_school.id]]
-            new_school.assign_attributes({ teachers_count: 1 })
-            new_school.save
-          end
-        else
-          teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], exist_shool.id]]
-        end
-      elsif School.find_by(id: row[:school_id])
-        # If there is a valid school id
-        teacher_value = [[row[:first_name], row[:last_name], row[:education_level], row[:email], row[:more_info], row[:personal_website], row[:snap], row[:status], row[:school_id]]]
-      else
-        # school_id is provided, but invalid
-        if row[:email]
-          failed_email_count += 1
-          failed_email.append(row[:email])
-        else
-          failed_noemail_count += 1
-        end
-        next
+      elsif !school # row[:school_id] exists, but is invalid
+        csv_import_summary_hash[:fail_count] += 1
+        csv_import_summary_hash[:failed_emails].append(row[:email])
+        next # don't try to create teacher
       end
-      Teacher.import teacher_column, teacher_value
-      success_count += 1
+
+      teacher = Teacher.find_by(email: row[:email]) || Teacher.find_by(snap: row[:snap])
+      if teacher
+        teacher.assign_attributes(teacher_update_params_from_row(row))
+      elsif row[:email]
+        teacher = Teacher.new(teacher_new_params_from_row(row))
+      end
+
+      if teacher.save
+        csv_import_summary_hash[:success_count] += 1
+      else
+        csv_import_summary_hash[:fail_count] += 1
+        csv_import_summary_hash[:failed_emails].append(row[:email])
+      end
     end
-    [success_count, school_count, failed_email, failed_email_count, failed_noemail_count, update_count]
+
+    csv_import_summary_hash
   end
 
-  def add_flash_message(count)
+  def add_flash_message(csv_import_summary_hash)
     # Assigns the flash messages for teacher csv upload
     #
     # Params:
-    #   count: An array [
-    #     success_count (int),
-    #     school_count (int),
-    #     failed_email ([str]),
-    #     failed_email_count (int),
-    #     failed_noemail_count (int),
-    #     update_count (int)
-    #   ]
+    #   csv_import_summary_hash: A hash {
+    #     success_count : (int),
+    #     school_count : (int),
+    #     failed_emails : Array of strings,
+    #     failed_email_count : (int),
+    #   }
     #
     # Returns: Nothing
-    success_count = count[0]
-    school_count = count[1]
-    failed_email = count[2]
-    failed_email_count = count[3]
-    failed_noemail_count = count[4]
-    update_count = count[5]
-    if success_count > 0
-      flash[:success] = "Successfully imported #{success_count} teachers"
+    if csv_import_summary_hash[:success_count] > 0
+      flash[:success] = "Successfully created/updated #{csv_import_summary_hash[:success_count]} teachers"
     end
-    if school_count > 0
-      flash[:notice] = "#{school_count} schools has been created"
+    if csv_import_summary_hash[:school_count] > 0
+      flash[:notice] = "#{csv_import_summary_hash[:school_count]} schools has been created"
     end
-    if failed_email_count > 0
-      flash[:alert] = "#{failed_email_count} teachers has failed with following emails:   "
-      for email in failed_email do
+    if csv_import_summary_hash[:fail_count] > 0
+      flash[:alert] = "#{csv_import_summary_hash[:fail_count]} teachers has failed with following emails:   "
+      for email in csv_import_summary_hash[:failed_emails] do
         flash[:alert] += " [ #{email} ] "
       end
     end
-
-    if failed_noemail_count > 0
-      flash[:warning] = "#{failed_noemail_count} teachers has failed without emails"
-    end
-
-    if update_count > 0
-      flash[:info] = "#{update_count} teachers has been updated"
-    end
   end
+
+  private
+    def teacher_new_params_from_row(row)
+      { first_name: row[:first_name],
+        last_name: row[:last_name],
+        education_level: row[:education_level],
+        more_info: row[:more_info],
+        personal_website: row[:personal_website],
+        status: row[:status],
+        school_id: row[:school_id],
+        email: row[:email],
+        snap: row[:snap] }
+    end
+
+    def teacher_update_params_from_row(row)
+      { first_name: row[:first_name],
+        last_name: row[:last_name],
+        education_level: row[:education_level],
+        more_info: row[:more_info],
+        personal_website: row[:personal_website],
+        status: row[:status],
+        school_id: row[:school_id] }
+    end
+
+    def school_params_from_row(row)
+      { name: row[:school_name],
+        city: row[:school_city],
+        state: row[:school_state],
+        website: row[:school_website],
+        grade_level: row[:school_grade_level],
+        school_type: row[:school_type],
+        tags: row[:school_tags],
+        nces_id: row[:school_nces_id] }
+    end
 end

@@ -33,8 +33,8 @@ class TeachersController < ApplicationController
   def import
     csv_file = params[:file]
     teacher_hash_array = SmarterCSV.process(csv_file)
-    count = process_record(teacher_hash_array)
-    add_flash_message(count)
+    csv_import_summary_hash = process_record(teacher_hash_array)
+    add_flash_message(csv_import_summary_hash)
     redirect_to teachers_path
   end
 
