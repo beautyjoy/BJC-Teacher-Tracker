@@ -26,7 +26,8 @@ class TeachersController < ApplicationController
 
   def new
     @teacher = Teacher.new
-    @school = School.new # maybe delegate this
+    @teacher.school = School.new
+    @school = @teacher.school # maybe delegate this
     @readonly = false
   end
 
