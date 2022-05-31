@@ -1,13 +1,13 @@
 <%= provide(:h1, "Add a School") %>
 
-
 <%= form_for @school do |f| %>
-<%= render 'schools/form', f: f %>
+  <%= render 'schools/form', f: f %>
 
-<div>
-  <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
-</div>
+  <div>
+    <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
+  </div>
 <% end %>
+
 <script>
   $("#submit_button").hide();
-  </script>
+</script>

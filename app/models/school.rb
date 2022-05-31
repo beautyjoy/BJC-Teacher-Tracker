@@ -35,6 +35,7 @@ class School < ApplicationRecord
   scope :validated, -> { where("num_validated_teachers > 0") }
 
   VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
+
   validates :state, inclusion: { in: VALID_STATES }
   validates_format_of :website, with: /.+\..+/, on: :create
   MAPS_API_KEY = ENV["MAPS_API_KEY"]
@@ -60,15 +61,16 @@ class School < ApplicationRecord
   def website
     prefix_url(self[:website])
   end
+
   def location
     "#{city}, #{state}"
   end
+
+  # TODO: Consider renaming this.
   def equal(school)
-    if school != nil && self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
-      true
-    else
-      false
-    end
+    return false unless school.present?
+
+    self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
   end
 
   def self.grade_level_options
@@ -78,37 +80,36 @@ class School < ApplicationRecord
   def self.school_type_options
     School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
   end
+
   def display_grade_level
-    if grade_level_before_type_cast.to_i == -1
-      "Unknown"
-    else
-      grade_level.to_s.titlecase
-    end
+    return "Unknown" if grade_level_before_type_cast.to_i == -1
+
+    grade_level.to_s.titlecase
   end
 
   private
-    def prefix_url(url)
-      return unless url
-      url.match?(/^https?:/) ? url : "https://#{url}"
-    end
+  def prefix_url(url)
+    return unless url
+    url.match?(/^https?:/) ? url : "https://#{url}"
+  end
 
-    # TODO: URL encode this.
-    def maps_api_location
-      "#{self.city}+#{self.state.sub("International", "")}".sub(" ", "+")
-    end
+  # TODO: URL encode this.
+  def maps_api_location
+    "#{self.city}+#{self.state.sub("International", "")}".sub(" ", "+")
+  end
 
-    def grab_lat_lng
-      url = "#{GOOGLE_MAPS}json?address=#{maps_api_location}&key=#{MAPS_API_KEY}"
-      uri = URI.parse(url)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE # You should use VERIFY_PEER in production
-      req = Net::HTTP::Get.new(uri.request_uri)
-      res = http.request(req)
-      data = JSON.parse(res.body)
-      unless data.nil? || data["results"].empty?
-        self.lat = data["results"][0]["geometry"]["location"]["lat"]
-        self.lng = data["results"][0]["geometry"]["location"]["lng"]
-      end
+  def grab_lat_lng
+    url = "#{GOOGLE_MAPS}json?address=#{maps_api_location}&key=#{MAPS_API_KEY}"
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE # You should use VERIFY_PEER in production
+    req = Net::HTTP::Get.new(uri.request_uri)
+    res = http.request(req)
+    data = JSON.parse(res.body)
+    unless data.nil? || data["results"].empty?
+      self.lat = data["results"][0]["geometry"]["location"]["lat"]
+      self.lng = data["results"][0]["geometry"]["location"]["lng"]
     end
+  end
 end

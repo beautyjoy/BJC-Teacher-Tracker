@@ -1,7 +1,7 @@
 
 <div class="form-group">
   <%= f.label :name, "School Name", class: "label-required", for: "school_selectize" %>
-  <%= f.select :name, 
+  <%= f.select :name,
     options_for_select(School.all.collect {|school| [
       "#{school.name}, #{school.city}, #{school.state}",
       "#{school.name} * #{school.city} * #{school.state} * #{school.website}"] # using " * " as delim. Probably really bad and should be changed
@@ -70,7 +70,7 @@
   </div>
 
 
-  <% if logged_in? ? current_user.admin : false %>
+  <% if current_user&.admin? %>
     <%= f.label :tags, "Tags" %>
     <div class="form-group row">
       <div class='col-2'>
