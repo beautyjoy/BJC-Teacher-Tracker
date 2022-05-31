@@ -40,12 +40,50 @@ class School < ApplicationRecord
   MAPS_API_KEY = ENV["MAPS_API_KEY"]
   GOOGLE_MAPS = "https://maps.googleapis.com/maps/api/geocode/"
 
+  enum grade_level: {
+    elementary: 0,
+    middle_school: 1,
+    high_school: 2,
+    community_college: 3,
+    university: 4
+  }
+
+  enum school_type: {
+    public: 0,
+    private: 1,
+    charter: 2,
+    magnet: 3,
+    alternative: 4,
+    other: 5
+  }, _prefix: :school_type
+
   def website
     prefix_url(self[:website])
   end
-
   def location
     "#{city}, #{state}"
+  end
+  def equal(school)
+    if school != nil && self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
+      true
+    else
+      false
+    end
+  end
+
+  def self.grade_level_options
+    School.grade_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.school_type_options
+    School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+  def display_grade_level
+    if grade_level_before_type_cast.to_i == -1
+      "Unknown"
+    else
+      grade_level.to_s.titlecase
+    end
   end
 
   private

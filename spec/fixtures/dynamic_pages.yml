@@ -10,10 +10,16 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  creator_id  :bigint           not null
+#  teachers_id :bigint
 #
 # Indexes
 #
-#  index_dynamic_pages_on_slug  (slug) UNIQUE
+#  index_dynamic_pages_on_slug         (slug) UNIQUE
+#  index_dynamic_pages_on_teachers_id  (teachers_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (teachers_id => teachers.id)
 #
 thepage:
   slug: Test_slug
@@ -21,3 +27,10 @@ thepage:
   permissions: "Verified Teacher"
   creator_id: 5
   last_editor: 5
+
+validadminpage:
+  slug: test_slug_2
+  title: Test Page Title 2
+  permissions: Admin
+  creator_id: 0
+  last_editor: 0

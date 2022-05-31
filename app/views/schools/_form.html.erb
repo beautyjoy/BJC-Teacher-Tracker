@@ -1,29 +1,121 @@
-<div class='form-group row'>
-    <div class='col-6'>
-        <%= fields.label :name, "School Name", class: "label-required" %>
-        <%= fields.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
-        required: true %>
-    </div>
-
-    <div class='col-4'>
-        <%= fields.label :city, class: "label-required" %>
-        <%= fields.text_field :city, placeholder: 'Berkeley', class: 'form-control',
-        required: true %>
-    </div>
-
-    <div class='col-2'>
-        <%= fields.label :state, class: "label-required" %>
-        <%= fields.select(
-            :state,
-            School::VALID_STATES,
-            {include_blank: "State"},
-            { class: 'form-control', required: true }
-        ) %>
-    </div>
-</div>
 
 <div class="form-group">
-<%= fields.label :website, "School Website", class: "label-required" %>
-<%= fields.text_field :website, placeholder: "snap.berkeley.edu",
-    class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL." %>
+  <%= f.label :name, "School Name", class: "label-required", for: "school_selectize" %>
+  <%= f.select :name, 
+    options_for_select(School.all.collect {|school| [
+      "#{school.name}, #{school.city}, #{school.state}",
+      "#{school.name} * #{school.city} * #{school.state} * #{school.website}"] # using " * " as delim. Probably really bad and should be changed
+    }),
+    {:prompt => 'Search School'},
+    {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
+  <%= javascript_pack_tag 'schools' %>
+  <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>
+  <%= csrf_meta_tags %>
 </div>
+
+<div id ="school_form">
+  <div class = "col-14 d-flex justify-content-end" id ="innest_form">
+    <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id = "close_button">Clear</button>
+  </div>
+
+  <div class='form-group row'>
+      <div class='col-6'>
+          <%= f.label :name, "School Name", class: "label-required" %>
+          <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
+          required: true, id: 'school_name' %>
+      </div>
+
+      <div class='col-4'>
+          <%= f.label :city, class: "label-required", for: "school_city" %>
+          <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
+          required: true, id: 'school_city' %>
+      </div>
+
+      <div class='col-2'>
+          <%= f.label :state, class: "label-required", for: "school_state" %>
+          <%= f.select(
+              :state,
+              School::VALID_STATES,
+              {include_blank: "State"},
+              { class: 'form-control', required: true, id: 'school_state'}
+          ) %>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
+    <%= f.text_field :website, placeholder: "snap.berkeley.edu",
+        class: "form-control", required: true, pattern: ".+\\..+", title: "Please enter a valid URL.",
+        id: 'school_website' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
+    <%= f.select(
+        :grade_level,
+        options_for_select(School.grade_level_options),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: false, id: 'school_grade_level' }
+      ) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :school_type, "School Type", for: 'school_type' %>
+    <%= f.select(
+        :school_type,
+        options_for_select(School.school_type_options),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: false, id: 'school_type' }
+      ) %>
+  </div>
+
+
+  <% if logged_in? ? current_user.admin : false %>
+    <%= f.label :tags, "Tags" %>
+    <div class="form-group row">
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+      <div class='col-2'>
+        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+            class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
+      <%= f.number_field :nces_id, placeholder: "000000000000",
+          class: "form-control", max: 999999999999, title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
+    </div>
+  <% end %>
+</div>
+
+
+<script>
+  $('#school_form').hide();
+
+  function autofillSchoolFields() {
+    var school_arr = $("#school_selectize").val().split(" * ", 4); // Format: [name, city, state, website]
+    $("#school_name").prop('value', school_arr[0]);
+    $("#school_city").prop('value', school_arr[1]);
+    $("#school_state").prop('value', school_arr[2]);
+    $("#school_website").prop('value', school_arr[3]);
+  }
+</script>

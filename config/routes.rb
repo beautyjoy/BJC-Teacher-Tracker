@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post :delete
       post :deny
     end
+    collection { post :import }
   end
   resources :schools
   resources :email_templates, only: [:index, :update, :edit]

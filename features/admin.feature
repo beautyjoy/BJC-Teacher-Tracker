@@ -77,8 +77,8 @@ Scenario: Non-admin, unregistered user should not be able to see admin-only page
 
 Scenario: Edit teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -98,8 +98,8 @@ Scenario: Edit teacher info as an admin
 
 Scenario: Deny teacher as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -120,8 +120,8 @@ Scenario: Deny teacher as an admin
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -130,8 +130,8 @@ Scenario: Not logged in should not have access to edit
 
 Scenario: Filter all teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name  | admin | email                     | school      | application_status |
   | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
@@ -153,8 +153,8 @@ Scenario: Filter all teacher info as an admin
 
 Scenario: View teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -174,8 +174,8 @@ Scenario: View teacher info as an admin
 
 Scenario: Edit teacher info as an admin navigating from view only page to edit page
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -198,8 +198,8 @@ Scenario: Edit teacher info as an admin navigating from view only page to edit p
 
 Scenario: Should be able to resend welcome email
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   | application_status |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
@@ -233,3 +233,53 @@ Scenario: Should be able to resend welcome email
   Then I should see "BJC Schools"
   And I press "New School"
   Then I should see "Add a School"
+
+Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I should see "BJC Teacher Dashboard"
+  Given I follow "All Teachers"
+  And I press "Upload CSV"
+  Then The "#hidden_file_select_input" form is invalid
+  Then I attach the csv "features/test_utils/test_teacher_first.csv"
+  Then I should see "ank sha"
+  Then I should not see "Steve Gao"
+  Then I should not see "Haha He"
+  Then I should see "Wuho He"
+  Then I should see "Successfully created/updated 2 teachers"
+  Then I should see "1 schools has been created"
+  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+  Then I follow "All Schools"
+  Then I should see "uci"
+  Then I follow "All Teachers"
+  Then I attach the csv "features/test_utils/test_teacher_second.csv"
+  Then I should see "anke sha"
+  Then I should see "Steve He"
+  Then I should see "Successfully created/updated 2 teachers"
+  Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
+
+Scenario: Importing with new schools model fields works
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+  Given I am on the BJC home page
+  Given I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  And I should see "BJC Teacher Dashboard"
+  Given I follow "All Teachers"
+  And I press "Upload CSV"
+  Then The "#hidden_file_select_input" form is invalid
+  Then I attach the csv "features/test_utils/test_teacher_third.csv"
+  Then I should see "ank sha"
+  Then I should not see "Steve Gao"
+  Then I should not see "Haha He"
+  Then I should see "Wuho He"
+  Then I should see "Successfully created/updated 2 teachers"
+  Then I should see "1 schools has been created"
+  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"

@@ -10,6 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require selectize
+ *= require selectize.default
  */
 
 @import 'bootstrap';
@@ -19,12 +21,14 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/regular';
-
 @import 'layout';
 @import 'forms';
 @import 'edit_teachers';
 
 @import "./actiontext.scss";
+@import "./selectize.scss";
+//@import 'selectize'
+
 
 html {
   min-height: 100%;

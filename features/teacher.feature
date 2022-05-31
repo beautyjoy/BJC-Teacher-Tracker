@@ -26,8 +26,9 @@ Scenario: Logging in as a teacher
 
 Scenario: Logging in as a teacher with Google account should be able to edit their info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name            |     city     |  state  |            website            |
+  |   UC Berkeley         |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  | Cupertino High School |   Cupertino  |   CA    |      https://chs.fuhsd.org    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -41,7 +42,7 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I enter my "First Name" as "Joe"
   And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
   And   I set my education level target as "College"
-  And   I enter my "School Name" as "Cupertino High School"
+  And   I fill in the school name selectize box with "Cupertino High School, Cupertino, CA" and choose to add a new school
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
   And   I enter my "School Website" as "https://chs.fuhsd.org"
@@ -113,7 +114,7 @@ Scenario: Logged in teacher can fill a new form with their info
   And   I enter my "Snap! Username" as "alonzo"
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
-  And   I enter my "School Name" as "Cupertino High School"
+  And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
   And   I enter my "School Website" as "https://chs.fuhsd.org"
@@ -139,7 +140,7 @@ Scenario: Logged in teacher can fill a new form with their info
   And   I enter my "Snap! Username" as "not_alonzo"
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
-  And   I enter my "School Name" as "Cupertino High School"
+  And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
   And   I enter my "School Website" as "https://chs.fuhsd.org"
@@ -234,3 +235,48 @@ Scenario: Denied teacher should not see resend button
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   Then I should not see "Resend Welcome Email"
+
+Scenario: Validated teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"
+
+Scenario: Pending teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"
+
+Scenario: Denied teacher should not see Tags or NCES ID
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  Then I should not see "Tags"
+  And I should not see "NCIS ID"

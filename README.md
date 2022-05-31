@@ -43,10 +43,21 @@ We have worked on the adding following core features and functionality:
 
 ## Few Things to Know:
 
-- Before running our application on localhost (`bundle exec rails server', default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
+- Before running our application on localhost (`bundle exec rails server`, default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
+- You may need to configure a new oauth instead of the one in application.yml
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber`
 - To make someone an admin use db console access
+  - First run `heroku pg:psql` or `psql bjc_teachers_dev`
+  - Then
+    ```
+    UPDATE teachers
+    SET admin = true
+    WHERE Email LIKE '%@berkeley.edu%'
+    ;
+    ```
+
+
 
 ## Deployed Site:
 
@@ -56,7 +67,7 @@ We have worked on the adding following core features and functionality:
 
 - ... create a heroku app
 - `heroku buildpacks:set heroku/nodejs` # this must be the first buildpack.
-- `heroku buildpacks:set heroku/ruby`
+- `heroku buildpacks:add --index 2 heroku/ruby`
 - `git remote set-url heroku https://git.heroku.com/bjc-teachers.git`
 - Make your local changes and start the commit process
 - `git add .`
@@ -64,6 +75,7 @@ We have worked on the adding following core features and functionality:
 - `git push heroku master`
 
 If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
+- `heroku addons:create heroku-postgresql`
 - `heroku run rake db:drop`
 - `heroku run rake db:schema:load`
 - `heroku run rake db:migrate`

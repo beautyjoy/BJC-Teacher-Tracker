@@ -27,7 +27,11 @@ Given(/the following schools exist/) do |schools_table|
     name: "UC Berkeley",
     city: "Berkeley",
     state: "CA",
-    website: "https://www.berkeley.edu"
+    website: "https://www.berkeley.edu",
+    grade_level: "university",
+    school_type: "public",
+    tags: [],
+    nces_id: 123456789100
   }
   schools_table.symbolic_hashes.each do |school|
     schools_default.each do |key, value|
