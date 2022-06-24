@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2022_04_28_021006) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,9 +61,7 @@ ActiveRecord::Schema.define(version: 2022_04_28_021006) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.bigint "last_editor", null: false
-    t.bigint "teachers_id"
     t.index ["slug"], name: "index_dynamic_pages_on_slug", unique: true
-    t.index ["teachers_id"], name: "index_dynamic_pages_on_teachers_id"
   end
 
   create_table "email_templates", force: :cascade do |t|
@@ -132,5 +129,4 @@ ActiveRecord::Schema.define(version: 2022_04_28_021006) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dynamic_pages", "teachers", column: "teachers_id"
 end

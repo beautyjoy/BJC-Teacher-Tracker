@@ -1,88 +1,86 @@
 <%= form_for teacher do |f| %>
-
-
-  <div class='form-group form-input-group'>
-    <h2>Your Information</h2>
-    <div class='form-group row'>
-      <div class='col-6'>
-        <%= f.label :first_name, "First Name", class: "label-required" %>
-        <%= f.text_field :first_name, placeholder: 'Alonzo', class: 'form-control',
-          required: true %>
-      </div>
-
-      <div class='col-6'>
-        <%= f.label :last_name, "Last Name", class: "label-required" %>
-        <%= f.text_field :last_name, placeholder: 'Church', class: 'form-control',
-          required: true %>
-      </div>
+<div class='form-group form-input-group'>
+  <h2>Your Information</h2>
+  <div class='form-group row'>
+    <div class='col-6'>
+      <%= f.label :first_name, "First Name", class: "label-required" %>
+      <%= f.text_field :first_name, placeholder: 'Alonzo', class: 'form-control',
+        required: true %>
     </div>
 
-    <div class='form-group row'>
-      <div class='col-6'>
-        <%= f.label :email, "School Email", class: "label-required" %>
-        <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
-          required: true, type: :email, readonly: @readonly %>
-      </div>
-
-      <div class='col-6'>
-        <%= f.label :snap do %>
-          Snap<i>!</i> Username <i>(optional)</i>
-        <% end %>
-        <%= f.text_field :snap, placeholder: "alonzo", class: "form-control", readonly: @readonly %>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class='col-12'>
-        <%= f.label :personal_website do %>
-          Personal or Course Website <i>(optional)</i>
-        <% end %>
-        <%= f.text_field :personal_website, placeholder: "school.edu", class: "form-control",
-        pattern: ".+\\..+", title: "Please enter a valid URL." %>
-      </div>
-    </div>
-
-    <div class='form-group row'>
-      <div class='col-12'>
-        <%= f.label :status, "What's your current status?", class: "label-required" %>
-        <%= f.select(
-          :status,
-          options_for_select(Teacher.status_options, teacher.status_before_type_cast),
-          { include_blank: "Select an option" },
-          { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
-        ) %>
-      </div>
-    </div>
-
-    <div class='form-group row'>
-      <div class='col-12'>
-        <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
-        <%= f.select(
-          :education_level,
-          options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
-          { include_blank: "Select an option" },
-          { class: 'form-control', required: true }
-        ) %>
-      </div>
-    </div>
-
-    <div class='form-group row'>
-        <div class='col-12'>
-        <%= f.label :more_info, "More Information" %>
-        <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
-          class: "form-control" %>
-        </div>
+    <div class='col-6'>
+      <%= f.label :last_name, "Last Name", class: "label-required" %>
+      <%= f.text_field :last_name, placeholder: 'Church', class: 'form-control',
+        required: true %>
     </div>
   </div>
-  <div class = 'form-group form-input-group'>
-    <%= form_for @teacher.school do |school_fields| %>
-      <h2>Your School</h2>
-      <%= render 'schools/form', f: school_fields %>
-    <% end %>
+
+  <div class='form-group row'>
+    <div class='col-6'>
+      <%= f.label :email, "School Email", class: "label-required" %>
+      <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
+        required: true, type: :email, readonly: @readonly %>
+    </div>
+
+    <div class='col-6'>
+      <%= f.label :snap do %>
+        Snap<i>!</i> Username <i>(optional)</i>
+      <% end %>
+      <%= f.text_field :snap, placeholder: "alonzo", class: "form-control", readonly: @readonly %>
+    </div>
   </div>
-  <div>
-    <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
+
+  <div class="form-group row">
+    <div class='col-12'>
+      <%= f.label :personal_website do %>
+        Personal or Course Website <i>(optional)</i>
+      <% end %>
+      <%= f.text_field :personal_website, placeholder: "school.edu", class: "form-control",
+      pattern: ".+\\..+", title: "Please enter a valid URL." %>
+    </div>
   </div>
+
+  <div class='form-group row'>
+    <div class='col-12'>
+      <%= f.label :status, "What's your current status?", class: "label-required" %>
+      <%= f.select(
+        :status,
+        options_for_select(Teacher.status_options, teacher.status_before_type_cast),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
+      ) %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <div class='col-12'>
+      <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
+      <%= f.select(
+        :education_level,
+        options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: true }
+      ) %>
+    </div>
+  </div>
+
+  <div class='form-group row'>
+    <div class='col-12'>
+      <%= f.label :more_info, "More Information" %>
+      <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
+        class: "form-control" %>
+    </div>
+  </div>
+</div>
+<div class='form-group form-input-group'>
+  <%= form_for @teacher.school do |school_fields| %>
+    <h2>Your School</h2>
+    <%= render 'schools/form', f: school_fields %>
+  <% end %>
+</div>
+<div>
+  <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
+</div>
 <% end %>
 
 <script>
