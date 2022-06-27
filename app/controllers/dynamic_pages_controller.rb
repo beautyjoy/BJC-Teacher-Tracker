@@ -58,17 +58,17 @@ class DynamicPagesController < ApplicationController
   end
 
   private
-    def dynamic_page_params
-      params.require(:dynamic_page).permit(:slug, :body, :title, :permissions)
-    end
+  def dynamic_page_params
+    params.require(:dynamic_page).permit(:slug, :body, :title, :permissions)
+  end
 
-    def get_permissions
-      if is_admin?
-        @permissions ||= ["Admin", "Verified Teacher", "Public"]
-      elsif is_verified_teacher?
-        @permissions ||= ["Verified Teacher", "Public"]
-      else
-        @permissions ||= ["Public"]
-      end
+  def get_permissions
+    if is_admin?
+      @permissions ||= ["Admin", "Verified Teacher", "Public"]
+    elsif is_verified_teacher?
+      @permissions ||= ["Verified Teacher", "Public"]
+    else
+      @permissions ||= ["Public"]
     end
+  end
 end
