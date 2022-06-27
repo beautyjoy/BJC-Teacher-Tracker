@@ -1,4 +1,4 @@
-<%= form_for teacher do |f| %>
+<%= form_with model: @teacher do |f| %>
 <div class='form-group form-input-group'>
   <h2>Your Information</h2>
   <div class='form-group row'>
@@ -72,15 +72,17 @@
     </div>
   </div>
 </div>
+
 <div class='form-group form-input-group'>
-  <%= form_for @teacher.school do |school_fields| %>
+  <%= form_with model: @teacher.school, local: true do |school| %>
     <h2>Your School</h2>
-    <%= render 'schools/form', f: school_fields %>
-  <% end %>
+    <%= render 'schools/form', f: school %>
+    <%# NO END HERE -- NOTE BELOW %>
 </div>
-<div>
-  <%= f.submit f.object.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary' %>
-</div>
+
+<%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
+<%# TWO ENDS MUST COME AFTER SUBMIT -- Rails bug??? %>
+<% end %>
 <% end %>
 
 <script>
