@@ -66,7 +66,6 @@ class TeachersController < ApplicationController
       @teacher.pending!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
-      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
       redirect_to root_path
     else
       redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information. #{@teacher.errors.full_messages}"
@@ -96,10 +95,6 @@ class TeachersController < ApplicationController
     end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
-    end
-    # Resends TEALS email only when said teacher changes status
-    if @teacher.status_changed?
-      TeacherMailer.teals_confirmation_email(@teacher).deliver_now
     end
     @teacher.save!
     if is_admin?

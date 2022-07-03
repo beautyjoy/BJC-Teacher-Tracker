@@ -2,7 +2,6 @@
 
 class TeacherMailer < ApplicationMailer
   CONTACT_EMAIL = "Lauren Mock <lmock@berkeley.edu>"
-  TEALS_CONTACT_EMAIL = Rails.application.secrets[:teals_contact_email]&.freeze
   BJC_EMAIL = "BJC <contact@bjc.berkeley.edu>"
 
   before_action :email_template
@@ -24,18 +23,6 @@ class TeacherMailer < ApplicationMailer
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
-  end
-
-  # TODO: Remove this.
-  def teals_confirmation_email(teacher)
-    @teacher = teacher
-    set_body
-    # Only send if teacher is a TEALS volunteer
-    if !@teacher.status.nil? && @teacher.teals_volunteer?
-      mail to: TEALS_CONTACT_EMAIL,
-           cc: CONTACT_EMAIL,
-           subject: email_template.subject
-    end
   end
 
   def form_submission(teacher)
