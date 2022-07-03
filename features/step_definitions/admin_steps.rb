@@ -61,10 +61,6 @@ Then(/I cannot log in with Google/) do
   page.find("button", text: /.*Sign in with Google/).click()
 end
 
-And(/The TEALS contact email is stubbed/) do
-  TeacherMailer::TEALS_CONTACT_EMAIL = "testcontactemail@berkeley.edu"
-end
-
 Then(/I can send a deny email/) do
   last_email = ActionMailer::Base.deliveries.last
   last_email.to[0].should eq "testteacher@berkeley.edu"
