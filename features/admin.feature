@@ -83,7 +83,6 @@ Scenario: Edit teacher info as an admin
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
-  And The TEALS contact email is stubbed
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
@@ -159,7 +158,6 @@ Scenario: View teacher info as an admin
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
-  And The TEALS contact email is stubbed
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
@@ -180,7 +178,6 @@ Scenario: Edit teacher info as an admin navigating from view only page to edit p
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
-  And The TEALS contact email is stubbed
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
@@ -204,7 +201,6 @@ Scenario: Should be able to resend welcome email
   | first_name | last_name | admin | email                    | school      | snap   | application_status |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
   Given I am on the BJC home page
-  And The TEALS contact email is stubbed
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google

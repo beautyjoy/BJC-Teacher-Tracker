@@ -16,7 +16,6 @@ Background: I am logged in as an admin, and email templates are generated
 Scenario: Logging in as an admin should see all email templates
     Given I am on the email templates index
     Then I should see "Welcome Email"
-    Then I should see "TEALS Confirmation Email"
     Then I should see "Form Submission"
 
 Scenario: Logging in as an admin should be able to edit email templates

@@ -33,7 +33,6 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Google email
-  And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
@@ -49,7 +48,6 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
-  Then  there is a TEALS email
 
 Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
   Given the following schools exist:
@@ -59,7 +57,6 @@ Scenario: Logging in as a teacher with Microsoft account should be able to edit 
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Microsoft email
-  And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Microsoft
@@ -74,7 +71,6 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Snap email
-  And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Snap
@@ -89,7 +85,6 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Clever email
-  And   The TEALS contact email is stubbed
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Clever
