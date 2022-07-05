@@ -15,6 +15,7 @@ AllCops:
     - '**/vendor/**/*'
     - '**/node_modules/**/*'
     - 'bin/*'
+    - db/schema.rb
 
 Performance:
   Exclude:
