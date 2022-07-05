@@ -57,4 +57,4 @@ Scenario: Admins can create new schools
     And I select "Public" from "School Type"
     And I fill in "NCES ID" with "123456789100"
     And I press "Submit"
-    And I should see "New UC Berkeley" with "0" in a table row
+    Then I should see "New UC Berkeley" with "0" in a table row

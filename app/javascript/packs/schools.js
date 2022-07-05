@@ -1,13 +1,9 @@
 
 import '../styles/selectize.scss';
-//= require turbolinks
-require("turbolinks")
-require("selectize")
-require ("bootstrap")
-require ("jquery")
-
-var selectizeCallback = null;
-
+require("turbolinks");
+require("selectize");
+require ("bootstrap");
+require ("jquery");
 
 
 $("#new_school").on("submit", function(e) {
@@ -34,15 +30,17 @@ let create_school = function(input,callback){
   var form = $("#close_button");
   var name_input = $("#school_name");
   name_input.val(input);
-  form.click(function(e) {
+  form.on('click', _event => {
     if (selectizeCallback != null) {
-    selectizeCallback();
-    selectizeCallback = null;
-    $("#submit_button").hide();
-  }
-  $('#school_form').hide();
+      selectizeCallback();
+      selectizeCallback = null;
+      $("#submit_button").hide();
+    }
+    $('#school_form').hide();
   });
 }
-var selecting = $(".select").selectize({
-create: create_school, createOnBlur: true,
- highlight: true});
+$(".select").selectize({
+  create: create_school,
+  createOnBlur: true,
+  highlight: true
+});

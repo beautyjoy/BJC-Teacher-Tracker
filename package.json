@@ -26,6 +26,6 @@
     "webpack-dev-server": "^3.10.x"
   },
   "engines": {
-    "node": "14.x"
+    "node": "^14.0"
   }
 }

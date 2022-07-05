@@ -13,22 +13,6 @@ module SeedData
     <p>Thank you! <br />&mdash; The BJC Team</p>
   WELCOME_EMAIL
 
-  @teals_confirmation_email = <<-TEALS_EMAIL
-    <p>
-      Hi,<br><br>
-
-      Can you please verify that {{teacher_first_name}} {{teacher_last_name}} is a TEALS Volunteer?<br>
-      They have signed up to access the BJC Teacher Solutions with the following details:<br>
-      Name: {{teacher_first_name}} {{teacher_last_name}} <br>
-      Email: {{teacher_email}}<br>
-      School: {{teacher_school_name}}<br>
-      More Info: {{teacher_more_info}}<br><br>
-
-      Thank You,<br>
-      - The BJC Team
-    </p>
-  TEALS_EMAIL
-
   @form_submission = <<-FORM_SUBMISSION
     <p>
       Here is the information that was submitted: <br>
@@ -59,18 +43,6 @@ module SeedData
         format: "html",
         title: "Welcome Email",
         subject: "Welcome to The Beauty and Joy of Computing!"
-      },
-
-      {
-        id: 2,
-        body: @teals_confirmation_email,
-        path: "teacher_mailer/teals_confirmation_email",
-        locale: nil,
-        handler: "liquid",
-        partial: false,
-        format: "html",
-        title: "TEALS Confirmation Email",
-        subject: "TEALS Confirmation Email"
       },
       {
         id: 3,

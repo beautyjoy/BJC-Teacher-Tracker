@@ -15,6 +15,7 @@ AllCops:
     - '**/vendor/**/*'
     - '**/node_modules/**/*'
     - 'bin/*'
+    - db/schema.rb
 
 Performance:
   Exclude:
@@ -97,7 +98,7 @@ Style/HashSyntax:
 # extra level of indentation.
 Layout/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: indented_internal_methods
+  EnforcedStyle: normal
 
 # Two spaces, no tabs (for indentation).
 Layout/IndentationWidth:

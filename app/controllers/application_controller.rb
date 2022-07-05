@@ -43,12 +43,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def check_teacher_admin
-      is_admin?
-      is_teacher?
-    end
+  def check_teacher_admin
+    is_admin?
+    is_teacher?
+  end
 
-    def set_sentry_user
-      Sentry.set_user(id: session[:user_id]) # or anything else in session
-    end
+  def set_sentry_user
+    Sentry.set_user(id: session[:user_id]) # or anything else in session
+  end
 end

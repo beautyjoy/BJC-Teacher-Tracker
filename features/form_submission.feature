@@ -149,7 +149,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
-    And I enter my "School Website" as "cvhs.cv.k12.ca.us"
+    And I enter my "School Website" as "https://cvhs.cv.k12.ca.us"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
     And I press "Submit"
@@ -162,7 +162,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
     Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
 
-  Scenario: Filling out the form with correct information as a host
+  Scenario: Filling out the form with correct information as an admin
     Given "bbaker@berkeley.edu" is not in the database
     And I am on the BJC home page
     And I enter my "First Name" as "Bob"
@@ -177,11 +177,10 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And I enter my "City" as "Castro Valley"
     And I select "CA" from "State"
-    And I enter my "School Website" as "cvhs.cv.k12.ca.us"
+    And I enter my "School Website" as "https://cvhs.cv.k12.ca.us"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
     And I press "Submit"
-
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
     Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
     Then the "snap" of the user with email "bbaker@berkeley.edu" should be "bbbbbaker"
@@ -193,4 +192,4 @@ Scenario: Filling out form should have the correct information in a Teacher
 Scenario: Teachers creating their account should not be able to input Tags or NCES ID for their school.
     Given I am on the BJC home page
     Then I should not see "Tags"
-    And I should not see "NCIS ID"
+    And I should not see "NCES ID"

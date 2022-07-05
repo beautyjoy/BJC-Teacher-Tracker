@@ -37,20 +37,20 @@ class SessionsController < ApplicationController
   end
 
   private
-    def setTokens(token, refresh_token, user)
-      case params[:provider]
-      when "google_oauth2"
-        user.google_token = token
-        user.google_refresh_token = refresh_token || user.google_refresh_token
-      when "microsoft_graph"
-        user.microsoft_token = token
-        user.microsoft_refresh_token = refresh_token || user.microsoft_refresh_token
-      when "discourse"
-        user.snap_token = token
-        user.snap_refresh_token = refresh_token || user.snap_refresh_token
-      when "clever"
-        user.clever_token = token
-        user.clever_refresh_token = refresh_token || user.clever_refresh_token
-      end
+  def setTokens(token, refresh_token, user)
+    case params[:provider]
+    when "google_oauth2"
+      user.google_token = token
+      user.google_refresh_token = refresh_token || user.google_refresh_token
+    when "microsoft_graph"
+      user.microsoft_token = token
+      user.microsoft_refresh_token = refresh_token || user.microsoft_refresh_token
+    when "discourse"
+      user.snap_token = token
+      user.snap_refresh_token = refresh_token || user.snap_refresh_token
+    when "clever"
+      user.clever_token = token
+      user.clever_refresh_token = refresh_token || user.clever_refresh_token
     end
+  end
 end

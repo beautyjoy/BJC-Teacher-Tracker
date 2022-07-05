@@ -90,36 +90,36 @@ module CsvProcess
   end
 
   private
-    def teacher_new_params_from_row(row)
-      { first_name: row[:first_name],
-        last_name: row[:last_name],
-        education_level: row[:education_level],
-        more_info: row[:more_info],
-        personal_website: row[:personal_website],
-        status: row[:status],
-        school_id: row[:school_id],
-        email: row[:email],
-        snap: row[:snap] }
-    end
+  def teacher_new_params_from_row(row)
+    { first_name: row[:first_name],
+      last_name: row[:last_name],
+      education_level: row[:education_level],
+      more_info: row[:more_info],
+      personal_website: row[:personal_website],
+      status: row[:status],
+      school_id: row[:school_id],
+      email: row[:email],
+      snap: row[:snap] }
+  end
 
-    def teacher_update_params_from_row(row)
-      { first_name: row[:first_name],
-        last_name: row[:last_name],
-        education_level: row[:education_level],
-        more_info: row[:more_info],
-        personal_website: row[:personal_website],
-        status: row[:status],
-        school_id: row[:school_id] }
-    end
+  def teacher_update_params_from_row(row)
+    { first_name: row[:first_name],
+      last_name: row[:last_name],
+      education_level: row[:education_level],
+      more_info: row[:more_info],
+      personal_website: row[:personal_website],
+      status: row[:status],
+      school_id: row[:school_id] }
+  end
 
-    def school_params_from_row(row)
-      { name: row[:school_name],
-        city: row[:school_city],
-        state: row[:school_state],
-        website: row[:school_website],
-        grade_level: row[:school_grade_level],
-        school_type: row[:school_type],
-        tags: row[:school_tags],
-        nces_id: row[:school_nces_id] }
-    end
+  def school_params_from_row(row)
+    { name: row[:school_name],
+      city: row[:school_city],
+      state: row[:school_state],
+      website: row[:school_website],
+      grade_level: row[:school_grade_level],
+      school_type: row[:school_type],
+      tags: row[:school_tags],
+      nces_id: row[:school_nces_id] }
+  end
 end

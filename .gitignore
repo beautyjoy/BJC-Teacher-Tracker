@@ -157,3 +157,6 @@ fabric.properties
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Heroku DB exports
+*.dump*
