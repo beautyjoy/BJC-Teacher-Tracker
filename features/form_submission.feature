@@ -180,7 +180,6 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I enter my "School Website" as "https://cvhs.cv.k12.ca.us"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
-    Then debug
     And I press "Submit"
     Then the "first_name" of the user with email "bbaker@berkeley.edu" should be "Bob"
     Then the "last_name" of the user with email "bbaker@berkeley.edu" should be "Baker"
