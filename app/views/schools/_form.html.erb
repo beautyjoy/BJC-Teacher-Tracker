@@ -13,8 +13,8 @@
   <%= csrf_meta_tags %>
 </div>
 
-<div id ="school_form">
-  <div class = "col-14 d-flex justify-content-end" id ="innest_form">
+<div id="school_form">
+  <div class = "col-14 d-flex justify-content-end" id="innest_form">
     <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id="close_button">Clear</button>
   </div>
 
@@ -102,7 +102,7 @@
 
     <div class="form-group">
       <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
-      <%= f.number_field :nces_id, placeholder: "000000000000",
+      <%= f.text_field :nces_id, placeholder: "000000000000",
           class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
     </div>
   <% end %>

@@ -103,6 +103,7 @@ RSpec.describe SchoolsController, type: :controller do
     expect(@fail_flash_alert).to match flash[:alert]
   end
 
+  # TODO: Separate these into individual tests
   it "requires proper inputs for fields" do
     allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
     expect(School.find_by(name: @create_school_name)).to be_nil
@@ -172,41 +173,6 @@ RSpec.describe SchoolsController, type: :controller do
                     grade_level: -4,
                     tags: [],
                     nces_id: 123456789000
-                }
-            }
-        }
-    }.to raise_error(ArgumentError)
-    expect(School.find_by(name: @create_school_name)).to be_nil
-
-    # Out of bounds nces_id
-    expect { post :create, {
-            params: {
-                school: {
-                    name: @create_school_name,
-                    city: "Berkeley",
-                    state: "CA",
-                    website: "www.berkeley.edu",
-                    school_type: 0,
-                    grade_level: -4,
-                    tags: [],
-                    nces_id: 999999999999 + 1 # max val + 1
-                }
-            }
-        }
-    }.to raise_error(ArgumentError)
-    expect(School.find_by(name: @create_school_name)).to be_nil
-
-    expect { post :create, {
-            params: {
-                school: {
-                    name: @create_school_name,
-                    city: "Berkeley",
-                    state: "CA",
-                    website: "www.berkeley.edu",
-                    school_type: 0,
-                    grade_level: -4,
-                    tags: [],
-                    nces_id: 0 - 1 # min val - 1
                 }
             }
         }

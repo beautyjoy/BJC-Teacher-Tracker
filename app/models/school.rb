@@ -19,7 +19,7 @@
 #  website                :string
 #  created_at             :datetime
 #  updated_at             :datetime
-#  nces_id                :bigint
+#  nces_id                :string
 #
 # Indexes
 #
@@ -85,6 +85,10 @@ class School < ApplicationRecord
     return "Unknown" if grade_level_before_type_cast.to_i == -1
 
     grade_level.to_s.titlecase
+  end
+
+  def selectize_options
+    { name: name, city: city, state: state, website: website }
   end
 
   private
