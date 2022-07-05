@@ -26,9 +26,6 @@
     "webpack-dev-server": "^3.10.x"
   },
   "engines": {
-    "node": ">=14.0"
-  },
-  "resolutions": {
-    "**/node-gyp": "^7.0.0"
+    "node": "^14.0"
   }
 }
