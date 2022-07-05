@@ -1,12 +1,12 @@
 <div class="form-group">
-  <%= f.label :name, "School Name", class: "label-required", for: "school_selectize" %>
+  <%= f.label :name, "Search for your school", class: "label-required", for: "school_selectize" %>
   <%# using " * " as delim. Probably really bad and should be changed %>
   <%= f.select :name,
     options_for_select(School.all.collect {|school| [
       "#{school.name}, #{school.city}, #{school.state}",
       "#{school.name} * #{school.city} * #{school.state} * #{school.website}"
     ]}),
-    {prompt: "Search School"},
+    {prompt: "Enter the name or city of your school"},
     {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
   <%= javascript_pack_tag 'schools' %>
   <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>

@@ -47,9 +47,11 @@ Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, ema
 end
 
 When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|
+  page.execute_script('$("#school_form").show()')
   fill_in("School Name", with: text)
-  page.find(".label-required", text: "School Name").click
+  # page.find(".label-required", text: "School Name").click
 end
+
 Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value|
   find("#school_selectize").click.set(value)
 end
