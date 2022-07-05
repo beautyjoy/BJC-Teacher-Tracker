@@ -244,7 +244,7 @@ Scenario: Validated teacher should not see Tags or NCES ID
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   Then I should not see "Tags"
-  And I should not see "NCIS ID"
+  And I should not see "NCES ID"
 
 Scenario: Pending teacher should not see Tags or NCES ID
   Given the following schools exist:
@@ -259,7 +259,7 @@ Scenario: Pending teacher should not see Tags or NCES ID
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   Then I should not see "Tags"
-  And I should not see "NCIS ID"
+  And I should not see "NCES ID"
 
 Scenario: Denied teacher should not see Tags or NCES ID
   Given the following schools exist:
@@ -274,4 +274,4 @@ Scenario: Denied teacher should not see Tags or NCES ID
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   Then I should not see "Tags"
-  And I should not see "NCIS ID"
+  And I should not see "NCES ID"

@@ -193,4 +193,4 @@ Scenario: Filling out form should have the correct information in a Teacher
 Scenario: Teachers creating their account should not be able to input Tags or NCES ID for their school.
     Given I am on the BJC home page
     Then I should not see "Tags"
-    And I should not see "NCIS ID"
+    And I should not see "NCES ID"
