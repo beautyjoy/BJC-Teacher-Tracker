@@ -48,6 +48,8 @@ end
 
 When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|
   page.execute_script('$("#school_form").show()')
+  # Necessary for the Admin School create page
+  page.execute_script('$("#submit_button").show()')
   fill_in("School Name", with: text)
   # page.find(".label-required", text: "School Name").click
 end
