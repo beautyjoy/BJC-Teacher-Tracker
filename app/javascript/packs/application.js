@@ -56,7 +56,7 @@ import './schools.js';
 
 // export default {};
 
-require("trix")
-require("@rails/actiontext")
+// require("trix")
+// require("@rails/actiontext")
 require("selectize")
 require("packs/schools.js")
