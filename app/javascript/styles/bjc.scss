@@ -1,9 +1,14 @@
 @charset "UTF-8";
+/* CSS Document */
 
-// This must come before bjc.css to mirror what happens in bjc-r
-@import 'llab.scss';
+@import './llab.scss';
 
 /** Basic HTML **/
+/* TODO: work sans is not loaded on most pages. */
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'work_sansregular', 'Open Sans', sans-serif;
+}
+
 .anchor {
    padding-top: 80px;
    margin-top: -80px;
@@ -27,6 +32,11 @@ a, .dialogue a {  color: #2a6496; /* was 428bca; */}
   padding-left: 30px; /* was 25px until  3/8/16 */
   float: right; /* added 3/8/16 to move TOC link to RHS near where menus are on lab pages */
   padding-right: 25px; /* added 3/8/16 to move TOC link to RHS near where menus are on lab pages */
+}
+
+body { /* Added 12/15/16 by Mary Fries to provide more screen real estate.*/
+  width: 100%;
+  max-width: 100%;
 }
 
 h3 {margin-top:20px;}
@@ -55,7 +65,7 @@ h3 {margin-top:20px;}
 }
 
 .fixedwidth {
-    font-family: Courier;
+	font-family: Courier;
 }
 
 .inline {
@@ -86,7 +96,7 @@ img.imageLeft {margin-bottom: 0px;}
 .smallindent {margin-left: 5%;}
 .padright {padding-right: 30px;;}
 
-li {    padding: 3px;}
+li {	padding: 3px;}
 
 li > ul, li > ol {
   margin: 5px auto;
@@ -107,12 +117,12 @@ ol.horizontal li {
 div.navbar-right {padding: 15px;}
 
 .nopad {
-    padding: 0px;
+	padding: 0px;
 }
 
 .nopadtb { /* top and bottom only */
-    padding-top: 0px;
-    padding-bottom: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 pre {
@@ -501,7 +511,7 @@ div.newProject span.text {
 /* Other Random Things added by Mary NEEDS ATTENTION*/
 
 span.big {
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .block {
@@ -562,9 +572,9 @@ div.task {font-size:large;padding-top: 10px;}
 
 /* Compare Page Styles */
 div.CSPpeach, div.visualgreen, div.visualcyan, div.visualpurple, div.visualyellow, div.visualsalmon, div.socialorange {
-    padding:25px;
-    border-radius: 25px;
-    margin-bottom:10px;
+	padding:25px;
+	border-radius: 25px;
+	margin-bottom:10px;
 }
 
 /* Are these in use? --MF, 10/11/19 */
@@ -581,17 +591,17 @@ ul.tight li {padding-top: 0px;padding-bottom:0px;}
 /* Blue button links */
 
 a.blbtn {
-    color: #fff;
-    background-color: #428bca;
-    border-color: #357ebd;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.428571429;
-    border: 1px solid transparent;
-    border-radius: 4px;
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	border: 1px solid transparent;
+	border-radius: 4px;
 }
 
 a.blbtn:hover {color: #333 !important;}
@@ -604,9 +614,9 @@ table.videos {border: 1px solid black;}
 table.videos th {font-weight: bold;}
 
 table.videos td {
-    padding: 5px;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+	padding: 5px;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
 }
 
 /* CSS for the image hover show/hide effects created by Selim for 6.1.1 */
@@ -666,11 +676,13 @@ a.expansion-menu.collapsed h4::after, a.expansion-menu.collapsed::after {content
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 
-a.fa-external-link-alt:after { /* This is used on the /cur/solutions-assessments/ pages to indicate an external link. */
-  content: " \f35d";
-  font-size: .7em;
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
+a.fa-external-link-alt { /* This is used on the /cur/solutions-assessments/ pages to indicate an external link. */
+  // content: " \f35d";
+  background: url(../img/external-link.png) center right no-repeat;
+  padding-right: 13px;
+  // font-size: .7em;
+  // font-family: 'Font Awesome';
+  // font-weight: 900;
 }
 
 /* Curriculum Index */
@@ -688,8 +700,8 @@ div.index-letter-link {
 }
 
 div.map-links {
-    margin-top: 25px;
-    margin-bottom: 25px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 
 div.index-letter-link a {
@@ -706,12 +718,4 @@ div.index-letter-target p {
 
 div.index-letter-target li {
     margin-left: 25px;
-}
-
-img[data-gifffer] {
-    padding: 0px !important;
-}
-
-img.buffer {
-    padding: 6px;
 }
