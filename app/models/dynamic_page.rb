@@ -5,6 +5,7 @@
 # Table name: dynamic_pages
 #
 #  id          :bigint           not null, primary key
+#  html        :text
 #  last_editor :bigint           not null
 #  permissions :string           not null
 #  slug        :string           not null

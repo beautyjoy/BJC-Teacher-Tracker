@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <%- if content_for?(:title) %>
-    <title><%= yield(:title)%> | BJC Teachers</title>
+    <title><%= yield(:title)%> | BJC Teachers </title>
   <%- else %>
     <title>BJC Teachers</title>
   <%- end %>
   <%= javascript_pack_tag 'application' %>
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
+  <%= stylesheet_pack_tag 'bjc', media: 'all', 'data-turbolinks-track': 'true' %>
+
   <%= csrf_meta_tags %>
 </head>
 
@@ -15,7 +17,8 @@
   <%= render 'layouts/navbar' %>
 
   <div class="container">
-    <main>
+    <%# class comes from llab / bjc-r content %>
+    <main class="full">
       <div class="page-title">
         <div class="row">
           <div class="col-9">

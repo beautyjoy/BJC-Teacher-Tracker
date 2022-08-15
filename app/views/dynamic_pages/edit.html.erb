@@ -2,8 +2,9 @@
 <hr />
 
 <%= form_for @dynamic_page do |f| %>
-  <%= render 'dynamic_pages/form', fields: f %>
+  <%= render 'form', fields: f %>
 
+  <br>
   <div class="actions">
       <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
     </div>

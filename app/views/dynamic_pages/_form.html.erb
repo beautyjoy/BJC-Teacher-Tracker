@@ -13,7 +13,7 @@
         <label class="form-check-label" for="inlineRadioAdmin">Admin</label>
       </div>
     </div>
-    
+
     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-xs-4 row">
       <div class="col-1">
         <%= fields.radio_button :permissions, 'Verified Teacher', class: "form-check-input", id: "inlineRadioTeacher", required: true %>
@@ -32,6 +32,8 @@
       </div>
     </div>
   </div>
-  <label for="dynamic_page_body"><h3>Body</h3></label>
-  <%= fields.rich_text_area :body, rows: 20, style: 'height: 500px; overflow-y: auto;', value: @dynamic_page.body %>
+  <label for="dynamic_page_html"><h3>HTML Content</h3></label>
+  <%= fields.text_area :html, rows: 20, class: 'form-control', style: 'font-family: monospace;' %>
+
+  <%# fields.rich_text_area :body, rows: 20, style: 'height: 500px; overflow-y: auto;', value: @dynamic_page.body %>
 </div>
