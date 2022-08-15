@@ -60,6 +60,11 @@ We have worked on the adding following core features and functionality:
     ```
 
 
+## JavaScript and CSS with Webpack
+
+* `stylesheet_pack_tag` doesn't work. :(
+* Use `import '*.scss' in a _JavaScript file, and webpack will compile correctly
+* If you need a new CSS-only import, make a new CSS *and* a new JS file.
 
 ## Deployed Site:
 

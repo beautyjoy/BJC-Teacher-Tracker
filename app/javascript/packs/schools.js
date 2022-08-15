@@ -1,4 +1,6 @@
 import "../styles/selectize.scss";
+
+// TODO: figure out why this needs to be here.
 require("turbolinks");
 require("selectize");
 require("bootstrap");

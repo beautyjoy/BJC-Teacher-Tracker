@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <%- if content_for?(:title) %>
-    <title><%= yield(:title)%> | BJC Teachers </title>
+    <title><%= yield(:title) %> | BJC Teachers</title>
   <%- else %>
     <title>BJC Teachers</title>
   <%- end %>
   <%= javascript_pack_tag 'application' %>
-  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
-  <%= stylesheet_pack_tag 'bjc', media: 'all', 'data-turbolinks-track': 'true' %>
+  <%= javascript_pack_tag 'bjc' %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -18,25 +17,25 @@
 
   <div class="container">
     <%# class comes from llab / bjc-r content %>
-    <main class="full">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-9">
-            <%- if content_for?(:h1) %>
-              <h1><%= yield(:h1) %></h1>
-            <%- end %>
-          </div>
+    <div class="page-title">
+      <div class="row">
+        <div class="col-9">
+          <%- if content_for?(:h1) %>
+            <h1><%= yield(:h1) %></h1>
+          <%- end %>
+        </div>
 
-          <div class="col-3">
-            <%- if content_for?(:header_button) %>
-              <%- if logged_in? && current_user.admin? %>
-                <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-              <%- end %>
+        <div class="col-3">
+          <%- if content_for?(:header_button) %>
+            <%- if logged_in? && current_user.admin? %>
+              <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
             <%- end %>
-          </div>
+          <%- end %>
         </div>
       </div>
-      <%= render 'layouts/flash' %>
+    </div>
+    <%= render 'layouts/flash' %>
+    <main class="full">
       <%= yield %>
     </main>
   </div>
