@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # See how all your routes lay out with "bin/rails routes".
+  root to: "main#index"
 
   resources :teachers do
     member do
@@ -16,8 +17,8 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :schools
+  resources :pages, param: :slug
   resources :email_templates, only: [:index, :update, :edit]
-  root to: "main#index"
 
   # The line below would be unnecessary since we use Google.
   # sessions#new could be left as an empty Ruby function.
@@ -29,9 +30,4 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "sessions#omniauth_callback"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
-
-  resources :pages, param: :slug, controller: 'pages'
-
-  # get "pages/:slug", to: "pages#show"
-  # get "pages/edit/:slug", to: "pages#edit"
 end
