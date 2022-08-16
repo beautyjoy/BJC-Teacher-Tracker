@@ -39,6 +39,7 @@ class DynamicPage < ApplicationRecord
 
   # TODO: This may be a bit too specific?
   def fix_bjc_r_links
+    return unless self.html
     self.html = self.html.gsub('="/bjc-r', '="https://bjc.edc.org/bjc-r')
   end
 

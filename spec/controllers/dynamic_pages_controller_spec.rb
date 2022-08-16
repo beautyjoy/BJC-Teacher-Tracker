@@ -22,15 +22,7 @@ RSpec.describe DynamicPagesController, type: :controller do
   end
 
   describe "#delete" do
-    it "deletes the page" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      id_to_delete = DynamicPage.find_by(slug: "test_slug_2").id
-      expect(DynamicPage).to receive(:destroy)
-      delete :delete, { params: { id: id_to_delete } }
-      expect(response).to redirect_to(dynamic_pages_path)
-    end
-
-    it "able to delete a page" do
+    it "successfully deletes a page" do
       ApplicationController.any_instance.stub(:require_admin).and_return(true)
       ApplicationController.any_instance.stub(:is_admin?).and_return(true)
       long_app = DynamicPage.find_by(slug: "Test_slug")
@@ -55,7 +47,7 @@ RSpec.describe DynamicPagesController, type: :controller do
               dynamic_page: {
                   slug: @dynamic_page_slug,
                   title: @dynamic_page_title,
-                  body: "<p>Test page body.</p>",
+                  html: "<p>Test page body.</p>",
                   permissions: "Admin",
               }
           },
@@ -74,7 +66,7 @@ RSpec.describe DynamicPagesController, type: :controller do
             dynamic_page: {
               slug: @dynamic_page_slug,
               title: @dynamic_page_title,
-              body: "<p>Test page body.</p>",
+              html: "<p>Test page body.</p>",
               permissions: "Admin",
             }
           },
@@ -92,7 +84,7 @@ RSpec.describe DynamicPagesController, type: :controller do
         params: {
           dynamic_page: {
             title: @dynamic_page_title,
-            body: "<p>Test page body.</p>",
+            html: "<p>Test page body.</p>",
             permissions: "Admin",
           }
         },
@@ -110,7 +102,7 @@ RSpec.describe DynamicPagesController, type: :controller do
         params: {
           dynamic_page: {
             slug: @dynamic_page_slug,
-            body: "<p>Test page body.</p>",
+            html: "<p>Test page body.</p>",
             permissions: "Admin",
           }
         },
@@ -129,7 +121,7 @@ RSpec.describe DynamicPagesController, type: :controller do
           dynamic_page: {
             title: @dynamic_page_title,
             slug: @dynamic_page_slug,
-            body: "<p>Test page body.</p>",
+            html: "<p>Test page body.</p>",
           }
         },
         session: {
@@ -147,7 +139,7 @@ RSpec.describe DynamicPagesController, type: :controller do
             dynamic_page: {
               title: @dynamic_page_title,
               slug: @dynamic_page_slug,
-              body: "<p>Test page body.</p>",
+              html: "<p>Test page body.</p>",
               permissions: "Admin",
             }
           } # No user_id in the session
@@ -164,7 +156,7 @@ RSpec.describe DynamicPagesController, type: :controller do
           dynamic_page: {
             slug: "test_slug_2",
             title: "Test Page Title 2",
-            body: "<p>Test page body.</p>",
+            html: "<p>Test page body.</p>",
             permissions: "Admin",
           }
         },
