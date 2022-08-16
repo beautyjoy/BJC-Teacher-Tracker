@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: dynamic_pages
+# Table name: pages
 #
 #  id          :bigint           not null, primary key
 #  html        :text
@@ -17,19 +17,23 @@
 #
 # Indexes
 #
-#  index_dynamic_pages_on_slug         (slug) UNIQUE
-#  index_dynamic_pages_on_teachers_id  (teachers_id)
+#  index_pages_on_slug         (slug) UNIQUE
+#  index_pages_on_teachers_id  (teachers_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (teachers_id => teachers.id)
 #
-class DynamicPage < ApplicationRecord
+class Page < ApplicationRecord
   validates :slug, uniqueness: true
-  validates :last_editor, :permissions, :slug, :title, :creator_id, presence: true
+  validates :last_editor, :permissions, :slug, :title, :html, :creator_id, presence: true
   validate :validate_permissions
 
   before_save :fix_bjc_r_links
+
+  def to_param
+    self.slug
+  end
 
   def validate_permissions
     if !["Admin", "Verified Teacher", "Public"].include?(permissions)

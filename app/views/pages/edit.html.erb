@@ -16,7 +16,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
     <div id="form">
-      <%= form_for @dynamic_page, class: "form" do |f| %>
+      <%= form_with @page, class: "form" do |f| %>
         <%= render 'form', fields: f %>
         <br>
         <div class="actions">

@@ -5,8 +5,8 @@
         <%- is_current = page == current_page %>
       <li class="nav-item">
         <a class="nav-link <%= "active" if is_current %>"
-          <%= "aria-current='page'" if is_current %>
-          href="<%= dynamic_pages_path(slug: page.slug) %>"><%= page.title %>
+          <%= "aria-current=\"page\"" if is_current %>
+          href="<%= page_path(page) %>"><%= page.title %>
         </a>
       </li>
     <%- end %>

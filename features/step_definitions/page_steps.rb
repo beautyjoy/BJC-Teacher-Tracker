@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Given(/the following dynamic pages exist/) do |dynamic_pages_table|
+Given(/the following dynamic pages exist/) do |pages_table|
   default_params = {
     slug: "test_slug",
     title: "Test Page Title",
@@ -10,8 +10,8 @@ Given(/the following dynamic pages exist/) do |dynamic_pages_table|
     last_editor: Teacher.first.id
   }
 
-  dynamic_pages_table.symbolic_hashes.each do |page|
-    DynamicPage.create!(default_params.merge(page))
+  pages_table.symbolic_hashes.each do |page|
+    Page.create!(default_params.merge(page))
   end
 end
 

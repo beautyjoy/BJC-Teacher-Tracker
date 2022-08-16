@@ -1,14 +1,14 @@
 <div class="form-group">
-  <label for="dynamic_page_title" class="form-label label-required">Title</label>
+  <label for="page_title" class="form-label label-required">Title</label>
   <%= fields.text_field :title, class: "form-control", required: true %>
 </div>
 <div class="form-group">
-  <label for="dynamic_page_slug" class="form-label label-required">Slug</label>
+  <label for="page_slug" class="form-label label-required">Slug</label>
   <%= fields.text_field :slug, class: "form-control", required: true %>
 </div>
 
 <div class="form-group">
-  <label for="dynamic_page_permissions" class="label-required form-label">Permissions</label>
+  <label for="page_permissions" class="label-required form-label">Permissions</label>
   <div class="form-check">
     <%= fields.radio_button :permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
     <label class="form-check-label" for="inlineRadioAdmin">Admin</label>
@@ -23,7 +23,7 @@
   </div>
 </div>
 <div class="form-group">
-  <label for="dynamic_page_html" class="form-label">HTML Content</label>
+  <label for="page_html" class="form-label">HTML Content</label>
   <%= fields.text_area :html, rows: 20, class: 'form-control', style: 'font-family: monospace;' %>
   <div class="form-text text-muted">
     This is an unresricted HTML field.
