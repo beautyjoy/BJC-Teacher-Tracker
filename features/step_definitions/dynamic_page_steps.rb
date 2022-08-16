@@ -32,9 +32,9 @@ Then(/^The radio button "(.*)" should be checked$/) do |radio_button_name|
 end
 
 And(/^I should see a(n active)? nav link "(.*)"/) do |active, link_text|
-  expect(page).to have_css('a.nav-link', text: link_text)
+  expect(page).to have_css("a.nav-link", text: link_text)
 end
 
 And(/^And I use the sidebar link "(.*)"/) do |link_text|
-  click_link('.nav-link', text: link_text)
+  click_link(".nav-link", text: link_text)
 end
