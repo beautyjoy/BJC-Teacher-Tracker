@@ -18,7 +18,7 @@ Scenario: Pressing "Dynamic Pages" button on navbar should take me to a list of 
     Then I should be on the dynamic pages index
     And I should see "Title"
     And I should see "Permissions"
-    And I should not see "Body"
+    And I should not see "HTML"
 
 Scenario: Pressing "New Page" button should take user to new page form
     Given I am on the dynamic pages index
@@ -26,17 +26,21 @@ Scenario: Pressing "New Page" button should take user to new page form
     Then I should be on the new dynamic pages page
     And I should see "Title"
     And I should see "Slug"
-    And I should see "Body"
+    And I should see "HTML Content"
+    And I should see "All Pages"
 
 Scenario: Successfully creating a new dynamic page redirects to that page
     Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Test Title"
     Then I should see "This is a test"
+    And I should see "All Pages"
+    And I should see a nav link "Test Title"
+
 
 Scenario: Creating a page without a title fails
     Given I am on the new dynamic pages page
@@ -71,6 +75,7 @@ Scenario: I create a new page and I can see it on the index page
     And I follow "Pages"
     Then I should see "Test Title"
     And I should see "Admin"
+    And I should see a nav link "Test Title"
 
 Scenario: Can create a new page with the same title as a page that already exists
     Given I am on the new dynamic pages page
@@ -105,14 +110,14 @@ Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
-    And I fill in the dynamic_page_body with "Don't see this"
+    And I fill in the page HTML content with "Don't see this"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Create a New Page"
@@ -167,7 +172,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     And I follow "Pages"
     And I press the edit button for "test_slug"
@@ -178,7 +183,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
     Then I fill in "dynamic_page_title" with "New Title"
     And I fill in "dynamic_page_slug" with "new_slug"
     And I choose "inlineRadioPublic"
-    And I fill in the dynamic_page_body with "This is a test 2"
+    And I fill in the page HTML content with "This is a test 2"
     And I press "Update"
     Then I should see "New Title"
     And I should see "Public"
@@ -191,7 +196,7 @@ Scenario: Can update page even if no changes
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     And I follow "Pages"
     And I press the edit button for "test_slug"
@@ -206,20 +211,20 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I fill in "dynamic_page_title" with "Test Title"
     And I fill in "dynamic_page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     Given I am on the new dynamic pages page
     And I fill in "dynamic_page_title" with "Test Title 2"
     And I fill in "dynamic_page_slug" with "test_slug_2"
     And I choose "inlineRadioAdmin"
-    And I fill in the dynamic_page_body with "This is a test"
+    And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     Then I follow "Pages"
     And I press the edit button for "test_slug_2"
     Then I should be on the edit dynamic pages page for "test_slug_2"
     And I fill in "dynamic_page_title" with "New Title"
     And I fill in "dynamic_page_slug" with "test_slug"
-    And I fill in the dynamic_page_body with "New page body."
+    And I fill in the page HTML content with "New page body."
     And I press "Update"
     Then I should see "Edit Page"
     And I should see "Slug has already been taken"

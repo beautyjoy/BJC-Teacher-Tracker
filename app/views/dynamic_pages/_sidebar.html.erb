@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>All Pages</h2>
+  <ul class="nav nav-pills nav-fill flex-column">
+    <%- pages.each do |page| %>
+        <%- is_current = page == current_page %>
+      <li class="nav-item">
+        <a class="nav-link <%= "active" if is_current %>"
+          <%= "aria-current='page'" if is_current %>
+          href="<%= dynamic_pages_path(slug: page.slug) %>"><%= page.title %>
+        </a>
+      </li>
+    <%- end %>
+  </ul>
+</div>

@@ -5,6 +5,7 @@
 # Table name: dynamic_pages
 #
 #  id          :bigint           not null, primary key
+#  html        :text
 #  last_editor :bigint           not null
 #  permissions :string           not null
 #  slug        :string           not null
@@ -28,13 +29,31 @@ class DynamicPage < ApplicationRecord
   validates :last_editor, :permissions, :slug, :title, :creator_id, presence: true
   validate :validate_permissions
 
+  before_save :fix_bjc_r_links
+
   def validate_permissions
     if !["Admin", "Verified Teacher", "Public"].include?(permissions)
       errors.add :base, "That permissions is not valid"
     end
   end
 
-  has_rich_text :body
+  # TODO: This may be a bit too specific?
+  def fix_bjc_r_links
+    return unless self.html
+    self.html = self.html.gsub('="/bjc-r', '="https://bjc.edc.org/bjc-r')
+  end
+
+  def self.viewable_pages(user)
+    return ["Public"] unless user
+
+    if user.admin?
+      ["Admin", "Verified Teacher", "Public"]
+    elsif user.validated?
+      ["Verified Teacher", "Public"]
+    else
+      ["Public"]
+    end
+  end
 
   def admin_permissions?
     permissions == "Admin"

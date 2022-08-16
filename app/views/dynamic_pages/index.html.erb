@@ -4,13 +4,13 @@
 <table class="table js-dataTable">
   <thead class="thead-dark">
     <tr align = "center">
-    <th scope="col">Title</th>
-    <th scope="col">Last Editor</th>
-    <% if logged_in? && current_user.admin? %>
-      <th scope="col">Permissions</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    <% end %>
+      <th scope="col">Title</th>
+      <th scope="col">Last Editor</th>
+      <% if logged_in? && current_user.admin? %>
+        <th scope="col">Permissions</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>

@@ -1,10 +1,33 @@
 <%= provide(:h1, "Edit Page") %>
+
+<%# <div class="row">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Form</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="true">Preview</a>
+    </li>
+  </ul>
+</div> %>
+
 <hr />
 
-<%= form_for @dynamic_page do |f| %>
-  <%= render 'dynamic_pages/form', fields: f %>
-
-  <div class="actions">
-      <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
+    <div id="form">
+      <%= form_for @dynamic_page, class: "form" do |f| %>
+        <%= render 'form', fields: f %>
+        <br>
+        <div class="actions">
+          <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-<% end %>
+  </div>
+  <%# <div class="tab-pane fade" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
+    <div hidden id="preview">
+      <div class="js-htmlContent"></div>
+    </div>
+  </div> %>
+</div>

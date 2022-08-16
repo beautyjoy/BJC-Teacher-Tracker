@@ -1,6 +1,8 @@
 # BJC Teacher Tracker
+
 ![Specs Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg) •
 [![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
+
 ---
 
 ## Description
@@ -58,6 +60,11 @@ We have worked on the adding following core features and functionality:
     ```
 
 
+## JavaScript and CSS with Webpack
+
+* `stylesheet_pack_tag` doesn't work. :(
+* Use `import '*.scss' in a _JavaScript file, and webpack will compile correctly
+* If you need a new CSS-only import, make a new CSS *and* a new JS file.
 
 ## Deployed Site:
 
