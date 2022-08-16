@@ -15,7 +15,7 @@ AllCops:
     - '**/vendor/**/*'
     - '**/node_modules/**/*'
     - 'bin/*'
-    - db/migrations/*.rb
+    - db/migrate/*.rb
     - db/schema.rb
 
 Performance:
