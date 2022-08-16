@@ -2,16 +2,10 @@
 
 class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
-  layout "dynamic_page", only: :show
+  before_action :load_dynamic_page, except: [:new, :create]
+  layout "dynamic_page"
 
-  def index
-    @dynamic_pages = DynamicPage.where(permissions: viewable_pages)
-  end
-
-  def delete
-    DynamicPage.destroy(params[:id])
-    redirect_to dynamic_pages_path
-  end
+  def index; end
 
   def new
     @dynamic_page = DynamicPage.new
@@ -32,8 +26,6 @@ class DynamicPagesController < ApplicationController
   end
 
   def show
-    @dynamic_page = DynamicPage.find_by(slug: params[:slug])
-
     if @dynamic_page.admin_permissions? && !is_admin?
       redirect_to dynamic_pages_path, alert: "You do not have permission to view that page!"
     elsif @dynamic_page.verified_teacher_permissions? && !is_admin? && !is_verified_teacher?
@@ -42,12 +34,9 @@ class DynamicPagesController < ApplicationController
     render_html_body
   end
 
-  def edit
-    @dynamic_page = DynamicPage.find_by(slug: params[:slug])
-  end
+  def edit; end
 
   def update
-    @dynamic_page ||= DynamicPage.find(params[:id])
     @dynamic_page.assign_attributes(dynamic_page_params)
     @dynamic_page.last_editor = current_user.id
 
@@ -60,8 +49,19 @@ class DynamicPagesController < ApplicationController
     end
   end
 
+  def delete
+    @dynamic_page.destroy(params[:id])
+    redirect_to dynamic_pages_path, notice: "Page #{@dynamic_page.title} was deleted."
+  end
+
   private
-  def load_page
+  def load_dynamic_page
+    @dynamic_pages ||= DynamicPage.where(permissions: viewable_pages)
+    if params[:id]
+      @dynamic_page ||= DynamicPage.find_by(id: params[:id])
+    elsif params[:slug]
+      @dynamic_page ||= DynamicPage.find_by(slug: params[:slug])
+    end
   end
 
   def dynamic_page_params
@@ -78,7 +78,7 @@ class DynamicPagesController < ApplicationController
     end
   end
 
-    # def liquid_assigns
+  # def liquid_assigns
   #   {
   #     teacher_first_name: @teacher.first_name,
   #     teacher_last_name: @teacher.last_name,
