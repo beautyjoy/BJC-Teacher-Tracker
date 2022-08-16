@@ -2,7 +2,7 @@
 
 class DynamicPagesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
-  before_action :load_dynamic_page, except: [:new, :create]
+  before_action :load_dynamic_page
   layout "dynamic_page"
 
   def index; end
@@ -56,7 +56,7 @@ class DynamicPagesController < ApplicationController
 
   private
   def load_dynamic_page
-    @dynamic_pages ||= DynamicPage.where(permissions: viewable_pages)
+    @dynamic_pages ||= DynamicPage.where(permissions: DynamicPage.viewable_pages(current_user))
     if params[:id]
       @dynamic_page ||= DynamicPage.find_by(id: params[:id])
     elsif params[:slug]
@@ -65,17 +65,7 @@ class DynamicPagesController < ApplicationController
   end
 
   def dynamic_page_params
-    params.require(:dynamic_page).permit(:slug, :body, :html, :title, :permissions)
-  end
-
-  def viewable_pages
-    if is_admin?
-      ["Admin", "Verified Teacher", "Public"]
-    elsif is_verified_teacher?
-      ["Verified Teacher", "Public"]
-    else
-      ["Public"]
-    end
+    params.require(:dynamic_page).permit(:slug, :html, :title, :permissions)
   end
 
   # def liquid_assigns

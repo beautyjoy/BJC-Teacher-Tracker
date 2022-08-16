@@ -22,12 +22,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  font-size: 1em;
-  line-height: 1.5;
-  color: #000; /* Why Bootstrap, why?! */
-  text-align: left;
-}
+// body {
+//   font-size: 1em;
+//   line-height: 1.5;
+//   color: #000; /* Why Bootstrap, why?! */
+//   text-align: left;
+// }
 
 .full {
   padding: 1em;
@@ -41,9 +41,6 @@ body {
   filter: none;
 }
 
-nav {
-  padding: 1% 5% 1% 5%;
-}
 
 .right {
   text-align: right;
@@ -135,18 +132,6 @@ code { /* Override bootstrap. */
   text-align: left;
 }
 
-/* Contains the page title text, truncates text with '…' */
-/* First line is stupid bootstrap stuff.... */
-.navbar-default .navbar-title:hover, .navbar-default .navbar-title:focus,
-.navbar-default .navbar-title,
-.navbar-title, a.navbar-title {
-  vertical-align: middle;
-  max-width: 80%;
-  min-width: 50%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .full-bottom-bar {
   background: #003A70;

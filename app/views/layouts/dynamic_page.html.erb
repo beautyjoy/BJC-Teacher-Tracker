@@ -14,32 +14,36 @@
 
 <body>
   <%= render 'layouts/navbar' %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 pages-sidebar">
+        <%= render 'dynamic_pages/sidebar', current_page: @dynamic_page, pages: @dynamic_pages %>
+      </div>
 
-  <div class="container">
-    <%# class comes from llab / bjc-r content %>
-    <div class="page-title">
-      <div class="row">
-        <div class="col-9">
-          <%- if content_for?(:h1) %>
-            <h1><%= yield(:h1) %></h1>
-          <%- end %>
-        </div>
-
-        <div class="col-3">
-          <%- if content_for?(:header_button) %>
-            <%- if logged_in? && current_user.admin? %>
-              <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-            <%- end %>
-          <%- end %>
+      <div class="col-10">
+        <div class="container">
+          <div class="row page-title">
+            <%= render 'layouts/flash' %>
+            <div class="col">
+              <%- if content_for?(:h1) %>
+                <h1><%= yield(:h1) %></h1>
+              <%- end %>
+            </div>
+            <div class="col-2">
+              <%- if content_for?(:header_button) %>
+                <%- if logged_in? && current_user.admin? %>
+                  <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
+                <%- end %>
+              <%- end %>
+            </div>
+          </div>
+          <main class="row">
+            <div class="full col"><%= yield %></div>
+          </main>
         </div>
       </div>
     </div>
-    <%= render 'layouts/flash' %>
-    <main class="full">
-      <%= yield %>
-    </main>
   </div>
-
   <%= render "layouts/footer" %>
 
 </body>
