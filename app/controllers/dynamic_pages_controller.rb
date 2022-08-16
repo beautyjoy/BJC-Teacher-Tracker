@@ -50,7 +50,7 @@ class DynamicPagesController < ApplicationController
   end
 
   def delete
-    @dynamic_page.destroy(params[:id])
+    @dynamic_page.destroy
     redirect_to dynamic_pages_path, notice: "Page #{@dynamic_page.title} was deleted."
   end
 

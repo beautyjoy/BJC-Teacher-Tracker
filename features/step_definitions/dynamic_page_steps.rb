@@ -1,24 +1,22 @@
 # frozen_string_literal: true
 
 Given(/the following dynamic pages exist/) do |dynamic_pages_table|
-  dynamic_pages_default = {
+  default_params = {
     slug: "test_slug",
     title: "Test Page Title",
-    body: "Test page body.",
+    html: "Test page body.",
     permissions: "Public",
-    creator_id: Teacher.all[0].id,
-    last_editor: Teacher.all[0].id
+    creator_id: Teacher.first.id,
+    last_editor: Teacher.first.id
   }
-  dynamic_pages_table.symbolic_hashes.each do |dynamic_page|
-    dynamic_pages_default.each do |key, value|
-      dynamic_page[key] = value if dynamic_page[key].nil?
-    end
-    DynamicPage.create!(dynamic_page)
+
+  dynamic_pages_table.symbolic_hashes.each do |page|
+    DynamicPage.create!(default_params.merge(page))
   end
 end
 
-When(/^(?:|I )fill in the dynamic_page_body with "([^"]*)"$/) do |value|
-  find("trix-editor").click.set(value)
+When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
+  find_field("HTML Content").set(value)
 end
 
 When(/^I press the delete button for "(.*)"$/) do |slug|
@@ -31,4 +29,12 @@ end
 
 Then(/^The radio button "(.*)" should be checked$/) do |radio_button_name|
   expect(find_field(radio_button_name)).to be_checked
+end
+
+And(/^I should see a(n active)? nav link "(.*)"/) do |active, link_text|
+  expect(page).to have_css('a.nav-link', text: link_text)
+end
+
+And(/^And I use the sidebar link "(.*)"/) do |link_text|
+  click_link('.nav-link', text: link_text)
 end

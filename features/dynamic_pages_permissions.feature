@@ -9,7 +9,7 @@ Background: Has admin and teacher in DB along with pages of each permission type
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following dynamic pages exist:
-    | slug                       | title             | body               | permissions      |
+    | slug                       | title             | html               | permissions      |
     | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin            |
     | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher |
     | test_slug_public           | Test Public Page  | Test public body.  | Public           |
@@ -64,19 +64,19 @@ Scenario: Admin can access all pages
     Then I can log in with Google
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Public Page"
+    And I use the sidebar link "Test Public Page"
     Then I should be on the dynamic page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Teacher Page"
+    And I use the sidebar link "Test Teacher Page"
     Then I should be on the dynamic page for slug "test_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Admin Page"
+    And I use the sidebar link "Test Admin Page"
     Then I should be on the dynamic page for slug "test_slug_admin"
     And I should see "Test Admin Page"
     And I should see "Test admin body."
@@ -88,7 +88,7 @@ Scenario: Teachers can access public pages
     Then I can log in with Google
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Public Page"
+    And I use the sidebar link "Test Public Page"
     Then I should be on the dynamic page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
@@ -100,7 +100,7 @@ Scenario: Teachers can access teacher pages
     Then I can log in with Google
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Teacher Page"
+    And I use the sidebar link "Test Teacher Page"
     Then I should be on the dynamic page for slug "test_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
@@ -117,7 +117,7 @@ Scenario: Public can access public pages
     Given I am on the BJC home page
     Then I follow "Pages"
     Then I should be on the dynamic pages index
-    And I follow "Test Public Page"
+    And I use the sidebar link "Test Public Page"
     Then I should be on the dynamic page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."

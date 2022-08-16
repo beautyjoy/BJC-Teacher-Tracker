@@ -1,6 +1,6 @@
 <% provide(:h1, "Create a New Page") %>
 
-<%= form_for @dynamic_page do |f| %>
+<%= form_for @dynamic_page, class: "form" do |f| %>
   <%= render 'form', fields: f %>
 
   <br>
