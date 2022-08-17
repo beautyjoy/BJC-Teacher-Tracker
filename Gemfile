@@ -44,7 +44,7 @@ gem "liquid"
 # Store uploaded files
 gem "aws-sdk-s3", require: false
 
-# Render images for file uploads in dynamic pages
+# Render images for file uploads in pages
 gem "image_processing", ">= 1.2"
 
 group :development do

@@ -1,6 +1,6 @@
-Feature: dynamic pages features as an admin
+Feature: pages features as an admin
 
-    As an admin, I should be able to create, view, and edit dynamic pages
+    As an admin, I should be able to create, view, and edit pages
 
 Background: I am logged in as an admin
     Given I seed data
@@ -13,24 +13,24 @@ Background: I am logged in as an admin
     Then I can log in with Google
     And I should see "BJC Teacher Dashboard"
 
-Scenario: Pressing "Dynamic Pages" button on navbar should take me to a list of all dynamic pages
+Scenario: Pressing "pages" button on navbar should take me to a list of all pages
     Given I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should see "Title"
     And I should see "Permissions"
     And I should not see "HTML"
 
 Scenario: Pressing "New Page" button should take user to new page form
-    Given I am on the dynamic pages index
+    Given I am on the pages index
     And I press "New Page"
-    Then I should be on the new dynamic pages page
+    Then I should be on the new pages page
     And I should see "Title"
     And I should see "Slug"
     And I should see "HTML Content"
     And I should see "All Pages"
 
-Scenario: Successfully creating a new dynamic page redirects to that page
-    Given I am on the new dynamic pages page
+Scenario: Successfully creating a new page redirects to that page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
@@ -43,31 +43,31 @@ Scenario: Successfully creating a new dynamic page redirects to that page
 
 
 Scenario: Creating a page without a title fails
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then The "#new_page" form is invalid
-    And I should be on the new dynamic pages page
+    And I should be on the new pages page
 
 Scenario: Creating a page without a slug fails
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then The "#new_page" form is invalid
-    And I should be on the new dynamic pages page
+    And I should be on the new pages page
 
 Scenario: Creating a page without choosing permissions fails
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I press "Submit"
     Then The "#new_page" form is invalid
-    And I should be on the new dynamic pages page
+    And I should be on the new pages page
 
 Scenario: I create a new page and I can see it on the index page
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -78,7 +78,7 @@ Scenario: I create a new page and I can see it on the index page
     And I should see a nav link "Test Title"
 
 Scenario: Can create a new page with the same title as a page that already exists
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -92,7 +92,7 @@ Scenario: Can create a new page with the same title as a page that already exist
     Then I should see "Test Title"
 
 Scenario: Can't create a page with a slug that already exists
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -107,7 +107,7 @@ Scenario: Can't create a page with a slug that already exists
     And I should see "Slug has already been taken"
 
 Scenario: Attempting to create page with taken slug doesn't delete form input
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I fill in the page HTML content with "Don't see this"
@@ -128,7 +128,7 @@ Scenario: Attempting to create page with taken slug doesn't delete form input
     And I should not see "Don't see this"
 
 Scenario: I can delete pages
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -138,7 +138,7 @@ Scenario: I can delete pages
     Then I should not see "test_slug"
 
 Scenario: Can create pages with any selection for permissions
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Admin Permissions"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -157,9 +157,9 @@ Scenario: Can create pages with any selection for permissions
     And I press "Submit"
 
 Scenario: Correctly store user's full name and create date.
-    Given I am on the dynamic pages index
+    Given I am on the pages index
     And I press "New Page"
-    Then I should be on the new dynamic pages page
+    Then I should be on the new pages page
     And I fill in "page_title" with "Test page"
     And I fill in "page_slug" with "Test"
     And I choose "inlineRadioAdmin"
@@ -168,7 +168,7 @@ Scenario: Correctly store user's full name and create date.
     And I should see "Joseph Mamoa"
 
 Scenario: Can edit pages with correct prefilled content in the form.
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -176,7 +176,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I press "Submit"
     And I follow "Pages"
     And I press the edit button for "test_slug"
-    Then I should be on the edit dynamic pages page for "test_slug"
+    Then I should be on the edit pages page for "test_slug"
     And the "page_title" field should contain "Test Title"
     And the "page_slug" field should contain "test_slug"
     And I should see "This is a test"
@@ -187,12 +187,12 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I press "Update"
     Then I should see "New Title"
     And I should see "Public"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should not see "Test Title"
     And I should not see "test_slug"
 
 Scenario: Can update page even if no changes
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
@@ -200,20 +200,20 @@ Scenario: Can update page even if no changes
     And I press "Submit"
     And I follow "Pages"
     And I press the edit button for "test_slug"
-    Then I should be on the edit dynamic pages page for "test_slug"
+    Then I should be on the edit pages page for "test_slug"
     And I press "Update"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should see "Test Title"
     And I should see "Admin"
 
 Scenario: Attempting to update page with taken slug doesn't delete form input
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
     And I fill in "page_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I fill in "page_title" with "Test Title 2"
     And I fill in "page_slug" with "test_slug_2"
     And I choose "inlineRadioAdmin"
@@ -221,7 +221,7 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I press "Submit"
     Then I follow "Pages"
     And I press the edit button for "test_slug_2"
-    Then I should be on the edit dynamic pages page for "test_slug_2"
+    Then I should be on the edit pages page for "test_slug_2"
     And I fill in "page_title" with "New Title"
     And I fill in "page_slug" with "test_slug"
     And I fill in the page HTML content with "New page body."
@@ -233,7 +233,7 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I should see "New page body."
 
 Scenario: Clicking radio button text selects that radio button
-    Given I am on the new dynamic pages page
+    Given I am on the new pages page
     And I choose "Admin"
     Then The radio button "inlineRadioAdmin" should be checked
     And I choose "Verified Teacher"

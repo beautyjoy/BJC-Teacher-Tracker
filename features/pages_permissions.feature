@@ -1,4 +1,4 @@
-Feature: dynamic pages features a verified teacher
+Feature: pages features a verified teacher
 
     As a verifed teacher, I should only be able to see pages I have access to
 
@@ -8,7 +8,7 @@ Background: Has admin and teacher in DB along with pages of each permission type
     | first_name | last_name | admin | email                        | application_status |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
-    Given the following dynamic pages exist:
+    Given the following pages exist:
     | slug                       | title             | html               | permissions      |
     | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin            |
     | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher |
@@ -20,7 +20,7 @@ Scenario: Admins can see everything
     And I follow "Log In"
     Then I can log in with Google
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should see "Test Public Page"
     And I should see "Test Teacher Page"
     And I should see "Test Admin Page"
@@ -36,7 +36,7 @@ Scenario: Teachers can't see admin pages, edit/delete button, or new page button
     And I follow "Log In"
     Then I can log in with Google
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should see "Test Public Page"
     And I should see "Test Teacher Page"
     And I should not see "Test Admin Page"
@@ -48,7 +48,7 @@ Scenario: Teachers can't see admin pages, edit/delete button, or new page button
 Scenario: Public can only see public pages
     Given I am on the BJC home page
     Given I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I should see "Test Public Page"
     And I should not see "Test Teacher Page"
     And I should not see "Test Admin Page"
@@ -63,21 +63,21 @@ Scenario: Admin can access all pages
     And I follow "Log In"
     Then I can log in with Google
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Public Page"
-    Then I should be on the dynamic page for slug "test_slug_public"
+    Then I should be on the page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Teacher Page"
-    Then I should be on the dynamic page for slug "test_slug_verified_teacher"
+    Then I should be on the page for slug "test_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Admin Page"
-    Then I should be on the dynamic page for slug "test_slug_admin"
+    Then I should be on the page for slug "test_slug_admin"
     And I should see "Test Admin Page"
     And I should see "Test admin body."
 
@@ -87,9 +87,9 @@ Scenario: Teachers can access public pages
     And I follow "Log In"
     Then I can log in with Google
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Public Page"
-    Then I should be on the dynamic page for slug "test_slug_public"
+    Then I should be on the page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
 
@@ -99,9 +99,9 @@ Scenario: Teachers can access teacher pages
     And I follow "Log In"
     Then I can log in with Google
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Teacher Page"
-    Then I should be on the dynamic page for slug "test_slug_verified_teacher"
+    Then I should be on the page for slug "test_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
 
@@ -110,22 +110,22 @@ Scenario: Teachers can't access admin pages
     Given I have a teacher Google email
     And I follow "Log In"
     Then I can log in with Google
-    Given I am on the dynamic page for slug "test_slug_admin"
-    Then I should be on the dynamic pages index
+    Given I am on the page for slug "test_slug_admin"
+    Then I should be on the pages index
 
 Scenario: Public can access public pages
     Given I am on the BJC home page
     Then I follow "Pages"
-    Then I should be on the dynamic pages index
+    Then I should be on the pages index
     And I use the sidebar link "Test Public Page"
-    Then I should be on the dynamic page for slug "test_slug_public"
+    Then I should be on the page for slug "test_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
 
 Scenario: Public can't access verified teacher pages
-    Given I am on the dynamic page for slug "test_slug_verified_teacher"
-    Then I should be on the dynamic pages index
+    Given I am on the page for slug "test_slug_verified_teacher"
+    Then I should be on the pages index
 
 Scenario: Public can't access admin pages
-    Given I am on the dynamic page for slug "test_slug_admin"
-    Then I should be on the dynamic pages index
+    Given I am on the page for slug "test_slug_admin"
+    Then I should be on the pages index

@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   def create
     @page = Page.new(page_params)
     @page.creator_id = current_user.id
-    @page.last_editor = current_user.id
+    @page.last_editor = current_user
 
     if @page.save
       flash[:success] = "Created #{@page.title} page successfully."
@@ -39,7 +39,7 @@ class PagesController < ApplicationController
 
   def update
     @page.assign_attributes(page_params)
-    @page.last_editor = current_user.id
+    @page.last_editor = current_user
 
     if @page.save
       flash[:success] = "Updated #{@page.title} page successfully."

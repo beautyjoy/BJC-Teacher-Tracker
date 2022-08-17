@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-Given(/the following dynamic pages exist/) do |pages_table|
+Given(/the following pages exist/) do |pages_table|
   default_params = {
     slug: "test_slug",
     title: "Test Page Title",
     html: "Test page body.",
     permissions: "Public",
     creator_id: Teacher.first.id,
-    last_editor: Teacher.first.id
+    last_editor: Teacher.first
   }
 
   pages_table.symbolic_hashes.each do |page|
