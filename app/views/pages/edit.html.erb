@@ -1,4 +1,4 @@
-<%= provide(:h1, "Edit Page") %>
+<%= provide(:h1, "#{action_name.capitalize} #{@page.title || 'Page'}") %>
 
 <%# <div class="row">
   <ul class="nav nav-tabs">
@@ -16,9 +16,9 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
     <div id="form">
-      <%= form_with @page, class: "form" do |f| %>
+      <%= form_for @page, class: "form" do |f| %>
         <%= render 'form', fields: f %>
-        <br>
+        <hr>
         <div class="actions">
           <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
         </div>

@@ -1,25 +1,21 @@
 <table class="table js-dataTable">
   <thead class="thead-dark">
-    <tr align = "center">
+    <tr>
       <th scope="col">Title</th>
-      <th scope="col">Last Editor</th>
-      <% if logged_in? && current_user.admin? %>
-        <th scope="col">Permissions</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      <% end %>
+      <th scope="col">Last Edited</th>
+      <th scope="col">Permissions</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
     <% @pages.each do |p| %>
-      <tr align="center">
-        <td> <%= link_to(p.title, page_path(p)) %> </td>
-        <td> <%= Teacher.find(p.last_editor).full_name %> </td>
-        <% if logged_in? && current_user.admin? %>
-          <td> <%= p.permissions %> </td>
-          <td> <%= button_to("Edit", edit_page_path(p), class: "btn btn-primary", type: 'button', id: "edit_"+p.slug) %> </td>
-          <td> <%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
-        <% end %>
+      <tr>
+        <td><%= link_to(p.title, page_path(p)) %> </td>
+        <td><%= "#{p.last_editor.full_name} on #{p.updated_at.strftime('%F')}" %></td>
+        <td><%= p.permissions %></td>
+        <td><%= link_to("Edit", edit_page_path(p), class: "btn btn-primary") %></td>
+        <td><%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
       </tr>
     <% end %>
   </tbody>
