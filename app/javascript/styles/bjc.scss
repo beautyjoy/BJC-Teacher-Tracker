@@ -1,6 +1,17 @@
 @charset "UTF-8";
 @import "./llab.scss";
 
+
+.page-title {
+  margin-bottom: 0;
+}
+
+.full {
+  padding: 0;
+  margin: 0;
+  width: unset;
+}
+
 /** Basic HTML **/
 /* TODO: work sans is not loaded on most pages. */
 body,
