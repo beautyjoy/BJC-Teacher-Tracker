@@ -173,7 +173,7 @@ RSpec.describe PagesController, type: :controller do
       ApplicationController.any_instance.stub(:require_admin).and_return(true)
       ApplicationController.any_instance.stub(:is_admin?).and_return(true)
       thetest = Page.find_by(slug: "Test_slug")
-      post :update, params: { id: thetest.id, pages: { permissions: "Verified Teacher", title: "title", slug: thetest.slug, creator_id: 2, last_editor: 2 } }, session: { user_id: 2 }
+      post :update, params: { id: thetest.id, pages: { permissions: "Verified Teacher", title: "title", slug: thetest.slug } }, session: { user_id: 2 }
       thetest = Page.find_by(slug: "Test_slug")
       expect(thetest.title).to eq("title")
     end

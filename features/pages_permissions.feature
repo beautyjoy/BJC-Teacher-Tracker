@@ -27,7 +27,7 @@ Scenario: Admins can see everything
     And I should see "Edit"
     And I should see "Delete"
     And I should see a button named "Delete"
-    And I should see a button named "Edit"
+    And I should see a link named "Edit"
     And I should see a button named "New Page"
 
 Scenario: Teachers can't see admin pages, edit/delete button, or new page button

@@ -9,12 +9,12 @@ class PagesController < ApplicationController
 
   def new
     @page = Page.new
-    render 'edit'
+    render "edit"
   end
 
   def create
     @page = Page.new(page_params)
-    @page.creator_id = current_user.id
+    @page.creator = current_user
     @page.last_editor = current_user
 
     if @page.save
@@ -22,7 +22,7 @@ class PagesController < ApplicationController
       redirect_to action: "show", slug: @page.slug
     else
       flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
-      render "new"
+      render "edit"
     end
   end
 

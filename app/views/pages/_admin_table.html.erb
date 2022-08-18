@@ -14,8 +14,8 @@
         <td><%= link_to(p.title, page_path(p)) %> </td>
         <td><%= "#{p.last_editor.full_name} on #{p.updated_at.strftime('%F')}" %></td>
         <td><%= p.permissions %></td>
-        <td><%= link_to("Edit", edit_page_path(p), class: "btn btn-primary") %></td>
-        <td><%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_"+p.slug) %> </td>
+        <td><%= link_to("Edit", edit_page_path(p), class: "btn btn-primary", id: "edit_#{p.slug}") %></td>
+        <td><%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_#{p.slug}") %> </td>
       </tr>
     <% end %>
   </tbody>

@@ -31,9 +31,8 @@ class Page < ApplicationRecord
 
   before_save :fix_bjc_r_links
 
-  # TODO: cleanup column name to be _id
-  belongs_to :last_editor, class_name: 'Teacher', foreign_key: 'last_editor'
-  belongs_to :creator, class_name: 'Teacher', foreign_key: 'creator_id'
+  belongs_to :last_editor, class_name: 'Teacher'
+  belongs_to :creator, class_name: 'Teacher'
 
   def to_param
     self.slug
