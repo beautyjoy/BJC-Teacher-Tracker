@@ -6,9 +6,7 @@ class SessionsController < ApplicationController
   def create; end
 
   def destroy
-    # log_out if logged_in?
-    session[:logged_in] = false
-    session[:user_id] = nil
+    reset_session
     redirect_to root_url
   end
 
@@ -24,6 +22,7 @@ class SessionsController < ApplicationController
       # Note: Refresh_token is only sent once during the first request
       refresh_token = access_token.credentials.refresh_token
       setTokens(token, refresh_token, user)
+      user.last_session_at = Time.zone.now
       user.save!
       log_in(user)
       redirect_to root_path
