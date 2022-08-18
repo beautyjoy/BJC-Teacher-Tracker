@@ -1,0 +1,11 @@
+<%= provide(:h1, "BJC Pages") %>
+<%= provide(:header_button, "New Page") %>
+
+<p>Use the links on the left to select a page.<p>
+<%- unless logged_in? %>
+  <p><strong>You are not currently logged in.</strong></p>
+<%- end %>
+
+<%- if current_user&.admin? %>
+  <%= render 'admin_table' %>
+<%- end %>

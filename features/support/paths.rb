@@ -26,10 +26,10 @@ module NavigationHelpers
     when /^the schools page$/ then schools_path
     when /^the new schools page$/ then new_school_path
     when /^the admin dashboard$/ then dashboard_path
-    when /^the dynamic pages index$/ then dynamic_pages_path
-    when /^the new dynamic pages page$/ then "/dynamic_pages/new"
-    when /^the edit dynamic pages page for (.*)$/ then "/pages/edit/" + $1[1..-2]
-    when /^the dynamic page for slug (.*)$/ then "/pages/" + $1[1..-2]
+    when /^the pages index$/ then pages_path
+    when /^the new pages page$/ then "/pages/new"
+    when /^the edit pages page for (.*)$/ then "/pages/#{$1[1..-2]}/edit"
+    when /^the page for slug (.*)$/ then "/pages/#{$1[1..-2]}"
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

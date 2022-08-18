@@ -1,0 +1,22 @@
+<table class="table js-dataTable">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Last Edited</th>
+      <th scope="col">Permissions</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pages.each do |p| %>
+      <tr>
+        <td><%= link_to(p.title, page_path(p)) %> </td>
+        <td><%= "#{p.last_editor.full_name} on #{p.updated_at.strftime('%F')}" %></td>
+        <td><%= p.permissions %></td>
+        <td><%= link_to("Edit", edit_page_path(p), class: "btn btn-primary", id: "edit_#{p.slug}") %></td>
+        <td><%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_#{p.slug}") %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

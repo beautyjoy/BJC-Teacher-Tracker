@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_15_080636) do
+ActiveRecord::Schema.define(version: 2022_08_17_205528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,20 +53,6 @@ ActiveRecord::Schema.define(version: 2022_08_15_080636) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "dynamic_pages", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", null: false
-    t.string "permissions", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "creator_id", null: false
-    t.bigint "last_editor", null: false
-    t.bigint "teachers_id"
-    t.text "html"
-    t.index ["slug"], name: "index_dynamic_pages_on_slug", unique: true
-    t.index ["teachers_id"], name: "index_dynamic_pages_on_teachers_id"
-  end
-
   create_table "email_templates", force: :cascade do |t|
     t.text "body"
     t.string "path"
@@ -78,6 +64,20 @@ ActiveRecord::Schema.define(version: 2022_08_15_080636) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.string "subject"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.string "permissions", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "creator_id", null: false
+    t.bigint "last_editor_id", null: false
+    t.bigint "teachers_id"
+    t.text "html"
+    t.index ["slug"], name: "index_pages_on_slug", unique: true
+    t.index ["teachers_id"], name: "index_pages_on_teachers_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -132,5 +132,5 @@ ActiveRecord::Schema.define(version: 2022_08_15_080636) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dynamic_pages", "teachers", column: "teachers_id"
+  add_foreign_key "pages", "teachers", column: "teachers_id"
 end
