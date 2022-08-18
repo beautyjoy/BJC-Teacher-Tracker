@@ -31,8 +31,8 @@ class Page < ApplicationRecord
 
   before_save :fix_bjc_r_links
 
-  belongs_to :last_editor, class_name: 'Teacher'
-  belongs_to :creator, class_name: 'Teacher'
+  belongs_to :last_editor, class_name: "Teacher"
+  belongs_to :creator, class_name: "Teacher"
 
   def to_param
     self.slug

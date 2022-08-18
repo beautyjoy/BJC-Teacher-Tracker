@@ -163,7 +163,7 @@ RSpec.describe PagesController, type: :controller do
                 permissions: "Verified Teacher",
                 title: "title",
                 slug: thetest.slug,
-                html: 'Test content'
+                html: "Test content"
               }
             },
             session: { user_id: 0 }
