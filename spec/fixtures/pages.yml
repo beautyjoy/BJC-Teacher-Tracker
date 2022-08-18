@@ -27,8 +27,8 @@ thepage:
   title: test_page
   html: <p>Content</p>
   permissions: "Verified Teacher"
-  creator_id: 5
-  last_editor: 5
+  creator_id: 0
+  last_editor_id: 0
 
 validadminpage:
   slug: test_slug_2
@@ -36,4 +36,4 @@ validadminpage:
   permissions: Admin
   html: <p>An admin page</p>
   creator_id: 0
-  last_editor: 0
+  last_editor_id: 0
