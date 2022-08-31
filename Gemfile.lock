@@ -267,7 +267,7 @@ GEM
       rainbow
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
-    hashie (4.1.0)
+    hashie (5.0.0)
     hirb (0.7.3)
     httparty (0.20.0)
       mime-types (~> 3.0)
@@ -354,7 +354,7 @@ GEM
     octokit (4.21.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
-    omniauth (1.9.1)
+    omniauth (1.9.2)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
     omniauth-clever (1.2.2)
@@ -405,7 +405,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3.1)
+    rack (2.2.4)
     rack-mini-profiler (2.3.3)
       rack (>= 1.2.0)
     rack-proxy (0.7.2)
@@ -630,7 +630,7 @@ DEPENDENCIES
   liquid
   listen (~> 3.3)
   metric_fu
-  omniauth (~> 1.0)
+  omniauth (~> 1.9)
   omniauth-clever
   omniauth-discourse
   omniauth-google-oauth2

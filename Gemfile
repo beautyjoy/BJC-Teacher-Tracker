@@ -19,7 +19,7 @@ gem "webpacker", "~> 4"
 gem "bootsnap", ">= 1.4.4", require: false
 
 # Login via 3rd party services.
-gem "omniauth", "~> 1.0"
+gem "omniauth", "~> 1.9"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-microsoft_graph"
