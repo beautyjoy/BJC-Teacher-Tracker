@@ -88,7 +88,7 @@ class School < ApplicationRecord
   end
 
   def selectize_options
-    { name: name, city: city, state: state, website: website }
+    { id: id, name: name, city: city, state: state, website: website }
   end
 
   private
