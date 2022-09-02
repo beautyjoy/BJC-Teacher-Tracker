@@ -1,11 +1,7 @@
 <div class="form-group">
   <%= f.label :name, "Search for your school", class: "label-required", for: "school_selectize" %>
-  <%# using " * " as delim. Probably really bad and should be changed %>
   <%= f.select :name,
-    options_for_select(School.all.collect {|school| [
-      "#{school.name}, #{school.city}, #{school.state}",
-      "#{school.name} * #{school.city} * #{school.state} * #{school.website}"
-    ]}),
+    options_for_select(School.all.collect(&:selectize_options)),
     {prompt: "Enter the name or city of your school"},
     {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
   <%= javascript_pack_tag 'schools' %>
@@ -113,10 +109,11 @@
   $('#school_form').hide();
 
   function autofillSchoolFields() {
-    var school_arr = $("#school_selectize").val().split(" * ", 4); // Format: [name, city, state, website]
-    $("#school_name").prop('value', school_arr[0]);
-    $("#school_city").prop('value', school_arr[1]);
-    $("#school_state").prop('value', school_arr[2]);
-    $("#school_website").prop('value', school_arr[3]);
+    var selectedSchool = JSON.parse($("#school_selectize").val());
+
+    ['name', 'city', 'state', 'website'].forEach(attr => {
+      $(`#school_${attr}`).val(selectedSchool[attr]);
+    });
+    $('#teacher_school_id').val(selectedSchool.id);
   }
 </script>

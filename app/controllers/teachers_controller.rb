@@ -50,8 +50,8 @@ class TeachersController < ApplicationController
       return
     end
 
-    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-    if !@school # School doesn't exist
+    load_school
+    if !@school
       @school = School.new(school_params)
       if !@school.save
         flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
@@ -87,8 +87,8 @@ class TeachersController < ApplicationController
 
   def update
     load_teacher
-    @school = @teacher.school
     @teacher.assign_attributes(teacher_params)
+    @school = @teacher.school
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
@@ -128,7 +128,7 @@ class TeachersController < ApplicationController
   end
 
   def delete
-    if !is_admin?
+    unless s_admin?
       redirect_to root_path, alert: "Only administrators can delete!"
     else
       Teacher.delete(params[:id])
@@ -145,14 +145,16 @@ class TeachersController < ApplicationController
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
-  def school_from_params
+  def load_school
+    if params[:school_id]
+      @school ||= School.find(params[:school_id])
+    end
     @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
-    @school ||= School.new(school_params)
   end
 
   def teacher_params
     params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website, :education_level)
+      :more_info, :personal_website, :education_level, :index_schools_on_name_city_and_website)
   end
 
   def school_params
