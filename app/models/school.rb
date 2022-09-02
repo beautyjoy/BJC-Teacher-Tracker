@@ -4,7 +4,7 @@
 #
 # Table name: schools
 #
-#  id                     :bigint           not null, primary key
+#  id                     :integer          not null, primary key
 #  city                   :string
 #  grade_level            :integer
 #  lat                    :float
