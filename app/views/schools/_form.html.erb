@@ -1,41 +1,26 @@
-<div class="form-group">
-  <%= f.label :name, "Search for your school", class: "label-required", for: "school_selectize" %>
-  <%= f.select :name,
-    options_for_select(@ordered_schools.collect(&:selectize_options)),
-    {prompt: "Enter the name or city of your school"},
-    {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
-  <%= javascript_pack_tag 'schools' %>
-  <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>
-  <%= csrf_meta_tags %>
-</div>
-
 <div id="school_form">
-  <div class = "col-14 d-flex justify-content-end" id="innest_form">
-    <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id="close_button">Clear</button>
-  </div>
-
   <div class='form-group row'>
-      <div class='col-6'>
-          <%= f.label :name, "School Name", class: "label-required" %>
-          <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
-          required: true, id: 'school_name' %>
-      </div>
+    <div class='col-6'>
+        <%= f.label :name, "School Name", class: "label-required" %>
+        <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
+        required: true, id: 'school_name' %>
+    </div>
 
-      <div class='col-4'>
-          <%= f.label :city, class: "label-required", for: "school_city" %>
-          <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
-          required: true, id: 'school_city' %>
-      </div>
+    <div class='col-4'>
+      <%= f.label :city, class: "label-required", for: "school_city" %>
+      <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
+      required: true, id: 'school_city' %>
+    </div>
 
-      <div class='col-2'>
-          <%= f.label :state, class: "label-required", for: "school_state" %>
-          <%= f.select(
-              :state,
-              School::VALID_STATES,
-              {include_blank: "State"},
-              { class: 'form-control', required: true, id: 'school_state'}
-          ) %>
-      </div>
+    <div class='col-2'>
+      <%= f.label :state, class: "label-required", for: "school_state" %>
+      <%= f.select(
+          :state,
+          School::VALID_STATES,
+          { include_blank: "State" },
+          { class: 'form-control', required: true, id: 'school_state'}
+      ) %>
+    </div>
   </div>
 
   <div class="form-group">
@@ -66,54 +51,38 @@
       ) %>
   </div>
 
-
-  <% if current_user&.admin? %>
-    <%= f.label :tags, "Tags" %>
-    <div class="form-group row">
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
+  <hr>
+  <%= f.label :tags, "Tags" %>
+  <div class="form-group row">
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
-      <%= f.text_field :nces_id, placeholder: "000000000000",
-          class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
     </div>
-  <% end %>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
+    <%= f.text_field :nces_id, placeholder: "000000000000",
+        class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
+  </div>
 </div>
-
-
-<script>
-  $('#school_form').hide();
-
-  function autofillSchoolFields() {
-    var selectedSchool = JSON.parse($("#school_selectize").val());
-
-    ['name', 'city', 'state', 'website'].forEach(attr => {
-      $(`#school_${attr}`).val(selectedSchool[attr]);
-    });
-    $('#teacher_school_id').val(selectedSchool.id);
-  }
-</script>

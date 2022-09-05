@@ -6,51 +6,27 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Location</th>
-      <th scope="col">Website</th>
-      <th scope="col">Teachers Count</th>
+      <th scope="col">URL</th>
+      <th scope="col">Teachers</th>
       <th scope="col">Grade Level</th>
-      <th scope="col"></th>
+      <th scope="col" width="10ch">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @schools.each_with_index do |school, index| %>
       <tr>
-        <td><%= school.name %></td>
+        <td><%= link_to(school.name, school_path(school)) %></td>
         <td><%= school.location %></td>
         <td>
-          <a href="<%= school.website %>" target="_blank">
-            <%= school.website %>
-          </a>
+          <%= link_to(truncate(school.website, length: 30), school.website, target: "_blank") %>
         </td>
         <td><%= school.teachers_count %></td>
         <td><%= school.display_grade_level %></td>
         <td>
-          <button class="btn btn-default dropdown-arrow" type="button" data-toggle="collapse" data-target="<%="#details_#{index}"%>" onclick> 
-            ▼
-          </button>
-        </td>
-      </tr>
-            
-      <tr class="collapse" id=<%="details_#{index}"%>>
-        <td colspan="6">
-          <table class="table">
-            <thead class="table-light">
-              <tr class="table-light">
-                <th colspan="5">Teacher Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% school.teachers.each do |teacher| %>
-                <tr class="table-light">
-                  <td>Name: <%= teacher.first_name + " " + teacher.last_name %> </td>
-                  <td>Email: <%= teacher.email %></td>
-                  <td>Education: <%= teacher.display_education_level %></td>
-                  <td>Status: <%= teacher.display_application_status%></td>
-                  <td>Date Submitted: <%= teacher.created_at.strftime("%b %d, %Y") %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <span class="btn-group">
+            <%= link_to("Edit", edit_school_path(school), class: "btn btn-info") %>
+            <%= link_to("❌", school_path(school), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) %>
+          </span>
         </td>
       </tr>
     <% end %>
