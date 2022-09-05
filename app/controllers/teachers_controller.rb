@@ -6,12 +6,17 @@ require "activerecord-import"
 
 class TeachersController < ApplicationController
   include CsvProcess
+
+  before_action :load_pages, only: [:new, :create, :edit, :update]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :delete, :index, :show]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
+
+  # Pages which are publicly visible.
+  layout "page_with_sidebar", only: [:new, :edit, :update]
 
   def index
     @all_teachers = Teacher.where(admin: false)
@@ -194,5 +199,9 @@ class TeachersController < ApplicationController
         params[:school][:school_type] = params[:school][:school_type].to_i
       end
     end
+  end
+
+  def load_pages
+    @pages ||= Page.where(permissions: Page.viewable_pages(current_user))
   end
 end
