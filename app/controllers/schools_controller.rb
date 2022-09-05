@@ -50,7 +50,8 @@ class SchoolsController < ApplicationController
   def destroy
     @school = School.find(params[:id])
     if @school.teachers_count > 0
-      redirect_to schools_path(@school), error: "Cannot delete a school which still has teachers"
+      redirect_to schools_path(@school), alert: "Cannot delete a school which still has teachers"
+      return
     end
     @school.destroy
     redirect_to schools_path, notice: "Deleted \"#{@school.name}\" successfully."
