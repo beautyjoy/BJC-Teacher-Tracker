@@ -61,7 +61,8 @@ class TeachersController < ApplicationController
     end
 
 
-    @teacher = @school.teachers.build(teacher_params)
+    @teacher = Teacher.new(teacher_params)
+    @teacher.school = @school
     if @teacher.save
       @teacher.pending!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
@@ -74,6 +75,7 @@ class TeachersController < ApplicationController
 
   def edit
     load_teacher
+    ordered_schools
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
     @readonly = !is_admin?
@@ -87,6 +89,7 @@ class TeachersController < ApplicationController
 
   def update
     load_teacher
+    ordered_schools
     @teacher.assign_attributes(teacher_params)
     @school = @teacher.school
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
@@ -128,7 +131,7 @@ class TeachersController < ApplicationController
   end
 
   def delete
-    unless s_admin?
+    unless is_admin?
       redirect_to root_path, alert: "Only administrators can delete!"
     else
       Teacher.delete(params[:id])
@@ -159,6 +162,15 @@ class TeachersController < ApplicationController
 
   def school_params
     params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, { tags: [] }, :nces_id)
+  end
+
+  def ordered_schools
+    if load_teacher
+      @ordered_schools ||= [ @teacher.school ] +
+        School.all.order(:name).reject { |s| s.id == @teacher.school.id }
+    else
+      @ordered_schools ||= School.all.order(:name)
+    end
   end
 
   def sanitize_params

@@ -1,7 +1,7 @@
 <div class="form-group">
   <%= f.label :name, "Search for your school", class: "label-required", for: "school_selectize" %>
   <%= f.select :name,
-    options_for_select(School.all.collect(&:selectize_options)),
+    options_for_select(@ordered_schools.collect(&:selectize_options)),
     {prompt: "Enter the name or city of your school"},
     {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
   <%= javascript_pack_tag 'schools' %>
