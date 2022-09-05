@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-  <div class="label-required form-label">Viewer Permissions</div>
+  <label class="label-required form-label">Viewer Permissions</label>
   <div class="form-check">
     <%= fields.radio_button :viewer_permissions, 'Admin', class: "form-check-input", id: "inlineRadioAdmin", required: true %>
     <label class="form-check-label" for="inlineRadioAdmin">Admin</label>
@@ -29,6 +29,6 @@
   <div class="form-text text-muted">
     This is an unresricted HTML field.
     <br>
-    <em>Tip:</em> Links that begin with <code>/bjc-r</code> will be expanded on save to reference <code>https://bjc.edc.org/bjc-r</code>.
+    <em>Note:</em> Links that begin with <code>/bjc-r</code> will be expanded on save to reference <code>https://bjc.edc.org/bjc-r</code>.
   </div>
 </div>
