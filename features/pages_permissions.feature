@@ -9,10 +9,10 @@ Background: Has admin and teacher in DB along with pages of each permission type
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following pages exist:
-    | slug                       | title             | html               | permissions      |
-    | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin            |
-    | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher |
-    | test_slug_public           | Test Public Page  | Test public body.  | Public           |
+    | slug                       | title             | html               | viewer_permissions |
+    | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin              |
+    | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher   |
+    | test_slug_public           | Test Public Page  | Test public body.  | Public             |
 
 Scenario: Admins can see everything
     Given I am on the BJC home page

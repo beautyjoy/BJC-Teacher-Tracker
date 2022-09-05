@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_01_235907) do
+ActiveRecord::Schema.define(version: 2022_09_05_210128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,15 +79,15 @@ ActiveRecord::Schema.define(version: 2022_09_01_235907) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "slug", null: false
+    t.string "url_slug", null: false
     t.string "title", null: false
-    t.string "permissions", null: false
+    t.string "viewer_permissions", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
     t.text "html"
-    t.index ["slug"], name: "index_pages_on_slug", unique: true
+    t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
   create_table "schools", id: :serial, force: :cascade do |t|

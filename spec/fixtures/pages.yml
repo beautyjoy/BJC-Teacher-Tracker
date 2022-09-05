@@ -2,32 +2,32 @@
 #
 # Table name: pages
 #
-#  id             :bigint           not null, primary key
-#  html           :text
-#  permissions    :string           not null
-#  slug           :string           not null
-#  title          :string           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  creator_id     :bigint           not null
-#  last_editor_id :bigint           not null
+#  id                 :bigint           not null, primary key
+#  html               :text
+#  title              :string           not null
+#  url_slug           :string           not null
+#  viewer_permissions :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  creator_id         :bigint           not null
+#  last_editor_id     :bigint           not null
 #
 # Indexes
 #
-#  index_pages_on_slug  (slug) UNIQUE
+#  index_pages_on_url_slug  (url_slug) UNIQUE
 #
 thepage:
-  slug: Test_slug
+  url_slug: Test_slug
   title: test_page
   html: <p>Content</p>
-  permissions: "Verified Teacher"
+  viewer_permissions: "Verified Teacher"
   creator_id: 0
   last_editor_id: 0
 
 validadminpage:
-  slug: test_slug_2
+  url_slug: test_slug_2
   title: Test Page Title 2
-  permissions: Admin
+  viewer_permissions: Admin
   html: <p>An admin page</p>
   creator_id: 0
   last_editor_id: 0

@@ -202,6 +202,6 @@ class TeachersController < ApplicationController
   end
 
   def load_pages
-    @pages ||= Page.where(permissions: Page.viewable_pages(current_user))
+    @pages ||= Page.where(viewer_permissions: Page.viewable_pages(current_user))
   end
 end
