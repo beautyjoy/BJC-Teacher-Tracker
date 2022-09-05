@@ -1,5 +1,6 @@
+
 <div class="form-group">
-  <%= f.label :name, "Search for your school", class: "label-required", for: "school_selectize" %>
+  <%= f.label :name, "Search for your school or add a new one", class: "label-required", for: "school_selectize" %>
   <%= f.select :name,
     options_for_select(@ordered_schools.collect(&:selectize_options)),
     {prompt: "Enter the name or city of your school"},
@@ -65,43 +66,6 @@
         { class: 'form-control', required: false, id: 'school_type' }
       ) %>
   </div>
-
-
-  <% if current_user&.admin? %>
-    <%= f.label :tags, "Tags" %>
-    <div class="form-group row">
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
-      <%= f.text_field :nces_id, placeholder: "000000000000",
-          class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
-    </div>
-  <% end %>
 </div>
 
 

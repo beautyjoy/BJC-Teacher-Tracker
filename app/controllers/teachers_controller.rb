@@ -15,6 +15,7 @@ class TeachersController < ApplicationController
 
   def index
     @all_teachers = Teacher.where(admin: false)
+    @admins = Teacher.where(admin: true)
   end
 
   def resend_welcome_email
@@ -25,6 +26,7 @@ class TeachersController < ApplicationController
   end
 
   def new
+    ordered_schools
     @teacher = Teacher.new
     @teacher.school = School.new
     @school = @teacher.school # maybe delegate this
@@ -165,9 +167,10 @@ class TeachersController < ApplicationController
   end
 
   def ordered_schools
-    if load_teacher
+    if params[:id]
+      load_teacher
       @ordered_schools ||= [ @teacher.school ] +
-        School.all.order(:name).reject { |s| s.id == @teacher.school.id }
+        School.all.order(:name).reject { |s| s.id == @teacher.school_id }
     else
       @ordered_schools ||= School.all.order(:name)
     end
