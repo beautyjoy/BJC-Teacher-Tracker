@@ -29,8 +29,25 @@
   </tbody>
 </table>
 
-<br/>
+<hr>
+<h2>Admin Users</h2>
+<table class="table table-striped js-dataTable">
+  <thead class="thead-dark">
+    <tr>
+      <%= render 'table_headers' %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admins.each do |admin| %>
+    <tr>
+      <%= render 'teacher', teacher: admin %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<hr>
+<br>
 <%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
   <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
   <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
