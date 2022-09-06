@@ -9,7 +9,6 @@ RSpec.describe PagesController, type: :controller do
     @pages_slug = "test_slug_1"
     @pages_title = "Test Page Title 1"
     @fail_flash_alert = /Failed to submit information :\(/
-    @slug_exists_flash_alert = "An error occurred! [\"URL Slug has already been taken\"]"
     @success_flash_alert = Regexp.new("Created #{@pages_title} page successfully.")
   end
 
@@ -147,7 +146,7 @@ RSpec.describe PagesController, type: :controller do
           user_id: 0
         }
       }
-      expect(flash[:alert]).to cotain @slug_exists_flash_alert
+      expect(flash[:alert]).to include "URL slug"
     end
   end
 

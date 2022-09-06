@@ -56,7 +56,7 @@ RSpec.describe Teacher, type: :model do
   end
 
   it "shows Unknown education level" do
-    expect(teacher.display_education_level).to eq "Unknown"
+    expect(teacher.display_education_level).to eq "?"
   end
 
   context "updating a record" do

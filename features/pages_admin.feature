@@ -109,7 +109,7 @@ Scenario: Can't create a page with a slug that already exists
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Create Test Title"
-    And I should see "Slug has already been taken"
+    And I should see "URL slug has already been taken"
 
 Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new pages page
@@ -126,7 +126,7 @@ Scenario: Attempting to create page with taken slug doesn't delete form input
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Create Test Title"
-    And I should see "Slug has already been taken"
+    And I should see "URL slug has already been taken"
     And the "page_title" field should contain "Test Title"
     And the "page_slug" field should contain "test_slug"
     And I should see "This is a test"
@@ -234,7 +234,7 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I fill in the page HTML content with "New page body."
     And I press "Update"
     Then I should see "Update New Title"
-    And I should see "Slug has already been taken"
+    And I should see "URL slug has already been taken"
     And the "page_title" field should contain "New Title"
     And the "page_slug" field should contain "test_slug"
     And I should see "New page body."
