@@ -32,7 +32,7 @@ Scenario: Pressing "New Page" button should take user to new page form
 Scenario: Successfully creating a new page redirects to that page
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
@@ -44,7 +44,7 @@ Scenario: Successfully creating a new page redirects to that page
 
 Scenario: Creating a page without a title fails
     Given I am on the new pages page
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then The "#new_page" form is invalid
@@ -61,7 +61,7 @@ Scenario: Creating a page without a slug fails
 Scenario: Creating a page without choosing permissions fails
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     Then The "#new_page" form is invalid
@@ -70,7 +70,7 @@ Scenario: Creating a page without choosing permissions fails
 Scenario: I create a new page and I can see it on the index page
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
@@ -82,14 +82,14 @@ Scenario: I create a new page and I can see it on the index page
 Scenario: Can create a new page with the same title as a page that already exists
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug_2"
+    And I fill in "page_url_slug" with "test_slug_2"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
@@ -98,14 +98,14 @@ Scenario: Can create a new page with the same title as a page that already exist
 Scenario: Can't create a page with a slug that already exists
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Create Test Title"
@@ -114,28 +114,28 @@ Scenario: Can't create a page with a slug that already exists
 Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "Don't see this"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     Then I should see "Create Test Title"
     And I should see "URL slug has already been taken"
     And the "page_title" field should contain "Test Title"
-    And the "page_slug" field should contain "test_slug"
+    And the "page_url_slug" field should contain "test_slug"
     And I should see "This is a test"
     And I should not see "Don't see this"
 
 Scenario: I can delete pages
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
@@ -146,19 +146,19 @@ Scenario: I can delete pages
 Scenario: Can create pages with any selection for permissions
     Given I am on the new pages page
     And I fill in "page_title" with "Admin Permissions"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "page_title" with "Verified Teacher Permissions"
-    And I fill in "page_slug" with "test_slug_2"
+    And I fill in "page_url_slug" with "test_slug_2"
     And I choose "inlineRadioTeacher"
     And I press "Submit"
     And I follow "Pages"
     And I press "New Page"
     And I fill in "page_title" with "Public Permissions"
-    And I fill in "page_slug" with "test_slug_3"
+    And I fill in "page_url_slug" with "test_slug_3"
     And I choose "inlineRadioPublic"
     And I press "Submit"
 
@@ -167,7 +167,7 @@ Scenario: Correctly store user's full name and create date.
     And I press "New Page"
     Then I should be on the new pages page
     And I fill in "page_title" with "Test page"
-    And I fill in "page_slug" with "Test"
+    And I fill in "page_url_slug" with "Test"
     And I fill in "HTML Content" with "Test Content"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
@@ -177,7 +177,7 @@ Scenario: Correctly store user's full name and create date.
 Scenario: Can edit pages with correct prefilled content in the form.
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
@@ -185,10 +185,10 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I press the edit button for "test_slug"
     Then I should be on the edit pages page for "test_slug"
     And the "page_title" field should contain "Test Title"
-    And the "page_slug" field should contain "test_slug"
+    And the "page_url_slug" field should contain "test_slug"
     And I should see "This is a test"
     Then I fill in "page_title" with "New Title"
-    And I fill in "page_slug" with "new_slug"
+    And I fill in "page_url_slug" with "new_slug"
     And I choose "inlineRadioPublic"
     And I fill in the page HTML content with "This is a test 2"
     And I press "Update"
@@ -201,7 +201,7 @@ Scenario: Can edit pages with correct prefilled content in the form.
 Scenario: Can update page even if no changes
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
@@ -216,13 +216,13 @@ Scenario: Can update page even if no changes
 Scenario: Attempting to update page with taken slug doesn't delete form input
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title 2"
-    And I fill in "page_slug" with "test_slug_2"
+    And I fill in "page_url_slug" with "test_slug_2"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
@@ -230,13 +230,13 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I press the edit button for "test_slug_2"
     Then I should be on the edit pages page for "test_slug_2"
     And I fill in "page_title" with "New Title"
-    And I fill in "page_slug" with "test_slug"
+    And I fill in "page_url_slug" with "test_slug"
     And I fill in the page HTML content with "New page body."
     And I press "Update"
     Then I should see "Update New Title"
     And I should see "URL slug has already been taken"
     And the "page_title" field should contain "New Title"
-    And the "page_slug" field should contain "test_slug"
+    And the "page_url_slug" field should contain "test_slug"
     And I should see "New page body."
 
 Scenario: Clicking radio button text selects that radio button
