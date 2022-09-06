@@ -122,7 +122,7 @@ end
 
 Then(/^(?:|I )should see hidden element "([^"]*)"$/) do |text|
   Capybara.ignore_hidden_elements = false
-  assert page.has_content?(text)
+  expect(page.html).to match(/#{text}/)
   Capybara.ignore_hidden_elements = true
 end
 
