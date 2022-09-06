@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_210128) do
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
-  create_table "teachers", force: :cascade do |t|
+  create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"

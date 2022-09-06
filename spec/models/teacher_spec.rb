@@ -4,7 +4,7 @@
 #
 # Table name: teachers
 #
-#  id                 :bigint           not null, primary key
+#  id                 :integer          not null, primary key
 #  admin              :boolean          default(FALSE)
 #  application_status :string           default("pending")
 #  education_level    :integer          default(NULL)
