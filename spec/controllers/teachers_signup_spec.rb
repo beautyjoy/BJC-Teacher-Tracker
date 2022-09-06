@@ -33,10 +33,8 @@ RSpec.describe TeachersController, type: :controller do
     post :create, {
         params: {
             school: {
-                name: "",
                 city: "Berkeley",
                 state: "CA",
-                website: "invalid.com"
             },
             teacher: {
                 first_name: "invalid",

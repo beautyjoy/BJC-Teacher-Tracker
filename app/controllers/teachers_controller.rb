@@ -49,12 +49,11 @@ class TeachersController < ApplicationController
     end
 
     load_school
-    if !@school
+    if @school.new_record?
       @school = School.new(school_params)
-      if !@school.save
+      unless @school.save
         flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
-        render "new"
-        return
+        render "new" && return
       end
     end
 
@@ -83,7 +82,7 @@ class TeachersController < ApplicationController
     load_teacher
     load_school
     ordered_schools
-    @school.update(school_params)
+    @school.update(school_params) if school_params
     @school.save!
     @teacher.assign_attributes(teacher_params)
     unless teacher_params[:school_id].present?
@@ -161,8 +160,8 @@ class TeachersController < ApplicationController
   end
 
   def load_school
-    if params[:school_id]
-      @school ||= School.find(params[:school_id])
+    if teacher_params[:school_id]
+      @school ||= School.find(teacher_params[:school_id])
     end
     @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
   end
@@ -173,6 +172,7 @@ class TeachersController < ApplicationController
   end
 
   def school_params
+    return unless params[:school]
     params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type)
   end
 
