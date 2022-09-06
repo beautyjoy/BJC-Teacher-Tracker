@@ -55,8 +55,8 @@
 
     <div class="row mt-5">
       <div class="col-sm-6">
-        <h5> School Name </h5>
-        <a href=<%= teacher.school.website %>><%= teacher.school.name %></a>
+        <h5>School</h5>
+        <%= link_to(teacher.school.name, school_path(teacher.school)) %>
       </div>
 
       <div class="col-sm-6">
