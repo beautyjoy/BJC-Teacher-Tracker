@@ -23,7 +23,7 @@ Scenario: Logging out as an admin
   And I follow "Log In"
   Then I can log in with Google
   And I follow "Logout"
-  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Request Access to BJC Teacher Materials"
   Then I should see "Log In"
 
 Scenario: Viewing all teachers as an admin
@@ -217,7 +217,7 @@ Scenario: Should be able to resend welcome email
   Given I follow "All Teachers"
   Then I should see "BJC Teachers"
   And I press "New Teacher"
-  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Request Access to BJC Teacher Materials"
 
   Scenario: Admin can access new school button at teacher index page
   Given I am on the BJC home page
