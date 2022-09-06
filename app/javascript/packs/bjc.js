@@ -10,7 +10,6 @@ w3.includeHTML = function(cb) {
   for (i = 0; i < z.length; i++) {
     elmnt = z[i];
     file = elmnt.getAttribute("w3-include-html");
-    console.log(file);
     if (file) {
       xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {

@@ -44,8 +44,16 @@ let create_school = function (input, callback) {
   });
 };
 
-$(".select").selectize({
+let $school_selector = $(".select").selectize({
   create: create_school,
   createOnBlur: true,
   highlight: true,
+});
+
+$school_selector.on('change', () => {
+  console.log('Selectize Change')
+  console.log("Before", $('#teacher_school_id').val())
+  let selectedSchool = JSON.parse($("#school_selectize").val());
+  $('#teacher_school_id').val(selectedSchool.id);
+  console.log("After", $('#teacher_school_id').val())
 });

@@ -32,7 +32,7 @@ w3.addStyle = function (sel, prop, val) {
 };
 w3.styleElements = function (elements, prop, val) {
   var i, l = elements.length;
-  for (i = 0; i < l; i++) {    
+  for (i = 0; i < l; i++) {
     w3.styleElement(elements[i], prop, val);
   }
 };
@@ -41,7 +41,7 @@ w3.styleElement = function (element, prop, val) {
 };
 w3.toggleShow = function (sel) {
   var i, x = w3.getElements(sel), l = x.length;
-  for (i = 0; i < l; i++) {    
+  for (i = 0; i < l; i++) {
     if (x[i].style.display == "none") {
       w3.styleElement(x[i], "display", "block");
     } else {
@@ -81,7 +81,7 @@ w3.removeClassElement = function (element, name) {
   arr2 = name.split(" ");
   for (i = 0; i < arr2.length; i++) {
     while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
     }
   }
   element.className = arr1.join(" ");
@@ -91,7 +91,7 @@ w3.toggleClass = function (sel, c1, c2) {
 };
 w3.toggleClassElements = function (elements, c1, c2) {
   var i, l = elements.length;
-  for (i = 0; i < l; i++) {    
+  for (i = 0; i < l; i++) {
     w3.toggleClassElement(elements[i], c1, c2);
   }
 };
@@ -119,9 +119,9 @@ w3.toggleClassElement = function (element, c1, c2) {
     }
     if (allPresent) {
       w3.removeClassElement(element, t1);
-      w3.addClassElement(element, t2);          
+      w3.addClassElement(element, t2);
     } else {
-      w3.removeClassElement(element, t2);        
+      w3.removeClassElement(element, t2);
       w3.addClassElement(element, t1);
     }
   }
@@ -244,7 +244,7 @@ w3.includeHTML = function(cb) {
           elmnt.removeAttribute("w3-include-html");
           w3.includeHTML(cb);
         }
-      }      
+      }
       xhttp.open("GET", file, true);
       xhttp.send();
       return;
@@ -295,7 +295,7 @@ w3.getElementsByAttribute = function (x, att) {
     if (y[i].getAttribute(z) !== null) {arrCount += 1; arr[arrCount] = y[i];}
   }
   return arr;
-};  
+};
 w3.dataObject = {},
 w3.displayObject = function (id, data) {
   var htmlObj, htmlTemplate, html, arr = [], a, l, rowClone, x, j, i, ii, cc, repeat, repeatObj, repeatX = "";

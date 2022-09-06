@@ -79,11 +79,12 @@ class TeachersController < ApplicationController
   def update
     load_school
     ordered_schools
-    @school.update(school_params) if school_params
-    @school.save!
     @teacher.assign_attributes(teacher_params)
-    unless teacher_params[:school_id].present?
+    if teacher_params[:school_id].present?
       @teacher.school = @school
+    else
+      @school.update(school_params) if school_params
+      @school.save!
     end
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
