@@ -23,11 +23,10 @@ class TeachersController < ApplicationController
     @admins = Teacher.where(admin: true)
   end
 
-  def resend_welcome_email
+  def show
     load_teacher
-    if @teacher.validated? || @is_admin
-      TeacherMailer.welcome_email(@teacher).deliver_now
-    end
+    @school = @teacher.school
+    @status = is_admin? ? "Admin" : "Teacher"
   end
 
   def new
@@ -36,14 +35,6 @@ class TeachersController < ApplicationController
     @teacher.school = School.new
     @school = @teacher.school # maybe delegate this
     @readonly = false
-  end
-
-  def import
-    csv_file = params[:file]
-    teacher_hash_array = SmarterCSV.process(csv_file)
-    csv_import_summary_hash = process_record(teacher_hash_array)
-    add_flash_message(csv_import_summary_hash)
-    redirect_to teachers_path
   end
 
   # TODO: This needs to be re-written.
@@ -88,17 +79,10 @@ class TeachersController < ApplicationController
     @readonly = !is_admin?
   end
 
-  def show
-    load_teacher
-    @school = @teacher.school
-    @status = is_admin? ? "Admin" : "Teacher"
-  end
-
   def update
     load_teacher
     ordered_schools
     @teacher.assign_attributes(teacher_params)
-    @school = @teacher.school
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
@@ -146,6 +130,21 @@ class TeachersController < ApplicationController
     end
   end
 
+  def resend_welcome_email
+    load_teacher
+    if @teacher.validated? || @is_admin
+      TeacherMailer.welcome_email(@teacher).deliver_now
+    end
+  end
+
+  def import
+    csv_file = params[:file]
+    teacher_hash_array = SmarterCSV.process(csv_file)
+    csv_import_summary_hash = process_record(teacher_hash_array)
+    add_flash_message(csv_import_summary_hash)
+    redirect_to teachers_path
+  end
+
   private
   def load_teacher
     @teacher ||= Teacher.find(params[:id])
@@ -168,7 +167,7 @@ class TeachersController < ApplicationController
   end
 
   def school_params
-    params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, { tags: [] }, :nces_id)
+    params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type)
   end
 
   def ordered_schools
