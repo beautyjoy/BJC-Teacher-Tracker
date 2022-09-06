@@ -31,10 +31,9 @@
       </tbody>
     </table>
     <% if @unvalidated_teachers.empty? %>
-
-    <div class="alert alert-success" role="alert">
-      <strong>No pending forms!</strong>
-    </div>
+      <div class="alert alert-success" role="alert">
+        <strong>No pending forms!</strong>
+      </div>
     <% end %>
 </div>
 
@@ -67,26 +66,24 @@
 
   <div class="col-6">
     <h2>School Statistics</h2>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-          <th scope="col">School </th>
-          <th scope="col">City, State </th>
-          <th scope="col">Count </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @schools.limit(20).each do |school| %>
-          <tr>
-            <td>
-              <%= link_to school.name, school.website, target: "_blank" %>
-            </td>
-            <td> <%= school.location %> </td>
-            <td> <%= school.num_validated_teachers %> </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+        <th scope="col">School</th>
+        <th scope="col">Location</th>
+        <th scope="col">Teachers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @schools.limit(20).each do |school| %>
+        <tr>
+          <td><%= link_to(school.name, school_path(school)) %></td>
+          <td><%= school.location %></td>
+          <td><%= school.teachers_count %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
 
