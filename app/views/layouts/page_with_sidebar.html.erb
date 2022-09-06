@@ -23,14 +23,14 @@
       </div>
 
       <div class="col-10">
+        <%= render 'layouts/flash' %>
         <div class="container">
-          <div class="page-title row">
+          <div class="row">
             <div class="col-9">
               <%- if content_for?(:h1) %>
                 <h1><%= yield(:h1) %></h1>
               <%- end %>
             </div>
-
             <div class="col-3">
               <%- if content_for?(:header_button) %>
                 <%- if logged_in? && current_user.admin? %>
@@ -40,7 +40,6 @@
             </div>
           </div>
           <main class="row">
-            <%= render 'layouts/flash' %>
             <div class="full col-12"><%= yield %></div>
           </main>
         </div>

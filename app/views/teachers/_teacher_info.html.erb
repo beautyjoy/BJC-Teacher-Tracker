@@ -7,7 +7,8 @@
         </h3>
       </div>
       <div class="col-sm-4 text-right">
-        <%= link_to "Edit Information", edit_teacher_path(teacher), :class=>"btn btn-primary" %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary" %>
+        <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
       </div>
     </div>
   </div>

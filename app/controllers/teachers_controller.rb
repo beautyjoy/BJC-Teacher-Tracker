@@ -8,9 +8,10 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
+  before_action :load_teacher, except: [:new, :index, :create, :import]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :delete, :index, :show]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -24,7 +25,6 @@ class TeachersController < ApplicationController
   end
 
   def show
-    load_teacher
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end
@@ -70,7 +70,6 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    load_teacher
     ordered_schools
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
@@ -78,7 +77,6 @@ class TeachersController < ApplicationController
   end
 
   def update
-    load_teacher
     load_school
     ordered_schools
     @school.update(school_params) if school_params
@@ -103,7 +101,6 @@ class TeachersController < ApplicationController
   end
 
   def validate
-    load_teacher
     @teacher.validated!
     @teacher.school.num_validated_teachers += 1
     @teacher.school.save!
@@ -112,7 +109,6 @@ class TeachersController < ApplicationController
   end
 
   def deny
-    load_teacher
     @teacher.denied!
     if !params[:skip_email].present?
       TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
@@ -120,17 +116,13 @@ class TeachersController < ApplicationController
     redirect_to root_path
   end
 
-  def delete
-    unless is_admin?
-      redirect_to root_path, alert: "Only administrators can delete!"
-    else
-      Teacher.delete(params[:id])
-      redirect_to root_path
-    end
+  def destroy
+    @teacher.destroy!
+    flash[:info] = "Deleted #{@teacher.full_name} successfully."
+    redirect_to teachers_path
   end
 
   def resend_welcome_email
-    load_teacher
     if @teacher.validated? || @is_admin
       TeacherMailer.welcome_email(@teacher).deliver_now
     end

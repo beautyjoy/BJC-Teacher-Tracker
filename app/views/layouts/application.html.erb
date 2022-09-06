@@ -16,6 +16,7 @@
 
   <div class="container-fluid">
     <main>
+      <%= render 'layouts/flash' %>
       <div class="page-title row">
           <div class="col-9">
             <%- if content_for?(:h1) %>
@@ -31,7 +32,6 @@
             <%- end %>
         </div>
       </div>
-      <%= render 'layouts/flash' %>
       <div class="row">
         <div class="col-12">
           <%= yield %>
