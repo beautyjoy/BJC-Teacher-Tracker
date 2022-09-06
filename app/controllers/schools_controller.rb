@@ -17,13 +17,19 @@ class SchoolsController < ApplicationController
   end
 
   def create
-    @school = School.new(school_params)
+    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    if @school
+      @school.assign_attributes(school_params)
+    else
+      @school = School.new(school_params)
+    end
     load_ordered_schools
     if @school.save
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      render "new", alert: "Failed to submit information :("
+      flash[:alert] = "Failed to submit information :("
+      render "new"
     end
   end
 

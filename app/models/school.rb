@@ -27,7 +27,7 @@
 #
 require "uri"
 class School < ApplicationRecord
-  validates :name, :city, :state, :website, presence: true
+  validates :name, :city, :state, :website, :school_type, :grade_level, presence: true
   before_save :grab_lat_lng
 
   has_many :teachers
