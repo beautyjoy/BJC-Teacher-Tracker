@@ -6,8 +6,8 @@ FactoryBot.define do
     name { "Basic School" }
     city { "Berkeley" }
     state { "CA" }
-    grade_level { "University" }
-    school_type { "Public" }
+    grade_level { 4 }
+    school_type { 0 }
     website { "https://www.school.edu" }
   end
 

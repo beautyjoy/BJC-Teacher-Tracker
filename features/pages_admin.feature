@@ -25,7 +25,8 @@ Scenario: Pressing "New Page" button should take user to new page form
     And I press "New Page"
     Then I should be on the new pages page
     And I should see "Title"
-    And I should see "Slug"
+    And I should see "Permissions"
+    And I should see "URL slug"
     And I should see "HTML Content"
     And I should see "All Pages"
 
