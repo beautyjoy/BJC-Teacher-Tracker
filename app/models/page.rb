@@ -35,7 +35,7 @@ class Page < ApplicationRecord
   end
 
   def validate_permissions
-    if !["Admin", "Verified Teacher", "Public"].include?(permissions)
+    if !["Admin", "Verified Teacher", "Public"].include?(viewer_permissions)
       errors.add :base, "That permissions is not valid"
     end
   end
