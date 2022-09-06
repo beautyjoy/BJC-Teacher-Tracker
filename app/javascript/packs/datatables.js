@@ -2,7 +2,6 @@ $(function() {
   // Filtering for the Admin Teachers Index
   $.fn.dataTable.ext.search.push((_, searchData) => {
     let enabled = $('input:checkbox[name="statusFilter"]:checked').map((_i, el) => el.value).get();
-    console.log(enabled)
     // Include all rows when no checkboxes are selected.
     return enabled.length === 0 || enabled.includes(searchData[6]);
   });
