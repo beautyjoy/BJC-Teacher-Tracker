@@ -128,7 +128,7 @@ class Teacher < ApplicationRecord
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
-      "Unknown"
+      "?"
     else
       education_level.to_s.titlecase
     end
@@ -145,7 +145,15 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    Teacher.application_statuses[application_status]
+    application_status.titlecase
+  end
+
+  def short_application_status
+    {
+      validated: "✔️",
+      denied: "🚫",
+      pending: "P"
+    }[application_status.to_sym]
   end
 
   def self.user_from_omniauth(auth)

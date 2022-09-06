@@ -4,13 +4,15 @@
 </td>
 <td><%= teacher.email %></td>
 <td><%= teacher.display_education_level %></td>
-<td><%= truncate(teacher.display_status, length: 50) %></td>
+<td><%= truncate(teacher.display_status, length: 25) %></td>
 <td><%= snap_link(teacher) %></td>
 <td>
   <%= link_to(teacher.school.name, teacher.school.website, target: '_blank') %>
   <%= teacher.school.location %>
 </td>
-<td><%= teacher.display_application_status %></td>
+<td data-search="<%= teacher.application_status %>">
+  <%= teacher.short_application_status %>
+</td>
 <td data-sort="<%= teacher.created_at %>">
-  <%= teacher.created_at.strftime("%b %d, %Y") %>
+  <%= teacher.created_at.strftime("%m/%d/%Y") %>
 </td>

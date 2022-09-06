@@ -11,9 +11,9 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_callback
-    access_token = request.env["omniauth.auth"]
-    if Teacher.validate_access_token(access_token)
-      user = Teacher.user_from_omniauth(access_token)
+    auth_info = request.env["omniauth.auth"]
+    if Teacher.validate_access_token(auth_info)
+      user = Teacher.user_from_omniauth(auth_info)
       user.last_session_at = Time.zone.now
       user.save!
       log_in(user)
