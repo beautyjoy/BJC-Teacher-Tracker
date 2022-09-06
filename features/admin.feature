@@ -97,8 +97,8 @@ Scenario: Edit teacher info as an admin
 
 Scenario: Deny teacher as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -106,12 +106,12 @@ Scenario: Deny teacher as an admin
   Given I have an admin email
   When  I follow "Log In"
   Then  I can log in with Google
-  And   I press "❌"
+  And   I press "❌" within "//table//tbody//tr[2]"
   Then  I should see "Reason for Denial"
   And   I should see "Deny Joseph Mamoa"
   And   I fill in "reason" with "Test"
   And   I press "Cancel"
-  And   I press "❌"
+  And   I press "❌" within "//table//tbody//tr[2]"
   Then  the "reason" field should not contain "Test"
   And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
@@ -119,8 +119,8 @@ Scenario: Deny teacher as an admin
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -129,8 +129,8 @@ Scenario: Not logged in should not have access to edit
 
 Scenario: Filter all teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name  | admin | email                     | school      | application_status |
   | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
@@ -152,8 +152,8 @@ Scenario: Filter all teacher info as an admin
 
 Scenario: View teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |

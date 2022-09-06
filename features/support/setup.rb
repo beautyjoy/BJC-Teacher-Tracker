@@ -35,8 +35,6 @@ Before do
 end
 
 RSpec.configure do |config|
-  # This app has both Rails 5 and rspec tests.
-  # They share the same fixtures.
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

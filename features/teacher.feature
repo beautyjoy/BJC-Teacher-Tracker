@@ -110,9 +110,12 @@ Scenario: Logged in teacher can fill a new form with their info
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
   And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
-  And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "State"
-  And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I fill in the following:
+  | City           | Cupertino             |
+  | State          | CA                    |
+  | School Website | https://chs.fuhsd.org |
+  | Grade Level    | High School           |
+  | School Type    | Public                |
   And   I press "Submit"
   Then  I see a confirmation "Successfully updated your information"
   And   I am on the edit page for Joe Mamoa

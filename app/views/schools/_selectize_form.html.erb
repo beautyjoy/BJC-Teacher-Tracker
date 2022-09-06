@@ -71,13 +71,8 @@
 
 <script>
   $('#school_form').hide();
-
   function autofillSchoolFields() {
-    var selectedSchool = JSON.parse($("#school_selectize").val());
-
-    ['name', 'city', 'state', 'website'].forEach(attr => {
-      $(`#school_${attr}`).val(selectedSchool[attr]);
-    });
+    let selectedSchool = JSON.parse($("#school_selectize").val());
     $('#teacher_school_id').val(selectedSchool.id);
   }
 </script>

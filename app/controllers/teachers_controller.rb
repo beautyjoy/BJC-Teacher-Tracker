@@ -81,16 +81,22 @@ class TeachersController < ApplicationController
 
   def update
     load_teacher
+    load_school
     ordered_schools
+    @school.update(school_params)
+    @school.save!
     @teacher.assign_attributes(teacher_params)
+    unless teacher_params[:school_id].present?
+      @teacher.school = @school
+    end
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
+    @teacher.save!
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
     end
-    @teacher.save!
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
@@ -158,7 +164,7 @@ class TeachersController < ApplicationController
     if params[:school_id]
       @school ||= School.find(params[:school_id])
     end
-    @school ||= School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
   end
 
   def teacher_params

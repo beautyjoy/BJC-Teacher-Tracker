@@ -83,8 +83,12 @@ end
 # based on naming conventions.
 #
 When(/^(?:|I )fill in the following:$/) do |fields|
-  fields.rows_hash.each do |name, value|
-    When %{I fill in "#{name}" with "#{value}"}
+  fields.rows_hash.each do |field, value|
+    if ["State", "Grade Level", "School Type"].include?(field)
+      select(value, from: field)
+    else
+      fill_in(field, with: value)
+    end
   end
 end
 
@@ -118,11 +122,7 @@ end
 
 Then(/^(?:|I )should see hidden element "([^"]*)"$/) do |text|
   Capybara.ignore_hidden_elements = false
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  assert page.has_content?(text)
   Capybara.ignore_hidden_elements = true
 end
 
