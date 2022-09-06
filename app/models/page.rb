@@ -28,7 +28,7 @@ class Page < ApplicationRecord
   belongs_to :last_editor, class_name: "Teacher"
   belongs_to :creator, class_name: "Teacher"
 
-  # TODO: convert :viewer_permissions to an enum
+  default_scope { order(title: :asc) }
 
   def to_param
     self.url_slug
