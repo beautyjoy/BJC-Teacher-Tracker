@@ -35,6 +35,6 @@ stanfurd:
   city: Palo Alto
   state: CA
   website: 'https://stanford.edu'
-  num_validated_teachers: 1
+  teachers_count: 1
   grade_level: 4
   school_type: 1

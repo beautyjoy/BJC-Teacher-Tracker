@@ -21,6 +21,6 @@ class MainController < ApplicationController
     @unvalidated_teachers = Teacher.unvalidated.order(:created_at) || []
     @validated_teachers = Teacher.validated.order(:created_at) || []
     @statuses = Teacher.validated.group(:status).count
-    @schools = School.validated.order(num_validated_teachers: :desc)
+    @schools = School.validated.order(teachers_count: :desc)
   end
 end

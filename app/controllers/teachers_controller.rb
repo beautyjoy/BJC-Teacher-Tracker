@@ -102,7 +102,6 @@ class TeachersController < ApplicationController
 
   def validate
     @teacher.validated!
-    @teacher.school.num_validated_teachers += 1
     @teacher.school.save!
     TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
