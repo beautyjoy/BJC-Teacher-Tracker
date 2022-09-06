@@ -2,9 +2,9 @@
 
 <%= render 'teacher_info', teacher: @teacher %>
 
+<hr>
 <div class='row'>
   <div class='col-12'>
-    <hr>
     <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id },
         class: "btn btn-secondary" %>
   </div>
