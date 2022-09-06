@@ -106,12 +106,12 @@ Scenario: Deny teacher as an admin
   Given I have an admin email
   When  I follow "Log In"
   Then  I can log in with Google
-  And   I press "❌" within "//table//tbody//tr[2]"
+  And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
   Then  I should see "Reason for Denial"
   And   I should see "Deny Joseph Mamoa"
   And   I fill in "reason" with "Test"
   And   I press "Cancel"
-  And   I press "❌" within "//table//tbody//tr[2]"
+  And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
   Then  the "reason" field should not contain "Test"
   And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
@@ -142,6 +142,7 @@ Scenario: Filter all teacher info as an admin
   Then  I can log in with Google
   When  I go to the teachers page
   And   I check "Pending"
+  And   I uncheck "Validated"
   Then  I should see "Peter"
   Then  I should not see "Victor"
   Then  I should not see "Danny"
