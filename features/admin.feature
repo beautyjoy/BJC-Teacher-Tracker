@@ -233,54 +233,54 @@ Scenario: Should be able to resend welcome email
   And I press "New School"
   Then I should see "Add a School"
 
-Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
-  Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
-  Given I am on the BJC home page
-  Given I have an admin email
-  And I follow "Log In"
-  Then I can log in with Google
-  And I should see "BJC Teacher Dashboard"
-  Given I follow "All Teachers"
-  And I uncheck "Validated"
-  And I press "Upload CSV"
-  Then The "#hidden_file_select_input" form is invalid
-  Then I attach the csv "features/test_utils/test_teacher_first.csv"
-  Then I should see "ank sha"
-  Then I should not see "Steve Gao"
-  Then I should not see "Haha He"
-  Then I should see "Wuho He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "1 schools has been created"
-  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
-  Then I follow "All Schools"
-  Then I should see "uci"
-  Then I follow "All Teachers"
-  Then I attach the csv "features/test_utils/test_teacher_second.csv"
-  Then I should see "anke sha"
-  Then I should see "Steve He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
+# Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
+#  Given the following schools exist:
+#  |       name      |     city     |  state  |            website            |
+#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  Given I am on the BJC home page
+#  Given I have an admin email
+#  And I follow "Log In"
+#  Then I can log in with Google
+#  And I should see "BJC Teacher Dashboard"
+#  Given I follow "All Teachers"
+#  And I uncheck "Validated"
+#  And I press "Upload CSV"
+#  Then The "#hidden_file_select_input" form is invalid
+#  Then I attach the csv "features/test_utils/test_teacher_first.csv"
+#  Then I should see "ank sha"
+#  Then I should not see "Steve Gao"
+#  Then I should not see "Haha He"
+#  Then I should see "Wuho He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "1 schools has been created"
+#  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+#  Then I follow "All Schools"
+#  Then I should see "uci"
+#  Then I follow "All Teachers"
+#  Then I attach the csv "features/test_utils/test_teacher_second.csv"
+#  Then I should see "anke sha"
+#  Then I should see "Steve He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
 
-Scenario: Importing with new schools model fields works
-  Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
-  Given I am on the BJC home page
-  Given I have an admin email
-  And I follow "Log In"
-  Then I can log in with Google
-  And I should see "BJC Teacher Dashboard"
-  Given I follow "All Teachers"
-  And I uncheck "Validated"
-  And I press "Upload CSV"
-  Then The "#hidden_file_select_input" form is invalid
-  Then I attach the csv "features/test_utils/test_teacher_third.csv"
-  Then I should see "ank sha"
-  Then I should not see "Steve Gao"
-  Then I should not see "Haha He"
-  Then I should see "Wuho He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "1 schools has been created"
-  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+# Scenario: Importing with new schools model fields works
+#  Given the following schools exist:
+#  |       name      |     city     |  state  |            website            |
+#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  Given I am on the BJC home page
+#  Given I have an admin email
+#  And I follow "Log In"
+#  Then I can log in with Google
+#  And I should see "BJC Teacher Dashboard"
+#  Given I follow "All Teachers"
+#  And I uncheck "Validated"
+#  And I press "Upload CSV"
+#  Then The "#hidden_file_select_input" form is invalid
+#  Then I attach the csv "features/test_utils/test_teacher_third.csv"
+#  Then I should see "ank sha"
+#  Then I should not see "Steve Gao"
+#  Then I should not see "Haha He"
+#  Then I should see "Wuho He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "1 schools has been created"
+#  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"

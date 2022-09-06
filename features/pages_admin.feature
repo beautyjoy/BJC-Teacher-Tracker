@@ -42,7 +42,6 @@ Scenario: Successfully creating a new page redirects to that page
     And I should see "All Pages"
     And I should see a nav link "Test Title"
 
-
 Scenario: Creating a page without a title fails
     Given I am on the new pages page
     And I fill in "page_url_slug" with "test_slug"
