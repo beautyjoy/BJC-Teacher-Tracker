@@ -71,12 +71,13 @@
         class: "form-control" %>
     </div>
   </div>
+  <%= f.hidden_field :school_id %>
 </div>
 
 <div class='form-group form-input-group'>
   <%= form_with model: @teacher.school, local: true do |school| %>
     <h2>Your School</h2>
-    <%= render 'schools/form', f: school %>
+    <%= render 'schools/selectize_form', f: school %>
     <%# NO END HERE -- NOTE BELOW %>
 </div>
 
@@ -89,12 +90,12 @@
   function requireVolunteerHostTeacher() {
     var status_val = $( "#teacher_status" ).val();
 
-    if(status_val == 3) {
+    if (status_val == 3) {
       $(".row:nth-child(7) label").prop('class', "label-required")
       $("#teacher_more_info").prop('required', true);
       $("#teacher_more_info").prop('placeholder', "Please type the name of your host teacher here (Required)");
     }
-    else if(status_val != 3) {
+    else if (status_val != 3) {
       $(".row:nth-child(7) label").prop('class', "")
       $("#teacher_more_info").prop('required', false);
       $("#teacher_more_info").prop('placeholder', "ex. I'm teaching a college course");

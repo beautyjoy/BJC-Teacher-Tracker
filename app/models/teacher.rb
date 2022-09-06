@@ -4,31 +4,21 @@
 #
 # Table name: teachers
 #
-#  id                                :bigint           not null, primary key
-#  admin                             :boolean          default(FALSE)
-#  application_status                :string           default("pending")
-#  clever_refresh_token              :string
-#  clever_token                      :string
-#  education_level                   :integer          default(NULL)
-#  email                             :string
-#  encrypted_google_refresh_token    :string
-#  encrypted_google_refresh_token_iv :string
-#  encrypted_google_token            :string
-#  encrypted_google_token_iv         :string
-#  first_name                        :string
-#  last_name                         :string
-#  last_session_at                   :datetime
-#  microsoft_refresh_token           :string
-#  microsoft_token                   :string
-#  more_info                         :string
-#  personal_website                  :string
-#  snap                              :string
-#  snap_refresh_token                :string
-#  snap_token                        :string
-#  status                            :integer
-#  created_at                        :datetime
-#  updated_at                        :datetime
-#  school_id                         :integer
+#  id                 :integer          not null, primary key
+#  admin              :boolean          default(FALSE)
+#  application_status :string           default("pending")
+#  education_level    :integer          default(NULL)
+#  email              :string
+#  first_name         :string
+#  last_name          :string
+#  last_session_at    :datetime
+#  more_info          :string
+#  personal_website   :string
+#  snap               :string
+#  status             :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  school_id          :integer
 #
 # Indexes
 #
@@ -89,10 +79,6 @@ class Teacher < ApplicationRecord
     "I am teaching Middle School BJC.",
   ].freeze
 
-  attr_encrypted_options[:key] = Figaro.env.attr_encrypted_key!
-  attr_encrypted :google_token
-  attr_encrypted :google_refresh_token
-
   before_update :reset_validation_status
   after_commit :update_school_counts
 
@@ -142,7 +128,7 @@ class Teacher < ApplicationRecord
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
-      "Unknown"
+      "?"
     else
       education_level.to_s.titlecase
     end
@@ -159,7 +145,15 @@ class Teacher < ApplicationRecord
   end
 
   def display_application_status
-    Teacher.application_statuses[application_status]
+    application_status.titlecase
+  end
+
+  def short_application_status
+    {
+      validated: "✔️",
+      denied: "🚫",
+      pending: "P"
+    }[application_status.to_sym]
   end
 
   def self.user_from_omniauth(auth)

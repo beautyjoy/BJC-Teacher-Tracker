@@ -24,7 +24,6 @@ jobs:
       TZ: America/Los_Angeles
       RAILS_ENV: test
       RUBY_ENV: test
-      attr_encrypted_key: '12345678912345678912345678912345'
       DISPLAY: ':99' # For chromedriver
       CCTR: ./cc-test-reporter
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}

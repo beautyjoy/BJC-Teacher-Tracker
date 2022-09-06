@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_083329) do
+ActiveRecord::Schema.define(version: 2022_09_05_210128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 2022_08_18_083329) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "dynamic_pages", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.string "permissions", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "creator_id", null: false
+    t.bigint "last_editor", null: false
+    t.text "html"
+    t.index ["slug"], name: "index_dynamic_pages_on_slug", unique: true
+  end
+
   create_table "email_templates", force: :cascade do |t|
     t.text "body"
     t.string "path"
@@ -67,28 +79,26 @@ ActiveRecord::Schema.define(version: 2022_08_18_083329) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "slug", null: false
+    t.string "url_slug", null: false
     t.string "title", null: false
-    t.string "permissions", null: false
+    t.string "viewer_permissions", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
-    t.bigint "teachers_id"
     t.text "html"
-    t.index ["slug"], name: "index_pages_on_slug", unique: true
-    t.index ["teachers_id"], name: "index_pages_on_teachers_id"
+    t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
-  create_table "schools", force: :cascade do |t|
+  create_table "schools", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.string "state"
     t.string "website"
     t.float "lat"
     t.float "lng"
-    t.integer "num_validated_teachers", default: 0
     t.integer "teachers_count", default: 0
+    t.integer "num_validated_teachers", default: 0
     t.datetime "created_at", default: -> { "now()" }
     t.datetime "updated_at", default: -> { "now()" }
     t.integer "num_denied_teachers", default: 0
@@ -99,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_08_18_083329) do
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
-  create_table "teachers", force: :cascade do |t|
+  create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -110,19 +120,9 @@ ActiveRecord::Schema.define(version: 2022_08_18_083329) do
     t.integer "status"
     t.string "more_info"
     t.boolean "admin", default: false
-    t.string "encrypted_google_token"
-    t.string "encrypted_google_token_iv"
-    t.string "encrypted_google_refresh_token"
-    t.string "encrypted_google_refresh_token_iv"
     t.string "personal_website"
     t.integer "education_level", default: -1
     t.string "application_status", default: "Pending"
-    t.string "microsoft_token"
-    t.string "microsoft_refresh_token"
-    t.string "snap_token"
-    t.string "snap_refresh_token"
-    t.string "clever_token"
-    t.string "clever_refresh_token"
     t.datetime "last_session_at"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email"], name: "index_teachers_on_email", unique: true
@@ -133,5 +133,4 @@ ActiveRecord::Schema.define(version: 2022_08_18_083329) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "pages", "teachers", column: "teachers_id"
 end

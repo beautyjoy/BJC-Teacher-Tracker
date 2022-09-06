@@ -43,8 +43,10 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # This app has both Rails 5 and rspec tests.
-  # They share the same fixtures.
+  config.before(:suite) do
+    Rails.application.load_seed # loading seeds
+  end
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -75,15 +77,14 @@ end
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: "google_oauth2",
-    uid: "123456789",
-    info: {
-      name: "Tony Stark",
-      email: "tony@stark.com"
-    },
-    credentials: {
-      token: "token",
-      refresh_token: "refresh token"
-    }
+  provider: "google_oauth2",
+  uid: "123456789",
+  info: {
+    name: "Tony Stark",
+    email: "tony@stark.com"
+  },
+  credentials: {
+    token: "token",
+    refresh_token: "refresh token"
   }
-                                                                  )
+  })

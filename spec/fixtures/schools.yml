@@ -2,7 +2,7 @@
 #
 # Table name: schools
 #
-#  id                     :bigint           not null, primary key
+#  id                     :integer          not null, primary key
 #  city                   :string
 #  grade_level            :integer
 #  lat                    :float
@@ -29,6 +29,8 @@ berkeley:
   city: Berkeley
   state: CA
   website: 'https://berkeley.edu'
+  grade_level: 4
+  school_type: 0
 
 stanfurd:
   name: $tanfurd
@@ -36,3 +38,5 @@ stanfurd:
   state: CA
   website: 'https://stanford.edu'
   num_validated_teachers: 1
+  grade_level: 4
+  school_type: 1

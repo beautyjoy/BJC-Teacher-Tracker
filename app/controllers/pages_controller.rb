@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
     if @page.save
       flash[:success] = "Created #{@page.title} page successfully."
-      redirect_to action: "show", slug: @page.slug
+      redirect_to action: "show", url_slug: @page.url_slug
     else
       flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
       render "edit"
@@ -57,16 +57,16 @@ class PagesController < ApplicationController
 
   private
   def load_page
-    @pages ||= Page.where(permissions: Page.viewable_pages(current_user))
+    @pages ||= Page.where(viewer_permissions: Page.viewable_pages(current_user))
     if params[:id]
       @page ||= Page.find_by(id: params[:id])
-    elsif params[:slug]
-      @page ||= Page.find_by(slug: params[:slug])
+    elsif params[:url_slug]
+      @page ||= Page.find_by(url_slug: params[:url_slug])
     end
   end
 
   def page_params
-    params.require(:page).permit(:slug, :html, :title, :permissions)
+    params.require(:page).permit(:url_slug, :html, :title, :viewer_permissions)
   end
 
   # def liquid_assigns

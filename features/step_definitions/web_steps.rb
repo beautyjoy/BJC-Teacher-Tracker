@@ -33,15 +33,6 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-# Single-line step scoper
-When(/^(.*) within (.*[^:])$/) do |step, parent|
-  with_scope(parent) { When step }
-end
-
-# Multi-line step scoper
-When(/^(.*) within (.*[^:]):$/) do |step, parent, table_or_string|
-  with_scope(parent) { When "#{step}:", table_or_string }
-end
 
 Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
@@ -51,8 +42,10 @@ When(/^(?:|I )go to (.+)$/) do |page_name|
   visit path_to(page_name)
 end
 
-When(/^(?:|I )press "([^"]*)"$/) do |button|
-  click_button(button)
+When(/^(?:|I )press "([^"]*)"(?: within (.*[^:]))?$/) do |button, scope|
+  with_scope(scope || '"html"') do
+    click_button(button)
+  end
 end
 
 When(/^(?:|I )follow "([^"]*)"$/) do |link|
@@ -83,8 +76,12 @@ end
 # based on naming conventions.
 #
 When(/^(?:|I )fill in the following:$/) do |fields|
-  fields.rows_hash.each do |name, value|
-    When %{I fill in "#{name}" with "#{value}"}
+  fields.rows_hash.each do |field, value|
+    if ["State", "Grade Level", "School Type"].include?(field)
+      select(value, from: field)
+    else
+      fill_in(field, with: value)
+    end
   end
 end
 
@@ -118,11 +115,7 @@ end
 
 Then(/^(?:|I )should see hidden element "([^"]*)"$/) do |text|
   Capybara.ignore_hidden_elements = false
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  expect(page.html).to match(/#{text}/)
   Capybara.ignore_hidden_elements = true
 end
 
@@ -271,6 +264,10 @@ end
 
 Given(/I seed data/) do
   Rails.application.load_seed
+  ActiveRecord::FixtureSet.reset_cache
+  fixtures_folder = File.join(Rails.root, "spec", "fixtures")
+  fixtures = Dir[File.join(fixtures_folder, "*.yml")].map { |f| File.basename(f, ".yml") }
+  ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
 end
 
 Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |value, field, selector|

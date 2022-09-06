@@ -14,10 +14,9 @@
 <body>
   <%= render 'layouts/navbar' %>
 
-  <div class="container">
+  <div class="container-fluid">
     <main>
-      <div class="page-title">
-        <div class="row">
+      <div class="page-title row">
           <div class="col-9">
             <%- if content_for?(:h1) %>
               <h1><%= yield(:h1) %></h1>
@@ -30,11 +29,14 @@
                 <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
               <%- end %>
             <%- end %>
-          </div>
         </div>
       </div>
       <%= render 'layouts/flash' %>
-      <%= yield %>
+      <div class="row">
+        <div class="col-12">
+          <%= yield %>
+        </div>
+      </div>
     </main>
   </div>
 

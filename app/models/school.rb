@@ -4,7 +4,7 @@
 #
 # Table name: schools
 #
-#  id                     :bigint           not null, primary key
+#  id                     :integer          not null, primary key
 #  city                   :string
 #  grade_level            :integer
 #  lat                    :float
@@ -27,7 +27,7 @@
 #
 require "uri"
 class School < ApplicationRecord
-  validates :name, :city, :state, :website, presence: true
+  validates :name, :city, :state, :website, :school_type, :grade_level, presence: true
   before_save :grab_lat_lng
 
   has_many :teachers
@@ -88,7 +88,7 @@ class School < ApplicationRecord
   end
 
   def selectize_options
-    { name: name, city: city, state: state, website: website }
+    [name, to_json(only: [:id, :name, :city, :state, :website]) ]
   end
 
   private

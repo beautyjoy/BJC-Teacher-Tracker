@@ -4,29 +4,23 @@
 #
 # Table name: pages
 #
-#  id             :bigint           not null, primary key
-#  html           :text
-#  permissions    :string           not null
-#  slug           :string           not null
-#  title          :string           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  creator_id     :bigint           not null
-#  last_editor_id :bigint           not null
-#  teachers_id    :bigint
+#  id                 :bigint           not null, primary key
+#  html               :text
+#  title              :string           not null
+#  url_slug           :string           not null
+#  viewer_permissions :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  creator_id         :bigint           not null
+#  last_editor_id     :bigint           not null
 #
 # Indexes
 #
-#  index_pages_on_slug         (slug) UNIQUE
-#  index_pages_on_teachers_id  (teachers_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (teachers_id => teachers.id)
+#  index_pages_on_url_slug  (url_slug) UNIQUE
 #
 class Page < ApplicationRecord
-  validates :slug, uniqueness: true
-  validates :last_editor, :permissions, :slug, :title, :html, :creator_id, presence: true
+  validates :url_slug, uniqueness: true
+  validates :last_editor, :viewer_permissions, :url_slug, :title, :html, :creator_id, presence: true
   validate :validate_permissions
 
   before_save :fix_bjc_r_links
@@ -34,12 +28,14 @@ class Page < ApplicationRecord
   belongs_to :last_editor, class_name: "Teacher"
   belongs_to :creator, class_name: "Teacher"
 
+  # TODO: convert :viewer_permissions to an enum
+
   def to_param
-    self.slug
+    self.url_slug
   end
 
   def validate_permissions
-    if !["Admin", "Verified Teacher", "Public"].include?(permissions)
+    if !["Admin", "Verified Teacher", "Public"].include?(viewer_permissions)
       errors.add :base, "That permissions is not valid"
     end
   end
@@ -63,10 +59,10 @@ class Page < ApplicationRecord
   end
 
   def admin_permissions?
-    permissions == "Admin"
+    viewer_permissions == "Admin"
   end
 
   def verified_teacher_permissions?
-    permissions == "Verified Teacher"
+    viewer_permissions == "Verified Teacher"
   end
 end

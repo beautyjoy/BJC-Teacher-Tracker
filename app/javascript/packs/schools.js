@@ -2,7 +2,7 @@ import "../styles/selectize.scss";
 
 // TODO: figure out why this needs to be here.
 require("turbolinks");
-require("selectize");
+window.Selectize = require("selectize");
 require("bootstrap");
 require("jquery");
 
@@ -21,21 +21,24 @@ $("#new_school").on("submit", function (e) {
 
 let create_school = function (input, callback) {
   var selectizeCallback = callback;
-  window.Selectize = require("selectize");
   $("#school_form").show();
   $("#school_name").prop("required", true);
   $("#school_city").prop("required", true);
   $("#school_state").prop("required", true);
   $("#school_website").prop("required", true);
   $(".btn-primary").show();
-  var form = $("#close_button");
+  let oringial_school_id = $('#teacher_school_id').val();
+  var reset_button = $("#close_button");
   var name_input = $("#school_name");
+  // Unset the existing saved school id.
+  $('#teacher_school_id').val('');
   name_input.val(input);
-  form.on("click", (_event) => {
+  reset_button.on("click", (_event) => {
     if (selectizeCallback != null) {
       selectizeCallback();
       selectizeCallback = null;
       $("#submit_button").hide();
+      $('#teacher_school_id').val(oringial_school_id);
     }
     $("#school_form").hide();
   });

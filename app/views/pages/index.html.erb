@@ -4,8 +4,10 @@
 <p>Use the links on the left to select a page.<p>
 <%- unless logged_in? %>
   <p><strong>You are not currently logged in.</strong></p>
+<%- else %>
+  <p>You may <%= link_to("edit your information", edit_teacher_path(current_user.id)) %>.
 <%- end %>
 
 <%- if current_user&.admin? %>
-  <%= render 'admin_table' %>
+  <%= render "admin_table" %>
 <%- end %>

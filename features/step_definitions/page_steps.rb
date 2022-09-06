@@ -2,10 +2,10 @@
 
 Given(/the following pages exist/) do |pages_table|
   default_params = {
-    slug: "test_slug",
+    url_slug: "test_slug",
     title: "Test Page Title",
     html: "Test page body.",
-    permissions: "Public",
+    viewer_permissions: "Public",
     creator_id: Teacher.first.id,
     last_editor: Teacher.first
   }

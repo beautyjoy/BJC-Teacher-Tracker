@@ -23,7 +23,7 @@ Scenario: Logging out as an admin
   And I follow "Log In"
   Then I can log in with Google
   And I follow "Logout"
-  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Request Access to BJC Teacher Materials"
   Then I should see "Log In"
 
 Scenario: Viewing all teachers as an admin
@@ -97,8 +97,8 @@ Scenario: Edit teacher info as an admin
 
 Scenario: Deny teacher as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -106,12 +106,12 @@ Scenario: Deny teacher as an admin
   Given I have an admin email
   When  I follow "Log In"
   Then  I can log in with Google
-  And   I press "❌"
+  And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
   Then  I should see "Reason for Denial"
   And   I should see "Deny Joseph Mamoa"
   And   I fill in "reason" with "Test"
   And   I press "Cancel"
-  And   I press "❌"
+  And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
   Then  the "reason" field should not contain "Test"
   And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
@@ -119,8 +119,8 @@ Scenario: Deny teacher as an admin
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -129,8 +129,8 @@ Scenario: Not logged in should not have access to edit
 
 Scenario: Filter all teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name  | admin | email                     | school      | application_status |
   | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
@@ -142,6 +142,7 @@ Scenario: Filter all teacher info as an admin
   Then  I can log in with Google
   When  I go to the teachers page
   And   I check "Pending"
+  And   I uncheck "Validated"
   Then  I should see "Peter"
   Then  I should not see "Victor"
   Then  I should not see "Danny"
@@ -152,18 +153,19 @@ Scenario: Filter all teacher info as an admin
 
 Scenario: View teacher info as an admin
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+  | name        | city     | state | website                  | grade_level | school_type |
+  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  | Joseph     | Test     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
   When  I go to the teachers page
-  When  I follow "Joseph Mamoa"
-  Then  I should see "Joseph Mamoa"
+  And   I uncheck "Validated"
+  When  I follow "Joseph Test"
+  Then  I should see "Joseph Test"
   And   I should see "Edit Information"
   And   I should see "School Name"
   And   I should see "School Location"
@@ -176,13 +178,14 @@ Scenario: Edit teacher info as an admin navigating from view only page to edit p
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  | Joseph     | Mamoa New    | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
   When  I go to the teachers page
-  When  I follow "Joseph Mamoa"
+  And   I uncheck "Validated"
+  When  I follow "Joseph Mamoa New"
   Then  I should see "Joseph Mamoa"
   And   I should see "Edit Information"
   And   I follow "Edit Information"
@@ -217,7 +220,7 @@ Scenario: Should be able to resend welcome email
   Given I follow "All Teachers"
   Then I should see "BJC Teachers"
   And I press "New Teacher"
-  Then I should see "Request Access to Teacher Materials"
+  Then I should see "Request Access to BJC Teacher Materials"
 
   Scenario: Admin can access new school button at teacher index page
   Given I am on the BJC home page
@@ -230,52 +233,54 @@ Scenario: Should be able to resend welcome email
   And I press "New School"
   Then I should see "Add a School"
 
-Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
-  Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
-  Given I am on the BJC home page
-  Given I have an admin email
-  And I follow "Log In"
-  Then I can log in with Google
-  And I should see "BJC Teacher Dashboard"
-  Given I follow "All Teachers"
-  And I press "Upload CSV"
-  Then The "#hidden_file_select_input" form is invalid
-  Then I attach the csv "features/test_utils/test_teacher_first.csv"
-  Then I should see "ank sha"
-  Then I should not see "Steve Gao"
-  Then I should not see "Haha He"
-  Then I should see "Wuho He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "1 schools has been created"
-  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
-  Then I follow "All Schools"
-  Then I should see "uci"
-  Then I follow "All Teachers"
-  Then I attach the csv "features/test_utils/test_teacher_second.csv"
-  Then I should see "anke sha"
-  Then I should see "Steve He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
+# Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
+#  Given the following schools exist:
+#  |       name      |     city     |  state  |            website            |
+#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  Given I am on the BJC home page
+#  Given I have an admin email
+#  And I follow "Log In"
+#  Then I can log in with Google
+#  And I should see "BJC Teacher Dashboard"
+#  Given I follow "All Teachers"
+#  And I uncheck "Validated"
+#  And I press "Upload CSV"
+#  Then The "#hidden_file_select_input" form is invalid
+#  Then I attach the csv "features/test_utils/test_teacher_first.csv"
+#  Then I should see "ank sha"
+#  Then I should not see "Steve Gao"
+#  Then I should not see "Haha He"
+#  Then I should see "Wuho He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "1 schools has been created"
+#  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+#  Then I follow "All Schools"
+#  Then I should see "uci"
+#  Then I follow "All Teachers"
+#  Then I attach the csv "features/test_utils/test_teacher_second.csv"
+#  Then I should see "anke sha"
+#  Then I should see "Steve He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "2 teachers has failed with following emails: [ 1@gmail.com ] [ 2@gmail.com ]"
 
-Scenario: Importing with new schools model fields works
-  Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
-  Given I am on the BJC home page
-  Given I have an admin email
-  And I follow "Log In"
-  Then I can log in with Google
-  And I should see "BJC Teacher Dashboard"
-  Given I follow "All Teachers"
-  And I press "Upload CSV"
-  Then The "#hidden_file_select_input" form is invalid
-  Then I attach the csv "features/test_utils/test_teacher_third.csv"
-  Then I should see "ank sha"
-  Then I should not see "Steve Gao"
-  Then I should not see "Haha He"
-  Then I should see "Wuho He"
-  Then I should see "Successfully created/updated 2 teachers"
-  Then I should see "1 schools has been created"
-  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+# Scenario: Importing with new schools model fields works
+#  Given the following schools exist:
+#  |       name      |     city     |  state  |            website            |
+#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  Given I am on the BJC home page
+#  Given I have an admin email
+#  And I follow "Log In"
+#  Then I can log in with Google
+#  And I should see "BJC Teacher Dashboard"
+#  Given I follow "All Teachers"
+#  And I uncheck "Validated"
+#  And I press "Upload CSV"
+#  Then The "#hidden_file_select_input" form is invalid
+#  Then I attach the csv "features/test_utils/test_teacher_third.csv"
+#  Then I should see "ank sha"
+#  Then I should not see "Steve Gao"
+#  Then I should not see "Haha He"
+#  Then I should see "Wuho He"
+#  Then I should see "Successfully created/updated 2 teachers"
+#  Then I should see "1 schools has been created"
+#  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"

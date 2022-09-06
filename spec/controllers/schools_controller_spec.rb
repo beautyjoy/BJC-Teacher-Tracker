@@ -58,6 +58,7 @@ RSpec.describe SchoolsController, type: :controller do
         params: {
             school: {
                 name: @create_school_name,
+                # missing city
                 state: "CA",
                 website: "www.berkeley.edu",
                 school_type: 0,
@@ -68,7 +69,7 @@ RSpec.describe SchoolsController, type: :controller do
         }
     }
     expect(School.find_by(name: @create_school_name)).to be_nil
-    expect(@fail_flash_alert).to match flash[:alert]
+    expect(flash[:alert]).to match @fail_flash_alert
 
     post :create, {
         params: {
@@ -76,6 +77,7 @@ RSpec.describe SchoolsController, type: :controller do
                 name: @create_school_name,
                 city: "Berkeley",
                 state: "CA",
+                # missing website
                 school_type: 0,
                 grade_level: 4,
                 tags: [],
@@ -84,11 +86,12 @@ RSpec.describe SchoolsController, type: :controller do
         }
     }
     expect(School.find_by(name: @create_school_name)).to be_nil
-    expect(@fail_flash_alert).to match flash[:alert]
+    expect(flash[:alert]).to match @fail_flash_alert
 
     post :create, {
         params: {
             school: {
+                # missing name
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
@@ -180,29 +183,35 @@ RSpec.describe SchoolsController, type: :controller do
     expect(School.find_by(name: @create_school_name)).to be_nil
   end
 
-  it "doesnt creation of the same school" do
+  it "does not create duplicate schools in the same city" do
     allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+    expect(School.where(name: @create_school_name).count).to eq 0
+
     post :create, {
         params: {
             school: {
                 name: @create_school_name,
                 city: "Berkeley",
                 state: "CA",
-                website: "www.berkeley.edu"
+                website: "www.berkeley.edu",
+                school_type: 0,
+                grade_level: 1,
             }
         }
     }
-    expect(School.where(name: @create_school_name).count).to be 1
+    expect(School.where(name: @create_school_name).count).to eq 1
     post :create, {
         params: {
             school: {
                 name: @create_school_name,
                 city: "Berkeley",
                 state: "CA",
-                website: "www.berkeley.edu"
+                website: "www.berkeley.edu",
+                school_type: 0,
+                grade_level: 4,
             }
         }
     }
-    expect(School.where(name: @create_school_name).count).to be 1
+    expect(School.where(name: @create_school_name).count).to eq 1
   end
 end

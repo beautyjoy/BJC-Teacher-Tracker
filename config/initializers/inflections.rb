@@ -16,4 +16,6 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "TEALS"
   inflect.acronym "CSP"
+  inflect.acronym "BJC"
+  inflect.acronym "URL"
 end

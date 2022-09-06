@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :schools
-  resources :pages, param: :slug
+  resources :pages, param: :url_slug
   resources :email_templates, only: [:index, :update, :edit]
 
   # The line below would be unnecessary since we use Google.

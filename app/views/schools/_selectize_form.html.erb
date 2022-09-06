@@ -1,0 +1,62 @@
+<div class="form-group">
+  <%= f.label :name, "Search for your school or add a new one", class: "label-required", for: "school_selectize" %>
+  <%= f.select :name,
+    options_for_select(@ordered_schools.collect(&:selectize_options)),
+    {prompt: "Enter the name or city of your school"},
+    {class: "select", id: "school_selectize", onchange: 'autofillSchoolFields();'} %>
+  <%= javascript_pack_tag 'schools' %>
+  <%= stylesheet_pack_tag 'schools', media: 'all', 'data-turbolinks-track': 'true' %>
+  <%= csrf_meta_tags %>
+</div>
+
+<div id="school_form" style="display: none">
+  <div class = "col-14 d-flex justify-content-end" id="innest_form">
+    <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id="close_button">Clear</button>
+  </div>
+
+  <div class='form-group row'>
+    <div class='col-6'>
+      <%= f.label :name, "School Name", class: "label-required" %>
+      <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control', required: true %>
+    </div>
+
+    <div class='col-4'>
+      <%= f.label :city, class: "label-required" %>
+      <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control', required: true %>
+    </div>
+
+    <div class='col-2'>
+      <%= f.label :state, class: "label-required" %>
+      <%= f.select(:state, School::VALID_STATES,
+        {include_blank: "State"},
+        { class: 'form-control', required: true }
+      ) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website, "School Website", class: "label-required" %>
+    <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
+        class: "form-control", required: true, title: "Please enter a valid URL" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :grade_level, "Grade Level" %>
+    <%= f.select(
+        :grade_level,
+        options_for_select(School.grade_level_options),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: false }
+      ) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :school_type, "School Type" %>
+    <%= f.select(
+        :school_type,
+        options_for_select(School.school_type_options),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: false }
+      ) %>
+  </div>
+</div>

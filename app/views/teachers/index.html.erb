@@ -1,20 +1,20 @@
 <%= provide(:h1, "BJC Teachers") %>
 <%= provide(:header_button, "New Teacher") %>
 
-<div class="custom-control custom-checkbox custom-control-inline float-right">
-  <input class="custom-control-input" type="checkbox" name="Application Status" id="Validated" value="Validated">
+<div class="custom-control custom-checkbox custom-control-inline">
+  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Validated" value="validated" checked=true>
   <label class="custom-control-label" for="Validated">Validated</label>
 </div>
-<div class="custom-control custom-checkbox custom-control-inline float-right">
-  <input class="custom-control-input" type="checkbox" name="Application Status" id="Denied" value="Denied">
+<div class="custom-control custom-checkbox custom-control-inline">
+  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Denied" value="denied">
   <label class="custom-control-label" for="Denied">Denied</label>
 </div>
-<div class="custom-control custom-checkbox custom-control-inline float-right">
-  <input class="custom-control-input" type="checkbox" name="Application Status" id="Pending" value="Pending">
+<div class="custom-control custom-checkbox custom-control-inline">
+  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Pending" value="pending">
   <label class="custom-control-label" for="Pending">Pending</label>
 </div>
 
-<table class="table table-striped js-dataTable">
+<table class="table table-striped js-dataTable js-teachersTable">
   <thead class="thead-dark">
     <tr>
       <%= render 'table_headers' %>
@@ -29,8 +29,25 @@
   </tbody>
 </table>
 
-<br/>
+<hr>
+<h2>Admin Users</h2>
+<table class="table table-striped js-dataTable">
+  <thead class="thead-dark">
+    <tr>
+      <%= render 'table_headers' %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admins.each do |admin| %>
+    <tr>
+      <%= render 'teacher', teacher: admin %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
+<hr>
+<br>
 <%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
   <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
   <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
@@ -74,18 +91,6 @@
 <script type="text/javascript">
   $("#hidden_csv_form").hide();
 
-  $(function() {
-    otable = $('#DataTables_Table_0').dataTable();
-  })
-  function filterme() {
-    var types = $('input:checkbox[name="Application Status"]:checked').map(function() {
-      return '^' + this.value + '\$';
-    }).get().join('|');
-    otable.fnFilter(types, 6, true, false, false, false);
-  }
-  $(".custom-checkbox").change(function() {
-    filterme()
-  });
 
   function openFileExplorer() {
     $("#hidden_file_select_input").click();
