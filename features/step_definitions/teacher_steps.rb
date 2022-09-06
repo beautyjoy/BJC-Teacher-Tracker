@@ -24,7 +24,7 @@ end
 
 Given(/the following schools exist/) do |schools_table|
   schools_default = {
-    name: "UC Berkeley",
+    name: "UC Berkeley - New",
     city: "Berkeley",
     state: "CA",
     website: "https://www.berkeley.edu",
@@ -62,7 +62,8 @@ Given(/the following teachers exist/) do |teachers_table|
 
     school_name = teacher.delete(:school)
     school = School.find_by(name: school_name || "UC Berkeley")
-    teacher[:school] = school
+    teacher[:school_id] = school.id
     Teacher.create!(teacher)
+    School.reset_counters(school.id, :teachers)
   end
 end

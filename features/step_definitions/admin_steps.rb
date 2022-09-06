@@ -20,10 +20,6 @@ Given(/I have an admin email/) do
       last_name: "User",
       email: "testadminuser@berkeley.edu",
       school: "UC Berkeley",
-    },
-    credentials: {
-      token: "test_token",
-      refresh_token: "test_refresh_token"
     }
   })
 end
@@ -40,10 +36,6 @@ Given(/I have a non-admin, unregistered (.*) email/) do |login|
       last_name: "User",
       email: "randomemail@berkeley.edu",
       school: "UC Berkeley",
-    },
-    credentials: {
-      token: "test_token",
-      refresh_token: "test_refresh_token"
     }
   })
 end
