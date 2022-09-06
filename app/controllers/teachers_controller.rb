@@ -57,7 +57,6 @@ class TeachersController < ApplicationController
       end
     end
 
-
     @teacher = Teacher.new(teacher_params)
     @teacher.school = @school
     if @teacher.save
@@ -104,8 +103,6 @@ class TeachersController < ApplicationController
   end
 
   def validate
-    # TODO: Check if teacher is already denied (MAYBE)
-    # TODO: move to model and add tests
     load_teacher
     @teacher.validated!
     @teacher.school.num_validated_teachers += 1
@@ -115,11 +112,8 @@ class TeachersController < ApplicationController
   end
 
   def deny
-    # TODO: Check if teacher is already validated (MAYBE)
     load_teacher
     @teacher.denied!
-    @teacher.school.num_denied_teachers += 1
-    @teacher.school.save!
     if !params[:skip_email].present?
       TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
     end
