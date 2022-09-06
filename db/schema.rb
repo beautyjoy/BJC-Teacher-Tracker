@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_05_210128) do
+ActiveRecord::Schema.define(version: 2022_09_06_221810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,18 +53,6 @@ ActiveRecord::Schema.define(version: 2022_09_05_210128) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "dynamic_pages", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", null: false
-    t.string "permissions", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "creator_id", null: false
-    t.bigint "last_editor", null: false
-    t.text "html"
-    t.index ["slug"], name: "index_dynamic_pages_on_slug", unique: true
-  end
-
   create_table "email_templates", force: :cascade do |t|
     t.text "body"
     t.string "path"
@@ -98,10 +86,8 @@ ActiveRecord::Schema.define(version: 2022_09_05_210128) do
     t.float "lat"
     t.float "lng"
     t.integer "teachers_count", default: 0
-    t.integer "num_validated_teachers", default: 0
     t.datetime "created_at", default: -> { "now()" }
     t.datetime "updated_at", default: -> { "now()" }
-    t.integer "num_denied_teachers", default: 0
     t.integer "grade_level"
     t.integer "school_type"
     t.text "tags", default: [], array: true
