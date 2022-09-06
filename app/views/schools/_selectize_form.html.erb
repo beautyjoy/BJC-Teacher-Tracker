@@ -1,4 +1,3 @@
-
 <div class="form-group">
   <%= f.label :name, "Search for your school or add a new one", class: "label-required", for: "school_selectize" %>
   <%= f.select :name,
@@ -10,69 +9,54 @@
   <%= csrf_meta_tags %>
 </div>
 
-<div id="school_form">
+<div id="school_form" style="display: none">
   <div class = "col-14 d-flex justify-content-end" id="innest_form">
     <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id="close_button">Clear</button>
   </div>
 
   <div class='form-group row'>
-      <div class='col-6'>
-          <%= f.label :name, "School Name", class: "label-required" %>
-          <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
-          required: true, id: 'school_name' %>
-      </div>
+    <div class='col-6'>
+      <%= f.label :name, "School Name", class: "label-required" %>
+      <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control', required: true %>
+    </div>
 
-      <div class='col-4'>
-          <%= f.label :city, class: "label-required", for: "school_city" %>
-          <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
-          required: true, id: 'school_city' %>
-      </div>
+    <div class='col-4'>
+      <%= f.label :city, class: "label-required" %>
+      <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control', required: true %>
+    </div>
 
-      <div class='col-2'>
-          <%= f.label :state, class: "label-required", for: "school_state" %>
-          <%= f.select(
-              :state,
-              School::VALID_STATES,
-              {include_blank: "State"},
-              { class: 'form-control', required: true, id: 'school_state'}
-          ) %>
-      </div>
+    <div class='col-2'>
+      <%= f.label :state, class: "label-required" %>
+      <%= f.select(:state, School::VALID_STATES,
+        {include_blank: "State"},
+        { class: 'form-control', required: true }
+      ) %>
+    </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
+    <%= f.label :website, "School Website", class: "label-required" %>
     <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
-        class: "form-control", required: true,
-        title: "Please enter a valid URL",
-        id: 'school_website' %>
+        class: "form-control", required: true, title: "Please enter a valid URL" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
+    <%= f.label :grade_level, "Grade Level" %>
     <%= f.select(
         :grade_level,
         options_for_select(School.grade_level_options),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: false, id: 'school_grade_level' }
+        { class: 'form-control', required: false }
       ) %>
   </div>
 
   <div class="form-group">
-    <%= f.label :school_type, "School Type", for: 'school_type' %>
+    <%= f.label :school_type, "School Type" %>
     <%= f.select(
         :school_type,
         options_for_select(School.school_type_options),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: false, id: 'school_type' }
+        { class: 'form-control', required: false }
       ) %>
   </div>
 </div>
-
-
-<script>
-  $('#school_form').hide();
-  function autofillSchoolFields() {
-    let selectedSchool = JSON.parse($("#school_selectize").val());
-    $('#teacher_school_id').val(selectedSchool.id);
-  }
-</script>
