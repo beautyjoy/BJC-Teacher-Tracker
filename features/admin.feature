@@ -157,14 +157,15 @@ Scenario: View teacher info as an admin
   | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  | Joseph     | Test     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
   When  I go to the teachers page
-  When  I follow "Joseph Mamoa"
-  Then  I should see "Joseph Mamoa"
+  And   I uncheck "Validated"
+  When  I follow "Joseph Test"
+  Then  I should see "Joseph Test"
   And   I should see "Edit Information"
   And   I should see "School Name"
   And   I should see "School Location"
@@ -177,13 +178,14 @@ Scenario: Edit teacher info as an admin navigating from view only page to edit p
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                    | school      | snap   |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
+  | Joseph     | Mamoa New    | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
   When  I go to the teachers page
-  When  I follow "Joseph Mamoa"
+  And   I uncheck "Validated"
+  When  I follow "Joseph Mamoa New"
   Then  I should see "Joseph Mamoa"
   And   I should see "Edit Information"
   And   I follow "Edit Information"
@@ -241,6 +243,7 @@ Scenario: Admin can import csv file. The loader should filter invalid record and
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
   Given I follow "All Teachers"
+  And I uncheck "Validated"
   And I press "Upload CSV"
   Then The "#hidden_file_select_input" form is invalid
   Then I attach the csv "features/test_utils/test_teacher_first.csv"
@@ -270,6 +273,7 @@ Scenario: Importing with new schools model fields works
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
   Given I follow "All Teachers"
+  And I uncheck "Validated"
   And I press "Upload CSV"
   Then The "#hidden_file_select_input" form is invalid
   Then I attach the csv "features/test_utils/test_teacher_third.csv"
