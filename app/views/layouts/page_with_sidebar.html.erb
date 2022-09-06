@@ -24,23 +24,14 @@
 
       <div class="col-10">
         <div class="container">
-          <div class="row page-title">
+          <div class="page-title">
             <%= render 'layouts/flash' %>
-            <div class="col">
-              <%- if content_for?(:h1) %>
-                <h1><%= yield(:h1) %></h1>
-              <%- end %>
-            </div>
-            <div class="col-2">
-              <%- if content_for?(:header_button) %>
-                <%- if logged_in? && current_user.admin? %>
-                  <%= button_to(yield(:header_button), {action: "new"}, method: "get", class: "btn btn-primary btn-lg", type: 'button') %>
-                <%- end %>
-              <%- end %>
-            </div>
+            <%- if content_for?(:h1) %>
+              <h1><%= yield(:h1) %></h1>
+            <%- end %>
           </div>
           <main class="row">
-            <div class="full col"><%= yield %></div>
+            <div class="full col-12"><%= yield %></div>
           </main>
         </div>
       </div>
