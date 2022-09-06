@@ -154,7 +154,7 @@ class TeachersController < ApplicationController
   end
 
   def load_school
-    if teacher_params[:school_id]
+    if teacher_params[:school_id].present?
       @school ||= School.find(teacher_params[:school_id])
     end
     @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
