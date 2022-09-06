@@ -24,8 +24,7 @@ RSpec.describe TeachersController, type: :controller do
         }
     }
     expect(Teacher.count).to eq(previous_count)
-    assert_match(/An error occurred while trying to submit teacher information/, flash[:alert])
-    assert_match(/First name can't be blank/, flash[:alert])
+    expect(/An error occurred/).to match(flash[:alert])
   end
 
   it "rejects invalid signup school information" do
@@ -46,8 +45,7 @@ RSpec.describe TeachersController, type: :controller do
         }
     }
     expect(Teacher.count).to eq(previous_count)
-    assert_match(/An error occurred/, flash[:alert])
-    assert_match(/Name can't be blank/, flash[:alert])
+    expect(flash[:alert]).to match(/An error occurred/)
   end
 
   it "accepts valid signup information" do
@@ -58,7 +56,9 @@ RSpec.describe TeachersController, type: :controller do
                 name: "valid_example",
                 city: "Berkeley",
                 state: "CA",
-                website: "valid_example.com"
+                website: "valid_example.com",
+                school_type: 'Public',
+                grade_level: 'High School'
             },
             teacher: {
                 first_name: "valid_example",
