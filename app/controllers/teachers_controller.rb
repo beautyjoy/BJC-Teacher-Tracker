@@ -171,7 +171,7 @@ class TeachersController < ApplicationController
   end
 
   def ordered_schools
-    if params[:id]
+    if params[:id].present?
       load_teacher
       @ordered_schools ||= [ @teacher.school ] +
         School.all.order(:name).reject { |s| s.id == @teacher.school_id }
