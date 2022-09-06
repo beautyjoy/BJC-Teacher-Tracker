@@ -57,8 +57,8 @@ RSpec.describe TeachersController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "valid_example.com",
-                school_type: 'Public',
-                grade_level: 'High School'
+                school_type: "Public",
+                grade_level: "High School"
             },
             teacher: {
                 first_name: "valid_example",
