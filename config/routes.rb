@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     member do
       post :resend_welcome_email
       post :validate
-      post :delete
       post :deny
     end
     collection { post :import }

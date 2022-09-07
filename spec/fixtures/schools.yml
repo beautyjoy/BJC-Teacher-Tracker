@@ -2,22 +2,20 @@
 #
 # Table name: schools
 #
-#  id                     :integer          not null, primary key
-#  city                   :string
-#  grade_level            :integer
-#  lat                    :float
-#  lng                    :float
-#  name                   :string
-#  num_denied_teachers    :integer          default(0)
-#  num_validated_teachers :integer          default(0)
-#  school_type            :integer
-#  state                  :string
-#  tags                   :text             default([]), is an Array
-#  teachers_count         :integer          default(0)
-#  website                :string
-#  created_at             :datetime
-#  updated_at             :datetime
-#  nces_id                :string
+#  id             :integer          not null, primary key
+#  city           :string
+#  grade_level    :integer
+#  lat            :float
+#  lng            :float
+#  name           :string
+#  school_type    :integer
+#  state          :string
+#  tags           :text             default([]), is an Array
+#  teachers_count :integer          default(0)
+#  website        :string
+#  created_at     :datetime
+#  updated_at     :datetime
+#  nces_id        :string
 #
 # Indexes
 #
@@ -37,6 +35,6 @@ stanfurd:
   city: Palo Alto
   state: CA
   website: 'https://stanford.edu'
-  num_validated_teachers: 1
+  teachers_count: 1
   grade_level: 4
   school_type: 1

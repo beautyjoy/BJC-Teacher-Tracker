@@ -21,7 +21,7 @@
 class Page < ApplicationRecord
   validates :url_slug, uniqueness: true
   validates :last_editor, :viewer_permissions, :url_slug, :title, :html, :creator_id, presence: true
-  validate :validate_permissions
+  validates_inclusion_of :viewer_permissions, in: ["Admin", "Verified Teacher", "Public"]
 
   before_save :fix_bjc_r_links
 
@@ -32,12 +32,6 @@ class Page < ApplicationRecord
 
   def to_param
     self.url_slug
-  end
-
-  def validate_permissions
-    if !["Admin", "Verified Teacher", "Public"].include?(viewer_permissions)
-      errors.add :base, "That permissions is not valid"
-    end
   end
 
   # TODO: This may be a bit too specific?

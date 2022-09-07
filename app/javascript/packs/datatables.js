@@ -1,8 +1,3 @@
-function autofillSchoolFields() {
-  let selectedSchool = JSON.parse($("#school_selectize").val());
-  $('#teacher_school_id').val(selectedSchool.id);
-}
-
 $(function() {
   // Filtering for the Admin Teachers Index
   $.fn.dataTable.ext.search.push((_, searchData) => {

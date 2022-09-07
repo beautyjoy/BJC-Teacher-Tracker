@@ -80,7 +80,6 @@ class Teacher < ApplicationRecord
   ].freeze
 
   before_update :reset_validation_status
-  after_commit :update_school_counts
 
   def reset_validation_status
     return if application_status_changed? || school_id_changed?
@@ -163,22 +162,5 @@ class Teacher < ApplicationRecord
   def self.validate_access_token(auth)
     email_from_auth = auth.info.email
     exists?(email: email_from_auth)
-  end
-
-  # TODO: Write tests, add hooks.
-  # TODO: Consider writing after_destroy hooks.
-  def update_school_counts
-    return unless application_status_changed?
-    if validated?
-      school.num_validated_teachers += 1
-    elsif denied?
-      school.num_denied_teachers += 1
-    end
-    if application_status_was == "validated"
-      school.num_validated_teachers -= 1
-    elsif application_status_was == "denied"
-      school.num_denied_teachers -= 1
-    end
-    school.save
   end
 end

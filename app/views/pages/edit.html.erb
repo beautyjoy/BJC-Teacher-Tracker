@@ -1,33 +1,33 @@
 <%= provide(:h1, "#{action_name.capitalize} #{@page.title || 'Page'}") %>
 
-<%# <div class="row">
-  <ul class="nav nav-tabs">
+<%= provide(:tabs) do %>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Form</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="true">Preview</a>
+      <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="false">Preview</a>
     </li>
   </ul>
-</div> %>
-
-<hr />
+<% end %>
 
 <div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
-    <div id="form">
-      <%= form_for @page, class: "form" do |f| %>
-        <%= render 'form', fields: f %>
-        <hr>
-        <div class="actions">
-          <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
+  <div class="tab-pane fade show active" id="form" role="tabpanel" aria-labelledby="form-tab">
+    <%= form_for @page, class: "form" do |f| %>
+      <%= render 'form', fields: f %>
+      <hr>
+      <div class="actions">
+        <%= f.submit f.object.new_record? ? "Submit" : "Update", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-  <%# <div class="tab-pane fade" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
-    <div hidden id="preview">
-      <div class="js-htmlContent"></div>
-    </div>
-  </div> %>
+  <div class="tab-pane fade" id="preview" role="tabpanel" aria-labelledby="preview-tab">
+    <div class="js-htmlContent"></div>
+  </div>
 </div>
+
+<script>
+  let updatePreview = () => { $('.js-htmlContent').html($('#page_html').val()) };
+  updatePreview();
+  $('#page_html').on('blur', updatePreview);
+</script>

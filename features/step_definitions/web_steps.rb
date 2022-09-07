@@ -106,11 +106,7 @@ When(/^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/) do |path, field|
 end
 
 Then(/^(?:|I )should see "([^"]*)"$/) do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  expect(page).to have_content(text)
 end
 
 Then(/^(?:|I )should see hidden element "([^"]*)"$/) do |text|
@@ -121,41 +117,23 @@ end
 
 Then(/^(?:|I )should see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)
-
-  if page.respond_to? :should
-    page.should have_xpath("//*", text: regexp)
-  else
-    assert page.has_xpath?("//*", text: regexp)
-  end
+  expect(page).to have_xpath("//*", text: regexp)
 end
 
 Then(/^(?:|I )should not see "([^"]*)"$/) do |text|
-  if page.respond_to? :should
-    page.should have_no_content(text)
-  else
-    assert page.has_no_content?(text)
-  end
+  expect(page).to have_no_content(text)
 end
 
 Then(/^(?:|I )should not see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)
-
-  if page.respond_to? :should
-    page.should have_no_xpath("//*", text: regexp)
-  else
-    assert page.has_no_xpath?("//*", text: regexp)
-  end
+  expect(page).to have_no_xpath("//*", text: regexp)
 end
 
 Then(/^the "([^"]*)" field(?: within (.*))? should contain "([^"]*)"$/) do |field, parent, value|
   with_scope(parent) do
     field = find_field(field)
     field_value = (field.tag_name == "textarea") ? field.text : field.value
-    if field_value.respond_to? :should
-      field_value.should =~ /#{value}/
-    else
-      assert_match(/#{value}/, field_value)
-    end
+    expect(field_value).to match(/#{value}/)
   end
 end
 

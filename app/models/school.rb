@@ -4,22 +4,20 @@
 #
 # Table name: schools
 #
-#  id                     :integer          not null, primary key
-#  city                   :string
-#  grade_level            :integer
-#  lat                    :float
-#  lng                    :float
-#  name                   :string
-#  num_denied_teachers    :integer          default(0)
-#  num_validated_teachers :integer          default(0)
-#  school_type            :integer
-#  state                  :string
-#  tags                   :text             default([]), is an Array
-#  teachers_count         :integer          default(0)
-#  website                :string
-#  created_at             :datetime
-#  updated_at             :datetime
-#  nces_id                :string
+#  id             :integer          not null, primary key
+#  city           :string
+#  grade_level    :integer
+#  lat            :float
+#  lng            :float
+#  name           :string
+#  school_type    :integer
+#  state          :string
+#  tags           :text             default([]), is an Array
+#  teachers_count :integer          default(0)
+#  website        :string
+#  created_at     :datetime
+#  updated_at     :datetime
+#  nces_id        :string
 #
 # Indexes
 #
@@ -32,7 +30,7 @@ class School < ApplicationRecord
 
   has_many :teachers
 
-  scope :validated, -> { where("num_validated_teachers > 0") }
+  scope :validated, -> { where("teachers_count > 0") }
 
   VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
 
