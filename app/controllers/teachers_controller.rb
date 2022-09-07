@@ -85,6 +85,7 @@ class TeachersController < ApplicationController
     else
       @school.update(school_params) if school_params
       @school.save!
+      @teacher.school = @school
     end
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
