@@ -167,7 +167,7 @@ Scenario: View teacher info as an admin
   When  I follow "Joseph Test"
   Then  I should see "Joseph Test"
   And   I should see "Edit Information"
-  And   I should see "School Name"
+  And   I should see "School"
   And   I should see "School Location"
   And   I should see "Email"
   And   I should see "Personal or Course Website"
