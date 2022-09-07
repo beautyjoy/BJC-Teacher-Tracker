@@ -11,7 +11,9 @@ class MainController < ApplicationController
       flash[:notice] = "Welcome back, #{@current_user.first_name}!"
       redirect_to pages_path
     elsif is_teacher?
-      redirect_to edit_teacher_path(current_user.id), notice: "You can edit your information"
+      flash[:notice] = "You can edit your information"
+      flash[:warning] = "Your applicating is currently #{@current_user.application_status}."
+      redirect_to edit_teacher_path(current_user.id)
     else
       redirect_to new_teacher_path
     end

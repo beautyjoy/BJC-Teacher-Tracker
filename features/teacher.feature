@@ -91,7 +91,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   And   I see a confirmation "You can edit your information"
   Then  the "First Name" field should contain "Joseph"
 
-Scenario: Logged in teacher can fill a new form with their info
+Scenario: Logged in pending teacher can update their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
@@ -102,10 +102,8 @@ Scenario: Logged in teacher can fill a new form with their info
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
-  When  I go to the new teachers page
   And   I enter my "First Name" as "Joe"
   And   I enter my "Last Name" as "Mamoa"
-  And   I enter my "School Email" as "testteacher@berkeley.edu"
   And   I enter my "Snap! Username" as "alonzo"
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
@@ -116,11 +114,12 @@ Scenario: Logged in teacher can fill a new form with their info
   | School Website | https://chs.fuhsd.org |
   | Grade Level    | High School           |
   | School Type    | Public                |
-  And   I press "Submit"
+  And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   And   I am on the edit page for Joe Mamoa
 
-  Scenario: Logged in teacher cannot change Snap from new form path
+  # TODO: Should this test updating to a new school?
+  Scenario: Logged in pending teacher cannot change Snap from new form path
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
@@ -131,7 +130,6 @@ Scenario: Logged in teacher can fill a new form with their info
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
-  When  I go to the new teachers page
   And   I enter my "First Name" as "Joe"
   And   I enter my "Last Name" as "Mamoa"
   And   I enter my "School Email" as "testteacher@berkeley.edu"
@@ -142,9 +140,9 @@ Scenario: Logged in teacher can fill a new form with their info
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State"
   And   I enter my "School Website" as "https://chs.fuhsd.org"
-  And   I press "Submit"
-  Then  I see a confirmation "Failed to update your information"
-  And   I am on the edit page for Joseph Mamoa
+  And   I press "Update"
+  And   I should see "Edit Joe Mamoa"
+  And   the "Snap! Username" field should contain "alonzo"
 
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
@@ -161,7 +159,7 @@ Scenario: Logged in teacher can only edit their own information
   When I go to the edit page for Jane Austin
   Then I should see "You can only edit your own information"
 
-Scenario: Logging in as a teacher should see "Update" instead of "Submit" when editing info
+Scenario: Logging in as a pending teacher should see "Update" instead of "Submit" when editing info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
