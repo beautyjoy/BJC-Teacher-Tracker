@@ -72,11 +72,11 @@ class School < ApplicationRecord
   end
 
   def self.grade_level_options
-    School.grade_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+    School.grade_levels.map { |key, _val| [key.to_s.titlecase, key] }
   end
 
   def self.school_type_options
-    School.school_types.map { |sym, val| [sym.to_s.titlecase, val] }
+    School.school_types.map { |key, _val| [key.to_s.titlecase, key] }
   end
 
   def display_grade_level

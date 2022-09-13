@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SchoolsController < ApplicationController
-  before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_admin
 
   def index
@@ -70,16 +69,5 @@ class SchoolsController < ApplicationController
 
   def load_ordered_schools
     @ordered_schools ||= School.all.order(:name)
-  end
-
-  def sanitize_params
-    if params[:school]
-      if params[:school][:grade_level]
-        params[:school][:grade_level] = params[:school][:grade_level].to_i
-      end
-      if params[:school][:school_type]
-        params[:school][:school_type] = params[:school][:school_type].to_i
-      end
-    end
   end
 end
