@@ -1,7 +1,7 @@
 <%= provide(:h1, "Update #{@school.name}") %>
 
 <%= form_for @school do |f| %>
-  <%= render 'schools/form', f: f %>
+  <%= render 'schools/form', f: f, school: school %>
 
   <div>
     <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
