@@ -10,7 +10,7 @@ gem "rails", "6.1.6"
 
 # Production app server
 gem "puma", "~> 5"
-gem "pg", "~> 1.0", require: false
+gem "pg", "~> 1.0"
 
 # Front-end Assets
 gem "webpacker", "~> 4"
@@ -70,7 +70,6 @@ group :development, :test do
   gem "pry-byebug", "~> 3.9"
 
   gem "spring"
-  gem "sqlite3"
 end
 
 group :linters, :development, :test do
