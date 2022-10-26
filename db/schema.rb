@@ -74,11 +74,13 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
+    t.bigint "teachers_id"
     t.text "html"
+    t.index ["teachers_id"], name: "index_pages_on_teachers_id"
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
-  create_table "schools", id: :serial, force: :cascade do |t|
+  create_table "schools", force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.string "state"
@@ -95,7 +97,7 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
-  create_table "teachers", id: :serial, force: :cascade do |t|
+  create_table "teachers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
@@ -121,5 +123,6 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pages", "teachers", column: "creator_id"
   add_foreign_key "pages", "teachers", column: "last_editor_id"
+  add_foreign_key "pages", "teachers", column: "teachers_id"
   add_foreign_key "teachers", "schools"
 end
