@@ -49,5 +49,4 @@ environment.config.merge({
   }
 })
 
-console.log(environment.loaders)
 module.exports = environment

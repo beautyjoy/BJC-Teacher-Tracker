@@ -30,6 +30,7 @@ We have worked on the adding following core features and functionality:
 #### Postgres Installation (MacOS):
 * `brew install postgresql chromedriver`
 * Start postgres if necessary. `brew services start postgresql`
+
 #### Postgres Installation (Linux):
 * `sudo apt install postgresql`
 * Create a postgres user.
@@ -42,6 +43,8 @@ We have worked on the adding following core features and functionality:
 * `rvm use 2.7.5` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
+* `nvm install 14` Node v14 is needed
+* `yarn install`
 
 ## Few Things to Know:
 
