@@ -21,8 +21,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -41,8 +41,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -61,8 +61,8 @@ RSpec.describe SchoolsController, type: :controller do
                 # missing city
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -78,8 +78,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 # missing website
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -95,8 +95,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -118,8 +118,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "DISTRESS",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -136,8 +136,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "wwwberkeleyedu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
                 tags: [],
                 nces_id: 123456789000
             }
@@ -155,7 +155,7 @@ RSpec.describe SchoolsController, type: :controller do
                     state: "CA",
                     website: "www.berkeley.edu",
                     school_type: -1,
-                    grade_level: 4,
+                    grade_level: "university",
                     tags: [],
                     nces_id: 123456789000
                 }
@@ -172,7 +172,7 @@ RSpec.describe SchoolsController, type: :controller do
                     city: "Berkeley",
                     state: "CA",
                     website: "www.berkeley.edu",
-                    school_type: 0,
+                    school_type: "public",
                     grade_level: -4,
                     tags: [],
                     nces_id: 123456789000
@@ -194,8 +194,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 1,
+                school_type: "public",
+                grade_level: "middle_school",
             }
         }
     }
@@ -207,8 +207,8 @@ RSpec.describe SchoolsController, type: :controller do
                 city: "Berkeley",
                 state: "CA",
                 website: "www.berkeley.edu",
-                school_type: 0,
-                grade_level: 4,
+                school_type: "public",
+                grade_level: "university",
             }
         }
     }
