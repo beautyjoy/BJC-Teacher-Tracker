@@ -1,91 +1,90 @@
-<div id="school_form" class="form-input-group">
-  <div class='form-group row'>
-    <div class='col-6'>
-        <%= f.label :name, "School Name", class: "label-required" %>
-        <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
-        required: true, id: 'school_name' %>
-    </div>
-
-    <div class='col-4'>
-      <%= f.label :city, class: "label-required", for: "school_city" %>
-      <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
-      required: true, id: 'school_city' %>
-    </div>
-
-    <div class='col-2'>
-      <%= f.label :state, class: "label-required", for: "school_state" %>
-      <%= f.select(
-          :state,
-          School::VALID_STATES,
-          { include_blank: "State" },
-          { class: 'form-control', required: true, id: 'school_state'}
-      ) %>
-    </div>
+<div class="form-group h3">Create a new School</div>
+<div class='form-group row'>
+  <div class='col-6'>
+      <%= f.label :name, "School Name", class: "label-required" %>
+      <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
+      required: true, id: 'school_name' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
-    <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
-        class: "form-control", required: true,
-        title: "Please enter a valid URL",
-        id: 'school_website' %>
+  <div class='col-4'>
+    <%= f.label :city, class: "label-required", for: "school_city" %>
+    <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
+    required: true, id: 'school_city' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
+  <div class='col-2'>
+    <%= f.label :state, class: "label-required", for: "school_state" %>
     <%= f.select(
-        :grade_level,
-        options_for_select(School.grade_level_options),
-        { include_blank: "Select a grade level" },
-        { class: 'form-control', required: false, id: 'school_grade_level' }
-      ) %>
+        :state,
+        School::VALID_STATES,
+        { include_blank: "State" },
+        { class: 'form-control', required: true, id: 'school_state'}
+    ) %>
   </div>
-
-  <div class="form-group">
-    <%= f.label :school_type, "School Type", for: 'school_type' %>
-    <%= f.select(
-        :school_type,
-        options_for_select(School.school_type_options, school.school_type),
-        { include_blank: "Select your school's type" },
-        { class: 'form-control', required: false, id: 'school_type' }
-      ) %>
-  </div>
-
-  <%- if current_user&.admin? %>
-    <hr>
-    <div >
-    <%= f.label :tags, "Tags" %>
-    <div class="form-group row">
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-      <div class='col-2'>
-        <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
-            class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
-      <%= f.text_field :nces_id, placeholder: "000000000000",
-          class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
-    </div>
-  <%- end %>
 </div>
+
+<div class="form-group">
+  <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
+  <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
+      class: "form-control", required: true,
+      title: "Please enter a valid URL",
+      id: 'school_website' %>
+</div>
+
+<div class="form-group">
+  <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
+  <%= f.select(
+      :grade_level,
+      options_for_select(School.grade_level_options, school.school_type),
+      { include_blank: "Select a grade level" },
+      { class: 'form-control', required: false, id: 'school_grade_level' }
+    ) %>
+</div>
+
+<div class="form-group">
+  <%= f.label :school_type, "School Type", for: 'school_type' %>
+  <%= f.select(
+      :school_type,
+      options_for_select(School.school_type_options, school.school_type),
+      { include_blank: "Select your school's type" },
+      { class: 'form-control', required: false, id: 'school_type' }
+    ) %>
+</div>
+
+<%- if current_user&.admin? %>
+  <hr>
+  <div class="form-group h4">Admin Actions</div>
+  <%= f.label :tags, "Tags" %>
+  <div class="form-group row">
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+    <div class='col-2'>
+      <%= f.text_field :tags, placeholder: "Tag Name", multiple: true,
+          class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nces_id, "NCES ID", for: "school_nces_id" %>
+    <%= f.text_field :nces_id, placeholder: "000000000000",
+        class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
+  </div>
+<%- end %>
