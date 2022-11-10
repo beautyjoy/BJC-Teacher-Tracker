@@ -72,4 +72,17 @@ RSpec.describe TeachersController, type: :controller do
     expect(Teacher.count).to eq(previous_count + 1)
     assert_match(/Thanks for signing up for BJC/, flash[:success])
   end
+
+  it "redirects existing users to the login page" do
+    post :create, {
+      params: {
+        school: {
+          id: 1
+        },
+        teacher: Teacher.first.to_h
+      }
+    }
+    expect(response).to redirect_to(login_path)
+    expect(flash[:alert]).to match(/already exists/)
+  end
 end

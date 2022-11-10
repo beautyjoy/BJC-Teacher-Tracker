@@ -46,6 +46,9 @@ class TeachersController < ApplicationController
       params[:id] = current_user.id
       update
       return
+    elsif @teacher
+      redirect_to login_path,
+                  notice: "You already have signed up with '#{@teacher.email}'. Please log in."
     end
 
     load_school
