@@ -14,43 +14,5 @@
     <button type="button" class="btn btn-primary btn-sm" aria-label="Close" id="close_button">Clear</button>
   </div>
 
-  <div class='form-group row'>
-    <div class='col-6'>
-      <%= f.label :name, "School Name", class: "label-required" %>
-      <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control' %>
-    </div>
-
-    <div class='col-4'>
-      <%= f.label :city, class: "label-required" %>
-      <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control' %>
-    </div>
-
-    <div class='col-2'>
-      <%= f.label :state, class: "label-required" %>
-      <%= f.select(:state, School::VALID_STATES,
-          {include_blank: "State"}, { class: 'form-control' }) %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :website, "School Website", class: "label-required" %>
-    <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
-        class: "form-control", title: "Please enter a valid URL" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :grade_level, "Grade Level" %>
-    <%= f.select(:grade_level,
-        options_for_select(School.grade_level_options),
-        { include_blank: "Select an option" }, { class: 'form-control' }
-      ) %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :school_type, "School Type" %>
-    <%= f.select(:school_type,
-      options_for_select(School.school_type_options),
-      { include_blank: "Select an option" }, { class: 'form-control' }
-    ) %>
-  </div>
+  <%= render 'schools/form', f: f, school: @school %>
 </div>
