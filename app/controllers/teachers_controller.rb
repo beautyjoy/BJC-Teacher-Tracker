@@ -49,6 +49,7 @@ class TeachersController < ApplicationController
     elsif @teacher
       redirect_to login_path,
                   notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+      return
     end
 
     load_school
