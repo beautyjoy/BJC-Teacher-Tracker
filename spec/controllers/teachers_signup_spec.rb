@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe TeachersController, type: :controller do
   fixtures :all
+
   it "rejects invalid signup information" do
     previous_count = Teacher.count
     post :create, {
@@ -79,10 +80,10 @@ RSpec.describe TeachersController, type: :controller do
         school: {
           id: 1
         },
-        teacher: Teacher.first.to_h
+        teacher: Teacher.first.attributes
       }
     }
     expect(response).to redirect_to(login_path)
-    expect(flash[:alert]).to match(/already exists/)
+    expect(flash[:notice]).to match(/Please log in/)
   end
 end
