@@ -75,7 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @schools.limit(20).each do |school| %>
+        <% @schools.each do |school| %>
         <tr>
           <td><%= link_to(school.name, school_path(school)) %></td>
           <td><%= school.location %></td>
