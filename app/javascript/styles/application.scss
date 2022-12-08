@@ -125,3 +125,10 @@ footer a:active {
 .pages-sidebar {
   border-right: 1px solid var(--berkeley-blue);
 }
+
+.requests-dashboard {
+  th[data-col="status"],
+  td[data-col="status"] {
+    display: none;
+  }
+}

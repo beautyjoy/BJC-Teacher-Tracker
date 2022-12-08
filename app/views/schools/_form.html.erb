@@ -3,13 +3,13 @@
   <div class='col-6'>
       <%= f.label :name, "School Name", class: "label-required" %>
       <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
-      required: true, id: 'school_name' %>
+      required: false, id: 'school_name' %>
   </div>
 
   <div class='col-4'>
     <%= f.label :city, class: "label-required", for: "school_city" %>
     <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
-    required: true, id: 'school_city' %>
+    required: false, id: 'school_city' %>
   </div>
 
   <div class='col-2'>
@@ -18,7 +18,7 @@
         :state,
         School::VALID_STATES,
         { include_blank: "State" },
-        { class: 'form-control', required: true, id: 'school_state'}
+        { class: 'form-control', required: false, id: 'school_state'}
     ) %>
   </div>
 </div>
@@ -26,7 +26,7 @@
 <div class="form-group">
   <%= f.label :website, "School Website", class: "label-required", for: "school_website" %>
   <%= f.url_field :website, placeholder: "https://snap.berkeley.edu",
-      class: "form-control", required: true,
+      class: "form-control", required: false,
       title: "Please enter a valid URL",
       id: 'school_website' %>
 </div>

@@ -1,5 +1,5 @@
 <% provide(:h1, "BJC Teacher Dashboard") %>
-<div class="">
+<div class="requests-dashboard">
   <h2>New Requests</h2>
     <table class="table js-dataTable">
       <thead class="thead-dark">
@@ -56,7 +56,7 @@
       <tbody>
         <% @statuses.each do |key, value| %>
         <tr>
-          <td> <%= key %> </td>
+          <td> <%= key.humanize.titlecase %> </td>
           <td> <%= value %> </td>
         </tr>
         <% end %>
@@ -75,7 +75,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @schools.limit(20).each do |school| %>
+        <% @schools.each do |school| %>
         <tr>
           <td><%= link_to(school.name, school_path(school)) %></td>
           <td><%= school.location %></td>

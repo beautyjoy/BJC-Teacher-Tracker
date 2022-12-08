@@ -54,4 +54,5 @@ let $school_selector = $(".select").selectize({
 $school_selector.on('change', () => {
   let selectedSchool = JSON.parse($("#school_selectize").val());
   $('#teacher_school_id').val(selectedSchool.id);
+  toggle_required(['name', 'city', 'state', 'website'], false);
 });

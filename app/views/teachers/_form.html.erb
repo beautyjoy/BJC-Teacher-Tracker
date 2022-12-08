@@ -59,7 +59,7 @@
         :education_level,
         options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: true }
+        { class: 'form-control', required: false }
       ) %>
     </div>
   </div>
