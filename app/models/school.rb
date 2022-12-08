@@ -86,7 +86,11 @@ class School < ApplicationRecord
   end
 
   def selectize_options
-    [name, to_json(only: [:id, :name, :city, :state, :website]) ]
+    [name_location, to_json(only: [:id, :name, :city, :state, :website]) ]
+  end
+
+  def name_location
+    "#{name} (#{city}, #{state})"
   end
 
   private

@@ -28,6 +28,10 @@
 #  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                (status)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (school_id => schools.id)
+#
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
   validates :email, uniqueness: true
