@@ -18,4 +18,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "CSP"
   inflect.acronym "BJC"
   inflect.acronym "URL"
+  # Not Really an acronym, but eh.
+  inflect.acronym "ExCITE"
 end
