@@ -16,6 +16,11 @@
 #
 #  index_pages_on_url_slug  (url_slug) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (creator_id => teachers.id)
+#  fk_rails_...  (last_editor_id => teachers.id)
+#
 thepage:
   url_slug: Test_slug
   title: test_page

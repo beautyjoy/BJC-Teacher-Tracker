@@ -18,6 +18,11 @@
 #
 #  index_pages_on_url_slug  (url_slug) UNIQUE
 #
+# Foreign Keys
+#
+#  fk_rails_...  (creator_id => teachers.id)
+#  fk_rails_...  (last_editor_id => teachers.id)
+#
 class Page < ApplicationRecord
   validates :url_slug, uniqueness: true
   validates :last_editor, :viewer_permissions, :url_slug, :title, :html, :creator_id, presence: true

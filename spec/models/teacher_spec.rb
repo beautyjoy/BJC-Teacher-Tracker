@@ -28,6 +28,10 @@
 #  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                (status)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (school_id => schools.id)
+#
 require "rails_helper"
 
 RSpec.describe Teacher, type: :model do
