@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe TeachersController, type: :controller do
   fixtures :all
+
   it "rejects invalid signup information" do
     previous_count = Teacher.count
     post :create, {
@@ -71,5 +72,18 @@ RSpec.describe TeachersController, type: :controller do
     }
     expect(Teacher.count).to eq(previous_count + 1)
     assert_match(/Thanks for signing up for BJC/, flash[:success])
+  end
+
+  it "redirects existing users to the login page" do
+    post :create, {
+      params: {
+        school: {
+          id: 1
+        },
+        teacher: Teacher.first.attributes
+      }
+    }
+    expect(response).to redirect_to(login_path)
+    expect(flash[:notice]).to match(/Please log in/)
   end
 end

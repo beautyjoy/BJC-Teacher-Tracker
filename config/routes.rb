@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   # sessions#new could be left as an empty Ruby function.
   # We just need to define a "new" view to prompt for user name,
   # and password.
-  get    "/login",   to: "sessions#new"
-  delete "/logout",  to: "sessions#destroy"
+  get    "/login",  to: "sessions#new",     as: "login"
+  delete "/logout", to: "sessions#destroy", as: "logout"
 
   get "auth/:provider/callback", to: "sessions#omniauth_callback"
 

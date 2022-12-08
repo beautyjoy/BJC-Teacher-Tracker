@@ -111,8 +111,9 @@ Scenario: Filling out new form with existing email should not update information
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
     And I press "Submit"
-    Then I should see "Email has already been taken"
-    Then the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
+    Then I should be on the login page
+    And I should see "Please log in."
+    And the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
 
 Scenario: Filling out new form with existing Snap should not create new teacher
     Given the following teachers exist:
