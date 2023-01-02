@@ -15,24 +15,24 @@
   <div class="card-body ml-5">
     <div class="row mt-3 pb-3">
       <div class="col-sm-4">
-        <h5> Email </h5>
-        <a href = <%= "mailto:#{teacher.email}" %>> <%= teacher.email %> </a>
+        <h5>Email</h5>
+        <a href=<%= "mailto:#{teacher.email}" %>> <%= teacher.email %> </a>
       </div>
 
       <div class="col-sm-4">
-        <h5> Snap<i>!</i> Username </h5>
+        <h5>Snap<i>!</i> Username</h5>
         <%= snap_link(teacher) %>
       </div>
 
       <div class="col-sm-4">
-        <h5> Application Status </h5>
+        <h5>Application Status</h5>
         <%= teacher.display_application_status %>
       </div>
     </div>
 
     <div class="row mt-5 pb-3">
       <div class="col-sm-6">
-        <h5> Personal or Course Website </h5>
+        <h5>Personal or Course Website</h5>
         <% if teacher.personal_website.blank? %>
           None provided
         <% else %>
@@ -41,15 +41,15 @@
       </div>
 
       <div class="col-sm-6">
-        <h5> Education Level Target </h5>
+        <h5>Education Level Target</h5>
         <%= teacher.display_education_level %>
       </div>
     </div>
 
     <div class="row mt-5 pb-3">
       <div class="col-sm-12">
-        <h5> Current Status </h5>
-        <%= truncate(teacher.display_status, length: 50) %>
+        <h5>Current Status</h5>
+        <%= teacher.display_status %>
       </div>
     </div>
 
