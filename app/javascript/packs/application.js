@@ -52,3 +52,7 @@ import 'datatables.net-buttons/js/buttons.html5.js';
 import './datatables.js';
 import '../styles/application.scss';
 import './schools.js';
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});

@@ -1,13 +1,25 @@
 <td>
   <%= link_to(teacher.full_name, teacher_path(teacher)) %>
-  <%= link_to('(Web)', teacher.personal_website) if teacher.personal_website %>
+  <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
 <td><%= teacher.email %></td>
 <td><%= teacher.display_education_level %></td>
-<td><%= truncate(teacher.display_status, length: 25) %></td>
+<td
+    <%- if teacher.display_status.length > 25 %>
+    data-toggle="tooltip"
+    data-placement="right"
+    title="<%= teacher.display_status %>"
+    <% end %>
+  >
+  <%= truncate(teacher.display_status, length: 25) %>
+  <%# <button
+    type="button" class="btn btn-sm btn-outline" >
+    <i class="fas fa-info-circle"></i>
+  </button> %>
+</td>
 <td><%= snap_link(teacher) %></td>
 <td>
-  <%= link_to(teacher.school.name, teacher.school.website, target: '_blank') %>
+  <%= link_to(teacher.school.name, school_path(teacher.school)) %>
   <%= teacher.school.location %>
 </td>
 <td data-search="<%= teacher.application_status %>" data-col="status" >

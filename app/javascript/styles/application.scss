@@ -38,6 +38,13 @@ body {
   /* bottom = footer height */
 }
 
+.btn-xs {
+  padding: 0 0.5rem;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  border-radius: 100%;
+}
+
 .btn-primary {
   background-color: var(--berkeley-blue);
 }
