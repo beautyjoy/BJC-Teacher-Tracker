@@ -17,6 +17,9 @@
       </li>
       <% if current_user %>
         <li class='nav-item'>
+          <%= link_to "Update Info", edit_teacher_path(current_user.id), class: "nav-link" %>
+        </li>
+        <li class='nav-item'>
           <a class='nav-link' href='/logout' data-method='delete'>Logout</a>
         </li>
       <% else %>

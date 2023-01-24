@@ -36,7 +36,7 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Google
-  And   I see a confirmation "You can edit your information"
+  And   I see a confirmation "You may update your information"
   Then  the "First Name" field should contain "Joseph"
   And   I enter my "First Name" as "Joe"
   And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
@@ -60,7 +60,7 @@ Scenario: Logging in as a teacher with Microsoft account should be able to edit 
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Microsoft
-  And   I see a confirmation "You can edit your information"
+  And   I see a confirmation "You may update your information"
   Then  the "First Name" field should contain "Joseph"
 
 Scenario: Logging in as a teacher with Snap account should be able to edit their info
@@ -74,7 +74,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Snap
-  And   I see a confirmation "You can edit your information"
+  And   I see a confirmation "You may update your information"
   Then  the "First Name" field should contain "Joseph"
 
   Scenario: Logging in as a teacher with Clever account should be able to edit their info
@@ -88,7 +88,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   Given I am on the BJC home page
   And   I follow "Log In"
   Then  I can log in with Clever
-  And   I see a confirmation "You can edit your information"
+  And   I see a confirmation "You may update your information"
   Then  the "First Name" field should contain "Joseph"
 
 Scenario: Logged in pending teacher can update their info

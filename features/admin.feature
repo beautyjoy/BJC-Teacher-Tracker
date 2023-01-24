@@ -45,28 +45,28 @@ Scenario: Logging in with non-admin, unregistered Google Account should fail
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Google
-  And I should see "Please Submit a teacher request"
+  And I should see "Please submit a new request."
 
 Scenario: Logging in with non-admin, unregistered Microsoft Account should fail
   Given I have a non-admin, unregistered Microsoft email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Microsoft
-  And I should see "Please Submit a teacher request"
+  And I should see "Please submit a new request."
 
 Scenario: Logging in with non-admin, unregistered Snap Account should fail
   Given I have a non-admin, unregistered Snap email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Snap
-  And I should see "Please Submit a teacher request"
+  And I should see "Please submit a new request."
 
 Scenario: Logging in with non-admin, unregistered Clever Account should fail
   Given I have a non-admin, unregistered Clever email
   Given I am on the BJC home page
   And I follow "Log In"
   Then I can log in with Clever
-  And I should see "Please Submit a teacher request"
+  And I should see "Please submit a new request."
 
 Scenario: Non-admin, unregistered user should not be able to see admin-only pages
   Given I have a non-admin, unregistered Google email

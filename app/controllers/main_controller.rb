@@ -8,12 +8,10 @@ class MainController < ApplicationController
     if is_admin?
       redirect_to dashboard_path
     elsif is_teacher? && current_user.validated?
-      flash[:notice] = "Welcome back, #{@current_user.first_name}!"
-      redirect_to pages_path
+      redirect_to pages_path, success: "Welcome back, #{@current_user.first_name}!"
     elsif is_teacher?
-      flash[:notice] = "You can edit your information"
-      flash[:warning] = "Your applicating is currently #{@current_user.application_status}."
-      redirect_to edit_teacher_path(current_user.id)
+      redirect_to edit_teacher_path(current_user.id),
+                 alert: "Your applicating is currently #{@current_user.application_status}. You may update your information."
     else
       redirect_to new_teacher_path
     end

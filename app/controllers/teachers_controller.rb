@@ -35,6 +35,9 @@ class TeachersController < ApplicationController
     @teacher.school = School.new
     @school = @teacher.school # maybe delegate this
     @readonly = false
+    if omniauth_data.present?
+      @teacher.assign_attributes(omniauth_data)
+    end
   end
 
   # TODO: This needs to be re-written.
@@ -69,7 +72,7 @@ class TeachersController < ApplicationController
       TeacherMailer.form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to submit teacher information. #{@teacher.errors.full_messages}"
+      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
     end
   end
 
@@ -164,6 +167,10 @@ class TeachersController < ApplicationController
   def school_params
     return unless params[:school]
     params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type)
+  end
+
+  def omniauth_data
+    @omniauth_data ||= session[:auth_data]&.slice("first_name", "last_name", "email")
   end
 
   def ordered_schools
