@@ -159,12 +159,12 @@ class Teacher < ApplicationRecord
     }[application_status.to_sym]
   end
 
-  def self.user_from_omniauth(auth)
-    find_by(email: auth.info.email)
+  def self.user_from_omniauth(omniauth)
+    Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase)
   end
 
-  def self.validate_access_token(auth)
-    email_from_auth = auth.info.email
-    exists?(email: email_from_auth)
-  end
+  # TODO: Figure out how this should be used. store and check `uid` field
+  # def self.validate_access_token(omniauth)
+  #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
+  # end
 end

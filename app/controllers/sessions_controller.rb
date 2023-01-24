@@ -11,19 +11,22 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_callback
-    auth_info = request.env["omniauth.auth"]
-    if Teacher.validate_access_token(auth_info)
-      user = Teacher.user_from_omniauth(auth_info)
+    omniauth_data = request.env["omniauth.auth"].info
+    user = Teacher.user_from_omniauth(omniauth_data)
+    if user.present?
       user.last_session_at = Time.zone.now
       user.save!
       log_in(user)
-      redirect_to root_path
     else
-      redirect_to root_path, alert: "Please Submit a teacher request"
+      Sentry.capture_message("OAuth Login Failure")
+      session[:auth_data] = omniauth_data
+      flash[alert] = "We couldn't find an account for #{omninauth_data.email}. Please submit a new request."
     end
+    redirect_to root_path
   end
 
   def omniauth_failure
-    redirect_to root_url, alert: "Login failed"
+    redirect_to root_url,
+                alert: "Login failed unexpectedly. Please reach out to contact@bjc.berkeley.edu"
   end
 end

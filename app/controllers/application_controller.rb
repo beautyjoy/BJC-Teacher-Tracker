@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   def is_admin?
@@ -49,6 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_sentry_user
-    Sentry.set_user(id: session[:user_id])
+    Sentry.set_user(id: session[:user_id], email: current_user&.email)
   end
 end
