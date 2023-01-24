@@ -160,7 +160,7 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase)
+    Teacher.find_by("LOWER(email) = ?", omniauth.email.downcase)
   end
 
   # TODO: Figure out how this should be used. store and check `uid` field
