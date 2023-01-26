@@ -1,10 +1,14 @@
 <nav class='navbar fixed-top navbar-dark navbar-bjc'>
-  <a class='navbar-brand' href='/' aria-label="Home">
-    <%= image_pack_tag('bjc.png', width: 30, height: 30, 'aria-hidden': 'true') %>
+  <span class='navbar-brand'>
+    <a href='/' aria-label="Home">
+      <%= image_pack_tag('bjc.png', width: 30, height: 30, 'aria-hidden': 'true') %>
+    </a>
     <%- if content_for?(:title) %>
       <span class="navbar-title"><%= yield(:title) %></span>
+    <% else %>
+      <span class="navbar-title">BJC Teachers Portal</span>
     <%- end %>
-  </a>
+  </span>
   <div class="trapezoid"></div>
   <div>
     <ul class='nav justify-content-end'>
