@@ -40,7 +40,7 @@ We have worked on the adding following core features and functionality:
 * Start postgres if necessary. `pg_ctlcluster 12 main start`
 
 #### General Installation
-* `rvm use 2.7.5` # Double-check `.ruby-version`
+* `rvm use 2.7.7` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
 * `nvm install 14` Node v14 is needed
