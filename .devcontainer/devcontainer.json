@@ -5,6 +5,6 @@
   "args": {
     "VARIANT": "2",
     "NODE_VERSION": "14" // Set to "none" to skip Node.js installation
-  }
+  },®
   "postCreateCommand": "bundle install && yarn install"
 }
