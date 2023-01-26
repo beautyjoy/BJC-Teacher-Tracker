@@ -1,8 +1,11 @@
 <nav class='navbar fixed-top navbar-dark navbar-bjc'>
-  <a class='navbar-brand' href='/' aria-label="Dashboard">
+  <a class='navbar-brand' href='/' aria-label="Home">
     <%= image_pack_tag('bjc.png', width: 30, height: 30, 'aria-hidden': 'true') %>
+    <%- if content_for?(:title) %>
+      <span class="navbar-title"><%= yield(:title) %></span>
+    <%- end %>
   </a>
-
+  <div class="trapezoid"></div>
   <div>
     <ul class='nav justify-content-end'>
       <% if @is_admin %>

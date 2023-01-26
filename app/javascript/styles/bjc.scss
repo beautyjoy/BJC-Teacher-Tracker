@@ -3,13 +3,19 @@
 
 @font-face {
   font-family: 'work_sansregular';
-  src: url('webfonts/Work_Sans/WorkSans-Regular.eot');
-  src: url('webfonts/Work_Sans/WorkSans-Regular.eot?#iefix') format('embedded-opentype'),
-       url('webfonts/Work_Sans/WorkSans-Regular.woff') format('woff'),
-       url('webfonts/Work_Sans/WorkSans-Regular.ttf') format('truetype'),
-       url('webfonts/Work_Sans/WorkSans-Regular.svg#open_sansregular') format('svg');
+  src: url('../fonts/WorkSans-Regular.woff') format('woff'),
+       url('../fonts/WorkSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+.navbar-title {
+  font-family: 'work_sansregular', Helvetica, Arial, sans-serif;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #FFF;
+  text-decoration: none;
+  font-variant: normal;
 }
 
 .page-title {

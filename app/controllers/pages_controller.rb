@@ -27,6 +27,14 @@ class PagesController < ApplicationController
   end
 
   def show
+    if !current_user
+      session[:redirect_on_login] = pages_path(@page)
+      redirect_to login_path, info: <<~TEXT.html_safe
+        Please log in to view #{@page.title}.
+        If you do not have a login, you may #{view_context.link_to('request access', new_teacher_path)}.
+      TEXT
+      return
+    end
     if @page.admin_permissions? && !is_admin?
       redirect_to pages_path, alert: "You do not have permission to view that page!"
     elsif @page.verified_teacher_permissions? && !is_admin? && !is_verified_teacher?

@@ -20,9 +20,9 @@ class SessionsController < ApplicationController
     else
       Sentry.capture_message("OAuth Login Failure")
       session[:auth_data] = omniauth_data
-      flash[alert] = "We couldn't find an account for #{omniauth_data.email}. Please submit a new request."
+      flash[:alert] = "We couldn't find an account for #{omniauth_data.email}. Please submit a new request."
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   def omniauth_failure
