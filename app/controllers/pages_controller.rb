@@ -27,7 +27,7 @@ class PagesController < ApplicationController
   end
 
   def show
-    if !current_user
+    if !current_user && !@page.public_permissions?
       session[:redirect_on_login] = request.path
       flash[:info] = <<~TEXT
       Please log in to view #{@page.title}.
