@@ -16,5 +16,5 @@ end
 
 OmniAuth.config.on_failure = Proc.new do |env|
   SessionsController.action(:omniauth_failure).call(env)
-  Rails.logger.warn "Omniauth Failure: #{env}"
+  # Rails.logger.warn "Omniauth Failure: #{env}"
 end
