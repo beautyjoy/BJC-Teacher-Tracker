@@ -9,14 +9,12 @@
   font-style: normal;
 }
 
-.page-title {
-  margin-bottom: 0;
+.full {
+  width: unset;
 }
 
-.full {
-  // padding: 0;
-  // margin: 0;
-  width: unset;
+.full ul.pagination {
+  display: flex;
 }
 
 /** Basic HTML **/

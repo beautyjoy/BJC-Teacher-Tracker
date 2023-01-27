@@ -12,7 +12,5 @@
   <hr/>
 </div>
 <div id='sign-up-form-container'>
-  <% if !flash[:success] %>
-    <%= render 'form', teacher: @teacher %>
-  <% end %>
+  <%= render 'form', teacher: @teacher %>
 </div>
