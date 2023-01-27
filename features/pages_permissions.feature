@@ -124,8 +124,8 @@ Scenario: Public can access public pages
 
 Scenario: Public can't access verified teacher pages
     Given I am on the page for slug "test_slug_verified_teacher"
-    Then I should be on the pages index
+    Then I should be on the login page
 
 Scenario: Public can't access admin pages
     Given I am on the page for slug "test_slug_admin"
-    Then I should be on the pages index
+    Then I should be on the login page

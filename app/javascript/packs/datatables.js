@@ -8,9 +8,9 @@ $(function() {
 
   let $tables = $('.js-dataTable').DataTable({
       dom:
-        `<'row form-row'<'col-9 form-inline'i><'col-3 form-inline'lf>>
+        `<'row form-row'<'col-6 form-inline'i><'col-6 form-inline'lf>>
         <'row'<'col-12'tr>>
-        <'row'<'col-sm-12 col-md-5'B><'col-sm-12 col-md-7'p>>`,
+        <'row'<'col-sm-12 col-md-5'B><'col-sm-12 col-md-4'p>>`,
       pageLength: 100,
       lengthMenu: [ [25, 50, 100, 250, -1], [25, 50, 100, 250, "All"] ],
       buttons: [ 'copy', 'csv' ],

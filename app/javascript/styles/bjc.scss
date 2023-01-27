@@ -1,15 +1,20 @@
 @charset "UTF-8";
 @import "./llab.scss";
 
-
-.page-title {
-  margin-bottom: 0;
+@font-face {
+  font-family: 'work_sansregular';
+  src: url('../fonts/WorkSans-Regular.woff') format('woff'),
+       url('../fonts/WorkSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .full {
-  padding: 0;
-  margin: 0;
   width: unset;
+}
+
+.full ul.pagination {
+  display: flex;
 }
 
 /** Basic HTML **/
@@ -21,7 +26,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Open Sans", sans-serif;
+  font-family: "work_sansregular", "Open Sans", sans-serif;
+}
+
+h2 {
+  font-weight: unset;
 }
 
 .anchor {

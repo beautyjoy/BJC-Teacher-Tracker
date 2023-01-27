@@ -7,7 +7,7 @@ code, pre, tt, kbd, samp, var {
 }
 
 html, body { /* default Sans Serif Stack */
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
 }
 
 /* END FONT SETTINGS */
@@ -32,7 +32,6 @@ html {
 .full {
   padding: 1em;
   width: 95%;
-  margin: 1em auto;
 }
 
 .noblur { /* No blur for images */
@@ -124,13 +123,13 @@ code { /* Override bootstrap. */
   display: none;
 }
 
-.navbar-title, .title-small-screen {
-  font-size: 1.5em;
-  font-weight: bold;
-  font-variant: small-caps;
-  color: #003A70;
-  text-align: left;
-}
+// .navbar-title, .title-small-screen {
+//   font-size: 1.5em;
+//   font-weight: bold;
+//   font-variant: small-caps;
+//   color: #003A70;
+//   text-align: left;
+// }
 
 
 .full-bottom-bar {

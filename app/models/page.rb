@@ -64,4 +64,8 @@ class Page < ApplicationRecord
   def verified_teacher_permissions?
     viewer_permissions == "Verified Teacher"
   end
+
+  def public_permissions?
+    viewer_permissions == "Public"
+  end
 end

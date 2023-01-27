@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: These belong in a separate file.
 require "smarter_csv"
 require "csv_process"
 require "activerecord-import"

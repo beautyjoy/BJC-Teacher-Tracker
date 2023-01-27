@@ -5,6 +5,13 @@ module SessionsHelper
     # TODO: remove the :logged_in, replace user_id with user_remember_token
     session[:user_id] = user.id
     session[:logged_in] = true
+    flash[:success] = "Welcome back, #{user.first_name}!"
+    if session[:redirect_on_login].present?
+      redirect_to session[:redirect_on_login]
+      session[:redirect_on_login] = nil
+    else
+      redirect_to root_path
+    end
   end
 
   def current_user

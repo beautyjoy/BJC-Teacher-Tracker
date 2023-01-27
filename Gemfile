@@ -23,8 +23,9 @@ gem "omniauth", "~> 1.0"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-microsoft_graph"
-gem "omniauth-discourse"
+gem "omniauth-discourse", github: "29th/omniauth-discourse"
 gem "omniauth-clever"
+gem "omniauth-yahoo-oauth2", github: "nevans/omniauth-yahoo-oauth2"
 
 # for timezone information for windows users
 gem "tzinfo-data"

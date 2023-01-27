@@ -24,7 +24,8 @@
 
       <div class="col-10">
         <%= render 'layouts/flash' %>
-        <div class="container">
+        <div class="container ml-2">
+          <%- if content_for?(:h1) || content_for?(:header_button) || content_for?(:tabs) %>
           <div class="row">
             <div class="col-9">
               <%- if content_for?(:h1) %>
@@ -41,6 +42,7 @@
               <%- end %>
             </div>
           </div>
+          <% end %>
           <main class="row">
             <div class="full col-12"><%= yield %></div>
           </main>
