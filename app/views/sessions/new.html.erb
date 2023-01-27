@@ -21,53 +21,92 @@
     text-align: left;
     height: 50px;
     vertical-align: middle;
+    color: #FFFFFF;
   }
+
   .social-btn-group .btn svg {
     float: left;
     height: 30px;
     margin: 0 15px;
     min-width: 15px;
+    fill: #FFFFFF
   }
 
+  :root {
+    --google-bg-color: #4285F4;
+    --clever-bg-color: #436cf2;
+    --yahoo-bg-color: #5f01d1;
+    --snap-bg-color: rgb(255, 194, 57);
+  }
   .social-btn-google {
-    background-color: #4285F4;
-    color: #FFFF;
+    background-color: var(--google-bg-color);
   }
 
   .social-btn-google:hover,
-  .social-btn-google:focus,
-  .social-btn-clever:hover,
-  .social-btn-clever:focus {
-    border: 1px solid #2F2F2F;
+  .social-btn-google:focus {
+    color: var(--google-bg-color);
+    background-color: #FFFFFF;
+    border: 2px solid var(--google-bg-color);
   }
 
-  .social-btn-snap {
-    background-color: rgb(255, 194, 57);
+  .social-btn-google:hover svg,
+  .social-btn-google:focus svg {
+    fill: var(--google-bg-color);
+  }
+
+  button.btn.social-btn-snap {
+    background-color: var(--snap-bg-color);
     color: #2F2F2F;
   }
 
-  .social-btn-snap:hover,
-  .social-btn-snap:focus {
+  button.btn.social-btn-snap:hover,
+  button.btn.social-btn-snap:focus {
     background-color: #2F2F2F;
-    border-color: rgb(255, 194, 57);
-    color: rgb(255, 194, 57);
+    border: 2px solid var(--snap-bg-color);
+    color: var(--snap-bg-color);
   }
 
   .social-btn-microsoft {
     background-color: #2F2F2F;
-    color: #FFFFFF;
   }
 
   .social-btn-microsoft:hover,
   .social-btn-microsoft:focus {
     background-color: #FFFF;
-    border-color: #2F2F2F;
+    border: 2px solid #2F2F2F;
     color: #2F2F2F;
   }
 
   .social-btn-clever {
-    background-color: #436cf2;
-    color: #FFFFFF;
+    background-color: var(--clever-bg-color);
+  }
+
+  .social-btn-yahoo {
+    background-color: var(--yahoo-bg-color);
+  }
+
+  .social-btn-clever:hover,
+  .social-btn-clever:focus {
+    color: var(--clever-bg-color);
+    background-color: #FFFFFF;
+    border: 2px solid var(--clever-bg-color);
+  }
+
+  .social-btn-clever:hover svg,
+  .social-btn-clever:focus svg {
+    fill: var(--clever-bg-color);
+  }
+
+  .social-btn-yahoo:hover,
+  .social-btn-yahoo:focus {
+    color: var(--yahoo-bg-color);
+    background-color: #FFFFFF;
+    border: 2px solid var(--yahoo-bg-color);
+  }
+
+  .social-btn-yahoo:hover svg,
+  .social-btn-yahoo:focus svg {
+    fill: var(--yahoo-bg-color);
   }
 
   .social-btn-group .btn > .text {
@@ -81,24 +120,30 @@
     <div class="text-center social-btn-group">
       <%= form_tag('/auth/google_oauth2', method: 'post') do %>
         <button class="btn btn-block social-btn-google">
-          <svg aria-hidden=true width="10%" height="auto" viewBox="0 0 500 500"><path xmlns="http://www.w3.org/2000/svg" d="M179.817 0.889 C 102.035 10.762,38.384 59.806,12.292 129.969 C -5.769 178.536,-4.477 239.334,15.583 284.828 C 52.874 369.402,137.709 416.141,235.168 405.807 C 315.046 397.336,375.590 347.015,394.110 273.700 C 400.725 247.516,402.168 209.776,397.471 185.780 L 396.783 182.263 300.532 182.263 L 204.281 182.263 204.281 216.205 L 204.281 250.147 262.669 250.303 L 321.057 250.459 318.937 256.776 C 304.971 298.403,272.277 323.893,225.382 329.716 C 152.168 338.808,89.320 291.170,81.029 220.300 C 71.214 136.394,132.528 70.605,215.644 75.860 C 248.484 77.936,269.718 87.060,295.265 110.072 C 298.716 113.180,301.881 115.578,302.299 115.400 C 303.853 114.740,356.276 63.474,356.451 62.444 C 356.803 60.366,338.833 44.117,326.825 35.656 C 300.548 17.140,274.542 6.788,241.590 1.725 C 230.961 0.092,190.419 -0.457,179.817 0.889 " stroke="none" fill="#FFFFFF" fill-rule="evenodd"/></svg>
+          <svg aria-hidden=true width="10%" height="auto" viewBox="0 0 500 500"><path xmlns="http://www.w3.org/2000/svg" d="M179.817 0.889 C 102.035 10.762,38.384 59.806,12.292 129.969 C -5.769 178.536,-4.477 239.334,15.583 284.828 C 52.874 369.402,137.709 416.141,235.168 405.807 C 315.046 397.336,375.590 347.015,394.110 273.700 C 400.725 247.516,402.168 209.776,397.471 185.780 L 396.783 182.263 300.532 182.263 L 204.281 182.263 204.281 216.205 L 204.281 250.147 262.669 250.303 L 321.057 250.459 318.937 256.776 C 304.971 298.403,272.277 323.893,225.382 329.716 C 152.168 338.808,89.320 291.170,81.029 220.300 C 71.214 136.394,132.528 70.605,215.644 75.860 C 248.484 77.936,269.718 87.060,295.265 110.072 C 298.716 113.180,301.881 115.578,302.299 115.400 C 303.853 114.740,356.276 63.474,356.451 62.444 C 356.803 60.366,338.833 44.117,326.825 35.656 C 300.548 17.140,274.542 6.788,241.590 1.725 C 230.961 0.092,190.419 -0.457,179.817 0.889 " stroke="none" fill-rule="evenodd"/></svg>
           <div class="text">Sign in with Google</div>
         </button>
       <% end %>
       <%= form_tag('/auth/microsoft_graph', method: 'post') do %>
         <button class="btn btn-block social-btn-microsoft">
-          <svg aria-hidden=true xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg>
+          <svg aria-hidden=true width="21" height="21" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg>
           <div class="text">Sign in with Microsoft</div>
         </button>
       <% end %>
       <%= form_tag('/auth/clever', method: 'post') do %>
         <button class="btn btn-block social-btn-clever">
-          <svg aria-hidden=true width="10%" height="auto" viewBox="0 0 500 500"><path xmlns="http://www.w3.org/2000/svg" d="M174.839 3.077 C 86.291 21.798,20.387 88.220,2.678 176.591 C -1.252 196.206,-1.269 253.319,2.650 272.701 C 18.439 350.775,73.255 413.484,147.097 437.944 C 197.360 454.594,267.351 452.957,315.484 434.004 C 348.942 420.830,400.752 381.990,399.746 370.835 C 399.375 366.717,342.594 307.097,339.043 307.097 C 338.445 307.097,333.771 310.746,328.655 315.206 C 281.690 356.158,230.225 368.341,182.495 349.807 C 83.361 311.313,73.704 158.112,167.097 105.524 C 216.512 77.699,274.224 87.259,326.736 131.969 C 336.872 140.599,335.380 141.626,368.868 102.989 C 402.242 64.484,400.921 66.925,392.581 59.171 C 361.982 30.726,327.830 12.778,287.097 3.736 C 266.553 -0.825,195.271 -1.243,174.839 3.077 " stroke="none" fill="#FFFFFF" fill-rule="evenodd"/></svg>
+          <svg aria-hidden=true width="10%" height="auto" viewBox="0 0 500 500"><path d="M174.839 3.077 C 86.291 21.798,20.387 88.220,2.678 176.591 C -1.252 196.206,-1.269 253.319,2.650 272.701 C 18.439 350.775,73.255 413.484,147.097 437.944 C 197.360 454.594,267.351 452.957,315.484 434.004 C 348.942 420.830,400.752 381.990,399.746 370.835 C 399.375 366.717,342.594 307.097,339.043 307.097 C 338.445 307.097,333.771 310.746,328.655 315.206 C 281.690 356.158,230.225 368.341,182.495 349.807 C 83.361 311.313,73.704 158.112,167.097 105.524 C 216.512 77.699,274.224 87.259,326.736 131.969 C 336.872 140.599,335.380 141.626,368.868 102.989 C 402.242 64.484,400.921 66.925,392.581 59.171 C 361.982 30.726,327.830 12.778,287.097 3.736 C 266.553 -0.825,195.271 -1.243,174.839 3.077 " stroke="none" fill-rule="evenodd"/></svg>
           <div class="text">Sign in with Clever</div>
         </button>
       <% end %>
+      <%= form_tag('/auth/yahoo', method: 'post') do %>
+        <button class="btn btn-block social-btn-yahoo">
+          <svg aria-hidden=true viewBox="0 0 3386.34 3010.5" shape-rendering=geometricPrecision text-rendering=geometricPrecision image-rendering=optimizeQuality fill-rule=evenodd clip-rule=evenodd><path d="M0 732.88h645.84l376.07 962.1 380.96-962.1h628.76l-946.8 2277.62H451.98l259.19-603.53L.02 732.88zm2763.84 768.75h-704.26L2684.65 0l701.69.03-622.5 1501.6zm-519.78 143.72c216.09 0 391.25 175.17 391.25 391.22 0 216.06-175.16 391.23-391.25 391.23-216.06 0-391.19-175.17-391.19-391.23 0-216.05 175.16-391.22 391.19-391.22z" fill-rule="nonzero"/></svg>
+          <div class="text">Sign in with Yahoo</div>
+        </button>
+      <% end %>
       <hr>
-            <%= form_tag('/auth/discourse', method: 'post') do %>
+      <%= form_tag('/auth/discourse', method: 'post') do %>
         <button class="btn btn-default btn-block social-btn-snap">
           <svg aria-hidden=true version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             width="20px" height="auto" viewBox="0 0 95 123">
