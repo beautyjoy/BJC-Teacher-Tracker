@@ -66,6 +66,6 @@ class Page < ApplicationRecord
   end
 
   def public_permissions?
-    viewer_permissions == 'Public'
+    viewer_permissions == "Public"
   end
 end
