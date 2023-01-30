@@ -68,9 +68,9 @@ class PagesController < ApplicationController
   def load_page
     @pages ||= Page.where(viewer_permissions: Page.viewable_pages(current_user))
     if params[:id]
-      @page ||= Page.find_by(id: params[:id])
+      @page ||= Page.find_by!(id: params[:id])
     elsif params[:url_slug]
-      @page ||= Page.find_by(url_slug: params[:url_slug])
+      @page ||= Page.find_by!(url_slug: params[:url_slug])
     end
   end
 
