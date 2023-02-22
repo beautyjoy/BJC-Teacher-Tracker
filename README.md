@@ -1,4 +1,12 @@
 # BJC Teacher Tracker
+Sp23 Badges:
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/maintainability)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/maintainability) •
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/test_coverage)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/test_coverage)
+
+---
+
+Previous Badges:
 
 ![Specs Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg) •
 [![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
