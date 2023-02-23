@@ -53,12 +53,12 @@ jobs:
         # SimpleCov runs with the Cobertura formatter for codeclimate
         # CCTR expects a file named cobertura.xml
         run: |
-          # bundle exec cucumber
+          bundle exec cucumber
+          cp coverage/coverage.xml ./cobertura.xml
           $CCTR format-coverage --output coverage/codeclimate.cucumber.json --input-type cobertura
+          bundle exec rspec
           cp coverage/coverage.xml ./cobertura.xml
-          # bundle exec rspec
           $CCTR format-coverage --output coverage/codeclimate.rspec.json --input-type cobertura
-          cp coverage/coverage.xml ./cobertura.xml
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
