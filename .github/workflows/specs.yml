@@ -27,7 +27,6 @@ jobs:
       DISPLAY: ':99' # For chromedriver
       CCTR: ./cc-test-reporter
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -39,7 +38,6 @@ jobs:
         with:
           ruby-version: 2.7.7
           bundler-cache: true
-
       - name: Setup Code Climate
         run: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
@@ -54,19 +52,15 @@ jobs:
         # CCTR expects a file named cobertura.xml
         run: |
           bundle exec cucumber
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.cucumber.json -t cobertura
           bundle exec rspec
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
+          cp coverage/coverage.xml ./cobertura.xml
+          $CCTR format-coverage -o coverage/codeclimate.rspec.json -t cobertura
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Publish code coverage
-        run: |
-          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-          $CCTR sum-coverage coverage/codeclimate.*.json
-          $CCTR upload-coverage --id $CC_TEST_REPORTER_ID
-          $CCTR after-build --id $CC_TEST_REPORTER_ID
       # - name: Publish Code Climate
       #  run: |
       #    export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
