@@ -1,6 +1,6 @@
 project:
   name: 'BJC Teacher Tracker'
-  owner: 'CS169L-22'
+  owner: 'CS169L-23'
   teamId: 'BJC Teacher Tracker'
   identities:
     pivotal: 'https://www.pivotaltracker.com/n/projects/2406982'
@@ -13,8 +13,8 @@ project:
       pivotalUsername: 'governifyauditor'
       herokuEmail: 'governify.auditor@gmail.com'
     member2:
-      name: 'Mitchell'
-      surname: 'Wong' 
-      githubUsername: 'mitchell2001wong'
-      pivotalUsername: 'mitchell2001wong'
-      herokuEmail: 'mitchell2001wong@gmail.com'
+      name: 'Chuang'
+      surname: 'Yao' 
+      githubUsername: 'chaung-yao-ucb'
+      pivotalUsername: 'chuangy'
+      herokuEmail: 'chuang_yao@berkeley.edu'
