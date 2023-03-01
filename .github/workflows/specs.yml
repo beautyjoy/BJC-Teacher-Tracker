@@ -48,8 +48,6 @@ jobs:
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:migrate
       - name: Run ${{ matrix.suite }}
-        # SimpleCov runs with the Cobertura formatter for codeclimate
-        # CCTR expects a file named cobertura.xml
         run: |
           bundle exec $SUITE
           $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
@@ -58,7 +56,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Publish Code Climate
-       run: |
+        run: |
          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
          $CCTR sum-coverage coverage/codeclimate.*.json
          $CCTR upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }}
