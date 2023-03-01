@@ -17,9 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite:
-          - cucumber
-          - rspec
+        suite: [cucumber, rspec]
     env:
       TZ: America/Los_Angeles
       RAILS_ENV: test
@@ -49,8 +47,8 @@ jobs:
       - run: bundle exec rake db:migrate
       - name: Run ${{ matrix.suite }}
         run: |
-          bundle exec $SUITE
-          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
+          bundle exec ${{ matrix.suite }}
+          $CCTR format-coverage --output coverage/codeclimate.${{ matrix.suite }}.json --input-type simplecov
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
