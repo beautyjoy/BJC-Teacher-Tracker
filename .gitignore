@@ -160,3 +160,6 @@ yarn-debug.log*
 
 # Heroku DB exports
 *.dump*
+
+# CodeClimate local tests
+cc-test-reporter
