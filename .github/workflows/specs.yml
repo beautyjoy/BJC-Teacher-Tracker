@@ -16,10 +16,10 @@ jobs:
           - 5432:5432
     strategy:
       fail-fast: false
-      # matrix:
-      #   suite:
-      #     - cucumber
-      #     - rspec
+      matrix:
+        suite:
+          - cucumber
+          - rspec
     env:
       TZ: America/Los_Angeles
       RAILS_ENV: test
@@ -51,12 +51,8 @@ jobs:
         # SimpleCov runs with the Cobertura formatter for codeclimate
         # CCTR expects a file named cobertura.xml
         run: |
-          bundle exec cucumber
-          cp coverage/coverage.xml ./cobertura.xml
-          $CCTR format-coverage -o coverage/codeclimate.cucumber.json -t cobertura
-          bundle exec rspec
-          cp coverage/coverage.xml ./cobertura.xml
-          $CCTR format-coverage -o coverage/codeclimate.rspec.json -t cobertura
+          bundle exec $SUITE
+          $CCTR format-coverage --output coverage/codeclimate.$SUITE.json --input-type simplecov
       - name: CodeCov Coverage
         uses: codecov/codecov-action@v2
         with:
