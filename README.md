@@ -37,9 +37,10 @@ We have worked on the adding following core features and functionality:
 
 ## Installation:
 
-### Environmental variable setup
+### Environmental Variable
 * We are not using `application.yml` (rails env framework). Instead, we use a `.env` file at directory root to load all env vars. Use `.env.example` as a reference for env format.
 * Use tools like [overmind](https://github.com/DarthSim/overmind) or [foreman](https://github.com/ddollar/foreman) to load in the env vars.
+* You probably need to configure your own oauth keys and database name/passwords.
 
 ### Postgres Installation
 
@@ -52,21 +53,22 @@ We have worked on the adding following core features and functionality:
 * Create a postgres user.
   * `sudo su - postgres` (to get into postgres shell)
   * `createuser --interactive --pwprompt` (in postgres shell)
-  * Save these information in `.env` file ()
+  * Save `DB_USER` and `DB_PASSWORD` fields in the `.env` file.
 * Start postgres if necessary. `pg_ctlcluster 12 main start`
   * Note: if you are using WSL2 on windows, the command to start postgres is `sudo service postgresql start`
 
-### General Installation
+### Framework/Gem Installation
 * `rvm use 2.7.7` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
 * `nvm install 14` Node v14 is needed
-* `yarn install`
+* `yarn install` Yarn is needed
 
-## Few Things to Know:
+### Spin Up Server
+* Use tools like [overmind](https://github.com/DarthSim/overmind) or [foreman](https://github.com/ddollar/foreman) to boot up server with env vars loaded.
+* If you are using `overmind`, you can simply `npm run dev`.
 
-- Before running our application on localhost (`bundle exec rails server`, default port 3000), the encrypted application.yml.asc file in the config folder needs to be unencrypted into the application.yml file. Only Michael, the current customer (ball@berkeley.edu), has the secret key to do this.
-- You may need to configure a new oauth instead of the one in application.yml
+### Available Commands
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber`
 - To make someone an admin use db console access
@@ -78,7 +80,6 @@ We have worked on the adding following core features and functionality:
     WHERE Email LIKE '%@berkeley.edu%'
     ;
     ```
-
 
 ## JavaScript and CSS with Webpack
 

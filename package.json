@@ -27,5 +27,8 @@
   },
   "engines": {
     "node": "^14.0"
+  },
+  "scripts": {
+    "dev": "overmind s -f Procfile.dev"
   }
 }
