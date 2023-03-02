@@ -37,19 +37,26 @@ We have worked on the adding following core features and functionality:
 
 ## Installation:
 
-#### Postgres Installation (MacOS):
+### Environmental variable setup
+* We are not using `application.yml` (rails env framework). Instead, we use a `.env` file at directory root to load all env vars. Use `.env.example` as a reference for env format.
+* Use tools like [overmind](https://github.com/DarthSim/overmind) or [foreman](https://github.com/ddollar/foreman) to load in the env vars.
+
+### Postgres Installation
+
+#### MacOS:
 * `brew install postgresql chromedriver`
 * Start postgres if necessary. `brew services start postgresql`
 
-#### Postgres Installation (Linux):
+#### Linux/WSL:
 * `sudo apt install postgresql`
 * Create a postgres user.
   * `sudo su - postgres` (to get into postgres shell)
   * `createuser --interactive --pwprompt` (in postgres shell)
-  * Save these information in `database.yml` under `default`. (`username: [username]` `password: [password]`)
+  * Save these information in `.env` file ()
 * Start postgres if necessary. `pg_ctlcluster 12 main start`
+  * Note: if you are using WSL2 on windows, the command to start postgres is `sudo service postgresql start`
 
-#### General Installation
+### General Installation
 * `rvm use 2.7.7` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
