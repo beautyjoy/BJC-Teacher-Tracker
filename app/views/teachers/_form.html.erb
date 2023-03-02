@@ -66,9 +66,9 @@
 
   <div class='form-group row'>
     <div class='col-12'>
-      <%= f.label :more_info, "More Information" %>
+      <%= f.label :more_info, "More Information", class: "label-required" %>
       <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
-        class: "form-control" %>
+        class: "form-control", required: true %>
     </div>
   </div>
   <%= f.hidden_field :school_id %>
@@ -91,13 +91,13 @@
     var status_val = $( "#teacher_status" ).val();
 
     if (status_val == 3) {
-      $(".row:nth-child(7) label").prop('class', "label-required")
-      $("#teacher_more_info").prop('required', true);
+      // $(".row:nth-child(7) label").prop('class', "label-required")
+      // $("#teacher_more_info").prop('required', true);
       $("#teacher_more_info").prop('placeholder', "Please type the name of your host teacher here (Required)");
     }
     else if (status_val != 3) {
-      $(".row:nth-child(7) label").prop('class', "")
-      $("#teacher_more_info").prop('required', false);
+      // $(".row:nth-child(7) label").prop('class', "")
+      // $("#teacher_more_info").prop('required', false);
       $("#teacher_more_info").prop('placeholder', "ex. I'm teaching a college course");
     }
   }

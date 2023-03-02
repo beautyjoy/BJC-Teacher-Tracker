@@ -8,7 +8,7 @@ Background: Test Data
     Given a valid teacher exists
     Given I seed data
 
-Scenario: Correctly filling out and succesful form submission
+Scenario: Correctly filling out and successful form submission
     Given "kpzhu@berkeley.edu" is not in the database
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
@@ -28,7 +28,7 @@ Scenario: Correctly filling out and succesful form submission
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
 
-Scenario: Not Correctly filling out and unsuccesful form submission
+Scenario: Not Correctly filling out and unsuccessful form submission
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
