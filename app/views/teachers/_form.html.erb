@@ -67,8 +67,8 @@
   <div class='form-group row'>
     <div class='col-12'>
       <%= f.label :more_info, "More Information", class: "label-required" %>
-      <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
-        class: "form-control", required: true %>
+      <%= f.text_area :more_info, placeholder: "ex. I'm teaching a college course",
+        class: "form-control", required: true, rows: "2" %>
     </div>
   </div>
   <%= f.hidden_field :school_id %>
