@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_07_003428) do
+ActiveRecord::Schema.define(version: 2023_03_02_040954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
     t.text "html"
+    t.boolean "default"
+    t.string "category"
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
