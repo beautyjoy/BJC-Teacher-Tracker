@@ -15,11 +15,8 @@ jobs:
         ports:
           - 5432:5432
     strategy:
-      fail-fast: false
       matrix:
-        suite:
-          - cucumber
-          - rspec
+        suite: [cucumber, rspec]
     env:
       TZ: America/Los_Angeles
       RAILS_ENV: test
