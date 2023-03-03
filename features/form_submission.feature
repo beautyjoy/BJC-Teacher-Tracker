@@ -43,6 +43,26 @@ Scenario: Not Correctly filling out and unsuccessful form submission
     Then  The "#new_teacher" form is invalid
     And  I am on the BJC home page
 
+Scenario: Missing the compulsory more info field
+    Given "kpzhu@berkeley.edu" is not in the database
+    Given I am on the BJC home page
+    And   I enter my "First Name" as "Kimberly"
+    And   I enter my "Last Name" as "Zhu"
+    And   I enter my "School Email" as "TESTkpzhu@berkeley.edu"
+    And   I enter my "Snap! Username" as "kpzhu"
+    And   I set my status as "I am teaching BJC as an AP CS Principles course."
+    And   I set my education level target as "High School"
+    And   I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
+    And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
+    And   I enter my "City" as "Cupertino"
+    And   I select "CA" from "State"
+    And   I enter my "School Website" as "https://chs.fuhsd.org"
+    And   I select "University" from "Grade Level"
+    And   I select "Public" from "School Type"
+    And   I press "Submit"
+    Then  The "#new_teacher" form is invalid
+    And   I am on the BJC home page
+
 Scenario: Websites validation - two invalid websites
     Given I am on the BJC home page
     And I enter my "First Name" as "Jonathan"
@@ -51,6 +71,7 @@ Scenario: Websites validation - two invalid websites
     And I enter my "Personal or Course Website" as "jonathancenacom"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
+    And I fill in "More Information" with "I am teaching BJC"
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
@@ -68,6 +89,7 @@ Scenario: Websites validation - one invalid website
     And I enter my "School Email" as "jonathancena@wwe.com"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
+    And I fill in "More Information" with "I am teaching BJC"
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
@@ -85,6 +107,7 @@ Scenario: Websites validation - one valid website
     And I enter my "School Email" as "jonathancena@wwe.com"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
+    And I fill in "More Information" with "I am teaching BJC"
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And I enter my "City" as "Palo Alto"
     And I select "CA" from "State"
@@ -104,6 +127,7 @@ Scenario: Filling out new form with existing email should not update information
     And I enter my "School Email" as "alice@berkeley.edu"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
     And I set my education level target as "High School"
+    And I fill in "More Information" with "I am teaching BJC"
     And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And I enter my "City" as "Cupertino"
     And I select "CA" from "State"
@@ -125,6 +149,7 @@ Scenario: Filling out new form with existing Snap should not create new teacher
     And I enter my "School Email" as "mallory@berkeley.edu"
     And I enter my "Snap! Username" as "aliceadams"
     And I set my status as "I am teaching BJC as an AP CS Principles course."
+    And I fill in "More Information" with "I am teaching BJC"
     And I set my education level target as "High School"
     And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And I enter my "City" as "Cupertino"
