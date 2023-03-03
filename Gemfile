@@ -19,12 +19,12 @@ gem "webpacker", "~> 4"
 gem "bootsnap", ">= 1.4.4", require: false
 
 # Login via 3rd party services.
-gem "omniauth", "~> 1.0"
+gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-microsoft_graph"
 gem "omniauth-discourse", github: "29th/omniauth-discourse"
-gem "omniauth-clever"
+gem "omniauth-clever", github: "ClassTagInc/omniauth-clever", branch: "allow-newer-omniauth-oauth2-versions"
 gem "omniauth-yahoo-oauth2", github: "nevans/omniauth-yahoo-oauth2"
 
 # for timezone information for windows users

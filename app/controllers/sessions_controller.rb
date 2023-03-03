@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :omniauth_callback, if: -> { Rails.env.development? }
+
   def new; end
 
   def create; end
