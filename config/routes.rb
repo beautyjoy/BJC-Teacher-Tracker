@@ -19,15 +19,9 @@ Rails.application.routes.draw do
   resources :pages, param: :url_slug
   resources :email_templates, only: [:index, :update, :edit]
 
-  # The line below would be unnecessary since we use Google.
-  # sessions#new could be left as an empty Ruby function.
-  # We just need to define a "new" view to prompt for user name,
-  # and password.
   get    "/login",  to: "sessions#new",     as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"
-
   get "/auth/:provider/callback", to: "sessions#omniauth_callback"
-  post "/auth/:provider/callback", to: "sessions#omniauth_callback"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 end
