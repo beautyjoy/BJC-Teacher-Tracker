@@ -5,8 +5,7 @@ require "simplecov-console"
 
 SimpleCov.start "rails" do
   command_name "cucumber"
-  enable_coverage :branch
-
+  # enable_coverage :branch
   # formatter SimpleCov::Formatter::MultiFormatter.new([
   #   SimpleCov::Formatter::Console,
   #   SimpleCov::Formatter::HTMLFormatter
