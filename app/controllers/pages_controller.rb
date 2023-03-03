@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     @page.last_editor = current_user
 
     if @page.save
-      flash[:success] = "Created #{@page.title} page successfully."
+      flash[:success] = "Created #{@page.title} page (#{@page.category}) successfully."
       redirect_to action: "show", url_slug: @page.url_slug
     else
       flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:url_slug, :html, :title, :viewer_permissions)
+    params.require(:page).permit(:url_slug, :html, :title, :category, :viewer_permissions)
   end
 
   # def liquid_assigns

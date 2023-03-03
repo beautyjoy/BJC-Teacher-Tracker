@@ -35,6 +35,14 @@ class Page < ApplicationRecord
 
   default_scope { order(title: :asc) }
 
+  def get_all_categories
+    Page.all.map(&:category)
+  end 
+
+  def has_category?
+    self.category.present?
+  end
+
   def to_param
     self.url_slug
   end
@@ -67,5 +75,9 @@ class Page < ApplicationRecord
 
   def public_permissions?
     viewer_permissions == "Public"
+  end
+
+  def display_category
+    category || "Uncategorized"
   end
 end

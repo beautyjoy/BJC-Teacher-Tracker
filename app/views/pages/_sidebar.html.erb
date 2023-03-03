@@ -1,13 +1,22 @@
 <div class="container">
   <h2 style="text-align: center">All Pages</h2>
   <ul class="nav nav-pills nav-fill flex-column">
-    <%- pages.each do |page| %>
-        <%- is_current = page == current_page %>
+    <%- categories.each do |key, value| %>
       <li class="nav-item">
-        <a class="nav-link <%= "active" if is_current %>"
-          <%= "aria-current=\"page\"" if is_current %>
-          href="<%= page_path(page) %>"><%= page.title %>
-        </a>
+        <%- if value[0].has_category? %>
+          <p class="font-weight-bold"><%= key %> </p>
+        <% end %>
+        <ul class="nav flex-column">
+          <%- value.each do |page| %>
+            <%- is_current = page == current_page %>
+              <li class="nav-item">
+                <a class="nav-link <%= "active" if is_current %>"
+                  <%= "aria-current=\"page\"" if is_current %>
+                  href="<%= page_path(page) %>"><%= page.title %>
+                </a>
+              </li>
+          <%- end %>
+        </ul>
       </li>
     <%- end %>
   </ul>
