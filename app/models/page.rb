@@ -37,7 +37,7 @@ class Page < ApplicationRecord
 
   def get_all_categories
     Page.all.map(&:category)
-  end 
+  end
 
   def has_category?
     self.category.present?

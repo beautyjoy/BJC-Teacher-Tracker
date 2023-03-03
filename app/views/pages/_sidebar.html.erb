@@ -10,7 +10,7 @@
               <%- value.each do |page| %>
                 <%- is_current = page == current_page %>
                   <li class="nav">
-                    <a class="nav-link <%= "active" if is_current %>"
+                    <a id="pagelink_<%= page.title %>" class="nav-link <%= "active" if is_current %>"
                       <%= "aria-current=\"page\"" if is_current %>
                       href="<%= page_path(page) %>"><%= page.title %>
                     </a>

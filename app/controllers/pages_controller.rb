@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     @page.last_editor = current_user
 
     if @page.save
-      flash[:success] = "Created #{@page.title} page (#{@page.category}) successfully."
+      flash[:success] = "Created #{@page.title} page successfully."
       redirect_to action: "show", url_slug: @page.url_slug
     else
       flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
