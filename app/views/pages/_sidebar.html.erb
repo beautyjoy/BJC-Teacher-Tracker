@@ -3,20 +3,21 @@
   <ul class="nav nav-pills nav-fill flex-column">
     <%- categories.each do |key, value| %>
       <li class="nav-item">
-        <%- if value[0].has_category? %>
-          <p class="font-weight-bold"><%= key %> </p>
-        <% end %>
-        <ul class="nav flex-column">
-          <%- value.each do |page| %>
-            <%- is_current = page == current_page %>
-              <li class="nav-item">
-                <a class="nav-link <%= "active" if is_current %>"
-                  <%= "aria-current=\"page\"" if is_current %>
-                  href="<%= page_path(page) %>"><%= page.title %>
-                </a>
-              </li>
-          <%- end %>
-        </ul>
+        <a class="nav-link font-weight-bold" data-toggle="collapse" 
+          href="#category-<%= key %>" role="button" aria-expanded="false" aria-controls="category-<%= key %>"><%= key %> </a>
+          <div class="collapse" id="category-<%= key %>">
+            <ul class="flex-column card card-body" >
+              <%- value.each do |page| %>
+                <%- is_current = page == current_page %>
+                  <li class="nav">
+                    <a class="nav-link <%= "active" if is_current %>"
+                      <%= "aria-current=\"page\"" if is_current %>
+                      href="<%= page_path(page) %>"><%= page.title %>
+                    </a>
+                  </li>
+              <%- end %>
+            </ul>
+          </div>
       </li>
     <%- end %>
   </ul>
