@@ -15,6 +15,6 @@ project:
     member2:
       name: 'Chuang'
       surname: 'Yao' 
-      githubUsername: 'chaung-yao-ucb'
+      githubUsername: 'chuang-yao-ucb'
       pivotalUsername: 'chuangy'
       herokuEmail: 'chuang_yao@berkeley.edu'
