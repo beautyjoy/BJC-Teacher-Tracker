@@ -106,6 +106,8 @@ class TeachersController < ApplicationController
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
+    else
+      @teacher.ip_history << request.remote_ip unless @teacher.ip_history.include?(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end

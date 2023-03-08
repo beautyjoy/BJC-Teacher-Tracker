@@ -15,6 +15,8 @@ class SessionsController < ApplicationController
     user = Teacher.user_from_omniauth(omniauth_data)
     if user.present?
       user.last_session_at = Time.zone.now
+      user.ip_history << request.remote_ip unless user.ip_history.include?(request.remote_ip)
+      user.session_count += 1
       user.save!
       log_in(user)
     else
