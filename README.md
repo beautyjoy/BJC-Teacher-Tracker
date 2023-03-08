@@ -111,3 +111,11 @@ If bundler install runs successfully, continue with the following commands to co
 - `heroku run rake db:migrate`
 - `figaro heroku:set -e production`
 - `heroku open`
+
+
+### CodeClimate Local Test
+
+
+```
+https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64
+```
