@@ -5,7 +5,8 @@ Sp23 Badges:
 [![Build & Rspec & Cucumber](https://github.com/cs169/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg)](https://github.com/cs169/BJC-Teacher-Tracker) •
 [![Robocop](https://github.com/cs169/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)](https://github.com/cs169/BJC-Teacher-Tracker) •
 [![Maintainability](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/maintainability)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/maintainability) •
-[![Test Coverage](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/test_coverage)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/test_coverage)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/test_coverage) •
+[![Pivotal Tracker](https://user-images.githubusercontent.com/67244883/154180887-f803124e-0156-4322-899d-ba475139d60d.png)](https://www.pivotaltracker.com/n/projects/2406982)
 
 ---
 
