@@ -4,7 +4,7 @@ project:
   teamId: 'BJC Teacher Tracker'
   identities:
     pivotal: 'https://www.pivotaltracker.com/n/projects/2406982'
-    heroku: 'https://bjc-teacher-tracker-2022.herokuapp.com/'
+    heroku: 'https://sp23-03-bjc-teachers.herokuapp.com/'
   members:
     member1:
       name: 'Governify'
