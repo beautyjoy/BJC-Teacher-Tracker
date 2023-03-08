@@ -35,8 +35,9 @@ class Page < ApplicationRecord
 
   default_scope { order(title: :asc) }
 
-  def get_all_categories
-    Page.all.map(&:category)
+  # Not really being used right now, but could be useful
+  def self.all_categories
+    Page.pluck(:category).uniq
   end
 
   def has_category?

@@ -1,20 +1,23 @@
 <div class="container">
   <h2 style="text-align: center">All Pages</h2>
   <ul class="nav nav-pills nav-fill flex-column">
-    <%- categories.each do |key, value| %>
+    <%- categories.each do |category, pages_in_category| %>
       <li class="nav-item">
+        <% @escaped_category = category.to_s.parameterize %>
         <a class="nav-link font-weight-bold" data-toggle="collapse" 
-          href="#category-<%= key %>" role="button" aria-expanded="false" aria-controls="category-<%= key %>"><%= key %> </a>
-          <div class="collapse" id="category-<%= key %>">
+          href="#category-<%= @escaped_category %>" 
+          role="button" aria-expanded="false" 
+          aria-controls="category-<%= @escaped_category %>"><%= category %> </a>
+          <div class="collapse" id="category-<%= @escaped_category %>">
             <ul class="flex-column card card-body" >
-              <%- value.each do |page| %>
+              <%- pages_in_category.each do |page| %>
                 <%- is_current = page == current_page %>
-                  <li class="nav">
-                    <a id="pagelink_<%= page.title %>" class="nav-link <%= "active" if is_current %>"
-                      <%= "aria-current=\"page\"" if is_current %>
-                      href="<%= page_path(page) %>"><%= page.title %>
-                    </a>
-                  </li>
+                <li class="nav">
+                  <a id="pagelink_<%= page.title %>" class="nav-link <%= "active" if is_current %>"
+                    <%= "aria-current=\"page\"" if is_current %>
+                    href="<%= page_path(page) %>"><%= page.title %>
+                  </a>
+                </li>
               <%- end %>
             </ul>
           </div>
