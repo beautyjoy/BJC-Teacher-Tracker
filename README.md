@@ -71,7 +71,7 @@ We have worked on the adding following core features and functionality:
 ### Available Commands
 - For RSpec tests run `bundle exec rspec`
 - For Cucumber tests run `bundle exec cucumber`
-- For Rubocop check run `bundle exec rubocop` (Autocorrect all with `bundle exec rubocop -A`)
+- For Rubocop check run `bundle exec rubocop` (Autocorrect all with `bundle exec rubocop -a`)
 - To make someone an admin use db console access
   - First run `heroku pg:psql` or `psql bjc_teachers_dev`
   - Then
