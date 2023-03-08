@@ -1,6 +1,8 @@
 # BJC Teacher Tracker
 Sp23 Badges:
 
+[![Bluejay Dashboard](https://img.shields.io/badge/Bluejay-Dashboard_BJC Teacher Tracker-blue.svg)](http://dashboard.bluejay.governify.io/dashboard/script/dashboardLoader.js?dashboardURL=https://reporter.bluejay.governify.io/api/v4/dashboards/tpa-CS169L-23-GH-cs169_BJC-Teacher-Tracker/main)
+
 [![Maintainability](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/maintainability)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/maintainability) •
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9bedc69e2aa0c0b704cd/test_coverage)](https://codeclimate.com/github/cs169/BJC-Teacher-Tracker/test_coverage)
 
