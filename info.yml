@@ -1,7 +1,7 @@
 project:
-  name: 'BJC Teacher Tracker'
+  name: 'BJC-Teacher-Tracker'
   owner: 'CS169L-23'
-  teamId: 'BJC Teacher Tracker'
+  teamId: '03'
   identities:
     pivotal: 'https://www.pivotaltracker.com/n/projects/2406982'
     heroku: 'https://sp23-03-bjc-teachers.herokuapp.com/'
