@@ -112,7 +112,7 @@ We have worked on the adding following core features and functionality:
 - Make your local changes and start the commit process
 - `git add .`
 - `git commit -m "<Message>"`
-- `git push heroku master`
+- `git push heroku master` (If this fails, try commenting the release command in `Procfile` for this first deployment only and go on to the next step. After you are done with the deployment, uncomment back the release command again. For more information, see [this PR](https://github.com/cs169/BJC-Teacher-Tracker/pull/15).)
 
 If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
 - `heroku addons:create heroku-postgresql` (or, create and attach a new postgresql database on Heroku dashboard manually)
