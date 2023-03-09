@@ -123,8 +123,7 @@ If bundler install runs successfully, continue with the following commands to co
 - `heroku open`
 
 
-### CodeClimate Local Test
-
+## CodeClimate Local Test
 
 ```
 https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64
