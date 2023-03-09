@@ -4,7 +4,7 @@ project:
   teamId: '03'
   identities:
     pivotal: 'https://www.pivotaltracker.com/n/projects/2406982'
-    heroku: 'https://sp23-03-bjc-teachers.herokuapp.com/'
+    heroku: 'https://sp23-03-bjc-teachers.herokuapp.com'
   members:
     member1:
       name: 'Chuang'
@@ -16,13 +16,13 @@ project:
       name: 'Yu'
       surname: 'Long' 
       githubUsername: 'Yu Long'
-      pivotalUsername: 'chuangy'
+      pivotalUsername: 'yulong'
       herokuEmail: 'long_yu@berkeley.edu'
     member3:
       name: 'Owen'
       surname: 'Tanuwidjaja' 
       githubUsername: 'owentanuwidjaja'
-      pivotalUsername: 'chuangy'
+      pivotalUsername: 'owentanuwidjaja'
       herokuEmail: 'owen.tanuwidjaja@berkeley.edu'
     member4:
       name: 'Matthew'
