@@ -10,10 +10,12 @@
 #  education_level    :integer          default(NULL)
 #  email              :string
 #  first_name         :string
+#  ip_history         :inet             default([]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
 #  personal_website   :string
+#  session_count      :integer          default(0)
 #  snap               :string
 #  status             :integer
 #  created_at         :datetime
@@ -162,6 +164,13 @@ class Teacher < ApplicationRecord
   def self.user_from_omniauth(omniauth)
     Teacher.find_by("LOWER(email) = ?", omniauth.email.downcase)
   end
+
+  def try_append_ip(ip)
+    return if ip_history.include?(ip)
+    self.ip_history << ip
+    save
+  end
+
 
   # TODO: Figure out how this should be used. store and check `uid` field
   # def self.validate_access_token(omniauth)
