@@ -7,24 +7,30 @@ project:
     heroku: 'https://sp23-03-bjc-teachers.herokuapp.com'
   members:
     member1:
+      name: 'Governify'
+      surname: 'Auditor' 
+      githubUsername: 'governifyauditor'
+      pivotalUsername: 'governifyauditor'
+      herokuEmail: 'governify.auditor@gmail.com'
+    member2:
       name: 'Chuang'
       surname: 'Yao' 
       githubUsername: 'chuang-yao-ucb'
       pivotalUsername: 'chuangy'
       herokuEmail: 'chuang_yao@berkeley.edu'
-    member2:
+    member3:
       name: 'Yu'
       surname: 'Long' 
       githubUsername: 'Yu Long'
       pivotalUsername: 'yulong'
       herokuEmail: 'long_yu@berkeley.edu'
-    member3:
+    member4:
       name: 'Owen'
       surname: 'Tanuwidjaja' 
       githubUsername: 'owentanuwidjaja'
       pivotalUsername: 'owentanuwidjaja'
       herokuEmail: 'owen.tanuwidjaja@berkeley.edu'
-    member4:
+    member5:
       name: 'Matthew'
       surname: 'Kao' 
       githubUsername: 'Matthew Kao'
