@@ -32,7 +32,6 @@ RSpec.describe SessionsController, type: :controller do
 
     it "should append current ip address when teacher logs in" do
       SessionsController.any_instance.stub(:omniauth_info).and_return(omniauth_data)
-      ip_addresses = Teacher.find_by(first_name: "Short").ip_history
       subject
       expect(Teacher.find_by(first_name: "Short").ip_history).to include(request.remote_ip)
     end
