@@ -75,14 +75,22 @@ We have worked on the adding following core features and functionality:
 - For Cucumber tests run `bundle exec cucumber`
 - For Rubocop check run `bundle exec rubocop` (Autocorrect all with `bundle exec rubocop -a`)
 - To make someone an admin use db console access
-  - First run `heroku pg:psql` or `psql bjc_teachers_dev`
-  - Then
-    ```
-    UPDATE teachers
-    SET admin = true
-    WHERE Email LIKE '%@berkeley.edu%'
-    ;
-    ```
+  - Using psql
+    - First run `heroku pg:psql` or `psql bjc_teachers_dev`
+    - Then
+      ```
+      UPDATE teachers
+      SET admin = true
+      WHERE Email LIKE '%@berkeley.edu%'
+      ;
+      ```
+      Of course, you can swap in the email of your choice.
+  - Using rails console
+    - First run `heroku run rails console` or `rails console` to get into rails console
+    - Then
+      ```
+      Teacher.where("email LIKE '%@berkeley.edu%'").update_all(admin: true)
+      ```
 
 ## JavaScript and CSS with Webpack
 
@@ -97,20 +105,21 @@ We have worked on the adding following core features and functionality:
 ## Steps to Deploying on Heroku
 
 - ... create a heroku app
+- `heroku stack:set heroku-20` (Ruby 2.7.7 is not supported on latest stack heroku-22. Double check your Ruby version though)
 - `heroku buildpacks:set heroku/nodejs` # this must be the first buildpack.
 - `heroku buildpacks:add --index 2 heroku/ruby`
-- `git remote set-url heroku https://git.heroku.com/bjc-teachers.git`
+- `git remote set-url heroku https://git.heroku.com/bjc-teachers.git` (or whatever your heroku deployment repository is)
 - Make your local changes and start the commit process
 - `git add .`
 - `git commit -m "<Message>"`
 - `git push heroku master`
 
 If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
-- `heroku addons:create heroku-postgresql`
-- `heroku run rake db:drop`
-- `heroku run rake db:schema:load`
-- `heroku run rake db:migrate`
-- `figaro heroku:set -e production`
+- `heroku addons:create heroku-postgresql` (or, create and attach a new postgresql database on Heroku dashboard manually)
+- `heroku run bin/rails db:drop` (if this fails, you can skip this step)
+- `heroku run bin/rails db:schema:load`
+- `heroku run bin/rails db:seed`
+- `figaro heroku:set -e production` (or `staging`, depending on the your needs)
 - `heroku open`
 
 
