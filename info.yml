@@ -21,7 +21,7 @@ project:
     member3:
       name: 'Yu'
       surname: 'Long' 
-      githubUsername: 'Yu Long'
+      githubUsername: 'Reimirno'
       pivotalUsername: 'yulong'
       herokuEmail: 'long_yu@berkeley.edu'
     member4:
@@ -33,6 +33,6 @@ project:
     member5:
       name: 'Matthew'
       surname: 'Kao' 
-      githubUsername: 'Matthew Kao'
+      githubUsername: 'Matthew-Kao'
       herokuEmail: 'matthewkao@berkeley.edu'      
       
