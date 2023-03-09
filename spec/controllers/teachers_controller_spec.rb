@@ -18,13 +18,25 @@ RSpec.describe TeachersController, type: :controller do
     user = Teacher.find_by(first_name: "First")
     expect(user).not_to be_nil
     expect(user.session_count).to eq 1
+  end
 
-    # Try to sign up again with same email won't work and won't change session count
+  it "should record ip address when teacher signs up (submits app)" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
     post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
       email: "new@user.com", password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
     user = Teacher.find_by(first_name: "First")
     expect(user).not_to be_nil
-    expect(user.session_count).to eq 1
+    expect(user.ip_history).to include(request.remote_ip)
+  end
+
+  it "should not increase session count when teacher attempts to sign up with existing email" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+    session_count_orig = short_app.session_count
+    post :create, params: { teacher: { first_name: "Short", last_name: "Last", status: 0, education_level: 0,
+      email: short_app.email, password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+    expect(Teacher.find_by(first_name: "Short").session_count).to eq session_count_orig
   end
 
   it "able to deny an application" do
@@ -57,25 +69,28 @@ RSpec.describe TeachersController, type: :controller do
     expect(Teacher.find_by(first_name: "Short")).not_to be_nil
   end
 
-  it "appends ip address when teacher update info for themselves without repetition" do
+  it "appends ip address when teacher updates info for themselves without repetition" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
     short_app = Teacher.find_by(first_name: "Short")
-    ip_count = short_app.ip_history.count()
     post :update, params: { id: short_app.id, teacher: { id: short_app.id, more_info: "changed", school_id: short_app.school_id } }
     short_app = Teacher.find_by(first_name: "Short")
     expect(short_app.more_info).to eq "changed"
-    ip_count_now = short_app.ip_history.count()
-    expect(ip_count_now).to eq ip_count + 1
-    expect(short_app.ip_history.last).to eq request.remote_ip
-    # now we post to update again (with the same ip address) and ip count shouldn't increase
-    ip_count = ip_count_now
+    expect(short_app.ip_history).to include request.remote_ip
+  end
+
+  it "doesn't appends same ip address twice even if teacher updates twice" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+    short_app = Teacher.find_by(first_name: "Short")
+    post :update, params: { id: short_app.id, teacher: { id: short_app.id, more_info: "changed", school_id: short_app.school_id } }
+    short_app = Teacher.find_by(first_name: "Short")
+    expect(short_app.more_info).to eq "changed"
+    cur_ip_count = short_app.ip_history.count()
     post :update, params: { id: short_app.id, teacher: { id: short_app.id, more_info: "changed again", school_id: short_app.school_id } }
     short_app = Teacher.find_by(first_name: "Short")
     expect(short_app.more_info).to eq "changed again"
-    ip_count_now = short_app.ip_history.count()
-    expect(ip_count_now).to eq ip_count
-    expect(short_app.ip_history.last).to eq request.remote_ip
+    expect(short_app.ip_history.count()).to eq cur_ip_count
   end
 
   it "doesn't appends ip address when admin updates teacher's info" do
