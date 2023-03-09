@@ -28,6 +28,5 @@ project:
       name: 'Matthew'
       surname: 'Kao' 
       githubUsername: 'Matthew Kao'
-      pivotalUsername: 'chuangy'
       herokuEmail: 'matthewkao@berkeley.edu'      
       
