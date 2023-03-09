@@ -66,6 +66,7 @@ class TeachersController < ApplicationController
     end
 
     @teacher = Teacher.new(teacher_params)
+    @teacher.session_count += 1
     @teacher.school = @school
     if @teacher.save
       @teacher.pending!

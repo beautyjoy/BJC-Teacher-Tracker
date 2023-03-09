@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_callback
-    omniauth_data = request.env["omniauth.auth"].info
+    omniauth_data = omniauth_info()
     user = Teacher.user_from_omniauth(omniauth_data)
     if user.present?
       user.last_session_at = Time.zone.now
@@ -25,6 +25,10 @@ class SessionsController < ApplicationController
       flash[:alert] = "We couldn't find an account for #{omniauth_data.email}. Please submit a new request."
       redirect_to new_teacher_path
     end
+  end
+
+  def omniauth_info
+    request.env["omniauth.auth"].info
   end
 
   def omniauth_failure

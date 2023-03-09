@@ -10,6 +10,23 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:require_login).and_return(true)
   end
 
+  it "should initialize session count to 1 when teachers signs up (submits app)" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+    post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
+      email: "new@user.com", password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+    user = Teacher.find_by(first_name: "First")
+    expect(user).not_to be_nil
+    expect(user.session_count).to eq 1
+
+    # Try to sign up again with same email won't work and won't change session count
+    post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
+      email: "new@user.com", password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+    user = Teacher.find_by(first_name: "First")
+    expect(user).not_to be_nil
+    expect(user.session_count).to eq 1
+  end
+
   it "able to deny an application" do
     ApplicationController.any_instance.stub(:require_admin).and_return(true)
     long_app = Teacher.find_by(first_name: "Short")
