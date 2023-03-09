@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_callback
-    omniauth_data = omniauth_info()
+    omniauth_data = omniauth_info
     user = Teacher.user_from_omniauth(omniauth_data)
     if user.present?
       user.last_session_at = Time.zone.now
