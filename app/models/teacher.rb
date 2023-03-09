@@ -165,6 +165,13 @@ class Teacher < ApplicationRecord
     Teacher.find_by("LOWER(email) = ?", omniauth.email.downcase)
   end
 
+  def try_append_ip(ip)
+    return if ip_history.include?(ip)
+    self.ip_history << ip
+    save
+  end
+
+
   # TODO: Figure out how this should be used. store and check `uid` field
   # def self.validate_access_token(omniauth)
   #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
