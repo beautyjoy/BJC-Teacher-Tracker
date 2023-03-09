@@ -30,5 +30,4 @@ RSpec.describe SessionsController, type: :controller do
       expect(Teacher.find_by(first_name: "Short").session_count).to eq(session_count + 1)
     end
   end
-
 end
