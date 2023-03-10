@@ -76,7 +76,8 @@ We have worked on the adding following core features and functionality:
 - For Rubocop check run `bundle exec rubocop` (Autocorrect all with `bundle exec rubocop -a`)
 - To make someone an admin use db console access
   - Using psql
-    - First run `heroku pg:psql` or `psql bjc_teachers_dev`
+    - First run `heroku pg:psql` (for Heroku) or `psql bjc_teachers_dev` (for local) to get into psql
+    - Alternatively, you can use `rails db` to get into psql
     - Then
       ```
       UPDATE teachers
@@ -86,7 +87,7 @@ We have worked on the adding following core features and functionality:
       ```
       Of course, you can swap in the email of your choice.
   - Using rails console
-    - First run `heroku run rails console` or `rails console` to get into rails console
+    - First run `heroku run rails console` (for Heroku) or `rails console` (for local) to get into rails console
     - Then
       ```
       Teacher.where("email LIKE '%@berkeley.edu%'").update_all(admin: true)

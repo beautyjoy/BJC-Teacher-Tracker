@@ -23,10 +23,10 @@ production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: bjc_teachers_prod
+  database: bjc_teachers_stage
 
 production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: bjc_teachers_stage
+  database: bjc_teachers_prod
