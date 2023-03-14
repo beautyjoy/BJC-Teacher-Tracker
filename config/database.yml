@@ -19,7 +19,7 @@ test:
   <<: *default
   database: bjc_teachers_test
 
-production:
+staging:
   adapter: postgresql
   pool: 5
   timeout: 5000
