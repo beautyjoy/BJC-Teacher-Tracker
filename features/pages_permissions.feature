@@ -21,7 +21,6 @@ Scenario: Admins can see everything
     Then I can log in with Google
     Then I follow "Pages"
     Then I should be on the pages index
-    And I should see a nav link "Uncategorized"
     And I should see a nav link "A"
     And I should see "Test Public Page"
     And I should see "Test Teacher Page"
@@ -39,7 +38,6 @@ Scenario: Teachers can't see admin pages, edit/delete button, or new page button
     Then I can log in with Google
     Then I follow "Pages"
     Then I should be on the pages index
-    And I should see a nav link "Uncategorized"
     And I should see a nav link "A"
     And I should have a hidden page link "Test Public Page"
     And I should have a hidden page link "Test Teacher Page"
@@ -53,7 +51,6 @@ Scenario: Public can only see public pages
     Given I am on the BJC home page
     Given I follow "Pages"
     Then I should be on the pages index
-    And I should not see a nav link "Uncategorized"
     And I should see a nav link "A"
     And I should have a hidden page link "Test Public Page"
     And I should not have a hidden page link "Test Teacher Page"
