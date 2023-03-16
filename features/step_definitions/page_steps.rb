@@ -20,7 +20,7 @@ When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
 end
 
 And(/^(?:|I )should see the page HTML content containing "([^"]*)"$/) do |value|
-  expect(page.execute_script('return tinyMCE.editors[0].getContent()')).to include(value)
+  expect(page.execute_script("return tinyMCE.editors[0].getContent()")).to include(value)
 end
 
 # TODO: This shouldn't rely on the HTML id.
