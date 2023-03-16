@@ -4,24 +4,29 @@
     <%- categories.each do |category, pages_in_category| %>
       <li class="nav-item">
         <% @escaped_category = category.to_s.parameterize %>
-        <a class="nav-link font-weight-bold" data-toggle="collapse" 
-          href="#category-<%= @escaped_category %>" 
-          role="button" aria-expanded="false" 
-          aria-controls="category-<%= @escaped_category %>"><%= category %> </a>
-          <div class="collapse" id="category-<%= @escaped_category %>">
-            <ul class="flex-column card card-body" >
-              <%- pages_in_category.each do |page| %>
-                <%- is_current = page == current_page %>
-                <li class="nav">
-                  <a id="pagelink_<%= page.title %>" class="nav-link <%= "active" if is_current %>"
-                    <%= "aria-current=\"page\"" if is_current %>
-                    href="<%= page_path(page) %>"><%= page.title %>
-                  </a>
-                </li>
-              <%- end %>
-            </ul>
-          </div>
+        <%- if category != "Uncategorized" %>
+          <a class="nav-link lead" data-toggle="collapse" 
+            href="#category-<%= @escaped_category %>" 
+            role="button" aria-expanded="true" 
+            aria-controls="category-<%= @escaped_category %>"><%= category %> 
+          </a>
+          <hr class="p-0 m-0"/>
+        <%- end %>
+        <div class="collapse show" id="category-<%= @escaped_category %>">
+          <ul class="flex-column pl-0" >
+            <%- pages_in_category.each do |page| %>
+              <%- is_current = page == current_page %>
+              <li class=" nav">
+                <a id="pagelink_<%= page.title %>" class="nav-link <%= "font-weight-bold" if is_current %>"
+                  <%= "aria-current=\"page\"" if is_current %>
+                  href="<%= page_path(page) %>"><%= (is_current ? "\u25B6 " : "") + page.title %>
+                </a>
+              </li>
+            <%- end %>
+          </ul>
+        </div>
       </li>
     <%- end %>
   </ul>
 </div>
+

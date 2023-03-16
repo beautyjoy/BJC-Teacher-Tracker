@@ -79,6 +79,6 @@ class Page < ApplicationRecord
   end
 
   def display_category
-    category || "Uncategorized"
+    category.presence || "Uncategorized"
   end
 end
