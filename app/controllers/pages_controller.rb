@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:url_slug, :html, :title, :viewer_permissions)
+    params.require(:page).permit(:url_slug, :html, :title, :category, :viewer_permissions)
   end
 
   # def liquid_assigns

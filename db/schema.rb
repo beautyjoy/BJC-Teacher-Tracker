@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2023_03_08_183157) do
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
     t.text "html"
+    t.boolean "default"
+    t.string "category"
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
