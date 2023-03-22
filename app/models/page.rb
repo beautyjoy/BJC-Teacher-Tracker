@@ -35,6 +35,15 @@ class Page < ApplicationRecord
 
   default_scope { order(title: :asc) }
 
+  # Not really being used right now, but could be useful
+  def self.all_categories
+    Page.pluck(:category).uniq
+  end
+
+  def has_category?
+    self.category.present?
+  end
+
   def to_param
     self.url_slug
   end
@@ -67,5 +76,9 @@ class Page < ApplicationRecord
 
   def public_permissions?
     viewer_permissions == "Public"
+  end
+
+  def display_category
+    category.presence || "Uncategorized"
   end
 end
