@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   def index
     if !current_user && Page.default_page.present?
       redirect_to page_path(Page.default_page.url_slug)
-      return
+      nil
     end
   end
 
