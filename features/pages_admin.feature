@@ -267,3 +267,18 @@ Scenario: Clicking radio button text selects that radio button
     Then The radio button "inlineRadioTeacher" should be checked
     And I choose "Public"
     Then The radio button "inlineRadioPublic" should be checked
+
+Scenario: Cannot update admin page to be default
+    Given I am on the new pages page
+    And I fill in "page_title" with "Test Default Title"
+    And I fill in "page_url_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
+    And I fill in the page HTML content with "This is a test"
+    And I press "Submit"
+    And I follow "Pages"
+    And I press the edit button for "test_slug"
+    Then I should be on the edit pages page for "test_slug"
+    And I check "page_default" checkbox
+    And I press "Update"
+    Then I should see "Update Test Default Title"
+    And I should see "error"
