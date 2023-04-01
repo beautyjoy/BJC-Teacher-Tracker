@@ -53,7 +53,7 @@
         <%= teacher.display_status %>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-sm-4 font-weight-bold">School:</div>
       <div class="col-sm-8 text-center">
         <%= link_to(teacher.school.name, school_path(teacher.school)) %>
@@ -63,6 +63,24 @@
       <div class="col-sm-4 font-weight-bold">School Location:</div>
       <div class="col-sm-8 text-center">
         <%= teacher.school.location %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-4 font-weight-bold">Session Count:</div>
+      <div class="col-sm-8 text-center">
+        <%= teacher.session_count %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-4 font-weight-bold">IP History:</div>
+      <div class="col-sm-8 text-center">
+        <%= teacher.ip_history %>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-sm-4 font-weight-bold">Last Session:</div>
+      <div class="col-sm-8 text-center">
+        <%= teacher.last_session_at %>
       </div>
     </div>
   </div>
