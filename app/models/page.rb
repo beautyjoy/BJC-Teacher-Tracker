@@ -42,6 +42,10 @@ class Page < ApplicationRecord
     Page.pluck(:category).uniq
   end
 
+  def self.default_page
+    Page.where(default: true).first
+  end
+
   def has_category?
     self.category.present?
   end

@@ -5,7 +5,12 @@ class PagesController < ApplicationController
   before_action :load_page
   layout "page_with_sidebar"
 
-  def index; end
+  def index
+    if !current_user && Page.default_page.present?
+      redirect_to page_path(Page.default_page.url_slug)
+      return
+    end
+  end
 
   def new
     @page = Page.new
@@ -47,6 +52,16 @@ class PagesController < ApplicationController
   def edit; end
 
   def update
+    # print all params
+    puts "params: #{params}"
+    if page_params[:default] == "1"
+      if page_params[:viewer_permissions] != "Public"
+        flash.now[:alert] = "Default page must be public!"
+        render "edit"
+        return
+      end
+      Page.where.not(id: @page.id).update_all(default: false)
+    end
     @page.assign_attributes(page_params)
     @page.last_editor = current_user
 
@@ -75,7 +90,7 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:url_slug, :html, :title, :category, :viewer_permissions)
+    params.require(:page).permit(:default, :url_slug, :html, :title, :category, :viewer_permissions)
   end
 
   # def liquid_assigns
