@@ -55,7 +55,7 @@ class Page < ApplicationRecord
   def to_param
     self.url_slug
   end
-  
+
   # TODO: This may be a bit too specific?
   def fix_bjc_r_links
     return unless self.html
