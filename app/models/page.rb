@@ -43,7 +43,7 @@ class Page < ApplicationRecord
   end
 
   def self.default_page
-    Page.where(default: true).first
+    Page.find_by(default: true)
   end
 
   def has_category?
