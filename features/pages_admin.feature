@@ -119,6 +119,18 @@ Scenario: Can't create a page with a slug that already exists
     Then I should see "Create Test Title"
     And I should see "URL slug has already been taken"
 
+Scenario: Can't create a default admin page
+   Given I am on the new pages page
+    And I fill in "page_title" with "Test Title"
+    And I fill in "page_url_slug" with "test_slug"
+    And I fill in "page_category" with "Test Category"
+    And I check "page_default" checkbox
+    And I fill in the page HTML content with "This is a test"
+    And I choose "inlineRadioAdmin"
+    And I press "Submit"
+    Then I should see "Create Test Title"
+    And I should see "error"
+
 Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"

@@ -15,6 +15,10 @@ Given(/the following pages exist/) do |pages_table|
   end
 end
 
+When("I check {string} checkbox") do |checkbox|
+  check checkbox
+end
+
 When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
   page.execute_script('$(tinyMCE.editors[0].setContent("' + value + '"))')
 end
