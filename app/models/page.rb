@@ -29,8 +29,10 @@ class Page < ApplicationRecord
   validates :url_slug, uniqueness: true
   validates :last_editor, :viewer_permissions, :url_slug, :title, :html, :creator_id, presence: true
   validates_inclusion_of :viewer_permissions, in: ["Admin", "Verified Teacher", "Public"]
+  validates_inclusion_of :viewer_permissions, in: ["Public"], if: :default
 
   before_save :fix_bjc_r_links
+  before_save :ensure_only_one_default_page
 
   belongs_to :last_editor, class_name: "Teacher"
   belongs_to :creator, class_name: "Teacher"
@@ -53,11 +55,16 @@ class Page < ApplicationRecord
   def to_param
     self.url_slug
   end
-
+  
   # TODO: This may be a bit too specific?
   def fix_bjc_r_links
     return unless self.html
     self.html = self.html.gsub('="/bjc-r', '="https://bjc.edc.org/bjc-r')
+  end
+
+  def ensure_only_one_default_page
+    return unless self.default
+    Page.where.not(id: self.id).update_all(default: false)
   end
 
   def self.viewable_pages(user)

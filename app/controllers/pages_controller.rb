@@ -52,16 +52,6 @@ class PagesController < ApplicationController
   def edit; end
 
   def update
-    # print all params
-    puts "params: #{params}"
-    if page_params[:default] == "1"
-      if page_params[:viewer_permissions] != "Public"
-        flash.now[:alert] = "Default page must be public!"
-        render "edit"
-        return
-      end
-      Page.where.not(id: @page.id).update_all(default: false)
-    end
     @page.assign_attributes(page_params)
     @page.last_editor = current_user
 
