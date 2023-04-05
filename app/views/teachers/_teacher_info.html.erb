@@ -7,33 +7,33 @@
     </div>
   </div>
   <div class="card-body">
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Email:</div>
-      <div class="col-sm-6 text-center">
+      <div class="col-sm-6">
         <a href=<%= "mailto:#{teacher.email}" %>> <%= teacher.email %> </a>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-primary" onclick="copyToClipboard('<%= teacher.email %>')">Copy</button>
+        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.email %>')"><i class="fa fa-copy"></i></button>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Snap<i>!</i> Username:</div>
-      <div class="col-sm-6 text-center">
+      <div class="col-sm-6">
         <%= snap_link(teacher) %>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-primary" onclick="copyToClipboard('<%= teacher.snap %>')">Copy</button>
+        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.snap %>')"><i class="fa fa-copy"></i></button>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Application Status:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= teacher.display_application_status %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <% if teacher.personal_website.blank? %>
           None provided
         <% else %>
@@ -41,46 +41,46 @@
         <% end %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Education Level Target:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= teacher.display_education_level %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Current Status:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= teacher.display_status %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">School:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= link_to(teacher.school.name, school_path(teacher.school)) %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">School Location:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= teacher.school.location %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Session Count:</div>
-      <div class="col-sm-8 text-center">
+      <div class="col-sm-8">
         <%= teacher.session_count %>
       </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">IP History:</div>
-      <div class="col-sm-8 text-center">
-        <%= teacher.ip_history %>
+      <div class="col-sm-8">
+        <%= ip_history_display(teacher) %>
       </div>
     </div>
     <div class="row"> 
       <div class="col-sm-4 font-weight-bold">Last Session:</div>
-      <div class="col-sm-8 text-center">
-        <%= teacher.last_session_at %>
+      <div class="col-sm-8">
+        <%= teacher.last_session_at || "-" %>
       </div>
     </div>
   </div>
