@@ -119,6 +119,18 @@ Scenario: Can't create a page with a slug that already exists
     Then I should see "Create Test Title"
     And I should see "URL slug has already been taken"
 
+Scenario: Can't create a default admin page
+   Given I am on the new pages page
+    And I fill in "page_title" with "Test Title"
+    And I fill in "page_url_slug" with "test_slug"
+    And I fill in "page_category" with "Test Category"
+    And I check "page_default" checkbox
+    And I fill in the page HTML content with "This is a test"
+    And I choose "inlineRadioAdmin"
+    And I press "Submit"
+    Then I should see "Create Test Title"
+    And I should see "error"
+
 Scenario: Attempting to create page with taken slug doesn't delete form input
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
@@ -255,3 +267,18 @@ Scenario: Clicking radio button text selects that radio button
     Then The radio button "inlineRadioTeacher" should be checked
     And I choose "Public"
     Then The radio button "inlineRadioPublic" should be checked
+
+Scenario: Cannot update admin page to be default
+    Given I am on the new pages page
+    And I fill in "page_title" with "Test Default Title"
+    And I fill in "page_url_slug" with "test_slug"
+    And I choose "inlineRadioAdmin"
+    And I fill in the page HTML content with "This is a test"
+    And I press "Submit"
+    And I follow "Pages"
+    And I press the edit button for "test_slug"
+    Then I should be on the edit pages page for "test_slug"
+    And I check "page_default" checkbox
+    And I press "Update"
+    Then I should see "Update Test Default Title"
+    And I should see "error"

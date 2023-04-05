@@ -5,7 +5,11 @@ class PagesController < ApplicationController
   before_action :load_page
   layout "page_with_sidebar"
 
-  def index; end
+  def index
+    if !current_user && Page.default_page.present?
+      redirect_to page_path(Page.default_page.url_slug) and return
+    end
+  end
 
   def new
     @page = Page.new
@@ -75,7 +79,7 @@ class PagesController < ApplicationController
   end
 
   def page_params
-    params.require(:page).permit(:url_slug, :html, :title, :category, :viewer_permissions)
+    params.require(:page).permit(:default, :url_slug, :html, :title, :category, :viewer_permissions)
   end
 
   # def liquid_assigns
