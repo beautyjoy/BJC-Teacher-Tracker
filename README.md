@@ -124,7 +124,10 @@ If bundler install runs successfully, continue with the following commands to co
 - `heroku open`
 
 
-## CodeClimate Local Test
+
+### CodeClimate Local Test
+
+TODO: Link to download CodeClimate binaries for macOS.
 
 ```
 https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64

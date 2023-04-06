@@ -118,6 +118,11 @@
   <div class="wrap">
     <h1 class="text-center">Sign In as a BJC Teacher</h1>
     <div class="text-center social-btn-group">
+        <%# <%= form_tag('/auth/developer', method: 'post', data: {turbo: false}) do %
+          <button type='submit'>Login with Developer</button>
+        <% end %>
+
+      <%= button_to('Dev Login', '/auth/developer', class: 'btn btn-info') if Rails.env.development? %>
       <%= form_tag('/auth/google_oauth2', method: 'post') do %>
         <button class="btn btn-block social-btn-google">
           <svg aria-hidden=true width="10%" height="auto" viewBox="0 0 500 500"><path xmlns="http://www.w3.org/2000/svg" d="M179.817 0.889 C 102.035 10.762,38.384 59.806,12.292 129.969 C -5.769 178.536,-4.477 239.334,15.583 284.828 C 52.874 369.402,137.709 416.141,235.168 405.807 C 315.046 397.336,375.590 347.015,394.110 273.700 C 400.725 247.516,402.168 209.776,397.471 185.780 L 396.783 182.263 300.532 182.263 L 204.281 182.263 204.281 216.205 L 204.281 250.147 262.669 250.303 L 321.057 250.459 318.937 256.776 C 304.971 298.403,272.277 323.893,225.382 329.716 C 152.168 338.808,89.320 291.170,81.029 220.300 C 71.214 136.394,132.528 70.605,215.644 75.860 C 248.484 77.936,269.718 87.060,295.265 110.072 C 298.716 113.180,301.881 115.578,302.299 115.400 C 303.853 114.740,356.276 63.474,356.451 62.444 C 356.803 60.366,338.833 44.117,326.825 35.656 C 300.548 17.140,274.542 6.788,241.590 1.725 C 230.961 0.092,190.419 -0.457,179.817 0.889 " stroke="none" fill-rule="evenodd"/></svg>
