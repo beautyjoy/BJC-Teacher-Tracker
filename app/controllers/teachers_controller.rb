@@ -66,6 +66,8 @@ class TeachersController < ApplicationController
     end
 
     @teacher = Teacher.new(teacher_params)
+    @teacher.try_append_ip(request.remote_ip)
+    @teacher.session_count += 1
     @teacher.school = @school
     if @teacher.save
       @teacher.pending!
@@ -106,6 +108,8 @@ class TeachersController < ApplicationController
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
+    else
+      @teacher.try_append_ip(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end

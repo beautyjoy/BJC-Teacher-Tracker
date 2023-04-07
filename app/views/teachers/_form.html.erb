@@ -66,10 +66,11 @@
 
   <div class='form-group row'>
     <div class='col-12'>
-      <%= f.label :more_info, "More Information" %>
-      <%= f.text_field :more_info, placeholder: "ex. I'm teaching a college course",
-        class: "form-control" %>
+      <%= f.label :more_info, "More Information", class: "label-required" %>
+      <%= f.text_area :more_info, placeholder: "I applied for access because...",
+        class: "form-control", required: true, rows: "2" %>
     </div>
+    <small class="col-12 form-text text-muted"><strong id='teacher-more-info-reminder'>Please tell us why you need access.</strong></small>
   </div>
   <%= f.hidden_field :school_id %>
 </div>
@@ -90,21 +91,13 @@
   function requireVolunteerHostTeacher() {
     var status_val = $( "#teacher_status" ).val();
 
+    <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
-      $(".row:nth-child(7) label").prop('class', "label-required")
-      $("#teacher_more_info").prop('required', true);
-      $("#teacher_more_info").prop('placeholder', "Please type the name of your host teacher here (Required)");
+      $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");
     }
-    else if (status_val != 3) {
-      $(".row:nth-child(7) label").prop('class', "")
-      $("#teacher_more_info").prop('required', false);
-      $("#teacher_more_info").prop('placeholder', "ex. I'm teaching a college course");
+    else {
+      $("#teacher-more-info-reminder").text("Please tell us why you need access.");
     }
-  }
 
-  // $("#new_teacher").on("submit", function(e) {
-  //   var selected = document.getElementById("school_selectize").value;
-  //   // TODO: Figure out what goes here.
-  //   if(selected != '') {}
-  // });
+  }
 </script>

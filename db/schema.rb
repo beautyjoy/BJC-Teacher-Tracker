@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_07_003428) do
+ActiveRecord::Schema.define(version: 2023_03_08_183157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
     t.bigint "creator_id", null: false
     t.bigint "last_editor_id", null: false
     t.text "html"
+    t.boolean "default"
+    t.string "category"
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
@@ -110,6 +112,8 @@ ActiveRecord::Schema.define(version: 2022_09_07_003428) do
     t.integer "education_level", default: -1
     t.string "application_status", default: "Pending"
     t.datetime "last_session_at"
+    t.inet "ip_history", default: [], array: true
+    t.integer "session_count", default: 0
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"

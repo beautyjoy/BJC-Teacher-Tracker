@@ -24,7 +24,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import 'layout';
 @import 'forms';
 @import 'edit_teachers';
-
+@import './sidebar.scss';
 @import "./selectize.scss";
 
 html {

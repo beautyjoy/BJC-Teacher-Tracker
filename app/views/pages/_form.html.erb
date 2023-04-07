@@ -6,6 +6,14 @@
   <label for="page_url_slug" class="form-label label-required">URL slug</label>
   <%= fields.text_field :url_slug, class: "form-control", required: true %>
 </div>
+<div class="form-group">
+  <label for="page_category" class="form-label">Category</label>
+  <%= fields.text_field :category, class: "form-control" %>
+</div>
+<div class="form-group">
+  <label for="page_default" class="form-label">Default Page</label>
+  <%= fields.check_box :default %>
+</div>
 
 <div class="form-group">
   <label class="label-required form-label">Viewer Permissions</label>
@@ -24,11 +32,29 @@
 </div>
 
 <div class="form-group">
-  <label for="page_html" class="form-label">HTML Content</label>
-  <%= fields.text_area :html, rows: 20, class: 'form-control', style: 'font-family: monospace;' %>
+  <label for="page_html" class="form-label">Content</label>
+  <%= fields.text_area :html, rows: 20, class: 'form-control tinymce', id: 'tinymce-input', style: 'font-family: monospace;' %>
   <div class="form-text text-muted">
-    This is an unresricted HTML field.
+    What you see here is what you get.
     <br>
     <em>Note:</em> Links that begin with <code>/bjc-r</code> will be expanded on save to reference <code>https://bjc.edc.org/bjc-r</code>.
   </div>
 </div>
+
+
+<script>
+  tinyMCE.init({
+    selector: 'textarea.tinymce',
+    height: 500,
+    menubar: 'edit table',
+    plugins: [
+      'image paste link table code'
+    ],
+    toolbar:
+      'code | undo redo | formatselect | ' +
+      'bold italic backcolor | alignleft aligncenter ' +
+      'alignright alignjustify | bullist numlist outdent indent | ' +
+      'table tabledelete | tableprops tablerowprops tablecellprops | ' +
+      'removeformat'
+  });
+</script>

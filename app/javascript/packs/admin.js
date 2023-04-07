@@ -11,6 +11,7 @@ import 'tinymce/plugins/image';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/table';
+import 'tinymce/plugins/code';
 // TinyMCE Skins. These need to be manually loaded.
 import 'tinymce/skins/ui/oxide/skin.min.css';
 import 'tinymce/skins/content/default/content.css';
