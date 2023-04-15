@@ -134,4 +134,14 @@ RSpec.describe TeachersController, type: :controller do
     post :resend_welcome_email, params: { id: short_app.id }
     expect(ActionMailer::Base.deliveries).to be_empty
   end
+
+  it "denied teacher cannot edit their application" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Bob"))
+    bob_app = Teacher.find_by(first_name: "Bob")
+    orig_more_info = bob_app.more_info
+    post :update, params: { id: bob_app.id, teacher: { id: bob_app.id, more_info: "changed", school_id: bob_app.school_id } }
+    bob_app = Teacher.find_by(first_name: "Bob")
+    expect(bob_app.more_info).to eq orig_more_info
+  end
 end

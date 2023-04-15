@@ -76,8 +76,8 @@ reimu:
   last_name: Hakurei
   snap: reimu
   email: 'reimu@touhou.com'
-  status: 2
+  status: 4
+  more_info: Best Touhou Character
   school: berkeley
-  more_info: ''
   application_status: Info Needed
-  education_level: 1
+  education_level: -1

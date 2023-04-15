@@ -74,12 +74,21 @@ RSpec.describe Teacher, type: :model do
       end.to change(teacher, :application_status)
              .from("info_needed").to("not_reviewed")
     end
+
+    it "can change a not_reviewed status to info_needed" do
+      expect(teacher.more_info).to eq "Best Touhou Character"
+      expect do
+        teacher.update(more_info: "updated info")
+      end.to change(teacher, :more_info)
+              .from("Best Touhou Character").to("updated info")
+    end
   end
 
   describe "teacher with more info" do
     let(:teacher) { teachers(:ye) }
 
     it "shows a short status with more info" do
+      expect(teacher.more_info).to eq "A CS169 Student"
       expect(teacher.display_status).to eq "Other | A CS169 Student"
     end
 
@@ -94,9 +103,5 @@ RSpec.describe Teacher, type: :model do
     it "shows an application status" do
       expect(teacher.display_application_status).to eq "Not Reviewed"
     end
-
-    # it "can change a not_reviewed status to info_needed" do
-    #   expect do
-    #     teacher.update(email: "
   end
 end
