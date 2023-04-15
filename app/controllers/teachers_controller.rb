@@ -70,7 +70,7 @@ class TeachersController < ApplicationController
     @teacher.session_count += 1
     @teacher.school = @school
     if @teacher.save
-      @teacher.pending!
+      @teacher.not_reviewed!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       redirect_to root_path
@@ -97,6 +97,10 @@ class TeachersController < ApplicationController
       @school.save!
       @teacher.school = @school
     end
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      return
+    end
     if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
@@ -112,6 +116,12 @@ class TeachersController < ApplicationController
       @teacher.try_append_ip(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+  end
+
+  def request_info
+    @teacher.info_needed!
+    # Send email to user
+    redirect_to root_path
   end
 
   def validate

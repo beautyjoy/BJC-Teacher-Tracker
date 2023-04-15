@@ -4,7 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  admin              :boolean          default(FALSE)
-#  application_status :string           default("pending")
+#  application_status :string           default("not_reviewed")
 #  education_level    :integer          default(NULL)
 #  email              :string
 #  first_name         :string
@@ -67,5 +67,17 @@ long:
   status: 3
   school: berkeley
   more_info: ''
-  application_status: Pending
+  application_status: Not Reviewed
   education_level: 2
+
+reimu:
+  id: 3
+  first_name: Reimu
+  last_name: Hakurei
+  snap: reimu
+  email: 'reimu@touhou.com'
+  status: 2
+  school: berkeley
+  more_info: ''
+  application_status: Info Needed
+  education_level: 1

@@ -135,13 +135,13 @@ Scenario: Filter all teacher info as an admin
   | first_name | last_name  | admin | email                     | school      | application_status |
   | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
   | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
-  | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |       Pending      |
+  | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |     Not Reviewed   |
   Given I am on the BJC home page
   Given I have an admin email
   And   I follow "Log In"
   Then  I can log in with Google
   When  I go to the teachers page
-  And   I check "Pending"
+  And   I check "Not Reviewed"
   And   I uncheck "Validated"
   Then  I should see "Peter"
   Then  I should not see "Victor"

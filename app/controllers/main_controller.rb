@@ -7,11 +7,14 @@ class MainController < ApplicationController
     flash.keep
     if is_admin?
       redirect_to dashboard_path
+    # if this teacher is validated, redirect to pages
     elsif is_teacher? && current_user.validated?
       redirect_to pages_path, success: "Welcome back, #{current_user.first_name}!"
-    elsif is_teacher?
+    # if this teacher is not validated (not_reviewed or info_needed), redirect to edit
+    elsif is_teacher? && !current_user.validated?
       redirect_to edit_teacher_path(current_user.id),
                  alert: "Your applicating is currently #{current_user.application_status}. You may update your information."
+    # if this user is denied, redirect to new
     else
       redirect_to new_teacher_path
     end

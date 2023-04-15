@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post :resend_welcome_email
       post :validate
       post :deny
+      post :request_info
     end
     collection { post :import }
   end

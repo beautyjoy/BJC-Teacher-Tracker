@@ -124,7 +124,7 @@ RSpec.describe TeachersController, type: :controller do
     expect(last_email.subject).to eq "Welcome to The Beauty and Joy of Computing!"
   end
 
-  it "denied and pending teacher can not request welcome email" do
+  it "denied and not_reviewed teacher can not request welcome email" do
     ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Bob"))
     bob_app = Teacher.find_by(first_name: "Bob")
     post :resend_welcome_email, params: { id: bob_app.id }

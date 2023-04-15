@@ -28,7 +28,7 @@ class TeacherMailer < ApplicationMailer
   def form_submission(teacher)
     @teacher = teacher
     set_body
-    if @teacher.pending?
+    if @teacher.not_reviewed?
       mail to: CONTACT_EMAIL,
            subject: email_template.subject
     end
