@@ -6,6 +6,17 @@
       required: false, id: 'school_name' %>
   </div>
 
+  <div class="form-group row">
+  <div class='col-12'>
+    <%= f.label :country, "Country", class: "label-required" %>
+    <%= f.country_select(
+      :country,
+      { priority_countries: ['United States'], include_blank: "Select an option" },
+      { class: 'form-control', required: true }
+    ) %>
+  </div>
+</div>
+
   <div class='col-4'>
     <%= f.label :city, class: "label-required", for: "school_city" %>
     <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
@@ -49,6 +60,11 @@
       { include_blank: "Select your school's type" },
       { class: 'form-control', required: false, id: 'school_type' }
     ) %>
+</div>
+
+<div class="form-group">
+  <%= f.label :country, "Country", class: "label-required" %>
+  <%= f.country_select :country, priority_countries: ["United States"], class: 'form-control', required: true %>
 </div>
 
 <%- if current_user&.admin? %>

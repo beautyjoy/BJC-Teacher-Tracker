@@ -6,6 +6,7 @@
 #
 #  id             :integer          not null, primary key
 #  city           :string
+#  country        :string
 #  grade_level    :integer
 #  lat            :float
 #  lng            :float
@@ -25,7 +26,7 @@
 #
 require "uri"
 class School < ApplicationRecord
-  validates :name, :city, :state, :website, presence: true
+  validates :name, :city, :state, :website, :country, presence: true
   before_save :grab_lat_lng
 
   has_many :teachers

@@ -155,6 +155,10 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.2)
+    countries (5.4.0)
+      unaccent (~> 0.3)
+    country_select (8.0.1)
+      countries (~> 5.0)
     crass (1.0.6)
     cucumber (7.1.0)
       builder (~> 3.2, >= 3.2.4)
@@ -598,6 +602,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.5)
       tzinfo (>= 1.0.0)
+    unaccent (0.4.0)
     unicode-display_width (2.1.0)
     version_gem (1.1.1)
     virtus (2.0.0)
@@ -636,6 +641,7 @@ DEPENDENCIES
   axe-core-rspec
   bootsnap (>= 1.4.4)
   byebug
+  country_select
   cucumber-rails
   database_cleaner
   factory_bot_rails
