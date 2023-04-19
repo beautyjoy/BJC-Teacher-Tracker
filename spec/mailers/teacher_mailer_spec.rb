@@ -46,5 +46,4 @@ describe TeacherMailer do
     expect(email.subject).to eq("Request Info Email")
     expect(email.body.encoded).to include("Request Info Reason")
   end
-  
 end
