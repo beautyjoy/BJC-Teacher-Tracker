@@ -2,12 +2,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Deny</h4>
+        <h4 class="modal-title"></h4>
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
       <%= form_tag deny_teacher_path(0), method: :post, class: "form-horizontal" do %>
         <div class="modal-body">
-            <%= label_tag 'reason', 'Reason for Denial', class: 'control-label' %>
+            <%= label_tag 'reason', 'Reason', class: 'control-label' %>
             <%= text_field_tag :reason, params[:reason], class: "form-control" %>
             <div class="form-check">
               <%= check_box_tag :skip_email, 'skip_email', false, class: 'form-check-input' %>
@@ -28,12 +28,27 @@
   modal.on('shown.bs.modal', function (event) {
     let button = $(event.relatedTarget);
     let teacherId = button.data('teacher-id');
-    let teachername = button.data('teachername');
-    let newaction = `/teachers/${teacherId}/deny`;
-    modal.find('.form-horizontal').attr('action', newaction);
-    modal.find('.modal-title').text('Deny ' + teachername);
+    let teacherName = button.data('teacher-name');
+    let newAction = null;
+    let newTitle = null;
+    switch(button.data('modal-type')) {
+      case "deny":
+        newAction = `/teachers/${teacherId}/deny`;
+        newTitle = 'Deny ' + teacherName;
+        break;
+      case "request_info":
+        newAction = `/teachers/${teacherId}/request_info`;
+        newTitle = 'Request Info from ' + teacherName;
+        break;
+      default:
+        newAction = `/teachers/${teacherId}/deny`;
+        newTitle = 'Deny ' + teacherName;
+    }
+    modal.find('.form-horizontal').attr('action', newAction);
+    modal.find('.modal-title').text(newTitle);
   });
   modal.on('hidden.bs.modal', function () {
     $('input[name="reason"]').val('');
+    modal.find('.modal-title').text('');
   });
 </script>

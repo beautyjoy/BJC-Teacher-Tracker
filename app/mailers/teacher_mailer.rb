@@ -25,6 +25,15 @@ class TeacherMailer < ApplicationMailer
          subject: email_template.subject
   end
 
+  def request_info_email(teacher, reason)
+    @teacher = teacher
+    @reason = reason
+    set_body
+    mail to: @teacher.email_name,
+         cc: CONTACT_EMAIL,
+         subject: email_template.subject
+  end
+
   def form_submission(teacher)
     @teacher = teacher
     set_body

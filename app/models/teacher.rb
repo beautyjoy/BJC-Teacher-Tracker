@@ -51,6 +51,7 @@ class Teacher < ApplicationRecord
   # Non-admin teachers whose application has neither been accepted nor denied
   # It might or might not have been reviewed.
   scope :unvalidated, -> { where("(application_status=? OR application_status=?) AND admin=?", application_statuses[:info_needed], application_statuses[:not_reviewed], "false") }
+  scope :unreviewed, -> { where("application_status=? AND admin=?", application_statuses[:not_reviewed], "false") }
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where("application_status=? AND admin=?", application_statuses[:validated], "false") }
 
