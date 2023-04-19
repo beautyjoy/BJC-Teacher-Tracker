@@ -60,6 +60,13 @@ Then(/I can send a deny email/) do
   last_email.body.encoded.should include "Denial Reason"
 end
 
+Then(/I can send a request info email/) do
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.to[0].should eq "testteacher@berkeley.edu"
+  last_email.subject.should eq "Request Info Email"
+  last_email.body.encoded.should include "Request Info Reason"
+end
+
 Then(/I attach the csv "([^"]*)"$/) do |path|
   Capybara.ignore_hidden_elements = false
   attach_file("file", File.expand_path(path))
