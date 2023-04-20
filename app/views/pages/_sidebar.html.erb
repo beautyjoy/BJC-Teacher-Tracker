@@ -34,10 +34,10 @@
 
 <script>
    $('.category-collapse').on('show.bs.collapse', function () {
-    $(this).siblings('.category-header').children(":first").class("fa fa-caret-right");
+    $(this).siblings('.category-header').children(":first").attr("class", "fa fa-caret-right");
   });
 
   $('.category-collapse').on('hide.bs.collapse', function () {
-    $(this).siblings('.category-header').children(":first").class("fa fa-caret-down");
+    $(this).siblings('.category-header').children(":first").attr("class", "fa fa-caret-down");
   });
 </script>
