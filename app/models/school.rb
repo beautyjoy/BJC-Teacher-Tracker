@@ -23,7 +23,6 @@
 #
 #  index_schools_on_name_city_and_website  (name,city,website)
 #
-require "uri"
 
 class School < ApplicationRecord
   VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
@@ -95,6 +94,17 @@ class School < ApplicationRecord
     data = GoogleMaps.get_lat_lng(maps_api_location)
     self.lat = data[:lat]
     self.lng = data[:lng]
+  end
+
+  def maps_marker_data
+    {
+      name: name,
+      position: { lat: lat, lng: lng },
+    }
+  end
+
+  def self.all_maps_data
+    all.map(&:maps_marker_data).to_json
   end
 
   private
