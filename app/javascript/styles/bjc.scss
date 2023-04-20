@@ -42,6 +42,10 @@ a:visited {
   color: #248694; /* was 36BBCE; */
 }
 
+a.btn:visited {
+  color: unset;
+}
+
 a,
 .dialogue a {
   color: #2a6496; /* was 428bca; */
