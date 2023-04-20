@@ -68,14 +68,6 @@ class School < ApplicationRecord
     self.name == school.name && self.state == school.state && self.city == school.city && school.website == self.website
   end
 
-  def self.grade_level_options
-    School.grade_levels.map { |key, _val| [key.to_s.titlecase, key] }
-  end
-
-  def self.school_type_options
-    School.school_types.map { |key, _val| [key.to_s.titlecase, key] }
-  end
-
   def display_grade_level
     return "Unknown" if grade_level_before_type_cast.to_i == -1
 
@@ -98,13 +90,22 @@ class School < ApplicationRecord
 
   def maps_marker_data
     {
-      name: name,
+      name: name_location,
+      id: id,
       position: { lat: lat, lng: lng },
     }
   end
 
+  def self.grade_level_options
+    School.grade_levels.map { |key, _val| [key.to_s.titlecase, key] }
+  end
+
+  def self.school_type_options
+    School.school_types.map { |key, _val| [key.to_s.titlecase, key] }
+  end
+
   def self.all_maps_data
-    all.map(&:maps_marker_data).to_json
+    validated.map(&:maps_marker_data).to_json
   end
 
   private
@@ -114,6 +115,6 @@ class School < ApplicationRecord
   end
 
   def maps_api_location
-    "#{city} #{state.sub('International', '')}"
+    location.sub("International", "")
   end
 end
