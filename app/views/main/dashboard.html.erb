@@ -88,30 +88,22 @@
 </div>
 
 <script>
-  var map;
+  let map;
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 39.50, lng: -98.35},
       zoom: 4
     });
 
-    let markers = [];
-    let infoWindows = [];
-    <% @schools.each do |school| %>
-    <% if school.lat && school.lng %>
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng(<%= school.lat %>, <%= school.lng %>),
+    let school_data = <%= School.all_maps_data.html_safe %>;
+    for (let school of school_data) {
+      let marker = new google.maps.Marker({
+        position: school.position,
         map: map
-      }));
-      infoWindows.push(new google.maps.InfoWindow({
-        content: "<%= school.name %>"
-      }));
-      <% end %>
-    <% end %>
-    markers.forEach((marker, idx) => {
-      let info = infoWindows[idx];
-      marker.addListener('click', () => { info.open(map, marker) });
-    });
+      });
+      let infoWindow = new google.maps.InfoWindow({ content: school.name });
+      marker.addListener('click', () => { infoWindow.open(map, marker) });
+    }
   }
 </script>
 
