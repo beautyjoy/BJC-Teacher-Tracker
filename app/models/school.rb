@@ -31,7 +31,7 @@ class School < ApplicationRecord
   validates :name, :city, :state, :website, presence: true
   validates_format_of :website, with: /.+\..+/, on: :create
 
-  before_save :update_gps_data, if: ->{ lat.nil? || lng.nil? }
+  before_save :update_gps_data, if: -> { lat.nil? || lng.nil? }
 
   has_many :teachers
   scope :validated, -> { where("teachers_count > 0") }
