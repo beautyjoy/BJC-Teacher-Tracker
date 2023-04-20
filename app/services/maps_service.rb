@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MapsService
   # Get latitude and longitude from address
   def self.get_lat_lng(address)
