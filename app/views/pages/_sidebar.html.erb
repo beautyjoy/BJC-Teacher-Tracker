@@ -1,11 +1,10 @@
 <div class="container">
-  <h2 style="text-align: center">All Pages</h2>
   <ul class="nav nav-pills nav-fill flex-column">
     <%- categories.each do |category, pages_in_category| %>
       <li class="nav-item">
         <% @escaped_category = category.to_s.parameterize %>
         <%- if category != "Uncategorized" %>
-          <a class="category-header nav-link lead text-dark" data-toggle="collapse"
+          <a class="category-header nav-link text-dark" data-toggle="collapse"
             href="#category-<%= @escaped_category %>"
             role="button" aria-expanded="true"
             aria-controls="category-<%= @escaped_category %>">
