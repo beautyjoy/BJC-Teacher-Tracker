@@ -83,7 +83,7 @@ class School < ApplicationRecord
   end
 
   def update_gps_data
-    data = GoogleMaps.get_lat_lng(maps_api_location)
+    data = MapsService.get_lat_lng(maps_api_location)
     return unless data
 
     self.lat = data[:lat]
