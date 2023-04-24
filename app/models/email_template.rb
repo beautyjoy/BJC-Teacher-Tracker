@@ -17,6 +17,9 @@
 #  updated_at :datetime         not null
 #
 class EmailTemplate < ApplicationRecord
-  validates :title,
-            inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase }
+  # validates :title,
+  #           inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase }
 end
+
+
+
