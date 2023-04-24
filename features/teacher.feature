@@ -91,7 +91,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   And   I see a confirmation "You may update your information"
   Then  the "First Name" field should contain "Joseph"
 
-Scenario: Logged in pending teacher can update their info
+Scenario: Logged in teacher with Not_Reviewed application status can update their info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
@@ -119,7 +119,7 @@ Scenario: Logged in pending teacher can update their info
   And   I am on the edit page for Joe Mamoa
 
   # TODO: Should this test updating to a new school?
-  Scenario: Logged in pending teacher cannot change Snap from new form path
+  Scenario: Logged in teacher with not_reviewed status cannot change Snap from new form path
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
@@ -159,7 +159,7 @@ Scenario: Logged in teacher can only edit their own information
   When I go to the edit page for Jane Austin
   Then I should see "You can only edit your own information"
 
-Scenario: Logging in as a pending teacher should see "Update" instead of "Submit" when editing info
+Scenario: Logging in as a teacher with not_reviewed status should see "Update" instead of "Submit" when editing info
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
@@ -187,6 +187,7 @@ Scenario: Frontend should not allow Teacher to edit their email
   When I go to the edit page for Jane Austin
   And  I enter my "School Email" as "wrong@berkeley.edu"
   And  I enter my "Snap! Username" as "wrong"
+  And I press "Update"
   Then the "School Email" field should contain "testteacher@berkeley.edu"
   Then the "Snap!" field should contain "Jane"
 
@@ -204,13 +205,13 @@ Scenario: Validated teacher should see resend button
   When I go to the edit page for Jane Austin
   Then I should see a button named "Resend Welcome Email"
 
-Scenario: Pending teacher should not see resend button
+Scenario: teacher with not_reviewed status should not see resend button
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                     | snap | application_status |
-  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed       |
   Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"
@@ -232,6 +233,22 @@ Scenario: Denied teacher should not see resend button
   When I go to the edit page for Jane Austin
   Then I should not see "Resend Welcome Email"
 
+Scenario: Denied teacher cannot edit their information
+  Given the following schools exist:
+  |       name      |     city     |  state  |            website            |
+  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  Given the following teachers exist:
+  | first_name | last_name | admin | email                     | snap | application_status | more_info |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied | Original Information |
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the edit page for Jane Austin
+  And  I enter my "More Information" as "Updated information"
+  And I press "Update"
+  Then the "More Information" field should contain "Original Information"
+
 Scenario: Validated teacher should not see Tags or NCES ID
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
@@ -247,13 +264,13 @@ Scenario: Validated teacher should not see Tags or NCES ID
   Then I should not see "Tags"
   And I should not see "NCES ID"
 
-Scenario: Pending teacher should not see Tags or NCES ID
+Scenario: Teacher with not_reviewed status should not see Tags or NCES ID
   Given the following schools exist:
   |       name      |     city     |  state  |            website            |
   |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
   | first_name | last_name | admin | email                     | snap | application_status |
-  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | pending          |
+  | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed          |
   Given I have a teacher Google email
   Given I am on the BJC home page
   And I follow "Log In"

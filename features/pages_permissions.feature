@@ -6,7 +6,7 @@ Background: Has admin and teacher in DB along with pages of each permission type
     Given I seed data
     Given the following teachers exist:
     | first_name | last_name | admin | email                        | application_status |
-    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Not Reviewed       |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following pages exist:
     | url_slug                   | title             | html               | viewer_permissions | category | default |

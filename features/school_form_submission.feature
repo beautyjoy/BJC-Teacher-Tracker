@@ -23,7 +23,7 @@ Scenario: Viewing the schools page should show the all current schools
     Then I can log in with Google
     And I am on the schools page
     # Berkeley already has 2 users.
-    Then I should see "UC Berkeley" with "5" in a table row
+    Then I should see "UC Berkeley" with "6" in a table row
     And I should see "UC Irvine" with "1" in a table row
     And I should see "UC Scam Diego" with "0" in a table row
 

@@ -52,7 +52,7 @@ Given(/the following teachers exist/) do |teachers_table|
     more_info: "I'm teaching a college course",
     admin: false,
     personal_website: "https://snap.berkeley.edu",
-    application_status: "Pending"
+    application_status: "Not Reviewed"
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
