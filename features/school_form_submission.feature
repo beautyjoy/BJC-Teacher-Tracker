@@ -56,5 +56,45 @@ Scenario: Admins can create new schools
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
     And I fill in "NCES ID" with "123456789100"
+    And I select "US" from "Country"
     And I press "Submit"
     Then I should see "New UC Berkeley" with "0" in a table row
+
+Scenario: Admins cannot create schools with invalid country codes
+    Given the following teachers exist:
+    | first_name | last_name | admin | email                        |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+    Given I am on the BJC home page
+    Given I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the new schools page
+    And I fill in the school name selectize box with "New UC Berkeley" and choose to add a new school
+    And I fill in "City" with "Berkeley"
+    And I select "CA" from "State"
+    And I fill in "School Website" with "https://www.berkeley.edu/"
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
+    And I fill in "NCES ID" with "123456789100"
+    And I select "XX" from "Country"
+    And I press "Submit"
+    Then I should see "Country is not included in the list" # Error message for invalid country code
+
+Scenario: Creating a school with an international state
+  Given the following teachers exist:
+    | first_name | last_name | admin | email                        |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+  Given I am on the BJC home page
+  And I have an admin email
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the new schools page
+  And I fill in the school name selectize box with "New International School" and choose to add a new school
+  And I fill in "City" with "London"
+  And I select "United Kingdom" from "Country"
+  And I select "International" from "State"
+  And I fill in "School Website" with "https://www.internationalschool.ac.uk/"
+  And I select "High School" from "Grade Level"
+  And I select "Private" from "School Type"
+  And I press "Submit"
+  Then I should see "New International School" with "0" in a table row

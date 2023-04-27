@@ -26,14 +26,16 @@
 #
 require "uri"
 class School < ApplicationRecord
-  validates :name, :city, :state, :website, :country, presence: true
+  VALID_STATES = ["International", "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY"].freeze
+  validates :name, :city, :website, presence: true
+  validates :state, inclusion: { in: ->(school) { school.country == 'US' ? School::VALID_STATES : ['', 'International'] } }, allow_blank: true
+  validates :country, presence: true, inclusion: { in: ISO3166::Country.all.map(&:alpha2) }
   before_save :grab_lat_lng
 
   has_many :teachers
 
   scope :validated, -> { where("teachers_count > 0") }
 
-  VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
 
   validates :state, inclusion: { in: VALID_STATES }
   validates_format_of :website, with: /.+\..+/, on: :create

@@ -1,4 +1,14 @@
 <div class="form-group h3">Create a new School</div>
+<% if @school.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h4>
+    <ul>
+    <% @school.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class='form-group row'>
   <div class='col-6'>
       <%= f.label :name, "School Name", class: "label-required" %>
@@ -26,11 +36,15 @@
   <div class='col-2'>
     <%= f.label :state, class: "label-required", for: "school_state" %>
     <%= f.select(
-        :state,
-        School::VALID_STATES,
-        { include_blank: "State" },
-        { class: 'form-control', required: false, id: 'school_state'}
-    ) %>
+    :state,
+    options_for_select(
+        [["International", "International"]] +
+        School::VALID_STATES.map { |state| [state, state] },
+        selected: @school.state.present? ? @school.state : "International"
+    ),
+    { include_blank: "State" },
+    { class: 'form-control', required: false, id: 'school_state' }
+) %>
   </div>
 </div>
 
@@ -60,11 +74,6 @@
       { include_blank: "Select your school's type" },
       { class: 'form-control', required: false, id: 'school_type' }
     ) %>
-</div>
-
-<div class="form-group">
-  <%= f.label :country, "Country", class: "label-required" %>
-  <%= f.country_select :country, priority_countries: ["United States"], class: 'form-control', required: true %>
 </div>
 
 <%- if current_user&.admin? %>
@@ -104,3 +113,10 @@
         class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
   </div>
 <%- end %>
+
+<script>
+  window.School = {
+    VALID_STATES: <%= raw(School::VALID_STATES.to_json) %>
+  };
+</script>
+</div>
