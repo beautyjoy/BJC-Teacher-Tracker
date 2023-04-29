@@ -19,3 +19,14 @@
     text-decoration: none;
     font-variant: normal;
   }
+
+a[data-toggle="collapse"]:not([aria-expanded="true"])::before,
+a[data-toggle="collapse"][aria-expanded="false"]::before {
+  content: "▸ ";
+  text-decoration: none;
+}
+
+a[data-toggle="collapse"][aria-expanded="true"]::before {
+  content: "▾ ";
+  text-decoration: none;
+}

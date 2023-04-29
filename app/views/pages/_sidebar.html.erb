@@ -8,7 +8,6 @@
             href="#category-<%= @escaped_category %>"
             role="button" aria-expanded="true"
             aria-controls="category-<%= @escaped_category %>">
-            <i class="fa fa-caret-down"></i>
             <%= category %>
           </a>
           <hr class="p-0 m-0"/>
@@ -19,7 +18,7 @@
               <%- is_current = page == current_page %>
               <li class="nav">
                 <%# id necessary for cuke tests. %>
-                <a id="pagelink_<%= page.title %>" class="nav-link <%= "font-weight-bold active" if is_current %>"
+                <a id="pagelink_<%= page.url_slug %>" class="nav-link <%= "font-weight-bold active" if is_current %>"
                   <%= "aria-current=\"page\"" if is_current %>
                   href="<%= page_path(page) %>"><%= page.title %></a>
               </li>
@@ -30,13 +29,3 @@
     <%- end %>
   </ul>
 </div>
-
-<script>
-   $('.category-collapse').on('show.bs.collapse', function () {
-    $(this).siblings('.category-header').children(":first").attr("class", "fa fa-caret-down");
-  });
-
-  $('.category-collapse').on('hide.bs.collapse', function () {
-    $(this).siblings('.category-header').children(":first").attr("class", "fa fa-caret-right");
-  });
-</script>
