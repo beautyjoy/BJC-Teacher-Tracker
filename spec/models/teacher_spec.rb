@@ -6,7 +6,7 @@
 #
 #  id                 :integer          not null, primary key
 #  admin              :boolean          default(FALSE)
-#  application_status :string           default("pending")
+#  application_status :string           default("not_reviewed")
 #  education_level    :integer          default(NULL)
 #  email              :string
 #  first_name         :string
@@ -65,12 +65,22 @@ RSpec.describe Teacher, type: :model do
     expect(teacher.display_education_level).to eq "?"
   end
 
-  context "updating a record" do
-    it "changes a denined status to pending" do
+  describe "teacher with info_needed application status" do
+    let(:teacher) { teachers(:reimu) }
+
+    it "changes a info_needed status to not_reviewed" do
       expect do
-        teacher.update(email: "bob.johnson@school.edu")
+        teacher.update(email: "reimu@touhou.com")
       end.to change(teacher, :application_status)
-             .from("denied").to("pending")
+             .from("info_needed").to("not_reviewed")
+    end
+
+    it "can change a not_reviewed status to info_needed" do
+      expect(teacher.more_info).to eq "Best Touhou Character"
+      expect do
+        teacher.update(more_info: "updated info")
+      end.to change(teacher, :more_info)
+              .from("Best Touhou Character").to("updated info")
     end
   end
 
@@ -78,6 +88,7 @@ RSpec.describe Teacher, type: :model do
     let(:teacher) { teachers(:ye) }
 
     it "shows a short status with more info" do
+      expect(teacher.more_info).to eq "A CS169 Student"
       expect(teacher.display_status).to eq "Other | A CS169 Student"
     end
 
@@ -86,11 +97,11 @@ RSpec.describe Teacher, type: :model do
     end
   end
 
-  describe "teacher with pending application status" do
+  describe "teacher with not_reviewed application status" do
     let(:teacher) { teachers(:long) }
 
     it "shows an application status" do
-      expect(teacher.display_application_status).to eq "Pending"
+      expect(teacher.display_application_status).to eq "Not Reviewed"
     end
   end
 end
