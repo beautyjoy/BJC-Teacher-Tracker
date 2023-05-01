@@ -26,8 +26,7 @@ class EmailTemplatesController < ApplicationController
     end
     load_ordered_emails
 
-  
-    if @email_template.save!      
+    if @email_template.save!
       flash[:success] = "Created #{@email_template.title} successfully."
       redirect_to email_templates_path
     else

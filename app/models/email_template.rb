@@ -20,6 +20,3 @@ class EmailTemplate < ApplicationRecord
   # validates :title,
   #           inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase }
 end
-
-
-

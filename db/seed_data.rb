@@ -35,7 +35,7 @@ module SeedData
     <p>Dear [Recipient's Name],</p>
     <p>Thank you for your email. We have received your message and we are sorry to inform you that your application has been rejected.</p>
     <p>Best regards,</p>
-    <p>[Your Name]</p>  
+    <p>[Your Name]</p>
     <p>Below, you can find the reason as to why it was rejected </p>
     <p>
       {{ reason | strip_tags}}
@@ -46,7 +46,7 @@ module SeedData
     <p>Dear [Recipient's Name],</p>
     <p>Thank you for your email. We have received your message and we are sorry to inform you that your application has been rejected.</p>
     <p>Best regards,</p>
-    <p>[Your Name]</p>  
+    <p>[Your Name]</p>
     <p>Unfortunately, we are not able to provide a particular reason at this moment </p>
   DENY_EMAIL2
 
@@ -55,7 +55,7 @@ module SeedData
     <p>Thank you for your email. We have received your message and your application has currently been waitlisted.</p>
     <p>We will reach out to you if there are any changes to your application, </p>
     <p>Best regards,</p>
-    <p>[Your Name]</p>  
+    <p>[Your Name]</p>
 
   DENY_EMAIL3
 
