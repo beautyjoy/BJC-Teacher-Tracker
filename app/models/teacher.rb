@@ -6,7 +6,7 @@
 #
 #  id                 :integer          not null, primary key
 #  admin              :boolean          default(FALSE)
-#  application_status :string           default("pending")
+#  application_status :string           default("not_reviewed")
 #  education_level    :integer          default(NULL)
 #  email              :string
 #  first_name         :string
@@ -41,16 +41,20 @@ class Teacher < ApplicationRecord
   enum application_status: {
     validated: "Validated",
     denied: "Denied",
-    pending: "Pending"
+    info_needed: "Info Needed",
+    not_reviewed: "Not Reviewed",
   }
   validates_inclusion_of :application_status, in: application_statuses.keys
 
   belongs_to :school, counter_cache: true
 
-  # # Non-admin teachers who have not been denied nor accepted
-  scope :unvalidated, -> { where("application_status=? AND admin=?", application_statuses[:pending], "false") }
+  # Non-admin teachers whose application has neither been accepted nor denied
+  # It might or might not have been reviewed.
+  scope :unvalidated, -> { where("(application_status=? OR application_status=?) AND admin=?", application_statuses[:info_needed], application_statuses[:not_reviewed], "false") }
+  scope :unreviewed, -> { where("application_status=? AND admin=?", application_statuses[:not_reviewed], "false") }
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where("application_status=? AND admin=?", application_statuses[:validated], "false") }
+
 
   enum education_level: {
     middle_school: 0,
@@ -89,8 +93,8 @@ class Teacher < ApplicationRecord
 
   def reset_validation_status
     return if application_status_changed? || school_id_changed?
-    if denied?
-      pending!
+    if info_needed?
+      not_reviewed!
     end
   end
 
@@ -157,7 +161,8 @@ class Teacher < ApplicationRecord
     {
       validated: "✔️",
       denied: "🚫",
-      pending: "P"
+      not_reviewed: "✉️",
+      info_needed: "❓",
     }[application_status.to_sym]
   end
 

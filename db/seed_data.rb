@@ -93,6 +93,17 @@ module SeedData
         format: "html",
         title: "Deny Email",
         subject: "Deny Email"
+      },
+      {
+        id: 5,
+        body: @request_info_email,
+        path: "teacher_mailer/request_info_email",
+        locale: nil,
+        handler: "liquid",
+        partial: false,
+        format: "html",
+        title: "Request Info Email",
+        subject: "Request Info Email"
       }
     ]
   end

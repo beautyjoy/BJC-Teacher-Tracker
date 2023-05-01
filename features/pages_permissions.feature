@@ -6,7 +6,7 @@ Background: Has admin and teacher in DB along with pages of each permission type
     Given I seed data
     Given the following teachers exist:
     | first_name | last_name | admin | email                        | application_status |
-    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Pending            |
+    | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Not Reviewed       |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following pages exist:
     | url_slug                   | title             | html               | viewer_permissions | category | default |
@@ -26,9 +26,7 @@ Scenario: Admins can see everything
     And I should see "Test Public Page"
     And I should see "Test Teacher Page"
     And I should see "Test Admin Page"
-    And I should see "Edit"
-    And I should see "Delete"
-    And I should see a button named "Delete"
+    And I should see a button named "❌"
     And I should see a link named "Edit"
     And I should see a button named "New Page"
 
