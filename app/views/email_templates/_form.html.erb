@@ -1,0 +1,19 @@
+<div class="form-group h3">Create a new Email</div>
+
+<div class="form-group">
+  <%= f.label :subject, "Subject", class: "label-required", for: "emailTemplate_subject" %>
+  <%= f.text_field :subject, placeholder: "Enter the subject for the Email Template",
+      class: "form-control", required: false,
+      title: "Please enter the subject for the Email Template",
+      id: 'emailTemplate_subject' %>
+</div>
+
+<div class="form-group">
+  <%= f.label :body, "Body", class: "label-required", for: "emailTemplate_body" %>
+  <%= f.text_area :body, placeholder: "Enter the body for the Email Template",
+      class: "tinymce", required: false,
+      title: "Please enter the body for the Email Template",
+      id: 'emailTemplate_body' %>
+</div>
+
+<%- end %>

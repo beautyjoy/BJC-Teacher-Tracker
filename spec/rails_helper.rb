@@ -44,6 +44,11 @@ RSpec.configure do |config|
     Rails.application.load_seed # loading seeds
   end
 
+  config.before(:each) do
+    # Globlly stub the Google Maps API call
+    allow(MapsService).to receive(:get_lat_lng).and_return({ lat: 37.8719, lng: -122.2585 })
+  end
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

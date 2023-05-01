@@ -17,7 +17,8 @@ $(function() {
       language: {
         search: '_INPUT_',
         searchPlaceholder: 'Search'
-      }
+      },
+      autoWidth: false,
   });
 
   $tables.draw();

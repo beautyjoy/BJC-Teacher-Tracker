@@ -26,9 +26,7 @@ Scenario: Admins can see everything
     And I should see "Test Public Page"
     And I should see "Test Teacher Page"
     And I should see "Test Admin Page"
-    And I should see "Edit"
-    And I should see "Delete"
-    And I should see a button named "Delete"
+    And I should see a button named "❌"
     And I should see a link named "Edit"
     And I should see a button named "New Page"
 
