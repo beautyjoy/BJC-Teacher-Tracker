@@ -47,6 +47,6 @@ RSpec.describe TeachersController, type: :controller do
             }
         }
     }
-    expect(Teacher.where(email: "valid_example@valid_example.edu").first.application_status).to eq("pending")
+    expect(Teacher.where(email: "valid_example@valid_example.edu").first.application_status).to eq("not_reviewed")
   end
 end

@@ -40,10 +40,17 @@ gem "sentry-rails"
 gem "liquid"
 
 # Store uploaded files
-gem "aws-sdk-s3", require: false
+# gem "aws-sdk-s3", require: false
 
 # Render images for file uploads in pages
 gem "image_processing", ">= 1.2"
+
+gem "selectize-rails"
+gem "smarter_csv", "~> 1.4"
+gem "activerecord-import", require: false
+
+gem 'country_select'
+gem "httparty", "~> 0.21.0"
 
 group :development do
   gem "annotate"
@@ -103,10 +110,3 @@ group :test do
 
   gem "rails-controller-testing"
 end
-
-gem "selectize-rails"
-gem "smarter_csv", "~> 1.4"
-gem "activerecord-import", require: false
-
- #Countries
- gem 'country_select'

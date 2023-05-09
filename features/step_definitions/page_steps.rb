@@ -67,5 +67,6 @@ And(/^I should not have a(n active)? hidden page link "(.*)"/) do |active, link_
 end
 
 And(/^I follow the page link "(.*)"/) do |link_text|
-  page.execute_script("document.getElementById('pagelink_#{link_text}').click();")
+  page_slug = Page.find_by(title: link_text).url_slug
+  page.execute_script("document.getElementById('pagelink_#{page_slug}').click();")
 end

@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2023_04_18_082217) do
     t.boolean "admin", default: false
     t.string "personal_website"
     t.integer "education_level", default: -1
-    t.string "application_status", default: "Pending"
+    t.string "application_status", default: "Not Reviewed"
     t.datetime "last_session_at"
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0

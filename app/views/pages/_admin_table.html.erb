@@ -2,22 +2,31 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Default</th>
-      <th scope="col">Last Edited</th>
+      <th scope="col">Last Update</th>
       <th scope="col">Permissions</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @pages.each do |p| %>
       <tr>
-        <td><%= link_to(p.title, page_path(p)) %> </td>
-        <td><%= p.default %></td>
+        <td>
+          <%= link_to(p.title, page_path(p)) %>
+          <%- if p.default %>
+            <span class="badge badge-primary">Default</span>
+          <%- end %>
+        </td>
         <td><%= "#{p.last_editor.full_name} on #{p.updated_at.strftime('%F')}" %></td>
         <td><%= p.viewer_permissions %></td>
-        <td><%= link_to("Edit", edit_page_path(p), class: "btn btn-primary", id: "edit_#{p.url_slug}") %></td>
-        <td><%= button_to("Delete", page_path(p), method: :delete, class: "btn btn-danger", type: 'button', id: "delete_#{p.url_slug}") %> </td>
+        <td>
+          <div class="btn-group">
+            <%# Extra span is necessary to work around weird bootstrap bug. %>
+            <span>
+              <%= link_to("Edit", edit_page_path(p), class: "btn btn-primary", id: "edit_#{p.url_slug}") %>
+            </span>
+            <%= button_to("❌", page_path(p), method: :delete, class: "btn btn-outline-danger", type: 'button', id: "delete_#{p.url_slug}") %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

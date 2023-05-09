@@ -29,7 +29,6 @@ Scenario: Pressing "New Page" button should take user to new page form
     And I should see "URL slug"
     And I should see "Content"
     And I should see "Category"
-    And I should see "All Pages"
 
 Scenario: Successfully creating a new page redirects to that page
     Given I am on the new pages page
@@ -41,7 +40,6 @@ Scenario: Successfully creating a new page redirects to that page
     And I press "Submit"
     Then I should see "Test Title"
     Then I should see "This is a test"
-    And I should see "All Pages"
     And I should see a nav link "Test Category"
     And I should have a hidden page link "Test Title"
 

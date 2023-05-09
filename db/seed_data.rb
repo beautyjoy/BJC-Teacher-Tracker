@@ -31,6 +31,15 @@ module SeedData
     </p>
   DENY_EMAIL
 
+  @request_info_email = <<-REQUEST_INFO_EMAIL
+    <p>
+      Here is an update to your application to BJC: <br>
+      We need more information from you: <br>
+      {{ reason | strip_tags }} <br>
+      To update your application, please login to your account and update your application.
+    </p>
+  REQUEST_INFO_EMAIL
+
   def self.emails
     [
       {
@@ -65,6 +74,17 @@ module SeedData
         format: "html",
         title: "Deny Email",
         subject: "Deny Email"
+      },
+      {
+        id: 5,
+        body: @request_info_email,
+        path: "teacher_mailer/request_info_email",
+        locale: nil,
+        handler: "liquid",
+        partial: false,
+        format: "html",
+        title: "Request Info Email",
+        subject: "Request Info Email"
       }
     ]
   end

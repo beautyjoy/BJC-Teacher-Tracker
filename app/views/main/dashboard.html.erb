@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @unvalidated_teachers.each do |teacher| %>
+        <% @unreviewed_teachers.each do |teacher| %>
         <tr>
           <%= render 'teachers/teacher', teacher: teacher %>
           <td>
@@ -17,22 +17,26 @@
               <%= button_to("✔️", validate_teacher_path(teacher.id),
                  class: 'btn btn-outline-success', type: 'button') %>
               <span>
-                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" data-teacher-id="<%= teacher.id %>" data-teachername="<%= teacher.full_name %>">
+                <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target=".js-denialModal" 
+                  data-modal-type="request_info" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
+                  ❓
+                </button>
+              </span>
+              <span>
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" 
+                  data-modal-type="deny" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
                   ❌
                 </button>
               </span>
-              <%# <%= button_to("Delete", teacher_delete_path(teacher.id),
-                 data: {confirm: "Are you sure you wish to delete this form?"},
-                 class: 'btn btn-danger', type: 'button') %>
             </div>
           </td>
         </tr>
         <% end %>
       </tbody>
     </table>
-    <% if @unvalidated_teachers.empty? %>
+    <% if @unreviewed_teachers.empty? %>
       <div class="alert alert-success" role="alert">
-        <strong>No pending forms!</strong>
+        <strong>No unreviewed forms!</strong>
       </div>
     <% end %>
 </div>
@@ -88,30 +92,22 @@
 </div>
 
 <script>
-  var map;
+  let map;
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 39.50, lng: -98.35},
       zoom: 4
     });
 
-    let markers = [];
-    let infoWindows = [];
-    <% @schools.each do |school| %>
-    <% if school.lat && school.lng %>
-      markers.push(new google.maps.Marker({
-        position: new google.maps.LatLng(<%= school.lat %>, <%= school.lng %>),
+    let school_data = <%= School.all_maps_data.html_safe %>;
+    for (let school of school_data) {
+      let marker = new google.maps.Marker({
+        position: school.position,
         map: map
-      }));
-      infoWindows.push(new google.maps.InfoWindow({
-        content: "<%= school.name %>"
-      }));
-      <% end %>
-    <% end %>
-    markers.forEach((marker, idx) => {
-      let info = infoWindows[idx];
-      marker.addListener('click', () => { info.open(map, marker) });
-    });
+      });
+      let infoWindow = new google.maps.InfoWindow({ content: school.name });
+      marker.addListener('click', () => { infoWindow.open(map, marker) });
+    }
   }
 </script>
 
