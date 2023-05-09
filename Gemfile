@@ -49,7 +49,7 @@ gem "selectize-rails"
 gem "smarter_csv", "~> 1.4"
 gem "activerecord-import", require: false
 
-gem 'country_select'
+gem "country_select"
 gem "httparty", "~> 0.21.0"
 
 group :development do

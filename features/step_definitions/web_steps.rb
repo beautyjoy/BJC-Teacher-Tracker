@@ -258,6 +258,6 @@ Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |v
   end
 end
 
-Then('I should see {string} # Error message for invalid country code') do |error_message|
+Then("I should see {string} # Error message for invalid country code") do |error_message|
   expect(page).to have_content(error_message)
 end
