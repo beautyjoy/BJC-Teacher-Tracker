@@ -1,15 +1,23 @@
 <% provide(:title, "Email Templates") %>
+<% provide(:header_button, "New Email Templates") %>
 <div class="container">
   <div class="row">
     <div class="col-12">
       <table class="table table-striped js-dataTable">
         <thead class="thead-dark">
-          <tr><th>Purpose</th></tr>
+          <th scope="col">Purpose</th>
+          <th scope="col" width="10ch">Actions</th>
         </thead>
         <tbody>
           <% @all_templates.each do |template| %>
           <tr>
             <td><%= link_to(template.title, edit_email_template_path(template)) %></td>
+            <td>
+            <span class="btn-group">
+              <%= link_to("Edit", edit_email_template_path(template), class: "btn btn-info") %>
+              <%= link_to("❌", email_template_path(template), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) %>
+            </span>
+          </td>
           </tr>
           <% end %>
         </tbody>

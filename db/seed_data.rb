@@ -31,19 +31,38 @@ module SeedData
     </p>
   DENY_EMAIL
 
-  @request_info_email = <<-REQUEST_INFO_EMAIL
+  @deny_email1 = <<-DENY_EMAIL1
+    <p>Dear [Recipient's Name],</p>
+    <p>Thank you for your email. We have received your message and we are sorry to inform you that your application has been rejected.</p>
+    <p>Best regards,</p>
+    <p>[Your Name]</p>
+    <p>Below, you can find the reason as to why it was rejected </p>
     <p>
-      Here is an update to your application to BJC: <br>
-      We need more information from you: <br>
-      {{ reason | strip_tags }} <br>
-      To update your application, please login to your account and update your application.
+      {{ reason | strip_tags}}
     </p>
-  REQUEST_INFO_EMAIL
+  DENY_EMAIL1
+
+  @deny_email2 = <<-DENY_EMAIL2
+    <p>Dear [Recipient's Name],</p>
+    <p>Thank you for your email. We have received your message and we are sorry to inform you that your application has been rejected.</p>
+    <p>Best regards,</p>
+    <p>[Your Name]</p>
+    <p>Unfortunately, we are not able to provide a particular reason at this moment </p>
+  DENY_EMAIL2
+
+  @deny_email3 = <<-DENY_EMAIL3
+    <p>Dear [Recipient's Name],</p>
+    <p>Thank you for your email. We have received your message and your application has currently been waitlisted.</p>
+    <p>We will reach out to you if there are any changes to your application, </p>
+    <p>Best regards,</p>
+    <p>[Your Name]</p>
+
+  DENY_EMAIL3
 
   def self.emails
     [
       {
-        id: 1,
+        # id: 1,
         body: @welcome_email,
         path: "teacher_mailer/welcome_email",
         locale: nil,
@@ -54,7 +73,7 @@ module SeedData
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
       {
-        id: 3,
+        # id: 3,
         body: @form_submission,
         path: "teacher_mailer/form_submission",
         locale: nil,
@@ -65,7 +84,7 @@ module SeedData
         subject: "Form Submission"
       },
       {
-        id: 4,
+        # id: 4,
         body: @deny_email,
         path: "teacher_mailer/deny_email",
         locale: nil,
