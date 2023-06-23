@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+ # frozen_string_literal: true
 
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   get    "/login",  to: "sessions#new",     as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"
+  # These are pulled from Discourse
+  post "session/sso" => "sessions#sso"
+  get "session/sso_login" => "sessions#sso_login"
+
   get "/auth/:provider/callback", to: "sessions#omniauth_callback"
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"

@@ -122,6 +122,8 @@
           <button type='submit'>Login with Developer</button>
         <% end %>
 
+      <%# TODO: Move to /auth/discourse_connect %>
+      <%= button_to('TEST SSO Login', '/session/sso', class: 'btn btn-info') if Rails.env.development? %>
       <%= button_to('Dev Login', '/auth/developer', class: 'btn btn-info') if Rails.env.development? %>
       <%= form_tag('/auth/google_oauth2', method: 'post') do %>
         <button class="btn btn-block social-btn-google">
