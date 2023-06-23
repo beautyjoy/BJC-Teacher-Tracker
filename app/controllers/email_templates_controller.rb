@@ -24,7 +24,7 @@ class EmailTemplatesController < ApplicationController
     else
       @email_template = EmailTemplate.new(template_params)
     end
-    load_ordered_emails
+    load_ordered_email_templates
 
     if @email_template.save!
       flash[:success] = "Created #{@email_template.title} successfully."
@@ -37,7 +37,7 @@ class EmailTemplatesController < ApplicationController
 
   def new
     @email_template = EmailTemplate.new
-    load_ordered_emails
+    load_ordered_email_templates
   end
 
   def destroy
@@ -46,12 +46,12 @@ class EmailTemplatesController < ApplicationController
     redirect_to email_templates_path, notice: "Deleted \"#{@email_template.subject}\" successfully."
   end
 
-  def load_ordered_emails
-    @ordered_email ||= EmailTemplate.all.order(:title)
-  end
-
   private
   def template_params
     params.require(:email_template).permit(:body, :subject, :title)
+  end
+
+  def load_ordered_email_templates
+    @ordered_email_templates ||= EmailTemplate.all.order(:title)
   end
 end

@@ -11,12 +11,24 @@
 #  locale     :string
 #  partial    :boolean
 #  path       :string
+#  required   :boolean          default(FALSE)
 #  subject    :string
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 class EmailTemplate < ApplicationRecord
-  # validates :title,
-  #           inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase }
+  validates :title,
+            inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase },
+            if: -> { self.required? }
+
+  before_destroy :prevent_deleting_required_emails
+
+  private
+  def prevent_deleting_required_emails
+    if self.required?
+      errors.add()
+      throw :abort
+    end
+  end
 end

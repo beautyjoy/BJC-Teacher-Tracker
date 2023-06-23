@@ -1,31 +1,4 @@
 <%= provide(:h1, @email_template.title) %>
 <hr />
 
-<%= form_with(model: @email_template, local: true) do |form| %>
-  <div class="form">
-    <label for="email_template_subject"><h3>Subject</h3></label>
-    <%= form.text_field :subject, class: "form-control" %>
-    <label for="email_template_body"><h3>Body</h3></label>
-    <%= form.text_area :body, class: "tinymce", rows: 20, style: 'width:100%;'%>
-  </div>
-  <br>
-  <div class="actions">
-    <%= form.submit "Update", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<script type="text/javascript">
-  tinyMCE.init({
-    selector: 'textarea.tinymce',
-    height: 500,
-    menubar: 'edit table',
-    plugins: [
-      'image', 'paste', 'link', 'table'
-    ],
-    toolbar: 'undo redo | formatselect | ' +
-      'bold italic backcolor | alignleft aligncenter ' +
-      'alignright alignjustify | bullist numlist outdent indent | ' +
-      'table tabledelete | tableprops tablerowprops tablecellprops | ' +
-      'removeformat'
-  });
-</script>
+<%= render 'form', email_template: @email_template %>

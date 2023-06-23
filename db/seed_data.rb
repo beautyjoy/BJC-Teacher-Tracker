@@ -62,7 +62,6 @@ module SeedData
   def self.emails
     [
       {
-        # id: 1,
         body: @welcome_email,
         path: "teacher_mailer/welcome_email",
         locale: nil,
@@ -70,10 +69,10 @@ module SeedData
         partial: false,
         format: "html",
         title: "Welcome Email",
+        required: true,
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
       {
-        # id: 3,
         body: @form_submission,
         path: "teacher_mailer/form_submission",
         locale: nil,
@@ -81,10 +80,10 @@ module SeedData
         partial: false,
         format: "html",
         title: "Form Submission",
+        required: true,
         subject: "Form Submission"
       },
       {
-        # id: 4,
         body: @deny_email,
         path: "teacher_mailer/deny_email",
         locale: nil,
@@ -92,10 +91,10 @@ module SeedData
         partial: false,
         format: "html",
         title: "Deny Email",
+        required: true,
         subject: "Deny Email"
       },
       {
-        id: 5,
         body: @request_info_email,
         path: "teacher_mailer/request_info_email",
         locale: nil,
@@ -103,6 +102,7 @@ module SeedData
         partial: false,
         format: "html",
         title: "Request Info Email",
+        required: true,
         subject: "Request Info Email"
       }
     ]

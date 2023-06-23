@@ -15,7 +15,7 @@
             <td>
             <span class="btn-group">
               <%= link_to("Edit", edit_email_template_path(template), class: "btn btn-info") %>
-              <%= link_to("❌", email_template_path(template), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) %>
+              <%= link_to("❌", email_template_path(template), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) unless template.required? %>
             </span>
           </td>
           </tr>
