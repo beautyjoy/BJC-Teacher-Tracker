@@ -91,20 +91,21 @@ class SessionsController < ApplicationController
           return
         end
 
-        if SiteSetting.must_approve_users? && !user.approved?
-          redeem_invitation(invite, sso, user) if invite.present? && user.invited_user.blank?
+        # if SiteSetting.must_approve_users? && !user.approved?
+        #   redeem_invitation(invite, sso, user) if invite.present? && user.invited_user.blank?
 
-          if SiteSetting.discourse_connect_not_approved_url.present?
-            redirect_to SiteSetting.discourse_connect_not_approved_url, allow_other_host: true
-          else
-            render_sso_error(text: I18n.t("discourse_connect.account_not_approved"), status: 403)
-          end
-          return
+        #   if SiteSetting.discourse_connect_not_approved_url.present?
+        #     redirect_to SiteSetting.discourse_connect_not_approved_url, allow_other_host: true
+        #   else
+        #     render_sso_error(text: I18n.t("discourse_connect.account_not_approved"), status: 403)
+        #   end
+        #   return
 
           # we only want to redeem the invite if
           # the user has not already redeemed an invite
           # (covers the same SSO user visiting an invite link)
-        elsif true && user.invited_user.blank?
+        # els
+        if true && user.invited_user&.blank?
           # redeem_invitation(invite, sso, user)
 
           # we directly call user.activate here instead of going
