@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.8"
 
-gem "rails", "6.1.6"
+gem "rails", "6.1.7.4"
 
 # Production app server
 gem "puma", "~> 5"
