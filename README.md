@@ -60,7 +60,7 @@ We have worked on the adding following core features and functionality:
   * Note: if you are using WSL2 on windows, the command to start postgres is `sudo service postgresql start`
 
 ### Framework/Gem Installation
-* `rvm use 2.7.7` # Double-check `.ruby-version`
+* `rvm use 3.2.2` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
 * `nvm install 14` Node v14 is needed
@@ -106,7 +106,7 @@ We have worked on the adding following core features and functionality:
 ## Steps to Deploying on Heroku
 
 - ... create a heroku app
-- `heroku stack:set heroku-20` (Ruby 2.7.7 is not supported on latest stack heroku-22. Double check your Ruby version though)
+- `heroku stack:set heroku-20` (Ruby 3.2.2 is not supported on latest stack heroku-22. Double check your Ruby version though)
 - `heroku buildpacks:set heroku/nodejs` # this must be the first buildpack.
 - `heroku buildpacks:add --index 2 heroku/ruby`
 - `git remote set-url heroku https://git.heroku.com/bjc-teachers.git` (or whatever your heroku deployment repository is)
