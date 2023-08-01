@@ -10,7 +10,7 @@ gem "rails", "6.1.6"
 
 # Production app server
 gem "puma", "~> 5"
-gem "pg", "~> 1.0"
+gem "pg", "~> 1.5"
 
 # Front-end Assets
 gem "webpacker", "~> 4"
