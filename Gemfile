@@ -92,7 +92,7 @@ end
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem "rspec-rails"
-  gem "simplecov", "< 0.18", require: false
+  gem "simplecov", require: false
   gem "simplecov-json", require: false
   gem "simplecov-console", require: false
   gem "simplecov-csv", require: false
