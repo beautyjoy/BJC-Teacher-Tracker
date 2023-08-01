@@ -9,7 +9,7 @@ namespace :split_teacher_pending_state do
     puts "Nil -> not_reviewed"
     puts Teacher.where(application_status: nil).update_all(application_status: "not_reviewed")
     puts "empty string -> not_reviewed"
-    puts Teacher.where(application_status: '').update_all(application_status: "not_reviewed")
+    puts Teacher.where(application_status: "").update_all(application_status: "not_reviewed")
     puts "Done."
   end
 end
