@@ -2,8 +2,9 @@
 
 class EmailTemplatesController < ApplicationController
   before_action :require_admin
+
   def index
-    @all_templates = EmailTemplate.all
+    load_ordered_email_templates
   end
 
   def edit

@@ -24,13 +24,20 @@ class EmailTemplate < ApplicationRecord
 
   before_destroy :prevent_deleting_required_emails
 
-  def self.templates_with_custom_reason
+  def test_data
+    @@test_data ||= rand(10)
+  end
+
+  def accepts_custom_reason?
+    # search for 'reason' in a liquid template
+    self.body.match?(/{{\s*reason/)
   end
 
   private
+
   def prevent_deleting_required_emails
     if self.required?
-      errors.add("Cannot delete a required email template")
+      errors.add('Cannot delete a required email template')
       throw :abort
     end
   end

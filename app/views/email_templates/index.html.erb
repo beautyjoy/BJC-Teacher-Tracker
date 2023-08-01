@@ -6,17 +6,21 @@
       <table class="table table-striped js-dataTable">
         <thead class="thead-dark">
           <th scope="col">Purpose</th>
+          <th scope="col" width="5ch">Reason?</th>
+          <th scope="col" width="5ch">Required?</th>
           <th scope="col" width="10ch">Actions</th>
         </thead>
         <tbody>
-          <% @all_templates.each do |template| %>
+          <% @ordered_email_templates.each do |template| %>
           <tr>
             <td><%= link_to(template.title, edit_email_template_path(template)) %></td>
+            <td><%= check_or_x(template.accepts_custom_reason?) %></td>
+            <td><%= check_or_x(template.required?) %></td>
             <td>
-            <span class="btn-group">
-              <%= link_to("Edit", edit_email_template_path(template), class: "btn btn-info") %>
-              <%= link_to("❌", email_template_path(template), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) unless template.required? %>
-            </span>
+              <span class="btn-group">
+                <%= link_to("Edit", edit_email_template_path(template), class: "btn btn-info") %>
+                <%= link_to("❌", email_template_path(template), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) unless template.required? %>
+              </span>
           </td>
           </tr>
           <% end %>
