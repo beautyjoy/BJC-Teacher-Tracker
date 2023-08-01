@@ -13,7 +13,7 @@ gem "puma", "~> 5"
 gem "pg", "~> 1.5"
 
 # Front-end Assets
-gem "webpacker", "~> 4"
+gem "webpacker", "< 5"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
