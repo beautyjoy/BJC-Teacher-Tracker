@@ -99,7 +99,7 @@ group :test do
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails"
-  gem "metric_fu"
+  # gem "metric_fu" # removed until ruby 3.x compat is fixed.
   gem "selenium-webdriver"
 
   gem "webdrivers"
