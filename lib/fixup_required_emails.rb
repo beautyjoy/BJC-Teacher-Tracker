@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 EmailTemplate.where(
     title:
     ["Welcome Email", "Form Submission",
