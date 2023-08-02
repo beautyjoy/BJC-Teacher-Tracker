@@ -38,7 +38,7 @@ RSpec.describe PagesController, type: :controller do
   end
 
   describe "#create" do
-    it "allows admin to create" do
+    it "allows admin to create", :focus do
       allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
       expect(Page.find_by(url_slug: @pages_slug)).to be_nil
       post :create, {
