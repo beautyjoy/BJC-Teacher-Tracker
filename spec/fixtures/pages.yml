@@ -23,18 +23,29 @@
 #  fk_rails_...  (creator_id => teachers.id)
 #  fk_rails_...  (last_editor_id => teachers.id)
 #
-thepage:
-  url_slug: Test_slug
+basic_page:
+  url_slug: basic_slug
   title: test_page
   html: <p>Content</p>
   viewer_permissions: "Verified Teacher"
+  default: false
   creator_id: 0
   last_editor_id: 0
 
 validadminpage:
-  url_slug: test_slug_2
+  url_slug: basic_slug_2
   title: Test Page Title 2
   viewer_permissions: Admin
   html: <p>An admin page</p>
+  default: false
   creator_id: 0
   last_editor_id: 0
+
+about_page:
+  url_slug: about
+  title: About BJC Page
+  html: <p>Content</p>
+  viewer_permissions: "Public"
+  default: true
+  creator_id: 1
+  last_editor_id: 1

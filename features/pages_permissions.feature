@@ -10,10 +10,10 @@ Background: Has admin and teacher in DB along with pages of each permission type
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following pages exist:
     | url_slug                   | title             | html               | viewer_permissions | category | default |
-    | test_slug_admin            | Test Admin Page   | Test admin body.   | Admin              | A        |         |
-    | test_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher   |          |         |
-    | test_slug_public           | Test Public Page  | Test public body.  | Public             | A        |         |
-    | test_slug_public_default   | Default Public Page| Test default body.| Public             |          |  true   |
+    | basic_slug_admin            | Test Admin Page   | Test admin body.   | Admin              | A        |         |
+    | basic_slug_verified_teacher | Test Teacher Page | Test teacher body. | Verified Teacher   |          |         |
+    | basic_slug_public           | Test Public Page  | Test public body.  | Public             | A        |         |
+    | basic_slug_public_default   | Default Public Page| Test default body.| Public             |          |  true   |
 
 Scenario: Admins can see everything
     Given I am on the BJC home page
@@ -67,19 +67,19 @@ Scenario: Admin can access all pages
     Then I follow "Pages"
     Then I should be on the pages index
     And I follow the page link "Test Public Page"
-    Then I should be on the page for slug "test_slug_public"
+    Then I should be on the page for slug "basic_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
     Then I follow "Pages"
     Then I should be on the pages index
     And I follow the page link "Test Teacher Page"
-    Then I should be on the page for slug "test_slug_verified_teacher"
+    Then I should be on the page for slug "basic_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
     Then I follow "Pages"
     Then I should be on the pages index
     And I follow the page link "Test Admin Page"
-    Then I should be on the page for slug "test_slug_admin"
+    Then I should be on the page for slug "basic_slug_admin"
     And I should see "Test Admin Page"
     And I should see "Test admin body."
 
@@ -91,7 +91,7 @@ Scenario: Teachers can access public pages
     Then I follow "Pages"
     Then I should be on the pages index
     And I follow the page link "Test Public Page"
-    Then I should be on the page for slug "test_slug_public"
+    Then I should be on the page for slug "basic_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
 
@@ -103,7 +103,7 @@ Scenario: Teachers can access teacher pages
     Then I follow "Pages"
     Then I should be on the pages index
     And I follow the page link "Test Teacher Page"
-    Then I should be on the page for slug "test_slug_verified_teacher"
+    Then I should be on the page for slug "basic_slug_verified_teacher"
     And I should see "Test Teacher Page"
     And I should see "Test teacher body."
 
@@ -112,7 +112,7 @@ Scenario: Teachers can't access admin pages
     Given I have a teacher Google email
     And I follow "Log In"
     Then I can log in with Google
-    Given I am on the page for slug "test_slug_admin"
+    Given I am on the page for slug "basic_slug_admin"
     Then I should be on the pages index
 
 Scenario: Public can access public pages
@@ -120,14 +120,14 @@ Scenario: Public can access public pages
     Then I follow "Pages"
     Then I should see "Default Public Page"
     And I follow the page link "Test Public Page"
-    Then I should be on the page for slug "test_slug_public"
+    Then I should be on the page for slug "basic_slug_public"
     And I should see "Test Public Page"
     And I should see "Test public body."
 
 Scenario: Public can't access verified teacher pages
-    Given I am on the page for slug "test_slug_verified_teacher"
+    Given I am on the page for slug "basic_slug_verified_teacher"
     Then I should be on the login page
 
 Scenario: Public can't access admin pages
-    Given I am on the page for slug "test_slug_admin"
+    Given I am on the page for slug "basic_slug_admin"
     Then I should be on the login page
