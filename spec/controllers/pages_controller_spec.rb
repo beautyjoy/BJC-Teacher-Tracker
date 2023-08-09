@@ -15,44 +15,38 @@ RSpec.describe PagesController, type: :request, focus: true do
   describe "#index" do
     it "redirects to the default page" do
       expect(Page).to receive(:where)
-      get '/pages'
-      expect(response).to redirect_to page_path('about')
+      get "/pages"
+      expect(response).to redirect_to page_path("about")
     end
   end
 
   describe "#destroy" do
     it "successfully deletes a page" do
-      ApplicationController.any_instance.stub(:require_admin).and_return(true)
-      ApplicationController.any_instance.stub(:is_admin?).and_return(true)
-      long_app = Page.find_by(url_slug: "basic_slug")
+      log_in(Teacher.find(0))
+      Page.find_by(url_slug: "basic_slug")
       delete page_path("basic_slug")
       expect(Page.find_by(url_slug: "basic_slug")).to be_nil
     end
 
     it "doesn't allow teacher to delete a page" do
-      ApplicationController.any_instance.stub(:is_admin?).and_return(false)
-      long_app = Page.find_by(url_slug: "basic_slug")
-      delete page_path(long_app.url_slug)
+      log_in(Teacher.find(1))
+      delete page_path("basic_slug")
       expect(Page.find_by(url_slug: "basic_slug")).not_to be_nil
     end
   end
 
   describe "#create" do
     it "allows admin to create", :focus do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
+      log_in(Teacher.find(0))
       expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post page_path(@pages_slug), {
+      post page_path(@pages_slug),
           params: {
               page: {
                   title: @pages_title,
                   html: "<p>Test page body.</p>",
                   viewer_permissions: "Admin",
               }
-          },
-          session: {
-            user_id: 0
           }
-      }
       expect(Page.find_by(url_slug: @pages_slug)).not_to be_nil
       expect(@success_flash_alert).to match flash[:success]
     end
