@@ -13,5 +13,5 @@ def log_in(user, provider: "google_oauth2")
     }
   })
 
-  get omniauth_callback_path(provider: provider)
+  get omniauth_callback_path(provider:)
 end

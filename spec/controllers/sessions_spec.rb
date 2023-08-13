@@ -21,7 +21,7 @@ RSpec.describe SessionsController, type: :controller do
     let(:omniauth_data) { Teacher.find_by(first_name: "Short") }
     let(:provider) { "google_oauth2" }
 
-    subject { get :omniauth_callback, params: { provider: provider } }
+    subject { get :omniauth_callback, params: { provider: } }
 
     it "should increase session count by 1 when teacher logs in" do
       SessionsController.any_instance.stub(:omniauth_info).and_return(omniauth_data)

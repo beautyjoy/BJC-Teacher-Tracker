@@ -73,7 +73,7 @@ Capybara.register_driver :headless_firefox do |app|
 
   Capybara::Selenium::Driver.new app,
     browser: :firefox,
-    options: options
+    options:
 end
 
 if ENV["DRIVER"].present?
