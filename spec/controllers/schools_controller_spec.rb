@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SchoolsController, type: :controller do
+RSpec.describe SchoolsController, type: :request do
   fixtures :all
 
   let(:admin_teacher) { teachers(:admin) }
@@ -16,7 +16,7 @@ RSpec.describe SchoolsController, type: :controller do
   context "for a regular teacher" do
     it "denies teacher to create" do
       expect(School.find_by(name: @create_school_name)).to be_nil
-      post :create, params: {
+      post schools_path, params: {
           school: {
               name: @create_school_name,
               city: "Berkeley",
@@ -39,7 +39,7 @@ RSpec.describe SchoolsController, type: :controller do
 
     it "allows admin to create" do
       expect(School.find_by(name: @create_school_name)).to be_nil
-      post :create, params: {
+      post schools_path, params: {
           school: {
               name: @create_school_name,
               city: "Berkeley",
@@ -57,7 +57,7 @@ RSpec.describe SchoolsController, type: :controller do
 
     it "requires all fields filled" do
       expect(School.find_by(name: @create_school_name)).to be_nil
-      post :create, params: {
+      post schools_path, params: {
         school: {
           name: @create_school_name,
           # missing city
@@ -72,7 +72,7 @@ RSpec.describe SchoolsController, type: :controller do
       expect(School.find_by(name: @create_school_name)).to be_nil
       expect(flash[:alert]).to match @fail_flash_alert
 
-      post :create, params: {
+      post schools_path, params: {
         school: {
             name: @create_school_name,
             city: "Berkeley",
@@ -87,7 +87,7 @@ RSpec.describe SchoolsController, type: :controller do
       expect(School.find_by(name: @create_school_name)).to be_nil
       expect(flash[:alert]).to match @fail_flash_alert
 
-      post :create, params: {
+      post schools_path, params: {
         school: {
           # missing name
           city: "Berkeley",
@@ -106,7 +106,7 @@ RSpec.describe SchoolsController, type: :controller do
     it "requires proper inputs for fields" do
       expect(School.find_by(name: @create_school_name)).to be_nil
       # Incorrect state (not chosen from enum list)
-      post :create, params: {
+      post schools_path, params: {
         school: {
           name: @create_school_name,
           city: "Berkeley",
@@ -121,7 +121,7 @@ RSpec.describe SchoolsController, type: :controller do
       expect(School.find_by(name: @create_school_name)).to be_nil
       expect(@fail_flash_alert).to match flash[:alert]
 
-      post :create, params: {
+      post schools_path, params: {
         school: {
           name: @create_school_name,
           city: "Berkeley",
@@ -137,7 +137,7 @@ RSpec.describe SchoolsController, type: :controller do
       expect(@fail_flash_alert).to match flash[:alert]
 
       # Incorrect school type
-      expect { post :create, params: {
+      expect { post schools_path, params: {
         school: {
             name: @create_school_name,
             city: "Berkeley",
@@ -153,7 +153,7 @@ RSpec.describe SchoolsController, type: :controller do
       expect(School.find_by(name: @create_school_name)).to be_nil
 
       # Incorrect grade_level
-      expect { post :create, {
+      expect { post schools_path, {
               params: {
                   school: {
                       name: @create_school_name,
@@ -174,7 +174,7 @@ RSpec.describe SchoolsController, type: :controller do
     it "does not create duplicate schools in the same city" do
       expect(School.where(name: @create_school_name).count).to eq 0
 
-      post :create, params: {
+      post schools_path, params: {
         school: {
           name: @create_school_name,
           city: "Berkeley",
@@ -186,7 +186,7 @@ RSpec.describe SchoolsController, type: :controller do
       }
       expect(School.where(name: @create_school_name).count).to eq 1
 
-      post :create, params: {
+      post schools_path, params: {
         school: {
           name: @create_school_name,
           city: "Berkeley",
