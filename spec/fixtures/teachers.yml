@@ -33,8 +33,8 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 
-ye:
-  id: 0
+admin:
+  id: 1
   admin: true
   first_name: Ye
   last_name: Wang
@@ -46,8 +46,21 @@ ye:
   education_level: -1
   school: stanfurd
 
+validated_teacher:
+  id: 2
+  admin: false
+  first_name: Validated
+  last_name: Teacher
+  status: 4
+  more_info: A CS169 Student
+  email: validated@teacher.edu
+  snap: validated
+  application_status: Validated
+  education_level: -1
+  school: berkeley
+
 bob:
-  id: 1
+  id: 3
   first_name: Bob
   last_name: Johnson
   snap: BobJohnson
@@ -59,7 +72,7 @@ bob:
   education_level: -1
 
 long:
-  id: 2
+  id: 4
   first_name: Short
   last_name: Long
   snap: song
@@ -71,7 +84,7 @@ long:
   education_level: 2
 
 reimu:
-  id: 3
+  id: 5
   first_name: Reimu
   last_name: Hakurei
   snap: reimu

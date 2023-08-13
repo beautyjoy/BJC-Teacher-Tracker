@@ -29,16 +29,16 @@ basic_page:
   html: <p>Content</p>
   viewer_permissions: "Verified Teacher"
   default: false
-  creator_id: 0
+  creator_id: 1
   last_editor_id: 0
 
-validadminpage:
+admin_page:
   url_slug: basic_slug_2
   title: Test Page Title 2
   viewer_permissions: Admin
   html: <p>An admin page</p>
   default: false
-  creator_id: 0
+  creator_id: 1
   last_editor_id: 0
 
 about_page:
