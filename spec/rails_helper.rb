@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 
 require "simplecov"
@@ -14,6 +13,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 require "support/factory_bot"
+
+require "spec_helper"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -28,7 +29,7 @@ require "support/factory_bot"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -41,7 +42,13 @@ end
 
 RSpec.configure do |config|
   config.before(:suite) do
-    Rails.application.load_seed # loading seeds
+    # We can't use rspec-mock here, so just overwrite the method...
+    module MapsService
+      def self.get_lat_lng(_)
+        { lat: 37.8719, lng: -122.2585 }
+      end
+    end
+    Rails.application.load_seed
   end
 
   config.before(:each) do
