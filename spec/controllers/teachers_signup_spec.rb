@@ -29,17 +29,17 @@ RSpec.describe TeachersController, type: :controller do
   it "rejects invalid signup school information" do
     previous_count = Teacher.count
     post :create, params: {
-            school: {
-                city: "Berkeley",
-                state: "CA",
-            },
-            teacher: {
-                first_name: "invalid",
-                last_name: "invalid",
-                email: "invalid@invalid.edu",
-                status: "invalid",
-                snap: "invalid"
-            }
+      school: {
+        city: "Berkeley",
+        state: "CA",
+      },
+      teacher: {
+        first_name: "invalid",
+        last_name: "invalid",
+        email: "invalid@invalid.edu",
+        status: "invalid",
+        snap: "invalid"
+      }
     }
     expect(Teacher.count).to eq(previous_count)
     expect(flash[:alert]).to match(/An error occurred/)
@@ -48,21 +48,21 @@ RSpec.describe TeachersController, type: :controller do
   it "accepts valid signup information" do
     previous_count = Teacher.count
     post :create, params: {
-            school: {
-                name: "valid_example",
-                city: "Berkeley",
-                state: "CA",
-                website: "valid_example.com",
-                school_type: "Public",
-                grade_level: "High School"
-            },
-            teacher: {
-                first_name: "valid_example",
-                last_name: "valid_example",
-                email: "valid_example@valid_example.edu",
-                status: 0,
-                snap: "valid_example"
-            }
+      school: {
+        name: "valid_example",
+        city: "Berkeley",
+        state: "CA",
+        website: "valid_example.com",
+        school_type: "Public",
+        grade_level: "High School"
+      },
+      teacher: {
+        first_name: "valid_example",
+        last_name: "valid_example",
+        email: "valid_example@valid_example.edu",
+        status: 0,
+        snap: "valid_example"
+      }
     }
     expect(Teacher.count).to eq(previous_count + 1)
     assert_match(/Thanks for signing up for BJC/, flash[:success])
@@ -70,10 +70,10 @@ RSpec.describe TeachersController, type: :controller do
 
   it "redirects existing users to the login page" do
     post :create, params: {
-        school: {
-          id: 1
-        },
-        teacher: Teacher.first.attributes
+      school: {
+        id: 1
+      },
+      teacher: Teacher.first.attributes
     }
     expect(response).to redirect_to(login_path)
     expect(flash[:notice]).to match(/Please log in/)
