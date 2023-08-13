@@ -85,7 +85,7 @@ RSpec.describe Teacher, type: :model do
   end
 
   describe "teacher with more info" do
-    let(:teacher) { teachers(:ye) }
+    let(:teacher) { teachers(:admin) }
 
     it "shows a short status with more info" do
       expect(teacher.more_info).to eq "A CS169 Student"
