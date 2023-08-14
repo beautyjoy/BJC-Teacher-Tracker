@@ -36,7 +36,7 @@ end
 
 # Load Rails all factories into cucumber:
 Before do
-  load File.join(Rails.root, 'db', 'seeds.rb')
+  load File.join(Rails.root, "db", "seeds.rb")
   Rails.application.load_seed
   ActiveRecord::FixtureSet.reset_cache
   fixtures_folder = File.join(Rails.root, "spec", "fixtures")
