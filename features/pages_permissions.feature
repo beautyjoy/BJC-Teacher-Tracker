@@ -3,7 +3,6 @@ Feature: pages features a verified teacher
     As a verifed teacher, I should only be able to see pages I have access to
 
 Background: Has admin and teacher in DB along with pages of each permission type
-    Given I seed data
     Given the following teachers exist:
     | first_name | last_name | admin | email                        | application_status |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Not Reviewed       |

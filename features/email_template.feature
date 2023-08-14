@@ -3,7 +3,6 @@ Feature: email template features
     As an admin, I should be able to view and edit email templates
 
 Background: I am logged in as an admin, and email templates are generated
-    Given I seed data
     Given the following teachers exist:
     | first_name | last_name | admin | email                        |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |

@@ -27,10 +27,22 @@ end
 
 
 # static seed data
-# load File.join(Rails.root, 'db', 'seeds.rb')
+# Override this so steps work without internet.
+module MapsService
+  def self.get_lat_lng(_)
+    { lat: 37.8719, lng: -122.2585 }
+  end
+end
 
 # Load Rails all factories into cucumber:
 Before do
+  load File.join(Rails.root, 'db', 'seeds.rb')
+  Rails.application.load_seed
+  ActiveRecord::FixtureSet.reset_cache
+  fixtures_folder = File.join(Rails.root, "spec", "fixtures")
+  fixtures = Dir[File.join(fixtures_folder, "*.yml")].map { |f| File.basename(f, ".yml") }
+  ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
+
   FactoryBot.reload
 end
 

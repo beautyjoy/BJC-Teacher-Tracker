@@ -3,9 +3,6 @@ Feature: view schools
     So that I can add schools to the database
     I can view teachers by schools
 
-Background: Seed Data Exists
-    Given I seed data
-
 Scenario: Viewing the schools page should show the all current schools
     Given the following schools exist:
     |       name        |     city     |  state  |            website            |

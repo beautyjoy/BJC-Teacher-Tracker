@@ -6,7 +6,6 @@ Feature: submit a form as a teacher
 
 Background: Test Data
     Given a valid teacher exists
-    Given I seed data
 
 Scenario: Correctly filling out and successful form submission
     Given "kpzhu@berkeley.edu" is not in the database
