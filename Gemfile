@@ -102,7 +102,6 @@ group :test do
   # gem "metric_fu" # removed until ruby 3.x compat is fixed.
   gem "selenium-webdriver"
 
-  gem "webdrivers"
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
