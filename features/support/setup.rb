@@ -34,17 +34,16 @@ module MapsService
   end
 end
 
-# Load Rails all factories into cucumber:
-puts "RUNNING BEFORE == Teachers: #{Teacher.count}"
-# load File.join(Rails.root, "db", "seeds.rb")
-Rails.application.load_seed
-puts "SEEDS LOADED  == Teachers: #{Teacher.count}"
-ActiveRecord::FixtureSet.reset_cache
+# This loads seeds and fixtures before each scenario.
+# TODO: We should (in theory) need to do this only once, but it breaks tests
+# Using transactions will reset the state after the first run...
 fixtures_folder = File.join(Rails.root, "spec", "fixtures")
 fixtures = Dir[File.join(fixtures_folder, "*.yml")].map { |f| File.basename(f, ".yml") }
-ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
-puts "FIXTURES LOADED == Teachers: #{Teacher.count}"
-FactoryBot.reload
+Before do
+  ActiveRecord::FixtureSet.reset_cache
+  ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
+  Rails.application.load_seed
+end
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

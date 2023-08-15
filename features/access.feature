@@ -5,9 +5,9 @@ Feature: access control for new users or non-admin users
 
 Background: Has an Admin and a teacher in DB
   Given the following teachers exist:
-  | first_name | last_name | admin | email                       | school_id |
-  | Alice      | Admin     | true   | testadminuser@berkeley.edu | 1         |
-  | Todd       | Teacher   | false  | testteacher@berkeley.edu   | 1         |
+  | first_name | last_name | admin | email                       |
+  | Alice      | Admin     | true   | testadminuser@berkeley.edu |
+  | Todd       | Teacher   | false  | testteacher@berkeley.edu   |
 
 #Logged-in Teacher (non-admin)
 Scenario: Schools page as a Teacher
