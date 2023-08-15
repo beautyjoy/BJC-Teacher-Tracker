@@ -25,7 +25,7 @@ module SeedData
     </p>
   FORM_SUBMISSION
 
-  @deny_email = <<-DENY_EMAIL
+  @basic_email_with_reason = <<-DENY_EMAIL
     <p>
       {{ reason | strip_tags }}
     </p>
@@ -95,7 +95,7 @@ module SeedData
         subject: "Deny Email"
       },
       {
-        body: @request_info_email,
+        body: @basic_email_with_reason,
         path: "teacher_mailer/request_info_email",
         locale: nil,
         handler: "liquid",

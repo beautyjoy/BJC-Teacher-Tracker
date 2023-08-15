@@ -21,12 +21,13 @@ class EmailTemplate < ApplicationRecord
   validates :title,
             inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase },
             if: -> { self.required? }
+  validates :body, presence: true
 
   before_destroy :prevent_deleting_required_emails
 
   def accepts_custom_reason?
     # search for 'reason' in a liquid template
-    self.body.match?(/{{\s*reason/)
+    body.match?(/{{\s*reason/)
   end
 
   private
