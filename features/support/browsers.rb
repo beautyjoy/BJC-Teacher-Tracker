@@ -86,4 +86,4 @@ else
   Capybara.default_driver = :headless_chrome
 end
 
-puts "RUNNING CAPYBARA WITH DRIVER #{Capybara.javascript_driver}"
+puts "\nRUNNING CAPYBARA WITH DRIVER #{Capybara.javascript_driver}\n\n"
