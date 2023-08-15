@@ -22,7 +22,7 @@ Scenario: Logging in as an admin should be able to edit email templates
     And I follow "Welcome Email"
     Then I should see hidden element "Hi {{teacher_first_name}}"
     And I fill in TinyMCE email form with "Test Edit"
-    And I press "Update"
+    And I press "Submit"
     And I follow "Welcome Email"
     Then I should see hidden element "Test Edit"
 
@@ -30,6 +30,6 @@ Scenario: Logging in as an admin should be able to edit email subject
     Given I am on the email templates index
     And I follow "Welcome Email"
     And I fill in "email_template_subject" with "Test Subject"
-    And I press "Update"
+    And I press "Submit"
     And I follow "Welcome Email"
     Then the "email_template_subject" field should contain "Test Subject"
