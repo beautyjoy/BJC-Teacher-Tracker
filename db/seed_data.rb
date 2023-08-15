@@ -31,7 +31,7 @@ module SeedData
     </p>
   DENY_EMAIL
 
-  @deny_email1 = <<-DENY_EMAIL1
+  @deny_email = <<-DENY_EMAIL1
     <p>Dear [Recipient's Name],</p>
     <p>Thank you for your email. We have received your message and we are sorry to inform you that your application has been rejected.</p>
     <p>Best regards,</p>
