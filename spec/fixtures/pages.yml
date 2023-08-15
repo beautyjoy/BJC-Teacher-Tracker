@@ -30,7 +30,7 @@ basic_page:
   viewer_permissions: "Verified Teacher"
   default: false
   creator_id: 1
-  last_editor_id: 0
+  last_editor_id: 1
 
 admin_page:
   url_slug: basic_slug_2
@@ -39,7 +39,7 @@ admin_page:
   html: <p>An admin page</p>
   default: false
   creator_id: 1
-  last_editor_id: 0
+  last_editor_id: 1
 
 about_page:
   url_slug: about

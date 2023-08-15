@@ -32,7 +32,7 @@ Scenario: Pressing "New Page" button should take user to new page form
 Scenario: Successfully creating a new page redirects to that page
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I fill in "page_category" with "Test Category"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
@@ -44,7 +44,7 @@ Scenario: Successfully creating a new page redirects to that page
 
 Scenario: Creating a page without a title fails
     Given I am on the new pages page
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I fill in "page_category" with "Test Category"
     And I choose "inlineRadioAdmin"
     And I press "Submit"
@@ -73,7 +73,7 @@ Scenario: Creating a page without choosing permissions fails
 Scenario: I create a new page and I can see it on the index page
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I fill in "page_category" with "Test Category"
     And I fill in the page HTML content with "This is a test"
     And I choose "inlineRadioAdmin"
@@ -194,15 +194,15 @@ Scenario: Correctly store user's full name and create date.
 Scenario: Can edit pages with correct prefilled content in the form.
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     And I follow "Pages"
-    And I press the edit button for "basic_slug"
-    Then I should be on the edit pages page for "basic_slug"
+    And I press the edit button for "cucumber_test_page"
+    Then I should be on the edit pages page for "cucumber_test_page"
     And the "page_title" field should contain "Test Title"
-    And the "page_url_slug" field should contain "basic_slug"
+    And the "page_url_slug" field should contain "cucumber_test_page"
     And I should see the page HTML content containing "This is a test"
     Then I fill in "page_title" with "New Title"
     And I fill in "page_url_slug" with "new_slug"
@@ -213,18 +213,18 @@ Scenario: Can edit pages with correct prefilled content in the form.
     And I should see "Public"
     Then I should be on the pages index
     And I should not see "Test Title"
-    And I should not see "basic_slug"
+    And I should not see "cucumber_test_page"
 
 Scenario: Can update page even if no changes
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     And I follow "Pages"
-    And I press the edit button for "basic_slug"
-    Then I should be on the edit pages page for "basic_slug"
+    And I press the edit button for "cucumber_test_page"
+    Then I should be on the edit pages page for "cucumber_test_page"
     And I press "Update"
     Then I should be on the pages index
     And I should see "Test Title"
@@ -233,7 +233,7 @@ Scenario: Can update page even if no changes
 Scenario: Attempting to update page with taken slug doesn't delete form input
     Given I am on the new pages page
     And I fill in "page_title" with "Test Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
@@ -247,13 +247,13 @@ Scenario: Attempting to update page with taken slug doesn't delete form input
     And I press the edit button for "basic_slug_2"
     Then I should be on the edit pages page for "basic_slug_2"
     And I fill in "page_title" with "New Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I fill in the page HTML content with "New page body."
     And I press "Update"
     Then I should see "Update New Title"
     And I should see "URL slug has already been taken"
     And the "page_title" field should contain "New Title"
-    And the "page_url_slug" field should contain "basic_slug"
+    And the "page_url_slug" field should contain "cucumber_test_page"
     And I should see the page HTML content containing "New page body."
 
 Scenario: Clicking radio button text selects that radio button
@@ -268,13 +268,13 @@ Scenario: Clicking radio button text selects that radio button
 Scenario: Cannot update admin page to be default
     Given I am on the new pages page
     And I fill in "page_title" with "Test Default Title"
-    And I fill in "page_url_slug" with "basic_slug"
+    And I fill in "page_url_slug" with "cucumber_test_page"
     And I choose "inlineRadioAdmin"
     And I fill in the page HTML content with "This is a test"
     And I press "Submit"
     And I follow "Pages"
-    And I press the edit button for "basic_slug"
-    Then I should be on the edit pages page for "basic_slug"
+    And I press the edit button for "cucumber_test_page"
+    Then I should be on the edit pages page for "cucumber_test_page"
     And I check "page_default" checkbox
     And I press "Update"
     Then I should see "Update Test Default Title"
