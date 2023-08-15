@@ -35,7 +35,6 @@ World(WithinHelpers)
 
 
 Given(/^(?:|I )am on (.+)$/) do |page_name|
-  debugger
   visit path_to(page_name)
 end
 
