@@ -15,15 +15,15 @@
           <td>
             <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
               <%= button_to("✔️", validate_teacher_path(teacher.id),
-                 class: 'btn btn-outline-success', type: 'button') %>
-              <span>
-                <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target=".js-denialModal" 
+                 class: 'btn-group btn btn-outline-success', type: 'button') %>
+              <!-- <span>
+                <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target=".js-denialModal"
                   data-modal-type="request_info" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
                   ❓
                 </button>
-              </span>
+              </span> -->
               <span>
-                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal" 
+                <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal"
                   data-modal-type="deny" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
                   ❌
                 </button>

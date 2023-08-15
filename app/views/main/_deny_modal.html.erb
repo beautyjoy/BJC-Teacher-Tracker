@@ -9,15 +9,15 @@
         <div class="modal-body">
             <%= label_tag 'reason', 'Reason', class: 'control-label' %>
             <%= text_field_tag :reason, params[:reason], class: "form-control" %>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="reason-select">Reason for Denial (Select)</label>
               <select id="reason-select" name="reason-select" class="form-control">
-                <option value="">-- Select a reason --</option>
+                <option value="">Select a reason</option>
                 <option value="Incomplete Application">Incomplete Application</option>
                 <option value="Insufficient Experience">Insufficient Experience</option>
                 <option value="Unfavorable References">Unfavorable References</option>
               </select>
-        </div>
+            </div> -->
             <div class="form-check">
               <%= check_box_tag :skip_email, 'skip_email', false, class: 'form-check-input' %>
               <%= label_tag 'skip_email', 'Skip email notifcation?', class: 'form-check-label' %>
