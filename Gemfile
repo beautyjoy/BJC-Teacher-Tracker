@@ -4,16 +4,16 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.8"
+ruby "3.2.2"
 
-gem "rails", "6.1.6"
+gem "rails", "6.1.7.4"
 
 # Production app server
 gem "puma", "~> 5"
-gem "pg", "~> 1.0"
+gem "pg", "~> 1.5"
 
 # Front-end Assets
-gem "webpacker", "~> 4"
+gem "webpacker"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
@@ -44,6 +44,12 @@ gem "aws-sdk-s3", require: false
 
 # Render images for file uploads in pages
 gem "image_processing", ">= 1.2"
+
+gem "selectize-rails"
+gem "smarter_csv", "~> 1.4"
+gem "activerecord-import", require: false
+
+gem "httparty", "~> 0.21.0"
 
 group :development do
   gem "annotate"
@@ -86,26 +92,17 @@ end
 # setup Cucumber, RSpec, Guard support
 group :test do
   gem "rspec-rails"
-  gem "simplecov", "< 0.18", require: false
+  gem "simplecov", require: false
   gem "simplecov-json", require: false
   gem "simplecov-console", require: false
   gem "simplecov-csv", require: false
   gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "factory_bot_rails"
-  gem "metric_fu"
+  # gem "metric_fu" # removed until ruby 3.x compat is fixed.
   gem "selenium-webdriver"
 
-  gem "webdrivers"
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
-
-  gem "rails-controller-testing"
 end
-
-gem "selectize-rails"
-gem "smarter_csv", "~> 1.4"
-gem "activerecord-import", require: false
-
-gem "httparty", "~> 0.21.0"

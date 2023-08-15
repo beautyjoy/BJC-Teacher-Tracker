@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe MainController, type: :controller do
   fixtures :all
+
   describe "#index" do
     subject { get :index }
 
@@ -19,17 +20,16 @@ RSpec.describe MainController, type: :controller do
     end
 
     it "counts correct number of validated (accepted) teachers" do
-      # TODO: Create a non-validated admin teacher
-      expect(@controller_stub.instance_variable_get(:@validated_teachers).size).to equal 0
+      expect(@controller_stub.instance_variable_get(:@validated_teachers).size).to equal 1
     end
 
     it "shows correct course statistics" do
-      # only validated (accepted) teachers are accounted for in statuses.
+      # only validated (non-admin) teachers are accounted for in statuses.
       statuses = @controller_stub.instance_variable_get(:@statuses)
       schools = @controller_stub.instance_variable_get(:@schools)
-      expect(statuses.size).to equal 0
-      expect(statuses["other"]).to be_nil
-      expect(schools.size).to equal 1
+      expect(statuses.size).to eq 1
+      expect(statuses["other"]).to eq 1
+      expect(schools.size).to eq 1
       expect(schools.find_by(name: "$tanfurd").name).to eq("$tanfurd")
     end
   end

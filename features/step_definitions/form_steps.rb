@@ -5,11 +5,11 @@ EDUCATION_FIELD = "What's your education level target?"
 
 Given(/a valid teacher exists/) do
   school = create(:school)
-  create(:teacher, school: school)
+  create(:teacher, school:)
 end
 
 And(/^"(.*)" is not in the database$/) do |email|
-  expect(Teacher.exists?(email: email)).to be false
+  expect(Teacher.exists?(email:)).to be false
 end
 
 Given(/^I enter (?:my)? "(.*)" as "(.*)"$/) do |field_name, input|
@@ -43,7 +43,7 @@ Then(/^debug$/) do
 end
 
 Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, email, expected|
-  expect(Teacher.find_by(email: email)[field]).to eq(expected)
+  expect(Teacher.find_by(email:)[field]).to eq(expected)
 end
 
 When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|

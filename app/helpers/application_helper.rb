@@ -20,4 +20,10 @@ module ApplicationHelper
       "Email Templates": email_templates_path
     }
   end
+
+  def check_or_x(bool)
+    return "✔️" if bool
+
+    "❌"
+  end
 end

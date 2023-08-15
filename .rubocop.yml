@@ -4,7 +4,8 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.7
+  # TODO: rubocop needs to be updated for 3.2
+  TargetRubyVersion: 3.1
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
   DisabledByDefault: true
@@ -104,6 +105,7 @@ Layout/IndentationConsistency:
 # Two spaces, no tabs (for indentation).
 Layout/IndentationWidth:
   Enabled: true
+  Width: 2
 
 Layout/LeadingCommentSpace:
   Enabled: true

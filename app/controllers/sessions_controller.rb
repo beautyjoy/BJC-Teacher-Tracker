@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_callback
-    omniauth_data = omniauth_info
-    user = Teacher.user_from_omniauth(omniauth_data)
+    user = Teacher.user_from_omniauth(omniauth_info)
     if user.present?
       user.last_session_at = Time.zone.now
       user.try_append_ip(request.remote_ip)
@@ -20,9 +19,16 @@ class SessionsController < ApplicationController
       user.save!
       log_in(user)
     else
-      Sentry.capture_message("OAuth Login Failure")
-      session[:auth_data] = omniauth_data
-      flash[:alert] = "We couldn't find an account for #{omniauth_data.email}. Please submit a new request."
+      crumb = Sentry::Breadcrumb.new(
+        category: "auth",
+        data: { omniauth_env: omniauth_info },
+        message: "No User Found failure",
+        level: "info"
+      )
+      Sentry.add_breadcrumb(crumb)
+      Sentry.capture_message("Omniauth No User Found")
+      session[:auth_data] = omniauth_info
+      flash[:alert] = "We couldn't find an account for #{omniauth_info.email}. Please submit a new request."
       redirect_to new_teacher_path
     end
   end
@@ -32,7 +38,20 @@ class SessionsController < ApplicationController
   end
 
   def omniauth_failure
+    crumb = Sentry::Breadcrumb.new(
+      category: "auth",
+      data: {
+        omniauth_env: request.env["omniauth.auth"],
+        omniauth_error: request.env["omniauth.error"],
+        message: params[:message],
+        strategy: params[:strategy]
+      },
+      message: "Authentication failure",
+      level: "info"
+    )
+    Sentry.add_breadcrumb(crumb)
+    Sentry.capture_message("Omniauth Failure")
     redirect_to root_url,
-                alert: "Login failed unexpectedly. Please reach out to contact@bjc.berkeley.edu"
+                alert: "Login failed unexpectedly. Please reach out to contact@bjc.berkeley.edu (#{params[:message]})"
   end
 end

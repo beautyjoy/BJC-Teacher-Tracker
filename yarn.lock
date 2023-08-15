@@ -6613,16 +6613,6 @@ select-hose@^2.0.0:
   resolved "https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-select2-bootstrap-theme@^0.1.0-beta.10:
-  version "0.1.0-beta.10"
-  resolved "https://registry.yarnpkg.com/select2-bootstrap-theme/-/select2-bootstrap-theme-0.1.0-beta.10.tgz#b9426ecfc03bf4a235e76a132377574310469ac0"
-  integrity sha1-uUJuz8A79KI152oTI3dXQxBGmsA=
-
-select2@^4.1.0-rc.0:
-  version "4.1.0-rc.0"
-  resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
-  integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
-
 selectize@^0.12.6:
   version "0.12.6"
   resolved "https://registry.yarnpkg.com/selectize/-/selectize-0.12.6.tgz#c2cf08cbaa4cb06c5e99bb452919d71b080690d6"
