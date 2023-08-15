@@ -35,18 +35,16 @@ module MapsService
 end
 
 # Load Rails all factories into cucumber:
-Before do
-  puts "RUNNING BEFORE == Teachers: #{Teacher.count}"
-  # load File.join(Rails.root, "db", "seeds.rb")
-  Rails.application.load_seed
-  puts "SEEDS LOADED  == Teachers: #{Teacher.count}"
-  ActiveRecord::FixtureSet.reset_cache
-  fixtures_folder = File.join(Rails.root, "spec", "fixtures")
-  fixtures = Dir[File.join(fixtures_folder, "*.yml")].map { |f| File.basename(f, ".yml") }
-  ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
-  puts "FIXTURES LOADED == Teachers: #{Teacher.count}"
-  FactoryBot.reload
-end
+puts "RUNNING BEFORE == Teachers: #{Teacher.count}"
+# load File.join(Rails.root, "db", "seeds.rb")
+Rails.application.load_seed
+puts "SEEDS LOADED  == Teachers: #{Teacher.count}"
+ActiveRecord::FixtureSet.reset_cache
+fixtures_folder = File.join(Rails.root, "spec", "fixtures")
+fixtures = Dir[File.join(fixtures_folder, "*.yml")].map { |f| File.basename(f, ".yml") }
+ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
+puts "FIXTURES LOADED == Teachers: #{Teacher.count}"
+FactoryBot.reload
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

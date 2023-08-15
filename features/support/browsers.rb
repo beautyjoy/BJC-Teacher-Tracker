@@ -16,7 +16,7 @@ chrome_options.add_preference(:download, prompt_for_download: false,
 chrome_options.add_preference(:browser, set_download_behavior: { behavior: "allow" })
 
 Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [chrome_options])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
 end
 
 Capybara.register_driver :headless_chrome do |app|
@@ -24,7 +24,7 @@ Capybara.register_driver :headless_chrome do |app|
   chrome_options.add_argument("--disable-gpu")
   chrome_options.add_argument("--window-size=1680,1050")
 
-  driver = Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: [chrome_options])
+  driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
 
   ### Allow file downloads in Google Chrome when headless!!!
   ### https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
