@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-free": "^5.x",
     "@rails/actiontext": "^6.1.4-4",
     "@rails/ujs": "^7.0.1",
-    "@rails/webpacker": "4.3.x",
+    "@rails/webpacker": "5.x.x",
     "bootstrap": "^4.x.x",
     "choices.js": "^10.1.0",
     "datatables.net-bs4": "^1.x.x",
@@ -21,10 +21,11 @@
   },
   "devDependencies": {
     "webpack": "^4.x",
-    "webpack-dev-server": "^3.10.x"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^4.x"
   },
   "engines": {
-    "node": "^14.0"
+    "node": "^14.0 || ^16.0"
   },
   "scripts": {
     "dev": "overmind s -f Procfile.dev"
