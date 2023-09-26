@@ -1,0 +1,31 @@
+<hr>
+<h3>Allowed Tags</h3>
+<p>Use the following tags in the email body. The example shows your current values.</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- current_user.email_attributes.each do |key, value| %>
+      <tr>
+        <td><code><%= "{{#{key}}}" %></code></td>
+        <td><%= value %></td>
+      </tr>
+    <%- end %>
+    <tr>
+      <td><code>{{bjc_password}}</code></td>
+      <td>(Should no longer be relevant)</td>
+    </tr>
+    <tr>
+      <td><code>{{piazza_password}}</code></td>
+      <td>(The current piazza sign up password)</td>
+    </tr>
+    <tr>
+      <td><code>{{reason}}</code></td>
+      <td>(Only on denial emails.)</td>
+    </tr>
+  </tbody>
+</table>
