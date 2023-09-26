@@ -34,6 +34,7 @@
 </table>
 
 <hr>
+
 <h2>Admin Users</h2>
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
@@ -52,7 +53,7 @@
 
 <hr>
 <br>
-<%= form_tag import_teachers_path,  multipart: true, id: "hidden_csv_form" do %>
+<%= form_tag import_teachers_path, multipart: true, id: "hidden_csv_form" do %>
   <%= file_field_tag :file, required: true, id: "hidden_file_select_input", onchange: "submitFile();" %>
   <%= submit_tag "Upload CSV", id: "hidden_submit_button" %>
 <% end %>

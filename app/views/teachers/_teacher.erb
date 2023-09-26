@@ -5,7 +5,8 @@
 <td>
   <%= teacher.email %>
   <%- if teacher.personal_email.present? %>
-  <br><%= teacher.personal_email %>
+    <br><%= teacher.personal_email %>
+  <%- end %>
 </td>
 <td><%= teacher.display_education_level %></td>
 <td
