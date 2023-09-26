@@ -45,20 +45,13 @@ class TeacherMailer < ApplicationMailer
 
   private
   def liquid_assigns
-    {
-      teacher_first_name: @teacher.first_name,
-      teacher_last_name: @teacher.last_name,
-      teacher_email: @teacher.email,
-      teacher_more_info: @teacher.more_info,
-      teacher_school_name: @teacher.school.name,
-      teacher_school_city: @teacher.school.city,
-      teacher_school_state: @teacher.school.state,
-      teacher_snap: @teacher.snap,
-      teacher_school_website: @teacher.school.website,
+    base_rules = {
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
       reason: @reason
-    }.with_indifferent_access
+    }
+    base_rules.merge!(@teacher.email_attributes)
+    base_rules.with_indifferent_access
   end
 
   def email_template
