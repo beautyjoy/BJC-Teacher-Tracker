@@ -4,9 +4,6 @@ Feature: teacher login functionality
     So that I can edit my information
     I can login via gmail
 
-Background: See data
-  Given I seed data
-
 Scenario: Logging in failure redirects to new teachers page
   Given I am on the BJC home page
   Given I have a teacher Google email

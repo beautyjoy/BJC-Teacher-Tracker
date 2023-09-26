@@ -144,4 +144,43 @@ RSpec.describe TeachersController, type: :controller do
     bob_app = Teacher.find_by(first_name: "Bob")
     expect(bob_app.more_info).to eq orig_more_info
   end
+
+  context "malicious parameters" do
+    it "does not allow non-admin to accept a user" do
+      post :validate, params: { id: 1 }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:danger]).to eq "Only admins can access this page."
+    end
+
+    it "rejects malicious admin signup attempt" do
+      post :create, params: {
+        teacher: {
+          first_name: "Valid",
+          last_name: "Example",
+          email: "valid_example@valid_example.edu",
+          status: 0,
+          snap: "valid_example",
+          admin: true,
+          school_id: School.first.id
+        }
+      }
+      expect(Teacher.find_by(email: "valid_example@valid_example.edu").admin).to be(false)
+    end
+
+    it "rejects malicious auto-approve signup attempt" do
+      post :create, params: {
+        teacher: {
+          first_name: "Valid",
+          last_name: "Example",
+          email: "valid_example@valid_example.edu",
+          status: 0,
+          application_status: "validated",
+          snap: "valid_example",
+          school_id: School.first.id,
+        }
+      }
+      expect(Teacher.find_by(email: "valid_example@valid_example.edu").not_reviewed?).to be true
+    end
+  end
 end

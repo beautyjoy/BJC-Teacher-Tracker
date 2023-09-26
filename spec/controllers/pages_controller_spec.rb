@@ -2,172 +2,140 @@
 
 require "rails_helper"
 
-RSpec.describe PagesController, type: :controller do
+RSpec.describe PagesController, type: :request do
   fixtures :all
 
+  let(:admin_teacher) { Teacher.where(admin: true).first }
+  let(:validated_teacher) { Teacher.validated.first }
+
   before(:all) do
-    @pages_slug = "test_slug_1"
+    @pages_slug = "basic_slug_1"
     @pages_title = "Test Page Title 1"
     @fail_flash_alert = /Failed to submit information :\(/
-    @success_flash_alert = Regexp.new("Created #{@pages_title} page successfully.")
   end
 
-  describe "#index" do
-    it "renders the index template" do
-      expect(Page).to receive(:where)
-      get :index
-      expect(response).to render_template("index")
-    end
-  end
-
-  describe "#destroy" do
-    it "successfully deletes a page" do
-      ApplicationController.any_instance.stub(:require_admin).and_return(true)
-      ApplicationController.any_instance.stub(:is_admin?).and_return(true)
-      long_app = Page.find_by(url_slug: "Test_slug")
-      delete :destroy, params: { url_slug: long_app.url_slug }
-      expect(Page.find_by(url_slug: "Test_slug")).to be_nil
+  context "for an admin teacher" do
+    before do
+      log_in(admin_teacher)
     end
 
-    it "doesn't allow teacher to delete a page" do
-      ApplicationController.any_instance.stub(:is_admin?).and_return(false)
-      long_app = Page.find_by(url_slug: "Test_slug")
-      delete :destroy, params: { url_slug: long_app.url_slug }
-      expect(Page.find_by(url_slug: "Test_slug")).not_to be_nil
+    it "#destroy successfully deletes a page" do
+      Page.find_by(url_slug: "basic_slug")
+      delete page_path("basic_slug")
+      expect(Page.find_by(url_slug: "basic_slug")).to be_nil
     end
-  end
 
-  describe "#create" do
-    it "allows admin to create" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post :create, {
-          params: {
-              page: {
-                  url_slug: @pages_slug,
-                  title: @pages_title,
-                  html: "<p>Test page body.</p>",
-                  viewer_permissions: "Admin",
-              }
-          },
-          session: {
-            user_id: 0
+    describe "#create" do
+      it "allows creating a valid page" do
+        expect(Page.find_by(url_slug: "admin_create_test")).to be_nil
+        post pages_path, params: {
+          page: {
+            url_slug: "admin_create_test",
+            title: @pages_title,
+            html: "<p>Test page body.</p>",
+            viewer_permissions: "Admin",
           }
-      }
-      expect(Page.find_by(url_slug: @pages_slug)).not_to be_nil
-      expect(@success_flash_alert).to match flash[:success]
-    end
+        }
+        expect(Page.find_by(url_slug: "admin_create_test")).not_to be_nil
+        expect(flash[:success]).to match(/Created #{@pages_title} page successfully./)
+      end
 
-    it "denies teacher to create" do
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post :create, {
-          params: {
-            page: {
-              url_slug: @pages_slug,
-              title: @pages_title,
-              html: "<p>Test page body.</p>",
-              viewer_permissions: "Admin",
-            }
-          },
-          session: {
-            user_id: 0
-          }
-      }
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-    end
-
-    it "requires slug to create" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post :create, {
-        params: {
+      it "requires slug to create" do
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+        post pages_path, params: {
           page: {
             title: @pages_title,
             html: "<p>Test page body.</p>",
             viewer_permissions: "Admin",
           }
-        },
-        session: {
-          user_id: 0
         }
-      }
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-    end
+        expect(flash[:alert]).to match(/URL slug/)
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+      end
 
-    it "requires title to create" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post :create, {
-        params: {
+      it "requires title to create" do
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+        post pages_path, params: {
           page: {
             url_slug: @pages_slug,
             html: "<p>Test page body.</p>",
             viewer_permissions: "Admin",
           }
-        },
-        session: {
-          user_id: 0
         }
-      }
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-    end
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+      end
 
-    it "requires permissions to create" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-      post :create, {
-        params: {
+      it "requires viewer permissions to create" do
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+        post pages_path, params: {
           page: {
             title: @pages_title,
             url_slug: @pages_slug,
             html: "<p>Test page body.</p>",
           }
-        },
-        session: {
-          user_id: 0
         }
-      }
-      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
-    end
+        expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+        expect(flash[:alert]).to match(/Viewer permissions/)
+      end
 
-    it "prevents submitting multiple pages with same slug" do
-      allow_any_instance_of(ApplicationController).to receive(:require_admin).and_return(true)
-      expect(Page.find_by(url_slug: "test_slug_2")).not_to be_nil
-      post :create, {
-        params: {
+      it "prevents submitting multiple pages with same slug" do
+        expect(Page.find_by(url_slug: "basic_slug_2")).not_to be_nil
+        post pages_path, params: {
           page: {
-            url_slug: "test_slug_2",
+            url_slug: "basic_slug_2",
             title: "Test Page Title 2",
             html: "<p>Test page body.</p>",
             viewer_permissions: "Admin",
           }
-        },
-        session: {
-          user_id: 0
+        }
+        expect(flash[:alert]).to include("URL slug")
+      end
+    end
+
+    it "#edit allows updates" do
+      thetest = Page.find_by(url_slug: "basic_slug")
+      patch page_path(url_slug: thetest.url_slug), params: {
+        page: {
+          viewer_permissions: "Verified Teacher",
+          title: "title",
+          url_slug: thetest.url_slug,
+          html: "Test content"
         }
       }
-      expect(flash[:alert]).to include "URL slug"
+      thetest = Page.find_by(url_slug: "basic_slug")
+      expect(thetest.title).to eq("title")
     end
   end
 
-  describe "#edit" do
-    it "should allow admin to edit page" do
-      ApplicationController.any_instance.stub(:require_admin).and_return(true)
-      ApplicationController.any_instance.stub(:is_admin?).and_return(true)
-      thetest = Page.find_by(url_slug: "Test_slug")
-      post :update,
-            params: {
-              url_slug: thetest.url_slug,
-              page: {
-                viewer_permissions: "Verified Teacher",
-                title: "title",
-                url_slug: thetest.url_slug,
-                html: "Test content"
-              }
-            },
-            session: { user_id: 0 }
-      thetest = Page.find_by(url_slug: "Test_slug")
-      expect(thetest.title).to eq("title")
+  describe "for a validated teacher" do
+    before do
+      log_in(validated_teacher)
+    end
+
+    it "#destroy doesn't allow teacher to delete a page" do
+      delete page_path("basic_slug")
+      expect(Page.find_by(url_slug: "basic_slug")).not_to be_nil
+    end
+
+    it "#create denies teacher to create" do
+      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+      post pages_path, params: {
+        page: {
+          url_slug: @pages_slug,
+          title: @pages_title,
+          html: "<p>Test page body.</p>",
+          viewer_permissions: "Admin",
+        }
+      }
+      expect(Page.find_by(url_slug: @pages_slug)).to be_nil
+    end
+  end
+
+  describe "#index" do
+    it "redirects to the default page" do
+      expect(Page).to receive(:where)
+      get "/pages"
+      expect(response).to redirect_to page_path("about")
     end
   end
 end

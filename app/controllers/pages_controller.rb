@@ -58,7 +58,7 @@ class PagesController < ApplicationController
       flash[:success] = "Updated #{@page.title} page successfully."
       redirect_to pages_path
     else
-      flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
+      flash.now[:alert] = "An error occurred! #{@page.errors.full_messages.to_sentence}"
       render "edit"
     end
   end
@@ -93,7 +93,6 @@ class PagesController < ApplicationController
   #     teacher_school_state: @teacher.school.state,
   #     teacher_snap: @teacher.snap,
   #     teacher_school_website: @teacher.school.website,
-  #     bjc_password: Rails.application.secrets[:bjc_password],
   #     piazza_password: Rails.application.secrets[:piazza_password],
   #     reason: @reason
   #   }.with_indifferent_access
