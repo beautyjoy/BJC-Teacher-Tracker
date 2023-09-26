@@ -181,7 +181,7 @@ class TeachersController < ApplicationController
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
       :more_info, :personal_website, :education_level, :school_id]
-    if current_user.admin?
+    if is_admin?
       teacher_attributes << :personal_email
     end
     params.require(:teacher).permit(*teacher_attributes)
