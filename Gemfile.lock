@@ -186,7 +186,6 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    date (3.3.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.5.0)
@@ -300,12 +299,6 @@ GEM
     lumberjack (1.2.8)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
-    main (6.2.3)
-      arrayfields (~> 4.7, >= 4.7.4)
-      chronic (~> 0.6, >= 0.6.2)
-      fattr (~> 2.2, >= 2.2.0)
-      map (~> 6.1, >= 6.1.0)
-    map (6.6.0)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -413,26 +406,14 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.7.4)
       sprockets-rails (>= 2.0.0)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
-    rails_best_practices (1.22.1)
-      activesupport
-      code_analyzer (>= 0.5.2)
-      erubis
-      i18n
-      json
-      require_all (~> 3.0)
-      ruby-progressbar
-    railties (6.1.6)
-      actionpack (= 6.1.6)
-      activesupport (= 6.1.6)
+    railties (6.1.7.4)
+      actionpack (= 6.1.7.4)
+      activesupport (= 6.1.7.4)
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
@@ -552,7 +533,6 @@ GEM
     thor (1.2.2)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.5)
@@ -624,8 +604,7 @@ DEPENDENCIES
   pry-byebug (~> 3.9)
   puma (~> 5)
   rack-mini-profiler (~> 2.0)
-  rails (= 6.1.6)
-  rails-controller-testing
+  rails (= 6.1.7.4)
   rspec-rails
   rubocop
   rubocop-faker
@@ -647,7 +626,7 @@ DEPENDENCIES
   webpacker
 
 RUBY VERSION
-   ruby 2.7.8p225
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.19
