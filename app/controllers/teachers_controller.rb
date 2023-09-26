@@ -105,7 +105,11 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
-    @teacher.save!
+    if !@teacher.save
+      redirect_to edit_teacher_path(current_user.id),
+                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+      return
+    end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
     end

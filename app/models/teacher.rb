@@ -39,6 +39,8 @@
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
   validates :email, uniqueness: true
+  validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
+  validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
 
   enum application_status: {
     validated: "Validated",
@@ -178,7 +180,7 @@ class Teacher < ApplicationRecord
     teachers = Teacher.where("LOWER(email) = :email or LOWER(personal_email) = :email",
       email: omniauth.email.downcase)
     if teachers.length > 1
-      raise Exception("Too Many Teachers Found")
+      raise "Too Many Teachers Found"
     elsif teachers.length == 1
       teachers.first
     else
@@ -217,4 +219,22 @@ class Teacher < ApplicationRecord
   # def self.validate_access_token(omniauth)
   #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
   # end
+
+  private
+  def ensure_unique_personal_email
+    # We want to ensure that both email and personal_email are unique across
+    # BOTH columns (i.e. the email only appears once in the combined set)
+    # However, it's perfectly valid for personal_email to be nil
+    # TODO: This really suggests email needs to be its own table...
+    teacher_with_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.email }])
+    if teacher_with_email
+      errors.add(:email, "must be unique across both email and personal_email columns")
+    end
+    return unless self.personal_email.present?
+
+    teacher_personal_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.personal_email }])
+    if teacher_personal_email
+      errors.add(:personal_email, "must be unique across both email and personal_email columns")
+    end
+  end
 end
