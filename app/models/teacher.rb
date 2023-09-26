@@ -169,7 +169,15 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    Teacher.find_by("LOWER(email) = ?", omniauth.email.downcase)
+    teachers = Teacher.where("LOWER(email) = :email or LOWER(personal_email) = :email",
+      email: omniauth.email.downcase)
+    if teachers.length > 1
+      raise Exception("Too Many Teachers Found")
+    elsif teachers.length == 1
+      teachers.first
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def try_append_ip(ip)
