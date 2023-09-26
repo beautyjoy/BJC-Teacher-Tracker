@@ -103,7 +103,8 @@ class Teacher < ApplicationRecord
   end
 
   def email_name
-    "#{full_name} <#{email}>"
+    # We need to normalize names for emails.
+    "#{full_name} <#{email}>".delete(",")
   end
 
   def status=(value)
@@ -176,7 +177,9 @@ class Teacher < ApplicationRecord
     save
   end
 
+  def email_attributes
 
+  end
   # TODO: Figure out how this should be used. store and check `uid` field
   # def self.validate_access_token(omniauth)
   #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
