@@ -184,7 +184,7 @@ class Teacher < ApplicationRecord
     elsif teachers.length == 1
       teachers.first
     else
-      raise ActiveRecord::RecordNotFound
+      nil
     end
   end
 
