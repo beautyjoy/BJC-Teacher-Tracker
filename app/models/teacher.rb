@@ -14,6 +14,7 @@
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
+#  personal_email     :string
 #  personal_website   :string
 #  session_count      :integer          default(0)
 #  snap               :string
@@ -24,11 +25,12 @@
 #
 # Indexes
 #
-#  index_teachers_on_email                 (email) UNIQUE
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
-#  index_teachers_on_status                (status)
+#  index_teachers_on_email                     (email) UNIQUE
+#  index_teachers_on_email_and_first_name      (email,first_name)
+#  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_school_id                 (school_id)
+#  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
+#  index_teachers_on_status                    (status)
 #
 # Foreign Keys
 #
@@ -107,6 +109,11 @@ class Teacher < ApplicationRecord
     "#{full_name} <#{email}>".delete(",")
   end
 
+  def snap_username
+    # TODO: use this method until we rename the column.
+    self.snap
+  end
+
   def status=(value)
     value = value.to_i if value.is_a?(String)
     super(value)
@@ -178,7 +185,25 @@ class Teacher < ApplicationRecord
   end
 
   def email_attributes
-
+    # Used when passing data to liquid templates
+    {
+      teacher_first_name: self.first_name,
+      teacher_last_name: self.last_name,
+      teacher_full_name: self.full_name,
+      teacher_email: self.email,
+      teacher_personal_email: self.personal_email,
+      teacher_more_info: self.more_info,
+      teacher_snap: self.snap_username,
+      teacher_snap_username: self.snap_username,
+      teacher_education_level: self.education_level,
+      teacher_personal_website: self.personal_website,
+      teacher_teaching_status: self.text_status,
+      teacher_signed_up_at: self.created_at,
+      teacher_school_name: self.school.name,
+      teacher_school_city: self.school.city,
+      teacher_school_state: self.school.state,
+      teacher_school_website: self.school.website,
+    }
   end
   # TODO: Figure out how this should be used. store and check `uid` field
   # def self.validate_access_token(omniauth)

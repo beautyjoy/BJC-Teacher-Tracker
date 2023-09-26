@@ -12,6 +12,7 @@
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
+#  personal_email     :string
 #  personal_website   :string
 #  session_count      :integer          default(0)
 #  snap               :string
@@ -22,11 +23,12 @@
 #
 # Indexes
 #
-#  index_teachers_on_email                 (email) UNIQUE
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
-#  index_teachers_on_status                (status)
+#  index_teachers_on_email                     (email) UNIQUE
+#  index_teachers_on_email_and_first_name      (email,first_name)
+#  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_school_id                 (school_id)
+#  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
+#  index_teachers_on_status                    (status)
 #
 # Foreign Keys
 #
