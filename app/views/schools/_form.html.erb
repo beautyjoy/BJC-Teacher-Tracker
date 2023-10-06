@@ -35,7 +35,7 @@
   <%= f.label :grade_level, "Grade Level", for: "school_grade_level" %>
   <%= f.select(
       :grade_level,
-      options_for_select(School.grade_level_options, school.school_type),
+      options_for_select(School.grade_level_options, school.grade_level),
       { include_blank: "Select a grade level" },
       { class: 'form-control', required: false, id: 'school_grade_level' }
     ) %>
