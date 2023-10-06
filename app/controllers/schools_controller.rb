@@ -46,9 +46,9 @@ class SchoolsController < ApplicationController
     @school.assign_attributes(school_params)
     if @school.save
       flash[:success] = "Update #{@school.name} successfully."
-      redirect_back fallback_location: schools_path
+      redirect_to school_path(@school)
     else
-      render "new", alert: "Failed to submit information :("
+      render "edit", alert: "Failed to submit information :("
     end
   end
 
