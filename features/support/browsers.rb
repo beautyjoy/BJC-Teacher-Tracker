@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Selenium Driver Code:
+# https://github.com/SeleniumHQ/selenium/tree/trunk/rb/lib/selenium/webdriver
+
 # Original Source
 # https://gist.github.com/bbonamin/4b01be9ed5dd1bdaf909462ff4fdca95
 require "capybara/rspec"
@@ -8,7 +11,6 @@ require "cucumber"
 
 
 ### Google Chrome
-
 chrome_options = Selenium::WebDriver::Chrome::Options.new
 chrome_options.add_preference(:download, prompt_for_download: false,
                                   default_directory: "/tmp/downloads")
@@ -22,44 +24,37 @@ end
 Capybara.register_driver :headless_chrome do |app|
   chrome_options.add_argument("--headless")
   chrome_options.add_argument("--disable-gpu")
-  chrome_options.add_argument("--window-size=1680,1050")
+  chrome_options.add_argument("--window-size=1440,900")
 
   driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
 
-  ### Allow file downloads in Google Chrome when headless!!!
+  ### Allow file downloads in Google Chrome when headless!
   ### https://bugs.chromium.org/p/chromium/issues/detail?id=696481#c89
   bridge = driver.browser.send(:bridge)
-
   path = "/session/#{bridge.session_id}/chromium/send_command"
-
   bridge.http.call(:post, path, cmd: "Page.setDownloadBehavior",
                                 params: {
                                   behavior: "allow",
                                   downloadPath: "/tmp/downloads"
                                 })
-  ###
-
   driver
 end
 
 #### Safari (macOS only.)
-# This is what we use to test the Safari release channel.
-# You will have to install Safari Technology Preview (STP) from Apple.
+# To enable safaridriver:
+# https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari/
+# Get the Tech Preview:
+# # https://developer.apple.com/safari/resources/
 
 Capybara.register_driver :safari do |app|
-  # see standard properties here: https://www.w3.org/TR/webdriver/#capabilities
-  # STP requires a capabilities object
-  # you could use any of the properties from the link above.
-  # I just used a accept_insecure_certs for the heck of it
-  options = Selenium::WebDriver::Remote::Capabilities.safari(
-    {}
-  )
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :safari,
-    driver_path: "/Applications/Safari Technology Preview.app/Contents/MacOS/safaridriver",
-    desired_capabilities: options
-  )
+  Capybara::Selenium::Driver.new(app, browser: :safari)
+end
+
+Capybara.register_driver :stp do |app|
+  # safari = Selenium::WebDriver::Safari
+  # safari.technology_preview!
+  Selenium::WebDriver::Safari.technology_preview!
+  Capybara::Selenium::Driver.new(app, browser: :safari)
 end
 
 ### Firefox
@@ -70,10 +65,7 @@ end
 Capybara.register_driver :headless_firefox do |app|
   options = Selenium::WebDriver::Firefox::Options.new
   options.headless! # added on https://github.com/SeleniumHQ/selenium/pull/4762
-
-  Capybara::Selenium::Driver.new app,
-    browser: :firefox,
-    options:
+  Capybara::Selenium::Driver.new(app, browser: :firefox, options:)
 end
 
 if ENV["DRIVER"].present?
