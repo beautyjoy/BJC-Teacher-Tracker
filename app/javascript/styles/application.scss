@@ -48,6 +48,11 @@ body {
 .btn-primary {
   background-color: var(--berkeley-blue);
   border-color: var(--berkeley-blue);
+  color: white;
+
+  &:visited {
+    color: white;
+  }
 }
 
 .btn-blue {
