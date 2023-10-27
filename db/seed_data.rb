@@ -18,7 +18,7 @@ module SeedData
       Here is the information that was submitted: <br>
       Name: {{teacher_first_name}} {{teacher_last_name}} <br>
       Email: {{teacher_email}} <br>
-      Snap Username: {{teacher_snap | link_to(teacher_snap, "https://snap.berkeley.edu/user?user=" + teacher_snap )}} <br>
+      Snap Username: {{teacher_snap | link_to(teacher_snap, "https://snap.berkeley.edu/user?username=" + teacher_snap )}} <br>
       School: {{teacher_school_name}} <br>
       Location: {{teacher_school_city}}, {{teacher_school_state}} <br>
       Website: {{ teacher_school_website | link_to(nil, teacher_school_website) }}

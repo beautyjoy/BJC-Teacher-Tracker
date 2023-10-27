@@ -89,7 +89,7 @@ group :linters, :development, :test do
   gem "rubocop-faker", require: false
 end
 
-# setup Cucumber, RSpec, Guard support
+# setup Cucumber, RSpec support
 group :test do
   gem "rspec-rails"
   gem "simplecov", require: false
