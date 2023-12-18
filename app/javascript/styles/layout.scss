@@ -20,13 +20,13 @@
     font-variant: normal;
   }
 
-a[data-toggle="collapse"]:not([aria-expanded="true"])::before,
-a[data-toggle="collapse"][aria-expanded="false"]::before {
+a[data-toggle="collapse"]:not([aria-expanded="true"])::after,
+a[data-toggle="collapse"][aria-expanded="false"]::after {
   content: "▸ ";
   text-decoration: none;
 }
 
-a[data-toggle="collapse"][aria-expanded="true"]::before {
+a[data-toggle="collapse"][aria-expanded="true"]::after {
   content: "▾ ";
   text-decoration: none;
 }
