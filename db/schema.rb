@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_18_082217) do
+ActiveRecord::Schema.define(version: 2023_09_05_181019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2023_04_18_082217) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.string "subject"
+    t.boolean "required", default: false
   end
 
   create_table "pages", force: :cascade do |t|
@@ -115,7 +116,9 @@ ActiveRecord::Schema.define(version: 2023_04_18_082217) do
     t.datetime "last_session_at"
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0
+    t.string "personal_email"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
+    t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"

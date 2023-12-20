@@ -105,7 +105,11 @@ class TeachersController < ApplicationController
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
-    @teacher.save!
+    if !@teacher.save
+      redirect_to edit_teacher_path(current_user.id),
+                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+      return
+    end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
     end
@@ -132,9 +136,11 @@ class TeachersController < ApplicationController
     redirect_to root_path
   end
 
+  # TODO: Handle the more info / intermediate status route.
   def deny
     @teacher.denied!
     if !params[:skip_email].present?
+      # TODO: Update dropdown to select the email template.
       TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
     end
     redirect_to root_path
@@ -177,8 +183,12 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    params.require(:teacher).permit(:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website, :education_level, :school_id)
+    teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
+      :more_info, :personal_website, :education_level, :school_id]
+    if is_admin?
+      teacher_attributes << :personal_email
+    end
+    params.require(:teacher).permit(*teacher_attributes)
   end
 
   def school_params

@@ -3,7 +3,13 @@
 namespace :split_teacher_pending_state do
   desc "Change all the pending state into not_reviewed state"
   task split: :environment do
-    Teacher.where(application_status: "pending").update_all(application_status: "not_reviewed")
-    Teacher.where(application_status: nil).update_all(application_status: "not_reviewed")
+    puts "Updating Pending/nil status to not_reviewed"
+    puts "Pending -> not reviewed"
+    puts Teacher.where(application_status: "Pending").update_all(application_status: "not_reviewed")
+    puts "Nil -> not_reviewed"
+    puts Teacher.where(application_status: nil).update_all(application_status: "not_reviewed")
+    puts "empty string -> not_reviewed"
+    puts Teacher.where(application_status: "").update_all(application_status: "not_reviewed")
+    puts "Done."
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: teachers
@@ -34,65 +36,15 @@
 #
 #  fk_rails_...  (school_id => schools.id)
 #
-
-admin:
-  id: 1
-  admin: true
-  first_name: Ye
-  last_name: Wang
-  status: 4
-  more_info: A CS169 Student
-  email: 'ye@berkeley.edu'
-  snap: ye
-  application_status: Validated
-  education_level: -1
-  school: stanfurd
-
-validated_teacher:
-  id: 2
-  admin: false
-  first_name: Validated
-  last_name: Teacher
-  status: 4
-  more_info: A CS169 Student
-  email: validated@teacher.edu
-  snap: validated
-  application_status: Validated
-  education_level: -1
-  school: berkeley
-
-bob:
-  id: 3
-  first_name: Bob
-  last_name: Johnson
-  snap: BobJohnson
-  email: 'bob@gmail.com'
-  status: 1
-  more_info: ''
-  application_status: Denied
-  school: berkeley
-  education_level: -1
-
-long:
-  id: 4
-  first_name: Short
-  last_name: Long
-  snap: song
-  email: 'short@long.com'
-  status: 3
-  school: berkeley
-  more_info: ''
-  application_status: Not Reviewed
-  education_level: 2
-
-reimu:
-  id: 5
-  first_name: Reimu
-  last_name: Hakurei
-  snap: reimu
-  email: 'reimu@touhou.com'
-  status: 4
-  more_info: Best Touhou Character
-  school: berkeley
-  application_status: Info Needed
-  education_level: -1
+FactoryBot.define do
+  factory :teacher do
+    first_name { "Teacher" }
+    last_name  { "User" }
+    snap { "teacher" }
+    sequence(:email) { |n| "teacher-#{n}@example.edu" }
+    status { 0 }
+    application_status { "Validated" }
+    personal_website { "https://www.school.edu/teacher" }
+    admin { false }
+  end
+end

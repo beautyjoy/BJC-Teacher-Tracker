@@ -100,7 +100,7 @@ class School < ApplicationRecord
     {
       name: name_location,
       id: id,
-      position: { lat: lat, lng: lng },
+      position: { lat:, lng: },
     }
   end
 

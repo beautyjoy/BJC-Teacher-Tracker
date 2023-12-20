@@ -27,7 +27,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], skip_jwt: true
 
   provider :microsoft_graph, ENV["MICROSOFT_CLIENT_ID"], ENV["MICROSOFT_CLIENT_SECRET"],
-           { scope: "openid profile email" }
+           { scope: "openid profile email User.read" }
 
   provider :discourse, sso_url: ENV["SNAP_CLIENT_URL"], sso_secret: ENV["SNAP_CLIENT_SECRET"]
 
@@ -37,5 +37,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 
 OmniAuth.config.on_failure = Proc.new do |env|
-  SessionsController.action(:omniauth_failure).call(env)
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end

@@ -14,6 +14,7 @@
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
+#  personal_email     :string
 #  personal_website   :string
 #  session_count      :integer          default(0)
 #  snap               :string
@@ -24,11 +25,12 @@
 #
 # Indexes
 #
-#  index_teachers_on_email                 (email) UNIQUE
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
-#  index_teachers_on_status                (status)
+#  index_teachers_on_email                     (email) UNIQUE
+#  index_teachers_on_email_and_first_name      (email,first_name)
+#  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_school_id                 (school_id)
+#  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
+#  index_teachers_on_status                    (status)
 #
 # Foreign Keys
 #
@@ -37,6 +39,8 @@
 class Teacher < ApplicationRecord
   validates :first_name, :last_name, :email, :status, presence: true
   validates :email, uniqueness: true
+  validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
+  validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
 
   enum application_status: {
     validated: "Validated",
@@ -103,7 +107,13 @@ class Teacher < ApplicationRecord
   end
 
   def email_name
-    "#{full_name} <#{email}>"
+    # We need to normalize names for emails.
+    "#{full_name} <#{email}>".delete(",")
+  end
+
+  def snap_username
+    # TODO: use this method until we rename the column.
+    self.snap
   end
 
   def status=(value)
@@ -167,7 +177,15 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    Teacher.find_by("LOWER(email) = ?", omniauth.email.downcase)
+    teachers = Teacher.where("LOWER(email) = :email or LOWER(personal_email) = :email",
+      email: omniauth.email.downcase)
+    if teachers.length > 1
+      raise "Too Many Teachers Found"
+    elsif teachers.length == 1
+      teachers.first
+    else
+      nil
+    end
   end
 
   def try_append_ip(ip)
@@ -176,9 +194,47 @@ class Teacher < ApplicationRecord
     save
   end
 
-
+  def email_attributes
+    # Used when passing data to liquid templates
+    {
+      teacher_first_name: self.first_name,
+      teacher_last_name: self.last_name,
+      teacher_full_name: self.full_name,
+      teacher_email: self.email,
+      teacher_personal_email: self.personal_email,
+      teacher_more_info: self.more_info,
+      teacher_snap: self.snap_username,
+      teacher_snap_username: self.snap_username,
+      teacher_education_level: self.education_level,
+      teacher_personal_website: self.personal_website,
+      teacher_teaching_status: self.text_status,
+      teacher_signed_up_at: self.created_at,
+      teacher_school_name: self.school.name,
+      teacher_school_city: self.school.city,
+      teacher_school_state: self.school.state,
+      teacher_school_website: self.school.website,
+    }
+  end
   # TODO: Figure out how this should be used. store and check `uid` field
   # def self.validate_access_token(omniauth)
   #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
   # end
+
+  private
+  def ensure_unique_personal_email
+    # We want to ensure that both email and personal_email are unique across
+    # BOTH columns (i.e. the email only appears once in the combined set)
+    # However, it's perfectly valid for personal_email to be nil
+    # TODO: This really suggests email needs to be its own table...
+    teacher_with_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.email }])
+    if teacher_with_email
+      errors.add(:email, "must be unique across both email and personal_email columns")
+    end
+    return unless self.personal_email.present?
+
+    teacher_personal_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.personal_email }])
+    if teacher_personal_email
+      errors.add(:personal_email, "must be unique across both email and personal_email columns")
+    end
+  end
 end

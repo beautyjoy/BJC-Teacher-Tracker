@@ -8,7 +8,7 @@ RSpec.describe TeacherHelper, type: :helper do
   let(:teacher) { teachers(:bob) }
 
   it "helpers snap_link displays correctly" do
-    expect(snap_link(teacher)).to eq "<a target=\"_blank\" href=\"https://snap.berkeley.edu/user?user=BobJohnson\">BobJohnson</a>"
+    expect(snap_link(teacher)).to eq "<a target=\"_blank\" href=\"https://snap.berkeley.edu/user?username=BobJohnson\">BobJohnson</a>"
   end
 
   it "helpers ip_history_display displays correctly" do

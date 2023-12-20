@@ -2,7 +2,12 @@
   <%= link_to(teacher.full_name, teacher_path(teacher)) %>
   <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
-<td><%= teacher.email %></td>
+<td>
+  <%= teacher.email %>
+  <%- if teacher.personal_email.present? %>
+    <br><%= teacher.personal_email %>
+  <%- end %>
+</td>
 <td><%= teacher.display_education_level %></td>
 <td
     <%- if teacher.display_status.length > 25 %>

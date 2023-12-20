@@ -14,6 +14,7 @@
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
+#  personal_email     :string
 #  personal_website   :string
 #  session_count      :integer          default(0)
 #  snap               :string
@@ -24,11 +25,12 @@
 #
 # Indexes
 #
-#  index_teachers_on_email                 (email) UNIQUE
-#  index_teachers_on_email_and_first_name  (email,first_name)
-#  index_teachers_on_school_id             (school_id)
-#  index_teachers_on_snap                  (snap) UNIQUE WHERE ((snap)::text <> ''::text)
-#  index_teachers_on_status                (status)
+#  index_teachers_on_email                     (email) UNIQUE
+#  index_teachers_on_email_and_first_name      (email,first_name)
+#  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_school_id                 (school_id)
+#  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
+#  index_teachers_on_status                    (status)
 #
 # Foreign Keys
 #
@@ -41,8 +43,13 @@ RSpec.describe Teacher, type: :model do
 
   let(:teacher) { teachers(:bob) }
 
-  it "shows email names correct" do
+  it "formats a proper email name" do
     expect(teacher.email_name).to eq "Bob Johnson <bob@gmail.com>"
+  end
+
+  it "formats a proper email name filtering commas" do
+    teacher.update(last_name: "Johnson, III")
+    expect(teacher.email_name).to eq "Bob Johnson III <bob@gmail.com>"
   end
 
   it "should be valid" do
@@ -85,7 +92,7 @@ RSpec.describe Teacher, type: :model do
   end
 
   describe "teacher with more info" do
-    let(:teacher) { teachers(:ye) }
+    let(:teacher) { teachers(:admin) }
 
     it "shows a short status with more info" do
       expect(teacher.more_info).to eq "A CS169 Student"

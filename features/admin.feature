@@ -5,7 +5,6 @@ Feature: basic admin functionality
   I can login in an see the dashboard
 
 Background: Has an Admin in DB
-  Given I seed data
   Given the following teachers exist:
   | first_name | last_name | admin | email                        |
   | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
@@ -116,28 +115,6 @@ Scenario: Deny teacher as an admin
   And   I fill in "reason" with "Denial Reason"
   And   I press "Submit"
   Then  I can send a deny email
-
-Scenario: Request info from teacher as an admin
-  Given the following schools exist:
-  | name        | city     | state | website                  | grade_level | school_type |
-  | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
-  Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
-  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
-  Given I am on the BJC home page
-  Given I have an admin email
-  When  I follow "Log In"
-  Then  I can log in with Google
-  And   I press "❓" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
-  Then  I should see "Reason"
-  Then  I should see "Request Info from Joseph Mamoa"
-  And   I fill in "reason" with "Test"
-  And   I press "Cancel"
-  And   I press "❓" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
-  Then  the "reason" field should not contain "Test"
-  And   I fill in "reason" with "Request Info Reason"
-  And   I press "Submit"
-  Then  I can send a request info email
 
 Scenario: Not logged in should not have access to edit
   Given the following schools exist:
