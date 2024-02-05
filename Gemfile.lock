@@ -128,7 +128,6 @@ GEM
     bootsnap (1.9.3)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (11.1.3)
     capybara (3.39.2)
       addressable
       matrix
@@ -188,6 +187,9 @@ GEM
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.3.3)
+    debug (1.9.1)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.5.0)
@@ -255,9 +257,6 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    guard-shell (0.7.2)
-      guard (>= 2.0.0)
-      guard-compat (~> 1.0)
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
@@ -279,6 +278,10 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    io-console (0.7.2)
+    irb (1.11.1)
+      rdoc
+      reline (>= 0.4.2)
     jmespath (1.6.1)
     json (2.6.3)
     jwt (2.7.1)
@@ -390,9 +393,8 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    pry-byebug (3.10.1)
-      byebug (~> 11.0)
-      pry (>= 0.13, < 0.15)
+    psych (5.1.2)
+      stringio
     public_suffix (5.0.3)
     puma (5.6.8)
       nio4r (~> 2.0)
@@ -440,7 +442,11 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rdoc (6.6.2)
+      psych (>= 4.0.0)
     regexp_parser (2.8.2)
+    reline (0.4.2)
+      io-console (~> 0.5)
     rexml (3.2.6)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
@@ -534,7 +540,6 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    spring (4.0.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -542,6 +547,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stringio (3.1.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
     sysexits (1.2.0)
@@ -591,15 +597,14 @@ DEPENDENCIES
   axe-core-cucumber
   axe-core-rspec
   bootsnap (>= 1.4.4)
-  byebug
   cucumber-rails
   database_cleaner
+  debug
   factory_bot_rails
   figaro
   guard
   guard-cucumber
   guard-rspec
-  guard-shell
   haml-lint
   httparty (~> 0.21.0)
   image_processing (>= 1.2)
@@ -619,8 +624,6 @@ DEPENDENCIES
   pronto-flay
   pronto-haml
   pronto-rubocop
-  pry
-  pry-byebug (~> 3.9)
   puma (~> 5)
   rack-mini-profiler (~> 2.0)
   rails (= 6.1.7.4)
@@ -639,7 +642,6 @@ DEPENDENCIES
   simplecov-csv
   simplecov-json
   smarter_csv (~> 1.4)
-  spring
   tzinfo-data
   web-console
   webpacker

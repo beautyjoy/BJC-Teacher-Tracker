@@ -29,7 +29,8 @@ gem "omniauth-yahoo-oauth2", github: "nevans/omniauth-yahoo-oauth2"
 
 # for timezone information for windows users
 gem "tzinfo-data"
-# for managing API keys
+
+# TODO: Is this necessary still?
 gem "figaro"
 
 # Error Tracking
@@ -56,7 +57,6 @@ group :development do
   gem "guard"
   gem "guard-rspec", require: false
   gem "guard-cucumber"
-  gem "guard-shell"
 
   # Intercept and view emails in a browser
   gem "letter_opener"
@@ -64,19 +64,14 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem "web-console"
 
+  # TODO: Move to general?
   gem "rack-mini-profiler", "~> 2.0"
   gem "listen", "~> 3.3"
 end
 
-group :development, :test do
-  gem "byebug"
-  gem "pry"
-  gem "pry-byebug", "~> 3.9"
-
-  gem "spring"
-end
-
 group :linters, :development, :test do
+  gem "debug"
+
   gem "pronto", require: false
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
