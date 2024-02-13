@@ -94,10 +94,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "email-smtp.us-west-2.amazonaws.com",
+    address: ENV["SMTP_EMAIL_ADDRESS"],
     port: 587,
-    user_name: "AKIA6JV7O2DSLSCZFINV",
-    password: Figaro.env.email_password,
+    user_name: ENV["SMTP_EMAIL_USERNAME"],
+    password: ENV["SMTP_EMAIL_PASSWORD"],
     authentication: :login,
     enable_starttls_auto: true,
   }

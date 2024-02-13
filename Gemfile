@@ -4,9 +4,9 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.2"
+ruby file: ".tool-versions"
 
-gem "rails", "6.1.7.4"
+gem "rails", "6.1.7.6"
 
 # Production app server
 gem "puma", "~> 5"
@@ -29,8 +29,6 @@ gem "omniauth-yahoo-oauth2", github: "nevans/omniauth-yahoo-oauth2"
 
 # for timezone information for windows users
 gem "tzinfo-data"
-# for managing API keys
-gem "figaro"
 
 # Error Tracking
 gem "sentry-ruby"
@@ -53,10 +51,6 @@ gem "httparty", "~> 0.21.0"
 
 group :development do
   gem "annotate"
-  gem "guard"
-  gem "guard-rspec", require: false
-  gem "guard-cucumber"
-  gem "guard-shell"
 
   # Intercept and view emails in a browser
   gem "letter_opener"
@@ -68,15 +62,9 @@ group :development do
   gem "listen", "~> 3.3"
 end
 
-group :development, :test do
-  gem "byebug"
-  gem "pry"
-  gem "pry-byebug", "~> 3.9"
-
-  gem "spring"
-end
-
 group :linters, :development, :test do
+  gem "debug"
+
   gem "pronto", require: false
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
