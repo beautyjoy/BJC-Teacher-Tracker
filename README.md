@@ -10,32 +10,29 @@ Sp23 Badges:
 
 ---
 
-Previous Badges:
+@beautyjoy/BJC-Teacher-Tracker Status:
 
-![Specs Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg) •
-[![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) • ![Rubocop Status](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)
-
+[![All Specs](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml/badge.svg)](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/specs.yml) •
+[![RuboCop](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml/badge.svg)](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/rubocop.yml) •
+[![CodeQL](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/beautyjoy/BJC-Teacher-Tracker/actions/workflows/codeql-analysis.yml) •
+[![codecov](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker/branch/master/graph/badge.svg?token=96PyjKKVzi)](https://codecov.io/gh/beautyjoy/BJC-Teacher-Tracker) •
+[![Maintainability](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/maintainability)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/maintainability) •
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ca4948c3dbe825709c3e/test_coverage)](https://codeclimate.com/github/beautyjoy/BJC-Teacher-Tracker/test_coverage)
 ---
 
 ## Description
 
 The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering.
 
-## Key Features and Functionality
+## Features
 
-We have worked on the adding following core features and functionality:
+**TODO: This section needs to be re-written.**
 
-- Feature: A application form for prospective teachers to request access to the platform
-- Functionality: Administrators are immediately notified of new applications via email
-- Feature: Administrators can validate or deny applicants with a button click
-- Functionality: An email is automatically sent to successful applicants notifying them of their acceptance to the teaching program
-- Feature: A separate administrators' view that uses Google OAuth to allow logins from UC Berkeley-registered users (@berkeley.edu)
-- Functionality: Administrators can login to the dashboard to view unvalidated applications, statistics on validated applicants, and a list of current teachers
-- Feature: The administrators' view contains a main page with
-  - buttons to delete or validate newly submitted forms
-  - tables for statistics about the schools and the courses current teachers are teaching
-  - a map with the locations of all the schools that teachers are a part of
-  - a separate page with all the validated teachers and their information
+* Teachers can sign up at https://teachers.bjc.berkeley.edu
+* Admins can login and approve/deny requests
+* Admins can see a dashboard of teacher stats
+* Teachers can log in to view protected solutions content
+* Admins can create/modify email templates.
 
 ## Installation:
 
