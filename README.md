@@ -105,22 +105,22 @@ We have worked on the adding following core features and functionality:
 
 ## Steps to Deploying on Heroku
 
-- ... create a heroku app
-- `heroku stack:set heroku-20` (Ruby 3.2.2 is not supported on latest stack heroku-22. Double check your Ruby version though)
+- ... create a heroku app, the default heroku-22 stack should work.
 - `heroku buildpacks:set heroku/nodejs` # this must be the first buildpack.
 - `heroku buildpacks:add --index 2 heroku/ruby`
-- `git remote set-url heroku https://git.heroku.com/bjc-teachers.git` (or whatever your heroku deployment repository is)
+- `heroku addons:create heroku-postgresql`
+- `heroku git -a [app-name]`
 - Make your local changes and start the commit process
 - `git add .`
 - `git commit -m "<Message>"`
 - `git push heroku master` (If this fails, try commenting the release command in `Procfile` for this first deployment only and go on to the next step. After you are done with the deployment, uncomment back the release command again. For more information, see [this PR](https://github.com/cs169/BJC-Teacher-Tracker/pull/15).)
 
 If bundler install runs successfully, continue with the following commands to correctly setup the PostgreSQL database on Heroku:
-- `heroku addons:create heroku-postgresql` (or, create and attach a new postgresql database on Heroku dashboard manually)
+
 - `heroku run bin/rails db:drop` (if this fails, you can skip this step)
 - `heroku run bin/rails db:schema:load`
 - `heroku run bin/rails db:seed`
-- `figaro heroku:set -e production` (or `staging`, depending on the your needs)
+- `heroku config:set ...` for each of the environment variables.
 - `heroku open`
 
 
