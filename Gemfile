@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.3"
+ruby file: '.tool-versions'
 
 gem "rails", "6.1.7.4"
 
