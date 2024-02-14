@@ -15,8 +15,8 @@ module ApplicationHelper
   def admin_nav_links
     {
       "Dashboard": dashboard_path,
-      "All Schools": schools_path,
-      "All Teachers": teachers_path,
+      "Schools": schools_path,
+      "Teachers": teachers_path,
       "Email Templates": email_templates_path
     }
   end
