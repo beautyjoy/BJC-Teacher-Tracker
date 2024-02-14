@@ -25,7 +25,7 @@ Scenario: Logging out as an admin
   Then I should see "Request Access to BJC Teacher Materials"
   Then I should see "Log In"
 
-Scenario: Viewing all teachers as an admin
+Scenario: Viewing Teachers as an admin
   Given I am on the BJC home page
   Given I have an admin email
   And I follow "Log In"
@@ -216,7 +216,7 @@ Scenario: Should be able to resend welcome email
   And I follow "Log In"
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
-  Given I follow "All Teachers"
+  Given I follow "Teachers"
   Then I should see "BJC Teachers"
   And I press "New Teacher"
   Then I should see "Request Access to BJC Teacher Materials"
@@ -227,7 +227,7 @@ Scenario: Should be able to resend welcome email
   And I follow "Log In"
   Then I can log in with Google
   And I should see "BJC Teacher Dashboard"
-  Given I follow "All Schools"
+  Given I follow "Schools"
   Then I should see "BJC Schools"
   And I press "New School"
   Then I should see "Add a School"
@@ -241,7 +241,7 @@ Scenario: Should be able to resend welcome email
 #  And I follow "Log In"
 #  Then I can log in with Google
 #  And I should see "BJC Teacher Dashboard"
-#  Given I follow "All Teachers"
+#  Given I follow "Teachers"
 #  And I uncheck "Validated"
 #  And I press "Upload CSV"
 #  Then The "#hidden_file_select_input" form is invalid
@@ -253,9 +253,9 @@ Scenario: Should be able to resend welcome email
 #  Then I should see "Successfully created/updated 2 teachers"
 #  Then I should see "1 schools has been created"
 #  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
-#  Then I follow "All Schools"
+#  Then I follow "Schools"
 #  Then I should see "uci"
-#  Then I follow "All Teachers"
+#  Then I follow "Teachers"
 #  Then I attach the csv "features/test_utils/test_teacher_second.csv"
 #  Then I should see "anke sha"
 #  Then I should see "Steve He"
@@ -271,7 +271,7 @@ Scenario: Should be able to resend welcome email
 #  And I follow "Log In"
 #  Then I can log in with Google
 #  And I should see "BJC Teacher Dashboard"
-#  Given I follow "All Teachers"
+#  Given I follow "Teachers"
 #  And I uncheck "Validated"
 #  And I press "Upload CSV"
 #  Then The "#hidden_file_select_input" form is invalid

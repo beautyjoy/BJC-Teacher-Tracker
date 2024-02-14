@@ -21,8 +21,13 @@ class TeachersController < ApplicationController
   layout "page_with_sidebar", only: [:new, :edit, :update]
 
   def index
-    @all_teachers = Teacher.where(admin: false)
-    @admins = Teacher.where(admin: true)
+    respond_to do |format|
+      format.html {
+        @all_teachers = Teacher.where(admin: false)
+        @admins = Teacher.where(admin: true)
+      }
+      format.csv { send_data Teacher.csv_export, filename: "teachers-#{Date.today}.csv" }
+    end
   end
 
   def show
