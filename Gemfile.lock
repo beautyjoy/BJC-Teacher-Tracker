@@ -124,6 +124,10 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.2.3)
+    countries (5.7.1)
+      unaccent (~> 0.3)
+    country_select (8.0.3)
+      countries (~> 5.0)
     crass (1.0.6)
     cucumber (7.1.0)
       builder (~> 3.2, >= 3.2.4)
@@ -245,7 +249,6 @@ GEM
     irb (1.11.1)
       rdoc
       reline (>= 0.4.2)
-    jmespath (1.6.1)
     json (2.6.3)
     jwt (2.7.1)
     launchy (2.5.2)
@@ -547,6 +550,7 @@ DEPENDENCIES
   axe-core-cucumber
   axe-core-rspec
   bootsnap (>= 1.4.4)
+  country_select
   cucumber-rails
   database_cleaner
   debug
