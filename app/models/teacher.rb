@@ -215,10 +215,41 @@ class Teacher < ApplicationRecord
       teacher_school_website: self.school.website,
     }
   end
-  # TODO: Figure out how this should be used. store and check `uid` field
-  # def self.validate_access_token(omniauth)
-  #   Teacher.find_by('LOWER(email) = ?', omniauth.email.downcase).present?
-  # end
+
+  delegate :name, :location, :grade_level, :website, to: :school, prefix: true
+  delegate :school_type, to: :school # don't add a redundant prefix.
+  # TODO: The school data needs to be cleaned up.
+  def self.csv_export
+    attributes = %w|
+      id
+      full_name
+      first_name
+      last_name
+      email
+      personal_email
+      snap_username
+      education_level
+      display_application_status
+      text_status
+      more_info
+      created_at
+      session_count
+      school_id
+      school_name
+      school_location
+      school_website
+      school_grade_level
+      school_type
+    |
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      Teacher.where(admin: false).find_each do |user|
+        csv << attributes.map { |attr| user.send(attr) }
+      end
+    end
+  end
 
   private
   def ensure_unique_personal_email

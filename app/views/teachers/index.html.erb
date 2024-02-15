@@ -1,6 +1,11 @@
 <%= provide(:title, "BJC Teachers") %>
 <%= provide(:header_button, "New Teacher") %>
 
+<!-- TODO: We need to clear up confusion with the datatables CSV export... -->
+<div class="custom-control custom-checkbox custom-control-inline">
+  <a href="/teachers.csv" class="btn btn-primary">Export All</a>
+</div>
+
 <div class="custom-control custom-checkbox custom-control-inline">
   <input class="custom-control-input" type="checkbox" name="statusFilter" id="Validated" value="validated" checked=true>
   <label class="custom-control-label" for="Validated">Validated</label>
