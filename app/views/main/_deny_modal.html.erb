@@ -7,8 +7,8 @@
       </div>
       <%= form_tag deny_teacher_path(0), method: :post, class: "form-horizontal" do %>
         <div class="modal-body">
-            <%= label_tag 'reason', 'Reason', class: 'control-label' %>
-            <%= text_field_tag :reason, params[:reason], class: "form-control" %>
+            <%= label_tag 'denial_reason', 'Reason', class: 'control-label' %>
+            <%= text_field_tag :denial_reason, params[:denial_reason], class: "form-control" %>
             <!-- <div class="form-group">
               <label for="reason-select">Reason for Denial (Select)</label>
               <select id="reason-select" name="reason-select" class="form-control">
@@ -57,7 +57,7 @@
     modal.find('.modal-title').text(newTitle);
   });
   modal.on('hidden.bs.modal', function () {
-    $('input[name="reason"]').val('');
+    $('input[name="denial_reason"]').val('');
     modal.find('.modal-title').text('');
   });
 </script>
