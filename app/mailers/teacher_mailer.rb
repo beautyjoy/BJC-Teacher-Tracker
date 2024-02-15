@@ -16,18 +16,18 @@ class TeacherMailer < ApplicationMailer
          subject: email_template.subject
   end
 
-  def deny_email(teacher, reason)
+  def deny_email(teacher, denial_reason)
     @teacher = teacher
-    @reason = reason
+    @denial_reason = denial_reason
     set_body
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
 
-  def request_info_email(teacher, reason)
+  def request_info_email(teacher, request_reason)
     @teacher = teacher
-    @reason = reason
+    @request_reason = request_reason
     set_body
     mail to: @teacher.email_name,
          cc: CONTACT_EMAIL,
@@ -48,7 +48,7 @@ class TeacherMailer < ApplicationMailer
     base_rules = {
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
-      reason: @reason
+      denial_reason: @denial_reason
     }
     base_rules.merge!(@teacher.email_attributes)
     base_rules.with_indifferent_access

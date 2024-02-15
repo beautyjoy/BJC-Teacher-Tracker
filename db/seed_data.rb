@@ -27,7 +27,7 @@ module SeedData
 
   @basic_email_with_reason = <<-DENY_EMAIL
     <p>
-      {{ reason | strip_tags }}
+      {{ denial_reason | strip_tags }}
     </p>
   DENY_EMAIL
 
@@ -38,7 +38,7 @@ module SeedData
     <p>[Your Name]</p>
     <p>Below, you can find the reason as to why it was rejected </p>
     <p>
-      {{ reason | strip_tags}}
+      {{ denial_reason | strip_tags}}
     </p>
   DENY_EMAIL1
 
