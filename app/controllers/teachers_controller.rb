@@ -130,7 +130,7 @@ class TeachersController < ApplicationController
   def request_info
     @teacher.info_needed!
     if !params[:skip_email].present?
-      TeacherMailer.request_info_email(@teacher, params[:denial_reason]).deliver_now
+      TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
     end
     redirect_to root_path
   end

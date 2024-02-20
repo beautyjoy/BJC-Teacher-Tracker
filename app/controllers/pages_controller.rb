@@ -95,6 +95,7 @@ class PagesController < ApplicationController
   #     teacher_school_website: @teacher.school.website,
   #     piazza_password: Rails.application.secrets[:piazza_password],
   #     denial_reason: @denial_reason
+  #     request_reason: @request_reason
   #   }.with_indifferent_access
   # end
 
