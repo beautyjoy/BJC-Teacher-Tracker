@@ -108,11 +108,11 @@ Scenario: Deny teacher as an admin
   And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
   Then  I should see "Reason"
   And   I should see "Deny Joseph Mamoa"
-  And   I fill in "reason" with "Test"
+  And   I fill in "denial_reason" with "Test"
   And   I press "Cancel"
   And   I press "❌" within "#DataTables_Table_0 > tbody > tr:nth-child(1)"
-  Then  the "reason" field should not contain "Test"
-  And   I fill in "reason" with "Denial Reason"
+  Then  the "denial_reason" field should not contain "Test"
+  And   I fill in "denial_reason" with "Denial Reason"
   And   I press "Submit"
   Then  I can send a deny email
 

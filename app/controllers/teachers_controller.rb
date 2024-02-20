@@ -130,7 +130,7 @@ class TeachersController < ApplicationController
   def request_info
     @teacher.info_needed!
     if !params[:skip_email].present?
-      TeacherMailer.request_info_email(@teacher, params[:reason]).deliver_now
+      TeacherMailer.request_info_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path
   end
@@ -146,7 +146,7 @@ class TeachersController < ApplicationController
     @teacher.denied!
     if !params[:skip_email].present?
       # TODO: Update dropdown to select the email template.
-      TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
+      TeacherMailer.deny_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path
   end
