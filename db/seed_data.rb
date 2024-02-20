@@ -59,9 +59,12 @@ module SeedData
 
   DENY_EMAIL3
 
+  @to_field = "{{teacher_email}}, {{teacher_personal_email}}"
+
   def self.emails
     [
       {
+        to: @to_field,
         body: @welcome_email,
         path: "teacher_mailer/welcome_email",
         locale: nil,
@@ -73,6 +76,7 @@ module SeedData
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
       {
+        to: @to_field,
         body: @form_submission,
         path: "teacher_mailer/form_submission",
         locale: nil,
@@ -84,6 +88,7 @@ module SeedData
         subject: "Form Submission"
       },
       {
+        to: @to_field,
         body: @deny_email,
         path: "teacher_mailer/deny_email",
         locale: nil,
@@ -95,6 +100,7 @@ module SeedData
         subject: "Deny Email"
       },
       {
+        to: @to_field,
         body: @basic_email_with_reason,
         path: "teacher_mailer/request_info_email",
         locale: nil,
