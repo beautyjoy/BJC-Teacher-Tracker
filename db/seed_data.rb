@@ -60,13 +60,27 @@ module SeedData
   DENY_EMAIL3
 
   @request_info_email = <<-REQUEST_INFO_EMAIL
-    <p>
-      Here is an update to your application to BJC: <br>
-      We need more information from you: <br>
-      {{ request_reason | strip_tags }} <br>
-      To update your application, please login to your account and update your application.
-    </p>
+    <p>Dear {{teacher_first_name}},</p>
+
+    <p>We hope this message finds you well. We're writing to you regarding your ongoing application with BJC. As part of our review process, we've identified that some additional information is required to move forward.</p>
+
+    <p><strong>Required Information:</strong><br>
+    We kindly ask you to provide the following details to complete your application:</p>
+    <p>{{ request_reason | strip_tags }}</p>
+
+    <p>To submit the requested information, please follow these steps:</p>
+    <ol>
+      <li>Log into your BJC account using your registered email and password.</li>
+      <li>Locate your current application and update the information.</li>
+      <li>Fill in the necessary details in the provided fields and submit the update.</li>
+    </ol>
+
+    <p>Thank you for your attention to this matter. We look forward to receiving the additional information and advancing your application process.</p>
+
+    <p>Warm regards,</p>
+    <p>[Your Name]</p>
   REQUEST_INFO_EMAIL
+
 
   def self.emails
     [
