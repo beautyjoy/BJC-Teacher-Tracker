@@ -22,8 +22,8 @@ class EmailTemplate < ApplicationRecord
   validates :title,
             inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase },
             if: -> { self.required? }
-  validates :body, presence: {message: "cannot be blank" }
-  validates :to, presence: {message: "cannot be blank" }
+  validates :body, presence: { message: "cannot be blank" }
+  validates :to, presence: { message: "cannot be blank" }
 
   before_destroy :prevent_deleting_required_emails
 
