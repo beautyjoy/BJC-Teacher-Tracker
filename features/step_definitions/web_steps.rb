@@ -60,6 +60,18 @@ When(/^(?:|I )fill in TinyMCE email form with "([^"]*)"$/) do |value|
   page.execute_script('$(tinymce.editors[0].setContent("' + value + '"))')
 end
 
+When(/^(?:|I )follow the first "([^"]*)" link$/) do |link_text|
+  first("a", text: link_text).click
+end
+
+When(/^(?:|I )press the first "([^"]*)" button$/) do |button_text|
+  first("button", text: button_text).click
+end
+
+Then(/^(?:|I )accept the popup alert$/) do
+  page.driver.browser.switch_to.alert.accept
+end
+
 When(/^(?:|I )fill in "([^"]*)" for "([^"]*)"$/) do |value, field|
   fill_in(field, with: value)
 end
