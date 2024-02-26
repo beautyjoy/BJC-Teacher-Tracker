@@ -130,6 +130,10 @@ class TeachersController < ApplicationController
   def request_info
     @teacher.info_needed!
     if !params[:skip_email].present?
+      
+      # This is not printing the right thing. However, if you do "puts params[:reason]" it actually 
+      # prints the reason. Route has to be updated I think?
+      puts params[:request_reason]
       TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
     end
     redirect_to root_path
@@ -146,6 +150,10 @@ class TeachersController < ApplicationController
     @teacher.denied!
     if !params[:skip_email].present?
       # TODO: Update dropdown to select the email template.
+
+      # This is not printing the right thing. However, if you do "puts params[:reason]" it actually 
+      # prints the reason. Route has to be updated I think?
+      puts params[:denial_reason]
       TeacherMailer.deny_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path

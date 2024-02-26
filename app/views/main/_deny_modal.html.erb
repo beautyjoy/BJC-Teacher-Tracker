@@ -8,7 +8,8 @@
       <%= form_tag deny_teacher_path(0), method: :post, class: "form-horizontal" do %>
         <div class="modal-body">
             <%= label_tag 'denial_reason', 'Reason', class: 'control-label' %>
-            <%= text_field_tag :denial_reason, params[:denial_reason], class: "form-control" %>
+            <%# The text field values are now filled when the modal is opened %>
+            <%= text_field_tag 'reason', nil, class: "form-control" %>
             <!-- <div class="form-group">
               <label for="reason-select">Reason for Denial (Select)</label>
               <select id="reason-select" name="reason-select" class="form-control">
@@ -40,24 +41,30 @@
     let teacherName = button.data('teacher-name');
     let newAction = null;
     let newTitle = null;
+    let reasonType = null;
     switch(button.data('modal-type')) {
       case "deny":
         newAction = `/teachers/${teacherId}/deny`;
         newTitle = 'Deny ' + teacherName;
+        reasonType = ':denial_reason';
         break;
       case "request_info":
         newAction = `/teachers/${teacherId}/request_info`;
         newTitle = 'Request Info from ' + teacherName;
+        reasonType = ':request_reason';
         break;
       default:
         newAction = `/teachers/${teacherId}/deny`;
         newTitle = 'Deny ' + teacherName;
+        reasonType = ':denial_reason';
     }
     modal.find('.form-horizontal').attr('action', newAction);
     modal.find('.modal-title').text(newTitle);
+   // Need to make reasonType the value of the TextField as well
+    $('.form-control').attr("id", reasonType);
   });
   modal.on('hidden.bs.modal', function () {
-    $('input[name="denial_reason"]').val('');
+    $('#reason').val('');
     modal.find('.modal-title').text('');
   });
 </script>
