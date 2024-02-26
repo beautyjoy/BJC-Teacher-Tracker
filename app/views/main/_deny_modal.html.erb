@@ -9,7 +9,7 @@
         <div class="modal-body">
             <%= label_tag 'denial_reason', 'Reason', class: 'control-label' %>
             <%# The text field values are now filled when the modal is opened %>
-            <%= text_field_tag 'reason', nil, class: "form-control" %>
+            <%= text_field_tag 'js_name_field', nil, class: "form-control" %>
             <!-- <div class="form-group">
               <label for="reason-select">Reason for Denial (Select)</label>
               <select id="reason-select" name="reason-select" class="form-control">
@@ -46,22 +46,23 @@
       case "deny":
         newAction = `/teachers/${teacherId}/deny`;
         newTitle = 'Deny ' + teacherName;
-        reasonType = ':denial_reason';
+        reasonType = 'denial_reason';
         break;
       case "request_info":
         newAction = `/teachers/${teacherId}/request_info`;
         newTitle = 'Request Info from ' + teacherName;
-        reasonType = ':request_reason';
+        reasonType = 'request_reason';
         break;
       default:
         newAction = `/teachers/${teacherId}/deny`;
         newTitle = 'Deny ' + teacherName;
-        reasonType = ':denial_reason';
+        reasonType = 'denial_reason';
     }
     modal.find('.form-horizontal').attr('action', newAction);
     modal.find('.modal-title').text(newTitle);
    // Need to make reasonType the value of the TextField as well
-    $('.form-control').attr("id", reasonType);
+    $('.form-control').attr("id", ":" + reasonType);
+    $('.form-control').attr("name", reasonType);
   });
   modal.on('hidden.bs.modal', function () {
     $('#reason').val('');
