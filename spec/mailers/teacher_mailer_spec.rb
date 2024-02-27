@@ -36,4 +36,17 @@ describe TeacherMailer do
     expect(email.to[0]).to eq("lmock@berkeley.edu")
     expect(email.body.encoded).to include("Short Long")
   end
+
+  it "Sends Request Info Email" do
+    teacher = teachers(:long)
+    email = TeacherMailer.request_info_email(teacher, "Request Reason")
+    email.deliver_now
+    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+    expect(email.to[0]).to eq("short@long.com")
+    expect(email.subject).to eq("Request Info Email")
+    # Test appearance of first_name
+    expect(email.body.encoded).to include("Short")
+    expect(email.body.encoded).to include("Request Reason")
+    expect(email.body.encoded).to include("We're writing to you regarding your ongoing application with BJC.")
+  end
 end
