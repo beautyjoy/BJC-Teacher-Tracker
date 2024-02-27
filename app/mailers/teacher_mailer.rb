@@ -52,7 +52,9 @@ class TeacherMailer < ApplicationMailer
     base_rules = {
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
-      denial_reason: @denial_reason
+      # TODO: Review if below two are needed, or can they be refractored?
+      denial_reason: @denial_reason,
+      request_reason: @request_reason
     }
     base_rules.merge!(@teacher.email_attributes)
     base_rules.with_indifferent_access

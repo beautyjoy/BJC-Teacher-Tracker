@@ -183,4 +183,23 @@ RSpec.describe TeachersController, type: :controller do
       expect(Teacher.find_by(email: "valid_example@valid_example.edu").not_reviewed?).to be true
     end
   end
+
+  context "flash a message after resend_welcome_email" do
+    it "succeeds when teacher is validated, sets success" do
+      ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Validated"))
+      validated_teacher = Teacher.find_by(first_name: "Validated")
+      post :resend_welcome_email, params: { id: validated_teacher.id }
+      expect(flash[:success]).to eq("Welcome email resent successfully!")
+      expect(response).to redirect_to(edit_teacher_path(validated_teacher.id))
+    end
+
+    it "fails when teacher is not validated, sets alert" do
+      ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+      nonvalidated_teacher = Teacher.find_by(first_name: "Short")
+      post :resend_welcome_email, params: { id: nonvalidated_teacher.id }
+      expect(flash[:alert]).to eq("Error resending welcome email. \
+      Please ensure that your account has been validated by an administrator.")
+      expect(response).to redirect_to(edit_teacher_path(nonvalidated_teacher.id))
+    end
+  end
 end
