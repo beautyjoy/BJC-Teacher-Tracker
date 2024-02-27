@@ -11,7 +11,8 @@ class TeacherMailer < ApplicationMailer
   def welcome_email(teacher)
     @teacher = teacher
     set_body
-    mail to: teacher.email_name,
+    set_recipients
+    mail to: @recipients, # ActionMailer accepts comma-separated lists of emails
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
@@ -20,7 +21,8 @@ class TeacherMailer < ApplicationMailer
     @teacher = teacher
     @denial_reason = denial_reason
     set_body
-    mail to: @teacher.email_name,
+    set_recipients
+    mail to: @recipients,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
@@ -29,7 +31,8 @@ class TeacherMailer < ApplicationMailer
     @teacher = teacher
     @request_reason = request_reason
     set_body
-    mail to: @teacher.email_name,
+    set_recipients
+    mail to: @recipients,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
@@ -37,8 +40,9 @@ class TeacherMailer < ApplicationMailer
   def form_submission(teacher)
     @teacher = teacher
     set_body
+    set_recipients
     if @teacher.not_reviewed?
-      mail to: CONTACT_EMAIL,
+      mail to: @recipients,
            subject: email_template.subject
     end
   end
@@ -60,7 +64,13 @@ class TeacherMailer < ApplicationMailer
     @email_template ||= EmailTemplate.find_by(title: action_name.titlecase)
   end
 
+  # renders the email body with the {{parameter}} things
   def set_body
     @body = Liquid::Template.parse(email_template.body).render(liquid_assigns).html_safe
+  end
+
+  # renders the list of recipients with the {{parameter}} things
+  def set_recipients
+    @recipients = Liquid::Template.parse(email_template.to).render(liquid_assigns).html_safe
   end
 end

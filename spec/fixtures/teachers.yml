@@ -96,3 +96,16 @@ reimu:
   school: berkeley
   application_status: Info Needed
   education_level: -1
+
+barney:
+  id: 6
+  first_name: Barney
+  last_name: Dinosaur
+  snap: barney
+  email: 'barneydinosaur@gmail.com'
+  personal_email: 'bigpurpletrex@gmail.com'
+  status: 1
+  more_info: ''
+  application_status: Denied
+  school: berkeley
+  education_level: -1

@@ -17,6 +17,17 @@ describe TeacherMailer do
      expect(email.body.encoded).to include("Hi Bob")
    end
 
+  it "Sends to Both School and Personal Email When Possible" do
+   teacher = teachers(:barney)
+   email = TeacherMailer.welcome_email(teacher)
+   email.deliver_now
+   expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+   expect(email.to[0]).to eq("barneydinosaur@gmail.com")
+   expect(email.to[1]).to eq("bigpurpletrex@gmail.com")
+   expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
+   expect(email.body.encoded).to include("Hi Barney")
+ end
+
 
   it "Sends Deny Email" do
     teacher = teachers(:long)

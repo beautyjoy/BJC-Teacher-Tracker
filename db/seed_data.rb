@@ -82,9 +82,12 @@ module SeedData
   REQUEST_INFO_EMAIL
 
 
+  @default_to_field = "{{teacher_email}}, {{teacher_personal_email}}"
+
   def self.emails
     [
       {
+        to: @default_to_field,
         body: @welcome_email,
         path: "teacher_mailer/welcome_email",
         locale: nil,
@@ -96,6 +99,7 @@ module SeedData
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
       {
+        to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
         body: @form_submission,
         path: "teacher_mailer/form_submission",
         locale: nil,
@@ -107,6 +111,7 @@ module SeedData
         subject: "Form Submission"
       },
       {
+        to: @default_to_field,
         body: @deny_email,
         path: "teacher_mailer/deny_email",
         locale: nil,
@@ -119,6 +124,7 @@ module SeedData
       },
       {
         body: @request_info_email,
+        to: @default_to_field,
         path: "teacher_mailer/request_info_email",
         locale: nil,
         handler: "liquid",
