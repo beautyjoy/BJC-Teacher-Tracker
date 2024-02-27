@@ -5,24 +5,25 @@
         <h4 class="modal-title"></h4>
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       </div>
+      <!-- default action is deny, but it can be dynamically changed. Check the js at the bottom of this file -->
       <%= form_tag deny_teacher_path(0), method: :post, class: "form-horizontal" do %>
         <div class="modal-body">
-            <%= label_tag 'denial_reason', 'Reason', class: 'control-label' %>
-            <%# The text field values are now filled when the modal is opened %>
-            <%= text_field_tag 'js_name_field', nil, class: "form-control" %>
-            <!-- <div class="form-group">
-              <label for="reason-select">Reason for Denial (Select)</label>
-              <select id="reason-select" name="reason-select" class="form-control">
-                <option value="">Select a reason</option>
-                <option value="Incomplete Application">Incomplete Application</option>
-                <option value="Insufficient Experience">Insufficient Experience</option>
-                <option value="Unfavorable References">Unfavorable References</option>
-              </select>
-            </div> -->
-            <div class="form-check">
-              <%= check_box_tag :skip_email, 'skip_email', false, class: 'form-check-input' %>
-              <%= label_tag 'skip_email', 'Skip email notifcation?', class: 'form-check-label' %>
-            </div>
+          <%= hidden_field_tag :action_type, '', class: "form-control action-type" %>
+          <%= label_tag 'action_reason', 'Reason', class: 'control-label' %>
+          <%= text_field_tag :action_reason_placeholder, '', class: "form-control action-reason", id: "action_reason" %>
+          <!-- <div class="form-group">
+            <label for="reason-select">Reason for Denial (Select)</label>
+            <select id="reason-select" name="reason-select" class="form-control">
+              <option value="">Select a reason</option>
+              <option value="Incomplete Application">Incomplete Application</option>
+              <option value="Insufficient Experience">Insufficient Experience</option>
+              <option value="Unfavorable References">Unfavorable References</option>
+            </select>
+          </div> -->
+          <div class="form-check">
+            <%= check_box_tag :skip_email, 'skip_email', false, class: 'form-check-input' %>
+            <%= label_tag 'skip_email', 'Skip email notifcation?', class: 'form-check-label' %>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -34,38 +35,43 @@
 </div>
 
 <script type="text/javascript">
-  let modal = $('.js-denialModal');
-  modal.on('shown.bs.modal', function (event) {
-    let button = $(event.relatedTarget);
-    let teacherId = button.data('teacher-id');
-    let teacherName = button.data('teacher-name');
-    let newAction = null;
-    let newTitle = null;
-    let reasonType = null;
-    switch(button.data('modal-type')) {
-      case "deny":
-        newAction = `/teachers/${teacherId}/deny`;
-        newTitle = 'Deny ' + teacherName;
-        reasonType = 'denial_reason';
-        break;
-      case "request_info":
-        newAction = `/teachers/${teacherId}/request_info`;
-        newTitle = 'Request Info from ' + teacherName;
-        reasonType = 'request_reason';
-        break;
-      default:
-        newAction = `/teachers/${teacherId}/deny`;
-        newTitle = 'Deny ' + teacherName;
-        reasonType = 'denial_reason';
-    }
-    modal.find('.form-horizontal').attr('action', newAction);
-    modal.find('.modal-title').text(newTitle);
-   // Need to make reasonType the value of the TextField as well
-    $('.form-control').attr("id", ":" + reasonType);
-    $('.form-control').attr("name", reasonType);
-  });
-  modal.on('hidden.bs.modal', function () {
-    $('#reason').val('');
-    modal.find('.modal-title').text('');
-  });
+    let modal = $('.js-denialModal');
+    modal.on('shown.bs.modal', function (event) {
+        let button = $(event.relatedTarget); // Button that triggered the modal
+        let teacherId = button.data('teacher-id');
+        let teacherName = button.data('teacher-name');
+        let actionType = button.data('modal-type'); // Action type, e.g., "deny", "request_info"
+        let newAction, newTitle, inputName;
+
+        // Determine the action and title based on the button clicked
+        switch(actionType) {
+            case "deny":
+                newAction = `/teachers/${teacherId}/deny`;
+                newTitle = 'Deny ' + teacherName;
+                inputName = 'denial_reason'; // The dynamic part for the input's name attribute
+                break;
+            case "request_info":
+                newAction = `/teachers/${teacherId}/request_info`;
+                newTitle = 'Request Info from ' + teacherName;
+                inputName = 'request_reason'; // Change accordingly
+                break;
+            default:
+                newAction = `/teachers/${teacherId}/deny`;
+                newTitle = 'Deny ' + teacherName;
+                inputName = 'denial_reason'; // Fallback option
+        }
+
+        // Update the form's action and the modal's title
+        modal.find('.form-horizontal').attr('action', newAction);
+        modal.find('.modal-title').text(newTitle);
+
+        // Dynamically change the name attribute of the input field
+        modal.find('#action_reason').attr('name', inputName);
+    });
+
+    // Reset the input field when the modal is closed
+    modal.on('hidden.bs.modal', function () {
+        modal.find('#action_reason').val('').attr('name', 'action_reason_placeholder');
+        modal.find('.modal-title').text('');
+    });
 </script>
