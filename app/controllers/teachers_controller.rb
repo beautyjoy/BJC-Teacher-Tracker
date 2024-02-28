@@ -160,13 +160,12 @@ class TeachersController < ApplicationController
 
   def resend_welcome_email
     if @teacher.validated? || @is_admin
-      TeacherMailer.welcome_email(@teacher).deliver_now
       flash[:success] = "Welcome email resent successfully!"
+      TeacherMailer.welcome_email(@teacher).deliver_now
     else
-      flash[:alert] = "Error resending welcome email. \
-      Please ensure that your account has been validated by an administrator."
+      flash[:alert] = "Error resending welcome email. Please ensure that your account has been validated by an administrator."
     end
-    redirect_to edit_teacher_path(@teacher)
+    redirect_back(fallback_location: dashboard_path)
   end
 
   def import
