@@ -2,7 +2,8 @@
 
 require_relative "seed_data"
 
-SeedData.emails.each { |email| EmailTemplate.find_or_create_by(email) }
+EmailTemplate.delete_all
+SeedData.emails.each { |email| EmailTemplate.create!(email) }
 
 SeedData.create_schools
 
