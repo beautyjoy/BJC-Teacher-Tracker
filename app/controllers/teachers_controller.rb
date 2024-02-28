@@ -87,6 +87,10 @@ class TeachersController < ApplicationController
     if @teacher.denied? && !is_admin?
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
       return
+    elsif @teacher.id != current_user.id && !is_admin?
+      Sentry.capture_message("BAD UPDATE: #{current_user.id} attempted to edit #{@teacher.id}")
+      redirect_to root_path, alert: "You are attempting to update another user's record."
+      return
     end
 
     load_school
@@ -115,13 +119,10 @@ class TeachersController < ApplicationController
     end
 
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
-      return
+      redirect_to teacher_path(@teacher), notice: "Saved #{@teacher.full_name}"
     else
-      @teacher.try_append_ip(request.remote_ip)
+      redirect_to root_path, notice: "Saved successfully. Thanks!"
     end
-    redirect_to edit_teacher_path(current_user.id),
-                notice: "Successfully updated your information. Thanks!"
   end
 
   def request_info
