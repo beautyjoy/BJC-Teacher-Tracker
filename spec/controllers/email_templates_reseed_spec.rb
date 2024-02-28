@@ -7,6 +7,8 @@ require "rails_helper"
 # upon reseeding the database with new seed data. It tests the initial seeding, updates to
 # templates, and the removal of templates that are no longer present in the seed data.
 RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
+  # To ensure that the tests run against the correct database.
+  include_context "database verification"
   # Define email content for initial seeding and subsequent updates. These blocks
   # provide a flexible way to manage test data, allowing us to simulate changes in seed data
   # across different test scenarios.
@@ -34,6 +36,9 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
   # Setup phase: Mocks the SeedData.emails call to return predetermined email content.
   # This mimics the initial seeding process with specific email templates before each test.
   before do
+    # Clean the database for email templates before each test.
+    # This is safe to do due to the `database verification` context
+    EmailTemplate.delete_all
     allow(SeedData).to receive(:emails).and_return(
       [
         {
