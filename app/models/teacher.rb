@@ -93,6 +93,9 @@ class Teacher < ApplicationRecord
     "I am teaching Middle School BJC.",
   ].freeze
 
+  delegate :name, :location, :grade_level, :website, to: :school, prefix: true
+  delegate :school_type, to: :school # don't add a redundant prefix.
+
   before_update :reset_validation_status
 
   def reset_validation_status
@@ -114,6 +117,10 @@ class Teacher < ApplicationRecord
   def snap_username
     # TODO: use this method until we rename the column.
     self.snap
+  end
+
+  def admin_attributes_changed?
+    self.email_changed? || self.personal_email_changed? || self.snap_changed?
   end
 
   def status=(value)
@@ -216,8 +223,7 @@ class Teacher < ApplicationRecord
     }
   end
 
-  delegate :name, :location, :grade_level, :website, to: :school, prefix: true
-  delegate :school_type, to: :school # don't add a redundant prefix.
+  # TODO: Move this to a TeacherCSVExports lib file
   # TODO: The school data needs to be cleaned up.
   def self.csv_export
     attributes = %w|

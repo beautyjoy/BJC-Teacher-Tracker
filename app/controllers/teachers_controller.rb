@@ -46,16 +46,10 @@ class TeachersController < ApplicationController
     end
   end
 
-  # TODO: This needs to be re-written.
-  # If you are logged in and not an admin, this should fail.
   def create
     # Find by email, but allow updating other info.
     @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
-      params[:id] = current_user.id
-      update
-      return
-    elsif @teacher
+    if @teacher
       redirect_to login_path,
                   notice: "You already have signed up with '#{@teacher.email}'. Please log in."
       return
@@ -80,7 +74,7 @@ class TeachersController < ApplicationController
       TeacherMailer.form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
+      render :new, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
     end
   end
 
@@ -92,6 +86,11 @@ class TeachersController < ApplicationController
   end
 
   def update
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      return
+    end
+
     load_school
     ordered_schools
     @teacher.assign_attributes(teacher_params)
@@ -102,11 +101,7 @@ class TeachersController < ApplicationController
       @school.save!
       @teacher.school = @school
     end
-    if @teacher.denied? && !is_admin?
-      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
-      return
-    end
-    if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
+    if (@teacher.admin_attributes_changed?) && !is_admin?
       redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
@@ -124,7 +119,8 @@ class TeachersController < ApplicationController
     else
       @teacher.try_append_ip(request.remote_ip)
     end
-    redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+    redirect_to edit_teacher_path(current_user.id),
+                notice: "Successfully updated your information. Thanks!"
   end
 
   def request_info
@@ -141,7 +137,6 @@ class TeachersController < ApplicationController
     redirect_to root_path
   end
 
-  # TODO: Handle the more info / intermediate status route.
   def deny
     @teacher.denied!
     if !params[:skip_email].present?
