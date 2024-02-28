@@ -47,11 +47,9 @@ class TeachersController < ApplicationController
   end
 
   def create
-    # Find by email, but allow updating other info.
-    @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher
+    if Teacher.find_by(email: params[:email])
       redirect_to login_path,
-                  notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+                  notice: "You already have signed up with '#{params[:email]}'. Please log in."
       return
     end
 
@@ -110,9 +108,12 @@ class TeachersController < ApplicationController
                 alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
       return
     end
+
     if !@teacher.validated? && !current_user.admin?
+      @teacher.not_reviewed!
       TeacherMailer.form_submission(@teacher).deliver_now
     end
+
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
       return
