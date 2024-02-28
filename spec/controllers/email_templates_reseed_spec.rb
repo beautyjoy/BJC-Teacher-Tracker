@@ -33,7 +33,6 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
 
   # Setup phase: Mocks the SeedData.emails call to return predetermined email content.
   # This mimics the initial seeding process with specific email templates before each test.
-  # The `load Rails.root.join("db/seeds.rb")` line simulates the seeding action.
   before do
     allow(SeedData).to receive(:emails).and_return(
       [
@@ -62,29 +61,39 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
           subject: "Request Info Email"
         }
       ])
-    # Initial seed with original data
+    # Simulates the seeding action.
     load Rails.root.join("db/seeds.rb")
-  end
 
-  # This test verifies the entire reseed process by first checking the state after initial seeding,
-  # then mocking updated seed data, reseeding, and finally asserting the expected outcomes.
-  # It checks for the correct handling of both updated and removed email templates.
-  it "correctly handles email templates on reseed without duplication" do
     # Verify original content
     expect(EmailTemplate.count).to eq(2)
     request_info_email = EmailTemplate.find_by(title: "Request Info Email")
+    expect(request_info_email).to be_present
     expect(request_info_email.title).to eq("Request Info Email")
     expect(request_info_email.body).to include("I am the original content of the request info email")
 
     form_submission_email = EmailTemplate.find_by(title: "Form Submission")
+    expect(form_submission_email).to be_present
     expect(form_submission_email.title).to eq("Form Submission")
     expect(form_submission_email.body).to include("I am the original content of the form submission email")
+  end
 
-    # Simulate an update to the seed data by changing the content of one email template
-    # and removing another. This prepares for the reseed to test how the application handles
-    # updated and removed templates.
+  it "does not duplicate email templates on reseed with updated content" do
+    # Mock the SeedData.emails call to return updated email content for the "Request Info Email" template.
+    # This simulates the reseeding process with updated email content.
     allow(SeedData).to receive(:emails).and_return(
       [
+        {
+          to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
+          body: form_submission_old,
+          path: "teacher_mailer/form_submission",
+          locale: nil,
+          handler: "liquid",
+          partial: false,
+          format: "html",
+          title: "Form Submission",
+          required: true,
+          subject: "Form Submission"
+        },
         {
           body: request_info_email_new,
           to: "{{teacher_email}}, {{teacher_personal_email}}",
@@ -100,14 +109,47 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
       ])
     load Rails.root.join("db/seeds.rb")
 
-    # Final assertions to verify that after reseeding, the email templates in the database
-    # reflect the updated seed data: updated content is present, and removed templates are absent.
-    expect(EmailTemplate.count).to eq(1)
-
+    # Verify updated content: Email count is still 2, with only updated content for the request info email.
+    expect(EmailTemplate.count).to eq(2)
     request_info_email = EmailTemplate.find_by(title: "Request Info Email")
+    expect(request_info_email).to be_present
     expect(request_info_email.title).to eq("Request Info Email")
-    expect(request_info_email.body).to include("NEW Template Content of the request info email")
+    expect(request_info_email.body).to include("I am NEW Template Content of the request info email")
 
+    form_submission_email = EmailTemplate.find_by(title: "Form Submission")
+    expect(form_submission_email).to be_present
+    expect(form_submission_email.title).to eq("Form Submission")
+    expect(form_submission_email.body).to include("I am the original content of the form submission email")
+  end
+
+  it "removes email templates not present in updated seed data" do
+    # Mock the SeedData.emails call to only return the "Request Info Email" template,
+    # simulating the removal of the "Form Submission" template from the seed data.
+    allow(SeedData).to receive(:emails).and_return(
+      [
+        {
+          body: request_info_email_old,
+          to: "{{teacher_email}}, {{teacher_personal_email}}",
+          path: "teacher_mailer/request_info_email",
+          locale: nil,
+          handler: "liquid",
+          partial: false,
+          format: "html",
+          title: "Request Info Email",
+          required: true,
+          subject: "Request Info Email"
+        }
+      ])
+    load Rails.root.join("db/seeds.rb")
+
+    # Verify that the "Form Submission" email template is removed
+    expect(EmailTemplate.count).to eq(1)
     expect(EmailTemplate.find_by(title: "Form Submission")).to be_nil
+
+    # Additionally, verify that the "Request Info Email" template remains and is unchanged
+    request_info_email = EmailTemplate.find_by(title: "Request Info Email")
+    expect(request_info_email).to be_present
+    expect(request_info_email.title).to eq("Request Info Email")
+    expect(request_info_email.body).to include("I am the original content of the request info email")
   end
 end
