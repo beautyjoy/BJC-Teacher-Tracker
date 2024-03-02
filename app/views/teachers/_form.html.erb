@@ -1,5 +1,24 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
-<div class='form-group form-input-group'>
+<%# Render the select dropdown to change teacher's application
+status ONLY IF the person viewing the form is an admin. %>
+
+<%if @is_admin %>
+    <div class='form-group form-input-group'>
+      <div class='form-group row'>
+        <div class='col-12'>
+        <%= f.label :application_status, "Application Status: ", class: "label-required" %>
+        <%= f.select(
+        :application_status,
+        options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
+      ) %>
+    </div>
+  </div>
+<% end %>
+
+
+
   <h2>Your Information</h2>
   <div class='form-group row'>
     <div class='col-6'>
