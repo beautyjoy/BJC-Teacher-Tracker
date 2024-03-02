@@ -31,36 +31,33 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
     REQUEST_INFO_EMAIL
   end
 
+  def email_template_hash(body:, title:, subject:, path:)
+    {
+      to: title == "Form Submission" ?
+            "lmock@berkeley.edu, contact@bjc.berkeley.edu"
+            : "{{teacher_email}}, {{teacher_personal_email}}",
+      body:,
+      path:,
+      locale: nil,
+      handler: "liquid",
+      partial: false,
+      format: "html",
+      title:,
+      required: true,
+      subject:
+    }
+  end
+
   before do
     # Clear the EmailTemplate table to ensure a clean slate for each test.
     # This is safe to do because it's under test environment, not production
     EmailTemplate.delete_all
     allow(SeedData).to receive(:emails).and_return(
       [
-        {
-          to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
-          body: form_submission_old,
-          path: "teacher_mailer/form_submission",
-          locale: nil,
-          handler: "liquid",
-          partial: false,
-          format: "html",
-          title: "Form Submission",
-          required: true,
-          subject: "Form Submission"
-        },
-        {
-          body: request_info_email_old,
-          to: "{{teacher_email}}, {{teacher_personal_email}}",
-          path: "teacher_mailer/request_info_email",
-          locale: nil,
-          handler: "liquid",
-          partial: false,
-          format: "html",
-          title: "Request Info Email",
-          required: true,
-          subject: "Request Info Email"
-        }
+        email_template_hash(body: form_submission_old, title: "Form Submission", subject: "Form Submission",
+                            path: "teacher_mailer/form_submission"),
+        email_template_hash(body: request_info_email_old, title: "Request Info Email", subject: "Request Info Email",
+                            path: "teacher_mailer/request_info_email")
       ])
     # Simulates the seeding action.
     load Rails.root.join("db/seeds.rb")
@@ -83,30 +80,10 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
     # This simulates the reseeding process with updated email content.
     allow(SeedData).to receive(:emails).and_return(
       [
-        {
-          to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
-          body: form_submission_old,
-          path: "teacher_mailer/form_submission",
-          locale: nil,
-          handler: "liquid",
-          partial: false,
-          format: "html",
-          title: "Form Submission",
-          required: true,
-          subject: "Form Submission"
-        },
-        {
-          body: request_info_email_new,
-          to: "{{teacher_email}}, {{teacher_personal_email}}",
-          path: "teacher_mailer/request_info_email",
-          locale: nil,
-          handler: "liquid",
-          partial: false,
-          format: "html",
-          title: "Request Info Email",
-          required: true,
-          subject: "Request Info Email"
-        }
+        email_template_hash(body: form_submission_old, title: "Form Submission", subject: "Form Submission",
+                            path: "teacher_mailer/form_submission"),
+        email_template_hash(body: request_info_email_new, title: "Request Info Email", subject: "Request Info Email",
+                            path: "teacher_mailer/request_info_email")
       ])
     load Rails.root.join("db/seeds.rb")
 
@@ -131,18 +108,8 @@ RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
     # even though it's no longer present in the seed data.
     allow(SeedData).to receive(:emails).and_return(
       [
-        {
-          body: request_info_email_old,
-          to: "{{teacher_email}}, {{teacher_personal_email}}",
-          path: "teacher_mailer/request_info_email",
-          locale: nil,
-          handler: "liquid",
-          partial: false,
-          format: "html",
-          title: "Request Info Email",
-          required: true,
-          subject: "Request Info Email"
-        }
+        email_template_hash(body: request_info_email_old, title: "Request Info Email", subject: "Request Info Email",
+                            path: "teacher_mailer/request_info_email")
       ])
     load Rails.root.join("db/seeds.rb")
 
