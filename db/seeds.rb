@@ -3,8 +3,9 @@
 require_relative "seed_data"
 
 SeedData.emails.each do |email_attrs|
-  # to, body fields are updated through development, should not be used as part of the uniqueness check
-  email_template = EmailTemplate.find_or_initialize_by(email_attrs.except(:to, :body))
+  # Based on what Professor Ball mentioned, 'title' is the unique identifier for each EmailTemplate
+  unique_identifier = { title: email_attrs[:title] }
+  email_template = EmailTemplate.find_or_initialize_by(unique_identifier)
   email_template.update(email_attrs)
 end
 
