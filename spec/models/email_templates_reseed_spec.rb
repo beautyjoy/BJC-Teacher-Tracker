@@ -7,7 +7,6 @@ require "rails_helper"
 # upon reseeding the database with new seed data. It tests the initial seeding, updates to
 # templates, and the non-removal of templates that are no longer present in the seed data.
 RSpec.describe "EmailTemplate Reseed Behavior", type: :model do
-
   RSpec.shared_context "setup initial email templates" do
     before do
       # Clear the EmailTemplate table to ensure a clean slate for each test.
