@@ -1,21 +1,32 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
 <%# Render the select dropdown to change teacher's application
 status ONLY IF the person viewing the form is an admin. %>
+<div class='form-group form-input-group'>
 
-<%if @is_admin %>
-    <div class='form-group form-input-group'>
+  <%if @is_admin %>
+      <%# The application status input field %>
       <div class='form-group row'>
-        <div class='col-12'>
-        <%= f.label :application_status, "Application Status: ", class: "label-required" %>
-        <%= f.select(
-        :application_status,
-        options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),
-        { include_blank: "Select an option" },
-        { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
-      ) %>
-    </div>
-  </div>
-<% end %>
+          <div class='col-12'>
+          <%= f.label :application_status, "Application Status: ", class: "label-required" %>
+          <%= f.select(
+          :application_status,
+          options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),
+          { include_blank: "Select an option" },
+          { id: 'application_status_select_value', class: 'form-control', required: true, onchange: 'updateReasonField();' }
+        ) %>
+        </div>
+      </div>
+
+      <%# Denial/request more info reason input field, if applicable %>
+      <div id= 'request_or_deny_reason' class='form-group row'>
+          <div class='col-12'>
+            <%= f.label :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
+            <%= f.text_field :request_reason, class: 'form-control' %>
+          </div>
+      </div>
+
+
+  <% end %>
 
 
 
@@ -120,6 +131,32 @@ status ONLY IF the person viewing the form is an admin. %>
 <% end %>
 
 <script>
+
+  $(document).ready(function() {
+    //on loading the page, immediately update the reason field depending on 
+    //the value of the application status
+    updateReasonField();
+  });
+
+  //AJAX to update the text description for the denial/request reason input
+  //field depending on what is selected in the application status dropdown
+  function updateReasonField() {
+    $("#request_or_deny_reason").show();
+    var selected_app_status = $("#application_status_select_value").val();
+    switch (selected_app_status) {
+      case "Denied":
+        $( "#request_or_deny_reason_text").text("Denial Reason: ");
+        break;
+      case "Info Needed":
+        $( "#request_or_deny_reason_text").text("Info Request Reason: ");
+        break;
+      default:
+        //the denial/request reason field in the form should be hidden 
+        //if it is not needed to collect input
+        $("#request_or_deny_reason").hide();
+    }
+  }
+
   function requireVolunteerHostTeacher() {
     var status_val = $( "#teacher_status" ).val();
 
@@ -132,4 +169,7 @@ status ONLY IF the person viewing the form is an admin. %>
     }
 
   }
+
+
+
 </script>
