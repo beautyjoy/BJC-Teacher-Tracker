@@ -91,6 +91,7 @@ class TeachersController < ApplicationController
     @readonly = !is_admin?
   end
 
+  #Note: need to write tests for potential update code paths
   def update
     load_school
     ordered_schools
@@ -102,6 +103,7 @@ class TeachersController < ApplicationController
       @school.save!
       @teacher.school = @school
     end
+    send_email_if_application_status_changed
     if @teacher.denied? && !is_admin?
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
       return
@@ -125,6 +127,21 @@ class TeachersController < ApplicationController
       @teacher.try_append_ip(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+  end
+
+  def send_email_if_application_status_changed
+    if @teacher.application_status_changed?
+      case @teacher.application_status
+      when "validated" 
+        TeacherMailer.welcome_email(@teacher).deliver_now
+      when "denied"
+        #TODO: change default denial reason to get input from admin through form
+        TeacherMailer.deny_email(@teacher, "Default Denial Reason").deliver_now
+      when "info_needed"
+        #TODO: change denial reason to get input from admin through form
+        TeacherMailer.request_info_email(@teacher, "Default Request More Info Reason").deliver_now
+      end
+    end
   end
 
   def request_info
