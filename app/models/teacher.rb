@@ -97,9 +97,6 @@ class Teacher < ApplicationRecord
 
   def reset_validation_status
     return if application_status_changed? || school_id_changed?
-    if info_needed?
-      not_reviewed!
-    end
   end
 
   def full_name
