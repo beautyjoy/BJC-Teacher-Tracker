@@ -19,12 +19,26 @@ status ONLY IF the person viewing the form is an admin. %>
 
       <%# Denial/request more info reason input field, if applicable %>
       <div id= 'request_or_deny_reason' class='form-group row'>
+          <%# Text Field for Denial/Request Reason %>
           <div class='col-12'>
-            <%= f.label :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
-            <%= f.text_field :request_reason, class: 'form-control' %>
+            <%# Use label_tag and text_field_tag to ensure that these inputs are
+            not linked to the actual form, which is backed by the model attributes %>
+            <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
+            <%= text_field_tag :request_reason, nil, class: 'form-control' %>
           </div>
       </div>
 
+      <%# Skip Email Notificiation Dropdown Y/N %>
+      <div id = 'skip_email_dropdown' class='form-group row'>
+        <div class='col-12'>
+          <%= label_tag :skip_email, "Skip Email Notification: ", id: 'skip-email', class: "label-optional" %>
+          <%= select_tag(
+            :skip_email,
+            options_for_select(['No', 'Yes'], 'No'),
+          { include_blank: false, class: 'form-control', required: false }
+          )%>
+        </div>
+      </div>
 
   <% end %>
 
@@ -139,21 +153,30 @@ status ONLY IF the person viewing the form is an admin. %>
   });
 
   //AJAX to update the text description for the denial/request reason input
-  //field depending on what is selected in the application status dropdown
+  //field and hide/display relevant linked fields depending on what is 
+  //selected in the application status dropdown
   function updateReasonField() {
     $("#request_or_deny_reason").show();
+    $("#skip_email_dropdown").show();
     var selected_app_status = $("#application_status_select_value").val();
     switch (selected_app_status) {
       case "Denied":
+        //change text of request reason input label
         $( "#request_or_deny_reason_text").text("Denial Reason: ");
         break;
       case "Info Needed":
+        //change text of request reason input label
         $( "#request_or_deny_reason_text").text("Info Request Reason: ");
         break;
-      default:
-        //the denial/request reason field in the form should be hidden 
-        //if it is not needed to collect input
+      case "Validated":
+        //in this case, we want to show the skip email notification, 
+        //checkbox, but not the deny/request more info reason box
         $("#request_or_deny_reason").hide();
+        break;
+      default: //not reviewed
+        //neither fields need to be displayed if app status -> not reviewed
+        $("#request_or_deny_reason").hide();
+        $("#skip_email_dropdown").hide();
     }
   }
 
