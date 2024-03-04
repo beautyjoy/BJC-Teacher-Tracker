@@ -257,3 +257,10 @@ Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |v
     field_labeled(field).find(:xpath, ".//option[@selected = 'selected'][text() = '#{value}']").should be_present
   end
 end
+
+Then(/^I should see a "(.*?)" flash message "(.*?)"$/) do |alert_type, message|
+  within(".alert.alert-#{alert_type}") do
+    expect(page).to have_text(message)
+  end
+end
+
