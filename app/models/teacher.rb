@@ -93,10 +93,27 @@ class Teacher < ApplicationRecord
     "I am teaching Middle School BJC.",
   ].freeze
 
-  before_update :reset_validation_status
+  # From an admin perspective, we want to know if a teacher has any **meaningful** change
+  # that would require re-reviewing their application.
+  before_update :check_for_relevant_changes
+
+  def check_for_relevant_changes
+    ignored_fields = %w[created_at updated_at session_count last_session_at ip_history]
+    # if any relevant fields have changed
+    if (changes.keys - ignored_fields).present?
+      handle_relevant_changes
+    end
+  end
+
+  def handle_relevant_changes
+    reset_validation_status
+  end
 
   def reset_validation_status
     return if application_status_changed? || school_id_changed?
+    if info_needed?
+      not_reviewed!
+    end
   end
 
   def full_name
