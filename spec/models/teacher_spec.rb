@@ -75,12 +75,19 @@ RSpec.describe Teacher, type: :model do
   describe "teacher with info_needed application status" do
     let(:teacher) { teachers(:reimu) }
 
+    it "does not change a info_need status to not_reviewed if submitted without changes" do
+      expect do
+        # Same email, which means no any change compared to last time
+        teacher.update(email: "reimu@touhou.com")
+      end.not_to change(teacher, :application_status)
+    end
+
     it "changes a info_needed status to not_reviewed" do
       expect do
         # Changes the status to not_reviewed only when there are meaningful changes
         teacher.update(email: "reimu_different_email@touhou.com")
       end.to change(teacher, :application_status)
-             .from("info_needed").to("not_reviewed")
+               .from("info_needed").to("not_reviewed")
     end
 
     it "can change a not_reviewed status to info_needed" do
@@ -88,7 +95,7 @@ RSpec.describe Teacher, type: :model do
       expect do
         teacher.update(more_info: "updated info")
       end.to change(teacher, :more_info)
-              .from("Best Touhou Character").to("updated info")
+               .from("Best Touhou Character").to("updated info")
     end
   end
 
