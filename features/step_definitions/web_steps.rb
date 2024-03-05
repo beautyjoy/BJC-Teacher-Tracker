@@ -263,4 +263,3 @@ Then(/^I should see a "(.*?)" flash message "(.*?)"$/) do |alert_type, message|
     expect(page).to have_text(message)
   end
 end
-
