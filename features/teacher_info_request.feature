@@ -33,3 +33,26 @@ Feature: Request additional information for teacher application
     And I follow "Log In"
     Then I can log in with Google
     And I should see a "warning" flash message "Your application is requested to be updated. You may update your information. Please check your email for more information."
+
+  Scenario: Teacher updates information as requested and sees updated application status upon re-login
+    Given the following schools exist:
+      | name        | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name | admin | email                    | school      | application_status |
+      | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | info_needed        |
+    And I am on the BJC home page
+    And I have a teacher Google email "testteacher@berkeley.edu"
+    And I follow "Log In"
+    Then I can log in with Google
+    And I should see a "warning" flash message "Your application is requested to be updated. You may update your information. Please check your email for more information."
+    And I fill in "teacher_more_info" with "I have been teaching for 5 years at a high school and have led several programming clubs."
+    And I press "Update"
+    Then I should see a "info" flash message "Successfully updated your information"
+    And I follow "Logout"
+
+    Given I am on the BJC home page
+    And I have a teacher Google email "testteacher@berkeley.edu"
+    And I follow "Log In"
+    Then I can log in with Google
+    And I should see a "danger" flash message "Your application is not reviewed. You may update your information. Please check your email for more information."
