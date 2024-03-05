@@ -32,13 +32,11 @@ class MainController < ApplicationController
 
   private
   def mapped_application_status(status)
-    case status
-    when "info_needed"
-      "requested to be updated"
-    when "denied"
-      "denied"
-    else
-      status
-    end
+    status_map = {
+      "info_needed" => "requested to be updated",
+      "not_reviewed" => "not reviewed"
+    }
+    # Fetch the mapped status if present; otherwise, return the original status
+    status_map.fetch(status, status)
   end
 end
