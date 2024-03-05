@@ -77,7 +77,8 @@ RSpec.describe Teacher, type: :model do
 
     it "changes a info_needed status to not_reviewed" do
       expect do
-        teacher.update(email: "reimu@touhou.com")
+        # Changes the status to not_reviewed only when there are meaningful changes
+        teacher.update(email: "reimu_different_email@touhou.com")
       end.to change(teacher, :application_status)
              .from("info_needed").to("not_reviewed")
     end
