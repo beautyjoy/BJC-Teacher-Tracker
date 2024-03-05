@@ -12,14 +12,10 @@ class MainController < ApplicationController
       redirect_to pages_path, success: "Welcome back, #{current_user.first_name}!"
     # if this teacher is not validated (not_reviewed or info_needed), redirect to edit
     elsif is_teacher? && !current_user.validated?
-      message = "Your application is currently #{current_user.application_status}. You may update your information."
-      if current_user.application_status == "info_needed"
-        # flash[:warn] for a yellow informational message
-        redirect_to edit_teacher_path(current_user.id), warn: message
-      else
-        # flash[:alert] for a red warning message
-        redirect_to edit_teacher_path(current_user.id), alert: message
-      end
+      message = "Your application is #{mapped_application_status(current_user.application_status)}. You may update your information. Please check your email for more information."
+      # flash[:warn] for yellow warning message in bootstrap style, flash[:alert] for red alert message
+      flash_type = current_user.application_status == "info_needed" ? :warn : :alert
+      redirect_to edit_teacher_path(current_user.id), flash_type => message
     # if this user is denied, redirect to new
     else
       redirect_to new_teacher_path
@@ -32,5 +28,17 @@ class MainController < ApplicationController
     @validated_teachers = Teacher.validated.order(:created_at) || []
     @statuses = Teacher.validated.group(:status).order(count_all: :desc).count
     @schools = School.validated.order(teachers_count: :desc).limit(20)
+  end
+
+  private
+  def mapped_application_status(status)
+    case status
+    when "info_needed"
+      "requested to be updated"
+    when "denied"
+      "denied"
+    else
+      status
+    end
   end
 end
