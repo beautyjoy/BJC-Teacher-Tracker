@@ -98,7 +98,7 @@ module SeedData
         required: true,
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
-      {
+      { # admin form submission email
         to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
         body: @form_submission,
         path: "teacher_mailer/form_submission",
@@ -109,6 +109,18 @@ module SeedData
         title: "Form Submission",
         required: true,
         subject: "Form Submission"
+      },
+      { # teacher form submission email
+        to: @default_to_field,
+        body: @form_submission,
+        path: "teacher_mailer/teacher_form_submission",
+        locale: nil,
+        handler: "liquid",
+        partial: false,
+        format: "html",
+        title: "Teacher Form Submission",
+        required: true,
+        subject: "Teacher Form Submission"
       },
       {
         to: @default_to_field,
