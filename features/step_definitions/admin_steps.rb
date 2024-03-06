@@ -68,8 +68,8 @@ Then(/I can send a request info email/) do
 end
 
 Then(/I send a form submission email to both admin and teacher with email "(.*)"/) do |teacher_email|
-  #this step definition assumes that the admin form submission email gets
-  #sent first, as this is how it is implemented in the code
+  # this step definition assumes that the admin form submission email gets
+  # sent first, as this is how it is implemented in the code
   admin_fs_email = ActionMailer::Base.deliveries[-2]
   teacher_fs_email = ActionMailer::Base.deliveries.last
   admin_fs_email.subject.should eq "Form Submission"
