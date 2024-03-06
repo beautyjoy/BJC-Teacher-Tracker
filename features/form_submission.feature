@@ -26,6 +26,7 @@ Scenario: Correctly filling out and successful form submission
     And   I select "Public" from "School Type"
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
+    And I send a form submission email to both admin and teacher with email "TESTkpzhu@berkeley.edu" 
 
 Scenario: Not Correctly filling out and unsuccessful form submission
     Given I am on the BJC home page
