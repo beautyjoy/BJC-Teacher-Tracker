@@ -1,12 +1,12 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
-<%# Render the select dropdown to change teacher's application
-status ONLY IF the person viewing the form is an admin. %>
-<div class='form-group form-input-group'>
 
-  <%if @is_admin %>
+<%# Render the subform to change teacher's application
+status ONLY IF the person viewing the form is an admin. %>
+<%if @is_admin %>
+  <div class='form-group form-input-group'>
+    <div class='form-group row'>
       <%# The application status input field %>
-      <div class='form-group row'>
-          <div class='col-12'>
+      <div class='col-6'>
           <%= f.label :application_status, "Application Status: ", class: "label-required" %>
           <%= f.select(
           :application_status,
@@ -14,35 +14,31 @@ status ONLY IF the person viewing the form is an admin. %>
           { include_blank: "Select an option" },
           { id: 'application_status_select_value', class: 'form-control', required: true, onchange: 'updateReasonField();' }
         ) %>
-        </div>
       </div>
-
-      <%# Denial/request more info reason input field, if applicable %>
-      <div id= 'request_or_deny_reason' class='form-group row'>
-          <%# Text Field for Denial/Request Reason %>
-          <div class='col-12'>
-            <%# Use label_tag and text_field_tag to ensure that these inputs are
-            not linked to the actual form, which is backed by the model attributes %>
-            <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
-            <%= text_field_tag :request_reason, nil, class: 'form-control' %>
-          </div>
-      </div>
-
-      <%# Skip Email Notificiation Dropdown Y/N %>
-      <div id = 'skip_email_dropdown' class='form-group row'>
-        <div class='col-12'>
+      <%# Skip email notification dropdown Y/N %>
+      <div id = 'skip_email_dropdown' class='col-6'>
           <%= label_tag :skip_email, "Skip Email Notification: ", id: 'skip-email', class: "label-optional" %>
           <%= select_tag(
             :skip_email,
             options_for_select(['No', 'Yes'], 'No'),
           { include_blank: false, class: 'form-control', required: false }
           )%>
-        </div>
       </div>
+    </div>
+    <%# Denial/request more info reason input field, if applicable %>
+    <div id= 'request_or_deny_reason' class='form-group row'>
+        <%# Text Field for Denial/Request Reason %>
+        <div class='col-12'>
+          <%# Use label_tag and text_field_tag to ensure that these inputs are
+          not linked to the actual form, which is backed by the model attributes %>
+          <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
+          <%= text_field_tag :request_reason, nil, class: 'form-control' %>
+        </div>
+    </div>  
+  </div>
+<% end %>
 
-  <% end %>
-
-
+<div class='form-group form-input-group'>
 
   <h2>Your Information</h2>
   <div class='form-group row'>
