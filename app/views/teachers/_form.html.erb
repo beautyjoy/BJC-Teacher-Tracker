@@ -7,7 +7,7 @@ status ONLY IF the person viewing the form is an admin. %>
     <div class='form-group row'>
       <%# The application status input field %>
       <div class='col-6'>
-          <%= f.label :application_status, "Application Status: ", class: "label-required" %>
+          <%= f.label :application_status, "Application Status:", class: "label-required" %>
           <%= f.select(
           :application_status,
           options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),

@@ -19,7 +19,7 @@ Given(/I have an admin email/) do
                                                                          first_name: "Admin",
                                                                          last_name: "User",
                                                                          email: "testadminuser@berkeley.edu",
-                                                                         school: "UC Berkeley",
+                                                                         school: "UC Berkeley"
                                                                        }
                                                                      })
 end
@@ -53,18 +53,38 @@ Then(/I cannot log in with Google/) do
   page.find("button", text: /.*Sign in with Google/).click()
 end
 
-Then(/I can send a deny email/) do
+Then(/I send a welcome email/) do
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.to[0].should eq "testteacher@berkeley.edu"
+  last_email.subject.should eq "Welcome to The Beauty and Joy of Computing!"
+  last_email.body.encoded.should include "Thanks for teaching with BJC!"
+end
+
+Then(/I send a deny email/) do
   last_email = ActionMailer::Base.deliveries.last
   last_email.to[0].should eq "testteacher@berkeley.edu"
   last_email.subject.should eq "Deny Email"
   last_email.body.encoded.should include "Denial Reason"
 end
 
-Then(/I can send a request info email/) do
+Then(/I send a request info email$/) do
   last_email = ActionMailer::Base.deliveries.last
   last_email.to[0].should eq "testteacher@berkeley.edu"
   last_email.subject.should eq "Request Info Email"
   last_email.body.encoded.should include "We kindly ask you to provide the following details to complete your application:"
+end
+
+Then(/I send a request info email with content "(.*)"/) do |content|
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.to[0].should eq "testteacher@berkeley.edu"
+  last_email.subject.should eq "Request Info Email"
+  last_email.body.encoded.should include "We kindly ask you to provide the following details to complete your application:"
+  last_email.body.encoded.should include content
+end
+
+Then(/my most recent email did not have subject line "(.*)"/) do |subject|
+  last_email = ActionMailer::Base.deliveries.last
+  expect(last_email.subject).not_to eq subject
 end
 
 Then(/I attach the csv "([^"]*)"$/) do |path|

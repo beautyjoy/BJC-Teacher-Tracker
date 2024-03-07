@@ -7,7 +7,7 @@ Feature: basic admin functionality
   Background: Has an Admin in DB
     Given the following teachers exist:
       | first_name | last_name | admin | email                        |
-      | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
+      | Admin    | User    | true  | testadminuser@berkeley.edu   |
 
   Scenario: Logging in as an admin
     Given I am on the BJC home page
@@ -94,6 +94,36 @@ Feature: basic admin functionality
     And   I press "Update"
     Then I see a confirmation "Saved"
 
+  Scenario: Changing application status as admin sends emails
+    Given the following schools exist:
+      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+    Given the following teachers exist:
+      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I go to the edit page for Bobby John
+    And I set my application status as "Info Needed"
+    And I set my request reason as "Test123"
+    And I press "Update"
+    Then I see a confirmation "Saved"
+    And I send a request info email with content "Test123"
+    When I go to the edit page for Bobby John
+    And I set my application status as "Validated"
+    And I press "Update"
+    Then I see a confirmation "Saved"
+    And I send a welcome email
+    When I go to the edit page for Bobby John
+    And I set my application status as "Denied"
+    And I select "Yes" from the skip email notification dropdown
+    And I press "Update"
+    Then I see a confirmation "Saved"
+    And my most recent email did not have subject line "Deny Email"
+
   Scenario: Deny teacher as an admin
     Given the following schools exist:
       | name        | city     | state | website                  | grade_level | school_type |
@@ -114,7 +144,7 @@ Feature: basic admin functionality
     Then  the "denial_reason" field should not contain "Test"
     And   I fill in "denial_reason" with "Denial Reason"
     And   I press "Submit"
-    Then  I can send a deny email
+    Then  I send a deny email
 
   Scenario: Not logged in should not have access to edit
     Given the following schools exist:
@@ -252,7 +282,7 @@ Feature: basic admin functionality
     Then the "request_reason" field should not contain "Need more details on qualifications"
     And I fill in "request_reason" with "Complete your profile details"
     And I press "Submit"
-    Then I can send a request info email
+    Then I send a request info email
 
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
