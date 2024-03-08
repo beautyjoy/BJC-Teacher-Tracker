@@ -124,6 +124,43 @@ Feature: basic admin functionality
     Then I see a confirmation "Saved"
     And my most recent email did not have subject line "Deny Email"
 
+  Scenario: Updating without changing application status does not send email
+    Given the following schools exist:
+      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+    Given the following teachers exist:
+      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I go to the edit page for Bobby John
+    And I set my application status as "Denied"
+    And I set my request reason as "Test123"
+    And I press "Update"
+    Then I should not have sent out any emails
+
+  Scenario: Updating application status persists changes in database
+    Given the following schools exist:
+      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+    Given the following teachers exist:
+      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I go to the edit page for Bobby John
+    And I set my application status as "Validated"
+    And I press "Update"
+    Then I see a confirmation "Saved"
+    When I check "Validated"
+    Then I should see "Bobby John"
+
   Scenario: Deny teacher as an admin
     Given the following schools exist:
       | name        | city     | state | website                  | grade_level | school_type |

@@ -87,6 +87,11 @@ Then(/my most recent email did not have subject line "(.*)"/) do |subject|
   expect(last_email.subject).not_to eq subject
 end
 
+Then(/I should not have sent out any emails/) do
+  last_email = ActionMailer::Base.deliveries.last
+  last_email.should eq nil
+end
+
 Then(/I attach the csv "([^"]*)"$/) do |path|
   Capybara.ignore_hidden_elements = false
   attach_file("file", File.expand_path(path))
