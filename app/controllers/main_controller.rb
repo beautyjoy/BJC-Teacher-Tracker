@@ -13,9 +13,9 @@ class MainController < ApplicationController
     # if this teacher is not validated (not_reviewed or info_needed), redirect to edit
     elsif is_teacher? && !current_user.validated?
       message = "Your application is #{mapped_application_status(current_user.application_status)}. You may update your information. Please check your email for more information."
-      # flash[:warn] for yellow warning message in bootstrap style, flash[:alert] for red alert message
-      flash_type = current_user.application_status == "info_needed" ? :warn : :alert
-      redirect_to edit_teacher_path(current_user.id), flash_type => message
+      # Both `info_needed` and `not_reviewed` flash message should be flash[:warn] style
+      # flash[:warn] for yellow warning message in bootstrap style
+      redirect_to edit_teacher_path(current_user.id), warn: message
     # if this user is denied, redirect to new
     else
       redirect_to new_teacher_path

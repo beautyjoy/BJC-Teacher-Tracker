@@ -55,4 +55,4 @@ Feature: Request additional information for teacher application
     And I have a teacher Google email "testteacher@berkeley.edu"
     And I follow "Log In"
     Then I can log in with Google
-    And I should see a "danger" flash message "Your application is not reviewed. You may update your information. Please check your email for more information."
+    And I should see a "warning" flash message "Your application is not reviewed. You may update your information. Please check your email for more information."
