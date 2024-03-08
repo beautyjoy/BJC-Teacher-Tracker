@@ -144,7 +144,6 @@ class TeachersController < ApplicationController
   def deny
     @teacher.denied!
     if !params[:skip_email].present?
-      puts params[:denial_reason]
       TeacherMailer.deny_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path
