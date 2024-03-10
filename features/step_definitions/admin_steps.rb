@@ -67,6 +67,20 @@ Then(/I can send a request info email/) do
   last_email.body.encoded.should include "We kindly ask you to provide the following details to complete your application:"
 end
 
+Then(/I send a form submission email to both admin and teacher with email "(.*)"/) do |teacher_email|
+  # this step definition assumes that the admin form submission email gets
+  # sent first, as this is how it is implemented in the code
+  admin_fs_email = ActionMailer::Base.deliveries[-2]
+  teacher_fs_email = ActionMailer::Base.deliveries.last
+  admin_fs_email.subject.should eq "Form Submission"
+  admin_fs_email.to[0].should eq "lmock@berkeley.edu"
+  admin_fs_email.to[1].should eq "contact@bjc.berkeley.edu"
+  admin_fs_email.body.encoded.should include "Here is the information that was submitted"
+  teacher_fs_email.subject.should eq "Teacher Form Submission"
+  teacher_fs_email.to[0].should eq teacher_email
+  teacher_fs_email.body.encoded.should include "Here is the information that was submitted"
+end
+
 Then(/I attach the csv "([^"]*)"$/) do |path|
   Capybara.ignore_hidden_elements = false
   attach_file("file", File.expand_path(path))
