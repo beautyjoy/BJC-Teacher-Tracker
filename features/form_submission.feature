@@ -4,10 +4,10 @@ Feature: submit a form as a teacher
   So that I can be added to the BJC program
   I want to be able to fill out a form on the BJC website
 
-Background: Test Data
+  Background: Test Data
     Given a valid teacher exists
 
-Scenario: Correctly filling out and successful form submission
+  Scenario: Correctly filling out and successful form submission
     Given "kpzhu@berkeley.edu" is not in the database
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
@@ -26,9 +26,9 @@ Scenario: Correctly filling out and successful form submission
     And   I select "Public" from "School Type"
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
-    And I send a form submission email to both admin and teacher with email "TESTkpzhu@berkeley.edu" 
+    And I send a form submission email to both admin and teacher with email "TESTkpzhu@berkeley.edu"
 
-Scenario: Not Correctly filling out and unsuccessful form submission
+  Scenario: Not Correctly filling out and unsuccessful form submission
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
     And   I enter my "Last Name" as "Zhu"
@@ -43,7 +43,7 @@ Scenario: Not Correctly filling out and unsuccessful form submission
     Then  The "#new_teacher" form is invalid
     And  I am on the BJC home page
 
-Scenario: Missing the compulsory more info field
+  Scenario: Missing the compulsory more info field
     Given "kpzhu@berkeley.edu" is not in the database
     Given I am on the BJC home page
     And   I enter my "First Name" as "Kimberly"
@@ -63,7 +63,7 @@ Scenario: Missing the compulsory more info field
     Then  The "#new_teacher" form is invalid
     And   I am on the BJC home page
 
-Scenario: Websites validation - two invalid websites
+  Scenario: Websites validation - two invalid websites
     Given I am on the BJC home page
     And I enter my "First Name" as "Jonathan"
     And I enter my "Last Name" as "Cena"
@@ -82,7 +82,7 @@ Scenario: Websites validation - two invalid websites
     Then The "#new_teacher" form is invalid
     And  I am on the BJC home page
 
-Scenario: Websites validation - one invalid website
+  Scenario: Websites validation - one invalid website
     Given I am on the BJC home page
     And I enter my "First Name" as "Jonathan"
     And I enter my "Last Name" as "Cena"
@@ -100,7 +100,7 @@ Scenario: Websites validation - one invalid website
     Then The "#new_teacher" form is invalid
     And  I am on the BJC home page
 
-Scenario: Websites validation - one valid website
+  Scenario: Websites validation - one valid website
     Given I am on the BJC home page
     And I enter my "First Name" as "Jonathan"
     And I enter my "Last Name" as "Cena"
@@ -117,10 +117,10 @@ Scenario: Websites validation - one valid website
     And I press "Submit"
     Then I see a confirmation "Thanks for signing up for BJC"
 
-Scenario: Filling out new form with existing email should not update information
+  Scenario: Filling out new form with existing email should not update information
     Given the following teachers exist:
-    | first_name | last_name | admin | email              |
-    | Alice      | Adams     | false | alice@berkeley.edu |
+      | first_name | last_name | admin | email              |
+      | Alice      | Adams     | false | alice@berkeley.edu |
     And I am on the BJC home page
     And I enter my "First Name" as "Mallory"
     And I enter my "Last Name" as "Moore"
@@ -139,10 +139,10 @@ Scenario: Filling out new form with existing email should not update information
     And I should see "Please log in."
     And the "first_name" of the user with email "alice@berkeley.edu" should be "Alice"
 
-Scenario: Filling out new form with existing Snap should not create new teacher
+  Scenario: Filling out new form with existing Snap should not create new teacher
     Given the following teachers exist:
-    | first_name | last_name | admin | email              | snap       |
-    | Alice      | Adams     | false | alice@berkeley.edu | aliceadams |
+      | first_name | last_name | admin | email              | snap       |
+      | Alice      | Adams     | false | alice@berkeley.edu | aliceadams |
     And I am on the BJC home page
     And I enter my "First Name" as "Mallory"
     And I enter my "Last Name" as "Moore"
@@ -161,7 +161,7 @@ Scenario: Filling out new form with existing Snap should not create new teacher
     Then I should see "Email address or Snap username already in use."
     And "mallory@berkeley.edu" is not in the database
 
-Scenario: Filling out form should have the correct information in a Teacher
+  Scenario: Filling out form should have the correct information in a Teacher
     Given "bbaker@berkeley.edu" is not in the database
     And I am on the BJC home page
     And I enter my "First Name" as "Bob"
@@ -215,7 +215,22 @@ Scenario: Filling out form should have the correct information in a Teacher
     Then the "personal_website" of the user with email "bbaker@berkeley.edu" should be "https://www.bobbaker.io"
     Then the "education_level" of the user with email "bbaker@berkeley.edu" should be "high_school"
 
-Scenario: Teachers creating their account should not be able to input Tags or NCES ID for their school.
+  Scenario: Teachers creating their account should not be able to input Tags or NCES ID for their school.
     Given I am on the BJC home page
     Then I should not see "Tags"
     And I should not see "NCES ID"
+
+  Scenario: Teacher updates information and two emails are sent
+    Given the following schools exist:
+      | name        | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name | admin | email                    | school      | application_status |
+      | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | info_needed        |
+    And I am on the BJC home page
+    And I have a teacher Google email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I fill in "teacher_more_info" with "I updated my information"
+    And I press "Update"
+    And I send a form submission email to both admin and teacher with email "testteacher@berkeley.edu"
