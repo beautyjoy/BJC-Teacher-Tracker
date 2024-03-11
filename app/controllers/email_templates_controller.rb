@@ -18,8 +18,8 @@ class EmailTemplatesController < ApplicationController
       flash[:success] = "Updated #{template.title} template successfully."
       redirect_to email_templates_path
     else
-      flash[:alert] = "Failed to save #{template.title} template: #{template.errors.full_messages.join(", ")}" 
-      render 'edit'
+      flash[:alert] = "Failed to save #{template.title} template: #{template.errors.full_messages.join(", ")}"
+      render "edit"
     end
   end
 
