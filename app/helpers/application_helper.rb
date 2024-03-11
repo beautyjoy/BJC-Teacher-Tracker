@@ -7,6 +7,8 @@ module ApplicationHelper
       "danger"
     when "notice"
       "info"
+    when "warn"
+      "warning"
     else
       name
     end

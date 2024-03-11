@@ -47,6 +47,13 @@ class TeacherMailer < ApplicationMailer
     end
   end
 
+  # teacher form submission works exactly the same as admin form submission,
+  # but this method name needs to be explicitly included to ensure that the
+  # title inclusion validation passes when updating the EmailTemplate database
+  def teacher_form_submission(teacher)
+    form_submission(teacher)
+  end
+
   private
   def liquid_assigns
     base_rules = {

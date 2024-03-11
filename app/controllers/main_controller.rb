@@ -12,8 +12,10 @@ class MainController < ApplicationController
       redirect_to pages_path, success: "Welcome back, #{current_user.first_name}!"
     # if this teacher is not validated (not_reviewed or info_needed), redirect to edit
     elsif is_teacher? && !current_user.validated?
-      redirect_to edit_teacher_path(current_user.id),
-                 alert: "Your applicating is currently #{current_user.application_status}. You may update your information."
+      message = "Your application is #{mapped_application_status(current_user.application_status)}. You may update your information. Please check your email for more information."
+      # Both `info_needed` and `not_reviewed` flash message should be flash[:warn] style
+      # flash[:warn] for yellow warning message in bootstrap style
+      redirect_to edit_teacher_path(current_user.id), warn: message
     # if this user is denied, redirect to new
     else
       redirect_to new_teacher_path
@@ -26,5 +28,15 @@ class MainController < ApplicationController
     @validated_teachers = Teacher.validated.order(:created_at) || []
     @statuses = Teacher.validated.group(:status).order(count_all: :desc).count
     @schools = School.validated.order(teachers_count: :desc).limit(20)
+  end
+
+  private
+  def mapped_application_status(status)
+    status_map = {
+      "info_needed" => "requested to be updated",
+      "not_reviewed" => "not reviewed"
+    }
+    # Fetch the mapped status if present; otherwise, return the original status
+    status_map.fetch(status, status)
   end
 end
