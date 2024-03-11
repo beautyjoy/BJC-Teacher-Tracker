@@ -119,10 +119,15 @@ Feature: basic admin functionality
     And I send a welcome email
     When I go to the edit page for Bobby John
     And I set my application status as "Denied"
+    And I press "Update"
+    Then I see a confirmation "Saved"
+    And I send a deny email
+    When I go to the edit page for Bobby John
+    And I set my application status as "Validated"
     And I select "Yes" from the skip email notification dropdown
     And I press "Update"
     Then I see a confirmation "Saved"
-    And my most recent email did not have subject line "Deny Email"
+    And my most recent email did not have subject line "Welcome Email"
 
   Scenario: Updating without changing application status does not send email
     Given the following schools exist:

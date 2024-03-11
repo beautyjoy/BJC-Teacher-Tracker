@@ -64,7 +64,7 @@ Then(/I send a deny email/) do
   last_email = ActionMailer::Base.deliveries.last
   last_email.to[0].should eq "testteacher@berkeley.edu"
   last_email.subject.should eq "Deny Email"
-  last_email.body.encoded.should include "Denial Reason"
+  last_email.body.encoded.should include "sorry to inform you that your application has been rejected"
 end
 
 Then(/I send a request info email$/) do

@@ -91,7 +91,6 @@ class TeachersController < ApplicationController
     @readonly = !is_admin?
   end
 
-  # Note: need to write tests for potential update code paths
   def update
     load_school
     ordered_schools
