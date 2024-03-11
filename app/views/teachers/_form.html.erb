@@ -157,20 +157,18 @@ status ONLY IF the person viewing this page is an admin. %>
     var selected_app_status = $("#application_status_select_value").val();
     switch (selected_app_status) {
       case "Denied":
-        //change text of request reason input label
         $( "#request_or_deny_reason_text").text("Denial Reason: ");
         break;
       case "Info Needed":
-        //change text of request reason input label
         $( "#request_or_deny_reason_text").text("Info Request Reason: ");
         break;
       case "Validated":
-        //in this case, we want to show the skip email notification, 
-        //checkbox, but not the deny/request more info reason box
+        //show the skip email notification but not 
+        //the deny/request more info reason box
         $("#request_or_deny_reason").hide();
         break;
       default: //not reviewed
-        //neither fields need to be displayed if app status -> not reviewed
+        //neither boxes need to be shown since they are not applicable
         $("#request_or_deny_reason").hide();
         $("#skip_email_dropdown").hide();
     }
