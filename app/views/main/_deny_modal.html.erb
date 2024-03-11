@@ -35,16 +35,12 @@
         let newAction, newTitle, inputName;
 
         switch(actionType) {
-            case "deny":
-                newAction = `/teachers/${teacherId}/deny`;
-                newTitle = 'Deny ' + teacherName;
-                inputName = 'denial_reason';
-                break;
             case "request_info":
                 newAction = `/teachers/${teacherId}/request_info`;
                 newTitle = 'Request Info from ' + teacherName;
                 inputName = 'request_reason';
                 break;
+            case "deny":
             default:
                 newAction = `/teachers/${teacherId}/deny`;
                 newTitle = 'Deny ' + teacherName;
