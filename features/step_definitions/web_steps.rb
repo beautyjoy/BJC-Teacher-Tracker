@@ -99,7 +99,7 @@ end
 
 When(/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
   select_box = find_field(field)
-  options = select_box.all('option', text: value)
+  options = select_box.all("option", text: value)
   if options.length > 1
     options.first.select_option
   else
@@ -109,11 +109,11 @@ end
 
 When(/^(?:|I )select "([^"]*)" from "([^"]*)" dropdown$/) do |value, readable_field|
   field_mappings = {
-    "State" => "state_select"  
+    "State" => "state_select"
   }
   field = field_mappings[readable_field] || readable_field
   select_box = find_field(field)
-  options = select_box.all('option', text: value)
+  options = select_box.all("option", text: value)
   if options.length > 1
     options.first.select_option
   else
