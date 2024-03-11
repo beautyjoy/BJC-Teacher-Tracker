@@ -103,6 +103,7 @@ class TeachersController < ApplicationController
       @school.save!
       @teacher.school = @school
     end
+    send_email_if_application_status_changed_and_email_resend_enabled
     if @teacher.denied? && !is_admin?
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
       return
@@ -127,6 +128,19 @@ class TeachersController < ApplicationController
       @teacher.try_append_ip(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+  end
+
+  def send_email_if_application_status_changed_and_email_resend_enabled
+    if @teacher.application_status_changed? && params[:skip_email] == "No"
+      case @teacher.application_status
+      when "validated"
+        TeacherMailer.welcome_email(@teacher).deliver_now
+      when "denied"
+        TeacherMailer.deny_email(@teacher, params[:request_reason]).deliver_now
+      when "info_needed"
+        TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
+      end
+    end
   end
 
   def request_info
@@ -198,7 +212,8 @@ class TeachersController < ApplicationController
     teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
       :more_info, :personal_website, :education_level, :school_id]
     if is_admin?
-      teacher_attributes << :personal_email
+      teacher_attributes << [:personal_email, :application_status,
+      :request_reason, :skip_email]
     end
     params.require(:teacher).permit(*teacher_attributes)
   end
