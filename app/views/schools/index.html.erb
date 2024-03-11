@@ -17,6 +17,7 @@
       <tr>
         <td><%= link_to(school.name, school_path(school)) %></td>
         <td><%= school.location %></td>
+        <td><%= school.country %></td>
         <td>
           <%= link_to(truncate(school.website, length: 30), school.website, target: "_blank") %>
         </td>

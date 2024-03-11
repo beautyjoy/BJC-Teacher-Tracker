@@ -41,7 +41,7 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I fill in the school name selectize box with "Cupertino High School, Cupertino, CA" and choose to add a new school
   And   I select "United States" from "Country"
   And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "state_select"
+  And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
@@ -108,7 +108,7 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
   And   I select "United States" from "Country"
   And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "state_select"
+  And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
   And   I select "High School" from "Grade Level"
   And   I select "Public" from "School Type"
@@ -137,7 +137,7 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
   And   I select "United States" from "Country"
   And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "state_select"
+  And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
   And   I press "Update"
   And   I should see "Edit Joe Mamoa"

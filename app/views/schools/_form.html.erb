@@ -12,7 +12,7 @@
     <%= f.country_select(
       :country,
       { priority_countries: ['United States'], include_blank: "Select an option" },
-      { class: 'form-control', required: true, id: 'school_country', format: :with_full_country_name}
+      { class: 'form-control', required: false, id: 'school_country', format: :with_full_country_name}
     ) %>
   </div>
 
@@ -102,10 +102,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const countrySelected = document.getElementById('school_country');
-
     const stateSelectContainer = document.getElementById('state_select_container');
     const stateTextfieldContainer = document.getElementById('state_textfield_container');
-
     const stateSelect = document.getElementById('state_select');
     const stateTextfield = document.getElementById('state_textfield');
 
@@ -126,7 +124,6 @@
         stateTextfield.setAttribute('name', 'school[state]');
       }
     }
-
     countrySelected.addEventListener('change', handleCountryChange);
     handleCountryChange(); 
   });

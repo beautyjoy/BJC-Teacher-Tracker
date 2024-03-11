@@ -21,7 +21,7 @@ Scenario: Correctly filling out and successful form submission
     And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I select "United States" from "Country"
     And   I enter my "City" as "Cupertino"
-    And   I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I select "University" from "Grade Level"
     And   I select "Public" from "School Type"
@@ -36,7 +36,7 @@ Scenario: Not Correctly filling out and unsuccessful form submission
     And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I select "United States" from "Country"
     And   I enter my "City" as "Cupertino"
-    And   I select "CA" from "state_select"
+    And   I select "CA" from "State" dropdown
     And   I enter my "School Website" as "chs.fuhsd.org"
     And   I select "University" from "Grade Level"
     And   I select "Public" from "School Type"
@@ -57,7 +57,7 @@ Scenario: Missing the compulsory more info field
     And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I select "United States" from "Country"
     And   I enter my "City" as "Cupertino"
-    And   I select "CA" from "state_select"
+    And   I select "CA" from "State" dropdown
     And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I select "University" from "Grade Level"
     And   I select "Public" from "School Type"
@@ -77,7 +77,7 @@ Scenario: Websites validation - two invalid websites
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Palo Alto"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "stafford"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -96,7 +96,7 @@ Scenario: Websites validation - one invalid website
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Palo Alto"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "stafford"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -115,7 +115,7 @@ Scenario: Websites validation - one valid website
     And I fill in the school name selectize box with "Stafford High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Palo Alto"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "https://stafford.edu"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -136,7 +136,7 @@ Scenario: Filling out new form with existing email should not update information
     And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Cupertino"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "https://chs.fuhsd.org"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -160,7 +160,7 @@ Scenario: Filling out new form with existing Snap should not create new teacher
     And I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Cupertino"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "https://chs.fuhsd.org"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -182,7 +182,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Castro Valley"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "https://cvhs.cv.k12.ca.us"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
@@ -211,7 +211,7 @@ Scenario: Filling out form should have the correct information in a Teacher
     And I fill in the school name selectize box with "Castro Valley High School" and choose to add a new school
     And   I select "United States" from "Country"
     And I enter my "City" as "Castro Valley"
-    And I select "CA" from "state_select"
+    And I select "CA" from "State" dropdown
     And I enter my "School Website" as "https://cvhs.cv.k12.ca.us"
     And I select "University" from "Grade Level"
     And I select "Public" from "School Type"
