@@ -56,3 +56,23 @@ Scenario: Admins can create new schools
     And I fill in "NCES ID" with "123456789100"
     And I press "Submit"
     Then I should see "New UC Berkeley" with "0" in a table row
+
+Scenario: User can create an international school
+    Given "razztech@berkeley.edu" is not in the database
+    Given I am on the BJC home page
+    And   I enter my "First Name" as "Razvan"
+    And   I enter my "Last Name" as "Turcu"
+    And   I enter my "School Email" as "razztech@berkeley.edu"
+    And   I set my status as "I am teaching BJC as an AP CS Principles course."
+    And   I set my education level target as "High School"
+    And   I fill in "More Information" with "I am after school volunteer"
+    And   I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
+    And   I fill in the school name selectize box with "Bucharest International School" and choose to add a new school
+    And   I select "Romania" from "Country"
+    And   I enter my "City" as "Bucharest"
+    And   I enter my "State" as "Bucharest, Sector 1"
+    And   I enter my "School Website" as "https://chs.fuhsd.org"
+    And   I select "University" from "Grade Level"
+    And   I select "Public" from "School Type"
+    And   I press "Submit"
+    Then  I see a confirmation "Thanks for signing up for BJC"
