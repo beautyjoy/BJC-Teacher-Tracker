@@ -1,7 +1,7 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
 
-<%# Render the subform to change teacher's application
-status ONLY IF the person viewing the form is an admin. %>
+<%# Render the extra input group to change teacher's application
+status ONLY IF the person viewing this page is an admin. %>
 <%if @is_admin %>
   <div class='form-group form-input-group'>
     <div class='form-group row'>
@@ -148,7 +148,7 @@ status ONLY IF the person viewing the form is an admin. %>
     updateReasonField();
   });
 
-  //AJAX to update the text description for the denial/request reason input
+  //JS to update the text description for the denial/request reason input
   //field and hide/display relevant linked fields depending on what is 
   //selected in the application status dropdown
   function updateReasonField() {

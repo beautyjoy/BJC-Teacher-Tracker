@@ -134,10 +134,8 @@ class TeachersController < ApplicationController
       when "validated"
         TeacherMailer.welcome_email(@teacher).deliver_now
       when "denied"
-        # TODO: change default denial reason to get input from admin through form
         TeacherMailer.deny_email(@teacher, params[:request_reason]).deliver_now
       when "info_needed"
-        # TODO: change denial reason to get input from admin through form
         TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
       end
     end
