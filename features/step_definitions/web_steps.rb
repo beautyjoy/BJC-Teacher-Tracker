@@ -107,20 +107,6 @@ When(/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
   end
 end
 
-When(/^(?:|I )select "([^"]*)" from "([^"]*)" dropdown$/) do |value, readable_field|
-  field_mappings = {
-    "State" => "state_select"
-  }
-  field = field_mappings[readable_field] || readable_field
-  select_box = find_field(field)
-  options = select_box.all("option", text: value)
-  if options.length > 1
-    options.first.select_option
-  else
-    select(value, from: field)
-  end
-end
-
 When(/^(?:|I )check "([^"]*)"$/) do |field|
   check(field, allow_label_click: true)
 end
