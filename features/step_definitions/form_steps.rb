@@ -73,7 +73,7 @@ Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, ema
 end
 
 Then(/^I should find a teacher with email "([^"]*)" and school country "([^"]*)" in the database$/) do |email, country|
-  teacher = Teacher.includes(:school).where(email: email, schools: { country: country }).first
+  teacher = Teacher.includes(:school).where(email:, 'schools.country': country).first
   expect(teacher).not_to be_nil, "No teacher found with email #{email} and country #{country}"
 end
 
