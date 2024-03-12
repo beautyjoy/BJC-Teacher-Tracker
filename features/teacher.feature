@@ -116,7 +116,6 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   Then  I see a confirmation "Successfully updated your information"
   And   I am on the edit page for Joe Mamoa
 
-  # TODO: Should this test updating to a new school?
   Scenario: Logged in teacher with not_reviewed status cannot change Snap from new form path
   Given the following schools exist:
   |       name      |     country     |     city     |  state  |            website            |
