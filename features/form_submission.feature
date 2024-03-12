@@ -232,8 +232,8 @@ Feature: submit a form as a teacher
 
   Scenario: Teacher updates information and two emails are sent
     Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     And the following teachers exist:
       | first_name | last_name | admin | email                    | school      | application_status |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | info_needed        |
