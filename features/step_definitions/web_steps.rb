@@ -117,6 +117,10 @@ When(/^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/) do |path, field|
   attach_file(field, File.expand_path(path))
 end
 
+When(/^I select "([^"]*)" from "([^"]*)"$/) do |value, field|
+  select(value, from: field)
+end
+
 Then(/^(?:|I )should see "([^"]*)"$/) do |text|
   expect(page).to have_content(text)
 end
@@ -256,4 +260,8 @@ Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |v
   with_scope(selector) do
     field_labeled(field).find(:xpath, ".//option[@selected = 'selected'][text() = '#{value}']").should be_present
   end
+end
+
+Then("I should see {string} # Error message for invalid country code") do |error_message|
+  expect(page).to have_content(error_message)
 end
