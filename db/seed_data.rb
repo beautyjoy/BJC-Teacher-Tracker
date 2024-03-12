@@ -27,7 +27,7 @@ module SeedData
 
   @basic_email_with_reason = <<-DENY_EMAIL
     <p>
-      {{ reason | strip_tags }}
+      {{ denial_reason | strip_tags }}
     </p>
   DENY_EMAIL
 
@@ -38,7 +38,7 @@ module SeedData
     <p>[Your Name]</p>
     <p>Below, you can find the reason as to why it was rejected </p>
     <p>
-      {{ reason | strip_tags}}
+      {{ denial_reason | strip_tags}}
     </p>
   DENY_EMAIL1
 
@@ -59,9 +59,35 @@ module SeedData
 
   DENY_EMAIL3
 
+  @request_info_email = <<-REQUEST_INFO_EMAIL
+    <p>Dear {{teacher_first_name}},</p>
+
+    <p>We hope this message finds you well. We're writing to you regarding your ongoing application with BJC. As part of our review process, we've identified that some additional information is required to move forward.</p>
+
+    <p><strong>Required Information:</strong><br>
+    We kindly ask you to provide the following details to complete your application:</p>
+    <p>{{ request_reason | strip_tags }}</p>
+
+    <p>To submit the requested information, please follow these steps:</p>
+    <ol>
+      <li>Log into your BJC account using your registered email and password.</li>
+      <li>Locate your current application and update the information.</li>
+      <li>Fill in the necessary details in the provided fields and submit the update.</li>
+    </ol>
+
+    <p>Thank you for your attention to this matter. We look forward to receiving the additional information and advancing your application process.</p>
+
+    <p>Warm regards,</p>
+    <p>[Your Name]</p>
+  REQUEST_INFO_EMAIL
+
+
+  @default_to_field = "{{teacher_email}}, {{teacher_personal_email}}"
+
   def self.emails
     [
       {
+        to: @default_to_field,
         body: @welcome_email,
         path: "teacher_mailer/welcome_email",
         locale: nil,
@@ -73,6 +99,7 @@ module SeedData
         subject: "Welcome to The Beauty and Joy of Computing!"
       },
       {
+        to: "lmock@berkeley.edu, contact@bjc.berkeley.edu",
         body: @form_submission,
         path: "teacher_mailer/form_submission",
         locale: nil,
@@ -84,6 +111,7 @@ module SeedData
         subject: "Form Submission"
       },
       {
+        to: @default_to_field,
         body: @deny_email,
         path: "teacher_mailer/deny_email",
         locale: nil,
@@ -95,7 +123,8 @@ module SeedData
         subject: "Deny Email"
       },
       {
-        body: @basic_email_with_reason,
+        body: @request_info_email,
+        to: @default_to_field,
         path: "teacher_mailer/request_info_email",
         locale: nil,
         handler: "liquid",

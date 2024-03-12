@@ -11,25 +11,28 @@ class TeacherMailer < ApplicationMailer
   def welcome_email(teacher)
     @teacher = teacher
     set_body
-    mail to: teacher.email_name,
+    set_recipients
+    mail to: @recipients, # ActionMailer accepts comma-separated lists of emails
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
 
-  def deny_email(teacher, reason)
+  def deny_email(teacher, denial_reason)
     @teacher = teacher
-    @reason = reason
+    @denial_reason = denial_reason
     set_body
-    mail to: @teacher.email_name,
+    set_recipients
+    mail to: @recipients,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
 
-  def request_info_email(teacher, reason)
+  def request_info_email(teacher, request_reason)
     @teacher = teacher
-    @reason = reason
+    @request_reason = request_reason
     set_body
-    mail to: @teacher.email_name,
+    set_recipients
+    mail to: @recipients,
          cc: CONTACT_EMAIL,
          subject: email_template.subject
   end
@@ -37,8 +40,9 @@ class TeacherMailer < ApplicationMailer
   def form_submission(teacher)
     @teacher = teacher
     set_body
+    set_recipients
     if @teacher.not_reviewed?
-      mail to: CONTACT_EMAIL,
+      mail to: @recipients,
            subject: email_template.subject
     end
   end
@@ -48,7 +52,9 @@ class TeacherMailer < ApplicationMailer
     base_rules = {
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
-      reason: @reason
+      # TODO: Review if below two are needed, or can they be refractored?
+      denial_reason: @denial_reason,
+      request_reason: @request_reason
     }
     base_rules.merge!(@teacher.email_attributes)
     base_rules.with_indifferent_access
@@ -58,7 +64,13 @@ class TeacherMailer < ApplicationMailer
     @email_template ||= EmailTemplate.find_by(title: action_name.titlecase)
   end
 
+  # renders the email body with the {{parameter}} things
   def set_body
     @body = Liquid::Template.parse(email_template.body).render(liquid_assigns).html_safe
+  end
+
+  # renders the list of recipients with the {{parameter}} things
+  def set_recipients
+    @recipients = Liquid::Template.parse(email_template.to).render(liquid_assigns).html_safe
   end
 end

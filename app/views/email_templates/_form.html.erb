@@ -2,6 +2,8 @@
   <div class="form">
     <label for="email_template_title"><h3>Title</h3></label>
     <%= form.text_field :title, class: "form-control", readonly: email_template.required? %>
+    <label for="email_template_to"><h3>To</h3></label>
+    <%= form.text_field :to, class: "form-control" %>
     <label for="email_template_subject"><h3>Subject</h3></label>
     <%= form.text_field :subject, class: "form-control" %>
     <label for="email_template_body"><h3>Body</h3></label>
@@ -12,7 +14,7 @@
     <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
-
+<%# This renders the section on "Allowed Tags" %>
 <%= render 'liquid_fields' %>
 
 <script type="text/javascript">

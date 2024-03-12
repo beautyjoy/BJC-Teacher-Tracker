@@ -12,10 +12,15 @@ class EmailTemplatesController < ApplicationController
   end
 
   def update
-    template = EmailTemplate.find(params[:id])
-    template.update(template_params)
-    template.save!
-    redirect_to email_templates_path
+    @email_template = EmailTemplate.find(params[:id])
+    @email_template.update(template_params)
+    if @email_template.save
+      flash[:success] = "Updated #{@email_template.title} template successfully."
+      redirect_to email_templates_path
+    else
+      flash.now[:alert] = "Failed to save #{@email_template.title} template: #{@email_template.errors.full_messages.join(", ")}"
+      render "edit"
+    end
   end
 
   def create
@@ -27,11 +32,11 @@ class EmailTemplatesController < ApplicationController
     end
     load_ordered_email_templates
 
-    if @email_template.save!
+    if @email_template.save
       flash[:success] = "Created #{@email_template.title} successfully."
       redirect_to email_templates_path
     else
-      flash[:alert] = "Failed to submit information :("
+      flash.now[:alert] = "Failed to submit information: #{@email_template.errors.full_messages.join(", ")}"
       render "new"
     end
   end
@@ -49,7 +54,7 @@ class EmailTemplatesController < ApplicationController
 
   private
   def template_params
-    params.require(:email_template).permit(:body, :subject, :title)
+    params.require(:email_template).permit(:body, :subject, :title, :to)
   end
 
   def load_ordered_email_templates

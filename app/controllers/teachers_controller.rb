@@ -130,7 +130,7 @@ class TeachersController < ApplicationController
   def request_info
     @teacher.info_needed!
     if !params[:skip_email].present?
-      TeacherMailer.request_info_email(@teacher, params[:reason]).deliver_now
+      TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
     end
     redirect_to root_path
   end
@@ -141,12 +141,10 @@ class TeachersController < ApplicationController
     redirect_to root_path
   end
 
-  # TODO: Handle the more info / intermediate status route.
   def deny
     @teacher.denied!
     if !params[:skip_email].present?
-      # TODO: Update dropdown to select the email template.
-      TeacherMailer.deny_email(@teacher, params[:reason]).deliver_now
+      TeacherMailer.deny_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path
   end
@@ -159,8 +157,12 @@ class TeachersController < ApplicationController
 
   def resend_welcome_email
     if @teacher.validated? || @is_admin
+      flash[:success] = "Welcome email resent successfully!"
       TeacherMailer.welcome_email(@teacher).deliver_now
+    else
+      flash[:alert] = "Error resending welcome email. Please ensure that your account has been validated by an administrator."
     end
+    redirect_back(fallback_location: dashboard_path)
   end
 
   def import
