@@ -74,13 +74,7 @@
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">School Location:</div>
       <div class="col-sm-8">
-        <%= teacher.school.location %>
-      </div>
-    </div>
-    <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Country</div>
-      <div class="col-sm-8">
-        <%= teacher.school.country %>
+        <%= "#{teacher.school.location}, #{teacher.school.country}" %>
       </div>
     </div>
     <div class="row">
