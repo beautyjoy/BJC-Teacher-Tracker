@@ -101,31 +101,29 @@
 <%- end %>
 
 <script>
-  $(document).ready(function() {
-    const countrySelected = document.getElementById('school_country');
-    const stateSelectContainer = document.getElementById('state_select_container');
-    const stateTextfieldContainer = document.getElementById('state_textfield_container');
-    const stateSelect = document.getElementById('state_select');
-    const stateTextfield = document.getElementById('state_textfield');
+    $(document).ready(function() {
+        const countrySelected = $('#school_country');
+        const stateSelectContainer = $('#state_select_container');
+        const stateTextfieldContainer = $('#state_textfield_container');
+        const stateSelect = $('#state_select');
+        const stateTextfield = $('#state_textfield');
 
-    function handleCountryChange() {
-      if (countrySelected.value === 'US') {
-        stateSelectContainer.style.display = 'block';
-        stateSelectContainer.required = true;
-        stateTextfieldContainer.style.display = 'none'
+        function handleCountryChange() {
+            if (countrySelected.val() === 'US') {
+                stateSelectContainer.show().attr('required', true);
+                stateTextfieldContainer.hide();
 
-        stateTextfield.removeAttribute('name'); 
-        stateSelect.setAttribute('name', 'school[state]');
-      } else {
-        stateTextfieldContainer.style.display = 'block';
-        stateTextfieldContainer.required = false;
-        stateSelectContainer.style.display = 'none';
+                stateTextfield.removeAttr('name');
+                stateSelect.attr('name', 'school[state]');
+            } else {
+                stateTextfieldContainer.show().attr('required', false);
+                stateSelectContainer.hide();
 
-        stateSelect.removeAttribute('name');
-        stateTextfield.setAttribute('name', 'school[state]');
-      }
-    }
-    countrySelected.addEventListener('change', handleCountryChange);
-    handleCountryChange(); 
-  });
+                stateSelect.removeAttr('name');
+                stateTextfield.attr('name', 'school[state]');
+            }
+        }
+        countrySelected.change(handleCountryChange);
+        handleCountryChange();
+    });
 </script>
