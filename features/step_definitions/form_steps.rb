@@ -88,3 +88,9 @@ end
 Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value|
   find("#school_selectize").click.set(value)
 end
+
+Then(/^the new teacher form should not be submitted$/) do
+  expect(current_path).to eq(new_teacher_path)
+  expect(page).to have_content("Your Information")
+  expect(page).to have_content("Create a new School")
+end

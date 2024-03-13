@@ -96,4 +96,21 @@ Scenario: Admin can see international schools in the submission
     And   I select "Public" from "School Type"
     And   I press "Submit"
     And   I see a confirmation "Thanks for signing up for BJC"
-    Then I should find a teacher with email "razztech@berkeley.edu" and school country "RO" in the database     
+    Then I should find a teacher with email "razztech@berkeley.edu" and school country "RO" in the database
+
+Scenario: Attempt to create an international school with missing mandatory fields
+    Given "razztech@berkeley.edu" is not in the database
+    And I am on the BJC home page
+    And I enter my "First Name" as "Perry"
+    And I enter my "Last Name" as "Zhong"
+    And I enter my "School Email" as "jzhong12@berkeley.edu"
+    And I set my status as "I am teaching BJC as an AP CS Principles course."
+    And I set my education level target as "High School"
+    And I fill in "More Information" with "I am after school volunteer"
+    And I enter my "Personal or Course Website" as "https://chs.fuhsd.org"
+    And I fill in the school name selectize box with "Bucharest International School" and choose to add a new school
+    # Leaving out mandatory fields "Country", "City", and "School Website" to simulate user error
+    And I select "University" from "Grade Level"
+    And I select "Public" from "School Type"
+    And I press "Submit"
+    Then the new teacher form should not be submitted
