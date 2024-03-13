@@ -141,6 +141,10 @@ class Teacher < ApplicationRecord
     end
   end
 
+  def self.application_status_options
+    Teacher.application_statuses.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
   def self.education_level_options
     Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
   end
