@@ -9,7 +9,7 @@
 #  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
-#  languages          :string
+#  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string

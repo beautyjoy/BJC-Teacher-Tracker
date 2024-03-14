@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2024_03_14_160959) do
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0
     t.string "personal_email"
-    t.string "languages"
+    t.string "languages", default: ["English"], array: true
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
     t.index ["email"], name: "index_teachers_on_email", unique: true
