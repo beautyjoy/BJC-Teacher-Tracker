@@ -157,12 +157,9 @@ class TeachersController < ApplicationController
     redirect_to root_path
   end
 
-  # TODO: Handle the more info / intermediate status route.
   def deny
     @teacher.denied!
     if !params[:skip_email].present?
-      # TODO: Update dropdown to select the email template.
-      puts params[:denial_reason]
       TeacherMailer.deny_email(@teacher, params[:denial_reason]).deliver_now
     end
     redirect_to root_path
