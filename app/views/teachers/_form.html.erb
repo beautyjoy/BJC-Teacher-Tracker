@@ -121,13 +121,14 @@ status ONLY IF the person viewing this page is an admin. %>
     <div class='col-12'>
       <%= f.label :languages, "What language(s) are spoken in the classroom?", 
       class: "label-required" %>
-      <%= select_tag(
-        :languages,
-        options_for_select(Teacher.language_options),
-        multiple: true,
-        include_blank: "Select an option",
-        class: 'selectize'
-      ) %>
+      <%= f.select(
+      :languages,
+      options_for_select(Teacher.language_options, @teacher.languages),
+      {},
+      multiple: true,
+      include_blank: "Select an option",
+      class: 'selectize'
+) %>
     </div>
   </div>
 
