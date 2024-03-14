@@ -6,6 +6,7 @@
 #
 #  id             :integer          not null, primary key
 #  city           :string
+#  country        :string
 #  grade_level    :integer
 #  lat            :float
 #  lng            :float
@@ -25,10 +26,12 @@
 #
 
 class School < ApplicationRecord
-  VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
+  VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY"].freeze
 
-  validates :state, inclusion: { in: VALID_STATES }
-  validates :name, :city, :state, :website, presence: true
+  validates :name, :city, :website, :country, presence: true
+  validates :country, inclusion: { in: ISO3166::Country.all.map(&:alpha2), message: "%{value} is not a valid country" }, presence: true
+  validates :state, presence: true, if: -> { country == "US" }
+  validates :state, inclusion: { in: VALID_STATES }, if: -> { country == "US" }
   validates_format_of :website, with: /.+\..+/, on: :create
 
   before_save :update_gps_data, if: -> { lat.nil? || lng.nil? }

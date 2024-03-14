@@ -36,6 +36,20 @@ Given(/^I set my education level target as "(.*)"$/) do |input|
   select(input, from: EDUCATION_FIELD)
 end
 
+When(/^(?:|I )select "([^"]*)" from "([^"]*)" dropdown$/) do |value, readable_field|
+  field_mappings = {
+    "State" => "state_select"
+  }
+  field = field_mappings[readable_field] || readable_field
+  select_box = find_field(field)
+  options = select_box.all("option", text: value)
+  if options.length > 1
+    options.first.select_option
+  else
+    select(value, from: field)
+  end
+end
+
 Then(/I see a confirmation "(.*)"/) do |string|
   page.should have_css ".alert", text: /#{string}/
 end
@@ -58,6 +72,11 @@ Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, ema
   expect(Teacher.find_by(email:)[field]).to eq(expected)
 end
 
+Then(/^I should find a teacher with email "([^"]*)" and school country "([^"]*)" in the database$/) do |email, country|
+  teacher = Teacher.includes(:school).where(email:, 'schools.country': country).first
+  expect(teacher).not_to be_nil, "No teacher found with email #{email} and country #{country}"
+end
+
 When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to add a new school$/) do |text|
   page.execute_script('$("#school_form").show()')
   # Necessary for the Admin School create page
@@ -68,4 +87,10 @@ end
 
 Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value|
   find("#school_selectize").click.set(value)
+end
+
+Then(/^the new teacher form should not be submitted$/) do
+  expect(current_path).to eq(new_teacher_path)
+  expect(page).to have_content("Your Information")
+  expect(page).to have_content("Create a new School")
 end
