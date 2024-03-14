@@ -38,6 +38,9 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
+
+  WORLD_LANGUAGES = [ 'Afrikaans', 'Albanian', 'Arabic', 'Armenian', 'Basque', 'Bengali', 'Bulgarian', 'Catalan', 'Cambodian', 'Chinese (Mandarin)', 'Croatian', 'Czech', 'Danish', 'Dutch', 'English', 'Estonian', 'Fiji', 'Finnish', 'French', 'Georgian', 'German', 'Greek', 'Gujarati', 'Hebrew', 'Hindi', 'Hungarian', 'Icelandic', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Javanese', 'Korean', 'Latin', 'Latvian', 'Lithuanian', 'Macedonian', 'Malay', 'Malayalam', 'Maltese', 'Maori', 'Marathi', 'Mongolian', 'Nepali', 'Norwegian', 'Persian', 'Polish', 'Portuguese', 'Punjabi', 'Quechua', 'Romanian', 'Russian', 'Samoan', 'Serbian', 'Slovak', 'Slovenian', 'Spanish', 'Swahili', 'Swedish ', 'Tamil', 'Tatar', 'Telugu', 'Thai', 'Tibetan', 'Tonga', 'Turkish', 'Ukrainian', 'Urdu', 'Uzbek', 'Vietnamese', 'Welsh', 'Xhosa' ].freeze
+
   validates :first_name, :last_name, :email, :status, presence: true
   validates :email, uniqueness: true
   validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
@@ -162,6 +165,11 @@ class Teacher < ApplicationRecord
 
   def self.education_level_options
     Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.language_options
+    WORLD_LANGUAGES
+    #language_codes = ISO3166::Country.all.map { |country| country.languages}.flatten.uniq
   end
 
   def display_education_level

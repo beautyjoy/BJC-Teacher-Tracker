@@ -121,11 +121,12 @@ status ONLY IF the person viewing this page is an admin. %>
     <div class='col-12'>
       <%= f.label :languages, "What language(s) are spoken in the classroom?", 
       class: "label-required" %>
-      <%= f.select(
+      <%= select_tag(
         :languages,
-        options_for_select(['English', 'Spanish', 'French', 'Other']),
-        { include_blank: "Select an option" },
-        { class: 'form-control', required: false }
+        options_for_select(Teacher.language_options),
+        multiple: true,
+        include_blank: "Select an option",
+        class: 'selectize'
       ) %>
     </div>
   </div>
@@ -158,6 +159,17 @@ status ONLY IF the person viewing this page is an admin. %>
 <script>
 
   $(document).ready(function() {
+    $('.selectize').selectize({
+      plugins: ['remove_button'],
+      delimiter: ",",
+      persist: false,
+      create: function (input) {
+        return {
+            value: input,
+            text: input,
+        };
+      },
+    });
     //on loading the page, immediately update the reason field depending on 
     //the value of the application status
     updateReasonField();
