@@ -78,6 +78,7 @@ class TeachersController < ApplicationController
       @teacher.not_reviewed!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
       redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
@@ -117,6 +118,7 @@ class TeachersController < ApplicationController
     end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
     if is_admin?
       redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
