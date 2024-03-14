@@ -172,6 +172,10 @@ class Teacher < ApplicationRecord
     #language_codes = ISO3166::Country.all.map { |country| country.languages}.flatten.uniq
   end
 
+  def display_languages
+    languages.select { |value| WORLD_LANGUAGES.include?(value)}.join(', ')
+  end
+
   def display_education_level
     if education_level_before_type_cast.to_i == -1
       "?"
