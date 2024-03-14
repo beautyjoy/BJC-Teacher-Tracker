@@ -207,7 +207,7 @@ class TeachersController < ApplicationController
 
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website, :education_level, :school_id]
+      :more_info, :personal_website, :education_level, :languages, :school_id]
     if is_admin?
       teacher_attributes << [:personal_email, :application_status,
       :request_reason, :skip_email]

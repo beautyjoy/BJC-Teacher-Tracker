@@ -119,6 +119,21 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <div class='form-group row'>
     <div class='col-12'>
+      <%= f.label :languages, "What language(s) are spoken in the classroom?", 
+      class: "label-required" %>
+      <%= f.select(
+        :languages,
+        options_for_select(['English', 'Spanish', 'French', 'Other']),
+        { include_blank: "Select an option" },
+        { class: 'form-control', required: false }
+      ) %>
+    </div>
+  </div>
+
+  
+
+  <div class='form-group row'>
+    <div class='col-12'>
       <%= f.label :more_info, "More Information", class: "label-required" %>
       <%= f.text_area :more_info, placeholder: "I applied for access because...",
         class: "form-control", required: true, rows: "2" %>
