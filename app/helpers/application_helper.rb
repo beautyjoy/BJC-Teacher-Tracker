@@ -19,7 +19,8 @@ module ApplicationHelper
       "Dashboard": dashboard_path,
       "Schools": schools_path,
       "Teachers": teachers_path,
-      "Email Templates": email_templates_path
+      "Email Templates": email_templates_path,
+      "Workshops": workshops_path,
     }
   end
 

@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'workshops/index'
+  get 'workshops/show'
+  get 'workshops/new'
+  get 'workshops/edit'
+  get 'workshops/create'
+  get 'workshops/update'
+  get 'workshops/destroy'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -19,6 +26,7 @@ Rails.application.routes.draw do
   resources :schools
   resources :pages, param: :url_slug
   resources :email_templates, except: [:show]
+  resources :workshops
 
   get    "/login",  to: "sessions#new",     as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"
