@@ -163,7 +163,8 @@ Feature: basic admin functionality
     And I set my application status as "Validated"
     And I press "Update"
     Then I see a confirmation "Saved"
-    When I check "Validated"
+    When I go to the teachers page
+    And I check "Validated"
     Then I should see "Bobby John"
 
   Scenario: Deny teacher as an admin

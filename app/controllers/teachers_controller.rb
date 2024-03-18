@@ -122,7 +122,7 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
+      redirect_to edit_teacher_path(current_user.id), notice: "Saved #{@teacher.full_name}"
       return
     else
       @teacher.try_append_ip(request.remote_ip)
