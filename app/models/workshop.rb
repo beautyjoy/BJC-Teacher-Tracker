@@ -12,7 +12,6 @@
 #  lng            :float
 #  name           :string
 #  state          :string
-#  tags           :text             default([]), is an Array
 #  teachers_count :integer          default(0)
 #  website        :string           TODO: Confirm is it necessary field
 #  created_at     :datetime
@@ -22,7 +21,9 @@
 #
 #  TODO: Define indexes
 
-
+# This class is a mock representation of the Workshop model.
+# In the final application, Workshops and Teachers are associated through PdRegistrations.
+# This mock setup uses arrays of mock PdRegistration objects to simulate many-to-many relationships.
 class Workshop
   include ActiveModel::Model
   include ActiveModel::Attributes # Make sure this is included
@@ -36,7 +37,9 @@ class Workshop
   attribute :start_date, :date
   attribute :end_date, :date
   attribute :grade_level, :integer, default: -1
+  attribute :teachers_count, :integer, default: 0
   attribute :registration_open, :boolean
+  attribute :pd_registrations, default: []
 
   GRADE_LEVELS = {
     elementary: 0,
