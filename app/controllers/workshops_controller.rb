@@ -37,7 +37,7 @@ class WorkshopsController < ApplicationController
         country: "USA",
         start_date: "2024-04-01",
         end_date: "2024-04-30",
-        grade_level: "Beginner",
+        # grade_level: "University",
         registration_open: true
       ),
       Workshop.new(
@@ -48,7 +48,7 @@ class WorkshopsController < ApplicationController
         country: "USA",
         start_date: "2024-05-15",
         end_date: "2024-06-15",
-        grade_level: "Advanced",
+        grade_level: 1,
         registration_open: false
       ),
       Workshop.new(
@@ -59,7 +59,7 @@ class WorkshopsController < ApplicationController
         country: "UK",
         start_date: "2024-07-01",
         end_date: "2024-07-31",
-        grade_level: "Intermediate",
+        grade_level: 0,
         registration_open: true
       )
     ]

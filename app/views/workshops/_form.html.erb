@@ -7,12 +7,10 @@
   </div>
 </div>
 <div class='form-group row'>
-  <!-- Start Date Field -->
   <div class='col-4'>
     <%= f.label :start_date, "Start Date", class: "label-required", for: "workshop_start_date" %>
     <%= f.date_field :start_date, class: 'form-control', required: true, id: 'workshop_start_date' %>
   </div>
-  <!-- End Date Field -->
   <div class='col-4'>
     <%= f.label :end_date, "End Date", class: "label-required", for: "workshop_end_date" %>
     <%= f.date_field :end_date, class: 'form-control', required: true, id: 'workshop_end_date' %>
@@ -40,9 +38,10 @@
     <%= f.country_select(
           :country,
           { priority_countries: ['United States'] },
-          { class: 'form-control', required: true, id: 'workshop_country', format: :with_full_country_name, selected: 'United States'}
+          { class: 'form-control', required: false, id: 'workshop_country', format: :with_full_country_name, selected: 'United States'}
         ) %>
   </div>
+
 
 </div>
 
@@ -52,7 +51,7 @@
         :grade_level,
         options_for_select(School.grade_level_options, workshop.grade_level),
         { include_blank: "Select a grade level" },
-        { class: 'form-control', required: true, id: 'workshop_grade_level' }
+        { class: 'form-control', required: false, id: 'workshop_grade_level' }
       ) %>
 </div>
 
