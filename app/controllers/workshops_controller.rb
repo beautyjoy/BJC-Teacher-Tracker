@@ -1,44 +1,21 @@
 class WorkshopsController < ApplicationController
+
+  # TODO: revise any method using `set_workshops` to use `MockWorkshop.all` instead. It's currently used for mocking data.
+  before_action :set_workshops, only: [:show, :edit]
+
   def index
-    # TODO: here is mocked data for workshops. Fix them after the model is created and the database is seeded.
-    @workshops = [
-      OpenStruct.new(
-        id: 1,
-        name: "Web Development Basics",
-        location: "San Francisco",
-        start_date: "2024-04-01",
-        end_date: "2024-04-30",
-        grade_level: "Beginner",
-        registration_open: true
-      ),
-      OpenStruct.new(
-        id: 2,
-        name: "Advanced Pottery",
-        location: "New York",
-        start_date: "2024-05-15",
-        end_date: "2024-06-15",
-        grade_level: "Advanced",
-        registration_open: false
-      ),
-      OpenStruct.new(
-        id: 3,
-        name: "Digital Photography",
-        location: "London",
-        start_date: "2024-07-01",
-        end_date: "2024-07-31",
-        grade_level: "Intermediate",
-        registration_open: true
-      )
-    ]
+    set_workshops
   end
 
   def show
+    @workshop = @workshops.find { |workshop| workshop.id == params[:id].to_i }
   end
 
   def new
   end
 
   def edit
+    @workshop = @workshops.find { |workshop| workshop.id == params[:id].to_i }
   end
 
   def create
@@ -48,5 +25,43 @@ class WorkshopsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def set_workshops
+    @workshops = [
+      Workshop.new(
+        id: 1,
+        name: "Web Development Basics",
+        city: "San Francisco",
+        state: "CA",
+        country: "USA",
+        start_date: "2024-04-01",
+        end_date: "2024-04-30",
+        grade_level: "Beginner",
+        registration_open: true
+      ),
+      Workshop.new(
+        id: 2,
+        name: "Advanced Pottery",
+        city: "New York",
+        state: "NY",
+        country: "USA",
+        start_date: "2024-05-15",
+        end_date: "2024-06-15",
+        grade_level: "Advanced",
+        registration_open: false
+      ),
+      Workshop.new(
+        id: 3,
+        name: "Digital Photography",
+        city: "London",
+        state: "",
+        country: "UK",
+        start_date: "2024-07-01",
+        end_date: "2024-07-31",
+        grade_level: "Intermediate",
+        registration_open: true
+      )
+    ]
   end
 end

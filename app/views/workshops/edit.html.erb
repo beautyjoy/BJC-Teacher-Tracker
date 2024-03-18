@@ -1,2 +1,13 @@
-<h1>Workshops#edit</h1>
-<p>Find me in app/views/workshops/edit.html.erb</p>
+<%= provide(:h1, "Update #{@workshop.name}") %>
+
+<% if @workshop.nil? %>
+  <p>Workshop not found.</p>
+<% else %>
+  <%= form_for @workshop do |f| %>
+    <%= render 'workshops/form', f: f, workshop: @workshop %>
+
+    <div>
+      <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
+    </div>
+  <% end %>
+<% end %>
