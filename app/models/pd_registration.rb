@@ -4,6 +4,7 @@ class PdRegistration
   include ActiveModel::Model
   include ActiveModel::Attributes
 
+  attribute :id, :integer
   attribute :teacher_id, :integer
   attribute :pd_id, :integer
   attribute :attended, :boolean

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "ostruct"
-
 class ProfessionalDevelopmentsController < ApplicationController
   # TODO: revise any method using `set_pds` to use `MockProfessionalDevelopments.all` instead. It's currently used for mocking data.
   before_action :set_pds, only: [:show, :edit, :update, :destroy]
@@ -50,8 +48,8 @@ class ProfessionalDevelopmentsController < ApplicationController
         end_date: "2024-04-30",
         registration_open: true,
         pd_registrations: [
-          PdRegistration.new(teacher_id: 1, pd_id: 1, attended: true, role: "leader", teacher_name: "Alex Johnson"),
-          PdRegistration.new(teacher_id: 2, pd_id: 1, attended: false, role: "attendee", teacher_name: "Jamie Smith")
+          PdRegistration.new(id: 1, teacher_id: 1, pd_id: 1, attended: true, role: "leader", teacher_name: "Alex Johnson"),
+          PdRegistration.new(id: 2, teacher_id: 2, pd_id: 1, attended: false, role: "attendee", teacher_name: "Jamie Smith")
         ]
       ),
       ProfessionalDevelopment.new(
@@ -65,8 +63,8 @@ class ProfessionalDevelopmentsController < ApplicationController
         grade_level: "High School",
         registration_open: false,
         pd_registrations: [
-          PdRegistration.new(teacher_id: 3, pd_id: 2, attended: true, role: "attendee", teacher_name: "Sam Lee"),
-          PdRegistration.new(teacher_id: 4, pd_id: 2, attended: true, role: "leader", teacher_name: "Chris Doe")
+          PdRegistration.new(id: 3, teacher_id: 3, pd_id: 2, attended: true, role: "attendee", teacher_name: "Sam Lee"),
+          PdRegistration.new(id: 4, teacher_id: 4, pd_id: 2, attended: true, role: "leader", teacher_name: "Chris Doe")
         ]
       ),
       ProfessionalDevelopment.new(
@@ -80,9 +78,9 @@ class ProfessionalDevelopmentsController < ApplicationController
         grade_level: "College",
         registration_open: true,
         pd_registrations: [
-          PdRegistration.new(teacher_id: 5, pd_id: 3, attended: false, role: "attendee", teacher_name: "Morgan Bailey"),
-          PdRegistration.new(teacher_id: 6, pd_id: 3, attended: true, role: "leader", teacher_name: "Casey Jordan"),
-          PdRegistration.new(teacher_id: 7, pd_id: 3, attended: true, role: "attendee", teacher_name: "Jordan Casey") # Added an extra registration for variety
+          PdRegistration.new(id: 5, teacher_id: 5, pd_id: 3, attended: false, role: "attendee", teacher_name: "Morgan Bailey"),
+          PdRegistration.new(id: 6, teacher_id: 6, pd_id: 3, attended: true, role: "leader", teacher_name: "Casey Jordan"),
+          PdRegistration.new(id: 7, teacher_id: 7, pd_id: 3, attended: true, role: "attendee", teacher_name: "Jordan Casey") # Added an extra registration for variety
         ]
       )
     ]
