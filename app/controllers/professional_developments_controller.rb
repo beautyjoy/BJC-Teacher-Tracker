@@ -22,17 +22,17 @@ class ProfessionalDevelopmentsController < ApplicationController
   end
 
   def create
-    flash[:danger] = "This feature is not yet implemented."
+    flash[:danger] = "Create is not yet implemented."
     redirect_to new_professional_development_path
   end
 
   def update
-    flash[:danger] = "This feature is not yet implemented."
+    flash[:danger] = "Update feature is not yet implemented."
     redirect_to edit_professional_development_path
   end
 
   def destroy
-    flash[:danger] = "This feature is not yet implemented."
+    flash[:danger] = "Destroy feature is not yet implemented."
     redirect_to professional_developments_path
   end
 
@@ -87,6 +87,6 @@ class ProfessionalDevelopmentsController < ApplicationController
   end
 
   def load_ordered_pds
-  #   not yet implemented
+    #   not yet implemented
   end
 end

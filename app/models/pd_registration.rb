@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# This class is a mock representation of the PdRegistration model.
+# In the final application, Professional Developments and Teachers are associated through PdRegistrations.
 class PdRegistration
   include ActiveModel::Model
   include ActiveModel::Attributes

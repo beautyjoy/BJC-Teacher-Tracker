@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PdRegistrationsController < ApplicationController
   def create
     flash[:danger] = "Create feature is not yet implemented."
