@@ -1,16 +1,16 @@
-<%= provide(:h1, @workshop.name) %>
+<%= provide(:h1, @professional_development.name) %>
 
 <div class="card">
   <div class="card-header">
     <div class="row d-flex">
       <div class="col-sm-8 d-flex">
         <h3>
-          <%= @workshop.name %>
+          <%= @professional_development.name %>
         </h3>
       </div>
       <div class="col-sm-4 text-right">
-        <%= link_to("Edit", edit_workshop_path(@workshop), class: "btn btn-primary") %>
-        <%= link_to("Delete", workshop_path(@workshop), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+        <%= link_to("Edit", edit_professional_development_path(@professional_development), class: "btn btn-primary") %>
+        <%= link_to("Delete", professional_development_path(@professional_development), method: "delete", class: "btn btn-danger", data: { confirm: "Are you sure?"}) %>
       </div>
     </div>
   </div>
@@ -18,17 +18,17 @@
     <div class="row mt-3 pb-3">
       <div class="col-sm-4">
         <h5>Location</h5>
-        <%= "#{@workshop.location}, #{@workshop.country}" %>
+        <%= "#{@professional_development.location}" %>
       </div>
 
       <div class="col-sm-4">
         <h5>Dates</h5>
-        <%= @workshop.start_date %> to <%= @workshop.end_date %>
+        <%= @professional_development.start_date %> to <%= @professional_development.end_date %>
       </div>
 
       <div class="col-sm-4">
         <h5>GradeLevel</h5>
-        <%= @workshop.display_grade_level %>
+        <%= @professional_development.display_grade_level %>
       </div>
     </div>
 
@@ -46,10 +46,10 @@
           </tr>
           </thead>
           <tbody>
-          <% @workshop.pd_registrations.each do |registration| %>
+          <% @professional_development.pd_registrations.each do |registration| %>
             <tr>
               <td><%= link_to(registration.teacher_name, teacher_path(registration.teacher_id)) %></td>
-              <td><%= @workshop.name %></td>
+              <td><%= @professional_development.name %></td>
               <td><%= registration.attended ? 'Yes' : 'No' %></td>
               <td><%= registration.role %></td>
             </tr>

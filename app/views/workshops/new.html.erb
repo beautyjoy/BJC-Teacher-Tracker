@@ -1,9 +1,0 @@
-<%= provide(:h1, "Add a School") %>
-
-<%= form_for @workshop do |f| %>
-  <%= render 'workshops/form', f: f, workshop: @workshop %>
-
-  <div>
-    <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
-  </div>
-<% end %>

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: workshops
+# Table name: professional_developments
 #
 #  id             :integer          not null, primary key
 #  city           :string
@@ -21,10 +21,10 @@
 #
 #  TODO: Define indexes
 
-# This class is a mock representation of the Workshop model.
-# In the final application, Workshops and Teachers are associated through PdRegistrations.
+# This class is a mock representation of the ProfessionalDevelopment model.
+# In the final application, Professional Developments and Teachers are associated through PdRegistrations.
 # This mock setup uses arrays of mock PdRegistration objects to simulate many-to-many relationships.
-class Workshop
+class ProfessionalDevelopment
   include ActiveModel::Model
   include ActiveModel::Attributes # Make sure this is included
 

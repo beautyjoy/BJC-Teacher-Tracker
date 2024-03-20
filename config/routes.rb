@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :schools
   resources :pages, param: :url_slug
   resources :email_templates, except: [:show]
-  resources :workshops
+  resources :professional_developments
 
   get    "/login",  to: "sessions#new",     as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"

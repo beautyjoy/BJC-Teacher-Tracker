@@ -2,45 +2,45 @@
 
 require "ostruct"
 
-class WorkshopsController < ApplicationController
-  # TODO: revise any method using `set_workshops` to use `MockWorkshop.all` instead. It's currently used for mocking data.
-  before_action :set_workshops, only: [:show, :edit, :update, :destroy]
+class ProfessionalDevelopmentsController < ApplicationController
+  # TODO: revise any method using `set_pds` to use `MockProfessionalDevelopments.all` instead. It's currently used for mocking data.
+  before_action :set_pds, only: [:show, :edit, :update, :destroy]
 
   def index
-    set_workshops
+    set_pds
   end
 
   def show
-    @workshop = @workshops.find { |workshop| workshop.id == params[:id].to_i }
+    @professional_development = @professional_developments.find { |pd| pd.id == params[:id].to_i }
   end
 
   def new
-    @workshop = Workshop.new
-    load_ordered_workshops
+    @professional_development = ProfessionalDevelopment.new
+    load_ordered_pds
   end
 
   def edit
-    @workshop = @workshops.find { |workshop| workshop.id == params[:id].to_i }
+    @professional_development = @professional_developments.find { |pd| pd.id == params[:id].to_i }
   end
 
   def create
     flash[:danger] = "This feature is not yet implemented."
-    redirect_to schools_path
+    redirect_to new_professional_development_path
   end
 
   def update
     flash[:danger] = "This feature is not yet implemented."
-    redirect_to schools_path
+    redirect_to edit_professional_development_path
   end
 
   def destroy
     flash[:danger] = "This feature is not yet implemented."
-    redirect_to schools_path
+    redirect_to professional_developments_path
   end
 
-  def set_workshops
-    @workshops = [
-      Workshop.new(
+  def set_pds
+    @professional_developments = [
+      ProfessionalDevelopment.new(
         id: 1,
         name: "Web Development Basics",
         city: "San Francisco",
@@ -54,7 +54,7 @@ class WorkshopsController < ApplicationController
           PdRegistration.new(teacher_id: 2, pd_id: 1, attended: false, role: "attendee", teacher_name: "Jamie Smith")
         ]
       ),
-      Workshop.new(
+      ProfessionalDevelopment.new(
         id: 2,
         name: "Advanced Pottery",
         city: "New York",
@@ -69,7 +69,7 @@ class WorkshopsController < ApplicationController
           PdRegistration.new(teacher_id: 4, pd_id: 2, attended: true, role: "leader", teacher_name: "Chris Doe")
         ]
       ),
-      Workshop.new(
+      ProfessionalDevelopment.new(
         id: 3,
         name: "Digital Photography",
         city: "London",
@@ -88,7 +88,7 @@ class WorkshopsController < ApplicationController
     ]
   end
 
-  def load_ordered_workshops
-    @ordered_schools = School.all.order(:name)
+  def load_ordered_pds
+  #   not yet implemented
   end
 end
