@@ -44,11 +44,13 @@ class SchoolsController < ApplicationController
   def update
     @school = School.find(params[:id])
     @school.assign_attributes(school_params)
+    debugger
     if @school.save
-      flash[:success] = "Update #{@school.name} successfully."
+      flash[:success] = "Updated #{@school.name} successfully."
       redirect_to school_path(@school)
     else
-      render "edit", alert: "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+      render "edit"
     end
   end
 

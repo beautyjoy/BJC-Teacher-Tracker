@@ -10,7 +10,7 @@
   <div class='col-4'>
     <%= f.label :city, class: "label-required", for: "school_city" %>
     <%= f.text_field :city, placeholder: 'Name of City', class: 'form-control',
-    required: true, id: 'school_city' %>
+    required: false, id: 'school_city' %>
   </div>
 
   <div class='col-4' id="state_select_container">
@@ -28,7 +28,7 @@
     <%= f.country_select(
       :country,
       { priority_countries: ['United States'], include_blank: "Select a country" },
-      { class: 'form-control', required: true, id: 'school_country', format: :with_full_country_name, selected: 'United States'}
+      { class: 'form-control', required: false, id: 'school_country', format: :with_full_country_name, selected: 'United States'}
     ) %>
   </div>
 

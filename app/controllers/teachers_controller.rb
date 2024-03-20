@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
     if @school.new_record?
       @school = School.new(school_params)
       unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
     end
@@ -81,7 +81,7 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
+      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
     end
   end
 
@@ -100,7 +100,10 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     else
       @school.update(school_params) if school_params
-      @school.save!
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "new" && return
+      end
       @teacher.school = @school
     end
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -114,7 +117,7 @@ class TeachersController < ApplicationController
     end
     if !@teacher.save
       redirect_to edit_teacher_path(current_user.id),
-                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+                alert: "An error occured: #{@teacher.errors.full_messages.join(', ')}"
       return
     end
     if !@teacher.validated? && !current_user.admin?
