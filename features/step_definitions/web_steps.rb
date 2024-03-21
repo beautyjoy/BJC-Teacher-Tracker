@@ -98,7 +98,13 @@ When(/^(?:|I )fill in the following:$/) do |fields|
 end
 
 When(/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
-  select(value, from: field)
+  select_box = find_field(field)
+  options = select_box.all("option", text: value)
+  if options.length > 1
+    options.first.select_option
+  else
+    select(value, from: field)
+  end
 end
 
 When(/^(?:|I )check "([^"]*)"$/) do |field|
@@ -255,5 +261,19 @@ end
 Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |value, field, selector|
   with_scope(selector) do
     field_labeled(field).find(:xpath, ".//option[@selected = 'selected'][text() = '#{value}']").should be_present
+  end
+end
+
+Then(/^I should see a "(.*?)" flash message "(.*?)"$/) do |alert_type, message|
+  within(".alert.alert-#{alert_type}") do
+    expect(page).to have_text(message)
+  end
+end
+
+When(/^(?:|I )press "([^"]*)" on Actions for first teacher$/) do |button|
+  teacher_actions_scope = "#DataTables_Table_0 tbody tr:first-child"
+
+  within(teacher_actions_scope) do
+    click_button(button)
   end
 end

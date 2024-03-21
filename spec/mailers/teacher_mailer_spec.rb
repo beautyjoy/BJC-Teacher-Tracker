@@ -60,4 +60,14 @@ describe TeacherMailer do
     expect(email.body.encoded).to include("Request Reason")
     expect(email.body.encoded).to include("We're writing to you regarding your ongoing application with BJC.")
   end
+
+  it "Sends Teacher Form Submission Email" do
+    teacher = teachers(:long)
+    email = TeacherMailer.teacher_form_submission(teacher)
+    email.deliver_now
+    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
+    expect(email.to[0]).to eq("short@long.com")
+    expect(email.subject).to eq("Teacher Form Submission")
+    expect(email.body.encoded).to include("Here is the information that was submitted")
+  end
 end

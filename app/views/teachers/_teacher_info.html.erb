@@ -74,11 +74,11 @@
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">School Location:</div>
       <div class="col-sm-8">
-        <%= teacher.school.location %>
+        <%= "#{teacher.school.location}, #{teacher.school.country}" %>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 font-weight-bold">Sing Up Date:</div>
+      <div class="col-sm-4 font-weight-bold">Sign Up Date:</div>
       <div class="col-sm-8">
         <%= teacher.created_at %>
       </div>

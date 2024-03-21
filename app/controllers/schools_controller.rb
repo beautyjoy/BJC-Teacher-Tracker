@@ -12,11 +12,11 @@ class SchoolsController < ApplicationController
   end
 
   def search
-    School.all.collect { |school| ["#{school.name}, #{school.city}, #{school.state}", school.name] }
+    School.all.collect { |school| ["#{school.name}, #{school.country}, #{school.city}, #{school.state}", school.name] }
   end
 
   def create
-    @school = School.find_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school = School.find_by(name: school_params[:name], country: school_params[:country], city: school_params[:city], state: school_params[:state])
     if @school
       @school.assign_attributes(school_params)
     else
@@ -27,7 +27,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      flash[:alert] = "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
       render "new"
     end
   end
@@ -44,11 +44,13 @@ class SchoolsController < ApplicationController
   def update
     @school = School.find(params[:id])
     @school.assign_attributes(school_params)
+    debugger
     if @school.save
-      flash[:success] = "Update #{@school.name} successfully."
+      flash[:success] = "Updated #{@school.name} successfully."
       redirect_to school_path(@school)
     else
-      render "edit", alert: "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+      render "edit"
     end
   end
 
@@ -64,7 +66,7 @@ class SchoolsController < ApplicationController
 
   private
   def school_params
-    params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type, { tags: [] }, :nces_id)
+    params.require(:school).permit(:name, :country, :city, :state, :website, :grade_level, :school_type, :country, { tags: [] }, :nces_id)
   end
 
   def load_ordered_schools

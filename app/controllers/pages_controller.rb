@@ -25,7 +25,7 @@ class PagesController < ApplicationController
       flash[:success] = "Created #{@page.title} page successfully."
       redirect_to action: "show", url_slug: @page.url_slug
     else
-      flash.now[:alert] = "An error occurred! #{@page.errors.full_messages}"
+      flash.now[:alert] = "An error occurred: #{@page.errors.full_messages.join(", ")}"
       render "edit"
     end
   end
@@ -58,7 +58,7 @@ class PagesController < ApplicationController
       flash[:success] = "Updated #{@page.title} page successfully."
       redirect_to pages_path
     else
-      flash.now[:alert] = "An error occurred! #{@page.errors.full_messages.to_sentence}"
+      flash.now[:alert] = "An error occurred: #{@page.errors.full_messages.join(', ')}"
       render "edit"
     end
   end

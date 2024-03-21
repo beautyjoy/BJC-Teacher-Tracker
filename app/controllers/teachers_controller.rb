@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
     if @school.new_record?
       @school = School.new(school_params)
       unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
     end
@@ -78,9 +78,10 @@ class TeachersController < ApplicationController
       @teacher.not_reviewed!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
       TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
+      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
     end
   end
 
@@ -99,9 +100,13 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     else
       @school.update(school_params) if school_params
-      @school.save!
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "new" && return
+      end
       @teacher.school = @school
     end
+    send_email_if_application_status_changed_and_email_resend_enabled
     if @teacher.denied? && !is_admin?
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
       return
@@ -112,19 +117,33 @@ class TeachersController < ApplicationController
     end
     if !@teacher.save
       redirect_to edit_teacher_path(current_user.id),
-                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+                alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
       return
     end
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
+      TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
+      redirect_to edit_teacher_path(current_user.id), notice: "Saved #{@teacher.full_name}"
       return
     else
       @teacher.try_append_ip(request.remote_ip)
     end
     redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+  end
+
+  def send_email_if_application_status_changed_and_email_resend_enabled
+    if @teacher.application_status_changed? && params[:skip_email] == "No"
+      case @teacher.application_status
+      when "validated"
+        TeacherMailer.welcome_email(@teacher).deliver_now
+      when "denied"
+        TeacherMailer.deny_email(@teacher, params[:request_reason]).deliver_now
+      when "info_needed"
+        TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
+      end
+    end
   end
 
   def request_info
@@ -186,21 +205,22 @@ class TeachersController < ApplicationController
     if teacher_params[:school_id].present?
       @school ||= School.find(teacher_params[:school_id])
     end
-    @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], country: school_params[:country], state: school_params[:state])
   end
 
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
       :more_info, :personal_website, :education_level, :school_id]
     if is_admin?
-      teacher_attributes << :personal_email
+      teacher_attributes << [:personal_email, :application_status,
+      :request_reason, :skip_email]
     end
     params.require(:teacher).permit(*teacher_attributes)
   end
 
   def school_params
     return unless params[:school]
-    params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type)
+    params.require(:school).permit(:name, :country, :city, :state, :website, :grade_level, :school_type)
   end
 
   def omniauth_data

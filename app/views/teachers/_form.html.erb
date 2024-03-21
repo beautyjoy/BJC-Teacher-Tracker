@@ -1,5 +1,45 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
+
+<%# Render the extra input group to change teacher's application
+status ONLY IF the person viewing this page is an admin. %>
+<%if @is_admin %>
+  <div class='form-group form-input-group'>
+    <div class='form-group row'>
+      <%# The application status input field %>
+      <div class='col-6'>
+          <%= f.label :application_status, "Application Status:", class: "label-required" %>
+          <%= f.select(
+          :application_status,
+          options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),
+          { include_blank: "Select an option" },
+          { id: 'application_status_select_value', class: 'form-control', required: true, onchange: 'updateReasonField();' }
+        ) %>
+      </div>
+      <%# Skip email notification dropdown Y/N %>
+      <div id = 'skip_email_dropdown' class='col-6'>
+          <%= label_tag :skip_email, "Skip Email Notification: ", id: 'skip-email', class: "label-optional" %>
+          <%= select_tag(
+            :skip_email,
+            options_for_select(['No', 'Yes'], 'No'),
+          { include_blank: false, class: 'form-control', required: false }
+          )%>
+      </div>
+    </div>
+    <%# Denial/request more info reason input field, if applicable %>
+    <div id= 'request_or_deny_reason' class='form-group row'>
+        <%# Text Field for Denial/Request Reason %>
+        <div class='col-12'>
+          <%# Use label_tag and text_field_tag to ensure that these inputs are
+          not linked to the actual form, which is backed by the model attributes %>
+          <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
+          <%= text_field_tag :request_reason, nil, class: 'form-control' %>
+        </div>
+    </div>  
+  </div>
+<% end %>
+
 <div class='form-group form-input-group'>
+
   <h2>Your Information</h2>
   <div class='form-group row'>
     <div class='col-6'>
@@ -101,6 +141,39 @@
 <% end %>
 
 <script>
+
+  $(document).ready(function() {
+    //on loading the page, immediately update the reason field depending on 
+    //the value of the application status
+    updateReasonField();
+  });
+
+  //JS to update the text description for the denial/request reason input
+  //field and hide/display relevant linked fields depending on what is 
+  //selected in the application status dropdown
+  function updateReasonField() {
+    $("#request_or_deny_reason").show();
+    $("#skip_email_dropdown").show();
+    var selected_app_status = $("#application_status_select_value").val();
+    switch (selected_app_status) {
+      case "Denied":
+        $( "#request_or_deny_reason_text").text("Denial Reason: ");
+        break;
+      case "Info Needed":
+        $( "#request_or_deny_reason_text").text("Info Request Reason: ");
+        break;
+      case "Validated":
+        //show the skip email notification but not 
+        //the deny/request more info reason box
+        $("#request_or_deny_reason").hide();
+        break;
+      default: //not reviewed
+        //neither boxes need to be shown since they are not applicable
+        $("#request_or_deny_reason").hide();
+        $("#skip_email_dropdown").hide();
+    }
+  }
+
   function requireVolunteerHostTeacher() {
     var status_val = $( "#teacher_status" ).val();
 
@@ -113,4 +186,7 @@
     }
 
   }
+
+
+
 </script>
