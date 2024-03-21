@@ -27,7 +27,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      flash[:alert] = "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
       render "new"
     end
   end
