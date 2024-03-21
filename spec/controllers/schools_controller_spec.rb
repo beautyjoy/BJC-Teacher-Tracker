@@ -189,7 +189,7 @@ RSpec.describe SchoolsController, type: :request do
         school: {
           name: @create_school_name,
           city: "Test City",
-          country: "XX", #invalid country
+          country: "XX", # invalid country
           state: "CA",
           website: "www.berkeley.edu",
           school_type: "public",
@@ -201,7 +201,6 @@ RSpec.describe SchoolsController, type: :request do
       expect(School.find_by(name: @create_school_name)).to be_nil
       error = @fail_flash_error_text + "Country XX is not a valid country"
       expect(flash[:alert]).to match error
-
     end
 
     it "allows any state when country is not US" do
@@ -209,7 +208,7 @@ RSpec.describe SchoolsController, type: :request do
         school: {
           name: @create_school_name,
           city: "Ottawa",
-          country: "CA", #Canada
+          country: "CA", # Canada
           state: "Ontario",
           website: "www.berkeley.edu",
           school_type: "public",
