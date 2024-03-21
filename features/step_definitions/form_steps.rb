@@ -89,6 +89,10 @@ Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do
   find("#school_selectize").click.set(value)
 end
 
+When(/^(?:|I )fill in state with "([^"]*)"$/) do |text|
+  fill_in("state_textfield", with: text)
+end
+
 Then(/^the new teacher form should not be submitted$/) do
   expect(current_path).to eq(new_teacher_path)
   expect(page).to have_content("Your Information")

@@ -116,10 +116,7 @@
 
                 stateTextfield.removeAttr('name');
                 stateSelect.attr('name', 'school[state]');
-                // Delay the call to reportValidity
-              setTimeout(function() {
-            stateSelectContainer.get(0).reportValidity();
-              }, 100); // Adjust the delay time as needed
+
             } else {
                 stateTextfieldContainer.show();
                 stateSelect.removeAttr('required')

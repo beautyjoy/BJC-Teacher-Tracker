@@ -117,7 +117,7 @@ class TeachersController < ApplicationController
     end
     if !@teacher.save
       redirect_to edit_teacher_path(current_user.id),
-                alert: "An error occured: #{@teacher.errors.full_messages.join(', ')}"
+                alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
       return
     end
     if !@teacher.validated? && !current_user.admin?

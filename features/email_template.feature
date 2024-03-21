@@ -38,7 +38,7 @@ Scenario: Creating new email template with blank fields displays flash error
     Given I am on the email templates index
     And I press "New Email Templates"
     When I press "Submit"
-    Then I should see "An error occured: Body can't be blank, To can't be blank"
+    Then I should see "An error occurred: Body can't be blank, To can't be blank"
 
 Scenario: Creating and deleting new email template with valid fields succeeds
     Given I am on the email templates index
@@ -59,7 +59,7 @@ Scenario: Editing email template to have blank body or to field displays flash e
     And I follow "Welcome Email"
     And I fill in "email_template_to" with ""
     And I press "Submit"
-    Then I should see "An error occured: To can't be blank"
+    Then I should see "An error occurred: To can't be blank"
     When I fill in TinyMCE email form with ""
     And I press "Submit"
-    Then I should see "An error occured: Body can't be blank"
+    Then I should see "An error occurred: Body can't be blank"
