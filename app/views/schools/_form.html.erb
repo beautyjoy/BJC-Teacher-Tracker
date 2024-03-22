@@ -111,7 +111,7 @@
         function handleCountryChange() {
             if (countrySelected.val() === 'US') {
                 stateSelectContainer.show();
-                stateSelect.attr('required', '')  //make state select required
+                stateSelect.attr('required', '')  //make state select required if country USA
                 stateTextfieldContainer.hide();
 
                 stateTextfield.removeAttr('name');
@@ -119,7 +119,7 @@
 
             } else {
                 stateTextfieldContainer.show();
-                stateSelect.removeAttr('required')
+                stateSelect.removeAttr('required') //else make state select not required
                 stateSelectContainer.hide();
                 
 
