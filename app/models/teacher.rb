@@ -44,6 +44,8 @@ class Teacher < ApplicationRecord
   validates :email, uniqueness: true
   validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
   validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
+  validate :valid_languages
+  before_validation :sort_and_clean_languages
 
   enum application_status: {
     validated: "Validated",
@@ -172,7 +174,17 @@ class Teacher < ApplicationRecord
   end
 
   def display_languages
-    languages.select { |value| WORLD_LANGUAGES.include?(value) }.join(", ")
+    languages.join(", ")
+  end
+
+  def valid_languages
+    languages.all? { |value| WORLD_LANGUAGES.include?(value) }
+  end
+
+  def sort_and_clean_languages
+    # a weird selectize bug results in the empty string sometimes included in languages
+    # so remove all occurences of empty string
+    languages.sort!.reject!(&:blank?)
   end
 
   def display_education_level

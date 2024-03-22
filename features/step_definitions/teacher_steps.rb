@@ -52,12 +52,20 @@ Given(/the following teachers exist/) do |teachers_table|
     more_info: "I'm teaching a college course",
     admin: false,
     personal_website: "https://snap.berkeley.edu",
-    application_status: "Not Reviewed"
+    application_status: "Not Reviewed",
+    languages: ["English"]
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
     teachers_default.each do |key, value|
-      teacher[key] = teacher[key].presence || value
+      # Parse the 'languages' field as an array of strings using YAML.safe_load
+      if key == :languages
+        languages = if teacher[key].present? then YAML.safe_load(teacher[key]) else nil end
+        teacher[key] = languages.presence || value
+      else
+        # Handle other fields as usual
+        teacher[key] = teacher[key].presence || value
+      end
     end
 
     school_name = teacher.delete(:school)
