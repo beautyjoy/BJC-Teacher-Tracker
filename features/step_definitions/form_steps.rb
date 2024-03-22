@@ -24,6 +24,11 @@ Given(/^I set my application status as "(.*)"$/) do |input|
   select(input, from: "application_status_select_value")
 end
 
+When(/^I select "(.*?)" from the languages dropdown$/) do |option|
+  first(".selectize-input").click  # Click on the dropdown to open it
+  find(".selectize-dropdown-content .option", text: option).click  # Click on the desired option
+end
+
 Given(/^I set my request reason as "(.*)"$/) do |input|
   fill_in("request_reason", with: input)
 end
