@@ -3,37 +3,56 @@
 class ProfessionalDevelopmentsController < ApplicationController
   # TODO: revise any method using `set_pds` to use `MockProfessionalDevelopments.all` instead. It's currently used for mocking data.
   before_action :set_pds, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+  before_action :require_admin
 
   def index
     set_pds
   end
 
   def show
-    @professional_development = @professional_developments.find { |pd| pd.id == params[:id].to_i }
+    @professional_development = ProfessionalDevelopment.find(params[:id])
+    @pd_registrations = @professional_development.pd_registrations
   end
 
   def new
     @professional_development = ProfessionalDevelopment.new
-    load_ordered_pds
   end
 
   def edit
-    @professional_development = @professional_developments.find { |pd| pd.id == params[:id].to_i }
+    @professional_development = ProfessionalDevelopment.find(params[:id])
+    @pd_registrations = @professional_development.pd_registrations
   end
 
   def create
-    flash[:danger] = "Create is not yet implemented."
-    redirect_to new_professional_development_path
+    @professional_development = ProfessionalDevelopment.find_by(name: professional_development_params[:name])
+    if @professional_development
+      flash.now[:alert] = "A professional development with the name #{@professional_development.name} already exists."
+      render :new
+    end
+    @professional_development = ProfessionalDevelopment.new(professional_development_params)
+    if !@professional_development.save
+      flash.now[:alert] = "Failed to save #{@professional_development.name}: #{@professional_development.errors.full_messages.join(", ")}"
+      render :new
+    end
+    redirect_to professional_developments_path, success: "Professional development created successfully."
   end
 
   def update
-    flash[:danger] = "Update feature is not yet implemented."
-    redirect_to edit_professional_development_path
+    @professional_development = ProfessionalDevelopment.find(params[:id])
+    @pd_registrations = @professional_development.pd_registrations
+    if !@professional_development.update(professional_development_params)
+      flash.now[:alert] = "Failed to save #{@professional_development.name}: #{@professional_development.errors.full_messages.join(", ")}"
+      render "edit"
+    end
+    redirect_to professional_developments_path, success: "Saved #{@professional_development.name}"
   end
 
   def destroy
-    flash[:danger] = "Destroy feature is not yet implemented."
-    redirect_to professional_developments_path
+    if !@professional_development.destroy
+      redirect_back(fallback_location: professional_developments_path, alert: "Failed to delete #{@professional_development.name}")
+    end
+    redirect_to professional_developments_path, success: "Deleted #{@professional_development.name} successfully."
   end
 
   def set_pds
@@ -84,9 +103,5 @@ class ProfessionalDevelopmentsController < ApplicationController
         ]
       )
     ]
-  end
-
-  def load_ordered_pds
-    #   not yet implemented
   end
 end

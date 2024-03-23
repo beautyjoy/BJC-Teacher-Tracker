@@ -41,6 +41,8 @@ class ProfessionalDevelopment
   attribute :registration_open, :boolean
   attribute :pd_registrations, default: []
 
+  validates :name, presence: { message: "can't be blank" }, uniqueness: { message: "must be unique" }
+
   GRADE_LEVELS = {
     elementary: 0,
     middle_school: 1,
@@ -48,6 +50,9 @@ class ProfessionalDevelopment
     community_college: 3,
     university: 4
   }.freeze
+
+  has_many :pd_registrations
+  has_many :teachers, through: :pd_registrations
 
   def initialize(attributes = {})
     super(attributes)

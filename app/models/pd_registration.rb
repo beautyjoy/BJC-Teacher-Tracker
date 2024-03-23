@@ -13,6 +13,12 @@ class PdRegistration
   attribute :role, :string
   attribute :teacher_name, :string # Adding this for convenience in mocking
 
+  # probably don't need the 3 id attributes (id, teacherid, pdid) if adding this relationship status into model
+  belongs_to :professional_development
+  belongs_to :teacher
+
+  validates :professional_development_id, uniqueness: { scope: :teacher_id, message: "Teacher already has a registration for this PD" }
+
   def initialize(attributes = {})
     super(attributes)
   end
