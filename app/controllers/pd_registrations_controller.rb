@@ -25,7 +25,7 @@ class PdRegistrationsController < ApplicationController
   # Create and update do NOT support admin overriding user functionality yet, only normal user functionality
   def create
     @professional_development = pd_name_to_pd()
-    if (!@professional_development)
+    if !@professional_development
       flash.now[:alert] = "Failed to save registration: No PD with that name exists.}"
       render :new
     end
@@ -41,7 +41,7 @@ class PdRegistrationsController < ApplicationController
 
   def update
     @professional_development = pd_name_to_pd()
-    if (!@professional_development)
+    if !@professional_development
       flash.now[:alert] = "Failed to save registration: No PD with that name exists.}"
       render :new
     end
@@ -72,6 +72,6 @@ class PdRegistrationsController < ApplicationController
     if professional_development.nil? || !professional_development.registration_open
       return nil
     end
-    return professional_development
+    professional_development
   end
 end
