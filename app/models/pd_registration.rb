@@ -2,7 +2,7 @@
 
 # This class is a mock representation of the PdRegistration model.
 # In the final application, Professional Developments and Teachers are associated through PdRegistrations.
-class PdRegistration
+class PdRegistration < ApplicationRecord
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -12,6 +12,13 @@ class PdRegistration
   attribute :attended, :boolean
   attribute :role, :string
   attribute :teacher_name, :string # Adding this for convenience in mocking
+
+  # probably don't need the 3 id attributes (id, teacherid, pdid) if adding this relationship status into model
+  belongs_to :professional_development
+  belongs_to :teacher
+
+  # if teacher should only have one registration per pd
+  validates :professional_development_id, uniqueness: { scope: :teacher_id, message: "Teacher already has a registration for this PD" }
 
   def initialize(attributes = {})
     super(attributes)

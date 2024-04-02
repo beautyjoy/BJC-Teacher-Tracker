@@ -24,7 +24,7 @@
 # This class is a mock representation of the ProfessionalDevelopment model.
 # In the final application, Professional Developments and Teachers are associated through PdRegistrations.
 # This mock setup uses arrays of mock PdRegistration objects to simulate many-to-many relationships.
-class ProfessionalDevelopment
+class ProfessionalDevelopment < ApplicationRecord
   include ActiveModel::Model
   include ActiveModel::Attributes # Make sure this is included
 
@@ -41,6 +41,9 @@ class ProfessionalDevelopment
   attribute :registration_open, :boolean
   attribute :pd_registrations, default: []
 
+  # Assuming that the names will have to be unique, to make it possible for teachers to link registration to pd
+  validates :name, presence: { message: "can't be blank" }, uniqueness: { message: "must be unique" }
+
   GRADE_LEVELS = {
     elementary: 0,
     middle_school: 1,
@@ -48,6 +51,9 @@ class ProfessionalDevelopment
     community_college: 3,
     university: 4
   }.freeze
+
+  has_many :pd_registrations
+  has_many :teachers, through: :pd_registrations
 
   def initialize(attributes = {})
     super(attributes)
