@@ -170,7 +170,6 @@ class Teacher < ApplicationRecord
 
   def self.language_options
     WORLD_LANGUAGES
-    # language_codes = ISO3166::Country.all.map { |country| country.languages}.flatten.uniq
   end
 
   def display_languages
