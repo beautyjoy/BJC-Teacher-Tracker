@@ -18,7 +18,7 @@
     <div class="row mt-3 pb-3">
       <% [['Location', @professional_development.location],
           ['Dates', "#{@professional_development.start_date.to_s} to #{@professional_development.end_date.to_s}"],
-          ['GradeLevel', @professional_development.display_grade_level]].each do |label, value| %>
+          ['Grade Level', @professional_development.display_grade_level]].each do |label, value| %>
         <div class="col-sm-4">
           <h5><%= label %></h5>
           <%= value %>
@@ -28,7 +28,10 @@
 
     <hr>
     <div class="row mt-5 pb-3">
-      <h4>PD Registrations</h4>
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <h4>PD Registrations</h4>
+        <h5>Total Registered Teachers: <%= @professional_development.pd_registrations.count %></h5>
+      </div>
       <div class="col-12 mb-3">
         <%= button_tag "Add Teacher", type: 'button', class: "btn btn-success", data: { toggle: "modal", target: "#addTeacherModal" } %>
       </div>
@@ -36,6 +39,7 @@
         <table class="table table-striped">
           <thead>
           <tr>
+            <th>Teacher ID</th>
             <th>Teacher Name</th>
             <th>PD Session</th>
             <th>Attended</th>
@@ -46,6 +50,7 @@
           <tbody>
           <% @professional_development.pd_registrations.each do |registration| %>
             <tr>
+              <td data-teacher-id><%= registration.teacher_id %></td>
               <td data-teacher-name><%= link_to(registration.teacher_name, teacher_path(registration.teacher_id)) %></td>
               <td><%= @professional_development.name %></td>
               <td data-attended><%= registration.attended ? 'Yes' : 'No' %></td>
@@ -77,13 +82,13 @@
       <div class="modal-body">
         <%= form_for :pd_registration, url: professional_development_pd_registrations_path(@professional_development), method: :post do |f| %>
           <div class="form-group">
-            <%= f.label :teacher_name, "Teacher Name" %>
-            <%= f.text_field :teacher_name, class: "form-control", placeholder: "Enter teacher name", required: true %>
+            <%= f.label :teacher_id, "Teacher ID" %>
+            <%= f.text_field :teacher_id, class: "form-control", placeholder: "Enter teacher id", required: true %>
           </div>
 
           <div class="form-group">
             <%= f.label :role, "Role" %>
-            <%= f.select :role, [['Leader', 'Leader'], ['Attendee', 'Attendee']], { prompt: "Select your role" }, { class: "form-control", required: true } %>
+            <%= f.select :role, [['Leader', 'leader'], ['Attendee', 'attendee']], { prompt: "Select your role" }, { class: "form-control", required: true } %>
           </div>
 
           <div class="form-group">
@@ -117,9 +122,9 @@
             form.reset();
         }
 
-        function populateModalForm({ teacher_name, role, attended }) {
-            console.log("Populating form with data:", { teacher_name, role, attended });
-            document.querySelector('[name="pd_registration[teacher_name]"]').value = teacher_name;
+        // Fill in the old values in the form for easier editing
+        function populateModalForm({ teacher_id, role, attended }) {
+            document.querySelector('[name="pd_registration[teacher_id]"]').value = teacher_id;
             setDropdownValue('[name="pd_registration[role]"]', role);
             setDropdownValue('[name="pd_registration[attended]"]', String(attended));
         }
@@ -139,17 +144,17 @@
         }
 
         function setupModalForUpdate(button, pdId) {
-            const {teacher_name, role, attended} = extractTeacherData(button);
-            populateModalForm({ teacher_name, role, attended });
+            const {teacher_id, role, attended} = extractTeacherData(button);
+            populateModalForm({ teacher_id, role, attended });
             modalLabel.textContent = 'Edit Teacher in PD Session';
-            const registrationId = button.getAttribute("data-registration_id");
+            const registrationId = button.getAttribute("data-registration-id");
             setFormActionForUpdate(pdId, registrationId);
         }
 
         function extractTeacherData(button) {
             const row = button.closest('tr');
             return {
-                teacher_name: row.querySelector('[data-teacher-name]').textContent,
+                teacher_id: row.querySelector('[data-teacher-id]').textContent,
                 role: row.querySelector('[data-role]').textContent,
                 attended: row.querySelector('[data-attended]').textContent === 'Yes'
             };
@@ -157,6 +162,7 @@
 
         function setFormActionForUpdate(pdId, registrationId) {
             form.action = `/professional_developments/${pdId}/pd_registrations/${registrationId}`;
+            console.debug("Setting form action to:", form.action);
             form.method = 'post';
             ensureMethodInput('patch');
         }

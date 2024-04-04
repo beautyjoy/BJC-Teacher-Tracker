@@ -25,7 +25,7 @@
 
   <div class='col-4' id="state_select_container">
     <%= f.label :state, class: "label-required", for: "professional_development_state" %>
-    <%= f.select :state, School::VALID_STATES, { include_blank: "State" }, { id: "state_select", class: 'form-control' } %>
+    <%= f.select :state, ProfessionalDevelopment::VALID_STATES, { include_blank: "State" }, { id: "state_select", class: 'form-control' } %>
   </div>
 
   <div class='col-4' id="state_textfield_container">
@@ -69,13 +69,13 @@
                 stateTextfieldContainer.hide();
 
                 stateTextfield.removeAttr('name');
-                stateSelect.attr('name', 'mock_professional_development[state]');
+                stateSelect.attr('name', 'professional_development[state]');
             } else {
                 stateTextfieldContainer.show().attr('required', false);
                 stateSelectContainer.hide();
 
                 stateSelect.removeAttr('name');
-                stateTextfield.attr('name', 'mock_professional_development[state]');
+                stateTextfield.attr('name', 'professional_development[state]');
             }
         }
         countrySelected.change(handleCountryChange);

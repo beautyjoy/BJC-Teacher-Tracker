@@ -9,7 +9,8 @@
     <th scope="col">Start Date</th>
     <th scope="col">End Date</th>
     <th scope="col">Grade Level</th>
-    <th scope="col">Registration Open</th>
+<!--    skip this for now-->
+<!--    <th scope="col">Registration Open</th>-->
     <th scope="col">Actions</th>
   </tr>
   </thead>
@@ -21,7 +22,6 @@
       <td><%= pd.start_date %></td>
       <td><%= pd.end_date %></td>
       <td><%= pd.display_grade_level %></td>
-      <td><%= pd.registration_open ? 'Yes' : 'No' %></td>
       <td>
         <span class="btn-group">
           <%= link_to("Edit", edit_professional_development_path(pd), class: "btn btn-info") %>
