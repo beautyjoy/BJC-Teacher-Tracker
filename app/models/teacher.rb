@@ -181,8 +181,8 @@ class Teacher < ApplicationRecord
   end
 
   def sort_and_clean_languages
-    # a weird selectize bug results in the empty string sometimes included in languages
-    # so remove all occurences of empty string
+    # Due to an identified bug in the Selectize plugin, an empty string is occasionally appended to the 'languages' list.
+    # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
     languages.sort!.reject!(&:blank?)
   end
 
