@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_07_225738) do
+ActiveRecord::Schema.define(version: 2024_04_04_191433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,29 @@ ActiveRecord::Schema.define(version: 2024_03_07_225738) do
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
+  create_table "pd_registrations", force: :cascade do |t|
+    t.integer "teacher_id", null: false
+    t.integer "professional_development_id", null: false
+    t.boolean "attended", default: false
+    t.string "role", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["teacher_id", "professional_development_id"], name: "index_pd_reg_on_teacher_id_and_pd_id", unique: true
+  end
+
+  create_table "professional_developments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "city", null: false
+    t.string "state"
+    t.string "country", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "grade_level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "start_date"], name: "index_professional_developments_on_name_and_start_date", unique: true
+  end
+
   create_table "schools", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -130,5 +153,7 @@ ActiveRecord::Schema.define(version: 2024_03_07_225738) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pages", "teachers", column: "creator_id"
   add_foreign_key "pages", "teachers", column: "last_editor_id"
+  add_foreign_key "pd_registrations", "professional_developments"
+  add_foreign_key "pd_registrations", "teachers"
   add_foreign_key "teachers", "schools"
 end

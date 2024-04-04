@@ -4,75 +4,61 @@
 #
 # Table name: professional_developments
 #
-#  id             :integer          not null, primary key
-#  city           :string
-#  country        :string
-#  grade_level    :integer
-#  lat            :float
-#  lng            :float
-#  name           :string
-#  state          :string
-#  teachers_count :integer          default(0)
-#  website        :string           TODO: Confirm is it necessary field
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id          :bigint           not null, primary key
+#  city        :string           not null
+#  country     :string           not null
+#  end_date    :date             not null
+#  grade_level :integer          not null
+#  name        :string           not null
+#  start_date  :date             not null
+#  state       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  TODO: Define indexes
-
-# This class is a mock representation of the ProfessionalDevelopment model.
-# In the final application, Professional Developments and Teachers are associated through PdRegistrations.
-# This mock setup uses arrays of mock PdRegistration objects to simulate many-to-many relationships.
+#  index_professional_developments_on_name_and_start_date  (name,start_date) UNIQUE
+#
 class ProfessionalDevelopment < ApplicationRecord
-  include ActiveModel::Model
-  include ActiveModel::Attributes # Make sure this is included
+  VALID_STATES = %w[AL AK AS AZ AR CA CO CT DE DC FM FL GA GU HI ID IL IN IA KS KY LA ME MH MD MA MI MN MS MO MT NE NV
+                    NH NJ NM NY NC ND MP OH OK OR PW PA PR RI SC SD TN TX UT VT VI VA WA WV WI WY].freeze
 
-  # Define attributes
-  attribute :id, :integer
-  attribute :name, :string
-  attribute :city, :string
-  attribute :state, :string
-  attribute :country, :string
-  attribute :start_date, :date
-  attribute :end_date, :date
-  attribute :grade_level, :integer, default: -1
-  attribute :teachers_count, :integer, default: 0
-  attribute :registration_open, :boolean
-  attribute :pd_registrations, default: []
+  validates :name, :city, :country, :start_date, :end_date, presence: true
+  validates :name, uniqueness: { scope: :start_date, message: "should be unique per start date" }
+  validates :state, presence: true, if: -> { country == "US" }
+  validates :state, inclusion: { in: VALID_STATES, message: "%{value} is not a valid state" },
+            if: -> { country == "US" }
+  validate :end_date_after_start_date
 
-  # Assuming that the names will have to be unique, to make it possible for teachers to link registration to pd
-  validates :name, presence: { message: "can't be blank" }, uniqueness: { message: "must be unique" }
-
-  GRADE_LEVELS = {
+  enum grade_level: {
     elementary: 0,
     middle_school: 1,
     high_school: 2,
     community_college: 3,
     university: 4
-  }.freeze
+  }
 
-  has_many :pd_registrations
+  has_many :pd_registrations, dependent: :destroy
   has_many :teachers, through: :pd_registrations
-
-  def initialize(attributes = {})
-    super(attributes)
-    # Now ActiveModel handles attributes, no need to manually set defaults for attributes defined above
-  end
-
-  def persisted?
-    id.present?
-  end
 
   def location
     "#{city}, #{state}, #{country}"
   end
 
   def display_grade_level
-    # Directly access the grade_level attribute
-    grade_level_value = self.grade_level
-    return "Unknown" if grade_level_value == -1
+    return "Unknown" if grade_level_before_type_cast.to_i == -1
 
-    GRADE_LEVELS.key(grade_level_value).to_s.titlecase
+    grade_level.to_s.titlecase
+  end
+
+  def registration_open
+    @professional_development.registration_open ? "Yes" : "No"
+  end
+
+  private
+  def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
+
+    errors.add(:end_date, "must be after the start date") if end_date < start_date
   end
 end
