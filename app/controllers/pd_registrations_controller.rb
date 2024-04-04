@@ -53,7 +53,6 @@ class PdRegistrationsController < ApplicationController
   end
 
   private
-
   def set_pd_registration
     @pd_registration = PdRegistration.find(params[:id])
   rescue ActiveRecord::RecordNotFound
