@@ -70,3 +70,16 @@ And(/^I follow the page link "(.*)"/) do |link_text|
   page_slug = Page.find_by(title: link_text).url_slug
   page.execute_script("document.getElementById('pagelink_#{page_slug}').click();")
 end
+
+
+When(/^I confirm the action$/) do
+  # Confirm the alert that appears after triggering a confirmation dialog
+  page.accept_alert do
+  end
+end
+
+When(/^I dismiss the action$/) do
+  # Dismiss the alert that appears after triggering a confirmation dialog
+  page.dismiss_confirm do
+  end
+end
