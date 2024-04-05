@@ -43,9 +43,11 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I select "Spanish" from the languages dropdown
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  And   the languages dropdown should have the option "Spanish" selected
 
 Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
   Given the following schools exist:

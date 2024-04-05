@@ -119,6 +119,23 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <div class='form-group row'>
     <div class='col-12'>
+      <%= f.label :languages, "What language(s) are spoken in the classroom?", 
+      class: "label-required" %>
+      <%= f.select(
+      :languages,
+      options_for_select(Teacher.language_options, @teacher.languages),
+      {},
+      multiple: true,
+      include_blank: "Select an option",
+      class: 'selectize', required: true
+) %>
+    </div>
+  </div>
+
+  
+
+  <div class='form-group row'>
+    <div class='col-12'>
       <%= f.label :more_info, "More Information", class: "label-required" %>
       <%= f.text_area :more_info, placeholder: "I applied for access because...",
         class: "form-control", required: true, rows: "2" %>
@@ -143,6 +160,12 @@ status ONLY IF the person viewing this page is an admin. %>
 <script>
 
   $(document).ready(function() {
+    $('.selectize').selectize({
+      plugins: ['remove_button'],
+      delimiter: ",",
+      persist: false,
+      create: false
+    });
     //on loading the page, immediately update the reason field depending on 
     //the value of the application status
     updateReasonField();
