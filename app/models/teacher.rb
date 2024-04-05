@@ -177,7 +177,7 @@ class Teacher < ApplicationRecord
   end
 
   def valid_languages
-    languages.all? { |value| WORLD_LANGUAGES.include?(value) }
+    !languages.empty? && languages.all? { |value| WORLD_LANGUAGES.include?(value) }
   end
 
   def sort_and_clean_languages
