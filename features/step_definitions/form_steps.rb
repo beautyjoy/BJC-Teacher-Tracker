@@ -20,6 +20,18 @@ Given(/^I set my status as "(.*)"$/) do |input|
   select(input, from: STATUS_FIELD)
 end
 
+Given(/^I set my application status as "(.*)"$/) do |input|
+  select(input, from: "application_status_select_value")
+end
+
+Given(/^I set my request reason as "(.*)"$/) do |input|
+  fill_in("request_reason", with: input)
+end
+
+Given(/^I select "(.*)" from the skip email notification dropdown$/) do |input|
+  select(input, from: "skip_email")
+end
+
 Given(/^I set my education level target as "(.*)"$/) do |input|
   select(input, from: EDUCATION_FIELD)
 end
