@@ -20,7 +20,7 @@ module ApplicationHelper
       "Schools": schools_path,
       "Teachers": teachers_path,
       "Email Templates": email_templates_path,
-      "Professional Developments": professional_developments_path,
+      "PD": professional_developments_path,
     }
   end
 
