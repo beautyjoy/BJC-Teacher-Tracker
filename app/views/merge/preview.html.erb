@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Merge <%= @merge_teacher.full_name %> into <%= @teacher.full_name %></title>
+  <style>
+    .teacher-info {
+      display: flex;
+    }
+
+    .teacher-info .teacher {
+      flex: 1;
+    }
+
+    .teacher-info .teacher + .teacher {
+      margin-left: 20px; /* Adjust the margin as needed */
+    }
+  </style>
+</head>
+<body>
+  <%= content_tag :h1, "Preview Merge of #{@merge_teacher.full_name} into #{@teacher.full_name}" %>
+  
+  <div class="teacher-info">
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @teacher %>
+    <% end %>
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @merge_teacher %>
+    <% end %>
+  </div>
+</body>
+</html>
