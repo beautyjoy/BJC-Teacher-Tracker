@@ -29,8 +29,6 @@ class PdRegistration < ApplicationRecord
   validates :role, inclusion: { in: %w[leader attendee], message: "%{value} is not a valid role" }
   validates :attended, inclusion: { in: [true, false] }
 
-  validate :professional_development_dates_passed, on: :create
-
   def teacher_name
     teacher = Teacher.find_by(id: teacher_id)
     if teacher.present?
@@ -38,12 +36,5 @@ class PdRegistration < ApplicationRecord
     else
       "Teacher not found"
     end
-  end
-
-  private
-  def professional_development_dates_passed
-    return unless professional_development&.end_date&.past?
-
-    errors.add(:professional_development_id, "can't register for past events")
   end
 end
