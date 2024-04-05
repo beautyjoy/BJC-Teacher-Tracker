@@ -9,7 +9,7 @@ RSpec.describe SchoolsController, type: :request do
 
   before(:all) do
     @create_school_name = "University of California, Berkeley"
-    @fail_flash_alert = /Failed to submit information :\(/
+    @fail_flash_error_text = "An error occurred: "
     @success_flash_alert = Regexp.new("Created #{@create_school_name} successfully.")
   end
 
@@ -72,7 +72,8 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.find_by(name: @create_school_name)).to be_nil
-      expect(flash[:alert]).to match @fail_flash_alert
+      error = @fail_flash_error_text + "City can't be blank"
+      expect(flash[:alert]).to match error
 
       post schools_path, params: {
         school: {
@@ -88,7 +89,8 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.find_by(name: @create_school_name)).to be_nil
-      expect(flash[:alert]).to match @fail_flash_alert
+      error = @fail_flash_error_text + "Website can't be blank, Website is invalid"
+      expect(flash[:alert]).to match error
 
       post schools_path, params: {
         school: {
@@ -104,7 +106,8 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.find_by(name: @create_school_name)).to be_nil
-      expect(@fail_flash_alert).to match flash[:alert]
+      error = @fail_flash_error_text + "Name can't be blank"
+      expect(flash[:alert]).to match error
     end
 
     it "requires proper inputs for fields" do
@@ -124,7 +127,8 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.find_by(name: @create_school_name)).to be_nil
-      expect(@fail_flash_alert).to match flash[:alert]
+      error = @fail_flash_error_text + "State is not included in the list"
+      expect(flash[:alert]).to match error
 
       post schools_path, params: {
         school: {
@@ -140,7 +144,8 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.find_by(name: @create_school_name)).to be_nil
-      expect(@fail_flash_alert).to match flash[:alert]
+      error = @fail_flash_error_text + "Website is invalid"
+      expect(flash[:alert]).to match error
 
       # Incorrect school type
       expect { post schools_path, params: {
@@ -177,6 +182,43 @@ RSpec.describe SchoolsController, type: :request do
           }
       }.to raise_error(ArgumentError)
       expect(School.find_by(name: @create_school_name)).to be_nil
+    end
+
+    it "does not allow invalid country" do
+      post schools_path, params: {
+        school: {
+          name: @create_school_name,
+          city: "Test City",
+          country: "XX", # invalid country
+          state: "CA",
+          website: "www.berkeley.edu",
+          school_type: "public",
+          grade_level: "university",
+          tags: [],
+          nces_id: 123456789000
+        }
+      }
+      expect(School.find_by(name: @create_school_name)).to be_nil
+      error = @fail_flash_error_text + "Country XX is not a valid country"
+      expect(flash[:alert]).to match error
+    end
+
+    it "allows any state when country is not US" do
+      post schools_path, params: {
+        school: {
+          name: @create_school_name,
+          city: "Ottawa",
+          country: "CA", # Canada
+          state: "Ontario",
+          website: "www.berkeley.edu",
+          school_type: "public",
+          grade_level: "university",
+          tags: [],
+          nces_id: 123456789000
+        }
+      }
+      expect(School.find_by(name: @create_school_name)).not_to be_nil
+      expect(@success_flash_alert).to match flash[:success]
     end
 
     it "does not create duplicate schools in the same city" do

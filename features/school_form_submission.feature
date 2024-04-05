@@ -70,7 +70,7 @@ Scenario: User can create an international school
     And   I fill in the school name selectize box with "Bucharest International School" and choose to add a new school
     And   I select "Romania" from "Country"
     And   I enter my "City" as "Bucharest"
-    And   I enter my "State" as "Bucharest, Sector 1"
+    And   I fill in state with "Bucharest, Sector 1"
     And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I select "University" from "Grade Level"
     And   I select "Public" from "School Type"
@@ -90,7 +90,7 @@ Scenario: Admin can see international schools in the submission
     And   I fill in the school name selectize box with "Bucharest International School" and choose to add a new school
     And   I select "Romania" from "Country"
     And   I enter my "City" as "Bucharest"
-    And   I enter my "State" as "Bucharest, Sector 1"
+    And   I fill in state with "Bucharest, Sector 1"
     And   I enter my "School Website" as "https://chs.fuhsd.org"
     And   I select "University" from "Grade Level"
     And   I select "Public" from "School Type"

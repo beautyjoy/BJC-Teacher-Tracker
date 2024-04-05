@@ -198,7 +198,8 @@ Feature: basic admin functionality
     And I set my application status as "Validated"
     And I press "Update"
     Then I see a confirmation "Saved"
-    When I check "Validated"
+    When I go to the teachers page
+    And I check "Validated"
     Then I should see "Bobby John"
 
   Scenario: Deny teacher as an admin
@@ -360,6 +361,24 @@ Feature: basic admin functionality
     And I fill in "request_reason" with "Complete your profile details"
     And I press "Submit"
     Then I send a request info email
+
+
+  Scenario: Admin update info without mandatory field shows error
+    Given the following schools exist:
+      | name        | country | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name | admin | email                    | school      |
+      | Jane       | Doe       | false | janedoe@berkeley.edu     | UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When  I go to the teachers page
+    And   I go to the edit page for Jane Doe
+    And   I fill in "teacher_email" with ""
+    And   I press "Update"
+    Then  I should be on the edit page for Jane Doe
 
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
