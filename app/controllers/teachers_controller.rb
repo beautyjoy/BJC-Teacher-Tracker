@@ -215,7 +215,7 @@ class TeachersController < ApplicationController
       teacher_attributes << [:personal_email, :application_status,
       :request_reason, :skip_email]
     end
-    params.require(:teacher).permit(*teacher_attributes)
+    params.require(:teacher).permit(*teacher_attributes, languages: [])
   end
 
   def school_params

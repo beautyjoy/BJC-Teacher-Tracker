@@ -11,6 +11,7 @@
 #  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
+#  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
@@ -37,10 +38,14 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
+  WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
+
   validates :first_name, :last_name, :email, :status, presence: true
   validates :email, uniqueness: true
   validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
   validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
+  validate :valid_languages
+  before_validation :sort_and_clean_languages
 
   enum application_status: {
     validated: "Validated",
@@ -161,6 +166,24 @@ class Teacher < ApplicationRecord
 
   def self.education_level_options
     Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.language_options
+    WORLD_LANGUAGES
+  end
+
+  def display_languages
+    languages.join(", ")
+  end
+
+  def valid_languages
+    !languages.empty? && languages.all? { |value| WORLD_LANGUAGES.include?(value) }
+  end
+
+  def sort_and_clean_languages
+    # Due to an identified bug in the Selectize plugin, an empty string is occasionally appended to the 'languages' list.
+    # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
+    languages.sort!.reject!(&:blank?)
   end
 
   def display_education_level
