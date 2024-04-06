@@ -14,11 +14,37 @@
     .teacher-info .teacher + .teacher {
       margin-left: 20px; /* Adjust the margin as needed */
     }
+
+    .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 1; /* Allow the title to grow to take up remaining space */
+}
+
+.button {
+  margin-left: 10px; /* Adjust margin as needed */
+}
+
+.btn-green {
+  background-color: green;
+}
+
   </style>
 </head>
 <body>
-  <%= content_tag :h1, "Preview Merge of #{@merge_teacher.full_name} into #{@teacher.full_name}" %>
-  
+  <div class="header">
+    <div class="title">
+      <%= content_tag :h1, "Preview Merge of #{@merge_teacher.full_name} into #{@teacher.full_name}" %>
+    </div>
+    <div class="button">
+      <%= link_to "Confirm Merge", merge_path(id: @teacher.id, merge_id: @merge_teacher.id), method: :patch, class: "btn btn-primary confirm-merge-button btn-green" %>
+    </div>
+  </div>
+
   <div class="teacher-info">
     <%= tag.div class: 'teacher' do %>
       <%= render 'teachers/teacher_info', teacher: @merge_teacher, render_edit: true, render_delete: false %>
