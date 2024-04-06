@@ -9,12 +9,18 @@ class MergeController < ApplicationController
   def merge
     @teacher = Teacher.find(params[:id])
     @merge_teacher = Teacher.find(params[:merge_id])
+    @result_teacher = merge_teachers(@teacher, @merge_teacher) 
     # Add logic to merge teachers
-    if @teacher.merge!(@merge_teacher)
-      redirect_to teachers_path, notice: 'Teachers merged successfully.'
-    else
-      render :preview, alert: 'Failed to merge teachers.'
-    end
+    @merge_teacher.destroy
+    @result_teacher.save!
+    redirect_to teachers_path, notice: 'Teachers merged successfully.'
+    #if @merge_teacher.destroy && @result_teacher.save
+      #redirect_to teachers_path, notice: 'Teachers merged successfully.'
+    #else
+    #  @teacher_1 = Teacher.new(@teacher_1.attributes.except('id', 'created_at', 'updated_at'))
+    #  @teacher_1.save!
+    #  render :preview, alert: 'Failed to merge teachers.'
+    #end
   end
 
   private
