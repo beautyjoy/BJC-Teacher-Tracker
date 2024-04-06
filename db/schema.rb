@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 2024_04_04_191433) do
     t.integer "grade_level", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name", "start_date"], name: "index_professional_developments_on_name_and_start_date", unique: true
   end
 
   create_table "schools", id: :serial, force: :cascade do |t|

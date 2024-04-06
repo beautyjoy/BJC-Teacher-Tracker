@@ -15,16 +15,11 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-# Indexes
-#
-#  index_professional_developments_on_name_and_start_date  (name,start_date) UNIQUE
-#
 class ProfessionalDevelopment < ApplicationRecord
   VALID_STATES = %w[AL AK AS AZ AR CA CO CT DE DC FM FL GA GU HI ID IL IN IA KS KY LA ME MH MD MA MI MN MS MO MT NE NV
                     NH NJ NM NY NC ND MP OH OK OR PW PA PR RI SC SD TN TX UT VT VI VA WA WV WI WY].freeze
 
   validates :name, :city, :country, :start_date, :end_date, presence: true
-  validates :name, uniqueness: { scope: :start_date, message: "should be unique per start date" }
   validates :state, presence: true, if: -> { country == "US" }
   validates :state, inclusion: { in: VALID_STATES, message: "%{value} is not a valid state" },
             if: -> { country == "US" }

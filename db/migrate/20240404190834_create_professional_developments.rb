@@ -11,7 +11,5 @@ class CreateProfessionalDevelopments < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-
-    add_index :professional_developments, [:name, :start_date], unique: true
   end
 end
