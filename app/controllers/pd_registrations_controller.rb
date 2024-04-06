@@ -2,6 +2,7 @@
 
 class PdRegistrationsController < ApplicationController
   before_action :require_login
+  before_action :require_admin
   before_action :set_pd_registration, only: [:show, :edit, :update, :destroy]
   before_action :set_professional_development, only: [:new, :create, :edit, :update, :destroy]
 
