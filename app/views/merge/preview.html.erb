@@ -21,10 +21,13 @@
   
   <div class="teacher-info">
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @teacher %>
+      <%= render 'teachers/teacher_info', teacher: @merge_teacher, render_edit: true, render_delete: false %>
     <% end %>
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @merge_teacher %>
+      <%= render 'teachers/teacher_info', teacher: @teacher, render_edit: true, render_delete: false %>
+    <% end %>
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @result_teacher, render_edit: false, render_delete: false %>
     <% end %>
   </div>
 </body>

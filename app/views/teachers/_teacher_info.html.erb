@@ -2,8 +2,12 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <h3><%= teacher.full_name %></h3>
     <div>
-      <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
-      <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% if render_edit %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
+      <% end %>
+      <% if render_delete %>
+        <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% end %>
     </div>
   </div>
   <div class="card-body">

@@ -1,6 +1,6 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
-<%= render 'teacher_info', teacher: @teacher %>
+<%= render 'teacher_info', teacher: @teacher, render_edit: true, render_delete: true %>
 
 <hr>
 <div class='row'>
