@@ -51,7 +51,7 @@ class ProfessionalDevelopmentsController < ApplicationController
   def set_professional_development
     @professional_development = ProfessionalDevelopment.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to professional_developments_url, alert: "Professional development not found. test2"
+    redirect_to professional_developments_url, alert: "Professional development not found."
   end
 
   def professional_development_params

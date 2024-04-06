@@ -62,7 +62,7 @@ class PdRegistrationsController < ApplicationController
   def set_professional_development
     @professional_development = ProfessionalDevelopment.find_by(id: params[:professional_development_id])
     unless @professional_development
-      redirect_to professional_developments_path, alert: "Professional Development not found. test"
+      redirect_to professional_developments_path, alert: "Professional Development not found."
     end
   end
 
