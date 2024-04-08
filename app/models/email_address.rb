@@ -24,10 +24,16 @@
 class EmailAddress < ApplicationRecord
   belongs_to :teacher
 
-  validates :email, presence: true, uniqueness: true
+  # Regular expression for validating the format of an email address
+  # https://stackoverflow.com/a/7791100/23305580
+  EMAIL_REGEX = /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/
+
+
+  validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
   validate :only_one_primary_email_per_teacher
 
   before_save :downcase_email
+  before_save :flag_teacher_if_email_changed
 
   private
   def only_one_primary_email_per_teacher
@@ -38,5 +44,12 @@ class EmailAddress < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def flag_teacher_if_email_changed
+    if self.email_changed? && !self.new_record?
+      teacher.email_changed_flag = true
+      teacher.handle_relevant_changes
+    end
   end
 end

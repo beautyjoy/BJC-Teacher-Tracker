@@ -42,6 +42,9 @@ class Teacher < ApplicationRecord
   validate :valid_languages
   before_validation :sort_and_clean_languages
 
+  # Custom attribute for tracking email changes. This is not persisted in the database.
+  attribute :email_changed_flag, :boolean, default: false
+
   enum application_status: {
     validated: "Validated",
     denied: "Denied",
@@ -213,8 +216,7 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    teacher = EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
-    raise "Teacher not found" unless teacher
+    teacher = EmailAddress.find_by(email: omniauth.primary_email.downcase)&.teacher
     teacher
   end
 
