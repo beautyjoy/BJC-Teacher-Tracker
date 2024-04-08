@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MergeController < ApplicationController
   def preview
     @teacher = Teacher.find(params[:id])
