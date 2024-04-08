@@ -14,12 +14,11 @@ class MergeController < ApplicationController
     puts params.inspect
     @from_teacher = Teacher.find(params[:from])
     @into_teacher = Teacher.find(params[:into])
-    @result_teacher = merge_teachers(@from_teacher, @into_teacher) 
-    #delete old teachers before saving the new merged teacher to prevent
-    #the unique email validation from failing
+    @merged_teacher = merge_teachers(@from_teacher, @into_teacher) 
+
+    merged_attributes = @merged_teacher.attributes.except("id")
+    @into_teacher.update!(merged_attributes)
     @from_teacher.destroy
-    @into_teacher.destroy
-    @result_teacher.save!
     redirect_to teachers_path, notice: "Teachers merged successfully."
   end
 
@@ -32,12 +31,14 @@ class MergeController < ApplicationController
       from_teacher_attr_value = from_teacher.attributes[attr_name]
       if attr_value.blank?
         merged_attributes[attr_name] = from_teacher_attr_value
+      elsif from_teacher_attr_value.blank?
+        merged_attributes[attr_name] = attr_value
       else
         case attr_name
         when "session_count"
           merged_attributes[attr_name] = attr_value + from_teacher_attr_value
         when "ip_history"
-          merged_attributes[attr_name] = attr_value + from_teacher_attr_value
+          merged_attributes[attr_name] = (attr_value + from_teacher_attr_value).uniq
         when "last_session_at"
           # The resulting last session time is the most recent one
           merged_attributes[attr_name] = attr_value > from_teacher_attr_value ? attr_value : from_teacher_attr_value
