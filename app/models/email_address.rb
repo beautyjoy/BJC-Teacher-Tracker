@@ -24,8 +24,7 @@
 class EmailAddress < ApplicationRecord
   belongs_to :teacher
 
-  # Rail's bulit-in validation for email format regex
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true
   validate :only_one_primary_email_per_teacher
 
   before_save :downcase_email
