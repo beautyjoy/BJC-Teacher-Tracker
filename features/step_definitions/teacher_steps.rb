@@ -12,7 +12,7 @@ Given(/I have a teacher (.*) email/) do |login|
       name: "Joseph",
       first_name: "Joseph",
       last_name: "Mamoa",
-      email: "testteacher@berkeley.edu",
+      primary_email: "testteacher@berkeley.edu",
       school: "UC Berkeley",
     },
     credentials: {
@@ -45,7 +45,6 @@ Given(/the following teachers exist/) do |teachers_table|
   teachers_default = {
     first_name: "Alonzo",
     last_name: "Church",
-    email: "alonzo@snap.berkeley.edu",
     snap: "",
     status: "Other - Please specify below.",
     education_level: 1,
@@ -53,7 +52,13 @@ Given(/the following teachers exist/) do |teachers_table|
     admin: false,
     personal_website: "https://snap.berkeley.edu",
     application_status: "Not Reviewed",
-    languages: ["English"]
+    languages: ["English"],
+
+    # Note: primary email field does not exist in the new schema of the Teacher model
+    # Include it in the seed data is to simulate the behavior of creating a new teacher,
+    # because we need to use it to compared with the EmailAddress model,
+    # to determine the existence of the teacher
+    primary_email: "alonzo@snap.berkeley.edu",
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
@@ -68,10 +73,13 @@ Given(/the following teachers exist/) do |teachers_table|
       end
     end
 
+    email = teacher.delete(:primary_email)
+
     school_name = teacher.delete(:school)
     school = School.find_by(name: school_name || "UC Berkeley")
     teacher[:school_id] = school.id
-    Teacher.create!(teacher)
+    teacher = Teacher.create!(teacher)
+    EmailAddress.create!(email:, teacher:, primary: true)
     School.reset_counters(school.id, :teachers)
   end
 end

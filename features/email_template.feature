@@ -4,7 +4,7 @@ Feature: email template features
 
 Background: I am logged in as an admin, and email templates are generated
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        |
+    | first_name | last_name | admin | primary_email                |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
     Given I am on the BJC home page
     Given I have an admin email

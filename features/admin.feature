@@ -6,7 +6,7 @@ Feature: basic admin functionality
 
   Background: Has an Admin in DB
     Given the following teachers exist:
-      | first_name | last_name | admin | email                        |
+      | first_name | last_name | admin | primary_email            |
       | Admin    | User    | true  | testadminuser@berkeley.edu   |
 
   Scenario: Logging in as an admin
@@ -79,7 +79,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | snap   |
+      | first_name | last_name | admin | primary_email            | school      | snap   |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
     Given I am on the BJC home page
     Given I have an admin email
@@ -99,7 +99,7 @@ Feature: basic admin functionality
   |       name            |     country     |     city     |  state  |            website            |
   |   UC Berkeley         |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | languages                      |
+  | first_name | last_name | admin | primary_email            | school      | languages                      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | - English\n- French\n- Spanish |
   Given I am on the BJC home page
   And I have an admin email
@@ -113,7 +113,7 @@ Feature: basic admin functionality
   |       name            |     country     |     city     |  state  |            website            |
   |   UC Berkeley         |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | languages |
+  | first_name | last_name | admin | primary_email            | school      | languages |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | - English\n- Hindi |
   Given I am on the BJC home page
   And I have an admin email
@@ -134,7 +134,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | first_name | last_name  | admin | primary_email            | school      | snap   | application_status |
       | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
     Given I am on the BJC home page
     And I have an admin email
@@ -169,7 +169,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | first_name | last_name  | admin | primary_email            | school      | snap   | application_status |
       | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
     Given I am on the BJC home page
     And I have an admin email
@@ -187,7 +187,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
+      | first_name | last_name  | admin | primary_email            | school      | snap   | application_status |
       | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
     Given I am on the BJC home page
     And I have an admin email
@@ -207,7 +207,7 @@ Feature: basic admin functionality
       | name        |     country     | city     | state | website                  | grade_level | school_type |
       | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      |
+      | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     Given I am on the BJC home page
     Given I have an admin email
@@ -229,7 +229,7 @@ Feature: basic admin functionality
       | name        |     country     | city     | state | website                  | grade_level | school_type |
       | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      |
+      | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
     Then  should see "You need to log in to access this."
@@ -239,7 +239,7 @@ Feature: basic admin functionality
       | name        |     country     | city     | state | website                  | grade_level | school_type |
       | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
-      | first_name | last_name  | admin | email                     | school      | application_status |
+      | first_name | last_name  | admin | primary_email             | school      | application_status |
       | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
       | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
       | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |     Not Reviewed   |
@@ -263,7 +263,7 @@ Feature: basic admin functionality
       | name        |     country     | city     | state | website                  | grade_level | school_type |
       | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | snap   |
+      | first_name | last_name | admin | primary_email           | school      | snap   |
       | Joseph     | Test     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
     Given I am on the BJC home page
     Given I have an admin email
@@ -284,7 +284,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | snap   |
+      | first_name | last_name | admin | primary_email               | school      | snap   |
       | Joseph     | Mamoa New    | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
     Given I am on the BJC home page
     Given I have an admin email
@@ -308,7 +308,7 @@ Feature: basic admin functionality
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | snap   | application_status |
+      | first_name | last_name | admin | primary_email            | school      | snap   | application_status |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
     Given I am on the BJC home page
     Given I have an admin email
@@ -345,7 +345,7 @@ Feature: basic admin functionality
       | name        |     country     | city     | state | website                  | grade_level | school_type |
       | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name | last_name | admin | email                    | school      |
+      | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     And I am on the BJC home page
     And I have an admin email
@@ -368,7 +368,7 @@ Feature: basic admin functionality
       | name        | country | city     | state | website                  | grade_level | school_type |
       | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name | last_name | admin | email                    | school      |
+      | first_name | last_name | admin | primary_email            | school      |
       | Jane       | Doe       | false | janedoe@berkeley.edu     | UC Berkeley |
     Given I am on the BJC home page
     And   I have an admin email
@@ -376,7 +376,7 @@ Feature: basic admin functionality
     Then  I can log in with Google
     When  I go to the teachers page
     And   I go to the edit page for Jane Doe
-    And   I fill in "teacher_email" with ""
+    And   I fill in "teacher_primary_email" with ""
     And   I press "Update"
     Then  I should be on the edit page for Jane Doe
 

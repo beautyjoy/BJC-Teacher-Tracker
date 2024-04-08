@@ -18,7 +18,7 @@ Given(/I have an admin email/) do
                                                                          name: "Admin User",
                                                                          first_name: "Admin",
                                                                          last_name: "User",
-                                                                         email: "testadminuser@berkeley.edu",
+                                                                         primary_email: "testadminuser@berkeley.edu",
                                                                          school: "UC Berkeley"
                                                                        }
                                                                      })
@@ -34,7 +34,7 @@ Given(/I have a non-admin, unregistered (.*) email/) do |login|
                                                                   name: "Random User",
                                                                   first_name: "Random",
                                                                   last_name: "User",
-                                                                  email: "randomemail@berkeley.edu",
+                                                                  primary_email: "randomemail@berkeley.edu",
                                                                   school: "UC Berkeley",
                                                                 }
                                                               })
@@ -79,6 +79,9 @@ Then(/I send a form submission email to both admin and teacher with email "(.*)"
   # sent first, as this is how it is implemented in the code
   admin_fs_email = ActionMailer::Base.deliveries[-2]
   teacher_fs_email = ActionMailer::Base.deliveries.last
+
+  expect(admin_fs_email).not_to eq nil
+  expect(teacher_fs_email).not_to eq nil
   admin_fs_email.subject.should eq "Form Submission"
   admin_fs_email.to[0].should eq "lmock@berkeley.edu"
   admin_fs_email.to[1].should eq "contact@bjc.berkeley.edu"

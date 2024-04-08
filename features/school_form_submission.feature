@@ -9,7 +9,7 @@ Scenario: Viewing the schools page should show the all current schools
     |   UC Irvine       |       US        |   Irvine     |   CA    |   https://www.uci.edu         |
     |   UC Scam Diego   |       US        |   La Jolla   |   CA    |   https://www.ucsd.edu        |
     And the following teachers exist:
-    |  first_name  |   last_name   |  admin  |          email        |    school   |
+    |  first_name  |   last_name   |  admin  |       primary_email        |    school   |
     |    Admin     |      User     |   true  | testadminuser@berkeley.edu | UC Berkeley |
     |    Joseph    |     Mamoa     |  false  | jmomoa@berkeley.edu   | UC Berkeley |
     |    Dwayne    |    Johnson    |  false  | djohnson@berkeley.edu | UC Berkeley |
@@ -26,7 +26,7 @@ Scenario: Viewing the schools page should show the all current schools
 
 Scenario: Admins can see Tags and NCES ID
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        |
+    | first_name | last_name | admin | primary_email                |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
     Given I am on the BJC home page
     Given I have an admin email
@@ -39,7 +39,7 @@ Scenario: Admins can see Tags and NCES ID
 
 Scenario: Admins can create new schools
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        |
+    | first_name | last_name | admin | primary_email                |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
     Given I am on the BJC home page
     Given I have an admin email
