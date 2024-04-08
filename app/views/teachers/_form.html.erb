@@ -57,8 +57,8 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <div class='form-group row'>
     <div class='col-6'>
-      <%= f.label :email, "School Email", class: "label-required" %>
-      <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
+      <%= f.label :primary_email, "School Email", class: "label-required" %>
+      <%= f.text_field :primary_email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
         required: true, type: :email, readonly: @readonly %>
     </div>
 
@@ -81,13 +81,14 @@ status ONLY IF the person viewing this page is an admin. %>
   </div>
 
   <%# For now... only admins can enter/edit personal emails. %>
-  <%- if current_user&.admin? || @teacher.personal_email.present? %>
+
+  <%- if current_user&.admin? || @teacher.personal_emails.present? %>
   <div class="form-group row">
     <div class='col-12'>
       <%= f.label :personal_email do %>
         Personal Email</i>
       <% end %>
-      <%= f.text_field :personal_email, placeholder: 'alonzo@gmail.com', class: 'form-control',
+      <%= f.text_field :personal_emails, placeholder: 'alonzo@gmail.com', class: 'form-control',
         required: false, type: :email, readonly: @readonly %>
     </div>
   </div>
