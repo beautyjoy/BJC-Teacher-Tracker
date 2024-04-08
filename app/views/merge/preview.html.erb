@@ -33,12 +33,19 @@
   background-color: green;
 }
 
+.btn-orange {
+  background-color: orange;
+}
+
   </style>
 </head>
 <body>
   <div class="header">
     <div class="title">
       <%= content_tag :h1, "Preview Merge of #{@merge_teacher.full_name} into #{@teacher.full_name}" %>
+    </div>
+    <div class="button">
+      <%= link_to "Switch Merge Order", merge_path(id: @teacher.id, merge_id: @merge_teacher.id), method: :patch, class: "btn btn-primary switch-merge-button btn-orange" %>
     </div>
     <div class="button">
       <%= link_to "Confirm Merge", merge_path(id: @teacher.id, merge_id: @merge_teacher.id), method: :patch, class: "btn btn-primary confirm-merge-button btn-green" %>
