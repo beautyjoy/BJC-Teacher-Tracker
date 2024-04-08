@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -28,8 +27,7 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 
-  #routes for merging teachers (accessible to ADMIN ONLY)
-  get 'merge/:id/:merge_id', to: 'merge#preview', as: 'preview_merge'
-  patch 'merge/:id/:merge_id', to: 'merge#merge', as: 'merge'
-
+  # routes for merging teachers (accessible to ADMIN ONLY)
+  get "merge/:id/:merge_id", to: "merge#preview", as: "preview_merge"
+  patch "merge/:id/:merge_id", to: "merge#merge", as: "merge"
 end
