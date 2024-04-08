@@ -60,7 +60,7 @@ RSpec.describe TeachersController, type: :controller do
       teacher: {
         first_name: "valid_example",
         last_name: "valid_example",
-        email: "valid_example@valid_example.edu",
+        primary_email: "valid_example@validexample.edu",
         status: 0,
         snap: "valid_example"
       }
@@ -74,7 +74,9 @@ RSpec.describe TeachersController, type: :controller do
       school: {
         id: 1
       },
-      teacher: Teacher.first.attributes
+      teacher: Teacher.first.attributes.merge(
+        primary_email: EmailAddress.find_by(
+          teacher_id: Teacher.first.id).email)
     }
     expect(response).to redirect_to(login_path)
     expect(flash[:notice]).to match(/Please log in/)
