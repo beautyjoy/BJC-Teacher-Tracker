@@ -12,7 +12,7 @@ Given(/I have a teacher (.*) email/) do |login|
       name: "Joseph",
       first_name: "Joseph",
       last_name: "Mamoa",
-      primary_email: "testteacher@berkeley.edu",
+      email: "testteacher@berkeley.edu",
       school: "UC Berkeley",
     },
     credentials: {

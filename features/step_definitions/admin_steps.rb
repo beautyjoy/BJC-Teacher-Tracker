@@ -18,7 +18,7 @@ Given(/I have an admin email/) do
                                                                          name: "Admin User",
                                                                          first_name: "Admin",
                                                                          last_name: "User",
-                                                                         primary_email: "testadminuser@berkeley.edu",
+                                                                         email: "testadminuser@berkeley.edu",
                                                                          school: "UC Berkeley"
                                                                        }
                                                                      })
@@ -34,7 +34,7 @@ Given(/I have a non-admin, unregistered (.*) email/) do |login|
                                                                   name: "Random User",
                                                                   first_name: "Random",
                                                                   last_name: "User",
-                                                                  primary_email: "randomemail@berkeley.edu",
+                                                                  email: "randomemail@berkeley.edu",
                                                                   school: "UC Berkeley",
                                                                 }
                                                               })

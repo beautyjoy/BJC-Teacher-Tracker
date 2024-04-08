@@ -216,7 +216,7 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    teacher = EmailAddress.find_by(email: omniauth.primary_email.downcase)&.teacher
+    teacher = EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
     teacher
   end
 
@@ -282,6 +282,11 @@ class Teacher < ApplicationRecord
         csv << attributes.map { |attr| user.send(attr) }
       end
     end
+  end
+
+  def email
+    # Default return primary email
+    primary_email
   end
 
   def primary_email
