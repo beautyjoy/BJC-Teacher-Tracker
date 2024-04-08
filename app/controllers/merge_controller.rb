@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MergeController < ApplicationController
   def preview
     puts params.inspect
@@ -18,7 +20,7 @@ class MergeController < ApplicationController
     @from_teacher.destroy
     @into_teacher.destroy
     @result_teacher.save!
-    redirect_to teachers_path, notice: 'Teachers merged successfully.'
+    redirect_to teachers_path, notice: "Teachers merged successfully."
   end
 
   private
@@ -52,5 +54,4 @@ class MergeController < ApplicationController
     merged_teacher = Teacher.new(merged_attributes)
     merged_teacher
   end
-
 end
