@@ -24,12 +24,8 @@
 class EmailAddress < ApplicationRecord
   belongs_to :teacher
 
-  # Regular expression for validating the format of an email address
-  # https://stackoverflow.com/a/7791100/23305580
-  EMAIL_REGEX = /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/
-
-
-  validates :email, presence: true, uniqueness: true, format: { with: EMAIL_REGEX }
+  # Rail's bulit-in validation for email format regex
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate :only_one_primary_email_per_teacher
 
   before_save :downcase_email
