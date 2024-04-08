@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Merge <%= @merge_teacher.full_name %> into <%= @teacher.full_name %></title>
+  <title>Merge <%= @from_teacher.full_name %> into <%= @into_teacher.full_name %></title>
   <style>
     .teacher-info {
       display: flex;
@@ -42,22 +42,22 @@
 <body>
   <div class="header">
     <div class="title">
-      <%= content_tag :h1, "Preview Merge of #{@merge_teacher.full_name} into #{@teacher.full_name}" %>
+      <%= content_tag :h1, "Preview Merge of #{@from_teacher.full_name} into #{@into_teacher.full_name}" %>
     </div>
     <div class="button">
-      <%= link_to "Switch Merge Order", merge_path(id: @teacher.id, merge_id: @merge_teacher.id), method: :patch, class: "btn btn-primary switch-merge-button btn-orange" %>
+      <%= link_to "Switch Merge Order", preview_merge_path(from: @into_teacher.id, into: @from_teacher.id), method: :get, class: "btn btn-primary switch-merge-button btn-orange" %>
     </div>
     <div class="button">
-      <%= link_to "Confirm Merge", merge_path(id: @teacher.id, merge_id: @merge_teacher.id), method: :patch, class: "btn btn-primary confirm-merge-button btn-green" %>
+      <%= link_to "Confirm Merge", merge_path(from: @from_teacher.id, into: @into_teacher.id), method: :patch, class: "btn btn-primary confirm-merge-button btn-green" %>
     </div>
   </div>
 
   <div class="teacher-info">
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @merge_teacher, render_edit: true, render_delete: false %>
+      <%= render 'teachers/teacher_info', teacher: @into_teacher, render_edit: true, render_delete: false %>
     <% end %>
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @teacher, render_edit: true, render_delete: false %>
+      <%= render 'teachers/teacher_info', teacher: @from_teacher, render_edit: true, render_delete: false %>
     <% end %>
     <%= tag.div class: 'teacher' do %>
       <%= render 'teachers/teacher_info', teacher: @result_teacher, render_edit: false, render_delete: false %>
