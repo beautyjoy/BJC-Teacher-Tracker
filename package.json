@@ -15,7 +15,7 @@
     "jquery-ujs": "^1.2.3",
     "popper.js": "^1.16.0",
     "selectize": "^0.12.6",
-    "tinymce": "^5.x",
+    "tinymce": "^7.x",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
