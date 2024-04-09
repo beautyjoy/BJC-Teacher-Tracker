@@ -194,7 +194,6 @@ class TeachersController < ApplicationController
   end
 
   private
-
   def load_teacher
     @teachers = Teacher.all
     @teacher ||= Teacher.find(params[:id])
