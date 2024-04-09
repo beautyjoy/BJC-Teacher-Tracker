@@ -1,0 +1,37 @@
+/* Modal styling */
+.merge_modal {
+    display: none; /* Hide the modal by default */
+    position: fixed; /* Position the modal relative to the viewport */
+    z-index: 1000; /* Ensure the modal appears on top of other elements */
+    left: 0;
+    top: 0;
+    width: 100%; /* Adjust the width of the modal */
+    height: 100%; /* Adjust the height of the modal */
+    overflow: auto; /* Enable scrolling if content exceeds the modal size */
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent black background */
+  }
+
+  /* Modal content */
+  .merge_modal-content {
+    background-color: #fefefe; /* White background for the modal content */
+    margin: 15% auto; /* Center the modal vertically and horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    position: relative; /* Enable positioning of the close button */
+  }
+
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
