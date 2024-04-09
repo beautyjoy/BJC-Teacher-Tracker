@@ -299,6 +299,8 @@ class Teacher < ApplicationRecord
 
   private
   def non_primary_emails
-    email_addresses.where(primary: false)&.pluck(:email)
+    # email_addresses.where(primary: false)&.pluck(:email)
+    # below code is temporary for current PR, to make sure the frontend same as before (only one personal email)
+    email_addresses.where(primary: false)&.pluck(:email)&.first
   end
 end
