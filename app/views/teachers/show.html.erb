@@ -10,17 +10,43 @@
   </div>
 </div>
 
-<table class="table table-striped js-dataTable js-teachersTable">
-  <thead class="thead-dark">
-    <tr>
-      <%= render 'table_headers' %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @all_teachers_except_current.each do |teacher| %>
-    <tr>
-      <%= render 'teacher', teacher: teacher, merge_table: true %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- Modal -->
+<div id="merge-modal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <!-- Your table code goes here -->
+    <table class="table table-striped js-dataTable js-teachersTable">
+      <!-- Table headers -->
+      <thead class="thead-dark">
+        <tr>
+          <%= render 'table_headers', include_id: true %>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody>
+        <% @all_teachers_except_current.each do |teacher| %>
+          <tr>
+            <%= render 'teacher', teacher: teacher, merge_table: true %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+      var modal = $('#merge-modal');
+      var button = $('#merge-button');
+
+      button.click(function() {
+        modal.show();
+      });
+
+      // Close the modal when the close button is clicked
+      $('.close').click(function() {
+        modal.hide();
+      });
+  });
+</script>

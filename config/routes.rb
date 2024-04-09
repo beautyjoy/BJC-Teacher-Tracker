@@ -31,6 +31,6 @@ Rails.application.routes.draw do
   # get 'merge/:id/:merge_id', to: 'merge#preview', as: 'preview_merge'
   # patch 'merge/:id/:merge_id', to: 'merge#merge', as: 'merge'
 
-  get "merge/preview", to: "merge#preview", as: "preview_merge"
-  patch "merge/execute", to: "merge#execute", as: "merge"
+  get "merge/:from/:into/preview", to: "merge#preview", as: "preview_merge"
+  patch "merge/:from/:into/execute", to: "merge#execute", as: "merge"
 end

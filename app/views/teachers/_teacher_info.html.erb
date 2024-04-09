@@ -10,7 +10,6 @@
     <div>
       <% if is_show_page && @is_admin %>
         <button id="merge-button" class="btn btn-warning mr-2">Merge</button>
-        <div id="search-modal" class="modal"></div>
       <% end %>
       <% if render_edit %>
         <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
@@ -133,6 +132,7 @@
 </div>
 
 <script>
+
   function copyToClipboard(text) {
     // Create a temporary textarea element to hold the text to copy
     const textarea = document.createElement("textarea");

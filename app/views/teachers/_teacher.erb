@@ -1,6 +1,9 @@
+<% if merge_table %>
+  <td><%= teacher.id %></td>
+<% end %>
 <td>
   <% if merge_table %>
-    <%= link_to teacher.full_name, preview_merge_path(from: @teacher.id, into: teacher.id), method: :get %>
+    <%= link_to teacher.full_name, preview_merge_path(@teacher.id, teacher.id), method: :get %>
   <% else %>
     <%= link_to(teacher.full_name, teacher_path(teacher)) %>
   <% end %>
