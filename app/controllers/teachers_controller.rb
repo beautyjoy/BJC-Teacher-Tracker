@@ -107,30 +107,22 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     end
     send_email_if_application_status_changed_and_email_resend_enabled
-    if @teacher.denied? && !is_admin?
-      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+
+    if fail_to_update
       return
     end
-    if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
-      return
-    end
-    if !@teacher.save
-      redirect_to edit_teacher_path(current_user.id),
-                alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
-      return
-    end
+
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
+
     if is_admin?
-      redirect_to edit_teacher_path(current_user.id), notice: "Saved #{@teacher.full_name}"
-      return
+      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
     else
       @teacher.try_append_ip(request.remote_ip)
+      redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
     end
-    redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
   end
 
   def send_email_if_application_status_changed_and_email_resend_enabled
@@ -201,6 +193,23 @@ class TeachersController < ApplicationController
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
+  def fail_to_update
+    failed = false
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      failed = true
+    elsif (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
+      flash.now[:alert] = "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
+      render "edit"
+      failed = true
+    elsif !@teacher.save
+      flash.now[:alert] = "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+      render "edit"
+      failed = true
+    end
+    failed
+  end
+
   def load_school
     if teacher_params[:school_id].present?
       @school ||= School.find(teacher_params[:school_id])
@@ -238,22 +247,20 @@ class TeachersController < ApplicationController
   end
 
   def sanitize_params
-    if params[:teacher]
-      if params[:teacher][:status]
-        params[:teacher][:status] = params[:teacher][:status].to_i
-      end
-      if params[:teacher][:education_level]
-        params[:teacher][:education_level] = params[:teacher][:education_level].to_i
-      end
+    teacher = params[:teacher]
+    if teacher && teacher[:status]
+      teacher[:status] = teacher[:status].to_i
+    end
+    if teacher && teacher[:education_level]
+      teacher[:education_level] = teacher[:education_level].to_i
     end
 
-    if params[:school]
-      if params[:school][:grade_level]
-        params[:school][:grade_level] = params[:school][:grade_level].to_i
-      end
-      if params[:school][:school_type]
-        params[:school][:school_type] = params[:school][:school_type].to_i
-      end
+    school = params[:school]
+    if school && school[:grade_level]
+      school[:grade_level] = school[:grade_level].to_i
+    end
+    if school && school[:school_type]
+      school[:school_type] = school[:school_type].to_i
     end
   end
 
