@@ -32,7 +32,7 @@
   <tbody>
     <% @all_teachers.each do |teacher| %>
     <tr>
-      <%= render 'teacher', teacher: teacher %>
+      <%= render 'teacher', teacher: teacher, merge_table: false %>
     </tr>
     <% end %>
   </tbody>
@@ -50,7 +50,7 @@
   <tbody>
     <% @admins.each do |admin| %>
     <tr>
-      <%= render 'teacher', teacher: admin %>
+      <%= render 'teacher', teacher: admin, merge_table: false %>
     </tr>
     <% end %>
   </tbody>

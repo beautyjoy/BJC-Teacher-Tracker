@@ -54,13 +54,13 @@
 
   <div class="teacher-info">
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @from_teacher, render_edit: true, render_delete: false, display_deletion_warning_icon: true %>
+      <%= render 'teachers/teacher_info', teacher: @from_teacher, render_edit: true, render_delete: false, display_deletion_warning_icon: true, is_show_page: false %>
     <% end %>
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @into_teacher, render_edit: true, render_delete: false, display_deletion_warning_icon: false %>
+      <%= render 'teachers/teacher_info', teacher: @into_teacher, render_edit: true, render_delete: false, display_deletion_warning_icon: false, is_show_page: false %>
     <% end %>
     <%= tag.div class: 'teacher' do %>
-      <%= render 'teachers/teacher_info', teacher: @result_teacher, render_edit: false, render_delete: false, display_deletion_warning_icon: false %>
+      <%= render 'teachers/teacher_info', teacher: @result_teacher, render_edit: false, render_delete: false, display_deletion_warning_icon: false, is_show_page: false %>
     <% end %>
   </div>
 </body>

@@ -1,6 +1,6 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
-<%= render 'teacher_info', teacher: @teacher, render_edit: true, render_delete: true, display_deletion_warning_icon: false %>
+<%= render 'teacher_info', teacher: @teacher, render_edit: true, render_delete: true, display_deletion_warning_icon: false, is_show_page: true %>
 
 <hr>
 <div class='row'>
@@ -9,3 +9,18 @@
         class: "btn btn-secondary" %>
   </div>
 </div>
+
+<table class="table table-striped js-dataTable js-teachersTable">
+  <thead class="thead-dark">
+    <tr>
+      <%= render 'table_headers' %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_teachers_except_current.each do |teacher| %>
+    <tr>
+      <%= render 'teacher', teacher: teacher, merge_table: true %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

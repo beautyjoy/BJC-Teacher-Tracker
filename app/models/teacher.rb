@@ -46,6 +46,7 @@ class Teacher < ApplicationRecord
   validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
   validate :valid_languages
   before_validation :sort_and_clean_languages
+  
 
   enum application_status: {
     validated: "Validated",
