@@ -21,6 +21,8 @@ module NavigationHelpers
     when /^the teachers page$/ then teachers_path
     when /^the edit page for (.*) (.*)$/
       edit_teacher_path(Teacher.find_by(first_name: $1, last_name: $2))
+    when /^the merge preview page for (.*) (.*) into (.*) (.*)$/
+      preview_merge_path(Teacher.find_by(first_name: $1, last_name: $2), Teacher.find_by(first_name: $3, last_name: $4))
     when /^the show page for (.*) (.*)$/
       teacher_path(Teacher.find_by(first_name: $1, last_name: $2))
     when /^the schools page$/ then schools_path

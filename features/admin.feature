@@ -380,6 +380,19 @@ Feature: basic admin functionality
     And   I press "Update"
     Then  I should be on the edit page for Jane Doe
 
+  Scenario: Admin can switch merge order
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | email                      | school      |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley | 
+      | Bobby       | John       | false | bobbyjohn@berkeley.edu     | UC Berkeley |
+    And I go to the merge preview page for Jane Doe into Bobby John
+    Then I should see "Preview Merge of Jane Doe into Bobby John"
+    When I follow "Switch Merge Order"
+    Then I should see "Preview Merge of Bobby John into Jane Doe"
+
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:
