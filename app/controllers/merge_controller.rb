@@ -2,16 +2,12 @@
 
 class MergeController < ApplicationController
   def preview
-    puts params.inspect
     @from_teacher = Teacher.find(params[:from])
     @into_teacher = Teacher.find(params[:into])
-    puts "Here we go"
-    puts @from_teacher
     @result_teacher = merge_teachers(@from_teacher, @into_teacher)
   end
 
   def execute
-    puts params.inspect
     @from_teacher = Teacher.find(params[:from])
     @into_teacher = Teacher.find(params[:into])
     @merged_teacher = merge_teachers(@from_teacher, @into_teacher)
