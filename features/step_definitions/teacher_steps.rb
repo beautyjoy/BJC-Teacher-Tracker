@@ -49,11 +49,14 @@ Given(/the following teachers exist/) do |teachers_table|
     snap: "",
     status: "Other - Please specify below.",
     education_level: 1,
-    more_info: "I'm teaching a college course",
+    more_info: "",
     admin: false,
     personal_website: "https://snap.berkeley.edu",
     application_status: "Not Reviewed",
-    languages: ["English"]
+    languages: ["English"],
+    session_count: 1,
+    last_session_at: DateTime.now,
+    ip_history: [IPAddr.new("1.2.3.4")]
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
@@ -74,4 +77,22 @@ Given(/the following teachers exist/) do |teachers_table|
     Teacher.create!(teacher)
     School.reset_counters(school.id, :teachers)
   end
+end
+
+Then(/the following entries should exist in the teachers database/) do |entries_table|
+  entries_table.symbolic_hashes.each do |teacher_params|
+    school_name = teacher_params[:school]
+    teacher_params.delete(:school)
+    #teacher should be present and school should be valid
+    expect(!Teacher.find_by(teacher_params).blank?).to be true
+    expect(!(School.find_by(name: school_name).blank?)).to be true
+  end 
+end
+
+Then(/the following entries should not exist in the teachers database/) do |entries_table|
+  entries_table.symbolic_hashes.each do |teacher_params|
+    teacher_params.delete(:school)
+    #matches on all fields except school name
+    expect(Teacher.find_by(teacher_params).blank?).to be true
+  end 
 end

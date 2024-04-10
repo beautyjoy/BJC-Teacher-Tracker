@@ -309,7 +309,7 @@ Feature: basic admin functionality
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      | snap   | application_status |
-      | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
+      | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated          |
     Given I am on the BJC home page
     Given I have an admin email
     And   I follow "Log In"
@@ -388,10 +388,35 @@ Feature: basic admin functionality
       | first_name | last_name  | admin  | email                      | school      |
       | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley | 
       | Bobby       | John       | false | bobbyjohn@berkeley.edu     | UC Berkeley |
-    And I go to the merge preview page for Jane Doe into Bobby John
+    And I go to the merge preview page for Jane into Bobby
     Then I should see "Preview Merge of Jane Doe into Bobby John"
     When I follow "Switch Merge Order"
     Then I should see "Preview Merge of Bobby John into Jane Doe"
+
+  Scenario: Merging teachers only updates blank fields with those of teacher being merged
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name     | last_name   | more_info | admin  | email                      | school      | application_status |
+      | Jane           |  Doe        | test 123  | false  | janedoe@berkeley.edu       | UC Berkeley | validated          |
+      | Bobby          |  John       |           | false  | bobbyjohn@berkeley.edu     | UC Berkeley | denied             |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When I go to the merge preview page for Jane into Bobby
+    And I follow "Confirm Merge"
+    Then I see a confirmation "Teachers merged successfully"
+    And the following entries should not exist in the teachers database:
+      | first_name     | last_name   | more_info | admin  | email                      | school      | application_status |
+      | Jane           |  Doe        | test 123  | false  | janedoe@berkeley.edu       | UC Berkeley | validated          |
+      | Bobby          |  John       |           | false  | bobbyjohn@berkeley.edu     | UC Berkeley | denied             |
+    And the following entries should exist in the teachers database:
+      | first_name     | last_name       | more_info         | admin  | email                      | school       | application_status |
+      | Bobby          |  John           | test 123          | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
+
+
 
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
