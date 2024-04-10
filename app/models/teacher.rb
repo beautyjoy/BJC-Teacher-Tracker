@@ -8,12 +8,14 @@
 #  admin              :boolean          default(FALSE)
 #  application_status :string           default("not_reviewed")
 #  education_level    :integer          default(NULL)
+#  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
 #  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
+#  personal_email     :string
 #  personal_website   :string
 #  session_count      :integer          default(0)
 #  snap               :string
@@ -24,9 +26,12 @@
 #
 # Indexes
 #
-#  index_teachers_on_school_id  (school_id)
-#  index_teachers_on_snap       (snap) UNIQUE WHERE ((snap)::text <> ''::text)
-#  index_teachers_on_status     (status)
+#  index_teachers_on_email                     (email) UNIQUE
+#  index_teachers_on_email_and_first_name      (email,first_name)
+#  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_school_id                 (school_id)
+#  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
+#  index_teachers_on_status                    (status)
 #
 # Foreign Keys
 #
@@ -290,7 +295,9 @@ class Teacher < ApplicationRecord
   end
 
   def primary_email
-    email_addresses.find_by(primary: true)&.email
+    # ||:email this code is temporary for this PR: https://github.com/cs169/BJC-Teacher-Tracker-App/pull/49
+    # to make sure at least original data in db still work and passed the existing tests
+    email_addresses.find_by(primary: true)&.email || self[:email]
   end
 
   def personal_emails
@@ -301,6 +308,6 @@ class Teacher < ApplicationRecord
   def non_primary_emails
     # email_addresses.where(primary: false)&.pluck(:email)
     # below code is temporary for current PR, to make sure the frontend same as before (only one personal email)
-    email_addresses.where(primary: false)&.pluck(:email)&.first
+    email_addresses.where(primary: false)&.pluck(:email)&.first || self.personal_email
   end
 end

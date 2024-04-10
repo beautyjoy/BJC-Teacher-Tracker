@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_07_190132) do
+ActiveRecord::Schema.define(version: 2024_04_07_190126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,28 +93,6 @@ ActiveRecord::Schema.define(version: 2024_04_07_190132) do
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
-  create_table "pd_registrations", force: :cascade do |t|
-    t.integer "teacher_id", null: false
-    t.integer "professional_development_id", null: false
-    t.boolean "attended", default: false
-    t.string "role", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["teacher_id", "professional_development_id"], name: "index_pd_reg_on_teacher_id_and_pd_id", unique: true
-  end
-
-  create_table "professional_developments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "city", null: false
-    t.string "state"
-    t.string "country", null: false
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.integer "grade_level", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "schools", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -136,6 +114,7 @@ ActiveRecord::Schema.define(version: 2024_04_07_190132) do
   create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "email"
     t.string "snap"
     t.integer "school_id"
     t.datetime "created_at", default: -> { "now()" }
@@ -149,7 +128,11 @@ ActiveRecord::Schema.define(version: 2024_04_07_190132) do
     t.datetime "last_session_at"
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0
+    t.string "personal_email"
     t.string "languages", default: ["English"], array: true
+    t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
+    t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
+    t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"
     t.index ["status"], name: "index_teachers_on_status"
@@ -160,7 +143,5 @@ ActiveRecord::Schema.define(version: 2024_04_07_190132) do
   add_foreign_key "email_addresses", "teachers"
   add_foreign_key "pages", "teachers", column: "creator_id"
   add_foreign_key "pages", "teachers", column: "last_editor_id"
-  add_foreign_key "pd_registrations", "professional_developments"
-  add_foreign_key "pd_registrations", "teachers"
   add_foreign_key "teachers", "schools"
 end

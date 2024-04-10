@@ -153,8 +153,9 @@ module SeedData
     School.find_or_create_by(
       name: "UC Berkeley",
       city: "Berkeley",
+      country: "US",
+      website: "https://bjc.berkeley.edu",
       state: "CA",
-      website: "https://bjc.berkeley.edu"
     )
   end
 
