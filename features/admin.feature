@@ -388,6 +388,10 @@ Feature: basic admin functionality
       | first_name | last_name  | admin  | email                      | school      |
       | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley | 
       | Bobby       | John       | false | bobbyjohn@berkeley.edu     | UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
     And I go to the merge preview page for Jane into Bobby
     Then I should see "Preview Merge of Jane Doe into Bobby John"
     When I follow "Switch Merge Order"
@@ -416,6 +420,22 @@ Feature: basic admin functionality
       | first_name     | last_name       | more_info         | admin  | email                      | school       | application_status |
       | Bobby          |  John           | test 123          | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
 
+  Scenario: Merging teachers sums session counts, concatenates IP histories, and saves most recent datetime
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name     | last_name   | session_count | ip_history        |   last_session_at      |   admin  | email                      | school      |
+      | Jane           |  Doe        |  169          | 1.2.3.4, 4.5.6.7  |    2023-04-10 12:30:00 |    false | janedoe@berkeley.edu       | UC Berkeley |
+      | Bobby          |  John       |  365          |  4.5.6.7          |   2023-01-11 12:00:00  |   false  | bobbyjohn@berkeley.edu     | UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When I go to the merge preview page for Jane into Bobby
+    And I follow "Confirm Merge"
+    Then I see a confirmation "Teachers merged successfully"
+    #TODO
 
 
 

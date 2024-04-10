@@ -65,6 +65,16 @@ Given(/the following teachers exist/) do |teachers_table|
       if key == :languages
         languages = if teacher[key].present? then YAML.safe_load(teacher[key]) else nil end
         teacher[key] = languages.presence || value
+      elsif key == :last_session_at
+        #conversion to DateTime object needed
+        teacher[key] = if teacher[key].present? then DateTime.parse(teacher[key]) else value end
+      elsif key == :session_count
+        #type cast from string --> int needed
+        teacher[key] = (teacher[key].presence || value).to_i
+      elsif key == :ip_history
+        #type cast from comma-separated list of ip addresses to array of IPAddr objects
+        ip_addr_array = if teacher[key].present? then teacher[key].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) } else nil end
+        teacher[key] = ip_addr_array.presence || value
       else
         # Handle other fields as usual
         teacher[key] = teacher[key].presence || value
