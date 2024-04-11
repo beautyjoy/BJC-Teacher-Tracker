@@ -376,7 +376,7 @@ Feature: basic admin functionality
     Then  I can log in with Google
     When  I go to the teachers page
     And   I go to the edit page for Jane Doe
-    And   I fill in "teacher_primary_email" with ""
+    And   I fill in "School Email" with ""
     And   I press "Update"
     Then  I should be on the edit page for Jane Doe
 

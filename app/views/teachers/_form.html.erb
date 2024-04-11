@@ -57,9 +57,9 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <div class='form-group row'>
     <div class='col-6'>
-      <%= f.label :primary_email, "School Email", class: "label-required" %>
-      <%= f.text_field :primary_email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
-        required: true, type: :email, readonly: @readonly %>
+      <%= label_tag 'email[primary]', "School Email", class: "label-required" %>
+      <%= text_field_tag 'email[primary]', @teacher.primary_email, placeholder: 'alonzo@snap.berkeley.edu',
+                         class: 'form-control', required: true, type: :email, readonly: @readonly %>
     </div>
 
     <div class='col-6'>
@@ -85,10 +85,10 @@ status ONLY IF the person viewing this page is an admin. %>
   <%- if current_user&.admin? || @teacher.personal_emails.present? %>
   <div class="form-group row">
     <div class='col-12'>
-      <%= f.label :personal_email do %>
+      <%= label_tag "email[personal_1]" do %>
         Personal Email</i>
       <% end %>
-      <%= f.text_field :personal_emails, placeholder: 'alonzo@gmail.com', class: 'form-control',
+      <%= text_field_tag "email[personal_1]", @teacher.personal_emails, placeholder: 'alonzo@gmail.com', class: 'form-control',
         required: false, type: :email, readonly: @readonly %>
     </div>
   </div>

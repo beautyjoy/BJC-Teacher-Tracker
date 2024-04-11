@@ -51,7 +51,7 @@ class TeachersController < ApplicationController
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
-    @teacher = EmailAddress.find_by(email: teacher_params[:primary_email])&.teacher
+    @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
@@ -71,9 +71,8 @@ class TeachersController < ApplicationController
       end
     end
 
-    teacher_attr = teacher_params.except(:primary_email)
-    @teacher = Teacher.new(teacher_attr)
-    @teacher.email_addresses.build(email: teacher_params[:primary_email], primary: true)
+    @teacher = Teacher.new(teacher_params)
+    @teacher.email_addresses.build(email: params[:email][:primary], primary: true)
 
     @teacher.try_append_ip(request.remote_ip)
     @teacher.session_count += 1
@@ -100,10 +99,8 @@ class TeachersController < ApplicationController
     load_school
     ordered_schools
 
-    personal_emails_params = params[:teacher].keys.select { |key| key.to_s.start_with?("personal_email") }
-
-    primary_email = params[:teacher].delete(:primary_email)
-    personal_emails = params[:teacher].extract!(*personal_emails_params).values
+    primary_email = params.dig(:email, :primary)
+    personal_emails = params[:email]&.select { |key, value| key.start_with?("personal_") }&.values
 
     # Now, `params[:teacher]` does not contain primary_email or any personal_emailX fields
     @teacher.assign_attributes(teacher_params)
@@ -224,15 +221,12 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    teacher_attributes = [:first_name, :last_name, :school, :primary_email, :status, :snap,
+    teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
                           :more_info, :personal_website, :education_level, :school_id, languages: []]
     admin_attributes = [:application_status, :request_reason, :skip_email]
     teacher_attributes.push(*admin_attributes) if is_admin?
 
-    # Dynamically extract and permit personal_emailX attributes from params
-    personal_email_attributes = params[:teacher].keys.select { |key| key.to_s.start_with?("personal_email") }
-    permitted_attributes = teacher_attributes + personal_email_attributes
-    params.require(:teacher).permit(*permitted_attributes)
+    params.require(:teacher).permit(*teacher_attributes)
   end
 
   def school_params
@@ -291,6 +285,7 @@ class TeachersController < ApplicationController
   end
 
   def update_personal_emails(personal_emails)
+    return unless personal_emails.present?
     personal_emails = personal_emails.reject(&:empty?)
     return if personal_emails.empty?
 
