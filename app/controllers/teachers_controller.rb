@@ -52,8 +52,7 @@ class TeachersController < ApplicationController
   # If you are logged in and not an admin, this should fail.
   def create
     # Find by email, but allow updating other info.
-    teacher_id = EmailAddress.find_by(email: teacher_params[:primary_email])&.teacher_id
-    @teacher = Teacher.find_by(id: teacher_id)
+    @teacher = @teacher = EmailAddress.find_by(email: teacher_params[:primary_email])&.teacher
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
