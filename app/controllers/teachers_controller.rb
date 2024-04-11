@@ -108,8 +108,7 @@ class TeachersController < ApplicationController
     personal_emails = params[:teacher].extract!(*personal_emails_params).values
 
     # Now, `params[:teacher]` does not contain primary_email or any personal_emailX fields
-    teacher_attr = teacher_params
-    @teacher.assign_attributes(teacher_attr)
+    @teacher.assign_attributes(teacher_params)
 
     update_primary_email(primary_email)
     update_personal_emails(personal_emails)

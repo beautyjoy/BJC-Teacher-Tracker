@@ -28,7 +28,7 @@ class EmailAddress < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validate :only_one_primary_email_per_teacher
 
-  before_save :downcase_email
+  before_save :normalize_email
   before_save :flag_teacher_if_email_changed
 
   private
@@ -38,8 +38,8 @@ class EmailAddress < ApplicationRecord
     end
   end
 
-  def downcase_email
-    self.email = email.downcase
+  def normalize_email
+    self.email = email.strip.downcase
   end
 
   def flag_teacher_if_email_changed
