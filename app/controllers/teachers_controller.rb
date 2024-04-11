@@ -283,11 +283,7 @@ class TeachersController < ApplicationController
     return unless primary_email.present?
 
     # First, ensure the current primary email is marked as not primary if it's not the same as the new one
-    @teacher.email_addresses.where(primary: true).each do |email_record|
-      if email_record.email != primary_email
-        email_record.update(primary: false)
-      end
-    end
+    @teacher.email_addresses.find_by(primary: true)&.update(primary: false)
 
     primary_email_record = @teacher.email_addresses.find_or_initialize_by(email: primary_email)
     primary_email_record.primary = true
