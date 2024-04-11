@@ -49,25 +49,13 @@ class TeachersController < ApplicationController
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
-    # Find by email, but allow updating other info.
-    @teacher = Teacher.find_by(email: teacher_params[:email])
-    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
-      params[:id] = current_user.id
-      update
-      return
-    elsif @teacher
-      redirect_to login_path,
-                  notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+    if existing_teacher
       return
     end
 
-    load_school
-    if @school.new_record?
-      @school = School.new(school_params)
-      unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
-        render "new" && return
-      end
+    valid_school = find_or_create_school
+    if !valid_school
+      return
     end
 
     @teacher = Teacher.new(teacher_params)
@@ -96,16 +84,12 @@ class TeachersController < ApplicationController
     load_school
     ordered_schools
     @teacher.assign_attributes(teacher_params)
-    if teacher_params[:school_id].present?
-      @teacher.school = @school
-    else
-      @school.update(school_params) if school_params
-      unless @school.save
-        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
-        render "new" && return
-      end
-      @teacher.school = @school
+
+    valid_school = update_school_through_teacher
+    if !valid_school
+      return
     end
+
     send_email_if_application_status_changed_and_email_resend_enabled
 
     if fail_to_update
@@ -191,6 +175,46 @@ class TeachersController < ApplicationController
 
   def deny_access
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
+  end
+
+  def existing_teacher
+    # Find by email, but allow updating other info.
+    @teacher = Teacher.find_by(email: teacher_params[:email])
+    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
+      params[:id] = current_user.id
+      update
+      return true
+    elsif @teacher
+      redirect_to login_path, notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+      return true
+    end
+    false
+  end
+
+  def find_or_create_school
+    load_school
+    if @school.new_record?
+      @school = School.new(school_params)
+      unless @school.save
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
+        render "new"
+        return false
+      end
+    end
+    true
+  end
+
+  def update_school_through_teacher
+    if !teacher_params[:school_id].present?
+      @school.update(school_params) if school_params
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "new"
+        return false
+      end
+    end
+    @teacher.school = @school
+    true
   end
 
   def fail_to_update
