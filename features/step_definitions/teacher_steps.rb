@@ -90,12 +90,22 @@ Given(/the following teachers exist/) do |teachers_table|
 end
 
 Then(/the following entries should exist in the teachers database/) do |entries_table|
-  entries_table.symbolic_hashes.each do |teacher_params|
-    school_name = teacher_params[:school]
-    teacher_params.delete(:school)
+  entries_table.symbolic_hashes.each do |params|
+    keys_to_exclude = [:school, :session_count, :last_session_at, :ip_history]
     #teacher should be present and school should be valid
-    expect(!Teacher.find_by(teacher_params).blank?).to be true
-    expect(!(School.find_by(name: school_name).blank?)).to be true
+    teacher = Teacher.find_by(params.except(*keys_to_exclude))
+    expect(!teacher.blank?).to be true
+    expect(!(School.find_by(name: params[:school]).blank?)).to be true
+    if params[:session_count].present?
+      expect(teacher.session_count).to eq(params[:session_count].to_i)
+    end
+    if params[:last_session_at].present?
+      expect(teacher.last_session_at).to eq(DateTime.parse(params[:last_session_at]))
+    end
+    if params[:ip_history].present?
+      ip_addr_array = params[:ip_history].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) }
+      expect(teacher.ip_history.all? { |addr| ip_addr_array.include?(addr) }).to be true
+    end 
   end 
 end
 
