@@ -297,7 +297,7 @@ class Teacher < ApplicationRecord
   def primary_email
     # ||:email this code is temporary for this PR: https://github.com/cs169/BJC-Teacher-Tracker-App/pull/49
     # to make sure at least original data in db still work and passed the existing tests
-    email_addresses.find_by(primary: true)&.email || self[:email]
+    self[:email] || email_addresses.find_by(primary: true)&.email
   end
 
   def personal_emails
@@ -308,6 +308,6 @@ class Teacher < ApplicationRecord
   def non_primary_emails
     # email_addresses.where(primary: false)&.pluck(:email)
     # below code is temporary for current PR, to make sure the frontend same as before (only one personal email)
-    email_addresses.where(primary: false)&.pluck(:email)&.first || self.personal_email
+    personal_email || email_addresses.where(primary: false)&.pluck(:email)&.first
   end
 end
