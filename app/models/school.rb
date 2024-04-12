@@ -61,7 +61,7 @@ class School < ApplicationRecord
   end
 
   def location
-    "#{city}, #{state}"
+    "#{city}, #{state}, #{country}"
   end
 
   # TODO: Consider renaming this.
