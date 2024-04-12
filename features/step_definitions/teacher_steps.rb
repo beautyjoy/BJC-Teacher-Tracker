@@ -66,13 +66,13 @@ Given(/the following teachers exist/) do |teachers_table|
         languages = if teacher[key].present? then YAML.safe_load(teacher[key]) else nil end
         teacher[key] = languages.presence || value
       elsif key == :last_session_at
-        #conversion to DateTime object needed
+        # conversion to DateTime object needed
         teacher[key] = if teacher[key].present? then DateTime.parse(teacher[key]) else value end
       elsif key == :session_count
-        #type cast from string --> int needed
+        # type cast from string --> int needed
         teacher[key] = (teacher[key].presence || value).to_i
       elsif key == :ip_history
-        #type cast from comma-separated list of ip addresses to array of IPAddr objects
+        # type cast from comma-separated list of ip addresses to array of IPAddr objects
         ip_addr_array = if teacher[key].present? then teacher[key].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) } else nil end
         teacher[key] = ip_addr_array.presence || value
       else
@@ -92,7 +92,7 @@ end
 Then(/the following entries should exist in the teachers database/) do |entries_table|
   entries_table.symbolic_hashes.each do |params|
     keys_to_exclude = [:school, :session_count, :last_session_at, :ip_history]
-    #teacher should be present and school should be valid
+    # teacher should be present and school should be valid
     teacher = Teacher.find_by(params.except(*keys_to_exclude))
     expect(!teacher.blank?).to be true
     expect(!(School.find_by(name: params[:school]).blank?)).to be true
@@ -105,14 +105,14 @@ Then(/the following entries should exist in the teachers database/) do |entries_
     if params[:ip_history].present?
       ip_addr_array = params[:ip_history].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) }
       expect(teacher.ip_history.all? { |addr| ip_addr_array.include?(addr) }).to be true
-    end 
-  end 
+    end
+  end
 end
 
 Then(/the following entries should not exist in the teachers database/) do |entries_table|
   entries_table.symbolic_hashes.each do |teacher_params|
     teacher_params.delete(:school)
-    #matches on all fields except school name
+    # matches on all fields except school name
     expect(Teacher.find_by(teacher_params).blank?).to be true
-  end 
+  end
 end
