@@ -102,7 +102,7 @@ class TeachersController < ApplicationController
       @school.update(school_params) if school_params
       unless @school.save
         flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
-        render "new" && return
+        render "edit" && return
       end
       @teacher.school = @school
     end
