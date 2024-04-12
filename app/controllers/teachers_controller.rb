@@ -65,7 +65,7 @@ class TeachersController < ApplicationController
     if @school.new_record?
       @school = School.new(school_params)
       unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
     end
