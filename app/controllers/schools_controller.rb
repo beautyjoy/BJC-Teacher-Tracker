@@ -44,7 +44,6 @@ class SchoolsController < ApplicationController
   def update
     @school = School.find(params[:id])
     @school.assign_attributes(school_params)
-    debugger
     if @school.save
       flash[:success] = "Updated #{@school.name} successfully."
       redirect_to school_path(@school)
