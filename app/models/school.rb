@@ -78,11 +78,11 @@ class School < ApplicationRecord
   end
 
   def selectize_options
-    [name_location, to_json(only: [:id, :name, :city, :state, :website]) ]
+    [name_location, to_json(only: [:id, :name, :city, :state, :country, :website]) ]
   end
 
   def name_location
-    "#{name} (#{city}, #{state})"
+    "#{name} (#{city}, #{state}, #{country})"
   end
 
   def update_gps_data
