@@ -63,3 +63,11 @@ Scenario: Editing email template to have blank body or to field displays flash e
     When I fill in TinyMCE email form with ""
     And I press "Submit"
     Then I should see "An error occurred: Body can't be blank"
+
+Scenario: Updating email template with valid parameters succeeds
+    Given I am on the email templates index
+    And I follow "Welcome Email"
+    And I fill in "email_template_to" with "abc@berkeley.edu"
+    And I fill in TinyMCE email form with "ABC"
+    And I press "Submit"
+    Then I should see "Updated Welcome Email template successfully"

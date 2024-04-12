@@ -362,7 +362,6 @@ Feature: basic admin functionality
     And I press "Submit"
     Then I send a request info email
 
-
   Scenario: Admin update info without mandatory field shows error
     Given the following schools exist:
       | name        | country | city     | state | website                  | grade_level | school_type |
@@ -456,7 +455,6 @@ Feature: basic admin functionality
     Then I should see "Choose A User To Merge Into"
     When I follow the first "Jane Doe" link
     Then I should be on the merge preview page for Bobby into Jane
-
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:
