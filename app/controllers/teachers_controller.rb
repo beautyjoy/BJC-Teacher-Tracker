@@ -53,9 +53,13 @@ class TeachersController < ApplicationController
       return
     end
 
-    valid_school = find_or_create_school
-    if !valid_school
-      return
+    load_school
+    if @school.new_record?
+      @school = School.new(school_params)
+      unless @school.save
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
+        render "new" && return
+      end
     end
 
     @teacher = Teacher.new(teacher_params)
@@ -191,19 +195,6 @@ class TeachersController < ApplicationController
     false
   end
 
-  def find_or_create_school
-    load_school
-    if @school.new_record?
-      @school = School.new(school_params)
-      unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
-        render "new"
-        return false
-      end
-    end
-    true
-  end
-
   def update_school_through_teacher
     if !teacher_params[:school_id].present?
       @school.update(school_params) if school_params
@@ -218,20 +209,19 @@ class TeachersController < ApplicationController
   end
 
   def fail_to_update
-    failed = false
     if @teacher.denied? && !is_admin?
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
-      failed = true
+      return true
     elsif (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
       flash.now[:alert] = "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       render "edit"
-      failed = true
+      return true
     elsif !@teacher.save
       flash.now[:alert] = "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
       render "edit"
-      failed = true
+      return true
     end
-    failed
+    false
   end
 
   def load_school
