@@ -66,6 +66,14 @@ Scenario: Other user's show page as a Teacher
   Given I am on the show page for Alice Admin
   Then I should be on the edit page for Todd Teacher
 
+Scenario: Try to access merge page as a registered teacher
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the merge preview page for Todd into Alice
+  Then I should see "Only admins can access this page"
+
 #New User
 Scenario: Schools page as a new user
   Given I am on the schools page

@@ -458,11 +458,6 @@ Feature: basic admin functionality
     Then I should be on the merge preview page for Bobby into Jane
 
 
-
-#Scenario: Nonadmin cannot see merge button or access merge page
-
-
-
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:
 #  |       name      |     country     |     city     |  state  |            website            |

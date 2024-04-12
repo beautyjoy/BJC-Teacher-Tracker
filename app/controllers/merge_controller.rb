@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MergeController < ApplicationController
+  before_action :require_admin
+
   def preview
     @from_teacher = Teacher.find(params[:from])
     @into_teacher = Teacher.find(params[:into])
