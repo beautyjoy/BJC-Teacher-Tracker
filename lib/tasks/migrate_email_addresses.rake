@@ -1,6 +1,7 @@
-# lib/tasks/migrate_emails.rake
+# frozen_string_literal: true
+
 namespace :email_address_migration do
-  desc "Migrate emails from Teacher to EmailAddress model, with comprehensive logging"
+  desc "Migrate emails from Teacher to EmailAddress model, delete emails from Teacher model, with comprehensive logging"
   task migrate_email_addresses: :environment do
     total_emails = 0
     migrated_emails = 0
@@ -25,14 +26,18 @@ namespace :email_address_migration do
         end
 
         total_emails += 1
-        email_record = EmailAddress.new(teacher_id: teacher.id, email: email, primary: (email == teacher.email))
+        email_record = EmailAddress.new(teacher_id: teacher.id, email:, primary: (email == teacher.email))
 
         if email_record.save
+          # Remove the email from the original Teacher record only if migration is successful
+          teacher.update(email: nil) if email == teacher.email
           migrated_emails += 1
           puts "[INFO] Successfully migrated email #{email} for Teacher ID: #{teacher.id}"
         else
           puts "[ERROR] Failed to migrate email #{email} for Teacher ID: #{teacher.id}: #{email_record.errors.full_messages.join(", ")}"
           failed_emails << { email: email, errors: email_record.errors.full_messages }
+          # Explicit log to indicate the failed email remains with the Teacher model
+          puts "[INFO] Failed email #{email} remains at Teacher model and has not been removed due to migration errors."
         end
       end
     end
