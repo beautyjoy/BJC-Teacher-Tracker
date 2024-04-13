@@ -12,7 +12,7 @@ class SchoolsController < ApplicationController
   end
 
   def search
-    School.all.collect { |school| ["#{school.name}, #{school.country}, #{school.city}, #{school.state}", school.name] }
+    School.search_list
   end
 
   def create

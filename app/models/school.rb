@@ -101,6 +101,18 @@ class School < ApplicationRecord
     }
   end
 
+  def format_school(data)
+    name, city, state, country = data
+    country_str = country == "US" ? "" : ", #{country}"
+    "#{name} (#{city}, #{state}#{country_str})"
+  end
+
+  def self.search_list
+    School.pluck(:name, :city, :state, :country).map do |data|
+      format_school(data)
+    end
+  end
+
   def self.grade_level_options
     School.grade_levels.map { |key, _val| [key.to_s.titlecase, key] }
   end
