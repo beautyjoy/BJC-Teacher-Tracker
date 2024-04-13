@@ -27,7 +27,7 @@ Feature: submit a form as a teacher
     And   I select "Public" from "School Type"
     And   I press "Submit"
     Then  I see a confirmation "Thanks for signing up for BJC"
-    And I send a form submission email to both admin and teacher with email "TESTkpzhu@berkeley.edu"
+    And I send a form submission email to both admin and teacher with email "testkpzhu@berkeley.edu"
 
   Scenario: Not Correctly filling out and unsuccessful form submission
     Given I am on the BJC home page
@@ -125,7 +125,7 @@ Feature: submit a form as a teacher
 
   Scenario: Filling out new form with existing email should not update information
     Given the following teachers exist:
-      | first_name | last_name | admin | email              |
+      | first_name | last_name | admin | primary_email      |
       | Alice      | Adams     | false | alice@berkeley.edu |
     And I am on the BJC home page
     And I enter my "First Name" as "Mallory"
@@ -148,7 +148,7 @@ Feature: submit a form as a teacher
 
   Scenario: Filling out new form with existing Snap should not create new teacher
     Given the following teachers exist:
-      | first_name | last_name | admin | email              | snap       |
+      | first_name | last_name | admin | primary_email      | snap       |
       | Alice      | Adams     | false | alice@berkeley.edu | aliceadams |
     And I am on the BJC home page
     And I enter my "First Name" as "Mallory"
@@ -235,7 +235,7 @@ Feature: submit a form as a teacher
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     And the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | application_status |
+      | first_name | last_name | admin | primary_email            | school      | application_status |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | info_needed        |
     And I am on the BJC home page
     And I have a teacher Google email

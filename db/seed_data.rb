@@ -153,8 +153,9 @@ module SeedData
     School.find_or_create_by(
       name: "UC Berkeley",
       city: "Berkeley",
+      country: "US",
+      website: "https://bjc.berkeley.edu",
       state: "CA",
-      website: "https://bjc.berkeley.edu"
     )
   end
 
@@ -163,21 +164,57 @@ module SeedData
         {
             first_name: "Michael",
             last_name: "Ball",
-            email: "ball@berkeley.edu",
             admin: true,
             status: 0,
             application_status: "Validated",
-            school: School.find_by(name: "UC Berkeley")
+            school: School.find_by(name: "UC Berkeley"),
+
+            # Note: email field does not exist in the new schema of the Teacher model
+            # Include it in the seed data is to simulate the behavior of creating a new teacher,
+            # because we need to use it to compared with the EmailAddress model,
+            # to determine the existence of the teacher
+            email: "ball@berkeley.edu",
         },
         {
             first_name: "Lauren",
             last_name: "Mock",
-            email: "lmock@berkeley.edu",
             admin: true,
             status: 0,
             application_status: "Validated",
-            school: School.find_by(name: "UC Berkeley")
+            school: School.find_by(name: "UC Berkeley"),
+
+            email: "lmock@berkeley.edu",
         }
+    ]
+  end
+
+  def self.email_addresses
+    [
+      {
+        email: "ball@berkeley.edu",
+        primary: true,
+        teacher: Teacher.find_by(first_name: "Michael"),
+      },
+      {
+        email: "lmock@berkeley.edu",
+        primary: true,
+        teacher: Teacher.find_by(first_name: "Lauren"),
+      },
+      {
+        email: "ball2@berkeley.edu",
+        primary: false,
+        teacher: Teacher.find_by(first_name: "Michael"),
+      },
+      {
+        email: "ball3@berkeley.edu",
+        primary: false,
+        teacher: Teacher.find_by(first_name: "Michael"),
+      },
+      {
+        email: "lmock2@berkeley.edu",
+        primary: false,
+        teacher: Teacher.find_by(first_name: "Lauren"),
+      },
     ]
   end
 end

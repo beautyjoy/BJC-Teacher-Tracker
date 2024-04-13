@@ -51,6 +51,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_sentry_user
-    Sentry.set_user(id: session[:user_id], email: current_user&.email)
+    Sentry.set_user(id: session[:user_id], email: current_user&.primary_email)
   end
 end

@@ -14,7 +14,10 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")
     post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
-      email: "new@user.com", password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+                                       password: "pa33word!", more_info: "info",
+                                       school_id: short_app.school_id },
+                            email: { primary: "new@user.com" }
+    }
     user = Teacher.find_by(first_name: "First")
     expect(user).not_to be_nil
     expect(user.session_count).to eq 1
@@ -24,7 +27,10 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")
     post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
-      email: "new@user.com", password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+                                       password: "pa33word!", more_info: "info",
+                                       school_id: short_app.school_id },
+                            email: { primary: "new@user.com" }
+    }
     user = Teacher.find_by(first_name: "First")
     expect(user).not_to be_nil
     expect(user.ip_history).to include(request.remote_ip)
@@ -35,7 +41,10 @@ RSpec.describe TeachersController, type: :controller do
     short_app = Teacher.find_by(first_name: "Short")
     session_count_orig = short_app.session_count
     post :create, params: { teacher: { first_name: "Short", last_name: "Last", status: 0, education_level: 0,
-      email: short_app.email, password: "pa33word!", more_info: "info", school_id: short_app.school_id } }
+                                       password: "pa33word!", more_info: "info",
+                                       school_id: short_app.school_id },
+                            email: { primary: short_app.primary_email }
+    }
     expect(Teacher.find_by(first_name: "Short").session_count).to eq session_count_orig
   end
 
@@ -112,7 +121,7 @@ RSpec.describe TeachersController, type: :controller do
     post :update, params: { id: short_app.id, teacher: { id: short_app.id, email: "wrong@berkeley.edu", school_id: short_app.school_id } }
     post :update, params: { id: short_app.id, teacher: { id: short_app.id, snap: "wrong", school_id: short_app.school_id } }
     short_app = Teacher.find_by(first_name: "Short")
-    expect(short_app.email).to eq "short@long.com"
+    expect(short_app.primary_email).to eq "short@long.com"
     expect(short_app.snap).to eq "song"
   end
 
@@ -158,14 +167,20 @@ RSpec.describe TeachersController, type: :controller do
         teacher: {
           first_name: "Valid",
           last_name: "Example",
-          email: "valid_example@valid_example.edu",
           status: 0,
           snap: "valid_example",
           admin: true,
           school_id: School.first.id
+        },
+        email: {
+          primary: "valid_example@validexample.edu",
         }
       }
-      expect(Teacher.find_by(email: "valid_example@valid_example.edu").admin).to be(false)
+
+      email_address = EmailAddress.find_by(email: "valid_example@validexample.edu")
+      expect(email_address).not_to be_nil
+      teacher = email_address.teacher
+      expect(teacher.admin).to be(false)
     end
 
     it "rejects malicious auto-approve signup attempt" do
@@ -173,14 +188,19 @@ RSpec.describe TeachersController, type: :controller do
         teacher: {
           first_name: "Valid",
           last_name: "Example",
-          email: "valid_example@valid_example.edu",
           status: 0,
           application_status: "validated",
           snap: "valid_example",
           school_id: School.first.id,
+        },
+        email: {
+          primary: "valid_example@validexample.edu",
         }
       }
-      expect(Teacher.find_by(email: "valid_example@valid_example.edu").not_reviewed?).to be true
+      email_address = EmailAddress.find_by(email: "valid_example@validexample.edu")
+      expect(email_address).not_to be_nil
+      teacher = email_address.teacher
+      expect(teacher.not_reviewed?).to be(true)
     end
   end
 
