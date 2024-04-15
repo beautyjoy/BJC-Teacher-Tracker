@@ -19,13 +19,12 @@
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal Email:</div>
       <div class="col-sm-6">
-        <a href=<%= "mailto:#{teacher.personal_emails}" %>
-          ><%= teacher.personal_emails %></a>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.personal_emails %>')"
-          ><i class="fa fa-copy"></i>
-        </button>
+        <% teacher.personal_emails.each do |email| %>
+          <div class="d-flex align-items-center mb-2">
+            <a href="mailto:<%= email %>" class="mr-2"><%= email %></a>
+            <button class="btn btn-sm" onclick="copyToClipboard('<%= email %>')"><i class="fa fa-copy"></i></button>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row mb-4">

@@ -82,16 +82,19 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <%# For now... only admins can enter/edit personal emails. %>
 
-  <%- if current_user&.admin? || @teacher.personal_emails.present? %>
-  <div class="form-group row">
-    <div class='col-12'>
-      <%= label_tag "email[personal_1]" do %>
-        Personal Email</i>
+  <% if @current_user&.admin? %>
+    <div class="form-group row">
+      <%= label_tag "Personal Emails", nil, class: "col-12 label-required" %>
+      <% @teacher.personal_emails.each_with_index do |email, index| %>
+        <div class="col-md-6 mb-3">
+          <%= label_tag "email[personal][#{index}]", "Email #{index + 1}", class: "form-label" %>
+          <%= text_field_tag "email[personal][#{index}]", email, placeholder: 'Enter email', class: 'form-control', type: :email %>
+        </div>
       <% end %>
-      <%= text_field_tag "email[personal_1]", @teacher.personal_emails, placeholder: 'alonzo@gmail.com', class: 'form-control',
-        required: false, type: :email, readonly: @readonly %>
+      <div class="col-12">
+        <%= link_to 'Add Email', '#', id: 'add_email', class: 'btn btn-secondary' %>
+      </div>
     </div>
-  </div>
   <% end %>
 
   <div class='form-group row'>
@@ -211,6 +214,15 @@ status ONLY IF the person viewing this page is an admin. %>
 
   }
 
-
-
+  // dynamically add new personal email fields
+  document.getElementById('add_email').addEventListener('click', function(e) {
+      e.preventDefault();
+      var container = this.parentNode.parentNode;
+      var newEmailIndex = container.querySelectorAll('input[type="email"]').length;
+      var newField = document.createElement('div');
+      newField.classList.add('col-md-6', 'mb-3');
+      newField.innerHTML = `<label for="email[personal][${newEmailIndex}]" class="form-label">Email ${newEmailIndex + 1}</label>
+                          <input type="email" name="email[personal][${newEmailIndex}]" placeholder="Enter email" class="form-control">`;
+      container.insertBefore(newField, this.parentNode);
+  });
 </script>
