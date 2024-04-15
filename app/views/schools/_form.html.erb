@@ -9,25 +9,25 @@
 <div class='form-group row'>
   <div class='col-4'>
     <%= f.label :city, class: "label-required", for: "school_city" %>
-    <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
+    <%= f.text_field :city, placeholder: 'Name of City', class: 'form-control',
     required: false, id: 'school_city' %>
   </div>
 
   <div class='col-4' id="state_select_container">
     <%= f.label :state, class: "label-required", for: "school_state" %>
-    <%= f.select :state, School::VALID_STATES, { include_blank: "State" }, { id: "state_select", class: 'form-control' } %>
+    <%= f.select :state, School::VALID_STATES, { include_blank: "Select a state" }, { id: "state_select", class: 'form-control' } %>
   </div>
 
   <div class='col-4' id="state_textfield_container">
     <%= f.label :state, for: "school_state" %>
-    <%= f.text_field :state, placeholder: "State", class: 'form-control', id: "state_textfield" %>
+    <%= f.text_field :state, placeholder: "Name of State", class: 'form-control', id: "state_textfield" %>
   </div>
   
   <div class='col-4'>
     <%= f.label :country, "Country", class: "label-required", for: "school_country" %>
     <%= f.country_select(
       :country,
-      { priority_countries: ['United States'] },
+      { priority_countries: ['United States'], include_blank: "Select a country" },
       { class: 'form-control', required: false, id: 'school_country', format: :with_full_country_name, selected: 'United States'}
     ) %>
   </div>
@@ -110,14 +110,18 @@
 
         function handleCountryChange() {
             if (countrySelected.val() === 'US') {
-                stateSelectContainer.show().attr('required', true);
+                stateSelectContainer.show();
+                stateSelect.attr('required', '')  //make state select required
                 stateTextfieldContainer.hide();
 
                 stateTextfield.removeAttr('name');
                 stateSelect.attr('name', 'school[state]');
+
             } else {
-                stateTextfieldContainer.show().attr('required', false);
+                stateTextfieldContainer.show();
+                stateSelect.removeAttr('required')
                 stateSelectContainer.hide();
+                
 
                 stateSelect.removeAttr('name');
                 stateTextfield.attr('name', 'school[state]');
