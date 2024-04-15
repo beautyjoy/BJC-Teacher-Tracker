@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :email_address_migration do
-  desc "Migrate emails from Teacher to EmailAddress model, delete emails from Teacher model, with comprehensive logging"
+  desc "Migrate emails from Teacher to EmailAddress model (no deletion of emails from Teacher model), with comprehensive logging"
   task migrate_email_addresses: :environment do
     total_emails = 0
     migrated_emails = 0
@@ -29,8 +29,6 @@ namespace :email_address_migration do
         email_record = EmailAddress.new(teacher_id: teacher.id, email:, primary: (email == teacher.email))
 
         if email_record.save
-          # Remove the email from the original Teacher record only if migration is successful
-          teacher.update(email: nil) if email == teacher.email
           migrated_emails += 1
           puts "[INFO] Successfully migrated email #{email} for Teacher ID: #{teacher.id}"
         else
