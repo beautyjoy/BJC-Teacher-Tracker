@@ -18,7 +18,7 @@ class EmailTemplatesController < ApplicationController
       flash[:success] = "Updated #{@email_template.title} template successfully."
       redirect_to email_templates_path
     else
-      flash.now[:alert] = "An error occurred: #{@email_template.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@email_template.errors.full_messages.join(", ")}"
       render "edit"
     end
   end
@@ -36,7 +36,7 @@ class EmailTemplatesController < ApplicationController
       flash[:success] = "Created #{@email_template.title} successfully."
       redirect_to email_templates_path
     else
-      flash[:alert] = "An error occurred: #{@email_template.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@email_template.errors.full_messages.join(", ")}"
       render "new"
     end
   end

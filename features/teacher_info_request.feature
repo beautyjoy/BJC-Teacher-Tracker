@@ -25,7 +25,7 @@ Feature: Request additional information for teacher application
     And I should see "Request Info from Joseph Mamoa"
     And I fill in "request_reason" with "Please provide more details on your teaching experience"
     And I press "Submit"
-    Then I can send a request info email
+    Then I send a request info email
     And I follow "Logout"
 
     Given I am on the BJC home page
