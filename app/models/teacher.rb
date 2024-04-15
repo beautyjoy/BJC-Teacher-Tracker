@@ -47,6 +47,7 @@ class Teacher < ApplicationRecord
   validate :valid_languages
   before_validation :sort_and_clean_languages
 
+
   enum application_status: {
     validated: "Validated",
     denied: "Denied",

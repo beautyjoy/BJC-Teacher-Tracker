@@ -1,12 +1,33 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3><%= teacher.full_name %></h3>
+    <h3><%= teacher.full_name %>
+    <% if display_deletion_warning_icon %>
+      <p style="font-size: smaller;">
+      ⚠️🔜🚫🔥🗑️💥
+      </p>
+    <% end %>
+    </h3>
     <div>
-      <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
-      <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% if is_show_page && @is_admin %>
+        <button id="merge-button" class="btn btn-warning mr-2">Merge</button>
+      <% end %>
+      <% if render_edit %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
+      <% end %>
+      <% if render_delete %>
+        <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% end %>
     </div>
   </div>
   <div class="card-body">
+    <% if @is_admin %>
+      <div class="row mb-4">
+        <div class="col-sm-4 font-weight-bold">Teacher ID:</div>
+        <div class="col-sm-8">
+          <%= teacher.id %>
+        </div>
+      </div>
+    <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Email:</div>
       <div class="col-sm-6">
@@ -111,6 +132,7 @@
 </div>
 
 <script>
+
   function copyToClipboard(text) {
     // Create a temporary textarea element to hold the text to copy
     const textarea = document.createElement("textarea");
