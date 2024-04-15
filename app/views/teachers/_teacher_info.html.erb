@@ -10,20 +10,20 @@
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Email:</div>
       <div class="col-sm-6">
-        <a href=<%= "mailto:#{teacher.email}" %>> <%= teacher.email %> </a>
+        <a href=<%= "mailto:#{teacher.primary_email}" %>> <%= teacher.primary_email %> </a>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.email %>')"><i class="fa fa-copy"></i></button>
+        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.primary_email %>')"><i class="fa fa-copy"></i></button>
       </div>
     </div>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal Email:</div>
       <div class="col-sm-6">
-        <a href=<%= "mailto:#{teacher.personal_email}" %>
-          ><%= teacher.personal_email %></a>
+        <a href=<%= "mailto:#{teacher.personal_emails}" %>
+          ><%= teacher.personal_emails %></a>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.personal_email %>')"
+        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.personal_emails %>')"
           ><i class="fa fa-copy"></i>
         </button>
       </div>
