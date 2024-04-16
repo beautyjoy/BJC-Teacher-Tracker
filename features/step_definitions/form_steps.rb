@@ -9,7 +9,7 @@ Given(/a valid teacher exists/) do
 end
 
 And(/^"(.*)" is not in the database$/) do |email|
-  expect(Teacher.exists?(email:)).to be false
+  expect(EmailAddress.exists?(email:)).to be false
 end
 
 Given(/^I enter (?:my)? "(.*)" as "(.*)"$/) do |field_name, input|
@@ -91,11 +91,14 @@ Then(/^debug$/) do
 end
 
 Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, email, expected|
-  expect(Teacher.find_by(email:)[field]).to eq(expected)
+  email = EmailAddress.find_by(email:)
+  expect(email.teacher[field]).to eq(expected)
 end
 
 Then(/^I should find a teacher with email "([^"]*)" and school country "([^"]*)" in the database$/) do |email, country|
-  teacher = Teacher.includes(:school).where(email:, 'schools.country': country).first
+  teacher = Teacher.joins(:email_addresses, :school)
+                   .where(email_addresses: { email: }, schools: { country: })
+                   .first
   expect(teacher).not_to be_nil, "No teacher found with email #{email} and country #{country}"
 end
 

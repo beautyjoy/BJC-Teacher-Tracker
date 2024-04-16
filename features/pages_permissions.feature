@@ -4,7 +4,7 @@ Feature: pages features a verified teacher
 
 Background: Has admin and teacher in DB along with pages of each permission type
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        | application_status |
+    | first_name | last_name | admin | primary_email                | application_status |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   | Not Reviewed       |
     | Todd       | Teacher   | false | testteacher@berkeley.edu     | Validated          |
     Given the following pages exist:

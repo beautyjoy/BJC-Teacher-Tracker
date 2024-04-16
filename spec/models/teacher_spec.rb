@@ -78,15 +78,15 @@ RSpec.describe Teacher, type: :model do
 
     it "does not change a info_need status to not_reviewed if submitted without changes" do
       expect do
-        # Same email, which means no any change compared to last time
-        teacher.update(email: "reimu@touhou.com")
+        # Same primary email, which means no any change compared to last time
+        teacher.email_addresses.find_by(email: "reimu@touhou.com").update(primary: true)
       end.not_to change(teacher, :application_status)
     end
 
     it "changes a info_needed status to not_reviewed" do
       expect do
         # Changes the status to not_reviewed only when there are meaningful changes
-        teacher.update(email: "reimu_different_email@touhou.com")
+        teacher.email_addresses.find_by(email: "reimu@touhou.com").update(email: "reimu_different_email@touhou.com")
       end.to change(teacher, :application_status)
                .from("info_needed").to("not_reviewed")
     end

@@ -9,7 +9,7 @@ def log_in(user, provider: "google_oauth2")
     uid: "123456789",
     info: {
       name: user.full_name,
-      email: user.email
+      email: user.primary_email
     }
   })
 

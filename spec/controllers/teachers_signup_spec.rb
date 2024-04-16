@@ -60,9 +60,11 @@ RSpec.describe TeachersController, type: :controller do
       teacher: {
         first_name: "valid_example",
         last_name: "valid_example",
-        email: "valid_example@valid_example.edu",
         status: 0,
         snap: "valid_example"
+      },
+      email: {
+        primary: "valid_example@validexample.edu",
       }
     }
     expect(Teacher.count).to eq(previous_count + 1)
@@ -74,7 +76,10 @@ RSpec.describe TeachersController, type: :controller do
       school: {
         id: 1
       },
-      teacher: Teacher.first.attributes
+      teacher: Teacher.first.attributes,
+      email: {
+        primary: EmailAddress.find_by(teacher_id: Teacher.first.id).email
+      }
     }
     expect(response).to redirect_to(login_path)
     expect(flash[:notice]).to match(/Please log in/)
