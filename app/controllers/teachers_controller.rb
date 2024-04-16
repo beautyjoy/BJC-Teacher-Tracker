@@ -10,10 +10,10 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import]
+  before_action :load_teacher, except: [:new, :index, :create, :import, :search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -32,6 +32,7 @@ class TeachersController < ApplicationController
   end
 
   def show
+    @all_teachers_except_current = Teacher.where.not(id: @teacher.id)
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end
@@ -208,6 +209,7 @@ class TeachersController < ApplicationController
 
   private
   def load_teacher
+    @teachers = Teacher.all
     @teacher ||= Teacher.find(params[:id])
   end
 
