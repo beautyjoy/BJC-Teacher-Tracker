@@ -10,7 +10,7 @@ end
 SeedData.create_schools
 
 SeedData.teachers.each do |teacher_attr|
-  email_address = EmailAddress.find_or_initialize_by(email: teacher_attr[:email])
+  email_address = EmailAddress.find_or_initialize_by(email: teacher_attr.delete(:email))
   puts "teacher_attr: #{teacher_attr}"
 
   if email_address.new_record?
