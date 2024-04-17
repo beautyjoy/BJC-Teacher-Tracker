@@ -51,14 +51,7 @@ class TeachersController < ApplicationController
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
-    @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
-    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
-      params[:id] = current_user.id
-      update
-      return
-    elsif @teacher
-      redirect_to login_path,
-                  notice: "You already have signed up with '#{@teacher.primary_email}'. Please log in."
+    if existing_teacher
       return
     end
 
@@ -107,6 +100,7 @@ class TeachersController < ApplicationController
 
     update_primary_email(primary_email)
     update_personal_emails(personal_emails)
+
     if teacher_params[:school_id].present?
       @teacher.school = @school
     else
@@ -117,32 +111,29 @@ class TeachersController < ApplicationController
       end
       @teacher.school = @school
     end
+
+    valid_school = update_school_through_teacher
+    if !valid_school
+      return
+    end
+
     send_email_if_application_status_changed_and_email_resend_enabled
-    if @teacher.denied? && !is_admin?
-      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+
+    if fail_to_update
       return
     end
-    if (@teacher.email_changed_flag || @teacher.snap_changed?) && !is_admin?
-      @teacher.email_changed_flag = false
-      redirect_to edit_teacher_path(params[:id]), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
-      return
-    end
-    unless @teacher.save
-      redirect_to edit_teacher_path(params[:id]),
-                  alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
-      return
-    end
+
     if !@teacher.validated? && !current_user.admin?
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
+
     if is_admin?
       redirect_to edit_teacher_path(params[:id]), notice: "Saved #{@teacher.full_name}"
-      return
     else
       @teacher.try_append_ip(request.remote_ip)
+      redirect_to edit_teacher_path(params[:id]), notice: "Successfully updated your information"
     end
-    redirect_to edit_teacher_path(params[:id]), notice: "Successfully updated your information"
   end
 
   def send_email_if_application_status_changed_and_email_resend_enabled
@@ -213,6 +204,49 @@ class TeachersController < ApplicationController
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
+  def existing_teacher
+    # Find by email, but allow updating other info.
+    @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
+    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
+      params[:id] = current_user.id
+      update
+      return true
+    elsif @teacher
+      redirect_to login_path, notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+      return true
+    end
+    false
+  end
+
+  def update_school_through_teacher
+    if !teacher_params[:school_id].present?
+      @school.update(school_params) if school_params
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "new"
+        return false
+      end
+    end
+    @teacher.school = @school
+    true
+  end
+
+  def fail_to_update
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      return true
+    elsif (@teacher.email_changed_flag || @teacher.snap_changed?) && !is_admin?
+      flash.now[:alert] = "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
+      render "edit"
+      return true
+    elsif !@teacher.save
+      flash.now[:alert] = "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+      render "edit"
+      return true
+    end
+    false
+  end
+
   def load_school
     if teacher_params[:school_id].present?
       @school ||= School.find(teacher_params[:school_id])
@@ -249,22 +283,20 @@ class TeachersController < ApplicationController
   end
 
   def sanitize_params
-    if params[:teacher]
-      if params[:teacher][:status]
-        params[:teacher][:status] = params[:teacher][:status].to_i
-      end
-      if params[:teacher][:education_level]
-        params[:teacher][:education_level] = params[:teacher][:education_level].to_i
-      end
+    teacher = params[:teacher]
+    if teacher && teacher[:status]
+      teacher[:status] = teacher[:status].to_i
+    end
+    if teacher && teacher[:education_level]
+      teacher[:education_level] = teacher[:education_level].to_i
     end
 
-    if params[:school]
-      if params[:school][:grade_level]
-        params[:school][:grade_level] = params[:school][:grade_level].to_i
-      end
-      if params[:school][:school_type]
-        params[:school][:school_type] = params[:school][:school_type].to_i
-      end
+    school = params[:school]
+    if school && school[:grade_level]
+      school[:grade_level] = school[:grade_level].to_i
+    end
+    if school && school[:school_type]
+      school[:school_type] = school[:school_type].to_i
     end
   end
 
