@@ -56,12 +56,11 @@ Given(/the following teachers exist/) do |teachers_table|
     session_count: 1,
     last_session_at: DateTime.now,
     ip_history: [IPAddr.new("1.2.3.4")],
-
     # Note: primary email field does not exist in the new schema of the Teacher model
     # Include it in the seed data is to simulate the behavior of creating a new teacher,
     # because we need to use it to compared with the EmailAddress model,
     # to determine the existence of the teacher
-    primary_email: "alonzo@snap.berkeley.edu",
+    primary_email: "alonzo@snap.berkeley.edu"
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
