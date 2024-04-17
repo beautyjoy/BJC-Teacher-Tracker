@@ -63,8 +63,6 @@ Given(/the following teachers exist/) do |teachers_table|
     primary_email: "alonzo@snap.berkeley.edu"
   }
 
-  debugger
-
   teachers_table.symbolic_hashes.each do |teacher|
     teachers_default.each do |key, value|
       # Parse the 'languages' field as an array of strings using YAML.safe_load
