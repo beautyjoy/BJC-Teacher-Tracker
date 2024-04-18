@@ -421,10 +421,10 @@ Feature: basic admin functionality
 
   Scenario: Merging teachers sums session counts, concatenates IP histories, and saves most recent datetime
     Given the following schools exist:
-     | name        | country | city     | state | personal_website         | grade_level | school_type |
+     | name        | country | city     | state | website                  | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name     | last_name   | session_count | ip_history             |   last_session_at      |   admin   | email                        | school      |
+      | first_name     | last_name   | session_count | ip_history             |   last_session_at      |   admin   | primary_email                        | school      |
       | Jane           |  Doe        |  169          | 1.2.3.4, 4.5.6.7       |   2023-04-10 12:30:00  |    false  | janedoe@berkeley.edu         | UC Berkeley |
       | Bobby          |  John       |  365          |  4.5.6.7, 7.8.9.10     |   2023-01-11 12:00:00  |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
     Given I am on the BJC home page
@@ -435,12 +435,12 @@ Feature: basic admin functionality
     And I follow "Confirm Merge"
     Then I see a confirmation "Teachers merged successfully"
     And the following entries should exist in the teachers database:
-    | first_name     | last_name    | session_count | ip_history                   |   last_session_at      |    admin  | email                        | school      |
+    | first_name     | last_name    | session_count | ip_history                   |   last_session_at      |    admin  | primary_email               | school      |
     | Bobby          |  John        |  534          | 1.2.3.4, 4.5.6.7, 7.8.9.10   |    2023-04-10 12:30:00 |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
       
   Scenario: Admin can access merge page from teacher show page
     Given the following schools exist:
-     | name        | country | city     | state | personal_website         | grade_level | school_type |
+     | name        | country | city     | state | website                  | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
       | first_name | last_name  | admin  | primary_email              |  school      |
