@@ -98,7 +98,7 @@ end
 
 Then(/the following entries should exist in the teachers database/) do |entries_table|
   entries_table.symbolic_hashes.each do |params|
-    keys_to_exclude = [:school, :session_count, :last_session_at, :ip_history]
+    keys_to_exclude = [:school, :session_count, :last_session_at, :ip_history, :primary_email]
     # teacher should be present and school should be valid
     teacher = Teacher.find_by(params.except(*keys_to_exclude))
     expect(!teacher.blank?).to be true
@@ -118,7 +118,7 @@ end
 
 Then(/the following entries should not exist in the teachers database/) do |entries_table|
   entries_table.symbolic_hashes.each do |teacher_params|
-    teacher_params.delete(:school)
+    teacher_params.except!(:school, :primary_email)
     # matches on all fields except school name
     expect(Teacher.find_by(teacher_params).blank?).to be true
   end

@@ -384,7 +384,7 @@ Feature: basic admin functionality
      | name        | country | city     | state | website                  | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name | last_name  | admin  | email                      | primary_email     | school      |
+      | first_name | last_name  | admin  | primary_email              | primary_email     | school      |
       | Jane       | Doe        | false  | janedoe@berkeley.edu       |  jd@berkeley.edu  | UC Berkeley | 
       | Bobby       | John       | false | bobbyjohn@berkeley.edu     |  bj@berkeley.edu  | UC Berkeley |
     Given I am on the BJC home page
@@ -401,9 +401,9 @@ Feature: basic admin functionality
      | name        | country | city     | state | website                  | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name     | last_name   | personal_website  | admin  | email                      | personal_email  |  school     | application_status |
-      | Jane           |  Doe        | abc@berkeley.edu  | false  | janedoe@berkeley.edu       | jd@berkeley.edu | UC Berkeley | validated          |
-      | Bobby          |  John       |                   | false  | bobbyjohn@berkeley.edu     | bj@berkeley.edu | UC Berkeley | denied             |
+      | first_name     | last_name   | personal_website  | admin  | primary_email              |  school      | application_status |
+      | Jane           |  Doe        | abc@berkeley.edu  | false  | janedoe@berkeley.edu       |  UC Berkeley | validated          |
+      | Bobby          |  John       |                   | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
     Given I am on the BJC home page
     And   I have an admin email
     And   I follow "Log In"
@@ -412,11 +412,11 @@ Feature: basic admin functionality
     And I follow "Confirm Merge"
     Then I see a confirmation "Teachers merged successfully"
     And the following entries should not exist in the teachers database:
-      | first_name     | last_name   | personal_website           | admin  | email                      | personal_email   | school      | application_status |
-      | Jane           |  Doe        | https://abc.berkeley.edu   | false  | janedoe@berkeley.edu       | jd@berkeley.edu  | UC Berkeley | validated          |
-      | Bobby          |  John       |                            | false  | bobbyjohn@berkeley.edu     | bj@berkeley.edu  | UC Berkeley | denied             |
+      | first_name     | last_name   | personal_website           | admin  | primary_email              | school      | application_status |
+      | Jane           |  Doe        | https://abc.berkeley.edu   | false  | janedoe@berkeley.edu       | UC Berkeley | validated          |
+      | Bobby          |  John       |                            | false  | bobbyjohn@berkeley.edu     | UC Berkeley | denied             |
     And the following entries should exist in the teachers database:
-      | first_name     | last_name       | personal_website  | admin  | email                      | school       | application_status |
+      | first_name     | last_name       | personal_website  | admin  | primary_email              | school       | application_status |
       | Bobby          |  John           | abc@berkeley.edu  | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
 
   Scenario: Merging teachers sums session counts, concatenates IP histories, and saves most recent datetime
@@ -424,9 +424,9 @@ Feature: basic admin functionality
      | name        | country | city     | state | personal_website         | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name     | last_name   | session_count | ip_history             |   last_session_at      |   admin   | email                        | personal_email  | school      |
-      | Jane           |  Doe        |  169          | 1.2.3.4, 4.5.6.7       |   2023-04-10 12:30:00  |    false  | janedoe@berkeley.edu         | jd@berkeley.edu | UC Berkeley |
-      | Bobby          |  John       |  365          |  4.5.6.7, 7.8.9.10     |   2023-01-11 12:00:00  |    false  | bobbyjohn@berkeley.edu       | bj@berkeley.edu | UC Berkeley |
+      | first_name     | last_name   | session_count | ip_history             |   last_session_at      |   admin   | email                        | school      |
+      | Jane           |  Doe        |  169          | 1.2.3.4, 4.5.6.7       |   2023-04-10 12:30:00  |    false  | janedoe@berkeley.edu         | UC Berkeley |
+      | Bobby          |  John       |  365          |  4.5.6.7, 7.8.9.10     |   2023-01-11 12:00:00  |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
     Given I am on the BJC home page
     And   I have an admin email
     And   I follow "Log In"
@@ -443,9 +443,9 @@ Feature: basic admin functionality
      | name        | country | city     | state | personal_website         | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
-      | first_name | last_name  | admin  | email                      | personal_email  | school      |
-      | Jane       | Doe        | false  | janedoe@berkeley.edu       | jd@berkeley.edu | UC Berkeley | 
-      | Bobby      | John       | false  | bobbyjohn@berkeley.edu     | bj@berkeley.edu | UC Berkeley |
+      | first_name | last_name  | admin  | primary_email              |  school      |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  | 
+      | Bobby      | John       | false  | bobbyjohn@berkeley.edu     |  UC Berkeley |
     Given I am on the BJC home page
     And   I have an admin email
     And   I follow "Log In"
