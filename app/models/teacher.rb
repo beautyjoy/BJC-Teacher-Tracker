@@ -81,6 +81,7 @@ class Teacher < ApplicationRecord
     developer: 6,
     excite: 7,
     middle_school_bjc: 8,
+    home_school_bjc: 9
   }
 
   # Always add to the bottom of the list!
@@ -94,6 +95,7 @@ class Teacher < ApplicationRecord
     "I am a BJC curriculum or tool developer.",
     "I am teaching with the ExCITE project",
     "I am teaching Middle School BJC.",
+    "I am teaching homeschool with the BJC curriculum. "
   ].freeze
 
   # From an admin perspective, we want to know if a teacher has any **meaningful** change
@@ -148,6 +150,7 @@ class Teacher < ApplicationRecord
       :excite,
       :teals_teacher,
       :teals_volunteer,
+      :home_school_bjc,
       :other,
       :developer,
     ]

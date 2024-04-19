@@ -157,6 +157,14 @@ module SeedData
       website: "https://bjc.berkeley.edu",
       state: "CA",
     )
+    #a dummy school to which all homeschoolers get assigned
+    School.find_or_create_by(
+      name: "Home School",
+      city: "Berkeley",
+      country: "US",
+      website: "https://bjc.berkeley.edu",
+      state: "CA",
+    )
   end
 
   def self.teachers
