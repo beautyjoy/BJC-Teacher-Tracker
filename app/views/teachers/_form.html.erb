@@ -129,33 +129,30 @@ status ONLY IF the person viewing this page is an admin. %>
       multiple: true,
       include_blank: "Select an option",
       class: 'selectize', required: true
-) %>
+      ) %>
     </div>
   </div>
-
-  
 
   <div class='form-group row'>
     <div class='col-12'>
-      <%= f.label :more_info, "More Information", class: "label-required" %>
-      <%= f.text_area :more_info, placeholder: "I applied for access because...",
-        class: "form-control", required: true, rows: "2" %>
+        <%= f.label :more_info, "More Information", class: "label-required" %>
+        <%= f.text_area :more_info, placeholder: "I applied for access because...",
+          class: "form-control", required: true, rows: "2" %>
     </div>
     <small class="col-12 form-text text-muted"><strong id='teacher-more-info-reminder'>Please tell us why you need access.</strong></small>
   </div>
-  <%= f.hidden_field :school_id %>
-</div>
+    <%= f.hidden_field :school_id %>
+  </div>
 
-<div class='form-group form-input-group'>
-  <%= form_with model: @teacher.school, local: true do |school| %>
-    <h2>Your School</h2>
-    <%= render 'schools/selectize_form', f: school %>
-    <%# NO END HERE -- NOTE BELOW %>
-</div>
+  <div class='form-group form-input-group'>
+    <%= form_with model: @teacher.school, local: true do |school| %>
+      <h2>Your School</h2>
+        <%= render 'schools/selectize_form', f: school %>
+    <% end %>
+  </div>
 
-<%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
-<%# TWO ENDS MUST COME AFTER SUBMIT -- Rails bug??? %>
-<% end %>
+  <%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
+
 <% end %>
 
 <script>
