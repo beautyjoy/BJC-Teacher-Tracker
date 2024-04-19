@@ -206,17 +206,64 @@ status ONLY IF the person viewing this page is an admin. %>
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
       <%# If homeschool, then hide schools form %>
       if (status_val == 9) {
+        selectOrCreateHomeschoolOption();
         $('#school_form').hide();
-        // Disable all input fields within the school form
-        $('#school_form input, #school_form select, #school_form textarea').prop('disabled', true);
       } else {
-        // Enable all input fields, select elements, and textarea elements within the school form
-        $('#school_form input, #school_form select, #school_form textarea').prop('disabled', false);
-    
         // Show the school form if it was hidden
         $('#school_form').show();
+        // Clear home school from the selection
+        $('#school_selectize').data('selectize').clear();
       }
     } 
   }
+
+  function selectOrCreateHomeschoolOption() {
+    selectOrCreateSelectizeOption("Home School", "HOME", "N/A", "N/A");
+  }
+
+  //selects or creates the selectize option with corresponding name
+  //city, country, and state in the selectize dropdown
+  function selectOrCreateSelectizeOption(name, country, city, state) {
+    // Get the Selectize instance associated with the element.
+    const selectizeInstance = $('#school_selectize').data('selectize');
+    
+    // Initialize variable to hold the value of the "Home School" option, if found.
+    let selectedOption = null;
+
+    // Iterate through the options to find the matching option.
+    for (const value in selectizeInstance.options) {
+        if (selectizeInstance.options.hasOwnProperty(value)) {
+            const option = selectizeInstance.options[value];
+            if (option.name === name && option.country === country &&
+            option.city == city && option.state == state) {
+                selectedOption = value;
+                break; // Stop iteration as soon as matching option is found.
+            }
+        }
+    }
+
+    // If selected option is not found, create it.
+    if (!selectedOption) {
+        const selectedOptionData = {
+            name: name,
+            country: country,
+            city: city,
+            state: state
+        };
+
+        // Use createItem to create the new option in the Selectize instance.
+        selectizeInstance.createItem(selectedOptionData, function(newValue) {
+            // Callback function after the new item is created.
+            // Update the selected option with the newly created item's value (ID).
+            selectedOption = newValue;
+        });
+    }
+
+    // Set the Selectize instance's value to the new option.
+    selectizeInstance.setValue(selectedOption);
+  }
+
+
+  
 
 </script>

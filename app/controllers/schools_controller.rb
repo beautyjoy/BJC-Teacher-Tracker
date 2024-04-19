@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SchoolsController < ApplicationController
+  include SchoolParams
   before_action :require_admin
 
   def index
@@ -12,11 +13,11 @@ class SchoolsController < ApplicationController
   end
 
   def search
-    School.all.collect { |school| ["#{school.name}, #{school.country}, #{school.city}, #{school.state}", school.name] }
+    School.search_list
   end
 
   def create
-    @school = School.find_by(name: school_params[:name], country: school_params[:country], city: school_params[:city], state: school_params[:state])
+    @school = School.find_by(**unique_school_params)
     if @school
       @school.assign_attributes(school_params)
     else
@@ -64,10 +65,6 @@ class SchoolsController < ApplicationController
   end
 
   private
-  def school_params
-    params.require(:school).permit(:name, :country, :city, :state, :website, :grade_level, :school_type, :country, { tags: [] }, :nces_id)
-  end
-
   def load_ordered_schools
     @ordered_schools ||= School.all.order(:name)
   end

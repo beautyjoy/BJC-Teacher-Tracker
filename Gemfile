@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.3" # TODO: use file: '.tool-versions' when heroku supports it. (bundler >= 2.5)
 
-gem "rails", "6.1.7.6"
+gem "rails", "6.1.7.7"
 
 # Production app server
 gem "puma", "~> 5"

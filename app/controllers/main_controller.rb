@@ -14,7 +14,6 @@ class MainController < ApplicationController
     elsif is_teacher? && !current_user.validated?
       message = "Your application is #{mapped_application_status(current_user.application_status)}. You may update your information. Please check your email for more information."
       # Both `info_needed` and `not_reviewed` flash message should be flash[:warn] style
-      # flash[:warn] for yellow warning message in bootstrap style
       redirect_to edit_teacher_path(current_user.id), warn: message
     # if this user is denied, redirect to new
     else
@@ -35,8 +34,7 @@ class MainController < ApplicationController
     status_map = {
       "info_needed" => "requested to be updated",
       "not_reviewed" => "not reviewed"
-    }
-    # Fetch the mapped status if present; otherwise, return the original status
+    }.with_indifferent_access
     status_map.fetch(status, status)
   end
 end
