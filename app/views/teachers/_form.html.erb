@@ -209,10 +209,10 @@ status ONLY IF the person viewing this page is an admin. %>
         createAndSelectDummyOption();
         $('#school_container').hide();
       } else {
-        // Show the school form if it was hidden
+        // Show the outer container, but hide the new school form
         $('#school_container').show();
-        // Clear home school from the selection
-        //$('#school_selectize').data('selectize').clear();
+        $("#school_form").hide();
+        
       }
     } 
   }
