@@ -11,6 +11,7 @@
 #  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
+#  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
@@ -41,10 +42,13 @@ FactoryBot.define do
     first_name { "Teacher" }
     last_name  { "User" }
     snap { "teacher" }
-    sequence(:email) { |n| "teacher-#{n}@example.edu" }
     status { 0 }
     application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
+
+    after(:create) do |teacher|
+      create(:email_address, teacher:, primary: true)
+    end
   end
 end

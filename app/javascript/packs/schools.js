@@ -28,7 +28,7 @@ let create_school = function (input, callback) {
   $("#school_form").show();
   toggle_required(['name', 'city', 'state', 'website'], true);
   $(".btn-primary").show();
-  let oringial_school_id = $('#teacher_school_id').val();
+  let original_school_id = $('#teacher_school_id').val();
   var reset_button = $("#close_button");
   var name_input = $("#school_name");
   // Unset the existing saved school id.
@@ -38,7 +38,7 @@ let create_school = function (input, callback) {
     if (selectizeCallback != null) {
       selectizeCallback();
       selectizeCallback = null;
-      $('#teacher_school_id').val(oringial_school_id);
+      $('#teacher_school_id').val(original_school_id);
     }
     toggle_required(['name', 'city', 'state', 'website'], true);
     $("#school_form").hide();

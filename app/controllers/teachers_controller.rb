@@ -42,22 +42,23 @@ class TeachersController < ApplicationController
     @school = @teacher.school # maybe delegate this
     @readonly = false
     if omniauth_data.present?
+      email_data = { email: omniauth_data.delete("email"), primary: true }
       @teacher.assign_attributes(omniauth_data)
+      @teacher.email_addresses.build(email_data)
     end
   end
 
   # TODO: This needs to be re-written.
   # If you are logged in and not an admin, this should fail.
   def create
-    # Find by email, but allow updating other info.
-    @teacher = Teacher.find_by(email: teacher_params[:email])
+    @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
       return
     elsif @teacher
       redirect_to login_path,
-                  notice: "You already have signed up with '#{@teacher.email}'. Please log in."
+                  notice: "You already have signed up with '#{@teacher.primary_email}'. Please log in."
       return
     end
 
@@ -65,23 +66,25 @@ class TeachersController < ApplicationController
     if @school.new_record?
       @school = School.new(school_params)
       unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        flash[:alert] = "An error occurred! #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
     end
 
     @teacher = Teacher.new(teacher_params)
+    @teacher.email_addresses.build(email: params[:email][:primary], primary: true)
+
     @teacher.try_append_ip(request.remote_ip)
     @teacher.session_count += 1
     @teacher.school = @school
     if @teacher.save
       @teacher.not_reviewed!
-      flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.email}."
+      flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.primary_email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
+      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
     end
   end
 
@@ -95,12 +98,23 @@ class TeachersController < ApplicationController
   def update
     load_school
     ordered_schools
+
+    primary_email = params.dig(:email, :primary)
+    personal_emails = params[:email]&.select { |key, value| key.start_with?("personal_") }&.values
+
+    # Now, `params[:teacher]` does not contain primary_email or any personal_emailX fields
     @teacher.assign_attributes(teacher_params)
+
+    update_primary_email(primary_email)
+    update_personal_emails(personal_emails)
     if teacher_params[:school_id].present?
       @teacher.school = @school
     else
       @school.update(school_params) if school_params
-      @school.save!
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "new" && return
+      end
       @teacher.school = @school
     end
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -108,13 +122,14 @@ class TeachersController < ApplicationController
       redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
       return
     end
-    if (@teacher.email_changed? || @teacher.snap_changed?) && !is_admin?
-      redirect_to edit_teacher_path(current_user.id), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
+    if (@teacher.email_changed_flag || @teacher.snap_changed?) && !is_admin?
+      @teacher.email_changed_flag = false
+      redirect_to edit_teacher_path(params[:id]), alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu."
       return
     end
-    if !@teacher.save
-      redirect_to edit_teacher_path(current_user.id),
-                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+    unless @teacher.save
+      redirect_to edit_teacher_path(params[:id]),
+                  alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
       return
     end
     if !@teacher.validated? && !current_user.admin?
@@ -122,12 +137,12 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
+      redirect_to edit_teacher_path(params[:id]), notice: "Saved #{@teacher.full_name}"
       return
     else
       @teacher.try_append_ip(request.remote_ip)
     end
-    redirect_to edit_teacher_path(current_user.id), notice: "Successfully updated your information"
+    redirect_to edit_teacher_path(params[:id]), notice: "Successfully updated your information"
   end
 
   def send_email_if_application_status_changed_and_email_resend_enabled
@@ -206,12 +221,11 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    teacher_attributes = [:first_name, :last_name, :school, :email, :status, :snap,
-      :more_info, :personal_website, :education_level, :school_id]
-    if is_admin?
-      teacher_attributes << [:personal_email, :application_status,
-      :request_reason, :skip_email]
-    end
+    teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
+                          :more_info, :personal_website, :education_level, :school_id, languages: []]
+    admin_attributes = [:application_status, :request_reason, :skip_email]
+    teacher_attributes.push(*admin_attributes) if is_admin?
+
     params.require(:teacher).permit(*teacher_attributes)
   end
 
@@ -227,7 +241,7 @@ class TeachersController < ApplicationController
   def ordered_schools
     if params[:id].present?
       load_teacher
-      @ordered_schools ||= [ @teacher.school ] +
+      @ordered_schools ||= [@teacher.school] +
         School.all.order(:name).reject { |s| s.id == @teacher.school_id }
     else
       @ordered_schools ||= School.all.order(:name)
@@ -256,5 +270,31 @@ class TeachersController < ApplicationController
 
   def load_pages
     @pages ||= Page.where(viewer_permissions: Page.viewable_pages(current_user))
+  end
+
+  def update_primary_email(primary_email)
+    return unless primary_email.present?
+
+    # First, ensure the current primary email is marked as not primary if it's not the same as the new one
+    @teacher.email_addresses.find_by(primary: true)&.update(primary: false)
+
+    primary_email_record = @teacher.email_addresses.find_or_initialize_by(email: primary_email)
+    primary_email_record.primary = true
+
+    primary_email_record.save if primary_email_record.changed?
+  end
+
+  def update_personal_emails(personal_emails)
+    return unless personal_emails.present?
+    personal_emails = personal_emails.reject(&:empty?)
+    return if personal_emails.empty?
+
+    current_emails = @teacher.email_addresses.pluck(:email)
+
+    new_emails = personal_emails - current_emails
+
+    new_emails.each do |email|
+      @teacher.email_addresses.build(email:, primary: false)
+    end
   end
 end

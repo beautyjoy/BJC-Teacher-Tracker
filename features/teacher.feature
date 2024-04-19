@@ -27,7 +27,7 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   |   UC Berkeley         |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   | Cupertino High School |       US        |   Cupertino  |   CA    |      https://chs.fuhsd.org    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -43,16 +43,18 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I enter my "City" as "Cupertino"
   And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I select "Spanish" from the languages dropdown
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  And   the languages dropdown should have the option "Spanish" selected
 
 Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
   Given the following schools exist:
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Microsoft email
   Given I am on the BJC home page
@@ -66,7 +68,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Snap email
   Given I am on the BJC home page
@@ -80,7 +82,7 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Clever email
   Given I am on the BJC home page
@@ -94,7 +96,7 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | snap   |
+  | first_name | last_name | admin | primary_email            | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -121,7 +123,7 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | snap   |
+  | first_name | last_name | admin | primary_email            | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -147,7 +149,7 @@ Scenario: Logged in teacher can only edit their own information
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     |
+  | first_name | last_name | admin | primary_email             |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   | Jane       | Austin    | false | testteacher2@berkeley.edu |
   Given I have a teacher Google email
@@ -162,7 +164,7 @@ Scenario: Logging in as a teacher with not_reviewed status should see "Update" i
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     |
+  | first_name | last_name | admin | primary_email             |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -176,7 +178,7 @@ Scenario: Frontend should not allow Teacher to edit their email
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap |
+  | first_name | last_name | admin | primary_email             | snap |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -194,7 +196,7 @@ Scenario: Validated teacher should see resend button
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -208,7 +210,7 @@ Scenario: teacher with not_reviewed status should not see resend button
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed       |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -222,7 +224,7 @@ Scenario: Denied teacher should not see resend button
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -236,7 +238,7 @@ Scenario: Denied teacher cannot edit their information
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status | more_info |
+  | first_name | last_name | admin | primary_email             | snap | application_status | more_info |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied | Original Information |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -252,7 +254,7 @@ Scenario: Validated teacher should not see Tags or NCES ID
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -267,7 +269,7 @@ Scenario: Teacher with not_reviewed status should not see Tags or NCES ID
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -282,7 +284,7 @@ Scenario: Denied teacher should not see Tags or NCES ID
   |       name      |     country     |     city     |  state  |            website            |
   |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
   Given I have a teacher Google email
   Given I am on the BJC home page

@@ -11,6 +11,7 @@
 #  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
+#  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
@@ -37,10 +38,17 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
-  validates :first_name, :last_name, :email, :status, presence: true
-  validates :email, uniqueness: true
-  validates :personal_email, uniqueness: true, if: -> { personal_email.present? }
-  validate :ensure_unique_personal_email, if: -> { email_changed? || personal_email_changed? }
+  WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
+
+  has_many :email_addresses, dependent: :destroy
+  accepts_nested_attributes_for :email_addresses, allow_destroy: true
+
+  validates :first_name, :last_name, :status, presence: true
+  validate :valid_languages
+  before_validation :sort_and_clean_languages
+
+  # Custom attribute for tracking email changes. This is not persisted in the database.
+  attribute :email_changed_flag, :boolean, default: false
 
   enum application_status: {
     validated: "Validated",
@@ -124,7 +132,7 @@ class Teacher < ApplicationRecord
 
   def email_name
     # We need to normalize names for emails.
-    "#{full_name} <#{email}>".delete(",")
+    "#{full_name} <#{primary_email}>".delete(",")
   end
 
   def snap_username
@@ -165,6 +173,24 @@ class Teacher < ApplicationRecord
     Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
   end
 
+  def self.language_options
+    WORLD_LANGUAGES
+  end
+
+  def display_languages
+    languages.join(", ")
+  end
+
+  def valid_languages
+    !languages.empty? && languages.all? { |value| WORLD_LANGUAGES.include?(value) }
+  end
+
+  def sort_and_clean_languages
+    # Due to an identified bug in the Selectize plugin, an empty string is occasionally appended to the 'languages' list.
+    # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
+    languages.sort!.reject!(&:blank?)
+  end
+
   def display_education_level
     if education_level_before_type_cast.to_i == -1
       "?"
@@ -197,15 +223,8 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    teachers = Teacher.where("LOWER(email) = :email or LOWER(personal_email) = :email",
-      email: omniauth.email.downcase)
-    if teachers.length > 1
-      raise "Too Many Teachers Found"
-    elsif teachers.length == 1
-      teachers.first
-    else
-      nil
-    end
+    teacher = EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
+    teacher
   end
 
   def try_append_ip(ip)
@@ -220,8 +239,9 @@ class Teacher < ApplicationRecord
       teacher_first_name: self.first_name,
       teacher_last_name: self.last_name,
       teacher_full_name: self.full_name,
-      teacher_email: self.email,
-      teacher_personal_email: self.personal_email,
+      teacher_email: self.primary_email,
+      # TODO: change to personal_emails
+      teacher_personal_email: self.non_primary_emails,
       teacher_more_info: self.more_info,
       teacher_snap: self.snap_username,
       teacher_snap_username: self.snap_username,
@@ -271,21 +291,25 @@ class Teacher < ApplicationRecord
     end
   end
 
-  private
-  def ensure_unique_personal_email
-    # We want to ensure that both email and personal_email are unique across
-    # BOTH columns (i.e. the email only appears once in the combined set)
-    # However, it's perfectly valid for personal_email to be nil
-    # TODO: This really suggests email needs to be its own table...
-    teacher_with_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.email }])
-    if teacher_with_email
-      errors.add(:email, "must be unique across both email and personal_email columns")
-    end
-    return unless self.personal_email.present?
+  def email
+    # Default return primary email
+    primary_email
+  end
 
-    teacher_personal_email = Teacher.where.not(id: self.id).exists?(["email = :value OR personal_email = :value", { value: self.personal_email }])
-    if teacher_personal_email
-      errors.add(:personal_email, "must be unique across both email and personal_email columns")
-    end
+  def primary_email
+    # ||:email this code is temporary for this PR: https://github.com/cs169/BJC-Teacher-Tracker-App/pull/49
+    # to make sure at least original data in db still work and passed the existing tests
+    self[:email] || email_addresses.find_by(primary: true)&.email
+  end
+
+  def personal_emails
+    non_primary_emails
+  end
+
+  private
+  def non_primary_emails
+    # email_addresses.where(primary: false)&.pluck(:email)
+    # below code is temporary for current PR, to make sure the frontend same as before (only one personal email)
+    personal_email || email_addresses.where(primary: false)&.pluck(:email)&.first
   end
 end

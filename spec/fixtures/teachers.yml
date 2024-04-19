@@ -9,6 +9,7 @@
 #  email              :string
 #  first_name         :string
 #  ip_history         :inet             default([]), is an Array
+#  languages          :string           default(["\"English\""]), is an Array
 #  last_name          :string
 #  last_session_at    :datetime
 #  more_info          :string
@@ -42,7 +43,6 @@ admin:
   last_name: Wang
   status: 4
   more_info: A CS169 Student
-  email: 'ye@berkeley.edu'
   snap: ye
   application_status: Validated
   education_level: -1
@@ -55,7 +55,6 @@ validated_teacher:
   last_name: Teacher
   status: 4
   more_info: A CS169 Student
-  email: validated@teacher.edu
   snap: validated
   application_status: Validated
   education_level: -1
@@ -66,7 +65,6 @@ bob:
   first_name: Bob
   last_name: Johnson
   snap: BobJohnson
-  email: 'bob@gmail.com'
   status: 1
   more_info: ''
   application_status: Denied
@@ -78,7 +76,6 @@ long:
   first_name: Short
   last_name: Long
   snap: song
-  email: 'short@long.com'
   status: 3
   school: berkeley
   more_info: ''
@@ -90,7 +87,6 @@ reimu:
   first_name: Reimu
   last_name: Hakurei
   snap: reimu
-  email: 'reimu@touhou.com'
   status: 4
   more_info: Best Touhou Character
   school: berkeley
@@ -102,11 +98,8 @@ barney:
   first_name: Barney
   last_name: Dinosaur
   snap: barney
-  email: 'barneydinosaur@gmail.com'
-  personal_email: 'bigpurpletrex@gmail.com'
   status: 1
   more_info: ''
   application_status: Denied
   school: berkeley
   education_level: -1
-  

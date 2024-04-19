@@ -27,7 +27,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      flash[:alert] = "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
       render "new"
     end
   end
@@ -45,10 +45,11 @@ class SchoolsController < ApplicationController
     @school = School.find(params[:id])
     @school.assign_attributes(school_params)
     if @school.save
-      flash[:success] = "Update #{@school.name} successfully."
+      flash[:success] = "Updated #{@school.name} successfully."
       redirect_to school_path(@school)
     else
-      render "edit", alert: "Failed to submit information :("
+      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+      render "edit"
     end
   end
 
