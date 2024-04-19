@@ -16,7 +16,7 @@ Given(/the following emails exist/) do |emails_table|
 end
 
 When(/^I press "([^"]*)" next to "([^"]*)"$/) do |button_text, email_text|
-  email_field = all('.email-field').find { |field| field.has_css?('input[type="email"][value="' + email_text + '"]') }
+  email_field = all(".email-field").find { |field| field.has_css?('input[type="email"][value="' + email_text + '"]') }
   within(email_field) do
     click_link(button_text)
   end
