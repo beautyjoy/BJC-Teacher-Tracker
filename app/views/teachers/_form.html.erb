@@ -101,7 +101,7 @@ status ONLY IF the person viewing this page is an admin. %>
         :status,
         options_for_select(Teacher.status_options, teacher.status_before_type_cast),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
+        { class: 'form-control', required: true, onchange: 'listenForStatusOptionChange();' }
       ) %>
     </div>
   </div>
@@ -144,7 +144,7 @@ status ONLY IF the person viewing this page is an admin. %>
     <%= f.hidden_field :school_id %>
   </div>
 
-  <div class='form-group form-input-group'>
+  <div class='form-group form-input-group' id='school_form'>
     <%= form_with model: @teacher.school, local: true do |school| %>
       <h2>Your School</h2>
         <%= render 'schools/selectize_form', f: school %>
@@ -165,8 +165,9 @@ status ONLY IF the person viewing this page is an admin. %>
       create: false
     });
     //on loading the page, immediately update the reason field depending on 
-    //the value of the application status
+    //the value of the application status and check teacher status option
     updateReasonField();
+    listenForStatusOptionChange();
   });
 
   //JS to update the text description for the denial/request reason input
@@ -195,19 +196,27 @@ status ONLY IF the person viewing this page is an admin. %>
     }
   }
 
-  function requireVolunteerHostTeacher() {
+  function listenForStatusOptionChange() {
     var status_val = $( "#teacher_status" ).val();
 
     <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
       $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");
-    }
-    else {
+    } else {
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
-    }
-
+      <%# If homeschool, then hide schools form %>
+      if (status_val == 9) {
+        $('#school_form').hide();
+        // Disable all input fields within the school form
+        $('#school_form input, #school_form select, #school_form textarea').prop('disabled', true);
+      } else {
+        // Enable all input fields, select elements, and textarea elements within the school form
+        $('#school_form input, #school_form select, #school_form textarea').prop('disabled', false);
+    
+        // Show the school form if it was hidden
+        $('#school_form').show();
+      }
+    } 
   }
-
-
 
 </script>
