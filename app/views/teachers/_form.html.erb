@@ -148,11 +148,10 @@ status ONLY IF the person viewing this page is an admin. %>
     <%= form_with model: @teacher.school, local: true do |school| %>
       <h2>Your School</h2>
         <%= render 'schools/selectize_form', f: school %>
-    <% end %>
   </div>
 
   <%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
-
+<% end %>
 <% end %>
 
 <script>
