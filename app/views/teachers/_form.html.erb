@@ -106,6 +106,14 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 
+  <!-- File upload input field -->
+  <div class='form-group row'>
+    <div class='col-12'>
+    <%= f.label :files, "Upload supporting files: " %>
+    <%= f.file_field :files, multiple: true %>
+    </div>
+  </div>
+
   <div class='form-group row'>
     <div class='col-12'>
       <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
