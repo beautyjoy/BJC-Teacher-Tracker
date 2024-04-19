@@ -49,7 +49,7 @@ gem "activerecord-import", require: false
 
 gem "httparty", "~> 0.21.0"
 
-
+gem 'activestorage'
 gem "country_select", "~> 8.0"
 
 group :development do
