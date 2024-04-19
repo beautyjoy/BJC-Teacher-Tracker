@@ -100,13 +100,10 @@ class TeachersController < ApplicationController
     ordered_schools
 
     primary_email = params.dig(:email, :primary)
-    personal_emails = params[:email]&.select { |key, value| key.start_with?("personal_") }&.values
 
-    # Now, `params[:teacher]` does not contain primary_email or any personal_emailX fields
     @teacher.assign_attributes(teacher_params)
 
     update_primary_email(primary_email)
-    update_personal_emails(personal_emails)
     if teacher_params[:school_id].present?
       @teacher.school = @school
     else
@@ -282,19 +279,5 @@ class TeachersController < ApplicationController
     primary_email_record.primary = true
 
     primary_email_record.save if primary_email_record.changed?
-  end
-
-  def update_personal_emails(personal_emails)
-    return unless personal_emails.present?
-    personal_emails = personal_emails.reject(&:empty?)
-    return if personal_emails.empty?
-
-    current_emails = @teacher.email_addresses.pluck(:email)
-
-    new_emails = personal_emails - current_emails
-
-    new_emails.each do |email|
-      @teacher.email_addresses.build(email:, primary: false)
-    end
   end
 end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root to: "main#index"
 
   resources :teachers do
+    resource :email_address, only: [:edit, :update, :create]
     member do
       post :resend_welcome_email
       post :validate
