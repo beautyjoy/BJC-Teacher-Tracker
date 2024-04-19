@@ -7,7 +7,6 @@ class PdRegistrationsController < ApplicationController
   before_action :set_professional_development, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @pd_registrations = PdRegistration.where(professional_development_id: @professional_development.id)
   end
 
   def show
