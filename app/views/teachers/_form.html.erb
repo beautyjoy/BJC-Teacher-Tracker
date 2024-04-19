@@ -144,7 +144,7 @@ status ONLY IF the person viewing this page is an admin. %>
     <%= f.hidden_field :school_id %>
   </div>
 
-  <div class='form-group form-input-group' id='school_form'>
+  <div class='form-group form-input-group' id='school_container'>
     <%= form_with model: @teacher.school, local: true do |school| %>
       <h2>Your School</h2>
         <%= render 'schools/selectize_form', f: school %>
@@ -197,7 +197,7 @@ status ONLY IF the person viewing this page is an admin. %>
   }
 
   function listenForStatusOptionChange() {
-    var status_val = $( "#teacher_status" ).val();
+    var status_val = $( "#teacher_status").val();
 
     <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
@@ -206,64 +206,28 @@ status ONLY IF the person viewing this page is an admin. %>
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
       <%# If homeschool, then hide schools form %>
       if (status_val == 9) {
-        selectOrCreateHomeschoolOption();
-        $('#school_form').hide();
+        createAndSelectDummyOption();
+        $('#school_container').hide();
       } else {
         // Show the school form if it was hidden
-        $('#school_form').show();
+        $('#school_container').show();
         // Clear home school from the selection
-        $('#school_selectize').data('selectize').clear();
+        //$('#school_selectize').data('selectize').clear();
       }
     } 
   }
 
-  function selectOrCreateHomeschoolOption() {
-    selectOrCreateSelectizeOption("Home School", "HOME", "N/A", "N/A");
+  //creates and selects a 'dummy' selectize option. This is only to
+  //prevent frontend validations from failing to submit the form when it
+  //is hidden because of the home school being selected. The dummy,
+  //in this case, is defined as the FIRST item in the selectize list. Backend
+  //logic is handled in the teachers controller.
+  function createAndSelectDummyOption() {
+        $("#school_form").show();
+        const selectizeElement = $('#school_selectize');
+        const selectizeInstance = selectizeElement[0].selectize;
+        const firstOptionKey = Object.keys(selectizeInstance.options)[0];
+        selectizeInstance.setValue(firstOptionKey);
   }
-
-  //selects or creates the selectize option with corresponding name
-  //city, country, and state in the selectize dropdown
-  function selectOrCreateSelectizeOption(name, country, city, state) {
-    // Get the Selectize instance associated with the element.
-    const selectizeInstance = $('#school_selectize').data('selectize');
-    
-    // Initialize variable to hold the value of the "Home School" option, if found.
-    let selectedOption = null;
-
-    // Iterate through the options to find the matching option.
-    for (const value in selectizeInstance.options) {
-        if (selectizeInstance.options.hasOwnProperty(value)) {
-            const option = selectizeInstance.options[value];
-            if (option.name === name && option.country === country &&
-            option.city == city && option.state == state) {
-                selectedOption = value;
-                break; // Stop iteration as soon as matching option is found.
-            }
-        }
-    }
-
-    // If selected option is not found, create it.
-    if (!selectedOption) {
-        const selectedOptionData = {
-            name: name,
-            country: country,
-            city: city,
-            state: state
-        };
-
-        // Use createItem to create the new option in the Selectize instance.
-        selectizeInstance.createItem(selectedOptionData, function(newValue) {
-            // Callback function after the new item is created.
-            // Update the selected option with the newly created item's value (ID).
-            selectedOption = newValue;
-        });
-    }
-
-    // Set the Selectize instance's value to the new option.
-    selectizeInstance.setValue(selectedOption);
-  }
-
-
-  
 
 </script>
