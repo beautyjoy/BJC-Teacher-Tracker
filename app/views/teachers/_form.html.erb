@@ -82,18 +82,6 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <%# For now... only admins can enter/edit personal emails. %>
 
-  <%- if current_user&.admin? || @teacher.personal_emails.present? %>
-  <div class="form-group row">
-    <div class='col-12'>
-      <%= label_tag "email[personal_1]" do %>
-        Personal Email</i>
-      <% end %>
-      <%= text_field_tag "email[personal_1]", @teacher.personal_emails, placeholder: 'alonzo@gmail.com', class: 'form-control',
-        required: false, type: :email, readonly: @readonly %>
-    </div>
-  </div>
-  <% end %>
-
   <div class='form-group row'>
     <div class='col-12'>
       <%= f.label :status, "What's your current status?", class: "label-required" %>
@@ -210,7 +198,4 @@ status ONLY IF the person viewing this page is an admin. %>
     }
 
   }
-
-
-
 </script>
