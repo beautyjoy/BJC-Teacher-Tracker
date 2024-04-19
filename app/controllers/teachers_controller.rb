@@ -250,9 +250,8 @@ class TeachersController < ApplicationController
   end
 
   def load_school
-    debugger
     if teacher_params[:status] == 9
-      #if homeschool, default the teacher's school to the 'Home School' object
+      # if homeschool, default the teacher's school to the 'Home School' object
       @school ||= School.find_or_create_by(**homeschool_params)
     else
       if teacher_params[:school_id].present?
@@ -260,7 +259,6 @@ class TeachersController < ApplicationController
       end
       @school ||= School.find_or_create_by(**unique_school_params)
     end
-    
   end
 
   def teacher_params
