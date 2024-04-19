@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post :validate
       post :deny
       post :request_info
+      delete 'remove_file', to: 'teachers#remove_file'
     end
     collection { post :import }
   end

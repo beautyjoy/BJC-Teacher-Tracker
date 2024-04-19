@@ -110,7 +110,7 @@ status ONLY IF the person viewing this page is an admin. %>
   <div class='form-group row' id = 'upload_file_field'>
     <div class='col-12'>
     <%= f.label :files, "Upload supporting files: " %>
-    <%= f.file_field :files, multiple: true %>
+    <%= f.file_field :files, multiple: true, direct_upload: true %>
     </div>
   </div>
 

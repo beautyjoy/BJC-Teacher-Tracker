@@ -1,5 +1,19 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
+<head>
+  <style>
+    /* Define the style for the box around the file upload link */
+    .box-link {
+      display: inline-block; /* Allow the element to take width and height properties */
+      padding: 5px 10px; /* Add some padding inside the box */
+      height: 40px;
+      border: 1px solid #ccc; /* Add a border around the box */
+      border-radius: 5px; /* Add rounded corners (optional) */
+      background-color: #f9f9f9; /* Add a light background color (optional) */
+    }
+  </style>
+</head>
+
 <%= render 'teacher_info', teacher: @teacher %>
 
 <hr>

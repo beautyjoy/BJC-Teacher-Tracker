@@ -90,6 +90,16 @@ class TeachersController < ApplicationController
     @readonly = !is_admin?
   end
 
+  def remove_file
+    file_attachment = @teacher.files.find(params[:file_id])
+    if file_attachment.purge
+        flash[:notice] = "File removed successfully"
+    else
+        flash[:alert] = "Failed to remove file"
+    end
+    redirect_to teacher_path(@teacher)
+end
+
   def update
     load_school
     ordered_schools

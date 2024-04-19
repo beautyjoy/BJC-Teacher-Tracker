@@ -43,6 +43,26 @@
         <%= teacher.display_application_status %>
       </div>
     </div>
+    <% if teacher.files.attached? %>
+      <div class="row mb-4">
+        <div class="col-sm-4 font-weight-bold">Uploaded Files:</div>
+        <div class="col-sm-8">
+          <% if @teacher.files.attached? %>
+              <% @teacher.files.each do |file| %>
+                <div class='form-group row'>
+                    <%= link_to file.filename.to_s, rails_blob_path(file), target: "_blank", class: "box-link" %>
+                    
+                    <div class='col-6'>
+                      <%= button_to "❌", remove_file_teacher_path(@teacher, file_id: file.id), method: :delete, data: { confirm: "Are you sure you want to remove this file?" }, style: "width: 40px;", class: "box-link" %>
+                    </div>
+                </div>
+              <% end %>
+          <% else %>
+            <p>No files attached yet.</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
       <div class="col-sm-8">
