@@ -6,7 +6,7 @@ Feature: Professional Development and Registration Management
 
   Background: Admin and Teacher exist
     Given the following teachers exist:
-      | first_name | last_name | admin | email                        | id   |
+      | first_name | last_name | admin | primary_email                | id   |
       | Perry      | Zhong     | true  | testadminuser@berkeley.edu   | 100  |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu     | 101  |
     And the following professional developments exist:
