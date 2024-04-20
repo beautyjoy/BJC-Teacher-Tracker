@@ -11,7 +11,7 @@ namespace :db do
         number_of_teachers.times do
             # Sample a random number of languages
             sampled_languages = all_languages.sample(rand(1..3))
-            Teacher.create!(
+            teacher = Teacher.create!(
                 first_name: Faker::Name.first_name,
                 last_name: Faker::Name.last_name,
                 snap: Faker::Internet.username,
@@ -22,8 +22,15 @@ namespace :db do
                 education_level: education_levels.sample, 
                 languages: sampled_languages
             )
-
-            # Email.create!()
+            if teacher.persisted?
+                 # Generate an email using the first_name and last_name from the teacher instance
+                email = Faker::Internet.email(name: "#{teacher.first_name} #{teacher.last_name}", separators: ['.'])
+                EmailAddress.create!(
+                    teacher_id: teacher.id,
+                    email: email,
+                    primary: true
+                )
+            end
         end
   
       puts "#{number_of_teachers} teachers created with detailed information."
