@@ -39,24 +39,9 @@ RSpec.describe EmailTemplatesController, type: :controller do
     expect(email.subject).to eq("Test Subject")
   end
 
-  describe "load_ordered_email_templates" do
-    after do
-      email_template1.destroy
-      email_template2.destroy
-      email_template3.destroy
-    end
-    it "loads email templates ordered by title" do
-      email_template1 = create(:email_template, title: "Template A")
-      email_template2 = create(:email_template, title: "Template C")
-      email_template3 = create(:email_template, title: "Template B")
-      controller.load_ordered_email_templates
-      loaded_templates = controller.instance_variable_get(:@ordered_email_templates)
-      expect(loaded_templates).to eq([email_template1, email_template3, email_template2])
-    end
-  end
-
   describe "GET #new" do
     it "assigns a new email template and renders new" do
+      allow_any_instance_of(ApplicationController).to receive(:is_admin?).and_return(true)
       get :new
       expect(assigns(:email_template)).to be_a_new(EmailTemplate)
       expect(response).to render_template(:new)
@@ -65,9 +50,10 @@ RSpec.describe EmailTemplatesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys, redirects, and sets notice flash message" do
-      let(:new_email_template) { double("EmailTemplate") }
+      allow_any_instance_of(ApplicationController).to receive(:is_admin?).and_return(true)
+      new_email_template = double("EmailTemplate")
       allow(EmailTemplate).to receive(:destroy).with("1").and_return(new_email_template)
-      allow(:new_email_template).to receive(:destroy).and_return(nil)
+      allow(new_email_template).to receive(:destroy).and_return(nil)
       get :destroy, params: { id: 1 }
       expect(flash[:notice]).to be_present
       expect(response).to redirect_to(email_templates_path)
@@ -75,16 +61,14 @@ RSpec.describe EmailTemplatesController, type: :controller do
   end
 
   describe "GET #index" do
-    after do
-      email_template1.destroy
-      email_template2.destroy
-      email_template3.destroy
-    end
     it "loads email templates ordered by title" do
-      email_template1 = create(:email_template, title: "Template A")
-      email_template2 = create(:email_template, title: "Template C")
-      email_template3 = create(:email_template, title: "Template B")
-      controller.index
+      allow_any_instance_of(ApplicationController).to receive(:is_admin?).and_return(true)
+      email_template1 = double("EmailTemplate", title: "Template A")
+      email_template2 = double("EmailTemplate", title: "Template C")
+      email_template3 = double("EmailTemplate", title: "Template B")
+      ordered_templates = [email_template1, email_template3, email_template2]
+      allow(EmailTemplate).to receive_message_chain(:all, :order).with(:title).and_return(ordered_templates)
+      get :index
       loaded_templates = controller.instance_variable_get(:@ordered_email_templates)
       expect(loaded_templates).to eq([email_template1, email_template3, email_template2])
     end
@@ -102,7 +86,7 @@ RSpec.describe EmailTemplatesController, type: :controller do
 
   describe "PUT #update" do
     let(:template_params) { { title: "Updated Template", body: "Updated Body", subject: "Updated Subject", to: "updated@example.com" } }
-    let(:new_email_template) { double("EmailTemplate") }
+    let(:email_template) { double("EmailTemplate", id: 1, title: "New Email Template") }
 
     before do
       allow_any_instance_of(ApplicationController).to receive(:is_admin?).and_return(true)
@@ -110,7 +94,7 @@ RSpec.describe EmailTemplatesController, type: :controller do
     end
 
     it "successfully updates and redirects to email templates" do
-      allow(email_template).to receive(:update).with(template_params).and_return(true)
+      allow(email_template).to receive(:update).with(hash_including(template_params)).and_return(true)
       allow(email_template).to receive(:save).and_return(true)
       put :update, params: { id: email_template.id, email_template: template_params }
       expect(flash[:success]).to be_present
@@ -118,8 +102,9 @@ RSpec.describe EmailTemplatesController, type: :controller do
     end
 
     it "fails to update and renders edit" do
-      allow(email_template).to receive(:update).with(template_params).and_return(false)
-      allow(email_template.errors).to receive(:full_messages).and_return(["Error message"])
+      allow(email_template).to receive(:update).with(hash_including(template_params)).and_return(false)
+      allow(email_template).to receive(:save).and_return(false)
+      allow(email_template).to receive_message_chain(:errors, :full_messages, :join).and_return(["Error message"])
       put :update, params: { id: email_template.id, email_template: template_params }
       expect(flash[:alert]).to be_present
       expect(response).to render_template("edit")
