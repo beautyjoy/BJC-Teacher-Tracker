@@ -77,7 +77,8 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
+      render "new"
     end
   end
 
@@ -102,7 +103,7 @@ class TeachersController < ApplicationController
     else
       @school.update(school_params) if school_params
       unless @school.save
-        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        flash.now[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
       @teacher.school = @school

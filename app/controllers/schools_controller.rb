@@ -27,7 +27,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Created #{@school.name} successfully."
       redirect_to schools_path
     else
-      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
       render "new"
     end
   end
@@ -48,7 +48,7 @@ class SchoolsController < ApplicationController
       flash[:success] = "Updated #{@school.name} successfully."
       redirect_to school_path(@school)
     else
-      flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
       render "edit"
     end
   end
