@@ -2,6 +2,7 @@
 
 require "rails_helper"
 
+# This file contains both a <type: :request> and <type: :controller>
 RSpec.describe SchoolsController, type: :request do
   fixtures :all
 
@@ -249,6 +250,89 @@ RSpec.describe SchoolsController, type: :request do
         }
       }
       expect(School.where(name: @create_school_name).count).to eq 1
+    end
+  end
+end
+
+RSpec.describe SchoolsController, type: :controller do
+  let(:school) { double("School", id: 1, name: "Test School") }
+
+  before do
+    allow_any_instance_of(ApplicationController).to receive(:is_admin?).and_return(true)
+    allow(School).to receive(:find).with("1").and_return(school)
+  end
+
+  describe "GET #index" do
+    it "assigns all schools ordered by name to @schools" do
+      schools = [double("School", name: "School A"), double("School", name: "School B"), double("School", name: "School C")]
+      allow(School).to receive_message_chain(:all, :order).and_return(schools)
+      get :index
+      expect(assigns(:schools)).to eq(schools)
+      expect(response).to render_template("index")
+    end
+  end
+
+  describe "GET #show" do
+    it "assigns the requested school to @school" do
+      get :show, params: { id: 1 }
+      expect(assigns(:school)).to eq(school)
+      expect(response).to render_template("show")
+    end
+  end
+
+  describe "GET #new" do
+    it "creates a new school and renders new" do
+      allow(School).to receive(:new).and_return(school)
+      get :new
+      expect(assigns(:school)).to eq(school)
+      expect(response).to render_template("new")
+    end
+  end
+
+  describe "GET #edit" do
+    it "finds the school and renders edit" do
+      get :edit, params: { id: 1 }
+      expect(assigns(:school)).to eq(school)
+      expect(response).to render_template("edit")
+    end
+  end
+
+  describe "DELETE #destroy" do
+    it "succeeds with no teacher left in the school" do
+      allow(school).to receive(:teachers_count).and_return(0)
+      allow(school).to receive(:destroy).and_return(nil)
+      get :destroy, params: { id: 1 }
+      expect(flash[:notice]).to be_present
+      expect(response).to redirect_to(schools_path)
+    end
+
+    it "fails with teachers still in the school" do
+      allow(school).to receive(:teachers_count).and_return(1)
+      get :destroy, params: { id: 1 }
+      expect(flash[:alert]).to be_present
+      expect(response).to redirect_to(schools_path(school))
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      allow(school).to receive(:assign_attributes).and_return(nil)
+    end
+
+    it "updates the school and redirects to the schools" do
+      allow(school).to receive(:save).and_return(true)
+      new_school_name = "New School Name"
+      put :update, params: { id: school.id, school: { name: new_school_name } }
+      expect(flash[:success]).to be_present
+      expect(response).to redirect_to(school_path(school))
+    end
+
+    it "does not update the school and re-renders the edit page with error" do
+      allow(school).to receive(:save).and_return(false)
+      allow(school).to receive_message_chain(:errors, :full_messages).and_return(["Name can't be blank"])
+      put :update, params: { id: school.id, school: { name: nil } }
+      expect(flash[:alert]).to be_present
+      expect(response).to render_template("edit")
     end
   end
 end
