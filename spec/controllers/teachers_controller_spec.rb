@@ -240,6 +240,7 @@ RSpec.describe TeachersController, type: :controller do
       get :show, params: { id: 1 }
       expect(assigns(:school)).to eq(school)
       expect(assigns(:status)).to eq("Teacher")
+      expect(response).to render_template("show")
     end
 
     it "assigns admin if teacher is admin" do
@@ -247,6 +248,7 @@ RSpec.describe TeachersController, type: :controller do
       get :show, params: { id: 1 }
       expect(assigns(:school)).to eq(school)
       expect(assigns(:status)).to eq("Admin")
+      expect(response).to render_template("show")
     end
   end
 
@@ -266,11 +268,12 @@ RSpec.describe TeachersController, type: :controller do
       allow(controller).to receive(:omniauth_data).and_return(omniauth_data)
     end
 
-    it "assigns a new teacher" do
+    it "sets up teacher, school, and readonly" do
       get :new
       expect(assigns(:teacher)).to eq(teacher)
       expect(assigns(:school)).to eq(school)
       expect(assigns(:readonly)).to be_falsey
+      expect(response).to render_template("new")
     end
   end
 
@@ -284,7 +287,7 @@ RSpec.describe TeachersController, type: :controller do
       allow(Teacher).to receive(:find).and_return(teacher)
     end
 
-    it "when user is admin" do
+    it "sets user as admin" do
       allow(controller).to receive(:is_admin?).and_return(true)
       get :edit, params: { id: teacher.id }
       expect(assigns(:school)).to eq(school)
@@ -293,7 +296,7 @@ RSpec.describe TeachersController, type: :controller do
       expect(response).to render_template("edit")
     end
 
-    it "when user is teacher" do
+    it "sets user as teacher" do
       allow(controller).to receive(:is_admin?).and_return(false)
       get :edit, params: { id: teacher.id }
       expect(assigns(:school)).to eq(school)
