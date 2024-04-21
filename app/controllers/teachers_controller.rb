@@ -92,13 +92,15 @@ class TeachersController < ApplicationController
 
   def remove_file
     file_attachment = @teacher.files.find(params[:file_id])
-    if file_attachment.purge
-        flash[:notice] = "File removed successfully"
-    else
-        flash[:alert] = "Failed to remove file"
-    end
-    redirect_to teacher_path(@teacher)
-end
+    file_attachment.purge
+    flash[:notice] = "File removed successfully"
+    render :show
+  end
+
+  def upload_file
+    @teacher.files.attach(params[:file])
+    render :show, notice: 'File was successfully uploaded.'
+  end
 
   def update
     load_school

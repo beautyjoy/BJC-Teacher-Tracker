@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root to: "main#index"
 
   resources :teachers do
+    post 'upload_file', on: :member
     member do
       post :resend_welcome_email
       post :validate

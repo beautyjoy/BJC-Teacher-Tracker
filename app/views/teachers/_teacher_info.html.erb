@@ -43,7 +43,7 @@
         <%= teacher.display_application_status %>
       </div>
     </div>
-    <% if teacher.files.attached? %>
+    <% if teacher.status_before_type_cast == 9 %>
       <div class="row mb-4">
         <div class="col-sm-4 font-weight-bold">Uploaded Files:</div>
         <div class="col-sm-8">
@@ -60,6 +60,10 @@
           <% else %>
             <p>No files attached yet.</p>
           <% end %>
+          <%= form_tag(upload_file_teacher_path(@teacher), method: :post, multipart: true, id: "file-upload-form") do %>
+          <%= file_field_tag :file, id: "file-upload-field" %>
+          <!-- Remove the submit button -->
+<% end %>
         </div>
       </div>
     <% end %>
@@ -129,6 +133,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#file-upload-field').on('change', function() {
+      // Submit the form when a file is selected
+      $('#file-upload-form').submit();
+    });
+  });
+</script>
 
 <script>
   function copyToClipboard(text) {
