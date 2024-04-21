@@ -44,7 +44,10 @@
       </div>
     </div>
     <% if teacher.status_before_type_cast == 9 %>
-      <%= render 'files_display', teacher: @teacher %>
+      <div class="row mb-4">
+        <div class="col-sm-4 font-weight-bold">Uploaded Files:</div>
+          <%= render 'files_display', teacher: @teacher, show_add_file: true, show_delete_file: true %>
+      </div>  
     <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>

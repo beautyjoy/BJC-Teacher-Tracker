@@ -115,17 +115,22 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 <% else %>
+  <!-- Note that edit teacher page CANNOT allow direct adding/removing 
+  of files because the nested forms result in undefined
+  behavior in Rails, including random controller
+  actions getting called from unrelated submit buttons -->
   <div class='form-group row' id = 'upload_file_field'>
     <div class='col-12'>
-    <%= f.label :more_files, "Upload more files: " %>
-    <%= f.file_field :more_files, multiple: true, direct_upload: true %>
+      <label for="uploaded_files">Uploaded files:</label>
+      <%= render 'files_display', teacher: @teacher, show_add_file: false, show_delete_file: false %>
+    </div>
+    <div class='col-12'>
+      <%= f.label :more_files, "Upload more files: " %>
+      <%= f.file_field :more_files, multiple: true, direct_upload: true %>
     </div>
   </div>
   <!-- Only displays on the new teacher page -->
-  <!-- Edit teacher page CANNOT allow adding/removing files
-  because the nested forms result in undefined
-  behavior in Rails, including random controller
-  actions getting called from unrelated submit buttons -->
+  
 <% end %>
 
   <div class='form-group row'>
