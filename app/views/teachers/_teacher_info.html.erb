@@ -60,11 +60,13 @@
           <% else %>
             <p>No files attached yet.</p>
           <% end %>
+          <!-- Add file button -->
           <%= form_tag(upload_file_teacher_path(@teacher), method: :post, multipart: true, id: "file-upload-form") do %>
-          <%= file_field_tag :file, id: "file-upload-field" %>
-          <!-- Remove the submit button -->
-<% end %>
+          <%= file_field_tag :file, id: "file-upload-field", style: "display: none;" %>
+        <label for="file-upload-field" class="styled-button">Add a File</label>
+        <% end %>
         </div>
+        
       </div>
     <% end %>
     <div class="row mb-4">
