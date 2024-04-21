@@ -44,30 +44,7 @@
       </div>
     </div>
     <% if teacher.status_before_type_cast == 9 %>
-      <div class="row mb-4">
-        <div class="col-sm-4 font-weight-bold">Uploaded Files:</div>
-        <div class="col-sm-8">
-          <% if @teacher.files.attached? %>
-              <% @teacher.files.each do |file| %>
-                <div class='form-group row'>
-                    <%= link_to file.filename.to_s, rails_blob_path(file), target: "_blank", class: "box-link" %>
-                    
-                    <div class='col-6'>
-                      <%= button_to "❌", remove_file_teacher_path(@teacher, file_id: file.id), method: :delete, data: { confirm: "Are you sure you want to remove this file?" }, style: "width: 40px;", class: "box-link" %>
-                    </div>
-                </div>
-              <% end %>
-          <% else %>
-            <p>No files attached yet.</p>
-          <% end %>
-          <!-- Add file button -->
-          <%= form_tag(upload_file_teacher_path(@teacher), method: :post, multipart: true, id: "file-upload-form") do %>
-          <%= file_field_tag :file, id: "file-upload-field", style: "display: none;" %>
-        <label for="file-upload-field" class="btn btn-primary btn-purple mr-2">Add a File</label>
-        <% end %>
-        </div>
-        
-      </div>
+      <%= render 'files_display', teacher: @teacher %>
     <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
@@ -135,15 +112,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('#file-upload-field').on('change', function() {
-      // Submit the form when a file is selected
-      $('#file-upload-form').submit();
-    });
-  });
-</script>
 
 <script>
   function copyToClipboard(text) {

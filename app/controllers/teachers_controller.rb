@@ -96,10 +96,10 @@ class TeachersController < ApplicationController
     flash[:notice] = "File removed successfully"
     redirect_to teacher_path(@teacher), notice: 'File was removed successfully'
   end
-  
+
   def upload_file
     @teacher.files.attach(params[:file])
-    redirect_to teacher_path(@teacher), notice: 'File was successfully uploaded.'
+    redirect_to teacher_path(@teacher), notice: 'File was successfully removed.'
   end
 
   def update
