@@ -93,13 +93,13 @@ class TeachersController < ApplicationController
   def remove_file
     file_attachment = @teacher.files.find(params[:file_id])
     file_attachment.purge
-    flash[:notice] = "File removed successfully"
-    redirect_to teacher_path(@teacher), notice: 'File was removed successfully'
+    flash[:notice] = "File was successfully removed"
+    redirect_back fallback_location: teacher_path(@teacher)
   end
 
   def upload_file
     @teacher.files.attach(params[:file])
-    redirect_to teacher_path(@teacher), notice: 'File was successfully removed.'
+    redirect_back fallback_location: teacher_path(@teacher), notice: 'File was successfully uploaded'
   end
 
   def update
@@ -129,6 +129,11 @@ class TeachersController < ApplicationController
     valid_school = update_school_through_teacher
     if !valid_school
       return
+    end
+
+    # Attach the new files to the existing ones
+    params[:teacher][:more_files].each do |file|
+      @teacher.files.attach(file)
     end
 
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -275,7 +280,8 @@ class TeachersController < ApplicationController
 
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
-                          :more_info, :personal_website, :education_level, :school_id, languages: [], files: []]
+                          :more_info, :personal_website, :education_level, :school_id, languages: [], files: [],
+                        more_files: []]
     admin_attributes = [:application_status, :request_reason, :skip_email]
     teacher_attributes.push(*admin_attributes) if is_admin?
 

@@ -106,13 +106,27 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 
-  <!-- File upload input field -->
+<!-- File upload input field -->
+<% if is_new_teacher_page %>
   <div class='form-group row' id = 'upload_file_field'>
     <div class='col-12'>
     <%= f.label :files, "Upload supporting files: " %>
     <%= f.file_field :files, multiple: true, direct_upload: true %>
     </div>
   </div>
+<% else %>
+  <div class='form-group row' id = 'upload_file_field'>
+    <div class='col-12'>
+    <%= f.label :more_files, "Upload more files: " %>
+    <%= f.file_field :more_files, multiple: true, direct_upload: true %>
+    </div>
+  </div>
+  <!-- Only displays on the new teacher page -->
+  <!-- Edit teacher page CANNOT allow adding/removing files
+  because the nested forms result in undefined
+  behavior in Rails, including random controller
+  actions getting called from unrelated submit buttons -->
+<% end %>
 
   <div class='form-group row'>
     <div class='col-12'>
@@ -171,6 +185,10 @@ status ONLY IF the person viewing this page is an admin. %>
       persist: false,
       create: false
     });
+    //$('#file-upload-field').on('change', function() {
+      // Submit the form when a file is selected
+    //  $('#file-upload-form').submit();
+    //});
     //on loading the page, immediately update the reason field depending on 
     //the value of the application status and check teacher status option
     updateReasonField();
@@ -204,8 +222,8 @@ status ONLY IF the person viewing this page is an admin. %>
   }
 
   function listenForStatusOptionChange() {
-    var status_val = $( "#teacher_status").val();
-
+    var status_val = $("#teacher_status").val();
+    debugger;
     <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
       $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");

@@ -37,6 +37,7 @@ class Teacher < ApplicationRecord
 
   has_many :email_addresses, dependent: :destroy
   has_many_attached :files
+  has_many_attached :more_files
   accepts_nested_attributes_for :email_addresses, allow_destroy: true
 
   validates :first_name, :last_name, :status, presence: true

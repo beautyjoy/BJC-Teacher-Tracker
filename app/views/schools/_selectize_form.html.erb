@@ -1,8 +1,7 @@
 <div class="form-group">
   <%= f.label :name, "Search for your school or add a new one", class: "label-required", for: "school_selectize" %>
   <%= f.select :name,
-    options_for_select( @ordered_schools.reject { |school| school.name == "Home School" }
-    .map(&:selectize_options)),
+    options_for_select( @ordered_schools.map(&:selectize_options)),
     {prompt: "Enter the name or city of your school"},
     {class: "select", id: "school_selectize" } %>
   <%= javascript_pack_tag 'schools' %>
