@@ -1,5 +1,12 @@
+<% if merge_table %>
+  <td><%= teacher.id %></td>
+<% end %>
 <td>
-  <%= link_to(teacher.full_name, teacher_path(teacher)) %>
+  <% if merge_table %>
+    <%= link_to teacher.full_name, preview_merge_path(@teacher.id, teacher.id), method: :get %>
+  <% else %>
+    <%= link_to(teacher.full_name, teacher_path(teacher)) %>
+  <% end %>
   <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
 <td>
