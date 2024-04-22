@@ -1,13 +1,35 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3><%= teacher.full_name %></h3>
+    <h3><%= teacher.full_name %>
+    <% if display_deletion_warning_icon %>
+      <p style="font-size: smaller;">
+      ❌
+      </p>
+    <% end %>
+    </h3>
     <div>
-      <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
-      <%= link_to "Edit Personal Emails", edit_teacher_email_address_path(teacher), class: "btn btn-secondary mr-2" %>
-      <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% if is_show_page && @is_admin %>
+        <button id="merge-button" class="btn btn-warning mr-2">Merge</button>
+      <% end %>
+      <% if render_edit %>
+        <% button_class = render_smaller ? " btn-sm" : "" %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" + button_class %>
+        <%= link_to "Edit Personal Emails", edit_teacher_email_address_path(teacher), class: "btn btn-secondary mr-2" + button_class %>
+      <% end %>
+     <% if render_delete %>
+        <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+    <% end %>
     </div>
   </div>
   <div class="card-body">
+    <% if @is_admin %>
+      <div class="row mb-4">
+        <div class="col-sm-4 font-weight-bold">Teacher ID:</div>
+        <div class="col-sm-8">
+          <%= teacher.id %>
+        </div>
+      </div>
+    <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Email:</div>
       <div class="col-sm-6">
@@ -18,7 +40,7 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Personal Email:</div>
+      <div class="col-sm-4 font-weight-bold">Personal Emails:</div>
       <div class="col-sm-6">
         <% teacher.personal_emails.each do |email| %>
           <div class="d-flex align-items-center mb-2">
@@ -80,7 +102,7 @@
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">School Location:</div>
       <div class="col-sm-8">
-        <%= "#{teacher.school.location}, #{teacher.school.country}" %>
+        <%= "#{teacher.school.location}" %>
       </div>
     </div>
     <div class="row">
@@ -111,6 +133,7 @@
 </div>
 
 <script>
+
   function copyToClipboard(text) {
     // Create a temporary textarea element to hold the text to copy
     const textarea = document.createElement("textarea");

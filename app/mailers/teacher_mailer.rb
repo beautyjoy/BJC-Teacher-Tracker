@@ -59,7 +59,6 @@ class TeacherMailer < ApplicationMailer
     base_rules = {
       bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
-      # TODO: Review if below two are needed, or can they be refractored?
       denial_reason: @denial_reason,
       request_reason: @request_reason
     }
