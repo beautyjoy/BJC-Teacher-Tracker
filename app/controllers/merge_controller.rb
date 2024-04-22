@@ -7,6 +7,7 @@ class MergeController < ApplicationController
     @from_teacher = Teacher.find(params[:from])
     @into_teacher = Teacher.find(params[:into])
     @result_teacher = merge_teachers(@from_teacher, @into_teacher)
+    render "preview"
   end
 
   def execute
