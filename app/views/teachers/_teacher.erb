@@ -11,10 +11,11 @@
 </td>
 <td>
   <%= teacher.primary_email %>
-<!--  Left our from current PR. Personal Emails display will be fixed at later PRs-->
-  <%#- if teacher.personal_emails.present? %>
-<!--    <br><%#= teacher.personal_emails %>-->
-  <%#- end %>
+  <% if teacher.personal_emails.present? %>
+    <% teacher.personal_emails.each do |email| %>
+      <br><%= email %>
+    <% end %>
+  <% end %>
 </td>
 <td><%= teacher.display_education_level %></td>
 <td

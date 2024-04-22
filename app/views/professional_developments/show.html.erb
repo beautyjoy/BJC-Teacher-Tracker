@@ -1,0 +1,181 @@
+<%= provide(:h1, @professional_development.name) %>
+
+<div class="card" data-professional-development-id="<%= @professional_development.id %>">
+  <div class="card-header">
+    <div class="row d-flex">
+      <div class="col-sm-8 d-flex">
+        <h3>
+          <%= @professional_development.name %>
+        </h3>
+      </div>
+      <div class="col-sm-4 text-right">
+        <%= link_to("Edit", edit_professional_development_path(@professional_development), class: "btn btn-primary") %>
+        <%= link_to("Delete", professional_development_path(@professional_development), method: "delete", class: "btn btn-danger", data: { confirm: "Are you sure?" }) %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body ml-5">
+    <div class="row mt-3 pb-3">
+      <% [['Location', @professional_development.location],
+          ['Dates', "#{@professional_development.start_date.to_s} to #{@professional_development.end_date.to_s}"],
+          ['Grade Level', @professional_development.display_grade_level]].each do |label, value| %>
+        <div class="col-sm-4">
+          <h5><%= label %></h5>
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+
+    <hr>
+    <div class="row mt-5 pb-3">
+      <div class="col-12 d-flex justify-content-between align-items-center">
+        <h4>PD Registrations</h4>
+        <h5>Total Registered Teachers: <%= @professional_development.pd_registrations.count %></h5>
+      </div>
+      <div class="col-12 mb-3">
+        <%= button_tag "Add Registration", type: 'button', class: "btn btn-success", data: { toggle: "modal", target: "#addTeacherModal" } %>
+      </div>
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Teacher ID</th>
+            <th>Teacher Name</th>
+            <th>PD Session</th>
+            <th>Attended</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @professional_development.pd_registrations.each do |registration| %>
+            <tr>
+              <td data-teacher-id><%= registration.teacher_id %></td>
+              <td data-teacher-name><%= link_to(registration.teacher_name, teacher_path(registration.teacher_id)) %></td>
+              <td><%= @professional_development.name %></td>
+              <td data-attended><%= registration.attended ? 'Yes' : 'No' %></td>
+              <td data-role><%= registration.role %></td>
+              <td>
+          <span class="btn-group">
+            <%= link_to "Update", "#", class: "btn btn-info", data: { toggle: "modal", target: "#addTeacherModal", registration_id: registration.id } %>
+            <%= link_to("❌", professional_development_pd_registration_path(@professional_development.id, registration.id), method: "delete", class: "btn btn-outline-danger", data: { confirm: "Are you sure?" }) %>
+          </span>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addTeacherModal" tabindex="-1" role="dialog" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher to PD Session</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for :pd_registration, url: professional_development_pd_registrations_path(@professional_development), method: :post do |f| %>
+          <div class="form-group">
+            <%= f.label :teacher_id, "Teacher ID" %>
+            <%= f.text_field :teacher_id, class: "form-control", placeholder: "Enter teacher id", required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :role, "Role" %>
+            <%= f.select :role, [['Leader', 'leader'], ['Attendee', 'attendee']], { prompt: "Select your role" }, { class: "form-control", required: true } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :attended, "Attended" %>
+            <%= f.select :attended, [['Yes', true], ['No', false]], { prompt: "Did the teacher attend?" }, { class: "form-control", required: true } %>
+          </div>
+
+          <%= f.hidden_field :professional_development_id, value: @professional_development.id %>
+
+          <%= f.submit "Add", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cardElement = document.querySelector('.card[data-professional-development-id]');
+        const pdId = cardElement.getAttribute('data-professional-development-id');
+        const modalLabel = document.getElementById('addTeacherModalLabel');
+        const form = document.querySelector('#addTeacherModal form');
+        const addTeacherButton = document.querySelector('[data-target="#addTeacherModal"].btn-success');
+        const updateButtons = document.querySelectorAll('.btn-info[data-target="#addTeacherModal"]');
+
+        addTeacherButton.addEventListener("click", () => setupModalForAddition(pdId));
+
+        updateButtons.forEach(button => button.addEventListener("click", () => setupModalForUpdate(button, pdId)));
+
+        function resetModalForm() {
+            form.reset();
+        }
+
+        // Fill in the old values in the form for easier editing
+        function populateModalForm({ teacher_id, role, attended }) {
+            document.querySelector('[name="pd_registration[teacher_id]"]').value = teacher_id;
+            setDropdownValue('[name="pd_registration[role]"]', role);
+            setDropdownValue('[name="pd_registration[attended]"]', String(attended));
+        }
+
+        function setDropdownValue(selector, value) {
+            const dropdown = document.querySelector(selector);
+            const options = Array.from(dropdown.options);
+            const matchedOption = options.find(option => option.value.toLowerCase().trim() === value.toLowerCase().trim());
+            matchedOption ? matchedOption.selected = true : dropdown.selectedIndex = 0;
+        }
+
+        function setupModalForAddition(pdId) {
+            resetModalForm();
+            modalLabel.textContent = 'Add Teacher to PD Session';
+            form.action = `/professional_developments/${pdId}/pd_registrations/`;
+            form.method = 'post';
+        }
+
+        function setupModalForUpdate(button, pdId) {
+            const {teacher_id, role, attended} = extractTeacherData(button);
+            populateModalForm({ teacher_id, role, attended });
+            modalLabel.textContent = 'Edit Teacher in PD Session';
+            const registrationId = button.getAttribute("data-registration-id");
+            setFormActionForUpdate(pdId, registrationId);
+        }
+
+        function extractTeacherData(button) {
+            const row = button.closest('tr');
+            return {
+                teacher_id: row.querySelector('[data-teacher-id]').textContent,
+                role: row.querySelector('[data-role]').textContent,
+                attended: row.querySelector('[data-attended]').textContent === 'Yes'
+            };
+        }
+
+        function setFormActionForUpdate(pdId, registrationId) {
+            form.action = `/professional_developments/${pdId}/pd_registrations/${registrationId}`;
+            console.debug("Setting form action to:", form.action);
+            form.method = 'post';
+            ensureMethodInput('patch');
+        }
+
+        function ensureMethodInput(method) {
+            let methodInput = document.querySelector('input[name="_method"]');
+            if (!methodInput) {
+                methodInput = document.createElement('input');
+                methodInput.type = 'hidden';
+                methodInput.name = '_method';
+                form.appendChild(methodInput);
+            }
+            methodInput.value = method;
+        }
+    });
+</script>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root to: "main#index"
 
   resources :teachers do
+    resource :email_address, only: [:edit, :update, :create]
     member do
       post :resend_welcome_email
       post :validate
@@ -19,6 +20,9 @@ Rails.application.routes.draw do
   resources :schools
   resources :pages, param: :url_slug
   resources :email_templates, except: [:show]
+  resources :professional_developments do
+    resources :pd_registrations, except: [:show]
+  end
 
   get    "/login",  to: "sessions#new",     as: "login"
   delete "/logout", to: "sessions#destroy", as: "logout"
