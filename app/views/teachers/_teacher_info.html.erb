@@ -12,10 +12,9 @@
         <button id="merge-button" class="btn btn-warning mr-2">Merge</button>
       <% end %>
       <% if render_edit %>
-    	  <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
-      <% end %>
-      <% if render_edit_personal %>
-        <%= link_to "Edit Personal Emails", edit_teacher_email_address_path(teacher), class: "btn btn-secondary mr-2" %>
+        <% button_class = render_smaller ? " btn-sm" : "" %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" + button_class %>
+        <%= link_to "Edit Personal Emails", edit_teacher_email_address_path(teacher), class: "btn btn-secondary mr-2" + button_class %>
       <% end %>
      <% if render_delete %>
         <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
