@@ -131,11 +131,7 @@ class TeachersController < ApplicationController
       return
     end
 
-    # Attach the new files to the existing ones
-    params[:teacher][:more_files].each do |file|
-      @teacher.files.attach(file)
-    end
-
+    attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
 
     if fail_to_update
@@ -275,6 +271,14 @@ class TeachersController < ApplicationController
         @school ||= School.find(teacher_params[:school_id])
       end
       @school ||= School.find_or_create_by(**unique_school_params)
+    end
+  end
+
+  def attach_new_files_if_any
+    if params.dig(:teacher, :more_files).present?
+      params[:teacher][:more_files].each do |file|
+        @teacher.files.attach(file)
+      end
     end
   end
 
