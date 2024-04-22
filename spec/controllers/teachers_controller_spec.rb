@@ -225,13 +225,15 @@ RSpec.describe TeachersController, type: :controller do
   end
 
   describe "GET #show" do
-    let(:teacher) { double("Teacher") }
+    let(:teacher) { double("Teacher", id: 1) }
+    let(:other_teacher) { double("Teacher") }
     let(:school) { double("School") }
 
     before do
       ApplicationController.any_instance.stub(:require_login).and_return(true)
       ApplicationController.any_instance.stub(:require_admin).and_return(true)
       allow(Teacher).to receive(:find).and_return(teacher)
+      allow(Teacher).to receive_message_chain(:where, :not).and_return(other_teacher)
       allow(teacher).to receive(:school).and_return(school)
     end
 
@@ -240,6 +242,7 @@ RSpec.describe TeachersController, type: :controller do
       get :show, params: { id: 1 }
       expect(assigns(:school)).to eq(school)
       expect(assigns(:status)).to eq("Teacher")
+      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
       expect(response).to render_template("show")
     end
 
@@ -248,6 +251,7 @@ RSpec.describe TeachersController, type: :controller do
       get :show, params: { id: 1 }
       expect(assigns(:school)).to eq(school)
       expect(assigns(:status)).to eq("Admin")
+      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
       expect(response).to render_template("show")
     end
   end
