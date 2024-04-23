@@ -125,9 +125,14 @@ Then(/the following entries should not exist in the teachers database/) do |entr
 end
 
 Then("the upload file field should be hidden") do
-  expect(page).to have_selector('#upload_file_field', visible: :hidden)
+  expect(page).to have_selector("#upload_file_field", visible: :hidden)
 end
 
 Then("the upload file field should be visible") do
-  expect(page).to have_selector('#upload_file_field', visible: :visible)
+  expect(page).to have_selector("#upload_file_field", visible: :visible)
+end
+
+When("I attach the file with name {string}") do |file_name|
+  page.execute_script("$('teacher_more_files').click()")
+  attach_file("teacher_more_files", Rails.root.join("spec/fixtures", file_name))
 end

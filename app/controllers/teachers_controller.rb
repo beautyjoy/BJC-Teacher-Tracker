@@ -100,7 +100,7 @@ class TeachersController < ApplicationController
 
   def upload_file
     @teacher.files.attach(params[:file])
-    redirect_back fallback_location: teacher_path(@teacher), notice: 'File was successfully uploaded'
+    redirect_back fallback_location: teacher_path(@teacher), notice: "File was successfully uploaded"
   end
 
   def update
@@ -261,10 +261,10 @@ class TeachersController < ApplicationController
   end
 
   def load_school
-      if teacher_params[:school_id].present?
-        @school ||= School.find(teacher_params[:school_id])
-      end
-      @school ||= School.find_or_create_by(**unique_school_params)
+    if teacher_params[:school_id].present?
+      @school ||= School.find(teacher_params[:school_id])
+    end
+    @school ||= School.find_or_create_by(**unique_school_params)
   end
 
   def attach_new_files_if_any

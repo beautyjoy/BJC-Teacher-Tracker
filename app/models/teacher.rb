@@ -99,7 +99,7 @@ class Teacher < ApplicationRecord
     "I am a BJC curriculum or tool developer.",
     "I am teaching with the ExCITE project",
     "I am teaching Middle School BJC.",
-    "I am teaching homeschool with the BJC curriculum. "
+    "I am teaching homeschool with the BJC curriculum."
   ].freeze
 
   # From an admin perspective, we want to know if a teacher has any **meaningful** change

@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   root to: "main#index"
 
   resources :teachers do
-    post 'upload_file', on: :member
+    post "upload_file", on: :member
     resource :email_address, only: [:edit, :update, :create]
     member do
       post :resend_welcome_email
       post :validate
       post :deny
       post :request_info
-      delete 'remove_file', to: 'teachers#remove_file'
+      delete "remove_file", to: "teachers#remove_file"
     end
     collection { post :import }
   end

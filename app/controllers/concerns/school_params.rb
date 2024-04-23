@@ -14,5 +14,4 @@ module SchoolParams
   def school_params
     params.require(:school).permit(:name, :country, :city, :state, :website, :grade_level, :school_type, :country, { tags: [] }, :nces_id)
   end
-
 end
