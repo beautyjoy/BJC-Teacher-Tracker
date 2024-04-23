@@ -456,6 +456,24 @@ Feature: basic admin functionality
     When I follow the first "Jane Doe" link
     Then I should be on the merge preview page for Bobby into Jane
 
+  Scenario: Admin does not see uploaded files for teachers with non-homeschool status
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | primary_email              |  school      | status                                                  |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  | I am using BJC as a resource, but not teaching with it. |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the show page for Jane Doe
+    Then I should not see "Supporting Files:"
+    When I go to the edit page for Jane Doe
+    Then I should not see "Supporting Files:"
+    And I should not see "Upload More Files:"
+
+
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:
 #  |       name      |     country     |     city     |  state  |            website            |
