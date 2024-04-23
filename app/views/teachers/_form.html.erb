@@ -109,18 +109,15 @@ status ONLY IF the person viewing this page is an admin. %>
   actions getting called from unrelated submit buttons -->
   <div class='form-group row' id = 'upload_file_field'>
     <div class='col-12'>
-      <label for="uploaded_files">Uploaded files:</label>
+      <label for="uploaded_files">Supporting files:</label>
       <%= render 'files_display', teacher: @teacher, show_add_file: false, show_delete_file: false %>
     </div>
     <div class='col-12'>
       <%= f.label :more_files, "Upload more files: " %>
       <%= f.file_field :more_files, multiple: true, direct_upload: true %>
     </div>
-  </div>
-  <!-- Only displays on the new teacher page -->
-  
+  </div> 
 <% end %>
-
   <div class='form-group row'>
     <div class='col-12'>
       <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
@@ -166,11 +163,13 @@ status ONLY IF the person viewing this page is an admin. %>
   </div>
 
   <%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
+<!-- This apparent Rails bug of requiring two ends after a submit is likely related
+to the use of the nested forms (here, the school form inside the teacher form) 
+which can result in inexplicable, and sometimes undefined behavior -->
 <% end %>
 <% end %>
 
 <script>
-
   $(document).ready(function() {
     $('.selectize').selectize({
       plugins: ['remove_button'],
@@ -178,10 +177,6 @@ status ONLY IF the person viewing this page is an admin. %>
       persist: false,
       create: false
     });
-    //$('#file-upload-field').on('change', function() {
-      // Submit the form when a file is selected
-    //  $('#file-upload-form').submit();
-    //});
     //on loading the page, immediately update the reason field depending on 
     //the value of the application status and check teacher status option
     updateReasonField();
@@ -223,31 +218,12 @@ status ONLY IF the person viewing this page is an admin. %>
       $('#upload_file_field').hide();
     } else {
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
-      <%# If homeschool, then hide schools form %>
+      <%# If homeschool, then show upload file field %>
       if (status_val == 9) {
-        createAndSelectDummyOption();
-        $('#school_container').hide();
         $('#upload_file_field').show();
       } else {
-        // Show the outer container, but hide the new school form
-        $('#school_container').show();
-        $("#school_form").hide();
         $('#upload_file_field').hide();
       }
     } 
   }
-
-  //creates and selects a 'dummy' selectize option. This is only to
-  //prevent frontend validations from failing to submit the form when it
-  //is hidden because of the home school being selected. The dummy,
-  //in this case, is defined as the FIRST item in the selectize list. Backend
-  //logic is handled in the teachers controller.
-  function createAndSelectDummyOption() {
-        $("#school_form").show();
-        const selectizeElement = $('#school_selectize');
-        const selectizeInstance = selectizeElement[0].selectize;
-        const firstOptionKey = Object.keys(selectizeInstance.options)[0];
-        selectizeInstance.setValue(firstOptionKey);
-  }
-
 </script>

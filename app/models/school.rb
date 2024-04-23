@@ -28,7 +28,7 @@
 class School < ApplicationRecord
   VALID_STATES = ISO3166::Country["US"].subdivisions.keys.freeze
   validates :name, :city, :website, :country, presence: true
-  validates :country, inclusion: { in: ISO3166::Country.all.map(&:alpha2) << "HOME", message: "%{value} is not a valid country" }
+  validates :country, inclusion: { in: ISO3166::Country.all.map(&:alpha2), message: "%{value} is not a valid country" }
   validates :state, presence: true, if: -> { country == "US" }
   validates :state, inclusion: { in: VALID_STATES }, if: -> { country == "US" }
   validates_format_of :website, with: /.+\..+/, on: :create

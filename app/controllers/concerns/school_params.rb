@@ -15,12 +15,4 @@ module SchoolParams
     params.require(:school).permit(:name, :country, :city, :state, :website, :grade_level, :school_type, :country, { tags: [] }, :nces_id)
   end
 
-  def homeschool_params
-    {
-      name: "Home School",
-      country: "HOME",
-      city: "N/A",
-      state: "N/A"
-    }
-  end
 end
