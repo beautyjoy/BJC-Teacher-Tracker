@@ -60,7 +60,7 @@ class School < ApplicationRecord
   end
 
   def location
-    country_text = country == "US" ? '' : ", #{country}"
+    country_text = country == "US" ? "" : ", #{country}"
     "#{city}, #{state}#{country_text}"
   end
 
