@@ -96,4 +96,7 @@ group :test do
   # Accessibility Testing
   gem "axe-core-rspec"
   gem "axe-core-cucumber"
+
+  # Test suite speedup
+  gem "rails-controller-testing"
 end

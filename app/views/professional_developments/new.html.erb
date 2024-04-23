@@ -1,0 +1,9 @@
+<%= provide(:h1, "Add a Professional Development Workshop") %>
+
+<%= form_for @professional_development do |f| %>
+  <%= render 'professional_developments/form', f: f, professional_development: @professional_development %>
+
+  <div>
+    <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
+  </div>
+<% end %>
