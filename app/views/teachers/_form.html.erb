@@ -214,8 +214,8 @@ which can result in inexplicable, and sometimes undefined behavior -->
     debugger;
     <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
-      $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");
       $('#upload_file_field').hide();
+      $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");
     } else {
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
       <%# If homeschool, then show upload file field %>

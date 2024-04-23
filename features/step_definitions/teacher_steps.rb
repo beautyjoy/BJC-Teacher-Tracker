@@ -123,3 +123,11 @@ Then(/the following entries should not exist in the teachers database/) do |entr
     expect(Teacher.find_by(teacher_params).blank?).to be true
   end
 end
+
+Then("the upload file field should be hidden") do
+  expect(page).to have_selector('#upload_file_field', visible: :hidden)
+end
+
+Then("the upload file field should be visible") do
+  expect(page).to have_selector('#upload_file_field', visible: :visible)
+end

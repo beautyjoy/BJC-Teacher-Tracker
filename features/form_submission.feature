@@ -230,6 +230,15 @@ Feature: submit a form as a teacher
     Then I should not see "Tags"
     And I should not see "NCES ID"
 
+  Scenario: Upload file field visibility based on status option
+    Given I am on the BJC home page
+    And I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
+    Then the upload file field should be hidden
+    When I set my status as "I am teaching BJC as an AP CS Principles course."
+    Then the upload file field should be hidden
+    When I set my status as "I am teaching homeschool with the BJC curriculum."
+    Then the upload file field should be visible
+
   Scenario: Teacher updates information and two emails are sent
     Given the following schools exist:
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
