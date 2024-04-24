@@ -301,14 +301,6 @@ class Teacher < ApplicationRecord
     non_primary_emails
   end
 
-  def self.get_statuses
-    self.statuses.keys
-  end
-
-  def self.get_education_levels
-    self.education_levels.keys
-  end
-
   def self.get_languages
     WORLD_LANGUAGES
   end

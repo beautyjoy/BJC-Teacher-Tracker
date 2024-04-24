@@ -117,18 +117,6 @@ class School < ApplicationRecord
     VALID_STATES
   end
 
-  def self.get_grade_levels
-    grade_levels.keys
-  end
-
-  def self.get_school_types
-    school_types.keys
-  end
-
-  def self.get_available_countries
-    ISO3166::Country.all.map(&:alpha2)
-  end
-
   private
   def prefix_url(url)
     return unless url
