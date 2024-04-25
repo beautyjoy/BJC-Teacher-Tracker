@@ -48,17 +48,19 @@ Given(/the following teachers exist/) do |teachers_table|
     snap: "",
     status: "Other - Please specify below.",
     education_level: 1,
-    more_info: "I'm teaching a college course",
+    more_info: "default more_info",
     admin: false,
-    personal_website: "https://snap.berkeley.edu",
+    personal_website: "",
     application_status: "Not Reviewed",
     languages: ["English"],
-
+    session_count: 1,
+    last_session_at: DateTime.now,
+    ip_history: [IPAddr.new("1.2.3.4")],
     # Note: primary email field does not exist in the new schema of the Teacher model
     # Include it in the seed data is to simulate the behavior of creating a new teacher,
     # because we need to use it to compared with the EmailAddress model,
     # to determine the existence of the teacher
-    primary_email: "alonzo@snap.berkeley.edu",
+    primary_email: "alonzo@snap.berkeley.edu"
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
@@ -67,6 +69,16 @@ Given(/the following teachers exist/) do |teachers_table|
       if key == :languages
         languages = if teacher[key].present? then YAML.safe_load(teacher[key]) else nil end
         teacher[key] = languages.presence || value
+      elsif key == :last_session_at
+        # conversion to DateTime object needed
+        teacher[key] = if teacher[key].present? then DateTime.parse(teacher[key]) else value end
+      elsif key == :session_count
+        # type cast from string --> int needed
+        teacher[key] = (teacher[key].presence || value).to_i
+      elsif key == :ip_history
+        # type cast from comma-separated list of ip addresses to array of IPAddr objects
+        ip_addr_array = if teacher[key].present? then teacher[key].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) } else nil end
+        teacher[key] = ip_addr_array.presence || value
       else
         # Handle other fields as usual
         teacher[key] = teacher[key].presence || value
@@ -81,5 +93,33 @@ Given(/the following teachers exist/) do |teachers_table|
     teacher = Teacher.create!(teacher)
     EmailAddress.create!(email:, teacher:, primary: true)
     School.reset_counters(school.id, :teachers)
+  end
+end
+
+Then(/the following entries should exist in the teachers database/) do |entries_table|
+  entries_table.symbolic_hashes.each do |params|
+    keys_to_exclude = [:school, :session_count, :last_session_at, :ip_history, :primary_email]
+    # teacher should be present and school should be valid
+    teacher = Teacher.find_by(params.except(*keys_to_exclude))
+    expect(!teacher.blank?).to be true
+    expect(!(School.find_by(name: params[:school]).blank?)).to be true
+    if params[:session_count].present?
+      expect(teacher.session_count).to eq(params[:session_count].to_i)
+    end
+    if params[:last_session_at].present?
+      expect(teacher.last_session_at).to eq(DateTime.parse(params[:last_session_at]))
+    end
+    if params[:ip_history].present?
+      ip_addr_array = params[:ip_history].split(/\s*,\s*/).map { |ip_str| IPAddr.new(ip_str.strip) }
+      expect(teacher.ip_history.all? { |addr| ip_addr_array.include?(addr) }).to be true
+    end
+  end
+end
+
+Then(/the following entries should not exist in the teachers database/) do |entries_table|
+  entries_table.symbolic_hashes.each do |teacher_params|
+    teacher_params.except!(:school, :primary_email)
+    # matches on all fields except school name
+    expect(Teacher.find_by(teacher_params).blank?).to be true
   end
 end
