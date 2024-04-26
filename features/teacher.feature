@@ -144,6 +144,28 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   And   I should see "Edit Joe Mamoa"
   And   the "Snap! Username" field should contain "alonzo"
 
+Scenario: Homeschool teacher can add/view supporting files
+  Given I have a teacher Google email
+  And the following schools exist:
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  And the following teachers exist:
+  | first_name | last_name | admin | primary_email            | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  And I am on the BJC home page
+  And I follow "Log In"
+  Then  I can log in with Google
+  When I set my status as "I am teaching homeschool with the BJC curriculum."
+  Then I should see "No files attached yet." 
+  When I attach the file with name "test_file.txt"
+  And I press "Update"
+  And I follow "test_file.txt"
+  Then I should see "test_file.txt"
+  When I attach the file with name "test_file2.txt"
+  And I press "Update"
+  Then I should see "test_file.txt"
+  And I should see "test_file2.txt" 
+
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
   |       name      |     country     |     city     |  state  |            website            |

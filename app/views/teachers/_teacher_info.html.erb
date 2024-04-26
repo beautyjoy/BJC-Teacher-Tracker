@@ -65,6 +65,12 @@
         <%= teacher.display_application_status %>
       </div>
     </div>
+    <% if teacher.status_before_type_cast == 9 %>
+      <div class="row mb-4">
+        <div class="col-sm-4 font-weight-bold">Supporting Files:</div>
+          <%= render 'files_display', teacher: @teacher, show_add_file: true, show_delete_file: true %>
+      </div>  
+    <% end %>
     <div class="row mb-4">
       <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
       <div class="col-sm-8">

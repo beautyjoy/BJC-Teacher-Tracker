@@ -567,6 +567,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  activestorage
   annotate
   aws-sdk-s3
   axe-core-cucumber
