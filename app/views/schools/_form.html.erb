@@ -1,26 +1,37 @@
 <div class="form-group h3">Create a new School</div>
 <div class='form-group row'>
-  <div class='col-6'>
+  <div class='col'>
       <%= f.label :name, "School Name", class: "label-required" %>
       <%= f.text_field :name, placeholder: 'UC Berkeley', class: 'form-control',
       required: false, id: 'school_name' %>
   </div>
-
+</div>
+<div class='form-group row'>
   <div class='col-4'>
     <%= f.label :city, class: "label-required", for: "school_city" %>
     <%= f.text_field :city, placeholder: 'Berkeley', class: 'form-control',
     required: false, id: 'school_city' %>
   </div>
 
-  <div class='col-2'>
+  <div class='col-4' id="state_select_container">
     <%= f.label :state, class: "label-required", for: "school_state" %>
-    <%= f.select(
-        :state,
-        School::VALID_STATES,
-        { include_blank: "State" },
-        { class: 'form-control', required: false, id: 'school_state'}
+    <%= f.select :state, School::VALID_STATES, { include_blank: "Select a state" }, { id: "state_select", class: 'form-control' } %>
+  </div>
+
+  <div class='col-4' id="state_textfield_container">
+    <%= f.label :state, for: "school_state" %>
+    <%= f.text_field :state, placeholder: "Name of State", class: 'form-control', id: "state_textfield" %>
+  </div>
+  
+  <div class='col-4'>
+    <%= f.label :country, "Country", class: "label-required", for: "school_country" %>
+    <%= f.country_select(
+      :country,
+      { priority_countries: ['United States'], include_blank: "Select a country" },
+      { class: 'form-control', required: false, id: 'school_country', format: :with_full_country_name, selected: 'United States'}
     ) %>
   </div>
+
 </div>
 
 <div class="form-group">
@@ -88,3 +99,35 @@
         class: "form-control", title: "Please enter a valid NCES ID.", id: "school_nces_id" %>
   </div>
 <%- end %>
+
+<script>
+    $(document).ready(function() {
+        const countrySelected = $('#school_country');
+        const stateSelectContainer = $('#state_select_container');
+        const stateTextfieldContainer = $('#state_textfield_container');
+        const stateSelect = $('#state_select');
+        const stateTextfield = $('#state_textfield');
+
+        function handleCountryChange() {
+            if (countrySelected.val() === 'US') {
+                stateSelectContainer.show();
+                stateSelect.attr('required', '')  //make state select required
+                stateTextfieldContainer.hide();
+
+                stateTextfield.removeAttr('name');
+                stateSelect.attr('name', 'school[state]');
+
+            } else {
+                stateTextfieldContainer.show();
+                stateSelect.removeAttr('required')
+                stateSelectContainer.hide();
+                
+
+                stateSelect.removeAttr('name');
+                stateTextfield.attr('name', 'school[state]');
+            }
+        }
+        countrySelected.change(handleCountryChange);
+        handleCountryChange();
+    });
+</script>

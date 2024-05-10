@@ -22,13 +22,13 @@
       </div>
 
       <div class="col-sm-4">
-        <h5>URL</h5>
-        <%= link_to(@school.website, @school.website) %>
+        <h5>Grade Level</h5>
+        <%= @school.display_grade_level %>
       </div>
 
       <div class="col-sm-4">
-        <h5>Grade Level</h5>
-        <%= @school.display_grade_level %>
+        <h5>URL</h5>
+        <%= link_to(@school.website, @school.website) %>
       </div>
     </div>
 
@@ -48,7 +48,6 @@
         <%= @school.created_at %>
       </div>
     </div>
-
     <hr>
     <div class="row mt-5 pb-3">
       <h4>Teachers</h4>

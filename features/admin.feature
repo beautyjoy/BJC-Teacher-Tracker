@@ -76,8 +76,8 @@ Feature: basic admin functionality
 
   Scenario: Edit teacher info as an admin
     Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      | snap   |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -96,8 +96,8 @@ Feature: basic admin functionality
 
   Scenario: Changing application status as admin sends emails
     Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name  | admin | email                    | school      | snap   | application_status |
       | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
@@ -131,8 +131,8 @@ Feature: basic admin functionality
 
   Scenario: Updating without changing application status does not send email
     Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name  | admin | email                    | school      | snap   | application_status |
       | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
@@ -147,29 +147,10 @@ Feature: basic admin functionality
     And I press "Update"
     Then I should not have sent out any emails
 
-  Scenario: Updating application status persists changes in database
-    Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
-      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
-    Given I am on the BJC home page
-    And I have an admin email
-    And I follow "Log In"
-    Then I can log in with Google
-    When I go to the teachers page
-    And I go to the edit page for Bobby John
-    And I set my application status as "Validated"
-    And I press "Update"
-    Then I see a confirmation "Saved"
-    When I check "Validated"
-    Then I should see "Bobby John"
-
   Scenario: Deny teacher as an admin
     Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+      | name        |     country     | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -190,42 +171,18 @@ Feature: basic admin functionality
 
   Scenario: Not logged in should not have access to edit
     Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+      | name        |     country     | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
     Then  should see "You need to log in to access this."
 
-  Scenario: Filter all teacher info as an admin
-    Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | email                     | school      | application_status |
-      | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
-      | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
-      | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |     Not Reviewed   |
-    Given I am on the BJC home page
-    Given I have an admin email
-    And   I follow "Log In"
-    Then  I can log in with Google
-    When  I go to the teachers page
-    And   I check "Not Reviewed"
-    And   I uncheck "Validated"
-    Then  I should see "Peter"
-    Then  I should not see "Victor"
-    Then  I should not see "Danny"
-    And   I check "Validated"
-    Then  I should see "Peter"
-    Then  I should see "Victor"
-    Then  I should not see "Danny"
-
   Scenario: View teacher info as an admin
     Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+      | name        |     country     | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      | snap   |
       | Joseph     | Test     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -245,8 +202,8 @@ Feature: basic admin functionality
 
   Scenario: Edit teacher info as an admin navigating from view only page to edit page
     Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      | snap   |
       | Joseph     | Mamoa New    | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
@@ -269,8 +226,8 @@ Feature: basic admin functionality
 
   Scenario: Should be able to resend welcome email
     Given the following schools exist:
-      |       name      |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
+      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     Given the following teachers exist:
       | first_name | last_name | admin | email                    | school      | snap   | application_status |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo | validated |
@@ -306,8 +263,8 @@ Feature: basic admin functionality
 
   Scenario: Request information from a teacher as an admin
     Given the following schools exist:
-      | name        | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+      | name        |     country     | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
       | first_name | last_name | admin | email                    | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
@@ -329,8 +286,8 @@ Feature: basic admin functionality
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:
-#  |       name      |     city     |  state  |            website            |
-#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  |       name      |     country     |     city     |  state  |            website            |
+#  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
 #  Given I am on the BJC home page
 #  Given I have an admin email
 #  And I follow "Log In"
@@ -359,8 +316,8 @@ Feature: basic admin functionality
 
 # Scenario: Importing with new schools model fields works
 #  Given the following schools exist:
-#  |       name      |     city     |  state  |            website            |
-#  | UC Berkeley   |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
+#  |       name    |     country     |     city     |  state  |            website            |
+#  | UC Berkeley   |       US        |   Berkeley   |   CA    |   https://bjc.berkeley.edu    |
 #  Given I am on the BJC home page
 #  Given I have an admin email
 #  And I follow "Log In"

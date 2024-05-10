@@ -98,7 +98,13 @@ When(/^(?:|I )fill in the following:$/) do |fields|
 end
 
 When(/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
-  select(value, from: field)
+  select_box = find_field(field)
+  options = select_box.all("option", text: value)
+  if options.length > 1
+    options.first.select_option
+  else
+    select(value, from: field)
+  end
 end
 
 When(/^(?:|I )check "([^"]*)"$/) do |field|

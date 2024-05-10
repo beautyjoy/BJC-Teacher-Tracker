@@ -6,6 +6,7 @@ require "csv_process"
 require "activerecord-import"
 
 class TeachersController < ApplicationController
+  include SchoolParams
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
@@ -63,9 +64,10 @@ class TeachersController < ApplicationController
 
     load_school
     if @school.new_record?
+      return unless params[:school]
       @school = School.new(school_params)
       unless @school.save
-        flash[:alert] = "An error occurred! #{@school.errors.full_messages}"
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
         render "new" && return
       end
     end
@@ -81,7 +83,7 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred while trying to save. #{@teacher.errors.full_messages}"
+      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
     end
   end
 
@@ -100,7 +102,10 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     else
       @school.update(school_params) if school_params
-      @school.save!
+      unless @school.save
+        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        render "edit" && return
+      end
       @teacher.school = @school
     end
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -114,7 +119,7 @@ class TeachersController < ApplicationController
     end
     if !@teacher.save
       redirect_to edit_teacher_path(current_user.id),
-                alert: "Failed to update data. #{@teacher.errors.full_messages.to_sentence}"
+                alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
       return
     end
     if !@teacher.validated? && !current_user.admin?
@@ -122,7 +127,7 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
     if is_admin?
-      redirect_to teachers_path, notice: "Saved #{@teacher.full_name}"
+      redirect_to edit_teacher_path(current_user.id), notice: "Saved #{@teacher.full_name}"
       return
     else
       @teacher.try_append_ip(request.remote_ip)
@@ -202,7 +207,7 @@ class TeachersController < ApplicationController
     if teacher_params[:school_id].present?
       @school ||= School.find(teacher_params[:school_id])
     end
-    @school ||= School.find_or_create_by(name: school_params[:name], city: school_params[:city], state: school_params[:state])
+    @school ||= School.find_or_create_by(**unique_school_params)
   end
 
   def teacher_params
@@ -213,11 +218,6 @@ class TeachersController < ApplicationController
       :request_reason, :skip_email]
     end
     params.require(:teacher).permit(*teacher_attributes)
-  end
-
-  def school_params
-    return unless params[:school]
-    params.require(:school).permit(:name, :city, :state, :website, :grade_level, :school_type)
   end
 
   def omniauth_data
