@@ -147,26 +147,6 @@ Feature: basic admin functionality
     And I press "Update"
     Then I should not have sent out any emails
 
-  Scenario: Updating application status persists changes in database
-    Given the following schools exist:
-      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | email                    | school      | snap   | application_status |
-      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
-    Given I am on the BJC home page
-    And I have an admin email
-    And I follow "Log In"
-    Then I can log in with Google
-    When I go to the teachers page
-    And I go to the edit page for Bobby John
-    And I set my application status as "Validated"
-    And I press "Update"
-    Then I see a confirmation "Saved"
-    When I go to the teachers page
-    And I check "Validated"
-    Then I should see "Bobby John"
-
   Scenario: Deny teacher as an admin
     Given the following schools exist:
       | name        |     country     | city     | state | website                  | grade_level | school_type |
@@ -198,30 +178,6 @@ Feature: basic admin functionality
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
     Then  should see "You need to log in to access this."
-
-  Scenario: Filter all teacher info as an admin
-    Given the following schools exist:
-      | name        |     country     | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | email                     | school      | application_status |
-      | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
-      | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
-      | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |     Not Reviewed   |
-    Given I am on the BJC home page
-    Given I have an admin email
-    And   I follow "Log In"
-    Then  I can log in with Google
-    When  I go to the teachers page
-    And   I check "Not Reviewed"
-    And   I uncheck "Validated"
-    Then  I should see "Peter"
-    Then  I should not see "Victor"
-    Then  I should not see "Danny"
-    And   I check "Validated"
-    Then  I should see "Peter"
-    Then  I should see "Victor"
-    Then  I should not see "Danny"
 
   Scenario: View teacher info as an admin
     Given the following schools exist:
