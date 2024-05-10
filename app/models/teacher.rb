@@ -218,8 +218,7 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    teacher = EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
-    teacher
+    EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
   end
 
   def try_append_ip(ip)
@@ -292,8 +291,6 @@ class Teacher < ApplicationRecord
   end
 
   def primary_email
-    # ||:email this code is temporary for this PR: https://github.com/cs169/BJC-Teacher-Tracker-App/pull/49
-    # to make sure at least original data in db still work and passed the existing tests
     email_addresses.find_by(primary: true)&.email
   end
 
