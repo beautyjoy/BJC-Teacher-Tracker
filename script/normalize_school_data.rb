@@ -30,7 +30,6 @@ def set_country_for_international_schools!
   schools.each do |school|
     domain = URI.parse(school.website).host
     country = domain.split(".").last.upcase
-    # check if country is valid
     if ISO3166::Country.find_country_by_alpha2(country)
       school.update(country:, state: nil)
     else

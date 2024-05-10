@@ -7,10 +7,11 @@
 </div>
 
 <% Teacher.application_statuses.each do |key, value| %>
-  <div class="custom-control custom-checkbox custom-control-inline">
-    <input class="custom-control-input" type="checkbox" name="statusFilter" id="<%= key %>" value="<%= value %>" <%= 'checked=true' if key == 'validated' %>>
-    <label class="custom-control-label" for="<%= key %>"><%= value %></label>
-  </div>
+<div class="custom-control custom-checkbox custom-control-inline">
+  <input class="custom-control-input" type="checkbox" name="statusFilter" id="<%= key %>" value="<%= value %>" <%= key == 'validated' ? 'checked=true' : '' %>>
+
+  <label class="custom-control-label" for="<%= key %>"><%= value %></label>
+</div>
 <% end %>
 
 <table class="table table-striped js-dataTable js-teachersTable">

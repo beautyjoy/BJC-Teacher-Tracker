@@ -3,8 +3,7 @@ $(function() {
   $.fn.dataTable.ext.search.push((_, searchData) => {
     let enabled = $('input:checkbox[name="statusFilter"]:checked').map((_i, el) => el.value).get();
     // Include all rows when no checkboxes are selected.
-    console.log(enabled.includes(searchData[6]));
-    return enabled.length === 0 || enabled.includes(searchData[6]);
+    return enabled.length === 0 || enabled.includes(searchData[5]);
   });
 
   let $tables = $('.js-dataTable').DataTable({
