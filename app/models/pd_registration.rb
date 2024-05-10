@@ -30,5 +30,6 @@ class PdRegistration < ApplicationRecord
   validates :attended, inclusion: { in: [true, false] }
 
   def teacher_name
-  self.teacher.full_name 
+    self.teacher.full_name
+  end
 end
