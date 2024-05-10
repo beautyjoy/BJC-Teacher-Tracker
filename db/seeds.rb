@@ -16,16 +16,13 @@ SeedData.teachers.each do |teacher_attr|
     teacher = Teacher.create(teacher_attr)
     if teacher.persisted?
       email_address.teacher_id = teacher.id
-      email_address_saved = email_address.save
-      # puts "New teacher created and email_address saved: #{email_address_saved}"
+      email_address.save
     else
       puts "Failed to create teacher. Errors: #{teacher.errors.full_messages.join(", ")}"
     end
   else
     teacher = Teacher.find_by(id: email_address.teacher_id)
-    if teacher&.update(teacher_attr)
-      # puts "Teacher updated successfully."
-    else
+    if !teacher&.update(teacher_attr)
       puts "Failed to update teacher. Errors: #{teacher.errors.full_messages.join(", ")}"
     end
   end

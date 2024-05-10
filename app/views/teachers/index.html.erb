@@ -6,22 +6,12 @@
   <a href="/teachers.csv" class="btn btn-primary">Export All</a>
 </div>
 
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="validated" value="validated" checked=true>
-  <label class="custom-control-label" for="validated">Validated</label>
-</div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Denied" value="denied">
-  <label class="custom-control-label" for="Denied">Denied</label>
-</div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="NotReviewed" value="not_reviewed">
-  <label class="custom-control-label" for="NotReviewed">Not Reviewed</label>
-</div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="InfoNeeded" value="info_needed">
-  <label class="custom-control-label" for="InfoNeeded">Info Needed</label>
-</div>
+<% Teacher.application_statuses.each do |key, value| %>
+  <div class="custom-control custom-checkbox custom-control-inline">
+    <input class="custom-control-input" type="checkbox" name="statusFilter" id="<%= key %>" value="<%= value %>" <%= 'checked=true' if key == 'validated' %>>
+    <label class="custom-control-label" for="<%= key %>"><%= value %></label>
+  </div>
+<% end %>
 
 <table class="table table-striped js-dataTable js-teachersTable">
   <thead class="thead-dark">
