@@ -29,9 +29,12 @@
   <%= link_to(teacher.school.name, school_path(teacher.school)) %>
   <%= teacher.school.location %>
 </td>
-<td data-search="<%= teacher.application_status %>" data-col="status" >
-  <%= teacher.short_application_status %>
-</td>
+<td
+  data-search="<%= teacher.display_application_status %>" data-col="status"
+  data-toggle="tooltip"
+  data-placement="bottom"
+  title="<%= teacher.display_application_status %>"
+  ><%= teacher.short_application_status %></td>
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%m/%d/%Y") %>
 </td>

@@ -23,7 +23,6 @@ $(function() {
 
   $tables.draw();
   $(".custom-checkbox").on("change", () => {
-      console.log("custom-checkbox change");
       $tables.draw();
   });
   $tables.on('draw', function() {
