@@ -108,9 +108,7 @@ class School < ApplicationRecord
   end
 
   def self.search_list
-    School.pluck(:name, :city, :state, :country).map do |data|
-      format_school(data)
-    end
+    School.pluck(:name, :city, :state, :country).map(&:format_school)
   end
 
   def self.grade_level_options
