@@ -169,7 +169,7 @@ module SeedData
             application_status: "Validated",
             school: School.find_by(name: "UC Berkeley"),
 
-            # Note: email field does not exist in the new schema of the Teacher model
+            # Note: email field does not exist in the schema of the Teacher model
             # Include it in the seed data is to simulate the behavior of creating a new teacher,
             # because we need to use it to compared with the EmailAddress model,
             # to determine the existence of the teacher
