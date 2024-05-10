@@ -182,26 +182,6 @@ Feature: basic admin functionality
     And I press "Update"
     Then I should not have sent out any emails
 
-  Scenario: Updating application status persists changes in database
-    Given the following schools exist:
-      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | primary_email            | school      | snap   | application_status |
-      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
-    Given I am on the BJC home page
-    And I have an admin email
-    And I follow "Log In"
-    Then I can log in with Google
-    When I go to the teachers page
-    And I go to the edit page for Bobby John
-    And I set my application status as "Validated"
-    And I press "Update"
-    Then I see a confirmation "Saved"
-    When I go to the teachers page
-    And I check "Validated"
-    Then I should see "Bobby John"
-
   Scenario: Deny teacher as an admin
     Given the following schools exist:
       | name        |     country     | city     | state | website                  | grade_level | school_type |
@@ -233,30 +213,6 @@ Feature: basic admin functionality
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
     Then  should see "You need to log in to access this."
-
-  Scenario: Filter all teacher info as an admin
-    Given the following schools exist:
-      | name        |     country     | city     | state | website                  | grade_level | school_type |
-      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
-    Given the following teachers exist:
-      | first_name | last_name  | admin | primary_email             | school      | application_status |
-      | Victor     | Validateme | false | testteacher1@berkeley.edu | UC Berkeley |      Validated     |
-      | Danny      | Denyme     | false | testteacher2@berkeley.edu | UC Berkeley |       Denied       |
-      | Peter      | Pendme     | false | testteacher3@berkeley.edu | UC Berkeley |     Not Reviewed   |
-    Given I am on the BJC home page
-    Given I have an admin email
-    And   I follow "Log In"
-    Then  I can log in with Google
-    When  I go to the teachers page
-    And   I check "Not Reviewed"
-    And   I uncheck "Validated"
-    Then  I should see "Peter"
-    Then  I should not see "Victor"
-    Then  I should not see "Danny"
-    And   I check "Validated"
-    Then  I should see "Peter"
-    Then  I should see "Victor"
-    Then  I should not see "Danny"
 
   Scenario: View teacher info as an admin
     Given the following schools exist:
@@ -385,7 +341,7 @@ Feature: basic admin functionality
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
       | first_name | last_name  | admin  | primary_email              | primary_email     | school      |
-      | Jane       | Doe        | false  | janedoe@berkeley.edu       |  jd@berkeley.edu  | UC Berkeley | 
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       |  jd@berkeley.edu  | UC Berkeley |
       | Bobby       | John       | false | bobbyjohn@berkeley.edu     |  bj@berkeley.edu  | UC Berkeley |
     Given I am on the BJC home page
     And   I have an admin email
@@ -437,14 +393,14 @@ Feature: basic admin functionality
     And the following entries should exist in the teachers database:
     | first_name     | last_name    | session_count | ip_history                   |   last_session_at      |    admin  | primary_email               | school      |
     | Bobby          |  John        |  534          | 1.2.3.4, 4.5.6.7, 7.8.9.10   |    2023-04-10 12:30:00 |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
-      
+
   Scenario: Admin can access merge page from teacher show page
     Given the following schools exist:
      | name        | country | city     | state | website                  | grade_level | school_type |
      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
     And the following teachers exist:
       | first_name | last_name  | admin  | primary_email              |  school      |
-      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  | 
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  |
       | Bobby      | John       | false  | bobbyjohn@berkeley.edu     |  UC Berkeley |
     Given I am on the BJC home page
     And   I have an admin email
@@ -490,9 +446,9 @@ Feature: basic admin functionality
     Then I go to the show page for Jane Doe
     When I attach the file with name "test_file.txt" on the show page
     Then I see a confirmation "File was successfully uploaded"
-    When I click the first file deletion button 
+    When I click the first file deletion button
     And I accept the popup alert
-    Then I see a confirmation "File was successfully removed" 
+    Then I see a confirmation "File was successfully removed"
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:

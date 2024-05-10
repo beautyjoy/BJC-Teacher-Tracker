@@ -36,9 +36,6 @@
   <%= link_to(teacher.school.name, school_path(teacher.school)) %>
   <%= teacher.school.location %>
 </td>
-<td>
-  <%= teacher.school.country %>
-</td>
 <td data-search="<%= teacher.application_status %>" data-col="status" >
   <%= teacher.short_application_status %>
 </td>
