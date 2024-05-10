@@ -53,8 +53,8 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Publish Code Climate
-        run: |
-         export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-         $CCTR sum-coverage coverage/codeclimate.*.json
-         $CCTR upload-coverage --id "$CC_TEST_REPORTER_ID"
+      # - name: Publish Code Climate
+      #   run: |
+      #    export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+      #    $CCTR sum-coverage coverage/codeclimate.*.json
+      #    $CCTR upload-coverage --id "${{ secrets.CC_TEST_REPORTER_ID }}"
