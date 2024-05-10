@@ -80,7 +80,6 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 
-  <%# For now... only admins can enter/edit personal emails. %>
 
   <div class='form-group row'>
     <div class='col-12'>
@@ -111,13 +110,13 @@ status ONLY IF the person viewing this page is an admin. %>
       <%= f.label :languages, "What language(s) are spoken in the classroom?", 
       class: "label-required" %>
       <%= f.select(
-      :languages,
-      options_for_select(Teacher.language_options, @teacher.languages),
-      {},
-      multiple: true,
-      include_blank: "Select an option",
-      class: 'selectize', required: true
-) %>
+        :languages,
+        options_for_select(Teacher.language_options, @teacher.languages),
+        {},
+        multiple: true,
+        include_blank: "Select an option",
+        class: 'selectize', required: true
+      ) %>
     </div>
   </div>
 
