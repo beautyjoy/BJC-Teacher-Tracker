@@ -33,10 +33,6 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "main#dashboard", as: "dashboard"
 
-  # routes for merging teachers (accessible to ADMIN ONLY)
-  # get 'merge/:id/:merge_id', to: 'merge#preview', as: 'preview_merge'
-  # patch 'merge/:id/:merge_id', to: 'merge#merge', as: 'merge'
-
   get "merge/:from/:into/preview", to: "merge#preview", as: "preview_merge"
   patch "merge/:from/:into/execute", to: "merge#execute", as: "merge"
 end
