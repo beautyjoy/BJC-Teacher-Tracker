@@ -6,7 +6,7 @@ Feature: Request additional information for teacher application
 
   Background: Has an Admin in DB
     Given the following teachers exist:
-      | first_name | last_name | admin | email                      |
+      | first_name | last_name | admin | primary_email              |
       | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu |
 
   Scenario: Admin requests more information and teacher sees notification upon login
@@ -14,7 +14,7 @@ Feature: Request additional information for teacher application
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     And the following teachers exist:
-      | first_name | last_name | admin | email                    | school      |
+      | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     And I am on the BJC home page
     And I have an admin email
@@ -39,7 +39,7 @@ Feature: Request additional information for teacher application
       |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
       |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
     And the following teachers exist:
-      | first_name | last_name | admin | email                    | school      | application_status |
+      | first_name | last_name | admin | primary_email            | school      | application_status |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | info_needed        |
     And I am on the BJC home page
     And I have a teacher Google email "testteacher@berkeley.edu"

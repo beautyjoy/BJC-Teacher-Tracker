@@ -1,0 +1,8 @@
+<%= provide(:h1, "Update #{@professional_development.name}") %>
+
+<%= form_for @professional_development do |f| %>
+  <%= render 'professional_developments/form', f: f, professional_development: @professional_development %>
+  <div>
+    <%= f.submit 'Submit', {class: 'btn btn-primary', id: 'submit_button'} %>
+  </div>
+<% end %>

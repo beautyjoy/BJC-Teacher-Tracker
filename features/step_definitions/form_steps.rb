@@ -9,7 +9,7 @@ Given(/a valid teacher exists/) do
 end
 
 And(/^"(.*)" is not in the database$/) do |email|
-  expect(Teacher.exists?(email:)).to be false
+  expect(EmailAddress.exists?(email:)).to be false
 end
 
 Given(/^I enter (?:my)? "(.*)" as "(.*)"$/) do |field_name, input|
@@ -22,6 +22,28 @@ end
 
 Given(/^I set my application status as "(.*)"$/) do |input|
   select(input, from: "application_status_select_value")
+end
+
+# assumes that languages dropdown is the FIRST selectize menu to appear on the page
+When(/^I select "(.*?)" from the languages dropdown$/) do |option|
+  first(".selectize-input").click  # Click on the dropdown to open it
+  find(".selectize-dropdown-content .option", text: option).click  # Click on the desired option
+end
+
+# also assumes that languages dropdown is the FIRST selectize menu to appear on the page
+When(/^I remove "(.*?)" from the languages dropdown$/) do |item|
+  first(".selectize-input .item", text: item).find(".remove").click
+end
+
+Then(/^the languages dropdown should have the option "(.*?)" selected$/) do |selected_option|
+  # Find the Selectize dropdown by its CSS class
+  selectize_dropdown = first(".selectize-input")
+
+  # Find the selected option within the dropdown
+  selected_option_element = selectize_dropdown.find(".item", text: selected_option)
+
+  # Assert that the selected option exists
+  expect(selected_option_element).to be_visible
 end
 
 Given(/^I set my request reason as "(.*)"$/) do |input|
@@ -69,11 +91,14 @@ Then(/^debug$/) do
 end
 
 Then(/the "(.*)" of the user with email "(.*)" should be "(.*)"/) do |field, email, expected|
-  expect(Teacher.find_by(email:)[field]).to eq(expected)
+  email = EmailAddress.find_by(email:)
+  expect(email.teacher[field]).to eq(expected)
 end
 
 Then(/^I should find a teacher with email "([^"]*)" and school country "([^"]*)" in the database$/) do |email, country|
-  teacher = Teacher.includes(:school).where(email:, 'schools.country': country).first
+  teacher = Teacher.joins(:email_addresses, :school)
+                   .where(email_addresses: { email: }, schools: { country: })
+                   .first
   expect(teacher).not_to be_nil, "No teacher found with email #{email} and country #{country}"
 end
 
@@ -82,7 +107,6 @@ When(/^(?:|I )fill in the school name selectize box with "([^"]*)" and choose to
   # Necessary for the Admin School create page
   page.execute_script('$("#submit_button").show()')
   fill_in("School Name", with: text)
-  # page.find(".label-required", text: "School Name").click
 end
 
 Then(/^"([^"]*)" click and fill option for "([^"]*)"(?: within "([^"]*)")?$/) do |value|

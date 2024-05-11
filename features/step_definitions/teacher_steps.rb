@@ -45,25 +45,41 @@ Given(/the following teachers exist/) do |teachers_table|
   teachers_default = {
     first_name: "Alonzo",
     last_name: "Church",
-    email: "alonzo@snap.berkeley.edu",
     snap: "",
     status: "Other - Please specify below.",
     education_level: 1,
     more_info: "I'm teaching a college course",
     admin: false,
     personal_website: "https://snap.berkeley.edu",
-    application_status: "Not Reviewed"
+    application_status: "Not Reviewed",
+    languages: ["English"],
+
+    # Note: primary email field does not exist in the new schema of the Teacher model
+    # Include it in the seed data is to simulate the behavior of creating a new teacher,
+    # because we need to use it to compared with the EmailAddress model,
+    # to determine the existence of the teacher
+    primary_email: "alonzo@snap.berkeley.edu",
   }
 
   teachers_table.symbolic_hashes.each do |teacher|
     teachers_default.each do |key, value|
-      teacher[key] = teacher[key].presence || value
+      # Parse the 'languages' field as an array of strings using YAML.safe_load
+      if key == :languages
+        languages = if teacher[key].present? then YAML.safe_load(teacher[key]) else nil end
+        teacher[key] = languages.presence || value
+      else
+        # Handle other fields as usual
+        teacher[key] = teacher[key].presence || value
+      end
     end
+
+    email = teacher.delete(:primary_email)
 
     school_name = teacher.delete(:school)
     school = School.find_by(name: school_name || "UC Berkeley")
     teacher[:school_id] = school.id
-    Teacher.create!(teacher)
+    teacher = Teacher.create!(teacher)
+    EmailAddress.create!(email:, teacher:, primary: true)
     School.reset_counters(school.id, :teachers)
   end
 end

@@ -66,7 +66,14 @@
               <% @school.teachers.each do |teacher| %>
                 <tr>
                   <td><%= link_to(teacher.full_name, teacher_path(teacher)) %></td>
-                  <td><%= teacher.email %></td>
+                  <td>
+                    <%= teacher.primary_email %>
+                    <% if teacher.personal_emails.present? %>
+                      <% teacher.personal_emails.each do |email| %>
+                        <br><%= email %>
+                      <% end %>
+                    <% end %>
+                  </td>
                   <td><%= teacher.display_status %></td>
                   <td><%= teacher.display_application_status %></td>
                   <td><%= teacher.created_at.strftime("%b %d, %Y") %></td>
