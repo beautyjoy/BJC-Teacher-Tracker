@@ -30,11 +30,6 @@ class PdRegistration < ApplicationRecord
   validates :attended, inclusion: { in: [true, false] }
 
   def teacher_name
-    teacher = Teacher.find_by(id: teacher_id)
-    if teacher.present?
-      "#{teacher.first_name} #{teacher.last_name}"
-    else
-      "Teacher not found"
-    end
+    self.teacher.full_name
   end
 end

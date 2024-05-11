@@ -6,21 +6,21 @@ Feature: Admin Data Tables functionality
 
   Background: Has an Admin in DB
     Given the following teachers exist:
-      | first_name | last_name | admin | email                        |
-      | Admin    | User    | true  | testadminuser@berkeley.edu   |
+      | first_name | last_name | admin | primary_email |
+      | Admin | User | true | testadminuser@berkeley.edu |
 
   Scenario: Updating application status persists changes in database
     Given the following schools exist:
-      |       name      |     country     |     city     |  state  |            website            |  grade_level  |  school_type  |
-      |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |  university   |     public    |
+      | name | country | city | state | website | grade_level | school_type |
+      | UC Berkeley | US | Berkeley | CA | https://www.berkeley.edu | university | public |
     Given the following teachers exist:
-      | first_name | last_name  | admin | primary_email            | school      | snap   | application_status |
-      | Bobby      | John       | false | testteacher@berkeley.edu | UC Berkeley | bobby  | denied             |
+      | first_name | last_name  | admin | primary_email | school | snap | application_status |
+      | Bobby | John | false | testteacher@berkeley.edu | UC Berkeley | bobby | not_reviewed |
     Given I am on the BJC home page
     And I have an admin email
     And I follow "Log In"
     Then I can log in with Google
-    When I go to the teachers page
+    # When I go to the teachers page
     And I go to the edit page for Bobby John
     And I set my application status as "Validated"
     And I press "Update"

@@ -34,7 +34,7 @@ status ONLY IF the person viewing this page is an admin. %>
           <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
           <%= text_field_tag :request_reason, nil, class: 'form-control' %>
         </div>
-    </div>  
+    </div>
   </div>
 <% end %>
 
@@ -80,7 +80,6 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 
-  <%# For now... only admins can enter/edit personal emails. %>
 
   <div class='form-group row'>
     <div class='col-12'>
@@ -103,7 +102,7 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 <% else %>
-  <!-- Note that edit teacher page CANNOT allow direct adding/removing 
+  <!-- Note that edit teacher page CANNOT allow direct adding/removing
   of files because the nested forms result in undefined
   behavior in Rails, including random controller
   actions getting called from unrelated submit buttons -->
@@ -116,7 +115,7 @@ status ONLY IF the person viewing this page is an admin. %>
       <%= f.label :more_files, "Upload More Files: " %>
       <%= f.file_field :more_files, multiple: true, direct_upload: true %>
     </div>
-  </div> 
+  </div>
 <% end %>
   <div class='form-group row'>
     <div class='col-12'>
@@ -132,15 +131,15 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <div class='form-group row'>
     <div class='col-12'>
-      <%= f.label :languages, "What language(s) are spoken in the classroom?", 
+      <%= f.label :languages, "What language(s) are spoken in the classroom?",
       class: "label-required" %>
       <%= f.select(
-      :languages,
-      options_for_select(Teacher.language_options, @teacher.languages),
-      {},
-      multiple: true,
-      include_blank: "Select an option",
-      class: 'selectize', required: true
+        :languages,
+        options_for_select(Teacher.language_options, @teacher.languages),
+        {},
+        multiple: true,
+        include_blank: "Select an option",
+        class: 'selectize', required: true
       ) %>
     </div>
   </div>
@@ -164,7 +163,7 @@ status ONLY IF the person viewing this page is an admin. %>
 
   <%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
 <!-- This apparent Rails bug of requiring two ends after a submit is likely related
-to the use of the nested forms (here, the school form inside the teacher form) 
+to the use of the nested forms (here, the school form inside the teacher form)
 which can result in inexplicable, and sometimes undefined behavior -->
 <% end %>
 <% end %>
@@ -177,14 +176,14 @@ which can result in inexplicable, and sometimes undefined behavior -->
       persist: false,
       create: false
     });
-    //on loading the page, immediately update the reason field depending on 
+    //on loading the page, immediately update the reason field depending on
     //the value of the application status and check teacher status option
     updateReasonField();
     listenForStatusOptionChange();
   });
 
   //JS to update the text description for the denial/request reason input
-  //field and hide/display relevant linked fields depending on what is 
+  //field and hide/display relevant linked fields depending on what is
   //selected in the application status dropdown
   function updateReasonField() {
     $("#request_or_deny_reason").show();
@@ -198,7 +197,7 @@ which can result in inexplicable, and sometimes undefined behavior -->
         $( "#request_or_deny_reason_text").text("Info Request Reason: ");
         break;
       case "Validated":
-        //show the skip email notification but not 
+        //show the skip email notification but not
         //the deny/request more info reason box
         $("#request_or_deny_reason").hide();
         break;
@@ -224,6 +223,6 @@ which can result in inexplicable, and sometimes undefined behavior -->
       } else {
         $('#upload_file_field').hide();
       }
-    } 
+    }
   }
 </script>

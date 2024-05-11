@@ -162,7 +162,6 @@
 
         function setFormActionForUpdate(pdId, registrationId) {
             form.action = `/professional_developments/${pdId}/pd_registrations/${registrationId}`;
-            console.debug("Setting form action to:", form.action);
             form.method = 'post';
             ensureMethodInput('patch');
         }
