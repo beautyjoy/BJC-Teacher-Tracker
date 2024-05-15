@@ -223,4 +223,90 @@ RSpec.describe TeachersController, type: :controller do
       expect(response).to redirect_to(teacher_path(nonvalidated_teacher.id))
     end
   end
+
+  describe "GET #show" do
+    let(:teacher) { double("Teacher", id: 1) }
+    let(:other_teacher) { double("Teacher") }
+    let(:school) { double("School") }
+
+    before do
+      ApplicationController.any_instance.stub(:require_login).and_return(true)
+      ApplicationController.any_instance.stub(:require_admin).and_return(true)
+      allow(Teacher).to receive(:find).and_return(teacher)
+      allow(Teacher).to receive_message_chain(:where, :not).and_return(other_teacher)
+      allow(teacher).to receive(:school).and_return(school)
+    end
+
+    it "assigns school and teacher status" do
+      allow(controller).to receive(:is_admin?).and_return(false)
+      get :show, params: { id: 1 }
+      expect(assigns(:school)).to eq(school)
+      expect(assigns(:status)).to eq("Teacher")
+      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
+      expect(response).to render_template("show")
+    end
+
+    it "assigns admin if teacher is admin" do
+      allow(controller).to receive(:is_admin?).and_return(true)
+      get :show, params: { id: 1 }
+      expect(assigns(:school)).to eq(school)
+      expect(assigns(:status)).to eq("Admin")
+      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
+      expect(response).to render_template("show")
+    end
+  end
+
+  describe "GET #new" do
+    let(:teacher) { double("Teacher") }
+    let(:school) { double("School") }
+    # Does not check omniauth if-loop
+    let(:omniauth_data) { double("OmniauthData", present?: false) }
+
+    before do
+      ApplicationController.any_instance.stub(:require_login).and_return(true)
+      allow(Teacher).to receive(:new).and_return(teacher)
+      allow(School).to receive(:new).and_return(school)
+      allow(teacher).to receive(:school=).and_return(school)
+      allow(teacher).to receive(:school).and_return(school)
+      allow(controller).to receive(:ordered_schools).and_return(nil)
+      allow(controller).to receive(:omniauth_data).and_return(omniauth_data)
+    end
+
+    it "sets up teacher, school, and readonly" do
+      get :new
+      expect(assigns(:teacher)).to eq(teacher)
+      expect(assigns(:school)).to eq(school)
+      expect(assigns(:readonly)).to be_falsey
+      expect(response).to render_template("new")
+    end
+  end
+
+  describe "GET #edit" do
+    let(:teacher) { instance_double("Teacher", id: 1, school:) }
+    let(:school) { instance_double("School") }
+
+    before do
+      ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
+      allow(controller).to receive(:ordered_schools)
+      allow(Teacher).to receive(:find).and_return(teacher)
+    end
+
+    it "sets user as admin" do
+      allow(controller).to receive(:is_admin?).and_return(true)
+      get :edit, params: { id: teacher.id }
+      expect(assigns(:school)).to eq(school)
+      expect(assigns(:status)).to eq("Admin")
+      expect(assigns(:readonly)).to be_falsey
+      expect(response).to render_template("edit")
+    end
+
+    it "sets user as teacher" do
+      allow(controller).to receive(:is_admin?).and_return(false)
+      get :edit, params: { id: teacher.id }
+      expect(assigns(:school)).to eq(school)
+      expect(assigns(:status)).to eq("Teacher")
+      expect(assigns(:readonly)).to be_truthy
+      expect(response).to render_template("edit")
+    end
+  end
 end

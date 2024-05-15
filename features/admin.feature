@@ -318,7 +318,6 @@ Feature: basic admin functionality
     And I press "Submit"
     Then I send a request info email
 
-
   Scenario: Admin update info without mandatory field shows error
     Given the following schools exist:
       | name        | country | city     | state | website                  | grade_level | school_type |
@@ -336,6 +335,120 @@ Feature: basic admin functionality
     And   I press "Update"
     Then  I should be on the edit page for Jane Doe
 
+  Scenario: Admin can switch merge order
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | primary_email              | primary_email     | school      |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       |  jd@berkeley.edu  | UC Berkeley |
+      | Bobby       | John       | false | bobbyjohn@berkeley.edu     |  bj@berkeley.edu  | UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    And I go to the merge preview page for Jane into Bobby
+    Then I should see "Preview Merge of Jane Doe into Bobby John"
+    When I follow "Switch Merge Order"
+    Then I should see "Preview Merge of Bobby John into Jane Doe"
+
+  Scenario: Merging teachers only updates blank fields with those of teacher being merged
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name     | last_name   | personal_website  | admin  | primary_email              |  school      | application_status |
+      | Jane           |  Doe        | abc@berkeley.edu  | false  | janedoe@berkeley.edu       |  UC Berkeley | validated          |
+      | Bobby          |  John       |                   | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When I go to the merge preview page for Jane into Bobby
+    And I follow "Confirm Merge"
+    Then I see a confirmation "Teachers merged successfully"
+    And the following entries should not exist in the teachers database:
+      | first_name     | last_name   | personal_website           | admin  | primary_email              | school      | application_status |
+      | Jane           |  Doe        | https://abc.berkeley.edu   | false  | janedoe@berkeley.edu       | UC Berkeley | validated          |
+      | Bobby          |  John       |                            | false  | bobbyjohn@berkeley.edu     | UC Berkeley | denied             |
+    And the following entries should exist in the teachers database:
+      | first_name     | last_name       | personal_website  | admin  | primary_email              | school       | application_status |
+      | Bobby          |  John           | abc@berkeley.edu  | false  | bobbyjohn@berkeley.edu     | UC Berkeley  | denied             |
+
+  Scenario: Merging teachers sums session counts, concatenates IP histories, and saves most recent datetime
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name     | last_name   | session_count | ip_history             |   last_session_at      |   admin   | primary_email                        | school      |
+      | Jane           |  Doe        |  169          | 1.2.3.4, 4.5.6.7       |   2023-04-10 12:30:00  |    false  | janedoe@berkeley.edu         | UC Berkeley |
+      | Bobby          |  John       |  365          |  4.5.6.7, 7.8.9.10     |   2023-01-11 12:00:00  |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When I go to the merge preview page for Jane into Bobby
+    And I follow "Confirm Merge"
+    Then I see a confirmation "Teachers merged successfully"
+    And the following entries should exist in the teachers database:
+    | first_name     | last_name    | session_count | ip_history                   |   last_session_at      |    admin  | primary_email               | school      |
+    | Bobby          |  John        |  534          | 1.2.3.4, 4.5.6.7, 7.8.9.10   |    2023-04-10 12:30:00 |    false  | bobbyjohn@berkeley.edu       | UC Berkeley |
+
+  Scenario: Admin can access merge page from teacher show page
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | primary_email              |  school      |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  |
+      | Bobby      | John       | false  | bobbyjohn@berkeley.edu     |  UC Berkeley |
+    Given I am on the BJC home page
+    And   I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When  I go to the show page for Bobby John
+    And   I press "Merge"
+    Then I should see "Choose A User To Merge Into"
+    When I follow the first "Jane Doe" link
+    Then I should be on the merge preview page for Bobby into Jane
+
+  Scenario: Admin does not see uploaded files for teachers with non-homeschool status
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | primary_email              |  school      | status                                                  |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  | I am using BJC as a resource, but not teaching with it. |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the show page for Jane Doe
+    Then I should not see "Supporting Files:"
+    When I go to the edit page for Jane Doe
+    Then I should not see "Supporting Files:"
+    And I should not see "Upload More Files:"
+
+  Scenario: Admin can edit files of a homeschool teacher on the teacher's show page
+    Given the following schools exist:
+     | name        | country | city     | state | website                  | grade_level | school_type |
+     | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    And the following teachers exist:
+      | first_name | last_name  | admin  | primary_email              |  school      |
+      | Jane       | Doe        | false  | janedoe@berkeley.edu       | UC Berkeley  |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    Then I go to the edit page for Jane Doe
+    And I set my status as "I am teaching homeschool with the BJC curriculum."
+    And I press "Update"
+    Then I go to the show page for Jane Doe
+    When I attach the file with name "test_file.txt" on the show page
+    Then I see a confirmation "File was successfully uploaded"
+    When I click the first file deletion button
+    And I accept the popup alert
+    Then I see a confirmation "File was successfully removed"
 
 # Scenario: Admin can import csv file. The loader should filter invalid record and create associate school.
 #  Given the following schools exist:

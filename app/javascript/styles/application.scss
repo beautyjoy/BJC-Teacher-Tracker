@@ -24,6 +24,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import 'layout';
 @import 'forms';
 @import 'edit_teachers';
+@import 'merge_modal';
 @import './sidebar.scss';
 @import "./selectize.scss";
 
@@ -53,6 +54,20 @@ body {
   &:visited {
     color: white;
   }
+}
+
+.btn-purple {
+  background-color: #8A2BE2; /* Light purple */
+}
+
+/* Style for the box around the file upload link */
+.box-link {
+  display: inline-block;
+  padding: 5px 10px; 
+  height: 40px;
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .btn-blue {

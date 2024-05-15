@@ -3,6 +3,6 @@
 <div id='sign-up-form-container'>
   <%# If submission was successful, don't re-render the form. %>
   <% if !flash[:success] %>
-    <%= render 'form', teacher: @teacher, admin: @is_admin %>
+    <%= render 'form', teacher: @teacher, admin: @is_admin, is_new_teacher_page: true %>
   <% end %>
 </div>

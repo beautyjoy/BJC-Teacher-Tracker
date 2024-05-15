@@ -36,6 +36,8 @@ class Teacher < ApplicationRecord
   WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
 
   has_many :email_addresses, dependent: :destroy
+  has_many_attached :files
+  has_many_attached :more_files
   accepts_nested_attributes_for :email_addresses, allow_destroy: true
 
   validates :first_name, :last_name, :status, presence: true
@@ -83,6 +85,7 @@ class Teacher < ApplicationRecord
     developer: 6,
     excite: 7,
     middle_school_bjc: 8,
+    home_school_bjc: 9
   }
 
   # Always add to the bottom of the list!
@@ -96,6 +99,7 @@ class Teacher < ApplicationRecord
     "I am a BJC curriculum or tool developer.",
     "I am teaching with the ExCITE project",
     "I am teaching Middle School BJC.",
+    "I am teaching homeschool with the BJC curriculum."
   ].freeze
 
   # From an admin perspective, we want to know if a teacher has any **meaningful** change
@@ -150,6 +154,7 @@ class Teacher < ApplicationRecord
       :excite,
       :teals_teacher,
       :teals_volunteer,
+      :home_school_bjc,
       :other,
       :developer,
     ]

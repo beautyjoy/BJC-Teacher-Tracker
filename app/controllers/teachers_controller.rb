@@ -10,10 +10,10 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import]
+  before_action :load_teacher, except: [:new, :index, :create, :import, :search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -32,6 +32,7 @@ class TeachersController < ApplicationController
   end
 
   def show
+    @all_teachers_except_current = Teacher.where.not(id: @teacher.id)
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end
@@ -79,7 +80,8 @@ class TeachersController < ApplicationController
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
       redirect_to root_path
     else
-      redirect_to new_teacher_path, alert: "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
+      render "new"
     end
   end
 
@@ -88,6 +90,18 @@ class TeachersController < ApplicationController
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
     @readonly = !is_admin?
+  end
+
+  def remove_file
+    file_attachment = @teacher.files.find(params[:file_id])
+    file_attachment.purge
+    flash[:notice] = "File was successfully removed"
+    redirect_back fallback_location: teacher_path(@teacher)
+  end
+
+  def upload_file
+    @teacher.files.attach(params[:file])
+    redirect_back fallback_location: teacher_path(@teacher), notice: "File was successfully uploaded"
   end
 
   def update
@@ -104,7 +118,7 @@ class TeachersController < ApplicationController
     else
       @school.update(school_params) if school_params
       unless @school.save
-        flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
+        flash.now[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
         render "edit" && return
       end
       @teacher.school = @school
@@ -115,6 +129,7 @@ class TeachersController < ApplicationController
       return
     end
 
+    attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
 
     if fail_to_update
@@ -195,6 +210,7 @@ class TeachersController < ApplicationController
 
   private
   def load_teacher
+    @teachers = Teacher.all
     @teacher ||= Teacher.find(params[:id])
   end
 
@@ -252,9 +268,18 @@ class TeachersController < ApplicationController
     @school ||= School.find_or_create_by(**unique_school_params)
   end
 
+  def attach_new_files_if_any
+    if params.dig(:teacher, :more_files).present?
+      params[:teacher][:more_files].each do |file|
+        @teacher.files.attach(file)
+      end
+    end
+  end
+
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
-                          :more_info, :personal_website, :education_level, :school_id, languages: []]
+                          :more_info, :personal_website, :education_level, :school_id, languages: [], files: [],
+                        more_files: []]
     admin_attributes = [:application_status, :request_reason, :skip_email]
     teacher_attributes.push(*admin_attributes) if is_admin?
 

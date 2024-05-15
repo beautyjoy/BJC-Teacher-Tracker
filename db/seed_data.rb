@@ -155,7 +155,7 @@ module SeedData
       city: "Berkeley",
       country: "US",
       website: "https://bjc.berkeley.edu",
-      state: "CA",
+      state: "CA"
     )
   end
 
