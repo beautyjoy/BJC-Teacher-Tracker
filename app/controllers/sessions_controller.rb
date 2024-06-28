@@ -52,6 +52,14 @@ class SessionsController < ApplicationController
     Sentry.add_breadcrumb(crumb)
     Sentry.capture_message("Omniauth Failure")
     redirect_to root_url,
-                alert: "Login failed unexpectedly. Please reach out to contact@bjc.berkeley.edu (#{params[:message]})"
+                alert: "Login failed unexpectedly. Please reach out to contact@bjc.berkeley.edu #{nyc_message} (#{params[:message]})"
+  end
+
+  private
+  # Special warning for emails that end with @schools.nyc.gov
+  def nyc_message
+    return "" unless omniauth_info.email.downcase.ends_with?("@schools.nyc.gov")
+
+    "Emails ending with @schools.nyc.gov are currently not working. Please try logging with Snap! or reach out to us to setup an alternate login method. Thanks!\n"
   end
 end
