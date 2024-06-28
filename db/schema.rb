@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_15_190239) do
+ActiveRecord::Schema.define(version: 2024_04_07_190126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2024_04_15_190239) do
   create_table "teachers", id: :serial, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.string "email"
     t.string "snap"
     t.integer "school_id"
     t.datetime "created_at", default: -> { "now()" }
@@ -150,7 +151,11 @@ ActiveRecord::Schema.define(version: 2024_04_15_190239) do
     t.datetime "last_session_at"
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0
+    t.string "personal_email"
     t.string "languages", default: ["English"], array: true
+    t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
+    t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
+    t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"
     t.index ["status"], name: "index_teachers_on_status"
