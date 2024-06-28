@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2023_09_05_181019) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
