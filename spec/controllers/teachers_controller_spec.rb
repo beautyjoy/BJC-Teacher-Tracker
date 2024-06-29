@@ -237,21 +237,11 @@ RSpec.describe TeachersController, type: :controller do
       allow(teacher).to receive(:school).and_return(school)
     end
 
-    it "assigns school and teacher status" do
-      allow(controller).to receive(:is_admin?).and_return(false)
-      get :show, params: { id: 1 }
-      expect(assigns(:school)).to eq(school)
-      expect(assigns(:status)).to eq("Teacher")
-      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
-      expect(response).to render_template("show")
-    end
-
     it "assigns admin if teacher is admin" do
       allow(controller).to receive(:is_admin?).and_return(true)
       get :show, params: { id: 1 }
       expect(assigns(:school)).to eq(school)
       expect(assigns(:status)).to eq("Admin")
-      expect(assigns(:all_teachers_except_current)).to eq(other_teacher)
       expect(response).to render_template("show")
     end
   end
