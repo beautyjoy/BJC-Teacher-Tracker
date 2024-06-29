@@ -53,24 +53,24 @@ class MergeController < ApplicationController
       end
     end
 
-    merged_teacher.email_addresses = [from_teacher.email_addresses + into_teacher.email_addresses]
-
     merged_teacher = Teacher.new(merged_attributes)
+    merged_teacher.email_addresses = from_teacher.email_addresses + into_teacher.email_addresses
     merged_teacher
   end
 
   # Handle merging EmailAddress records, so they all belong to the saved record.
+  # This method is designed to be inside a transaction for safety.
   def merge_email_addresses(from_teacher, into_teacher)
     existing_emails = into_teacher.email_addresses
 
     # Ensure there is only one primary email if both have a primary.
-    if into_teacher.primary_email.present? && from_teacher.primary_email.present?
-      from_teacher.primary_email.update(primary: false)
+    if into_teacher.primary_email.present?
+      from_teacher.email_addresses.update_all(primary: false)
     end
 
     from_teacher.email_addresses.each do |email_address|
-      if existing_emails.select(:email).include?(email_address.strip.downcase)
-        puts "[WARN]: Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address}'"
+      if existing_emails.select(:email).include?(email_address.email.strip.downcase)
+        puts "[WARN]: Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'"
         next
       end
       email_address.update!(teacher: into_teacher)

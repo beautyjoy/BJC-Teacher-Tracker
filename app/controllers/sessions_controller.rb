@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       Sentry.add_breadcrumb(crumb)
       Sentry.capture_message("Omniauth No User Found")
       session[:auth_data] = omniauth_info
-      flash[:alert] = "We couldn't find an account for #{omniauth_info.email}. Please submit a new request."
+      flash[:alert] = "We couldn't find an account for #{omniauth_info.email}. Please submit a new request. #{nyc_message}"
       redirect_to new_teacher_path
     end
   end
@@ -60,6 +60,6 @@ class SessionsController < ApplicationController
   def nyc_message
     return "" unless omniauth_info.email.downcase.ends_with?("@schools.nyc.gov")
 
-    "Emails ending with @schools.nyc.gov are currently not working. Please try logging with Snap! or reach out to us to setup an alternate login method. Thanks!\n"
+    "Emails ending with @schools.nyc.gov are currently blocked by NYC DOE. Please try logging with Snap! or reach out to us to setup an alternate login method. Thanks!\n"
   end
 end
