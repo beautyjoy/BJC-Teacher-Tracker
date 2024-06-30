@@ -102,7 +102,6 @@ status ONLY IF the person viewing this page is an admin. %>
     </div>
   </div>
 <% else %>
-
   <!-- Note that edit teacher page CANNOT allow direct adding/removing
   of files because the nested forms result in undefined
   behavior in Rails, including random controller
@@ -119,8 +118,8 @@ status ONLY IF the person viewing this page is an admin. %>
   </div>
 <% end %>
   <div class='form-group row'>
-    <div class='col-6'>
-      <%= f.label :education_level, "What grades to you teach?", class: "label-required" %>
+    <div class='col-12'>
+      <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
       <%= f.select(
         :education_level,
         options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
@@ -128,8 +127,10 @@ status ONLY IF the person viewing this page is an admin. %>
         { class: 'form-control', required: false }
       ) %>
     </div>
+  </div>
 
-    <div class='col-6'>
+  <div class='form-group row'>
+    <div class='col-12'>
       <%= f.label :languages, "What language(s) are spoken in the classroom?",
       class: "label-required" %>
       <%= f.select(

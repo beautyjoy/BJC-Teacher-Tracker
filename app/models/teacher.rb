@@ -228,14 +228,7 @@ class Teacher < ApplicationRecord
   end
 
   def self.user_from_omniauth(omniauth)
-    email = EmailAddress.find_by(email: omniauth.email.downcase)
-
-    # We should handle this separately.
-    # Trim emails that end with email+snap-id-XXX@domain which come from the snap forum
-    if email.blank? && omniauth.email.match?(/\+snap-id-\d+/)
-      email = EmailAddress.find_by(email: omniauth.email.downcase.gsub(/\+snap-id-\d+@/, "@"))
-    end
-    email&.teacher
+    EmailAddress.find_by(email: omniauth.email.downcase)&.teacher
   end
 
   def try_append_ip(ip)

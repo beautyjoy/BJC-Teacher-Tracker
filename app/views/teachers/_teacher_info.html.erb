@@ -24,25 +24,34 @@
   <div class="card-body">
     <% if @is_admin %>
       <div class="row mb-4">
-        <div class="col-sm-3 font-weight-bold">Teacher ID:</div>
-        <div class="col-sm-9">
+        <div class="col-sm-4 font-weight-bold">Teacher ID:</div>
+        <div class="col-sm-8">
           <%= teacher.id %>
         </div>
       </div>
     <% end %>
-    <div class="row mb-3">
-      <div class="col-sm-3 font-weight-bold">Emails:</div>
-        <ul class="list-unstyled col-sm-9">
-          <% teacher.email_addresses.each do |email| %>
-            <li class="">
-              <a href="mailto:<%= email.email %>" class="mr-2"><%= email.email %></a>
-              <button class="btn btn-sm" onclick="copyToClipboard('<%= email.email %>')"><i class="fa fa-copy"></i></button>
-              <%= email_address_label(email) %>
-            </li>
-        <% end %></ul>
+    <div class="row mb-4">
+      <div class="col-sm-4 font-weight-bold">Email:</div>
+      <div class="col-sm-6">
+        <a href=<%= "mailto:#{teacher.primary_email}" %>> <%= teacher.primary_email %> </a>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.primary_email %>')"><i class="fa fa-copy"></i></button>
+      </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Snap<i>!</i> Username:</div>
+      <div class="col-sm-4 font-weight-bold">Personal Emails:</div>
+      <div class="col-sm-6">
+        <% teacher.personal_emails.each do |email| %>
+          <div class="d-flex align-items-center mb-2">
+            <a href="mailto:<%= email %>" class="mr-2"><%= email %></a>
+            <button class="btn btn-sm" onclick="copyToClipboard('<%= email %>')"><i class="fa fa-copy"></i></button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-sm-4 font-weight-bold">Snap<i>!</i> Username:</div>
       <div class="col-sm-6">
         <%= snap_link(teacher) %>
       </div>
@@ -51,20 +60,20 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Application Status:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Application Status:</div>
+      <div class="col-sm-8">
         <%= teacher.display_application_status %>
       </div>
     </div>
     <% if teacher.status_before_type_cast == 9 %>
       <div class="row mb-4">
-        <div class="col-sm-3 font-weight-bold">Supporting Files:</div>
+        <div class="col-sm-4 font-weight-bold">Supporting Files:</div>
           <%= render 'files_display', teacher: @teacher, show_add_file: true, show_delete_file: true %>
-      </div>
+      </div>  
     <% end %>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Personal or Course Website:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
+      <div class="col-sm-8">
         <% if teacher.personal_website.blank? %>
           None provided
         <% else %>
@@ -73,55 +82,55 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Grade Level:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Education Level Target:</div>
+      <div class="col-sm-8">
         <%= teacher.display_education_level %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Classroom Language(s):</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Classroom Language(s):</div>
+      <div class="col-sm-8">
         <%= teacher.display_languages %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Current Status:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Current Status:</div>
+      <div class="col-sm-8">
         <%= teacher.display_status %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">School:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">School:</div>
+      <div class="col-sm-8">
         <%= link_to(teacher.school.name, school_path(teacher.school)) %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">School Location:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">School Location:</div>
+      <div class="col-sm-8">
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-3 font-weight-bold">Sign Up Date:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Sign Up Date:</div>
+      <div class="col-sm-8">
         <%= teacher.created_at %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">Session Count:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Session Count:</div>
+      <div class="col-sm-8">
         <%= teacher.session_count %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-3 font-weight-bold">IP History:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">IP History:</div>
+      <div class="col-sm-8">
         <%= ip_history_display(teacher) %>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-3 font-weight-bold">Last Session:</div>
-      <div class="col-sm-9">
+      <div class="col-sm-4 font-weight-bold">Last Session:</div>
+      <div class="col-sm-8">
         <%= teacher.last_session_at || "-" %>
       </div>
     </div>

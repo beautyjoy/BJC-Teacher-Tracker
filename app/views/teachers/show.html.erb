@@ -38,9 +38,16 @@
 
 <script>
   $(document).ready(function() {
-      let modal = $('#merge-modal');
+      var modal = $('#merge-modal');
+      var button = $('#merge-button');
 
-      $('#merge-button').click(() => modal.show());
-      $('.close').click(() => modal.hide());
+      button.click(function() {
+        modal.show();
+      });
+
+      // Close the modal when the close button is clicked
+      $('.close').click(function() {
+        modal.hide();
+      });
   });
 </script>
