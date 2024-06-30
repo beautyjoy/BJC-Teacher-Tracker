@@ -15,12 +15,16 @@ class MergeController < ApplicationController
     @merged_teacher = merge_teachers(@from_teacher, @into_teacher)
 
     merged_attributes = @merged_teacher.attributes.except("id")
-    @into_teacher.update!(merged_attributes)
-    @from_teacher.destroy
+    Teacher.transaction do
+      merge_email_addresses(@from_teacher, @into_teacher)
+      @from_teacher.destroy
+      @into_teacher.update!(merged_attributes)
+    end
     redirect_to teachers_path, notice: "Teachers merged successfully."
   end
 
   private
+  # TODO: Migrate to a library/service method
   # Returns a merged teacher without saving it to the database.
   # Rendered in the preview, and only saved to the DB in a call to merge.
   def merge_teachers(from_teacher, into_teacher)
@@ -50,6 +54,26 @@ class MergeController < ApplicationController
     end
 
     merged_teacher = Teacher.new(merged_attributes)
+    merged_teacher.email_addresses = from_teacher.email_addresses + into_teacher.email_addresses
     merged_teacher
+  end
+
+  # Handle merging EmailAddress records, so they all belong to the saved record.
+  # This method is designed to be inside a transaction for safety.
+  def merge_email_addresses(from_teacher, into_teacher)
+    existing_emails = into_teacher.email_addresses
+
+    # Ensure there is only one primary email if both have a primary.
+    if into_teacher.primary_email.present?
+      from_teacher.email_addresses.update_all(primary: false)
+    end
+
+    from_teacher.email_addresses.each do |email_address|
+      if existing_emails.select(:email).include?(email_address.email.strip.downcase)
+        puts "[WARN]: Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'"
+        next
+      end
+      email_address.update!(teacher: into_teacher)
+    end
   end
 end

@@ -24,15 +24,15 @@ class TeachersController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        @all_teachers = Teacher.where(admin: false)
-        @admins = Teacher.where(admin: true)
+        @all_teachers = Teacher.eager_load(:email_addresses, :school).where(admin: false)
+        @admins = Teacher.eager_load(:email_addresses, :school).where(admin: true)
       }
       format.csv { send_data Teacher.csv_export, filename: "teachers-#{Date.today}.csv" }
     end
   end
 
   def show
-    @all_teachers_except_current = Teacher.where.not(id: @teacher.id)
+    @all_teachers_except_current = Teacher.preload(:email_addresses, :school).where.not(id: @teacher.id)
     @school = @teacher.school
     @status = is_admin? ? "Admin" : "Teacher"
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 STATUS_FIELD = "What's your current status?"
-EDUCATION_FIELD = "What's your education level target?"
+EDUCATION_FIELD = "What grades to you teach?"
 
 Given(/a valid teacher exists/) do
   school = create(:school)
@@ -26,7 +26,7 @@ end
 
 # assumes that languages dropdown is the FIRST selectize menu to appear on the page
 When(/^I select "(.*?)" from the languages dropdown$/) do |option|
-  first(".selectize-input").click  # Click on the dropdown to open it
+  first(".selectize-input").click # Click on the dropdown to open it
   find(".selectize-dropdown-content .option", text: option).click  # Click on the desired option
 end
 

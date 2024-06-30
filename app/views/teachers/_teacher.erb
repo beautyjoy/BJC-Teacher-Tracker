@@ -10,10 +10,10 @@
   <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
 <td>
-  <%= teacher.primary_email %>
-  <% if teacher.personal_emails.present? %>
-    <% teacher.personal_emails.each do |email| %>
-      <br><%= email %>
+  <% teacher.email_addresses.each do |email| %>
+    <%= email.email %><%= email_address_label(email) %>
+    <% unless email == teacher.email_addresses.last %>
+      <br>
     <% end %>
   <% end %>
 </td>
