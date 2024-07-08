@@ -29,8 +29,8 @@ config/master.key
 # config/secrets.yml
 
 # dotenv
-# TODO Comment out this rule if environment variables can be committed
 .env
+!.env.example
 
 ## Environment normalization:
 /.bundle
@@ -69,10 +69,6 @@ yarn-debug.log*
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
-
-# Ignore postgress-related database files
-my_database_development
-my_database_test
 
 # A copy of GitHub's template .gitignore for all JetBrains IDEs.
 # It can be found here: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
