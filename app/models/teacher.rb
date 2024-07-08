@@ -38,6 +38,7 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
+  # TODO: Move this somewhere else...
   WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
 
   has_many :email_addresses, dependent: :destroy
@@ -66,12 +67,14 @@ class Teacher < ApplicationRecord
 
   # Non-admin teachers whose application has neither been accepted nor denied
   # It might or might not have been reviewed.
+  # TODO: Ensure these scopes do not override enum names.
   scope :unvalidated, -> { where("(application_status=? OR application_status=?) AND admin=?", application_statuses[:info_needed], application_statuses[:not_reviewed], "false") }
   scope :unreviewed, -> { where("application_status=? AND admin=?", application_statuses[:not_reviewed], "false") }
   # Non-admin teachers who have been accepted/validated
   scope :validated, -> { where("application_status=? AND admin=?", application_statuses[:validated], "false") }
 
 
+  # TODO: Remove this.
   enum education_level: {
     middle_school: 0,
     high_school: 1,
@@ -94,6 +97,7 @@ class Teacher < ApplicationRecord
   }
 
   # Always add to the bottom of the list!
+  # The text here may be changed, but the index maps to the actual reason (above)
   STATUSES = [
     "I am teaching BJC as an AP CS Principles course.",
     "I am teaching BJC but not as an AP CS Principles course.",
@@ -110,6 +114,9 @@ class Teacher < ApplicationRecord
   # From an admin perspective, we want to know if a teacher has any **meaningful** change
   # that would require re-reviewing their application.
   before_update :check_for_relevant_changes
+
+  delegate :name, :location, :grade_level, :website, to: :school, prefix: true
+  delegate :school_type, to: :school # don't add a redundant prefix.
 
   def check_for_relevant_changes
     ignored_fields = %w[created_at updated_at session_count last_session_at ip_history]
@@ -139,9 +146,29 @@ class Teacher < ApplicationRecord
     "#{full_name} <#{primary_email}>".delete(",")
   end
 
+  # TODO: Remove this pending migration to drop email column.
+  def email
+    # Default return primary email
+    primary_email
+  end
+
+  def primary_email
+    email_addresses.find_by(primary: true)&.email
+  end
+
+  def personal_emails
+    non_primary_emails
+  end
+
+  # TODO: use this method until we rename the column.
   def snap_username
-    # TODO: use this method until we rename the column.
     self.snap
+  end
+
+  def try_append_ip(ip)
+    return if ip_history.include?(ip)
+    self.ip_history << ip
+    save
   end
 
   def status=(value)
@@ -149,6 +176,15 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  def text_status
+    STATUSES[status_before_type_cast]
+  end
+
+  def display_status
+    formatted_status = status.to_s.titlecase
+    return "#{formatted_status} | #{more_info}" if more_info?
+    formatted_status
+  end
   # TODO: Move these to helpers.
   def self.status_options
     display_order = [
@@ -170,18 +206,6 @@ class Teacher < ApplicationRecord
     end
   end
 
-  def self.application_status_options
-    Teacher.application_statuses.map { |sym, val| [sym.to_s.titlecase, val] }
-  end
-
-  def self.education_level_options
-    Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
-  end
-
-  def self.language_options
-    WORLD_LANGUAGES
-  end
-
   def display_languages
     languages.join(", ")
   end
@@ -195,6 +219,18 @@ class Teacher < ApplicationRecord
     # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
     languages.sort!.reject!(&:blank?)
   end
+  # TODO: Move to a helper.
+  def self.application_status_options
+    Teacher.application_statuses.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.education_level_options
+    Teacher.education_levels.map { |sym, val| [sym.to_s.titlecase, val] }
+  end
+
+  def self.language_options
+    WORLD_LANGUAGES
+  end
 
   def display_education_level
     if education_level_before_type_cast.to_i == -1
@@ -202,16 +238,6 @@ class Teacher < ApplicationRecord
     else
       education_level.to_s.titlecase
     end
-  end
-
-  def text_status
-    STATUSES[status_before_type_cast]
-  end
-
-  def display_status
-    formatted_status = status.to_s.titlecase
-    return "#{formatted_status} | #{more_info}" if more_info?
-    formatted_status
   end
 
   def display_application_status
@@ -238,21 +264,15 @@ class Teacher < ApplicationRecord
     email&.teacher
   end
 
-  def try_append_ip(ip)
-    return if ip_history.include?(ip)
-    self.ip_history << ip
-    save
-  end
-
   def email_attributes
-    # Used when passing data to liquid templates
     {
       teacher_first_name: self.first_name,
       teacher_last_name: self.last_name,
       teacher_full_name: self.full_name,
+      teacher_primary_email: self.primary_email,
       teacher_email: self.primary_email,
       # TODO: change to personal_emails
-      teacher_personal_email: self.non_primary_emails,
+      teacher_personal_email: self.non_primary_emails.join(', '),
       teacher_more_info: self.more_info,
       teacher_snap: self.snap_username,
       teacher_snap_username: self.snap_username,
@@ -260,6 +280,8 @@ class Teacher < ApplicationRecord
       teacher_personal_website: self.personal_website,
       teacher_teaching_status: self.text_status,
       teacher_signed_up_at: self.created_at,
+
+      # TODO: Move these to the school model.
       teacher_school_name: self.school.name,
       teacher_school_city: self.school.city,
       teacher_school_state: self.school.state,
@@ -267,8 +289,6 @@ class Teacher < ApplicationRecord
     }
   end
 
-  delegate :name, :location, :grade_level, :website, to: :school, prefix: true
-  delegate :school_type, to: :school # don't add a redundant prefix.
   # TODO: The school data needs to be cleaned up.
   def self.csv_export
     attributes = %w|
@@ -300,19 +320,6 @@ class Teacher < ApplicationRecord
         csv << attributes.map { |attr| user.send(attr) }
       end
     end
-  end
-
-  def email
-    # Default return primary email
-    primary_email
-  end
-
-  def primary_email
-    email_addresses.find_by(primary: true)&.email
-  end
-
-  def personal_emails
-    non_primary_emails
   end
 
   private
