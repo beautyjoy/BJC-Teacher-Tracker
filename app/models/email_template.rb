@@ -28,8 +28,8 @@ class EmailTemplate < ApplicationRecord
   before_destroy :prevent_deleting_required_emails
 
   def accepts_custom_reason?
-    # search for 'reason' in a liquid template
-    body.match?(/{{\s*reason/)
+    # search for 'reason' in a liquid template, e.g. denial_reason or request_reason
+    body.match?(/\{\{.*_reason.*\}\}/)
   end
 
   private
