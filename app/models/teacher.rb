@@ -272,7 +272,7 @@ class Teacher < ApplicationRecord
       teacher_primary_email: self.primary_email,
       teacher_email: self.primary_email,
       # TODO: change to personal_emails
-      teacher_personal_email: self.non_primary_emails.join(', '),
+      teacher_personal_email: self.non_primary_emails.join(", "),
       teacher_more_info: self.more_info,
       teacher_snap_username: self.snap_username,
       teacher_education_level: self.education_level,
@@ -285,7 +285,7 @@ class Teacher < ApplicationRecord
       teacher_school_city: self.school.city,
       teacher_school_state: self.school.state,
       teacher_school_website: self.school.website,
-    }.trasform_values { |value| value.blank? ? '(blank)' : value }
+    }.trasform_values { |value| value.blank? ? "(blank)" : value }
   end
 
   # TODO: The school data needs to be cleaned up.
