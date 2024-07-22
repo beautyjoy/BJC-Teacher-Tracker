@@ -285,7 +285,7 @@ class Teacher < ApplicationRecord
       teacher_school_city: self.school.city,
       teacher_school_state: self.school.state,
       teacher_school_website: self.school.website,
-    }.trasform_values { |value| value.blank? ? "(blank)" : value }
+    }.transform_values { |value| value.blank? ? "(blank)" : value }
   end
 
   # TODO: The school data needs to be cleaned up.
