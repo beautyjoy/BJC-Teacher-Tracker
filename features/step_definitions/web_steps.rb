@@ -214,7 +214,7 @@ Then(/^the "([^"]*)" checkbox(?: within (.*))? should be checked$/) do |label, p
   with_scope(parent) do
     field_checked = find_field(label)["checked"]
     if field_checked.respond_to? :should
-      field_checked.should be_true
+      field_checked.should be true
     else
       assert field_checked
     end

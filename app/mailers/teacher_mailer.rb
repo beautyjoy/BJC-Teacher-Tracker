@@ -81,5 +81,9 @@ class TeacherMailer < ApplicationMailer
   # Must be called after @teacher is set.
   def set_recipients
     @recipients = Liquid::Template.parse(email_template.to).render(liquid_assigns).html_safe
+    @recipients = @recipients.split(',').
+        map { |addr| addr.strip }.
+        filter { |addr| addr != '(blank)' || addr.blank? }.compact
+
   end
 end
