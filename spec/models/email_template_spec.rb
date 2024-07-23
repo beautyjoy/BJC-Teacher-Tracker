@@ -15,7 +15,7 @@ RSpec.describe EmailTemplate, type: :model do
     end
 
     it "returns false if no reason is in the body" do
-      template = EmailTemplate.new(body: '')
+      template = EmailTemplate.new(body: "")
       expect(template.accepts_custom_reason?).to be false
     end
   end
