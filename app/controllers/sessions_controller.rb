@@ -33,6 +33,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  # Return more data in the case of errors.
+  def omniauth_data
+    request.env["omniauth.auth"]
+  end
+
   def omniauth_info
     request.env["omniauth.auth"].info
   end
@@ -41,7 +46,7 @@ class SessionsController < ApplicationController
     crumb = Sentry::Breadcrumb.new(
       category: "auth",
       data: {
-        omniauth_env: request.env["omniauth.auth"],
+        omniauth_env: omniauth_data,
         omniauth_error: request.env["omniauth.error"],
         message: params[:message],
         strategy: params[:strategy]
@@ -58,7 +63,7 @@ class SessionsController < ApplicationController
   private
   # Special warning for emails that end with @schools.nyc.gov
   def nyc_message
-    return "" unless omniauth_info.email.downcase.ends_with?("@schools.nyc.gov")
+    return "" unless omniauth_info&.email.downcase.ends_with?("@schools.nyc.gov")
 
     "Emails ending with @schools.nyc.gov are currently blocked by NYC DOE. Please try logging with Snap! or reach out to us to setup an alternate login method. Thanks!\n"
   end

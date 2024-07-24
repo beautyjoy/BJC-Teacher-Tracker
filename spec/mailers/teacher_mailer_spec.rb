@@ -11,8 +11,8 @@ describe TeacherMailer do
      teacher = teachers(:bob)
      email = TeacherMailer.welcome_email(teacher)
      email.deliver_now
-     expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-     expect(email.to[0]).to eq("bob@gmail.com")
+     expect(email.from).to include("contact@bjc.berkeley.edu")
+     expect(email.to).to include("bob@gmail.com")
      expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
      expect(email.body.encoded).to include("Hi Bob")
    end
@@ -21,9 +21,9 @@ describe TeacherMailer do
    teacher = teachers(:barney)
    email = TeacherMailer.welcome_email(teacher)
    email.deliver_now
-   expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-   expect(email.to[0]).to eq("barneydinosaur@gmail.com")
-   expect(email.to[1]).to eq("bigpurpletrex@gmail.com")
+   expect(email.from).to include("contact@bjc.berkeley.edu")
+   expect(email.to).to include("barneydinosaur@gmail.com")
+   expect(email.to).to include("bigpurpletrex@gmail.com")
    expect(email.subject).to eq("Welcome to The Beauty and Joy of Computing!")
    expect(email.body.encoded).to include("Hi Barney")
  end
@@ -33,8 +33,8 @@ describe TeacherMailer do
     teacher = teachers(:long)
     email = TeacherMailer.deny_email(teacher, "Denial Reason")
     email.deliver_now
-    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-    expect(email.to[0]).to eq("short@long.com")
+    expect(email.from).to include("contact@bjc.berkeley.edu")
+    expect(email.to).to include("short@long.com")
     expect(email.subject).to eq("Deny Email")
     expect(email.body.encoded).to include("Denial Reason")
   end
@@ -43,8 +43,8 @@ describe TeacherMailer do
     teacher = teachers(:long)
     email = TeacherMailer.form_submission(teacher)
     email.deliver_now
-    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-    expect(email.to[0]).to eq("lmock@berkeley.edu")
+    expect(email.from).to include("contact@bjc.berkeley.edu")
+    expect(email.to).to include("lmock@berkeley.edu")
     expect(email.body.encoded).to include("Short Long")
   end
 
@@ -52,8 +52,8 @@ describe TeacherMailer do
     teacher = teachers(:long)
     email = TeacherMailer.request_info_email(teacher, "Request Reason")
     email.deliver_now
-    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-    expect(email.to[0]).to eq("short@long.com")
+    expect(email.from).to include("contact@bjc.berkeley.edu")
+    expect(email.to).to include("short@long.com")
     expect(email.subject).to eq("Request Info Email")
     # Test appearance of first_name
     expect(email.body.encoded).to include("Short")
@@ -65,8 +65,8 @@ describe TeacherMailer do
     teacher = teachers(:long)
     email = TeacherMailer.teacher_form_submission(teacher)
     email.deliver_now
-    expect(email.from[0]).to eq("contact@bjc.berkeley.edu")
-    expect(email.to[0]).to eq("short@long.com")
+    expect(email.from).to include("contact@bjc.berkeley.edu")
+    expect(email.to).to include("short@long.com")
     expect(email.subject).to eq("Teacher Form Submission")
     expect(email.body.encoded).to include("Here is the information that was submitted")
   end

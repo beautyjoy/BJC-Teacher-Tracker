@@ -37,6 +37,7 @@ class TeacherMailer < ApplicationMailer
          subject: email_template.subject
   end
 
+  # This method is used to send the /admin/ an email message when a new user signs up.
   def form_submission(teacher)
     @teacher = teacher
     set_body
@@ -57,10 +58,10 @@ class TeacherMailer < ApplicationMailer
   private
   def liquid_assigns
     base_rules = {
-      bjc_password: Rails.application.secrets[:bjc_password],
       piazza_password: Rails.application.secrets[:piazza_password],
       denial_reason: @denial_reason,
-      request_reason: @request_reason
+      request_reason: @request_reason,
+      request_info_reason: @request_reason
     }
     base_rules.merge!(@teacher.email_attributes)
     base_rules.with_indifferent_access
@@ -70,13 +71,18 @@ class TeacherMailer < ApplicationMailer
     @email_template ||= EmailTemplate.find_by(title: action_name.titlecase)
   end
 
-  # renders the email body with the {{parameter}} things
+  # renders the email body with the {{parameter}} substitutions
+  # Must be called after @teacher is set.
   def set_body
     @body = Liquid::Template.parse(email_template.body).render(liquid_assigns).html_safe
   end
 
-  # renders the list of recipients with the {{parameter}} things
+  # renders the list of recipients with the {{parameter}} substitutions
+  # Must be called after @teacher is set.
   def set_recipients
     @recipients = Liquid::Template.parse(email_template.to).render(liquid_assigns).html_safe
+    @recipients = @recipients.split(",").
+        map { |addr| addr.strip }.
+        filter { |addr| addr != "(blank)" || addr.blank? }.compact
   end
 end
