@@ -156,7 +156,7 @@ Scenario: Homeschool teacher can add/view supporting files
   And I follow "Log In"
   Then  I can log in with Google
   When I set my status as "I am teaching homeschool with the BJC curriculum."
-  Then I should see "No files attached yet." 
+  Then I should see "No files attached yet."
   When I attach the file with name "test_file.txt"
   And I press "Update"
   And I follow "test_file.txt"
@@ -164,7 +164,7 @@ Scenario: Homeschool teacher can add/view supporting files
   When I attach the file with name "test_file2.txt"
   And I press "Update"
   Then I should see "test_file.txt"
-  And I should see "test_file2.txt" 
+  And I should see "test_file2.txt"
 
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
@@ -208,7 +208,6 @@ Scenario: Frontend should not allow Teacher to edit their email
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   And  I enter my "School Email" as "wrong@berkeley.edu"
-  And  I enter my "Snap! Username" as "wrong"
   And I press "Update"
   Then the "School Email" field should contain "testteacher@berkeley.edu"
   Then the "Snap!" field should contain "Jane"
