@@ -32,8 +32,10 @@ class School < ApplicationRecord
   validates :state, presence: true, if: -> { country == "US" }
   validates :state, inclusion: { in: VALID_STATES }, if: -> { country == "US" }
   validates_format_of :website, with: /.+\..+/, on: :create
+  validates :grade_level, presence: true
+  validates :school_type, presence: true
 
-  before_save :update_gps_data, if: -> { lat.nil? || lng.nil? }
+  before_save :update_gps_data, if: -> { lat.nil? || lng.nil? || location_changed? }
 
   has_many :teachers
   scope :validated, -> { where("teachers_count > 0") }
@@ -124,6 +126,10 @@ class School < ApplicationRecord
   end
 
   private
+  def location_changed?
+    city_changed? || state_changed? || country_changed?
+  end
+
   def prefix_url(url)
     return unless url
     url.match?(/^https?:/) ? url : "https://#{url}"

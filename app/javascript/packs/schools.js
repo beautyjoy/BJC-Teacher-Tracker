@@ -40,7 +40,8 @@ let create_school = function (input, callback) {
       selectizeCallback = null;
       $('#teacher_school_id').val(original_school_id);
     }
-    toggle_required(['name', 'city', 'state', 'website'], true);
+    // TODO: This list should match the model attributes.
+    toggle_required(['name', 'city', 'state', 'website', 'grade_level', 'school_type'], true);
     $("#school_form").hide();
   });
 };
