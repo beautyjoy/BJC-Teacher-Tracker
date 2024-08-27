@@ -19,6 +19,9 @@ $("#new_school").on("submit", function (e) {
   });
 });
 
+// TODO: This list should match the model attributes.
+const SCHOOL_REQUIRED_ATTRIBUTES = ['name', 'city', 'state', 'website', 'grade_level', 'school_type'];
+
 let toggle_required = (selectors, state) => {
   selectors.forEach(s => $(`#school_${s}`).prop("required", state))
 }
@@ -26,7 +29,7 @@ let toggle_required = (selectors, state) => {
 let create_school = function (input, callback) {
   var selectizeCallback = callback;
   $("#school_form").show();
-  toggle_required(['name', 'city', 'state', 'website'], true);
+  toggle_required(SCHOOL_REQUIRED_ATTRIBUTES, true);
   $(".btn-primary").show();
   let original_school_id = $('#teacher_school_id').val();
   var reset_button = $("#close_button");
@@ -40,8 +43,7 @@ let create_school = function (input, callback) {
       selectizeCallback = null;
       $('#teacher_school_id').val(original_school_id);
     }
-    // TODO: This list should match the model attributes.
-    toggle_required(['name', 'city', 'state', 'website', 'grade_level', 'school_type'], true);
+    toggle_required(SCHOOL_REQUIRED_ATTRIBUTES, true);
     $("#school_form").hide();
   });
 };
@@ -55,5 +57,5 @@ let $school_selector = $(".select").selectize({
 $school_selector.on('change', () => {
   let selectedSchool = JSON.parse($("#school_selectize").val());
   $('#teacher_school_id').val(selectedSchool.id);
-  toggle_required(['name', 'city', 'state', 'website'], false);
+  toggle_required(SCHOOL_REQUIRED_ATTRIBUTES, false);
 });
