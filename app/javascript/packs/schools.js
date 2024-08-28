@@ -20,10 +20,12 @@ $("#new_school").on("submit", function (e) {
 });
 
 // TODO: This list should match the model attributes.
-const SCHOOL_REQUIRED_ATTRIBUTES = ['name', 'city', 'state', 'website', 'grade_level', 'school_type'];
+// These are all prefixed with schol_ on the page form.
+const SCHOOL_REQUIRED_ATTRIBUTES = ['name', 'city', 'state', 'website', 'grade_level', 'type'];
 
-let toggle_required = (selectors, state) => {
-  selectors.forEach(s => $(`#school_${s}`).prop("required", state))
+let toggle_required = (fields, state) => {
+  fields.forEach(s => $(`#school_${s}`).prop("required", state));
+  fields.forEach(s => $(`[for=school_${s}]`).addClass('label-required'));
 }
 
 let create_school = function (input, callback) {
