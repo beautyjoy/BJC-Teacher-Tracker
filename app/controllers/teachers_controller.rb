@@ -140,7 +140,7 @@ class TeachersController < ApplicationController
 
     valid_school = update_school_through_teacher
     return if !valid_school
-      
+
     attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
 

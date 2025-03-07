@@ -161,7 +161,7 @@ class Teacher < ApplicationRecord
   def admin_attributes_changed?
     self.email_changed? || self.personal_email_changed? || self.snap_changed?
   end
-  
+
   def try_append_ip(ip)
     return if ip_history.include?(ip)
     self.ip_history << ip
