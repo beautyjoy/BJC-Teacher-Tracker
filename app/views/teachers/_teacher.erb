@@ -1,14 +1,22 @@
+<% if merge_table %>
+  <td><%= teacher.id %></td>
+<% end %>
 <td>
-  <%= link_to(teacher.full_name, teacher_path(teacher)) %>
+  <% if merge_table %>
+    <%= link_to teacher.full_name, preview_merge_path(@teacher.id, teacher.id), method: :get %>
+  <% else %>
+    <%= link_to(teacher.full_name, teacher_path(teacher)) %>
+  <% end %>
   <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
 <td>
-  <%= teacher.email %>
-  <%- if teacher.personal_email.present? %>
-    <br><%= teacher.personal_email %>
-  <%- end %>
+  <% teacher.email_addresses.each do |email| %>
+    <%= email.email %><%= email_address_label(email) %>
+    <% unless email == teacher.email_addresses.last %>
+      <br>
+    <% end %>
+  <% end %>
 </td>
-<td><%= teacher.display_education_level %></td>
 <td
     <%- if teacher.display_status.length > 25 %>
     data-toggle="tooltip"
@@ -26,10 +34,14 @@
 <td>
   <%= link_to(teacher.school.name, school_path(teacher.school)) %>
   <%= teacher.school.location %>
+  <br><%= teacher.school.display_grade_level %>
 </td>
-<td data-search="<%= teacher.application_status %>" data-col="status" >
-  <%= teacher.short_application_status %>
-</td>
+<td
+  data-search="<%= teacher.display_application_status %>" data-col="status"
+  data-toggle="tooltip"
+  data-placement="bottom"
+  title="<%= teacher.display_application_status %>"
+  ><%= teacher.short_application_status %></td>
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%m/%d/%Y") %>
 </td>

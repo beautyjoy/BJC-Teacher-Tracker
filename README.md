@@ -25,14 +25,54 @@ Sp23 Badges:
 The Beauty and Joy of Computing (BJC) is an introductory computer science curriculum developed at UC Berkeley meant for high school freshmen up to college freshmen. The program has a teacher guide and a newly generated password that is to be given to any teacher who signs up for the program as a volunteer educator in the Bay Area - there are plans to expand the program to other states in late 2020. This pilot application is designed as a dashboard to track the workflow of teachers who run the program and provide high-level, descriptive statistics on the courses taught and participating schools. The BJC Teacher Tracker is a NEW project started in Fall 2019 by a group of 5 student developers in UC Berkeley's CS 169: Software Engineering.
 
 ## Features
+```mermaid
+C4Context
+  title BJC Curriculum Management Dashboard
 
-**TODO: This section needs to be re-written.**
+  Boundary(b1, "Dashboard System") {
+    Person(teacher, "Teacher", "Signs up and manages own information")
+    System(curriculumSystem, "Curriculum Dashboard", "Central platform for curriculum management")
+    Person(admin, "Admin", "Administers systems and oversees communications")
+
+    System(teacherInfoSystem, "Teacher Management System", "Manages teacher profiles")
+
+    System(emailSystem, "Email System", "Handles all email communications")
+   
+    System(workshopSystem, "Workshop System", "Coordinates workshop registrations")
+
+    Rel(admin, curriculumSystem, "Administers", "HTTPS", "left")
+    Rel(admin, teacherInfoSystem, "Administers", "HTTPS", "left")
+    Rel(admin, emailSystem, "Sends Emails", "SMTP", "down")
+    Rel(admin, workshopSystem, "Organizes Workshops", "HTTPS", "up")
+    Rel(teacher, curriculumSystem, "Accesses if approved", "HTTPS", "right")
+    Rel(teacher, teacherInfoSystem, "Manages own profile", "HTTPS", "left")
+
+    UpdateElementStyle(admin, $bgColor="#F9D648FF", $fontColor="#000000", $borderColor="#C4972F")
+    UpdateElementStyle(teacher, $bgColor="#8ABAD3FF", $fontColor="#000000", $borderColor="#045D75")
+    UpdateElementStyle(curriculumSystem, $bgColor="#F0F0F0", $fontColor="#000000", $borderColor="#707070")
+    UpdateElementStyle(teacherInfoSystem, $bgColor="#B8DEE6", $fontColor="#000000", $borderColor="#76A5AF")
+    UpdateElementStyle(emailSystem, $bgColor="#F7E0B5", $fontColor="#000000", $borderColor="#DDBE7E")
+    UpdateElementStyle(workshopSystem, $bgColor="#D1F4C9", $fontColor="#000000", $borderColor="#95C896")
+
+    UpdateRelStyle(teacher, curriculumSystem, $textColor="#046307", $lineColor="#0D4006")
+    UpdateRelStyle(teacher, teacherInfoSystem, $textColor="#046307", $lineColor="#0D4006")
+    UpdateRelStyle(admin, curriculumSystem, $textColor="#860136", $lineColor="#540229")
+    UpdateRelStyle(admin, teacherInfoSystem, $textColor="#860136", $lineColor="#540229")
+    UpdateRelStyle(admin, emailSystem, $textColor="#860136", $lineColor="#540229")
+    UpdateRelStyle(admin, workshopSystem, $textColor="#860136", $lineColor="#540229")
+ }
+
+```
 
 * Teachers can sign up at https://teachers.bjc.berkeley.edu
-* Admins can login and approve/deny requests
-* Admins can see a dashboard of teacher stats
-* Teachers can log in to view protected solutions content
-* Admins can create/modify email templates.
+  * For homeschoolers, they need to upload additional support documents.
+* Admins can log in to approve, deny, or request more information for each request.
+* Admins can merge duplicate teacher records.
+* Admins can create and modify workshops and relevant registrations.
+* Admins can see a dashboard of teacher stats.
+* Teachers can log in to view protected solutions content.
+* Admins can create and modify email templates.
+
 
 ## Installation:
 

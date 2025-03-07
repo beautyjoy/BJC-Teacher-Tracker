@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  # flash gem by default only has types of :alert and :notice
+  add_flash_types :warn
+
   before_action :set_sentry_user
   before_action :check_teacher_admin
 
@@ -48,6 +51,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_sentry_user
-    Sentry.set_user(id: session[:user_id], email: current_user&.email)
+    Sentry.set_user(id: session[:user_id], email: current_user&.primary_email)
   end
 end

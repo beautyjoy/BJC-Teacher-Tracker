@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Merge <%= @from_teacher.full_name %> into <%= @into_teacher.full_name %></title>
+  <style>
+    .teacher-info {
+      display: flex;
+    }
+
+    .teacher-info .teacher {
+      flex: 1;
+    }
+
+    .teacher-info .teacher + .teacher {
+      margin-left: 20px; /* Adjust the margin as needed */
+    }
+
+    .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  flex-grow: 1; /* Allow the title to grow to take up remaining space */
+}
+
+.button {
+  margin-left: 10px; /* Adjust margin as needed */
+}
+
+.btn-green {
+  background-color: green;
+}
+
+.btn-orange {
+  background-color: orange;
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">
+      <%= content_tag :h1, "Preview Merge of #{@from_teacher.full_name} into #{@into_teacher.full_name}" %>
+    </div>
+    <div class="button">
+      <%= link_to "Switch Merge Order", preview_merge_path(from: @into_teacher.id, into: @from_teacher.id), method: :get, class: "btn btn-primary switch-merge-button btn-orange" %>
+    </div>
+    <div class="button">
+      <%= link_to "Confirm Merge", merge_path(from: @from_teacher.id, into: @into_teacher.id), method: :patch, class: "btn btn-primary confirm-merge-button btn-green" %>
+    </div>
+  </div>
+
+  <div class="teacher-info">
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @from_teacher, render_edit: true, render_smaller: true, render_delete: false, display_deletion_warning_icon: true, is_show_page: false %>
+    <% end %>
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @into_teacher, render_edit: true, render_smaller: true, render_delete: false, display_deletion_warning_icon: false, is_show_page: false %>
+    <% end %>
+    <%= tag.div class: 'teacher' do %>
+      <%= render 'teachers/teacher_info', teacher: @result_teacher, render_edit: false, render_smaller: true, render_delete: false, display_deletion_warning_icon: false, is_show_page: false %>
+    <% end %>
+  </div>
+</body>
+</html>

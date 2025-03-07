@@ -1,0 +1,32 @@
+<%= provide(:title, "BJC PD") %>
+<%= provide(:header_button, "New Professional Development") %>
+
+<table class="table table-striped js-dataTable">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Location</th>
+    <th scope="col">Start Date</th>
+    <th scope="col">End Date</th>
+    <th scope="col">Grade Level</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @professional_developments.each_with_index do |pd, index| %>
+    <tr>
+      <td><%= link_to(pd.name, professional_development_path(pd)) %></td>
+      <td><%= pd.location %></td>
+      <td><%= pd.start_date %></td>
+      <td><%= pd.end_date %></td>
+      <td><%= pd.display_grade_level %></td>
+      <td>
+        <span class="btn-group">
+          <%= link_to("Edit", edit_professional_development_path(pd), class: "btn btn-info") %>
+          <%= link_to("❌", professional_development_path(pd), method: "delete", class: "btn btn-outline-danger", data: {confirm: "Are you sure?"}) %>
+        </span>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

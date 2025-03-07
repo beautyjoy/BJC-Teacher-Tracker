@@ -4,7 +4,7 @@ Feature: email template features
 
 Background: I am logged in as an admin, and email templates are generated
     Given the following teachers exist:
-    | first_name | last_name | admin | email                        |
+    | first_name | last_name | admin | primary_email                |
     | Joseph     | Mamoa     | true  | testadminuser@berkeley.edu   |
     Given I am on the BJC home page
     Given I have an admin email
@@ -33,3 +33,41 @@ Scenario: Logging in as an admin should be able to edit email subject
     And I press "Submit"
     And I follow "Welcome Email"
     Then the "email_template_subject" field should contain "Test Subject"
+
+Scenario: Creating new email template with blank fields displays flash error
+    Given I am on the email templates index
+    And I press "New Email Templates"
+    When I press "Submit"
+    Then I should see "An error occurred: Body can't be blank, To can't be blank"
+
+Scenario: Creating and deleting new email template with valid fields succeeds
+    Given I am on the email templates index
+    And I press "New Email Templates"
+    When I fill in "email_template_title" with "Test Email"
+    And I fill in "email_template_subject" with "Test Subject"
+    And I fill in "email_template_to" with "{{teacher_email}}"
+    And I fill in TinyMCE email form with "This is the body of my test email"
+    And I press "Submit"
+    Then I should see "Created Test Email successfully"
+    When I follow the first "❌" link
+    And I accept the popup alert
+    Then I should be on the email templates index
+    And I should not see "Test Email"
+
+Scenario: Editing email template to have blank body or to field displays flash error
+    Given I am on the email templates index
+    And I follow "Welcome Email"
+    And I fill in "email_template_to" with ""
+    And I press "Submit"
+    Then I should see "An error occurred: To can't be blank"
+    When I fill in TinyMCE email form with ""
+    And I press "Submit"
+    Then I should see "An error occurred: Body can't be blank"
+
+Scenario: Updating email template with valid parameters succeeds
+    Given I am on the email templates index
+    And I follow "Welcome Email"
+    And I fill in "email_template_to" with "abc@berkeley.edu"
+    And I fill in TinyMCE email form with "ABC"
+    And I press "Submit"
+    Then I should see "Updated Welcome Email template successfully"

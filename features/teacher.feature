@@ -23,11 +23,11 @@ Scenario: Logging in as a teacher
 
 Scenario: Logging in as a teacher with Google account should be able to edit their info
   Given the following schools exist:
-  |       name            |     city     |  state  |            website            |
-  |   UC Berkeley         |   Berkeley   |   CA    |   https://www.berkeley.edu    |
-  | Cupertino High School |   Cupertino  |   CA    |      https://chs.fuhsd.org    |
+  |       name            |     country     |     city     |  state  |            website            |
+  |   UC Berkeley         |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  | Cupertino High School |       US        |   Cupertino  |   CA    |      https://chs.fuhsd.org    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -39,19 +39,22 @@ Scenario: Logging in as a teacher with Google account should be able to edit the
   And   I set my status as "I am a TEALS volunteer, and am teaching the BJC curriculum."
   And   I set my education level target as "College"
   And   I fill in the school name selectize box with "Cupertino High School, Cupertino, CA" and choose to add a new school
+  And   I select "United States" from "Country"
   And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "State"
+  And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I select "Spanish" from the languages dropdown
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   Then  the "First Name" field should contain "Joe"
+  And   the languages dropdown should have the option "Spanish" selected
 
 Scenario: Logging in as a teacher with Microsoft account should be able to edit their info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Microsoft email
   Given I am on the BJC home page
@@ -62,10 +65,10 @@ Scenario: Logging in as a teacher with Microsoft account should be able to edit 
 
 Scenario: Logging in as a teacher with Snap account should be able to edit their info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Snap email
   Given I am on the BJC home page
@@ -76,10 +79,10 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
 
   Scenario: Logging in as a teacher with Clever account should be able to edit their info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      |
+  | first_name | last_name | admin | primary_email            | school      |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
   Given I have a teacher Clever email
   Given I am on the BJC home page
@@ -90,10 +93,10 @@ Scenario: Logging in as a teacher with Snap account should be able to edit their
 
 Scenario: Logged in teacher with Not_Reviewed application status can update their info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | snap   |
+  | first_name | last_name | admin | primary_email            | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -105,23 +108,22 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
   And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
-  And   I fill in the following:
-  | City           | Cupertino             |
-  | State          | CA                    |
-  | School Website | https://chs.fuhsd.org |
-  | Grade Level    | High School           |
-  | School Type    | Public                |
+  And   I select "United States" from "Country"
+  And   I enter my "City" as "Cupertino"
+  And   I select "CA" from "State" dropdown
+  And   I enter my "School Website" as "https://chs.fuhsd.org"
+  And   I select "High School" from "Grade Level"
+  And   I select "Public" from "School Type"
   And   I press "Update"
   Then  I see a confirmation "Successfully updated your information"
   And   I am on the edit page for Joe Mamoa
 
-  # TODO: Should this test updating to a new school?
   Scenario: Logged in teacher with not_reviewed status cannot change Snap from new form path
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                    | school      | snap   |
+  | first_name | last_name | admin | primary_email            | school      | snap   |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley | alonzo |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -134,19 +136,42 @@ Scenario: Logged in teacher with Not_Reviewed application status can update thei
   And   I set my status as "I am teaching BJC as an AP CS Principles course."
   And   I set my education level target as "High School"
   And   I fill in the school name selectize box with "Cupertino High School" and choose to add a new school
+  And   I select "United States" from "Country"
   And   I enter my "City" as "Cupertino"
-  And   I select "CA" from "State"
+  And   I select "CA" from "State" dropdown
   And   I enter my "School Website" as "https://chs.fuhsd.org"
   And   I press "Update"
   And   I should see "Edit Joe Mamoa"
   And   the "Snap! Username" field should contain "alonzo"
 
+Scenario: Homeschool teacher can add/view supporting files
+  Given I have a teacher Google email
+  And the following schools exist:
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  And the following teachers exist:
+  | first_name | last_name | admin | primary_email            | school      |
+  | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
+  And I am on the BJC home page
+  And I follow "Log In"
+  Then  I can log in with Google
+  When I set my status as "I am teaching homeschool with the BJC curriculum."
+  Then I should see "No files attached yet."
+  When I attach the file with name "test_file.txt"
+  And I press "Update"
+  And I follow "test_file.txt"
+  Then I should see "test_file.txt"
+  When I attach the file with name "test_file2.txt"
+  And I press "Update"
+  Then I should see "test_file.txt"
+  And I should see "test_file2.txt"
+
 Scenario: Logged in teacher can only edit their own information
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     |
+  | first_name | last_name | admin | primary_email             |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   | Jane       | Austin    | false | testteacher2@berkeley.edu |
   Given I have a teacher Google email
@@ -158,10 +183,10 @@ Scenario: Logged in teacher can only edit their own information
 
 Scenario: Logging in as a teacher with not_reviewed status should see "Update" instead of "Submit" when editing info
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     |
+  | first_name | last_name | admin | primary_email             |
   | Joseph     | Mamoa     | false | testteacher@berkeley.edu  |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -172,10 +197,10 @@ Scenario: Logging in as a teacher with not_reviewed status should see "Update" i
 
 Scenario: Frontend should not allow Teacher to edit their email
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap |
+  | first_name | last_name | admin | primary_email             | snap |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -183,17 +208,16 @@ Scenario: Frontend should not allow Teacher to edit their email
   Then I can log in with Google
   When I go to the edit page for Jane Austin
   And  I enter my "School Email" as "wrong@berkeley.edu"
-  And  I enter my "Snap! Username" as "wrong"
   And I press "Update"
   Then the "School Email" field should contain "testteacher@berkeley.edu"
   Then the "Snap!" field should contain "Jane"
 
 Scenario: Validated teacher should see resend button
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -204,10 +228,10 @@ Scenario: Validated teacher should see resend button
 
 Scenario: teacher with not_reviewed status should not see resend button
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed       |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -218,10 +242,10 @@ Scenario: teacher with not_reviewed status should not see resend button
 
 Scenario: Denied teacher should not see resend button
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -232,10 +256,10 @@ Scenario: Denied teacher should not see resend button
 
 Scenario: Denied teacher cannot edit their information
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status | more_info |
+  | first_name | last_name | admin | primary_email             | snap | application_status | more_info |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied | Original Information |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -248,10 +272,10 @@ Scenario: Denied teacher cannot edit their information
 
 Scenario: Validated teacher should not see Tags or NCES ID
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | validated          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -263,10 +287,10 @@ Scenario: Validated teacher should not see Tags or NCES ID
 
 Scenario: Teacher with not_reviewed status should not see Tags or NCES ID
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | Not Reviewed          |
   Given I have a teacher Google email
   Given I am on the BJC home page
@@ -278,10 +302,10 @@ Scenario: Teacher with not_reviewed status should not see Tags or NCES ID
 
 Scenario: Denied teacher should not see Tags or NCES ID
   Given the following schools exist:
-  |       name      |     city     |  state  |            website            |
-  |   UC Berkeley   |   Berkeley   |   CA    |   https://www.berkeley.edu    |
+  |       name      |     country     |     city     |  state  |            website            |
+  |   UC Berkeley   |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
   Given the following teachers exist:
-  | first_name | last_name | admin | email                     | snap | application_status |
+  | first_name | last_name | admin | primary_email             | snap | application_status |
   | Jane       | Austin    | false | testteacher@berkeley.edu  | Jane | denied |
   Given I have a teacher Google email
   Given I am on the BJC home page

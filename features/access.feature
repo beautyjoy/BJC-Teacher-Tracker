@@ -5,7 +5,7 @@ Feature: access control for new users or non-admin users
 
 Background: Has an Admin and a teacher in DB
   Given the following teachers exist:
-  | first_name | last_name | admin | email                       |
+  | first_name | last_name | admin  | primary_email               |
   | Alice      | Admin     | true   | testadminuser@berkeley.edu |
   | Todd       | Teacher   | false  | testteacher@berkeley.edu   |
 
@@ -65,6 +65,14 @@ Scenario: Other user's show page as a Teacher
   Then I can log in with Google
   Given I am on the show page for Alice Admin
   Then I should be on the edit page for Todd Teacher
+
+Scenario: Try to access merge page as a registered teacher
+  Given I have a teacher Google email
+  Given I am on the BJC home page
+  And I follow "Log In"
+  Then I can log in with Google
+  When I go to the merge preview page for Todd into Alice
+  Then I should see "Only admins can access this page"
 
 #New User
 Scenario: Schools page as a new user

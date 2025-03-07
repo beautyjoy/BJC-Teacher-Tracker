@@ -7,10 +7,10 @@
       <div class='col resend-email-div'>
         <%= button_to "Resend Welcome Email", { action: "resend_welcome_email", id: @teacher.id }, :class => "btn btn-primary resend-email-button" %>
       </div>
-    <% end %>
+    <% end %> 
   </div>
   <hr/>
 </div>
 <div id='sign-up-form-container'>
-  <%= render 'form', teacher: @teacher %>
+  <%= render 'form', teacher: @teacher, admin: @is_admin, is_new_teacher_page: false %>
 </div>

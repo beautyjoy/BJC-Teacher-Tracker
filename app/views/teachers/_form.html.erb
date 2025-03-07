@@ -1,5 +1,45 @@
 <%= form_with model: @teacher, id: 'new_teacher' do |f| %>
+
+<%# Render the extra input group to change teacher's application
+status ONLY IF the person viewing this page is an admin. %>
+<%if @is_admin %>
+  <div class='form-group form-input-group'>
+    <div class='form-group row'>
+      <%# The application status input field %>
+      <div class='col-6'>
+          <%= f.label :application_status, "Application Status:", class: "label-required" %>
+          <%= f.select(
+          :application_status,
+          options_for_select(Teacher.application_status_options, teacher.application_status_before_type_cast),
+          { include_blank: "Select an option" },
+          { id: 'application_status_select_value', class: 'form-control', required: true, onchange: 'updateReasonField();' }
+        ) %>
+      </div>
+      <%# Skip email notification dropdown Y/N %>
+      <div id = 'skip_email_dropdown' class='col-6'>
+          <%= label_tag :skip_email, "Skip Email Notification: ", id: 'skip-email', class: "label-optional" %>
+          <%= select_tag(
+            :skip_email,
+            options_for_select(['No', 'Yes'], 'No'),
+          { include_blank: false, class: 'form-control', required: false }
+          )%>
+      </div>
+    </div>
+    <%# Denial/request more info reason input field, if applicable %>
+    <div id= 'request_or_deny_reason' class='form-group row'>
+        <%# Text Field for Denial/Request Reason %>
+        <div class='col-12'>
+          <%# Use label_tag and text_field_tag to ensure that these inputs are
+          not linked to the actual form, which is backed by the model attributes %>
+          <%= label_tag :request_reason, "Request Reason: ", id: 'request_or_deny_reason_text', class: "label-optional" %>
+          <%= text_field_tag :request_reason, nil, class: 'form-control' %>
+        </div>
+    </div>
+  </div>
+<% end %>
+
 <div class='form-group form-input-group'>
+
   <h2>Your Information</h2>
   <div class='form-group row'>
     <div class='col-6'>
@@ -17,16 +57,16 @@
 
   <div class='form-group row'>
     <div class='col-6'>
-      <%= f.label :email, "School Email", class: "label-required" %>
-      <%= f.text_field :email, placeholder: 'alonzo@snap.berkeley.edu', class: 'form-control',
-        required: true, type: :email, readonly: @readonly %>
+      <%= label_tag 'email[primary]', "School Email", class: "label-required" %>
+      <%= text_field_tag 'email[primary]', @teacher.primary_email, placeholder: 'alonzo@snap.berkeley.edu',
+                         class: 'form-control', required: true, type: :email, readonly: @readonly %>
     </div>
 
     <div class='col-6'>
       <%= f.label :snap do %>
         Snap<i>!</i> Username <i>(optional)</i>
       <% end %>
-      <%= f.text_field :snap, placeholder: "alonzo", class: "form-control", readonly: @readonly %>
+      <%= f.text_field :snap, placeholder: "alonzo", class: "form-control" %>
     </div>
   </div>
 
@@ -40,18 +80,6 @@
     </div>
   </div>
 
-  <%# For now... only admins can enter/edit personal emails. %>
-  <%- if current_user&.admin? || @teacher.personal_email.present? %>
-  <div class="form-group row">
-    <div class='col-12'>
-      <%= f.label :personal_email do %>
-        Personal Email</i>
-      <% end %>
-      <%= f.text_field :personal_email, placeholder: 'alonzo@gmail.com', class: 'form-control',
-        required: false, type: :email, readonly: @readonly %>
-    </div>
-  </div>
-  <% end %>
 
   <div class='form-group row'>
     <div class='col-12'>
@@ -60,14 +88,39 @@
         :status,
         options_for_select(Teacher.status_options, teacher.status_before_type_cast),
         { include_blank: "Select an option" },
-        { class: 'form-control', required: true, onchange: 'requireVolunteerHostTeacher();' }
+        { class: 'form-control', required: true, onchange: 'listenForStatusOptionChange();' }
       ) %>
     </div>
   </div>
 
-  <div class='form-group row'>
+<!-- File upload input field -->
+<% if is_new_teacher_page %>
+  <div class='form-group row' id = 'upload_file_field'>
     <div class='col-12'>
-      <%= f.label :education_level, "What's your education level target?", class: "label-required" %>
+    <%= f.label :files, "Upload supporting files: " %>
+    <%= f.file_field :files, multiple: true, direct_upload: true %>
+    </div>
+  </div>
+<% else %>
+
+  <!-- Note that edit teacher page CANNOT allow direct adding/removing
+  of files because the nested forms result in undefined
+  behavior in Rails, including random controller
+  actions getting called from unrelated submit buttons -->
+  <div class='form-group row' id = 'upload_file_field'>
+    <div class='col-12'>
+      <label for="uploaded_files">Supporting files:</label>
+      <%= render 'files_display', teacher: @teacher, show_add_file: false, show_delete_file: false %>
+    </div>
+    <div class='col-12'>
+      <%= f.label :more_files, "Upload More Files: " %>
+      <%= f.file_field :more_files, multiple: true, direct_upload: true %>
+    </div>
+  </div>
+<% end %>
+  <div class='form-group row'>
+    <div class='col-6'>
+      <%= f.label :education_level, "What grades to you teach?", class: "label-required" %>
       <%= f.select(
         :education_level,
         options_for_select(Teacher.education_level_options, teacher.education_level_before_type_cast),
@@ -75,42 +128,100 @@
         { class: 'form-control', required: false }
       ) %>
     </div>
+
+    <div class='col-6'>
+      <%= f.label :languages, "What language(s) are spoken in the classroom?",
+      class: "label-required" %>
+      <%= f.select(
+        :languages,
+        options_for_select(Teacher.language_options, @teacher.languages),
+        {},
+        multiple: true,
+        include_blank: "Select an option",
+        class: 'selectize', required: true
+      ) %>
+    </div>
   </div>
 
   <div class='form-group row'>
     <div class='col-12'>
-      <%= f.label :more_info, "More Information", class: "label-required" %>
-      <%= f.text_area :more_info, placeholder: "I applied for access because...",
-        class: "form-control", required: true, rows: "2" %>
+        <%= f.label :more_info, "More Information", class: "label-required" %>
+        <%= f.text_area :more_info, placeholder: "I applied for access because...",
+          class: "form-control", required: true, rows: "2" %>
     </div>
     <small class="col-12 form-text text-muted"><strong id='teacher-more-info-reminder'>Please tell us why you need access.</strong></small>
   </div>
-  <%= f.hidden_field :school_id %>
-</div>
+    <%= f.hidden_field :school_id %>
+  </div>
 
-<div class='form-group form-input-group'>
-  <%= form_with model: @teacher.school, local: true do |school| %>
-    <h2>Your School</h2>
-    <%= render 'schools/selectize_form', f: school %>
-    <%# NO END HERE -- NOTE BELOW %>
-</div>
+  <div class='form-group form-input-group' id='school_container'>
+    <%= form_with model: @teacher.school, local: true do |school| %>
+      <h2>Your School</h2>
+        <%= render 'schools/selectize_form', f: school %>
+  </div>
 
-<%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
-<%# TWO ENDS MUST COME AFTER SUBMIT -- Rails bug??? %>
+  <%= f.submit (f.object.new_record? ? 'Submit' : 'Update'), class: 'btn btn-primary' %>
+<!-- This apparent Rails bug of requiring two ends after a submit is likely related
+to the use of the nested forms (here, the school form inside the teacher form)
+which can result in inexplicable, and sometimes undefined behavior -->
 <% end %>
 <% end %>
 
 <script>
-  function requireVolunteerHostTeacher() {
-    var status_val = $( "#teacher_status" ).val();
+  $(document).ready(function() {
+    $('.selectize').selectize({
+      plugins: ['remove_button'],
+      delimiter: ",",
+      persist: false,
+      create: false
+    });
+    //on loading the page, immediately update the reason field depending on
+    //the value of the application status and check teacher status option
+    updateReasonField();
+    listenForStatusOptionChange();
+  });
 
+  //JS to update the text description for the denial/request reason input
+  //field and hide/display relevant linked fields depending on what is
+  //selected in the application status dropdown
+  function updateReasonField() {
+    $("#request_or_deny_reason").show();
+    $("#skip_email_dropdown").show();
+    var selected_app_status = $("#application_status_select_value").val();
+    switch (selected_app_status) {
+      case "Denied":
+        $( "#request_or_deny_reason_text").text("Denial Reason: ");
+        break;
+      case "Info Needed":
+        $( "#request_or_deny_reason_text").text("Info Request Reason: ");
+        break;
+      case "Validated":
+        //show the skip email notification but not
+        //the deny/request more info reason box
+        $("#request_or_deny_reason").hide();
+        break;
+      default: //not reviewed
+        //neither boxes need to be shown since they are not applicable
+        $("#request_or_deny_reason").hide();
+        $("#skip_email_dropdown").hide();
+    }
+  }
+
+  function listenForStatusOptionChange() {
+    var status_val = $("#teacher_status").val();
+    debugger;
     <%# For TEALS volunteer, we also ask for the name of their host teacher. %>
     if (status_val == 3) {
+      $('#upload_file_field').hide();
       $("#teacher-more-info-reminder").text("Please tell us why you need access, and include the name of your host teacher here.");
-    }
-    else {
+    } else {
       $("#teacher-more-info-reminder").text("Please tell us why you need access.");
+      <%# If homeschool, then show upload file field %>
+      if (status_val == 9) {
+        $('#upload_file_field').show();
+      } else {
+        $('#upload_file_field').hide();
+      }
     }
-
   }
 </script>

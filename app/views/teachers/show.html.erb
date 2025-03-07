@@ -1,6 +1,6 @@
 <%= provide(:h1, "#{@status} View #{@teacher.full_name}") %>
 
-<%= render 'teacher_info', teacher: @teacher %>
+<%= render 'teacher_info', teacher: @teacher, render_edit: true, render_smaller: false, render_delete: true, display_deletion_warning_icon: false, is_show_page: true %>
 
 <hr>
 <div class='row'>
@@ -9,3 +9,38 @@
         class: "btn btn-secondary" %>
   </div>
 </div>
+
+<!-- Merge Modal -->
+<div id="merge-modal" class="merge_modal">
+  <!-- Modal content -->
+  <div class="merge_modal-content">
+    <h2>Choose A User To Merge Into</h2>
+    <span class="close">&times;</span>
+    <!-- Table code -->
+    <table class="table table-striped js-dataTable js-teachersTable">
+      <!-- Table headers -->
+      <thead class="thead-dark">
+        <tr>
+          <%= render 'table_headers', include_id: true %>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody>
+        <% @all_teachers_except_current.each do |teacher| %>
+          <tr>
+            <%= render 'teacher', teacher: teacher, merge_table: true %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+      let modal = $('#merge-modal');
+
+      $('#merge-button').click(() => modal.show());
+      $('.close').click(() => modal.hide());
+  });
+</script>

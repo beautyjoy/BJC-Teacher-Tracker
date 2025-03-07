@@ -7,6 +7,8 @@ module ApplicationHelper
       "danger"
     when "notice"
       "info"
+    when "warn"
+      "warning"
     else
       name
     end
@@ -17,7 +19,8 @@ module ApplicationHelper
       "Dashboard": dashboard_path,
       "Schools": schools_path,
       "Teachers": teachers_path,
-      "Email Templates": email_templates_path
+      "Email Templates": email_templates_path,
+      "PD": professional_developments_path,
     }
   end
 

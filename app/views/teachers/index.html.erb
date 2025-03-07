@@ -6,33 +6,24 @@
   <a href="/teachers.csv" class="btn btn-primary">Export All</a>
 </div>
 
+<% Teacher.application_statuses.each do |key, value| %>
 <div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Validated" value="validated" checked=true>
-  <label class="custom-control-label" for="Validated">Validated</label>
+  <input class="custom-control-input" type="checkbox" name="statusFilter" id="<%= key %>" value="<%= value %>" <%= key == 'validated' ? 'checked=true' : '' %>>
+
+  <label class="custom-control-label" for="<%= key %>"><%= value %></label>
 </div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="Denied" value="denied">
-  <label class="custom-control-label" for="Denied">Denied</label>
-</div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="NotReviewed" value="not_reviewed">
-  <label class="custom-control-label" for="NotReviewed">Not Reviewed</label>
-</div>
-<div class="custom-control custom-checkbox custom-control-inline">
-  <input class="custom-control-input" type="checkbox" name="statusFilter" id="InfoNeeded" value="info_needed">
-  <label class="custom-control-label" for="InfoNeeded">Info Needed</label>
-</div>
+<% end %>
 
 <table class="table table-striped js-dataTable js-teachersTable">
   <thead class="thead-dark">
     <tr>
-      <%= render 'table_headers' %>
+      <%= render 'table_headers', include_id: false %>
     </tr>
   </thead>
   <tbody>
     <% @all_teachers.each do |teacher| %>
     <tr>
-      <%= render 'teacher', teacher: teacher %>
+      <%= render 'teacher', teacher: teacher, merge_table: false %>
     </tr>
     <% end %>
   </tbody>
@@ -44,13 +35,13 @@
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
     <tr>
-      <%= render 'table_headers' %>
+      <%= render 'table_headers', include_id: false %>
     </tr>
   </thead>
   <tbody>
     <% @admins.each do |admin| %>
     <tr>
-      <%= render 'teacher', teacher: admin %>
+      <%= render 'teacher', teacher: admin, merge_table: false %>
     </tr>
     <% end %>
   </tbody>
@@ -88,6 +79,7 @@
       <li class="list-group-item">school_name</li>
       <li class="list-group-item">school_city</li>
       <li class="list-group-item">school_state</li>
+      <li class="list-group-item">school_country</li>
       <li class="list-group-item">school_website</li>
       <li class="list-group-item">school_grade_level</li>
       <li class="list-group-item">school_type</li>

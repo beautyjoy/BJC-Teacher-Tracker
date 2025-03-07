@@ -11,4 +11,9 @@ module TeacherHelper
     return "-" if teacher.ip_history.nil? || teacher.ip_history.empty?
     teacher.ip_history.to_sentence
   end
+
+  def email_address_label(email)
+    return unless email.primary?
+    '&nbsp; <span class="badge badge-pill badge-primary h6">primary</span>'.html_safe
+  end
 end

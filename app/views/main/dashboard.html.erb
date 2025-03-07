@@ -1,44 +1,44 @@
 <% provide(:title, "BJC Teacher Dashboard") %>
 <div class="requests-dashboard">
   <h2>New Requests</h2>
-    <table class="table js-dataTable">
-      <thead class="thead-dark">
-        <tr>
-          <%= render 'teachers/table_headers' %>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @unreviewed_teachers.each do |teacher| %>
-        <tr>
-          <%= render 'teachers/teacher', teacher: teacher %>
-          <td>
-            <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
-              <%= button_to("✔️", validate_teacher_path(teacher.id),
-                 class: 'btn-group btn btn-outline-success', type: 'button') %>
-              <!-- <span>
+  <table class="table js-dataTable">
+    <thead class="thead-dark">
+    <tr>
+      <%= render 'teachers/table_headers', include_id: false %>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @unreviewed_teachers.each do |teacher| %>
+      <tr>
+        <%= render 'teachers/teacher', teacher: teacher, merge_table: false %>
+        <td>
+          <div class="btn-group" role="group" aria-label="Validate or Remove Teacher">
+            <%= button_to("✔️", validate_teacher_path(teacher.id),
+                          class: 'btn-group btn btn-outline-success', type: 'button') %>
+            <span>
                 <button class="btn btn-outline-warning" type="button" data-toggle="modal" data-target=".js-denialModal"
-                  data-modal-type="request_info" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
+                        data-modal-type="request_info" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
                   ❓
                 </button>
-              </span> -->
-              <span>
+              </span>
+            <span>
                 <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target=".js-denialModal"
-                  data-modal-type="deny" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
+                        data-modal-type="deny" data-teacher-id="<%= teacher.id %>" data-teacher-name="<%= teacher.full_name %>">
                   ❌
                 </button>
               </span>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% if @unreviewed_teachers.empty? %>
-      <div class="alert alert-success" role="alert">
-        <strong>No unreviewed forms!</strong>
-      </div>
+          </div>
+        </td>
+      </tr>
     <% end %>
+    </tbody>
+  </table>
+  <% if @unreviewed_teachers.empty? %>
+    <div class="alert alert-success" role="alert">
+      <strong>No unreviewed forms!</strong>
+    </div>
+  <% end %>
 </div>
 
 <%= render 'deny_modal' %>
@@ -52,65 +52,65 @@
     <h2>Course Statistics</h2>
     <table class="table">
       <thead class="thead-dark">
-        <tr>
+      <tr>
         <th scope="col"> Status </th>
         <th scope="col"> Count </th>
-        </tr>
+      </tr>
       </thead>
       <tbody>
-        <% @statuses.each do |key, value| %>
+      <% @statuses.each do |key, value| %>
         <tr>
           <td> <%= key.humanize.titlecase %> </td>
           <td> <%= value %> </td>
         </tr>
-        <% end %>
+      <% end %>
       </tbody>
-      </table>
+    </table>
   </div>
 
   <div class="col-6">
     <h2>School Statistics</h2>
     <table class="table">
       <thead class="thead-dark">
-        <tr>
+      <tr>
         <th scope="col">School</th>
         <th scope="col">Location</th>
         <th scope="col">Teachers</th>
-        </tr>
+      </tr>
       </thead>
       <tbody>
-        <% @schools.each do |school| %>
+      <% @schools.each do |school| %>
         <tr>
           <td><%= link_to(school.name, school_path(school)) %></td>
           <td><%= school.location %></td>
           <td><%= school.teachers_count %></td>
         </tr>
-        <% end %>
+      <% end %>
       </tbody>
     </table>
   </div>
 </div>
 
 <script>
-  let map;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 39.50, lng: -98.35},
-      zoom: 4
-    });
+    let map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 39.50, lng: -98.35},
+            zoom: 4
+        });
 
-    let school_data = <%= School.all_maps_data.html_safe %>;
-    for (let school of school_data) {
-      let marker = new google.maps.Marker({
-        position: school.position,
-        map: map
-      });
-      let infoWindow = new google.maps.InfoWindow({ content: school.name });
-      marker.addListener('click', () => { infoWindow.open(map, marker) });
+        let school_data = <%= School.all_maps_data.html_safe %>;
+        for (let school of school_data) {
+            let marker = new google.maps.Marker({
+                position: school.position,
+                map: map
+            });
+            let infoWindow = new google.maps.InfoWindow({ content: school.name });
+            marker.addListener('click', () => { infoWindow.open(map, marker) });
+        }
     }
-  }
 </script>
 
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9YjQt1uyBo0rEKe7UWMeW9GUryKtaMVo&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9YjQt1uyBo0rEKe7UWMeW9GUryKtaMVo&callback=initMap">
 </script>

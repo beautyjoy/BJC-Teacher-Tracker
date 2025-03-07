@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_05_181019) do
+ActiveRecord::Schema.define(version: 2024_04_07_190126) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -53,6 +54,17 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "email_addresses", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.string "email", null: false
+    t.boolean "primary", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_email_addresses_on_email", unique: true
+    t.index ["teacher_id", "primary"], name: "index_email_addresses_on_teacher_id_and_primary", unique: true, where: "(\"primary\" = true)"
+    t.index ["teacher_id"], name: "index_email_addresses_on_teacher_id"
+  end
+
   create_table "email_templates", force: :cascade do |t|
     t.text "body"
     t.string "path"
@@ -65,6 +77,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
     t.string "title"
     t.string "subject"
     t.boolean "required", default: false
+    t.string "to"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -81,6 +94,28 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
     t.index ["url_slug"], name: "index_pages_on_url_slug", unique: true
   end
 
+  create_table "pd_registrations", force: :cascade do |t|
+    t.integer "teacher_id", null: false
+    t.integer "professional_development_id", null: false
+    t.boolean "attended", default: false
+    t.string "role", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["teacher_id", "professional_development_id"], name: "index_pd_reg_on_teacher_id_and_pd_id", unique: true
+  end
+
+  create_table "professional_developments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "city", null: false
+    t.string "state"
+    t.string "country", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "grade_level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "schools", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "city"
@@ -95,6 +130,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
     t.integer "school_type"
     t.text "tags", default: [], array: true
     t.string "nces_id"
+    t.string "country"
     t.index ["name", "city", "website"], name: "index_schools_on_name_city_and_website"
   end
 
@@ -116,6 +152,7 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
     t.inet "ip_history", default: [], array: true
     t.integer "session_count", default: 0
     t.string "personal_email"
+    t.string "languages", default: ["English"], array: true
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
     t.index ["email"], name: "index_teachers_on_email", unique: true
@@ -126,7 +163,10 @@ ActiveRecord::Schema.define(version: 2023_09_05_181019) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "email_addresses", "teachers"
   add_foreign_key "pages", "teachers", column: "creator_id"
   add_foreign_key "pages", "teachers", column: "last_editor_id"
+  add_foreign_key "pd_registrations", "professional_developments"
+  add_foreign_key "pd_registrations", "teachers"
   add_foreign_key "teachers", "schools"
 end

@@ -1,35 +1,48 @@
 <div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h3><%= teacher.full_name %></h3>
+    <h3><%= teacher.full_name %>
+    <% if display_deletion_warning_icon %>
+      <p style="font-size: smaller;">
+      ❌
+      </p>
+    <% end %>
+    </h3>
     <div>
-      <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" %>
-      <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+      <% if is_show_page && @is_admin %>
+        <button id="merge-button" class="btn btn-warning mr-2">Merge</button>
+      <% end %>
+      <% if render_edit %>
+        <% button_class = render_smaller ? " btn-sm" : "" %>
+        <%= link_to "Edit Information", edit_teacher_path(teacher), class: "btn btn-primary mr-2" + button_class %>
+        <%= link_to "Edit Personal Emails", edit_teacher_email_address_path(teacher), class: "btn btn-secondary mr-2" + button_class %>
+      <% end %>
+     <% if render_delete %>
+        <%= link_to("Delete", teacher_path(teacher), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"}) %>
+    <% end %>
     </div>
   </div>
   <div class="card-body">
-    <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Email:</div>
-      <div class="col-sm-6">
-        <a href=<%= "mailto:#{teacher.email}" %>> <%= teacher.email %> </a>
+    <% if @is_admin %>
+      <div class="row mb-4">
+        <div class="col-sm-3 font-weight-bold">Teacher ID:</div>
+        <div class="col-sm-9">
+          <%= teacher.id %>
+        </div>
       </div>
-      <div class="col-sm-2">
-        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.email %>')"><i class="fa fa-copy"></i></button>
-      </div>
+    <% end %>
+    <div class="row mb-3">
+      <div class="col-sm-3 font-weight-bold">Emails:</div>
+        <ul class="list-unstyled col-sm-9">
+          <% teacher.email_addresses.each do |email| %>
+            <li class="">
+              <a href="mailto:<%= email.email %>" class="mr-2"><%= email.email %></a>
+              <button class="btn btn-sm" onclick="copyToClipboard('<%= email.email %>')"><i class="fa fa-copy"></i></button>
+              <%= email_address_label(email) %>
+            </li>
+        <% end %></ul>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Personal Email:</div>
-      <div class="col-sm-6">
-        <a href=<%= "mailto:#{teacher.personal_email}" %>
-          ><%= teacher.personal_email %></a>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn btn-sm" onclick="copyToClipboard('<%= teacher.personal_email %>')"
-          ><i class="fa fa-copy"></i>
-        </button>
-      </div>
-    </div>
-    <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Snap<i>!</i> Username:</div>
+      <div class="col-sm-3 font-weight-bold">Snap<i>!</i> Username:</div>
       <div class="col-sm-6">
         <%= snap_link(teacher) %>
       </div>
@@ -38,14 +51,20 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Application Status:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Application Status:</div>
+      <div class="col-sm-9">
         <%= teacher.display_application_status %>
       </div>
     </div>
+    <% if teacher.status_before_type_cast == 9 %>
+      <div class="row mb-4">
+        <div class="col-sm-3 font-weight-bold">Supporting Files:</div>
+          <%= render 'files_display', teacher: @teacher, show_add_file: true, show_delete_file: true %>
+      </div>
+    <% end %>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Personal or Course Website:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Personal or Course Website:</div>
+      <div class="col-sm-9">
         <% if teacher.personal_website.blank? %>
           None provided
         <% else %>
@@ -54,50 +73,55 @@
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Education Level Target:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Grade Level:</div>
+      <div class="col-sm-9">
         <%= teacher.display_education_level %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Current Status:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Classroom Language(s):</div>
+      <div class="col-sm-9">
+        <%= teacher.display_languages %>
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-sm-3 font-weight-bold">Current Status:</div>
+      <div class="col-sm-9">
         <%= teacher.display_status %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">School:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">School:</div>
+      <div class="col-sm-9">
         <%= link_to(teacher.school.name, school_path(teacher.school)) %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">School Location:</div>
-      <div class="col-sm-8">
-        <%= teacher.school.location %>
+      <div class="col-sm-3 font-weight-bold">School Location:</div>
+      <div class="col-sm-9">
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 font-weight-bold">Sing Up Date:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Sign Up Date:</div>
+      <div class="col-sm-9">
         <%= teacher.created_at %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">Session Count:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Session Count:</div>
+      <div class="col-sm-9">
         <%= teacher.session_count %>
       </div>
     </div>
     <div class="row mb-4">
-      <div class="col-sm-4 font-weight-bold">IP History:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">IP History:</div>
+      <div class="col-sm-9">
         <%= ip_history_display(teacher) %>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 font-weight-bold">Last Session:</div>
-      <div class="col-sm-8">
+      <div class="col-sm-3 font-weight-bold">Last Session:</div>
+      <div class="col-sm-9">
         <%= teacher.last_session_at || "-" %>
       </div>
     </div>
@@ -105,6 +129,7 @@
 </div>
 
 <script>
+
   function copyToClipboard(text) {
     // Create a temporary textarea element to hold the text to copy
     const textarea = document.createElement("textarea");

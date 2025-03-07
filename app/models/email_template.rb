@@ -14,6 +14,7 @@
 #  required   :boolean          default(FALSE)
 #  subject    :string
 #  title      :string
+#  to         :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -22,12 +23,13 @@ class EmailTemplate < ApplicationRecord
             inclusion: TeacherMailer.instance_methods(false).map { |method| method.to_s.titlecase },
             if: -> { self.required? }
   validates :body, presence: true
+  validates :to, presence: true
 
   before_destroy :prevent_deleting_required_emails
 
   def accepts_custom_reason?
-    # search for 'reason' in a liquid template
-    body.match?(/{{\s*reason/)
+    # search for 'reason' in a liquid template, e.g. denial_reason or request_reason
+    body.match?(/\{\{.*_reason.*\}\}/)
   end
 
   private

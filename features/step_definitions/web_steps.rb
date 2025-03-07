@@ -60,6 +60,18 @@ When(/^(?:|I )fill in TinyMCE email form with "([^"]*)"$/) do |value|
   page.execute_script('$(tinymce.editors[0].setContent("' + value + '"))')
 end
 
+When(/^(?:|I )follow the first "([^"]*)" link$/) do |link_text|
+  first("a", text: link_text).click
+end
+
+When(/^(?:|I )press the first "([^"]*)" button$/) do |button_text|
+  first("button", text: button_text).click
+end
+
+Then(/^(?:|I )accept the popup alert$/) do
+  page.driver.browser.switch_to.alert.accept
+end
+
 When(/^(?:|I )fill in "([^"]*)" for "([^"]*)"$/) do |value, field|
   fill_in(field, with: value)
 end
@@ -86,7 +98,13 @@ When(/^(?:|I )fill in the following:$/) do |fields|
 end
 
 When(/^(?:|I )select "([^"]*)" from "([^"]*)"$/) do |value, field|
-  select(value, from: field)
+  select_box = find_field(field)
+  options = select_box.all("option", text: value)
+  if options.length > 1
+    options.first.select_option
+  else
+    select(value, from: field)
+  end
 end
 
 When(/^(?:|I )check "([^"]*)"$/) do |field|
@@ -196,7 +214,7 @@ Then(/^the "([^"]*)" checkbox(?: within (.*))? should be checked$/) do |label, p
   with_scope(parent) do
     field_checked = find_field(label)["checked"]
     if field_checked.respond_to? :should
-      field_checked.should be_true
+      field_checked.should be true
     else
       assert field_checked
     end
@@ -243,5 +261,19 @@ end
 Then(/^"([^"]*)" should be selected for "([^"]*)"(?: within "([^"]*)")?$/) do |value, field, selector|
   with_scope(selector) do
     field_labeled(field).find(:xpath, ".//option[@selected = 'selected'][text() = '#{value}']").should be_present
+  end
+end
+
+Then(/^I should see a "(.*?)" flash message "(.*?)"$/) do |alert_type, message|
+  within(".alert.alert-#{alert_type}") do
+    expect(page).to have_text(message)
+  end
+end
+
+When(/^(?:|I )press "([^"]*)" on Actions for first teacher$/) do |button|
+  teacher_actions_scope = "#DataTables_Table_0 tbody tr:first-child"
+
+  within(teacher_actions_scope) do
+    click_button(button)
   end
 end

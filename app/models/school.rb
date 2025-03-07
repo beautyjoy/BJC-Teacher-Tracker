@@ -6,6 +6,7 @@
 #
 #  id             :integer          not null, primary key
 #  city           :string
+#  country        :string
 #  grade_level    :integer
 #  lat            :float
 #  lng            :float
@@ -25,13 +26,16 @@
 #
 
 class School < ApplicationRecord
-  VALID_STATES = [ "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY", "International"].freeze
-
-  validates :state, inclusion: { in: VALID_STATES }
-  validates :name, :city, :state, :website, presence: true
+  VALID_STATES = ISO3166::Country["US"].subdivisions.keys.freeze
+  validates :name, :city, :website, :country, presence: true
+  validates :country, inclusion: { in: ISO3166::Country.all.map(&:alpha2), message: "%{value} is not a valid country" }
+  validates :state, presence: true, if: -> { country == "US" }
+  validates :state, inclusion: { in: VALID_STATES }, if: -> { country == "US" }
   validates_format_of :website, with: /.+\..+/, on: :create
+  validates :grade_level, presence: true
+  validates :school_type, presence: true
 
-  before_save :update_gps_data, if: -> { lat.nil? || lng.nil? }
+  before_save :update_gps_data, if: -> { lat.nil? || lng.nil? || location_changed? }
 
   has_many :teachers
   scope :validated, -> { where("teachers_count > 0") }
@@ -58,7 +62,8 @@ class School < ApplicationRecord
   end
 
   def location
-    "#{city}, #{state}"
+    country_text = country == "US" ? "" : ", #{country}"
+    "#{city}, #{state}#{country_text}"
   end
 
   # TODO: Consider renaming this.
@@ -75,11 +80,11 @@ class School < ApplicationRecord
   end
 
   def selectize_options
-    [name_location, to_json(only: [:id, :name, :city, :state, :website]) ]
+    [name_location, to_json(only: [:id, :name, :city, :state, :country, :website]) ]
   end
 
   def name_location
-    "#{name} (#{city}, #{state})"
+    "#{name} (#{city}, #{state}, #{country})"
   end
 
   def update_gps_data
@@ -98,6 +103,16 @@ class School < ApplicationRecord
     }
   end
 
+  def format_school(data)
+    name, city, state, country = data
+    country_str = country == "US" ? "" : ", #{country}"
+    "#{name} (#{city}, #{state}#{country_str})"
+  end
+
+  def self.search_list
+    School.pluck(:name, :city, :state, :country).map(&:format_school)
+  end
+
   def self.grade_level_options
     School.grade_levels.map { |key, _val| [key.to_s.titlecase, key] }
   end
@@ -111,6 +126,10 @@ class School < ApplicationRecord
   end
 
   private
+  def location_changed?
+    city_changed? || state_changed? || country_changed?
+  end
+
   def prefix_url(url)
     return unless url
     url.match?(/^https?:/) ? url : "https://#{url}"

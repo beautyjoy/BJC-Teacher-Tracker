@@ -3,7 +3,7 @@ $(function() {
   $.fn.dataTable.ext.search.push((_, searchData) => {
     let enabled = $('input:checkbox[name="statusFilter"]:checked').map((_i, el) => el.value).get();
     // Include all rows when no checkboxes are selected.
-    return enabled.length === 0 || enabled.includes(searchData[6]);
+    return enabled.length === 0 || enabled.includes(searchData[5]);
   });
 
   let $tables = $('.js-dataTable').DataTable({
@@ -22,5 +22,11 @@ $(function() {
   });
 
   $tables.draw();
-  $(".custom-checkbox").on("change", () => $tables.draw());
+  $(".custom-checkbox").on("change", () => {
+      $tables.draw();
+  });
+  $tables.on('draw', function() {
+      $('[data-toggle="tooltip"]').tooltip('dispose');
+      $('[data-toggle="tooltip"]').tooltip();
+  });
 });
