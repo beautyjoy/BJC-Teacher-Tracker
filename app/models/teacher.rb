@@ -130,13 +130,6 @@ class Teacher < ApplicationRecord
     reset_validation_status
   end
 
-  def reset_validation_status
-    return if application_status_changed? || school_id_changed?
-    if info_needed?
-      not_reviewed!
-    end
-  end
-
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -163,6 +156,10 @@ class Teacher < ApplicationRecord
   # TODO: use this method until we rename the column.
   def snap_username
     self.snap
+  end
+
+  def admin_attributes_changed?
+    self.email_changed? || self.personal_email_changed? || self.snap_changed?
   end
 
   def try_append_ip(ip)
@@ -288,7 +285,7 @@ class Teacher < ApplicationRecord
     }.transform_values { |value| value.blank? ? "(blank)" : value }
   end
 
-  # TODO: The school data needs to be cleaned up.
+  # TODO: Move this to a TeacherCSVExports lib file
   def self.csv_export
     attributes = %w|
       id
