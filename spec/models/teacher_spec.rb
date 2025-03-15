@@ -22,20 +22,26 @@
 #  status             :integer
 #  created_at         :datetime
 #  updated_at         :datetime
+#  last_editor_id     :bigint
 #  school_id          :integer
+#  verifed_by_id      :bigint
 #
 # Indexes
 #
 #  index_teachers_on_email                     (email) UNIQUE
 #  index_teachers_on_email_and_first_name      (email,first_name)
 #  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_last_editor_id            (last_editor_id)
 #  index_teachers_on_school_id                 (school_id)
 #  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                    (status)
+#  index_teachers_on_verifed_by_id             (verifed_by_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (last_editor_id => teachers.id)
 #  fk_rails_...  (school_id => schools.id)
+#  fk_rails_...  (verifed_by_id => teachers.id)
 #
 require "rails_helper"
 
