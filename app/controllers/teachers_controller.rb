@@ -51,10 +51,9 @@ class TeachersController < ApplicationController
   end
 
   def create
-    if existing_teacher
-      redirect_to login_path,
-            notice: "You already have signed up with '#{params[:email]}'. Please log in."
-      return
+    if existing_teacher?
+      flash[:notice] = "You already have signed up with '#{params[:email]}'. Please log in."
+      redirect_to login_path and return
     end
 
     load_school
@@ -231,18 +230,19 @@ class TeachersController < ApplicationController
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
-  def existing_teacher
+  def existing_teacher?
     # Find by email, but allow updating other info.
     @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
-    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
+    return false unless @teacher
+
+    if defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
-      return true
-    elsif @teacher
-      redirect_to login_path, notice: "You already have signed up with '#{@teacher.email}'. Please log in."
-      return true
+      true
+    else
+      flash[:notice] = "You already have signed up with '#{@teacher.email}'. Please log in."
+      redirect_to login_path and return
     end
-    false
   end
 
   def update_school_through_teacher

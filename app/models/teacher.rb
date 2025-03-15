@@ -47,14 +47,26 @@ class Teacher < ApplicationRecord
   # TODO: Move this somewhere else...
   WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
 
+
   has_many :email_addresses, dependent: :destroy
   has_many_attached :files
   has_many_attached :more_files
   accepts_nested_attributes_for :email_addresses, allow_destroy: true
+  belongs_to :school, counter_cache: true
+  belongs_to :last_editor, class_name: "Teacher", optional: true
+  belongs_to :verified_by, class_name: "Teacher", optional: true
+
+  has_many :professional_development_registrations
+  has_many :professional_developments, through: :professional_development_registrations
 
   validates :first_name, :last_name, :status, presence: true
   validate :valid_languages
   before_validation :sort_and_clean_languages
+
+  # From an admin perspective, we want to know if a teacher has any **meaningful** change
+  # that would require re-reviewing their application.
+  before_update :check_for_relevant_changes
+  before_save :track_last_editor
 
   # Custom attribute for tracking email changes. This is not persisted in the database.
   attribute :email_changed_flag, :boolean, default: false
@@ -66,10 +78,6 @@ class Teacher < ApplicationRecord
     not_reviewed: "Not Reviewed",
   }
   validates_inclusion_of :application_status, in: application_statuses.keys
-
-  belongs_to :school, counter_cache: true
-  has_many :professional_development_registrations
-  has_many :professional_developments, through: :professional_development_registrations
 
   # Non-admin teachers whose application has neither been accepted nor denied
   # It might or might not have been reviewed.
@@ -117,24 +125,8 @@ class Teacher < ApplicationRecord
     "I am teaching homeschool with the BJC curriculum."
   ].freeze
 
-  # From an admin perspective, we want to know if a teacher has any **meaningful** change
-  # that would require re-reviewing their application.
-  before_update :check_for_relevant_changes
-
   delegate :name, :location, :grade_level, :website, to: :school, prefix: true
   delegate :school_type, to: :school # don't add a redundant prefix.
-
-  def check_for_relevant_changes
-    ignored_fields = %w[created_at updated_at session_count last_session_at ip_history]
-    # if any relevant fields have changed
-    if (changes.keys - ignored_fields).present?
-      handle_relevant_changes
-    end
-  end
-
-  def handle_relevant_changes
-    reset_validation_status
-  end
 
   def full_name
     "#{first_name} #{last_name}"
@@ -174,6 +166,14 @@ class Teacher < ApplicationRecord
     save
   end
 
+  # TODO: This can't be private because the EmailAddress model uses it.
+  def check_for_relevant_changes
+    ignored_fields = %w[created_at updated_at session_count last_session_at ip_history]
+    if (changes.keys - ignored_fields).present?
+      reset_validation_status_if_needed!
+    end
+  end
+
   def status=(value)
     value = value.to_i if value.is_a?(String)
     super(value)
@@ -188,6 +188,7 @@ class Teacher < ApplicationRecord
     return "#{formatted_status} | #{more_info}" if more_info?
     formatted_status
   end
+
   # TODO: Move these to helpers.
   def self.status_options
     display_order = [
@@ -222,6 +223,7 @@ class Teacher < ApplicationRecord
     # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
     languages.sort!.reject!(&:blank?)
   end
+
   # TODO: Move to a helper.
   def self.application_status_options
     Teacher.application_statuses.map { |sym, val| [sym.to_s.titlecase, val] }
@@ -325,7 +327,36 @@ class Teacher < ApplicationRecord
   end
 
   private
+  def reset_validation_status_if_needed!
+    # When a teacher has been marked as needing more info, we want to reset their application status to "not_reviewed" so it shows up in the queue again.
+    # Other attributes like email can't be changed.
+    # Once a teacher has been validated, we don't want to reset their status.
+    return if application_status_changed? || school_id_changed?
+
+    if info_needed?
+      not_reviewed!
+    end
+  end
+
   def non_primary_emails
     email_addresses.where(primary: false)&.pluck(:email)
+  end
+
+  def track_last_editor
+    return if skip_last_editor_tracking?
+
+    if Current.user.present?
+      self.last_editor = Current.user
+    end
+  end
+
+  def skip_last_editor_tracking?
+    return true if changes.empty?
+
+    # Skip if only tracking attributes are changing
+    tracked_attributes = ["last_session_at", "session_count", "ip_history", "updated_at"]
+    changing_attributes = changes.keys
+
+    (changing_attributes - tracked_attributes).empty?
   end
 end

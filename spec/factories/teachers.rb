@@ -47,11 +47,12 @@ FactoryBot.define do
   factory :teacher do
     first_name { "Teacher" }
     last_name  { "User" }
-    snap { "teacher" }
+    snap { Faker::Internet.unique.username(specifier: 5..20) }
     status { 0 }
     application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
+    school { create(:school) }
 
     after(:create) do |teacher|
       create(:email_address, teacher:, primary: true)
