@@ -343,10 +343,11 @@ class Teacher < ApplicationRecord
   end
 
   def track_last_editor
-    return if skip_last_editor_tracking?
+    return if skip_last_editor_tracking? || Current.user.nil?
 
-    if Current.user.present?
-      self.last_editor = Current.user
+    self.last_editor = Current.user
+    if self.application_status_changed? && self.validated?
+      self.verified_by = Current.user
     end
   end
 
