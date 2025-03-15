@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 2025_03_12_015657) do
     t.integer "session_count", default: 0
     t.string "personal_email"
     t.string "languages", default: ["English"], array: true
-    t.bigint "verifed_by_id"
+    t.bigint "verified_by_id"
     t.bigint "last_editor_id"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2025_03_12_015657) do
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["snap"], name: "index_teachers_on_snap", unique: true, where: "((snap)::text <> ''::text)"
     t.index ["status"], name: "index_teachers_on_status"
-    t.index ["verifed_by_id"], name: "index_teachers_on_verifed_by_id"
+    t.index ["verified_by_id"], name: "index_teachers_on_verified_by_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -174,5 +174,5 @@ ActiveRecord::Schema.define(version: 2025_03_12_015657) do
   add_foreign_key "pd_registrations", "teachers"
   add_foreign_key "teachers", "schools"
   add_foreign_key "teachers", "teachers", column: "last_editor_id"
-  add_foreign_key "teachers", "teachers", column: "verifed_by_id"
+  add_foreign_key "teachers", "teachers", column: "verified_by_id"
 end
