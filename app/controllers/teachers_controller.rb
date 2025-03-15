@@ -62,7 +62,7 @@ class TeachersController < ApplicationController
       @school = School.new(school_params)
       unless @school.save
         flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
-        render "new" && return
+        render "new" and return
       end
     end
 
@@ -72,15 +72,15 @@ class TeachersController < ApplicationController
     @teacher.try_append_ip(request.remote_ip)
     @teacher.session_count += 1
     @teacher.school = @school
+
     if @teacher.save
       @teacher.not_reviewed!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.primary_email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
-      redirect_to root_path
+      redirect_to root_path and return
     else
       flash.now[:alert] = "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
-      render "new"
     end
   end
 

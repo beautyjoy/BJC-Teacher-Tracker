@@ -52,7 +52,10 @@ FactoryBot.define do
     application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
-    school { create(:school) }
+
+    before(:create) do |teacher|
+      teacher.school ||= create(:school)
+    end
 
     after(:create) do |teacher|
       create(:email_address, teacher:, primary: true)
