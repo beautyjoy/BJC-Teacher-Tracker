@@ -9,7 +9,7 @@ Background: Has an Admin and a teacher in DB
   | Alice      | Admin     | true   | testadminuser@berkeley.edu |
   | Todd       | Teacher   | false  | testteacher@berkeley.edu   |
 
-#Logged-in Teacher (non-admin)
+# Logged-in Teacher (non-admin)
 Scenario: Schools page as a Teacher
   Given I have a teacher Google email
   Given I am on the BJC home page

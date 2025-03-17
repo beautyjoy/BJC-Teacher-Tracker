@@ -22,20 +22,26 @@
 #  status             :integer
 #  created_at         :datetime
 #  updated_at         :datetime
+#  last_editor_id     :bigint
 #  school_id          :integer
+#  verified_by_id     :bigint
 #
 # Indexes
 #
 #  index_teachers_on_email                     (email) UNIQUE
 #  index_teachers_on_email_and_first_name      (email,first_name)
 #  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_last_editor_id            (last_editor_id)
 #  index_teachers_on_school_id                 (school_id)
 #  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                    (status)
+#  index_teachers_on_verified_by_id            (verified_by_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (last_editor_id => teachers.id)
 #  fk_rails_...  (school_id => schools.id)
+#  fk_rails_...  (verified_by_id => teachers.id)
 #
 require "rails_helper"
 
@@ -118,6 +124,54 @@ RSpec.describe Teacher, type: :model do
 
     it "shows an application status" do
       expect(teacher.display_application_status).to eq "Not Reviewed"
+    end
+  end
+
+  describe "#track_last_editor" do
+    let(:editor) { teachers(:admin) }
+    let(:new_teacher) { create(:teacher, last_editor_id: nil) }
+
+    before do
+      # All new_teacher updates, including create will have last_editor set to editor
+      allow(Current).to receive(:user).and_return(nil)
+    end
+
+    it "updates last_editor when attributes change" do
+      allow(Current).to receive(:user).and_return(editor)
+      new_teacher.first_name = "New Name"
+      new_teacher.save
+      new_teacher.reload
+
+      expect(new_teacher.last_editor).to eq(editor)
+    end
+
+    it "does not update last_editor when only updated_at changes" do
+      # last_editor is currently set to nil, such as when a new teacher is created
+      new_teacher.touch
+      new_teacher.reload
+
+      expect(new_teacher.last_editor).to eq(nil)
+    end
+
+    it "does not update last_editor when only tracking attributes change" do
+      allow(Current).to receive(:user).and_return(new_teacher)
+      new_teacher.last_session_at = Time.current
+      new_teacher.session_count = 5
+      new_teacher.ip_history = ["192.168.1.1"]
+      new_teacher.save
+      new_teacher.reload
+
+      expect(new_teacher.last_editor).to eq(nil)
+    end
+
+    it "updates last_editor when tracking attributes and other attributes change" do
+      allow(Current).to receive(:user).and_return(editor)
+      new_teacher.first_name = "New Name"
+      new_teacher.last_session_at = Time.current
+      new_teacher.save
+      new_teacher.reload
+
+      expect(new_teacher.last_editor).to eq(editor)
     end
   end
 end
