@@ -128,6 +128,9 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (8.0.3)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.39.2)
       addressable
       matrix
@@ -538,6 +541,7 @@ GEM
       tzinfo (>= 1.0.0)
     unaccent (0.4.0)
     unicode-display_width (2.4.2)
+    uniform_notifier (1.16.0)
     version_gem (1.1.3)
     virtus (2.0.0)
       axiom-types (~> 0.1)
@@ -572,6 +576,7 @@ DEPENDENCIES
   axe-core-cucumber
   axe-core-rspec
   bootsnap (>= 1.4.4)
+  bullet
   country_select (~> 8.0)
   cucumber-rails
   database_cleaner

@@ -53,6 +53,7 @@ gem "country_select", "~> 8.0"
 
 group :development do
   gem "annotate"
+  gem "bullet"
 
   # Intercept and view emails in a browser
   gem "letter_opener"
