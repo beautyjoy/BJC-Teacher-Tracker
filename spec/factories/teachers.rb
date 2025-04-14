@@ -22,30 +22,40 @@
 #  status             :integer
 #  created_at         :datetime
 #  updated_at         :datetime
+#  last_editor_id     :bigint
 #  school_id          :integer
+#  verified_by_id     :bigint
 #
 # Indexes
 #
 #  index_teachers_on_email                     (email) UNIQUE
 #  index_teachers_on_email_and_first_name      (email,first_name)
 #  index_teachers_on_email_and_personal_email  (email,personal_email) UNIQUE
+#  index_teachers_on_last_editor_id            (last_editor_id)
 #  index_teachers_on_school_id                 (school_id)
 #  index_teachers_on_snap                      (snap) UNIQUE WHERE ((snap)::text <> ''::text)
 #  index_teachers_on_status                    (status)
+#  index_teachers_on_verified_by_id            (verified_by_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (last_editor_id => teachers.id)
 #  fk_rails_...  (school_id => schools.id)
+#  fk_rails_...  (verified_by_id => teachers.id)
 #
 FactoryBot.define do
   factory :teacher do
     first_name { "Teacher" }
     last_name  { "User" }
-    snap { "teacher" }
+    snap { Faker::Internet.unique.username(specifier: 5..20) }
     status { 0 }
     application_status { "Validated" }
     personal_website { "https://www.school.edu/teacher" }
     admin { false }
+
+    before(:create) do |teacher|
+      teacher.school ||= create(:school)
+    end
 
     after(:create) do |teacher|
       create(:email_address, teacher:, primary: true)
