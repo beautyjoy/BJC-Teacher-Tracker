@@ -229,7 +229,7 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    ffi (1.15.4)
+    ffi (1.17.3)
     flay (2.13.1)
       erubi (~> 1.10)
       path_expander (~> 1.0)
@@ -618,9 +618,6 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webpacker
-
-RUBY VERSION
-   ruby 3.2.3p157
 
 BUNDLED WITH
    2.5.6
