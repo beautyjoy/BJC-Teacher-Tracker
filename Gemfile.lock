@@ -124,6 +124,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.2.0)
+    bigdecimal (4.0.1)
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
@@ -145,6 +146,7 @@ GEM
     country_select (8.0.3)
       countries (~> 5.0)
     crass (1.0.6)
+    csv (3.3.5)
     cucumber (7.1.0)
       builder (~> 3.2, >= 3.2.4)
       cucumber-core (~> 10.1, >= 10.1.0)
@@ -252,7 +254,8 @@ GEM
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
     hashie (5.0.0)
-    httparty (0.21.0)
+    httparty (0.24.0)
+      csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     i18n (1.14.1)
@@ -301,7 +304,8 @@ GEM
     minitest (5.22.2)
     msgpack (1.7.2)
     multi_test (0.1.2)
-    multi_xml (0.6.0)
+    multi_xml (0.8.1)
+      bigdecimal (>= 3.1, < 5)
     multipart-post (2.3.0)
     net-imap (0.4.10)
       date
@@ -578,7 +582,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   haml-lint
-  httparty (~> 0.21.0)
+  httparty (~> 0.24.0)
   image_processing (>= 1.2)
   letter_opener
   letter_opener_web (~> 2)
