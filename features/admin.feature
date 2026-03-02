@@ -247,6 +247,7 @@ Feature: basic admin functionality
     And   I follow "Log In"
     Then  I can log in with Google
     When  I go to the teachers page
+    And   I uncheck "Validated"
     When  I follow "Joseph Test"
     Then  I should see "Verification Notes"
     And   I should see "Principal contact: principal@berkeley.edu"
