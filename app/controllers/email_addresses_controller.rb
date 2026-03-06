@@ -15,7 +15,7 @@ class EmailAddressesController < ApplicationController
     EmailAddress.transaction do
       emails.each do |email|
         next if email.blank?
-        @teacher.email_addresses.create!(email: email, primary: false)
+        @teacher.email_addresses.create!(email:, primary: false)
       end
     end
     redirect_to teacher_path(@teacher), notice: "Personal email addresses added successfully."
@@ -36,12 +36,11 @@ class EmailAddressesController < ApplicationController
     redirect_to teacher_path(@teacher), notice: "Email address deleted successfully."
   rescue ActiveRecord::RecordNotFound
     redirect_to teacher_path(@teacher), alert: "Email address not found."
-  rescue ActiveRecord::RecordNotDestroyed => e
+  rescue ActiveRecord::RecordNotDestroyed
     redirect_to teacher_path(@teacher), alert: "Could not delete email address."
   end
 
   private
-
   def set_teacher
     @teacher = Teacher.find(params[:teacher_id])
   end
