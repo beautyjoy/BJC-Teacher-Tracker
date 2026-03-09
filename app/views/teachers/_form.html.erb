@@ -74,7 +74,7 @@ status ONLY IF the person viewing this page is an admin. %>
     <div class='col-12'>
       <%= f.label :personal_website, "Personal or Course Website", class: "label-required" %>
       <%= f.text_field :personal_website, placeholder: "school.edu", class: "form-control",
-      pattern: ".+\\..+", title: "Please enter a valid URL.", required: true %>
+      type: "url", required: true %>
     </div>
     <small class="col-12 form-text text-muted">Please enter a valid URL (e.g. https://example.com).</small>
   </div>
