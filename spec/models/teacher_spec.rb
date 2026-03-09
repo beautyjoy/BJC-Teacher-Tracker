@@ -59,7 +59,7 @@ RSpec.describe Teacher, type: :model do
 
   it "requires personal_website" do
     teacher.personal_website = ""
-    expect(teacher).not_to be_valid
+    expect(teacher.valid?(:create)).to be false
     expect(teacher.errors[:personal_website]).to include("can't be blank")
   end
 
