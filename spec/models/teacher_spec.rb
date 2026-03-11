@@ -58,14 +58,14 @@ RSpec.describe Teacher, type: :model do
   end
 
   it "requires personal_website" do
-    new_teacher = Teacher.new(
-      first_name: "Test",
-      last_name: "User",
-      status: "non_csp_teacher",
-      personal_website: ""
-    )
-    expect(new_teacher).not_to be_valid
-    expect(new_teacher.errors[:personal_website]).to include("can't be blank")
+      new_teacher = Teacher.new(
+        first_name: "Test",
+        last_name: "User",
+        status: "non_csp_teacher",
+        personal_website: ""
+      )
+      expect(new_teacher).not_to be_valid
+      expect(new_teacher.errors[:personal_website]).to include("can't be blank")
     end
 
   it "shows a text status" do
