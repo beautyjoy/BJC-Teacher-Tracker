@@ -1,38 +1,24 @@
 project:
-  name: 'BJC-Teacher-Tracker'
-  owner: 'CS169L-23'
-  teamId: '03'
-  identities:
-    pivotal: 'https://www.pivotaltracker.com/n/projects/2406982'
-    heroku: 'https://sp23-03-bjc-teachers.herokuapp.com'
+  name: 'TeamTeam'
+  owner: 'CS169L-Sp26'
+  teamId: 'CS169L-Sp26'
+  identities: {}
+  notifications:
+    email: 'ronikriger@berkeley.edu'
   members:
     member1:
-      name: 'Governify'
-      surname: 'Auditor' 
-      githubUsername: 'governifyauditor'
-      pivotalUsername: 'governifyauditor'
-      herokuEmail: 'governify.auditor@gmail.com'
+      name: 'Roni'
+      surname: 'Kriger'
+      githubUsername: 'ronikriger'
     member2:
-      name: 'Chuang'
-      surname: 'Yao' 
-      githubUsername: 'chuang-yao-ucb'
-      pivotalUsername: 'chuangy'
-      herokuEmail: 'chuang_yao@berkeley.edu'
+      name: 'Hagen'
+      surname: 'Haeussler'
+      githubUsername: 'hagenhaeussler'
     member3:
-      name: 'Yu'
-      surname: 'Long' 
-      githubUsername: 'Reimirno'
-      pivotalUsername: 'yulong'
-      herokuEmail: 'long_yu@berkeley.edu'
+      name: 'Kien'
+      surname: 'Huynh'
+      githubUsername: 'kienthuynh'
     member4:
-      name: 'Owen'
-      surname: 'Tanuwidjaja' 
-      githubUsername: 'owentanuwidjaja'
-      pivotalUsername: 'owentanuwidjaja'
-      herokuEmail: 'owen.tanuwidjaja@berkeley.edu'
-    member5:
-      name: 'Matthew'
-      surname: 'Kao' 
-      githubUsername: 'Matthew-Kao'
-      herokuEmail: 'matthewkao@berkeley.edu'      
-      
+      name: 'Nishanth'
+      surname: 'Kankipati'
+      githubUsername: 'NishK05'
