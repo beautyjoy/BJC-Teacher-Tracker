@@ -38,6 +38,26 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
+  include PgSearch::Model
+
+  # Internal scope — callers use .search_non_admins which enforces admin: false.
+  # To search a new Teacher text column: add it to `against:`.
+  # To search a new association: add it to `associated_against:`.
+  pg_search_scope :_pg_search_teachers,
+    against: [:first_name, :last_name, :snap],
+    associated_against: {
+      email_addresses: :email,
+      school: :name
+    },
+    using: {
+      tsearch: { prefix: true, dictionary: "simple" },
+      trigram: { word_similarity: true }
+    }
+
+  def self.search_non_admins(query)
+    where(admin: false)._pg_search_teachers(query)
+  end
+
   # TODO: Move this somewhere else...
   WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
 
