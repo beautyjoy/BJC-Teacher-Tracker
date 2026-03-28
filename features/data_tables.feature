@@ -29,6 +29,22 @@ Feature: Admin Data Tables functionality
     And I check "Validated"
     Then I should see "Bobby John"
 
+  Scenario: Cross-filter notice shows hidden matches when search spans multiple statuses
+    Given the following schools exist:
+      | name        | country | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley | US      | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    Given the following teachers exist:
+      | first_name | last_name | admin | primary_email  | school      | application_status |
+      | Alice      | Smith     | false | alice@test.edu | UC Berkeley | Validated          |
+      | Bob        | Smith     | false | bob@test.edu   | UC Berkeley | Denied             |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I search the teachers table for "Smith"
+    Then I should see "result(s) in Denied"
+
   Scenario: Filter all teacher info as an admin
     Given the following schools exist:
       | name        |     country     | city     | state | website                  | grade_level | school_type |
