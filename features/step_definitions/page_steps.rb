@@ -20,7 +20,7 @@ When("I check {string} checkbox") do |checkbox|
 end
 
 When(/^I search the teachers table for "([^"]*)"$/) do |query|
-  first('.dataTables_filter input').set(query)
+  first(".dataTables_filter input").set(query)
 end
 
 When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
