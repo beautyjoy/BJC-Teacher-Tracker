@@ -29,4 +29,43 @@ $(function() {
       $('[data-toggle="tooltip"]').tooltip('dispose');
       $('[data-toggle="tooltip"]').tooltip();
   });
+
+  // Cross-filter search notice: after the user stops typing for 300ms, query
+  // the server for result counts per status and surface any that are hidden
+  // by the current checkbox filter.
+  let crossFilterTimer;
+  let currentRequest = null;
+
+  function scheduleCrossFilterUpdate() {
+    clearTimeout(crossFilterTimer);
+
+    crossFilterTimer = setTimeout(function() {
+      const checked = $('input:checkbox[name="statusFilter"]:checked').map((_, el) => el.value).get();
+      const query = $tables.table('.js-teachersTable').search();
+
+      if (!query.trim() || checked.length === 0) {
+        $('#cross-filter-notice').text('');
+        return;
+      }
+
+      if (currentRequest) { currentRequest.abort(); }
+
+      currentRequest = $.get('/teachers/cross_filter_search', { q: query }, function(data) {
+        const messages = [];
+        $.each(data, function(status, count) {
+          if (!checked.includes(status)) {
+            messages.push(`${count} result(s) in ${status} \u2014 hidden by current filter`);
+          }
+        });
+        $('#cross-filter-notice').text(messages.join(' | '));
+      }).always(function() {
+        currentRequest = null;
+      }).fail(function(xhr) {
+        if (xhr.statusText !== 'abort') { $('#cross-filter-notice').text(''); }
+      });
+    }, 300);
+  }
+
+  $tables.on('search.dt', scheduleCrossFilterUpdate);
+  $('.custom-checkbox').on('change', scheduleCrossFilterUpdate);
 });
