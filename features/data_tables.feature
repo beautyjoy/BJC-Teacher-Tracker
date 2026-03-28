@@ -44,6 +44,7 @@ Feature: Admin Data Tables functionality
     When I go to the teachers page
     And I search the teachers table for "Smith"
     Then I should see "result(s) in Denied"
+    Then I should see "hidden by current filter"
 
   Scenario: Filter all teacher info as an admin
     Given the following schools exist:

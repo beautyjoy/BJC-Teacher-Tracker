@@ -54,10 +54,11 @@ $(function() {
         const messages = [];
         $.each(data, function(status, count) {
           if (!checked.includes(status)) {
-            messages.push(`${count} result(s) in ${status} \u2014 hidden by current filter`);
+            messages.push(`${count} result(s) in ${status}`);
           }
         });
-        $('#cross-filter-notice').text(messages.join(' | '));
+        const notice = messages.length > 0 ? messages.join(', ') + ' \u2014 hidden by current filter' : '';
+        $('#cross-filter-notice').text(notice);
       }).always(function() {
         currentRequest = null;
       }).fail(function(xhr) {
