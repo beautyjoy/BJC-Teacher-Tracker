@@ -131,4 +131,42 @@ RSpec.describe Teacher, type: :model do
       expect(teacher.display_application_status).to eq "Not Reviewed"
     end
   end
+
+  describe ".search_non_admins" do
+    it "finds teacher by first name" do
+      expect(Teacher.search_non_admins("bob")).to include(teachers(:bob))
+    end
+
+    it "finds teacher by last name" do
+      expect(Teacher.search_non_admins("hakurei")).to include(teachers(:reimu))
+    end
+
+    it "finds teacher by email" do
+      expect(Teacher.search_non_admins("bob@gmail")).to include(teachers(:bob))
+    end
+
+    it "finds teacher by snap username" do
+      # long fixture has snap: "song"
+      expect(Teacher.search_non_admins("song")).to include(teachers(:long))
+    end
+
+    it "finds teachers by school name" do
+      results = Teacher.search_non_admins("berkeley")
+      expect(results).to include(teachers(:bob), teachers(:barney))
+    end
+
+    it "excludes admin teachers" do
+      # "Wang" is admin's last name and unique to that fixture —
+      # if admin is not excluded, this would return a result; it should be empty
+      expect(Teacher.search_non_admins("Wang")).to be_empty
+    end
+
+    it "returns empty when nothing matches" do
+      expect(Teacher.search_non_admins("zzznomatch999")).to be_empty
+    end
+
+    it "is case-insensitive" do
+      expect(Teacher.search_non_admins("BOB")).to include(teachers(:bob))
+    end
+  end
 end
