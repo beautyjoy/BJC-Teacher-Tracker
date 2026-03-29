@@ -12,12 +12,12 @@ RSpec.describe MergeController, type: :request do
   context "for a non-admin" do
     it "redirects preview to root" do
       get preview_school_merge_path(from: from_school.id, into: into_school.id)
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(login_path)
     end
 
     it "redirects execute to root" do
       patch school_merge_path(from: from_school.id, into: into_school.id)
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(login_path)
     end
   end
 
