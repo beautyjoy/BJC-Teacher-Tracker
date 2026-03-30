@@ -22,27 +22,13 @@ end
 
 When(/^I add "([^"]*)" to the email input$/) do |email|
   within("#emailModal") do
-    find(".selectize-input").click
-    find(".selectize-input input").set(email)
-    find(".selectize-input input").native.send_keys(:return)
+    fill_in("Email address", with: email)
   end
 end
 
-When(/^I remove "([^"]*)" from the email input$/) do |email|
-  within("#emailModal .selectize-control") do
-    find(".item", text: email).find(".remove").click
-  end
-end
-
-Then(/^I should see "([^"]*)" in the email tags$/) do |email|
-  within("#emailModal .selectize-control") do
-    expect(page).to have_css(".item", text: email)
-  end
-end
-
-Then(/^I should not see "([^"]*)" in the email tags$/) do |email|
-  within("#emailModal .selectize-control") do
-    expect(page).not_to have_css(".item", text: email)
+When(/^I clear the email input$/) do
+  within("#emailModal") do
+    fill_in("Email address", with: "")
   end
 end
 
@@ -57,7 +43,9 @@ end
 
 When(/^I click the delete button for email "([^"]*)"$/) do |email|
   email_row = all(".email-list-item").find { |row| row.has_text?(email) }
-  within(email_row) do
-    find(".delete-email-btn").click
+  page.accept_confirm "Are you sure you want to delete this email?" do
+    within(email_row) do
+      find(".delete-email-btn").click
+    end
   end
 end

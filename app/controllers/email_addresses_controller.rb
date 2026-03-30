@@ -6,18 +6,13 @@ class EmailAddressesController < ApplicationController
   before_action :set_teacher
 
   def create
-    emails = params[:emails] || []
-    if emails.empty?
-      redirect_to teacher_path(@teacher), alert: "No emails provided."
+    email = params[:email].to_s.strip
+    if email.blank?
+      redirect_to teacher_path(@teacher), alert: "No email provided."
       return
     end
 
-    EmailAddress.transaction do
-      emails.each do |email|
-        next if email.blank?
-        @teacher.email_addresses.create!(email:, primary: false)
-      end
-    end
+    @teacher.email_addresses.create!(email:, primary: false)
     redirect_to teacher_path(@teacher), notice: "Personal email addresses added successfully."
   rescue ActiveRecord::RecordInvalid => e
     error_message = e.record&.errors&.full_messages&.join(", ")

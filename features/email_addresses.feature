@@ -38,7 +38,6 @@ Feature: Managing personal email addresses for teachers
     And I follow "Joseph Mamoa"
     And I click "Edit Personal Emails" to open the email modal
     And I add "jose.personal3@email.com" to the email input
-    Then I should see "jose.personal3@email.com" in the email tags
     And I press "Add Emails"
     Then I should see a "info" flash message "Personal email addresses added successfully."
     Then I should see "Admin View Joseph Mamoa"
@@ -53,11 +52,8 @@ Feature: Managing personal email addresses for teachers
     And I follow "Joseph Mamoa"
     And I click "Edit Personal Emails" to open the email modal
     And I add "jose.personal3@email.com" to the email input
+    And I clear the email input
     And I add "jose.personal4@email.com" to the email input
-    Then I should see "jose.personal3@email.com" in the email tags
-    Then I should see "jose.personal4@email.com" in the email tags
-    And I remove "jose.personal3@email.com" from the email input
-    Then I should not see "jose.personal3@email.com" in the email tags
     And I press "Add Emails"
     Then I should see a "info" flash message "Personal email addresses added successfully."
     Then I should see "jose.personal4@email.com"

@@ -39,8 +39,11 @@
             <li class="email-list-item">
               <a href="mailto:<%= email.email %>" class="mr-2"><%= email.email %></a>
               <button class="btn btn-sm" onclick="copyToClipboard('<%= email.email %>')"><i class="fa fa-copy"></i></button>
-              <% if @is_admin %>
-                <%= link_to teacher_delete_email_address_path(teacher, email), method: :delete, class: "btn btn-sm btn-link text-danger delete-email-btn p-0 ml-1" do %>
+              <% if @is_admin || @is_teacher %>
+                <%= link_to teacher_delete_email_address_path(teacher, email),
+                            method: :delete,
+                            onclick: "return confirm('Are you sure you want to delete this email?')",
+                            class: "btn btn-sm btn-link text-danger delete-email-btn p-0 ml-1" do %>
                   <i class="fa fa-times"></i>
                 <% end %>
               <% end %>
