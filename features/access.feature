@@ -74,39 +74,46 @@ Scenario: Try to access merge page as a registered teacher
   When I go to the merge preview page for Todd into Alice
   Then I should see "Only admins can access this page"
 
+#Unauthenticated Admin
+Scenario: Admin is redirected to intended page after login
+  Given I have an admin email
+  Given I am on the admin dashboard
+  Then I can log in with Google
+  Then I should be on the admin dashboard
+
 #New User
 Scenario: Schools page as a new user
   Given I am on the schools page
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: Dashboard page as a new user
   Given I am on the admin dashboard
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: New School page as a new user
   Given I am on the new schools page
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: All teacher page as a new user
   Given I am on the teachers page
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: Email templates page as a new user
   Given I am on the email templates index
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: admin user's edit page as a new user
   Given I am on the edit page for Alice Admin
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: admin user's show page as a new user
   Given I am on the show page for Alice Admin
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: Other user's edit page as a new user
   Given I am on the edit page for Todd Teacher
-  Then I should be on the new teachers page
+  Then I should be on the login page
 
 Scenario: Other user's show page as a new user
   Given I am on the show page for Todd Teacher
-  Then I should be on the new teachers page
+  Then I should be on the login page
