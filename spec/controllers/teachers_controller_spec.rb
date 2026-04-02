@@ -314,6 +314,46 @@ RSpec.describe TeachersController, type: :controller do
     end
   end
 
+  describe "GET #cross_filter_search" do
+    before do
+      ApplicationController.any_instance.stub(:require_admin).and_return(true)
+    end
+
+    context "action is reachable" do
+      it "responds with 200 OK" do
+        get :cross_filter_search, params: { q: "anything" }
+        expect(response).to have_http_status(:ok)
+      end
+
+      it "responds with JSON content type" do
+        get :cross_filter_search, params: { q: "anything" }
+        expect(response.content_type).to match(%r{application/json})
+      end
+    end
+
+    context "returns status counts as display values" do
+      before do
+        fake_relation = double("ActiveRecord::Relation")
+        allow(Teacher).to receive(:search_non_admins).and_return(fake_relation)
+        allow(fake_relation).to receive(:reorder).and_return(fake_relation)
+        allow(fake_relation).to receive(:group).and_return(fake_relation)
+        allow(fake_relation).to receive(:count).and_return({ "denied" => 2, "validated" => 1 })
+      end
+
+      it "returns display values as keys in the JSON response" do
+        get :cross_filter_search, params: { q: "test" }
+        body = JSON.parse(response.body)
+        expect(body).to eq({ "Denied" => 2, "Validated" => 1 })
+      end
+
+      it "omits statuses with zero count" do
+        get :cross_filter_search, params: { q: "test" }
+        body = JSON.parse(response.body)
+        expect(body.keys).not_to include("Info Needed", "Not Reviewed")
+      end
+    end
+  end
+
   describe "GET #edit" do
     let(:teacher) { instance_double("Teacher", id: 1, school:) }
     let(:school) { instance_double("School") }

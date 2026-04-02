@@ -10,10 +10,10 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import, :search]
+  before_action :load_teacher, except: [:new, :index, :create, :import, :search, :cross_filter_search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :cross_filter_search]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -198,6 +198,14 @@ class TeachersController < ApplicationController
       flash[:alert] = "Error resending welcome email. Please ensure that your account has been validated by an administrator."
     end
     redirect_back(fallback_location: dashboard_path)
+  end
+
+  def cross_filter_search
+    counts = Teacher.search_non_admins(params[:q])
+      .reorder(nil)
+      .group(:application_status)
+      .count("DISTINCT teachers.id")
+    render json: counts.transform_keys { |k| Teacher.application_statuses[k] }
   end
 
   def import
