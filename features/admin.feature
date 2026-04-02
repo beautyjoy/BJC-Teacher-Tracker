@@ -285,6 +285,14 @@ Feature: basic admin functionality
     And I press "New Teacher"
     Then I should see "Request Access to BJC Teacher Materials"
 
+  Scenario: Cross-filter notice element is present on the teachers page
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    Then I should see hidden element "cross-filter-notice"
+
   Scenario: Admin can access new school button at teacher index page
     Given I am on the BJC home page
     Given I have an admin email
