@@ -71,8 +71,8 @@ Feature: basic admin functionality
     Given I have a non-admin, unregistered Google email
     Given I am on the BJC home page
     When  I go to the dashboard page
-    Then  I should see "Only admins can access this page"
-    And   I should be on the new teachers page
+    Then  I should see "Please log in to access this page"
+    And   I should be on the login page
 
   Scenario: Edit teacher info as an admin
     Given the following schools exist:
@@ -212,7 +212,7 @@ Feature: basic admin functionality
       | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
-    Then  should see "You need to log in to access this."
+    Then  should see "Please log in to access this page"
 
   Scenario: View teacher info as an admin
     Given the following schools exist:
