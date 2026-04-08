@@ -158,8 +158,8 @@ RSpec.describe TeachersController, type: :controller do
     it "does not allow non-admin to accept a user" do
       post :validate, params: { id: 1 }
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to(root_path)
-      expect(flash[:danger]).to eq "Only admins can access this page."
+      expect(response).to redirect_to(login_path)
+      expect(flash[:danger]).to eq "Please log in to access this page."
     end
 
     it "rejects malicious admin signup attempt" do
