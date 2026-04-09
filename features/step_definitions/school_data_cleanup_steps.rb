@@ -1,13 +1,12 @@
 
+# frozen_string_literal: true
 
 Before do
   @schools = {}
 end
 
-
-
 Given(/^a school "([^"]*)" exists with no country and state "([^"]*)"$/) do |name, state|
-  school = FactoryBot.create(:school, name: name, state: state)
+  school = FactoryBot.create(:school, name:, state:)
 
   school.update_column(:country, nil)
 
@@ -15,7 +14,7 @@ Given(/^a school "([^"]*)" exists with no country and state "([^"]*)"$/) do |nam
 end
 
 Given(/^a school "([^"]*)" exists with no country and website "([^"]*)"$/) do |name, website|
-  school = FactoryBot.create(:school, name: name, website: website)
+  school = FactoryBot.create(:school, name:, website:)
 
   school.update_column(:country, nil)
   school.update_column(:state, nil)
@@ -26,23 +25,23 @@ Given(/^a school "([^"]*)" exists with no country and website "([^"]*)"$/) do |n
 end
 
 Given(/^a school "([^"]*)" exists with country "([^"]*)"$/) do |name, country|
-  school = FactoryBot.create(:school, name: name, country: country)
+  school = FactoryBot.create(:school, name:, country:)
   @schools[name] = school
 end
 
 
 Given(/^a school "([^"]*)" exists with grade level "([^"]*)"$/) do |name, grade_level|
-  school = FactoryBot.create(:school, name: name, grade_level: grade_level.to_sym)
+  school = FactoryBot.create(:school, name:, grade_level: grade_level.to_sym)
   @schools[name] = school
 end
 
 Given(/^the school "([^"]*)" has (\d+) teachers with education level "([^"]*)"$/) do |name, count, level|
-  school = @schools[name] || School.find_by!(name: name)
+  school = @schools[name] || School.find_by!(name:)
 
   count.to_i.times do |i|
     FactoryBot.create(
       :teacher,
-      school: school,
+      school:,
       education_level: level.to_sym,
       snap: "#{name.parameterize}-teacher-#{i}"
     )
@@ -71,7 +70,7 @@ end
 
 
 Then(/^the school "([^"]*)" should have country "([^"]*)"$/) do |name, expected_country|
-  school = @schools[name] || School.find_by!(name: name)
+  school = @schools[name] || School.find_by!(name:)
 
   school.reload
 
@@ -81,7 +80,7 @@ Then(/^the school "([^"]*)" should have country "([^"]*)"$/) do |name, expected_
 end
 
 Then(/^the school "([^"]*)" should have no country$/) do |name|
-  school = @schools[name] || School.find_by!(name: name)
+  school = @schools[name] || School.find_by!(name:)
   school.reload
 
   expect(school.country).to be_nil,
@@ -90,7 +89,7 @@ Then(/^the school "([^"]*)" should have no country$/) do |name|
 end
 
 Then(/^the school "([^"]*)" should have grade level "([^"]*)"$/) do |name, expected_level|
-  school = @schools[name] || School.find_by!(name: name)
+  school = @schools[name] || School.find_by!(name:)
   school.reload
 
   expect(school.grade_level).to eq(expected_level),

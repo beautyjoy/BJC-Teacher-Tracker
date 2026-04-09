@@ -1,7 +1,7 @@
 
+# frozen_string_literal: true
 
 namespace :schools do
-
   desc "Report (and optionally fix) schools with missing or invalid country"
   task fix_countries: :environment do
     apply = ENV["APPLY"] == "true"
@@ -153,12 +153,12 @@ namespace :schools do
       confidence = both_agree ? "HIGH" : "LOW"
 
       proposed = if both_agree
-                   name_suggestion
-                 elsif name_mismatch
-                   name_suggestion
-                 else
-                   teacher_suggestion
-                 end
+        name_suggestion
+      elsif name_mismatch
+        name_suggestion
+      else
+        teacher_suggestion
+      end
 
       flagged += 1
 
