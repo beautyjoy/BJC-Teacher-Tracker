@@ -57,6 +57,7 @@ RSpec.describe "school_data_cleanup rake tasks" do
     it "does not modify a school that already has a valid country" do
       school = create(:school, country: "US", state: "NY")
 
+      school.reload
       original_updated_at = school.updated_at
 
       expect { task.invoke }.to output.to_stdout
@@ -132,6 +133,7 @@ RSpec.describe "school_data_cleanup rake tasks" do
     it "does not modify a school whose grade_level is already correct" do
       school = create(:school, name: "Oak High School", grade_level: :high_school)
 
+      school.reload
       original_updated_at = school.updated_at
 
       expect { task.invoke }.to output.to_stdout
