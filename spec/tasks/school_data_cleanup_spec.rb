@@ -1,4 +1,5 @@
 
+# frozen_string_literal: true
 
 require "rails_helper"
 require "rake"
@@ -108,9 +109,9 @@ RSpec.describe "school_data_cleanup rake tasks" do
     it "fixes grade_level when both name and teacher heuristics agree (high confidence)" do
       school = create(:school, name: "Springfield High School", grade_level: :elementary)
 
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "teacher_hs_1")
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "teacher_hs_2")
 
       expect { task.invoke }.to output.to_stdout
@@ -143,9 +144,9 @@ RSpec.describe "school_data_cleanup rake tasks" do
     it "does not auto-fix when only teacher heuristic fires (low confidence)" do
       school = create(:school, name: "Learning Academy", grade_level: :elementary)
 
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "hs_teacher_1")
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "hs_teacher_2")
 
       expect { task.invoke }.to output.to_stdout
@@ -157,9 +158,9 @@ RSpec.describe "school_data_cleanup rake tasks" do
     it "does not write changes in dry-run mode" do
       school = create(:school, name: "Springfield High School", grade_level: :elementary)
 
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "dry_run_teacher_1")
-      create(:teacher, school: school, education_level: :high_school,
+      create(:teacher, school:, education_level: :high_school,
                        snap: "dry_run_teacher_2")
 
       ENV["APPLY"] = "false"
