@@ -201,6 +201,9 @@ class TeachersController < ApplicationController
   end
 
   def destroy
+    if MailblusterService.configured? && @teacher.primary_email.present?
+      MailblusterService.delete_lead(@teacher.primary_email)
+    end
     @teacher.destroy!
     flash[:info] = "Deleted #{@teacher.full_name} successfully."
     redirect_to teachers_path
