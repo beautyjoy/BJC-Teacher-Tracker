@@ -22,7 +22,12 @@ module TeacherHelper
 
   def mailbluster_sync_status(teacher)
     if teacher.mailbluster_synced?
-      '<span class="badge badge-success">Synced</span>'.html_safe
+      url = teacher.mailbluster_profile_url
+      if url
+        link_to('<span class="badge badge-success">Synced</span>'.html_safe, url, target: "_blank", title: "View in MailBluster")
+      else
+        '<span class="badge badge-success">Synced</span>'.html_safe
+      end
     else
       '<span class="badge badge-secondary">Not Synced</span>'.html_safe
     end
