@@ -20,6 +20,7 @@
 #  session_count      :integer          default(0)
 #  snap               :string
 #  status             :integer
+#  verification_notes :text
 #  created_at         :datetime
 #  updated_at         :datetime
 #  school_id          :integer
@@ -38,6 +39,29 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
+  def self.search_non_admins(query)
+    q = "%#{sanitize_sql_like(query)}%"
+    status_case = statuses.map { |key, int|
+      "WHEN #{int} THEN '#{key.tr('_', ' ').titleize}'"
+    }.join(" ")
+
+    where(admin: false)
+      .left_joins(:email_addresses, :school)
+      .where(
+        "teachers.first_name ILIKE :q OR " \
+        "teachers.last_name ILIKE :q OR " \
+        "(teachers.first_name || ' ' || teachers.last_name) ILIKE :q OR " \
+        "teachers.snap ILIKE :q OR " \
+        "email_addresses.email ILIKE :q OR " \
+        "schools.name ILIKE :q OR " \
+        "teachers.application_status ILIKE :q OR " \
+        "(CASE teachers.status #{status_case} ELSE '' END) ILIKE :q OR " \
+        "TO_CHAR(teachers.created_at, 'MM/DD/YYYY') ILIKE :q",
+        q:
+      )
+      .distinct
+  end
+
   # TODO: Move this somewhere else...
   WORLD_LANGUAGES = [ "Afrikaans", "Albanian", "Arabic", "Armenian", "Basque", "Bengali", "Bulgarian", "Catalan", "Cambodian", "Chinese (Mandarin)", "Croatian", "Czech", "Danish", "Dutch", "English", "Estonian", "Fiji", "Finnish", "French", "Georgian", "German", "Greek", "Gujarati", "Hebrew", "Hindi", "Hungarian", "Icelandic", "Indonesian", "Irish", "Italian", "Japanese", "Javanese", "Korean", "Latin", "Latvian", "Lithuanian", "Macedonian", "Malay", "Malayalam", "Maltese", "Maori", "Marathi", "Mongolian", "Nepali", "Norwegian", "Persian", "Polish", "Portuguese", "Punjabi", "Quechua", "Romanian", "Russian", "Samoan", "Serbian", "Slovak", "Slovenian", "Spanish", "Swahili", "Swedish ", "Tamil", "Tatar", "Telugu", "Thai", "Tibetan", "Tonga", "Turkish", "Ukrainian", "Urdu", "Uzbek", "Vietnamese", "Welsh", "Xhosa" ].freeze
 
