@@ -23,6 +23,10 @@ When(/^I search the teachers table for "([^"]*)"$/) do |query|
   first(".dataTables_filter input").set(query)
 end
 
+When(/^I search the schools table for "([^"]*)"$/) do |query|
+  find("#schools-table_filter input").set(query)
+end
+
 When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
   page.execute_script('$(tinyMCE.editors[0].setContent("' + value + '"))')
 end
