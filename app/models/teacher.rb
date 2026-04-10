@@ -335,15 +335,44 @@ class Teacher < ApplicationRecord
       school_website
       school_grade_level
       school_type
+      mailbluster_id
+      primary_email_sent
+      primary_email_delivered
+      primary_email_bounced
     |
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      Teacher.where(admin: false).find_each do |user|
+      Teacher.where(admin: false).includes(:email_addresses).find_each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end
+  end
+
+  def mailbluster_synced?
+    mailbluster_id.present?
+  end
+
+  def mailbluster_profile_url
+    return nil unless mailbluster_id.present?
+    "https://app.mailbluster.com/leads/#{mailbluster_id}"
+  end
+
+  def primary_email_address
+    email_addresses.find_by(primary: true)
+  end
+
+  def primary_email_sent
+    primary_email_address&.emails_sent || 0
+  end
+
+  def primary_email_delivered
+    primary_email_address&.emails_delivered || 0
+  end
+
+  def primary_email_bounced
+    primary_email_address&.bounced? ? "Yes" : "No"
   end
 
   private
