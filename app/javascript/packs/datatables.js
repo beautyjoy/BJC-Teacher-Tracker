@@ -22,6 +22,8 @@ $(function() {
   });
 
   $tables.draw();
+  const $teachersWrapper = $('.js-teachersTable').closest('.dataTables_wrapper');
+  $teachersWrapper.find('.dataTables_info').after($('#cross-filter-notice'));
   $(".custom-checkbox").on("change", () => {
       $tables.draw();
   });
