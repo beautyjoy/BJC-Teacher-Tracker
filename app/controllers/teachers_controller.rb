@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import, :search, :cross_filter_search]
+  before_action :load_teacher, except: [:new, :index, :create, :import, :search, :cross_filter_search, :sync_all_mailbluster]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :cross_filter_search,
