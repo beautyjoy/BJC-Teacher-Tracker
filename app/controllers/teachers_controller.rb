@@ -13,7 +13,7 @@ class TeachersController < ApplicationController
   before_action :load_teacher, except: [:new, :index, :create, :import, :search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :sync_mailbluster, :sync_all_mailbluster]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -206,6 +206,33 @@ class TeachersController < ApplicationController
     teacher_hash_array = SmarterCSV.process(csv_file)
     csv_import_summary_hash = process_record(teacher_hash_array)
     add_flash_message(csv_import_summary_hash)
+    redirect_to teachers_path
+  end
+
+  def sync_mailbluster
+    unless MailblusterService.configured?
+      redirect_to teacher_path(@teacher), alert: "MailBluster API key is not configured."
+      return
+    end
+
+    if MailblusterService.sync_teacher(@teacher)
+      redirect_to teacher_path(@teacher), notice: "Successfully synced #{@teacher.full_name} to MailBluster."
+    else
+      redirect_to teacher_path(@teacher), alert: "Failed to sync #{@teacher.full_name} to MailBluster."
+    end
+  end
+
+  def sync_all_mailbluster
+    unless MailblusterService.configured?
+      redirect_to teachers_path, alert: "MailBluster API key is not configured."
+      return
+    end
+
+    results = MailblusterService.sync_all_teachers
+    flash[:notice] = "MailBluster sync complete: #{results[:synced]} synced, #{results[:failed]} failed, #{results[:skipped]} skipped."
+    if results[:errors].any?
+      flash[:alert] = "Errors: #{results[:errors].first(5).join('; ')}"
+    end
     redirect_to teachers_path
   end
 
