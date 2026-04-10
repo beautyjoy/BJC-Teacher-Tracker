@@ -135,4 +135,80 @@ RSpec.describe Teacher, type: :model do
       expect(teacher.display_application_status).to eq "Not Reviewed"
     end
   end
+
+  describe "MailBluster helper methods" do
+    let(:validated_teacher) { teachers(:validated_teacher) }
+
+    describe "#mailbluster_synced?" do
+      it "returns false when mailbluster_id is nil" do
+        expect(validated_teacher.mailbluster_synced?).to be false
+      end
+
+      it "returns true when mailbluster_id is present" do
+        validated_teacher.update_column(:mailbluster_id, 12345)
+        expect(validated_teacher.mailbluster_synced?).to be true
+      end
+    end
+
+    describe "#mailbluster_profile_url" do
+      it "returns nil when not synced" do
+        expect(validated_teacher.mailbluster_profile_url).to be_nil
+      end
+
+      it "returns the MailBluster profile URL when synced" do
+        validated_teacher.update_column(:mailbluster_id, 12345)
+        expect(validated_teacher.mailbluster_profile_url).to eq("https://app.mailbluster.com/leads/12345")
+      end
+    end
+
+    describe "#primary_email_sent" do
+      it "returns 0 by default" do
+        expect(validated_teacher.primary_email_sent).to eq(0)
+      end
+
+      it "returns the email sent count from primary email address" do
+        email = validated_teacher.email_addresses.find_by(primary: true)
+        email.update_column(:emails_sent, 10)
+        expect(validated_teacher.primary_email_sent).to eq(10)
+      end
+    end
+
+    describe "#primary_email_delivered" do
+      it "returns 0 by default" do
+        expect(validated_teacher.primary_email_delivered).to eq(0)
+      end
+
+      it "returns the email delivered count from primary email address" do
+        email = validated_teacher.email_addresses.find_by(primary: true)
+        email.update_column(:emails_delivered, 8)
+        expect(validated_teacher.primary_email_delivered).to eq(8)
+      end
+    end
+
+    describe "#primary_email_bounced" do
+      it "returns 'No' by default" do
+        expect(validated_teacher.primary_email_bounced).to eq("No")
+      end
+
+      it "returns 'Yes' when primary email is bounced" do
+        email = validated_teacher.email_addresses.find_by(primary: true)
+        email.update_column(:bounced, true)
+        expect(validated_teacher.primary_email_bounced).to eq("Yes")
+      end
+    end
+  end
+
+  describe ".csv_export" do
+    it "includes mailbluster_id column" do
+      csv = Teacher.csv_export
+      expect(csv).to include("mailbluster_id")
+    end
+
+    it "includes email delivery columns" do
+      csv = Teacher.csv_export
+      expect(csv).to include("primary_email_sent")
+      expect(csv).to include("primary_email_delivered")
+      expect(csv).to include("primary_email_bounced")
+    end
+  end
 end
