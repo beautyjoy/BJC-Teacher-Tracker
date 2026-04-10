@@ -64,4 +64,25 @@ RSpec.describe EmailAddressesController, type: :controller do
       post :create, params: { teacher_id: teacher.id, email: "newemail3@test.com" }
     end
   end
+
+  describe "DELETE #destroy with MailBluster sync" do
+    let(:teacher) { teachers(:validated_teacher) }
+
+    it "re-syncs teacher to MailBluster when deleting an email" do
+      extra_email = teacher.email_addresses.create!(email: "extra_mb@test.com", primary: false)
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).to receive(:create_or_update_lead).with(teacher)
+
+      delete :destroy, params: { teacher_id: teacher.id, id: extra_email.id }
+    end
+
+    it "does not sync when teacher is not validated" do
+      denied_teacher = teachers(:bob)
+      extra_email = denied_teacher.email_addresses.create!(email: "extra_mb2@test.com", primary: false)
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).not_to receive(:create_or_update_lead)
+
+      delete :destroy, params: { teacher_id: denied_teacher.id, id: extra_email.id }
+    end
+  end
 end
