@@ -215,10 +215,11 @@ class TeachersController < ApplicationController
       return
     end
 
-    if MailblusterService.sync_teacher(@teacher)
+    result = MailblusterService.sync_teacher(@teacher)
+    if result[:success]
       redirect_to teacher_path(@teacher), notice: "Successfully synced #{@teacher.full_name} to MailBluster."
     else
-      redirect_to teacher_path(@teacher), alert: "Failed to sync #{@teacher.full_name} to MailBluster."
+      redirect_to teacher_path(@teacher), alert: "Failed to sync #{@teacher.full_name} to MailBluster. #{result[:error]}"
     end
   end
 
