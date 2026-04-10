@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_07_190126) do
+ActiveRecord::Schema.define(version: 2026_03_28_092348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -153,6 +154,7 @@ ActiveRecord::Schema.define(version: 2024_04_07_190126) do
     t.integer "session_count", default: 0
     t.string "personal_email"
     t.string "languages", default: ["English"], array: true
+    t.text "verification_notes"
     t.index ["email", "first_name"], name: "index_teachers_on_email_and_first_name"
     t.index ["email", "personal_email"], name: "index_teachers_on_email_and_personal_email", unique: true
     t.index ["email"], name: "index_teachers_on_email", unique: true

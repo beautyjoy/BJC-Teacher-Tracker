@@ -10,10 +10,10 @@ class TeachersController < ApplicationController
   include CsvProcess
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import, :search]
+  before_action :load_teacher, except: [:new, :index, :create, :import, :search, :cross_filter_search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :cross_filter_search]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
@@ -200,6 +200,14 @@ class TeachersController < ApplicationController
     redirect_back(fallback_location: dashboard_path)
   end
 
+  def cross_filter_search
+    counts = Teacher.search_non_admins(params[:q])
+      .reorder(nil)
+      .group(:application_status)
+      .count("DISTINCT teachers.id")
+    render json: counts.transform_keys { |k| Teacher.application_statuses[k] }
+  end
+
   def import
     csv_file = params[:file]
     teacher_hash_array = SmarterCSV.process(csv_file)
@@ -278,7 +286,7 @@ class TeachersController < ApplicationController
 
   def teacher_params
     teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
-                          :more_info, :personal_website, :education_level, :school_id, languages: [], files: [],
+                          :more_info, :verification_notes, :personal_website, :education_level, :school_id, languages: [], files: [],
                         more_files: []]
     admin_attributes = [:application_status, :request_reason, :skip_email]
     teacher_attributes.push(*admin_attributes) if is_admin?

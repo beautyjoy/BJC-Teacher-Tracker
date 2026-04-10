@@ -20,6 +20,7 @@
 #  session_count      :integer          default(0)
 #  snap               :string
 #  status             :integer
+#  verification_notes :text
 #  created_at         :datetime
 #  updated_at         :datetime
 #  school_id          :integer
