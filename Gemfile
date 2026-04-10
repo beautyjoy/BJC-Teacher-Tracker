@@ -11,7 +11,6 @@ gem "rails", "6.1.7.7"
 # Production app server
 gem "puma", "~> 5"
 gem "pg", "~> 1.5"
-gem "pg_search"
 
 # Front-end Assets
 gem "webpacker"

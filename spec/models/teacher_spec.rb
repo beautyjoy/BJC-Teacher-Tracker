@@ -169,5 +169,10 @@ RSpec.describe Teacher, type: :model do
     it "is case-insensitive" do
       expect(Teacher.search_non_admins("BOB")).to include(teachers(:bob))
     end
+
+    it "finds teachers by role" do
+      # teachers(:long) has status: 3 → display_status "Teals Volunteer"
+      expect(Teacher.search_non_admins("teals volunteer")).to include(teachers(:long))
+    end
   end
 end

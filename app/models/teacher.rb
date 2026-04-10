@@ -39,24 +39,27 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Teacher < ApplicationRecord
-  include PgSearch::Model
-
-  # Internal scope — callers use .search_non_admins which enforces admin: false.
-  # To search a new Teacher text column: add it to `against:`.
-  # To search a new association: add it to `associated_against:`.
-  pg_search_scope :_pg_search_teachers,
-    against: [:first_name, :last_name, :snap],
-    associated_against: {
-      email_addresses: :email,
-      school: :name
-    },
-    using: {
-      tsearch: { prefix: true, dictionary: "simple" },
-      trigram: { word_similarity: true }
-    }
-
   def self.search_non_admins(query)
-    where(admin: false)._pg_search_teachers(query)
+    q = "%#{sanitize_sql_like(query)}%"
+    status_case = statuses.map { |key, int|
+      "WHEN #{int} THEN '#{key.tr('_', ' ').titleize}'"
+    }.join(" ")
+
+    where(admin: false)
+      .left_joins(:email_addresses, :school)
+      .where(
+        "teachers.first_name ILIKE :q OR " \
+        "teachers.last_name ILIKE :q OR " \
+        "(teachers.first_name || ' ' || teachers.last_name) ILIKE :q OR " \
+        "teachers.snap ILIKE :q OR " \
+        "email_addresses.email ILIKE :q OR " \
+        "schools.name ILIKE :q OR " \
+        "teachers.application_status ILIKE :q OR " \
+        "(CASE teachers.status #{status_case} ELSE '' END) ILIKE :q OR " \
+        "TO_CHAR(teachers.created_at, 'MM/DD/YYYY') ILIKE :q",
+        q:
+      )
+      .distinct
   end
 
   # TODO: Move this somewhere else...
