@@ -41,3 +41,33 @@ Feature: MailBluster email sync
     When I go to the teachers page
     Then I should see "MB Sync"
     And I should see "Not Synced"
+
+  Scenario: Admin sees email delivery stats on teacher show page
+    Given I am on the BJC home page
+    Given I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I follow "Mbluster Validated"
+    Then I should see "Sent: 0"
+    And I should see "Delivered: 0"
+    And I should see "Bounced: No"
+
+  Scenario: Admin sees MailBluster section for pending teacher
+    Given I am on the BJC home page
+    Given I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    And I check "Not Reviewed"
+    And I follow "Mbluster Pending"
+    Then I should see "MailBluster Sync"
+    And I should see "Not synced"
+
+  Scenario: Non-admin cannot see MailBluster sync controls
+    Given I am on the BJC home page
+    Given I have a non-admin, unregistered Google email
+    And I follow "Log In"
+    Then I can log in with Google
+    Then I should not see "Sync All to MailBluster"
+    And I should not see "MB Sync"
