@@ -28,3 +28,40 @@ RSpec.describe EmailAddress, type: :model do
     end
   end
 end
+
+RSpec.describe EmailAddressesController, type: :controller do
+  fixtures :all
+
+  before(:each) do
+    Rails.application.load_seed
+    ApplicationController.any_instance.stub(:require_login).and_return(true)
+    ApplicationController.any_instance.stub(:require_admin).and_return(true)
+    ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+  end
+
+  describe "POST #create with MailBluster sync" do
+    let(:teacher) { teachers(:validated_teacher) }
+
+    it "syncs teacher to MailBluster when adding email to validated teacher" do
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).to receive(:create_or_update_lead).with(teacher)
+
+      post :create, params: { teacher_id: teacher.id, email: "newemail@test.com" }
+    end
+
+    it "does not sync when teacher is not validated" do
+      denied_teacher = teachers(:bob) # bob has application_status: Denied
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).not_to receive(:create_or_update_lead)
+
+      post :create, params: { teacher_id: denied_teacher.id, email: "newemail2@test.com" }
+    end
+
+    it "does not sync when API key is not configured" do
+      allow(MailblusterService).to receive(:configured?).and_return(false)
+      expect(MailblusterService).not_to receive(:create_or_update_lead)
+
+      post :create, params: { teacher_id: teacher.id, email: "newemail3@test.com" }
+    end
+  end
+end
