@@ -394,7 +394,7 @@ RSpec.describe TeachersController, type: :controller do
 
       it "syncs a single teacher when API key is configured" do
         allow(MailblusterService).to receive(:configured?).and_return(true)
-        allow(MailblusterService).to receive(:sync_teacher).with(teacher).and_return(true)
+        allow(MailblusterService).to receive(:sync_teacher).with(teacher).and_return({ success: true })
 
         post :sync_mailbluster, params: { id: teacher.id }
         expect(response).to redirect_to(teacher_path(teacher))
@@ -403,7 +403,7 @@ RSpec.describe TeachersController, type: :controller do
 
       it "shows error when sync fails" do
         allow(MailblusterService).to receive(:configured?).and_return(true)
-        allow(MailblusterService).to receive(:sync_teacher).with(teacher).and_return(false)
+        allow(MailblusterService).to receive(:sync_teacher).with(teacher).and_return({ success: false, error: "API error" })
 
         post :sync_mailbluster, params: { id: teacher.id }
         expect(response).to redirect_to(teacher_path(teacher))

@@ -87,10 +87,17 @@ class MailblusterService
     end
 
     # Sync a single teacher to MailBluster.
-    # Returns true on success, false on failure.
+    # Returns a hash with :success and optionally :error.
     def sync_teacher(teacher)
       lead_data = create_or_update_lead(teacher)
-      lead_data.present?
+      if lead_data.present?
+        { success: true }
+      else
+        { success: false, error: "MailBluster API returned no lead data" }
+      end
+    rescue StandardError => e
+      Rails.logger.error("[MailBluster] Error syncing teacher #{teacher.id}: #{e.message}")
+      { success: false, error: e.message }
     end
 
     # Check if the API key is configured.

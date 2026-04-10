@@ -197,16 +197,27 @@ RSpec.describe MailblusterService, type: :service do
   end
 
   describe ".sync_teacher" do
-    it "returns true on successful sync" do
+    it "returns success hash on successful sync" do
       allow(HTTParty).to receive(:post).and_return(success_response)
 
-      expect(described_class.sync_teacher(teacher)).to be true
+      result = described_class.sync_teacher(teacher)
+      expect(result[:success]).to be true
     end
 
-    it "returns false on failed sync" do
+    it "returns failure hash on failed sync" do
       allow(HTTParty).to receive(:post).and_return(failure_response)
 
-      expect(described_class.sync_teacher(teacher)).to be false
+      result = described_class.sync_teacher(teacher)
+      expect(result[:success]).to be false
+      expect(result[:error]).to be_present
+    end
+
+    it "handles unexpected errors gracefully" do
+      allow(HTTParty).to receive(:post).and_raise(StandardError, "connection timeout")
+
+      result = described_class.sync_teacher(teacher)
+      expect(result[:success]).to be false
+      expect(result[:error]).to include("connection timeout")
     end
   end
 
