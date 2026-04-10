@@ -45,3 +45,4 @@
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%m/%d/%Y") %>
 </td>
+<td><%= mailbluster_sync_status(teacher) %></td>
