@@ -9,10 +9,10 @@ Feature: MailBluster email sync
     |       name            |     country     |     city     |  state  |            website            |
     |   UC Berkeley         |       US        |   Berkeley   |   CA    |   https://www.berkeley.edu    |
     Given the following teachers exist:
-    | first_name | last_name | admin | primary_email              | school      | application_status |
-    | Admin      | User      | true  | testadminuser@berkeley.edu | UC Berkeley | Validated          |
-    | Validated  | Teacher   | false | validated@teacher.edu      | UC Berkeley | Validated          |
-    | Pending    | Teacher   | false | pending@teacher.edu        | UC Berkeley | Not Reviewed       |
+    | first_name | last_name  | admin | primary_email              | school      | application_status |
+    | Admin      | User       | true  | testadminuser@berkeley.edu | UC Berkeley | Validated          |
+    | Mbluster   | Validated  | false | mb_validated@teacher.edu   | UC Berkeley | Validated          |
+    | Mbluster   | Pending    | false | mb_pending@teacher.edu     | UC Berkeley | Not Reviewed       |
 
   Scenario: Admin sees MailBluster sync information on teacher show page
     Given I am on the BJC home page
@@ -20,10 +20,10 @@ Feature: MailBluster email sync
     And I follow "Log In"
     Then I can log in with Google
     When I go to the teachers page
-    And I follow "Validated Teacher"
+    And I follow "Mbluster Validated"
     Then I should see "MailBluster Sync"
     And I should see "Not synced"
-    And I should see "Sync to MailBluster"
+    And I should see a button named "Sync to MailBluster"
 
   Scenario: Admin sees Sync All button on teachers index page
     Given I am on the BJC home page
@@ -31,7 +31,7 @@ Feature: MailBluster email sync
     And I follow "Log In"
     Then I can log in with Google
     When I go to the teachers page
-    Then I should see "Sync All to MailBluster"
+    Then I should see a button named "Sync All to MailBluster"
 
   Scenario: Admin sees MB Sync column in teachers table
     Given I am on the BJC home page
