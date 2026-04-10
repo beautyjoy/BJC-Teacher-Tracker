@@ -474,4 +474,37 @@ RSpec.describe TeachersController, type: :controller do
       post :validate, params: { id: teacher.id }
     end
   end
+
+  describe "PUT #update with MailBluster auto-sync on status change" do
+    before(:each) do
+      ApplicationController.any_instance.stub(:require_admin).and_return(true)
+      ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
+      ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+      ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Ye"))
+    end
+
+    it "syncs to MailBluster when application_status changes to validated" do
+      teacher = Teacher.find_by(first_name: "Short")
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).to receive(:create_or_update_lead)
+
+      put :update, params: {
+        id: teacher.id,
+        teacher: { application_status: "validated", school_id: teacher.school_id },
+        skip_email: "Yes"
+      }
+    end
+
+    it "does not sync when status does not change" do
+      teacher = Teacher.find_by(first_name: "Validated")
+      allow(MailblusterService).to receive(:configured?).and_return(true)
+      expect(MailblusterService).not_to receive(:create_or_update_lead)
+
+      put :update, params: {
+        id: teacher.id,
+        teacher: { first_name: "StillValidated", school_id: teacher.school_id },
+        skip_email: "Yes"
+      }
+    end
+  end
 end

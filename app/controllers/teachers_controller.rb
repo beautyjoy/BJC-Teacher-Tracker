@@ -132,6 +132,7 @@ class TeachersController < ApplicationController
 
     attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
+    sync_to_mailbluster_if_status_changed
 
     if fail_to_update
       return
@@ -160,6 +161,19 @@ class TeachersController < ApplicationController
       when "info_needed"
         TeacherMailer.request_info_email(@teacher, params[:request_reason]).deliver_now
       end
+    end
+  end
+
+  def sync_to_mailbluster_if_status_changed
+    return unless MailblusterService.configured?
+    return unless @teacher.application_status_changed?
+
+    if @teacher.validated?
+      MailblusterService.create_or_update_lead(@teacher)
+    elsif @teacher.application_status_was == "validated"
+      # If teacher was validated but status changed away, update MailBluster
+      # to mark them as unsubscribed
+      MailblusterService.create_or_update_lead(@teacher)
     end
   end
 
