@@ -91,6 +91,16 @@ RSpec.describe TeachersController, type: :controller do
     expect(Teacher.find_by(first_name: "Short")).to be_nil
   end
 
+  it "deletes MailBluster lead when destroying a teacher" do
+    ApplicationController.any_instance.stub(:require_admin).and_return(true)
+    ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+    teacher = Teacher.find_by(first_name: "Short")
+    allow(MailblusterService).to receive(:configured?).and_return(true)
+    expect(MailblusterService).to receive(:delete_lead).with(teacher.primary_email)
+
+    delete :destroy, params: { id: teacher.id }
+  end
+
   it "doesn't allow teacher to delete an application" do
     long_app = Teacher.find_by(first_name: "Short")
     delete :destroy, params: { id: long_app.id }
