@@ -58,6 +58,7 @@ class MailblusterService
 
     # Sync all validated (non-admin) teachers to MailBluster.
     # Returns a summary hash with counts.
+    # Includes a small delay between requests to avoid rate limiting.
     def sync_all_teachers
       teachers = Teacher.where(admin: false)
                         .where(application_status: "Validated")
@@ -78,6 +79,9 @@ class MailblusterService
           results[:failed] += 1
           results[:errors] << "Teacher #{teacher.id} (#{teacher.full_name})"
         end
+
+        # Small delay between API calls to respect rate limits
+        sleep(0.1) if results[:synced] + results[:failed] > 0
       rescue StandardError => e
         results[:failed] += 1
         results[:errors] << "Teacher #{teacher.id}: #{e.message}"
