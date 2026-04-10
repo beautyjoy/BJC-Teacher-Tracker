@@ -173,6 +173,7 @@ class TeachersController < ApplicationController
   def validate
     @teacher.validated!
     TeacherMailer.welcome_email(@teacher).deliver_now
+    MailblusterService.create_or_update_lead(@teacher) if MailblusterService.configured?
     redirect_to root_path
   end
 
