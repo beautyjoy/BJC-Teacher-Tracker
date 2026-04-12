@@ -16,9 +16,14 @@ Rails.application.routes.draw do
       post :validate
       post :deny
       post :request_info
+      post :sync_mailbluster
       delete "remove_file", to: "teachers#remove_file"
     end
-    collection { post :import }
+    collection do
+      post :import
+      get :cross_filter_search
+      post :sync_all_mailbluster
+    end
   end
   resources :schools
   resources :pages, param: :url_slug
@@ -36,4 +41,7 @@ Rails.application.routes.draw do
 
   get "merge/:from/:into/preview", to: "merge#preview", as: "preview_merge"
   patch "merge/:from/:into/execute", to: "merge#execute", as: "merge"
+
+  get "school_merge/:from/:into/preview", to: "merge#school_preview", as: "preview_school_merge"
+  patch "school_merge/:from/:into/execute", to: "merge#school_execute", as: "school_merge"
 end

@@ -71,8 +71,8 @@ Feature: basic admin functionality
     Given I have a non-admin, unregistered Google email
     Given I am on the BJC home page
     When  I go to the dashboard page
-    Then  I should see "Only admins can access this page"
-    And   I should be on the new teachers page
+    Then  I should see "Please log in to access this page"
+    And   I should be on the login page
 
   Scenario: Edit teacher info as an admin
     Given the following schools exist:
@@ -212,7 +212,7 @@ Feature: basic admin functionality
       | first_name | last_name | admin | primary_email            | school      |
       | Joseph     | Mamoa     | false | testteacher@berkeley.edu | UC Berkeley |
     When  I go to the edit page for Joseph Mamoa
-    Then  should see "You need to log in to access this."
+    Then  should see "Please log in to access this page"
 
   Scenario: View teacher info as an admin
     Given the following schools exist:
@@ -235,6 +235,23 @@ Feature: basic admin functionality
     And   I should see "Berkeley, CA"
     And   I should see "Email"
     And   I should see "Personal or Course Website"
+
+  Scenario: Admin can see verification notes on teacher profile
+    Given the following schools exist:
+      | name        |     country     | city     | state | website                  | grade_level | school_type |
+      | UC Berkeley |       US        | Berkeley | CA    | https://www.berkeley.edu | university  | public      |
+    Given the following teachers exist:
+      | first_name | last_name | admin | primary_email             | school      | snap   | verification_notes                                 |
+      | Joseph     | Test      | false | testteacher@berkeley.edu  | UC Berkeley | alonzo | Principal contact: principal@berkeley.edu         |
+    Given I am on the BJC home page
+    Given I have an admin email
+    And   I follow "Log In"
+    Then  I can log in with Google
+    When  I go to the teachers page
+    And   I uncheck "Validated"
+    When  I follow "Joseph Test"
+    Then  I should see "Verification Notes"
+    And   I should see "Principal contact: principal@berkeley.edu"
 
   Scenario: Edit teacher info as an admin navigating from view only page to edit page
     Given the following schools exist:
@@ -285,6 +302,14 @@ Feature: basic admin functionality
     Then I should see "BJC Teachers"
     And I press "New Teacher"
     Then I should see "Request Access to BJC Teacher Materials"
+
+  Scenario: Cross-filter notice element is present on the teachers page
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    When I go to the teachers page
+    Then I should see hidden element "cross-filter-notice"
 
   Scenario: Admin can access new school button at teacher index page
     Given I am on the BJC home page
@@ -502,3 +527,114 @@ Feature: basic admin functionality
 #  Then I should see "Successfully created/updated 2 teachers"
 #  Then I should see "1 schools has been created"
 #  Then I should see "2 teachers has failed with following emails: [ steve.gao02112@gmail.com ] [ steve.fdso02112@gmail.com ]"
+
+  # ---------------------------------------------------------------------------
+  # School Merge
+  # ---------------------------------------------------------------------------
+
+  Scenario: Admin sees Merge button on school show page
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    Then I should see "Merge"
+
+  Scenario: Admin sees other schools listed in the merge modal
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    And I press "Merge"
+    Then I should see "Choose A School To Merge Into"
+    And I should see "Dupe School"
+
+  Scenario: Admin can preview a school merge
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    And I press "Merge"
+    And I follow "Dupe School"
+    Then I should see "Preview Merge of Test School into Dupe School"
+    And I should see "Switch Merge Order"
+    And I should see "Confirm Merge"
+
+  Scenario: Admin can complete a school merge
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |
+    And the following teachers exist:
+      | first_name | last_name | admin | primary_email        | school      |
+      | Teacher    | One       | false | teacher1@example.com | Dupe School |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    And I press "Merge"
+    And I follow "Dupe School"
+    And I follow "Confirm Merge"
+    Then I should see "Schools merged successfully."
+    And I should not see "Test School"
+
+  Scenario: School merge preserves non-blank fields and fills blank fields from from school
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type | nces_id   |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      | 111111111 |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |           |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    And I press "Merge"
+    And I follow "Dupe School"
+    And I follow "Confirm Merge"
+    Then I should see "Schools merged successfully."
+    And I follow "Dupe School"
+    And I follow "Edit"
+    Then the "NCES ID" field should contain "111111111"
+    And the "School Website" field should contain "dupeschool.edu"
+    And the "School Website" field should not contain "testschool.edu"
+
+  Scenario: Teachers are re-pointed to surviving school after merge
+    Given the following schools exist:
+      | name        | country | city   | state | website                    | grade_level | school_type |
+      | Test School | US      | Irvine | CA    | https://www.testschool.edu | high_school | public      |
+      | Dupe School | US      | Irvine | CA    | https://www.dupeschool.edu | high_school | public      |
+    And the following teachers exist:
+      | first_name | last_name | admin | primary_email        | school      |
+      | Teacher    | One       | false | teacher1@example.com | Test School |
+    Given I am on the BJC home page
+    And I have an admin email
+    And I follow "Log In"
+    Then I can log in with Google
+    And I am on the schools page
+    And I follow "Test School"
+    And I press "Merge"
+    And I follow "Dupe School"
+    And I follow "Confirm Merge"
+    Then I should see "Schools merged successfully."
+    And I follow "Dupe School"
+    Then I should see "Teacher One"

@@ -14,6 +14,8 @@
 </div>
 <% end %>
 
+<div id="cross-filter-notice" class="text-muted small mb-2"></div>
+
 <table class="table table-striped js-dataTable js-teachersTable">
   <thead class="thead-dark">
     <tr>
@@ -61,6 +63,16 @@
 
   <div class="col-6">
     <%= submit_tag "Fields for CSV", class: "btn btn-primary", data: { toggle: "collapse", target: "#csvFields" } %>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <%= button_to "Sync All to MailBluster",
+        sync_all_mailbluster_teachers_path,
+        method: :post,
+        class: "btn btn-warning",
+        data: { confirm: "This will sync all validated teachers to MailBluster. Continue?" } %>
   </div>
 </div>
 
