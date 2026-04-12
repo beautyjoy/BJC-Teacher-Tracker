@@ -110,7 +110,6 @@ class MailblusterService
     end
 
     private
-
     def api_key
       ENV["MAILBLUSTER_API_KEY"]
     end
@@ -179,7 +178,7 @@ class MailblusterService
     def post(path, body)
       HTTParty.post(
         "#{BASE_URL}#{path}",
-        headers: headers,
+        headers:,
         body: body.to_json
       )
     end
@@ -187,14 +186,14 @@ class MailblusterService
     def get(path)
       HTTParty.get(
         "#{BASE_URL}#{path}",
-        headers: headers
+        headers:
       )
     end
 
     def delete(path)
       HTTParty.delete(
         "#{BASE_URL}#{path}",
-        headers: headers
+        headers:
       )
     end
 
