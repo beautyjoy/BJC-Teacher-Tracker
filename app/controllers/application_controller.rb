@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include SessionsHelper
+
   # flash gem by default only has types of :alert and :notice
   add_flash_types :warn
 
   before_action :set_sentry_user
   before_action :check_teacher_admin
-
-  include SessionsHelper
+  before_action :set_current_user
 
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
@@ -52,5 +53,9 @@ class ApplicationController < ActionController::Base
 
   def set_sentry_user
     Sentry.set_user(id: session[:user_id], email: current_user&.primary_email)
+  end
+
+  def set_current_user
+    Current.user = current_user
   end
 end

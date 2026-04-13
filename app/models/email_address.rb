@@ -42,10 +42,11 @@ class EmailAddress < ApplicationRecord
     self.email = email.strip.downcase
   end
 
+  # TODO: (2025) Is this correct? Should we only flag primary email changes?
   def flag_teacher_if_email_changed
     if self.email_changed? && !self.new_record?
       teacher.email_changed_flag = true
-      teacher.handle_relevant_changes
+      teacher.check_for_relevant_changes
     end
   end
 end

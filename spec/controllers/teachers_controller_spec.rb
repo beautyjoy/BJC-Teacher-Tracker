@@ -7,6 +7,7 @@ RSpec.describe TeachersController, type: :controller do
 
   before(:each) do
     Rails.application.load_seed
+    # TODO: Replace with a login helper
     ApplicationController.any_instance.stub(:require_login).and_return(true)
   end
 
@@ -34,6 +35,14 @@ RSpec.describe TeachersController, type: :controller do
     user = Teacher.find_by(first_name: "First")
     expect(user).not_to be_nil
     expect(user.ip_history).to include(request.remote_ip)
+  end
+
+  it "should save the user who verifies the application", :focus do
+    ApplicationController.any_instance.stub(:current_user).and_return(teachers(:admin))
+    teacher = teachers(:bob)
+    post :validate, params: { id: teacher.id }
+    teacher.reload
+    expect(teacher.verified_by).to eq(teachers(:admin))
   end
 
   it "should not increase session count when teacher attempts to sign up with existing email" do

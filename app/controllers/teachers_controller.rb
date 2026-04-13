@@ -50,11 +50,10 @@ class TeachersController < ApplicationController
     end
   end
 
-  # TODO: This needs to be re-written.
-  # If you are logged in and not an admin, this should fail.
   def create
-    if existing_teacher
-      return
+    if existing_teacher?
+      flash[:notice] = "You already have signed up with '#{params[:email]}'. Please log in."
+      redirect_to login_path and return
     end
 
     load_school
@@ -63,7 +62,7 @@ class TeachersController < ApplicationController
       @school = School.new(school_params)
       unless @school.save
         flash[:alert] = "An error occurred: #{@school.errors.full_messages.join(', ')}"
-        render "new" && return
+        render "new" and return
       end
     end
 
@@ -73,15 +72,15 @@ class TeachersController < ApplicationController
     @teacher.try_append_ip(request.remote_ip)
     @teacher.session_count += 1
     @teacher.school = @school
+
     if @teacher.save
       @teacher.not_reviewed!
       flash[:success] = "Thanks for signing up for BJC, #{@teacher.first_name}! You'll hear from us shortly. Your email address is: #{@teacher.primary_email}."
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
-      redirect_to root_path
+      redirect_to root_path and return
     else
       flash.now[:alert] = "An error occurred: #{@teacher.errors.full_messages.join(', ')}"
-      render "new"
     end
   end
 
@@ -105,6 +104,15 @@ class TeachersController < ApplicationController
   end
 
   def update
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      return
+    elsif @teacher.id != current_user.id && !is_admin?
+      Sentry.capture_message("BAD UPDATE: #{current_user.id} attempted to edit #{@teacher.id}")
+      redirect_to root_path, alert: "You are attempting to update another user's record."
+      return
+    end
+
     load_school
     ordered_schools
 
@@ -124,10 +132,13 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     end
 
-    valid_school = update_school_through_teacher
-    if !valid_school
-      return
+    if @teacher.admin_attributes_changed? && !is_admin?
+      redirect_to edit_teacher_path(current_user.id),
+        alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu." and return
     end
+
+    valid_school = update_school_through_teacher
+    return if !valid_school
 
     attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -137,15 +148,16 @@ class TeachersController < ApplicationController
     end
 
     if !@teacher.validated? && !current_user.admin?
+      @teacher.not_reviewed!
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
 
     if is_admin?
-      redirect_to edit_teacher_path(params[:id]), notice: "Saved #{@teacher.full_name}"
+      redirect_to teacher_path(@teacher), notice: "Saved #{@teacher.full_name}"
     else
       @teacher.try_append_ip(request.remote_ip)
-      redirect_to edit_teacher_path(params[:id]), notice: "Successfully updated your information"
+      redirect_to root_path, notice: "Saved successfully. Thanks!"
     end
   end
 
@@ -172,6 +184,7 @@ class TeachersController < ApplicationController
 
   def validate
     @teacher.validated!
+    @teacher.update(verified_by: current_user)
     TeacherMailer.welcome_email(@teacher).deliver_now
     redirect_to root_path
   end
@@ -218,18 +231,19 @@ class TeachersController < ApplicationController
     redirect_to new_teacher_path, alert: "Email address or Snap username already in use. Please use a different email or Snap username."
   end
 
-  def existing_teacher
+  def existing_teacher?
     # Find by email, but allow updating other info.
     @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
-    if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
+    return false unless @teacher
+
+    if defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
-      return true
-    elsif @teacher
-      redirect_to login_path, notice: "You already have signed up with '#{@teacher.email}'. Please log in."
-      return true
+      true
+    else
+      flash[:notice] = "You already have signed up with '#{@teacher.email}'. Please log in."
+      redirect_to login_path and return
     end
-    false
   end
 
   def update_school_through_teacher
