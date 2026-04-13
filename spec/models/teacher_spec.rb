@@ -63,6 +63,17 @@ RSpec.describe Teacher, type: :model do
     expect(teacher.valid?).to be true
   end
 
+  it "requires personal_website" do
+      new_teacher = Teacher.new(
+        first_name: "Test",
+        last_name: "User",
+        status: "non_csp_teacher",
+        personal_website: ""
+      )
+      expect(new_teacher).not_to be_valid
+      expect(new_teacher.errors[:personal_website]).to include("can't be blank")
+    end
+
   it "shows a text status" do
     expect(teacher.text_status).to eq "I am teaching BJC but not as an AP CS Principles course."
   end

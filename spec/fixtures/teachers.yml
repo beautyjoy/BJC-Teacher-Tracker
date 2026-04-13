@@ -49,6 +49,7 @@ admin:
   last_name: Wang
   status: 4
   more_info: A CS169 Student
+  personal_website: https://example.com
   snap: ye
   application_status: Validated
   education_level: -1
@@ -61,6 +62,7 @@ validated_teacher:
   last_name: Teacher
   status: 4
   more_info: A CS169 Student
+  personal_website: https://example.com
   snap: validated
   application_status: Validated
   education_level: -1
@@ -73,6 +75,7 @@ bob:
   snap: BobJohnson
   status: 1
   more_info: ''
+  personal_website: https://example.com
   application_status: Denied
   school: berkeley
   education_level: -1
@@ -85,6 +88,7 @@ long:
   status: 3
   school: berkeley
   more_info: ''
+  personal_website: https://example.com
   application_status: Not Reviewed
   education_level: 2
 
@@ -95,6 +99,7 @@ reimu:
   snap: reimu
   status: 4
   more_info: Best Touhou Character
+  personal_website: https://example.com
   school: berkeley
   application_status: Info Needed
   education_level: -1
@@ -106,6 +111,7 @@ barney:
   snap: barney
   status: 1
   more_info: ''
+  personal_website: https://example.com
   application_status: Denied
   school: berkeley
   education_level: -1

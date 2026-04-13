@@ -60,6 +60,7 @@ class Teacher < ApplicationRecord
   has_many :professional_developments, through: :professional_development_registrations
 
   validates :first_name, :last_name, :status, presence: true
+  validates :personal_website, presence: true, on: :create
   validate :valid_languages
   before_validation :sort_and_clean_languages
 

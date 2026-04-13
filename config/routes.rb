@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   resources :teachers do
     post "upload_file", on: :member
-    resource :email_address, only: [:edit, :update, :create]
+    resource :email_address, only: [:create]
+    delete "email_addresses/:id", to: "email_addresses#destroy", as: :delete_email_address
     member do
       post :resend_welcome_email
       post :validate
@@ -35,4 +36,7 @@ Rails.application.routes.draw do
 
   get "merge/:from/:into/preview", to: "merge#preview", as: "preview_merge"
   patch "merge/:from/:into/execute", to: "merge#execute", as: "merge"
+
+  get "school_merge/:from/:into/preview", to: "merge#school_preview", as: "preview_school_merge"
+  patch "school_merge/:from/:into/execute", to: "merge#school_execute", as: "school_merge"
 end
