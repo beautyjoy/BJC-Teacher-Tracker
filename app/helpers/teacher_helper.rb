@@ -17,7 +17,7 @@ module TeacherHelper
     labels << '<span class="primary-email-dot" data-toggle="tooltip" data-placement="top" title="Primary email"></span>' if email.primary?
     labels << '<span class="bounced-email-dot" data-toggle="tooltip" data-placement="top" title="Bounced email"></span>' if email.bounced?
     return nil if labels.empty?
-    labels.join('').html_safe
+    labels.join("").html_safe
   end
 
   def mailbluster_sync_status(teacher)
