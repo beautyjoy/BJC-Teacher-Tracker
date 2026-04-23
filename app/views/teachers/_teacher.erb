@@ -1,6 +1,7 @@
 <% if merge_table %>
   <td><%= teacher.id %></td>
 <% end %>
+<% show_mailbluster = local_assigns.fetch(:show_mailbluster, true) %>
 <td>
   <% if merge_table %>
     <%= link_to teacher.full_name, preview_merge_path(@teacher.id, teacher.id), method: :get %>
@@ -10,9 +11,10 @@
   <%= link_to('(Web)', teacher.personal_website, target: '_blank') if teacher.personal_website.present? %>
 </td>
 <td>
-  <% teacher.email_addresses.each do |email| %>
-    <%= email.email %><%= email_address_label(email) %>
-    <% unless email == teacher.email_addresses.last %>
+  <% sorted_emails = teacher.email_addresses.sort_by { |e| e.primary? ? 0 : 1 } %>
+  <% sorted_emails.each do |email| %>
+    <%= email_address_label(email) %><%= email.email %>
+    <% unless email == sorted_emails.last %>
       <br>
     <% end %>
   <% end %>
@@ -45,3 +47,6 @@
 <td data-sort="<%= teacher.created_at %>">
   <%= teacher.created_at.strftime("%m/%d/%Y") %>
 </td>
+<% if show_mailbluster %>
+<td><%= mailbluster_sync_status(teacher) %></td>
+<% end %>
