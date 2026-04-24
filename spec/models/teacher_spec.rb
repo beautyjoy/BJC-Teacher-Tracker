@@ -131,4 +131,26 @@ RSpec.describe Teacher, type: :model do
       expect(teacher.display_application_status).to eq "Not Reviewed"
     end
   end
+
+  describe "#course_category" do
+    subject(:teacher) { teachers(:bob) }
+
+    {
+      csp_teacher: "CSP",
+      mixed_class: "CSP",
+      teals_volunteer: "CSP",
+      teals_teacher: "CSP",
+      excite: "CSP",
+      middle_school_bjc: "Sparks",
+      non_csp_teacher: "Other",
+      other: "Other",
+      developer: "Other",
+      home_school_bjc: "Other"
+    }.each do |status, expected_category|
+      it "returns '#{expected_category}' for #{status}" do
+        teacher.status = status
+        expect(teacher.course_category).to eq(expected_category)
+      end
+    end
+  end
 end
