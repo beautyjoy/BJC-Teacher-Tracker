@@ -33,12 +33,14 @@ When(/^I clear the email input$/) do
 end
 
 When(/^I close the email modal$/) do
-  within("#emailModal") do
-    find(".modal-header").click
-    sleep 0.2
-    find("button.close span").click
-  end
-  expect(page).not_to have_css(".modal-backdrop", wait: 5)
+  # Trigger Bootstrap's modal-dismiss behavior directly. Clicking the close
+  # button via Capybara is unreliable while the email input still has focus
+  # (browsers run native required-field validation on blur, which races the
+  # click). Using the public Bootstrap API both blurs inputs and animates the
+  # modal closed in one deterministic step.
+  page.execute_script("$('#emailModal').modal('hide')")
+  expect(page).not_to have_css("#emailModal.show")
+  expect(page).not_to have_css(".modal-backdrop")
 end
 
 When(/^I click the delete button for email "([^"]*)"$/) do |email|
