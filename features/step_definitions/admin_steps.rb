@@ -93,8 +93,11 @@ end
 
 Then(/I attach the csv "([^"]*)"$/) do |path|
   Capybara.ignore_hidden_elements = false
-  attach_file("file", File.expand_path(path))
-  Capybara.ignore_hidden_elements = true
+  begin
+    attach_file("file", File.expand_path(path))
+  ensure
+    Capybara.ignore_hidden_elements = true
+  end
 end
 
 Then(/I send a request info email with content "(.*)"/) do |content|
