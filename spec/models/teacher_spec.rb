@@ -157,7 +157,7 @@ RSpec.describe Teacher, type: :model do
       end
     end
   end
-  
+
   describe "MailBluster helper methods" do
     let(:validated_teacher) { teachers(:validated_teacher) }
 
