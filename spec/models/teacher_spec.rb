@@ -155,6 +155,9 @@ RSpec.describe Teacher, type: :model do
         teacher.status = status
         expect(teacher.course_category).to eq(expected_category)
       end
+    end
+  end
+  
   describe "MailBluster helper methods" do
     let(:validated_teacher) { teachers(:validated_teacher) }
 
