@@ -161,7 +161,7 @@ If bundler install runs successfully, continue with the following commands to co
 
 ## Staging Data
 
-Populates a staging database with realistic sample data (~500 schools, ~700 teachers, PD events, and registrations). Run **after** `db:seed`. Never runs in production.
+Populates a staging database with realistic sample data (~500 schools, ~700 teachers, PD events, and registrations). Run **after** `db:seed`. Never runs in production. Note that rows with invalid/missing data will not be seeded.
 
 **Requires:** `BACKEND_MAPS_API_KEY` with the [Geocoding API](https://console.cloud.google.com) enabled, and a CSV export of schools (`Name, Location, Country, URL, Teachers, Grade Level, Actions`).
 
