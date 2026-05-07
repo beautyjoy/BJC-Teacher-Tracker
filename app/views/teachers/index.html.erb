@@ -14,16 +14,25 @@
 </div>
 <% end %>
 
+<div class="custom-control-inline">
+  <select id="courseFilter" class="custom-select custom-select-sm">
+    <option value="">All Courses</option>
+    <option value="CSP">CSP</option>
+    <option value="Sparks">Sparks</option>
+    <option value="Other">Other</option>
+  </select>
+</div>
+
 <table class="table table-striped js-dataTable js-teachersTable">
   <thead class="thead-dark">
     <tr>
-      <%= render 'table_headers', include_id: false %>
+      <%= render 'table_headers', include_id: false, show_mailbluster: false %>
     </tr>
   </thead>
   <tbody>
     <% @all_teachers.each do |teacher| %>
     <tr>
-      <%= render 'teacher', teacher: teacher, merge_table: false %>
+      <%= render 'teacher', teacher: teacher, merge_table: false, show_mailbluster: false %>
     </tr>
     <% end %>
   </tbody>
@@ -35,13 +44,13 @@
 <table class="table table-striped js-dataTable">
   <thead class="thead-dark">
     <tr>
-      <%= render 'table_headers', include_id: false %>
+      <%= render 'table_headers', include_id: false, show_mailbluster: false %>
     </tr>
   </thead>
   <tbody>
     <% @admins.each do |admin| %>
     <tr>
-      <%= render 'teacher', teacher: admin, merge_table: false %>
+      <%= render 'teacher', teacher: admin, merge_table: false, show_mailbluster: false %>
     </tr>
     <% end %>
   </tbody>
@@ -61,6 +70,16 @@
 
   <div class="col-6">
     <%= submit_tag "Fields for CSV", class: "btn btn-primary", data: { toggle: "collapse", target: "#csvFields" } %>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <%= button_to "Sync All to MailBluster",
+        sync_all_mailbluster_teachers_path,
+        method: :post,
+        class: "btn btn-warning",
+        data: { confirm: "This will sync all validated teachers to MailBluster. Continue?" } %>
   </div>
 </div>
 

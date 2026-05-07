@@ -17,6 +17,7 @@ gem "webpacker"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.4", require: false
+gem "faker"
 
 # Login via 3rd party services.
 gem "omniauth"
@@ -40,6 +41,9 @@ gem "liquid"
 # Store uploaded files
 gem "aws-sdk-s3", require: false
 
+# Verify signatures on SNS webhook deliveries
+gem "aws-sdk-sns", "~> 1", require: false
+
 # Render images for file uploads in pages
 gem "image_processing", ">= 1.2"
 
@@ -50,6 +54,7 @@ gem "activerecord-import", require: false
 gem "httparty", "~> 0.21.0"
 
 gem "country_select", "~> 8.0"
+gem "ajax-datatables-rails"
 
 group :development do
   gem "annotate"
