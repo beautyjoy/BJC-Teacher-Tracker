@@ -326,7 +326,7 @@ namespace :db do
                              when :hard then 0
                              when :soft then 1  # retried and eventually delivered
                              else emails_sent
-                             end
+          end
         else
           bounce_type      = :none
           emails_sent      = 0
