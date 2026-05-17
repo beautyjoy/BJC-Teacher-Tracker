@@ -50,10 +50,10 @@ class TeachersController < ApplicationController
     end
   end
 
-  # TODO: This needs to be re-written.
-  # If you are logged in and not an admin, this should fail.
   def create
     if existing_teacher
+      redirect_to login_path,
+            notice: "You already have signed up with '#{params[:email]}'. Please log in."
       return
     end
 
@@ -105,6 +105,15 @@ class TeachersController < ApplicationController
   end
 
   def update
+    if @teacher.denied? && !is_admin?
+      redirect_to root_path, alert: "Failed to update your information. You have already been denied. If you have questions, please email contact@bjc.berkeley.edu."
+      return
+    elsif @teacher.id != current_user.id && !is_admin?
+      Sentry.capture_message("BAD UPDATE: #{current_user.id} attempted to edit #{@teacher.id}")
+      redirect_to root_path, alert: "You are attempting to update another user's record."
+      return
+    end
+
     load_school
     ordered_schools
 
@@ -124,10 +133,13 @@ class TeachersController < ApplicationController
       @teacher.school = @school
     end
 
-    valid_school = update_school_through_teacher
-    if !valid_school
-      return
+    if @teacher.admin_attributes_changed? && !is_admin?
+      redirect_to edit_teacher_path(current_user.id),
+        alert: "Failed to update your information. If you want to change your email or Snap! username, please email contact@bjc.berkeley.edu." and return
     end
+
+    valid_school = update_school_through_teacher
+    return if !valid_school
 
     attach_new_files_if_any
     send_email_if_application_status_changed_and_email_resend_enabled
@@ -137,15 +149,16 @@ class TeachersController < ApplicationController
     end
 
     if !@teacher.validated? && !current_user.admin?
+      @teacher.not_reviewed!
       TeacherMailer.form_submission(@teacher).deliver_now
       TeacherMailer.teacher_form_submission(@teacher).deliver_now
     end
 
     if is_admin?
-      redirect_to edit_teacher_path(params[:id]), notice: "Saved #{@teacher.full_name}"
+      redirect_to teacher_path(@teacher), notice: "Saved #{@teacher.full_name}"
     else
       @teacher.try_append_ip(request.remote_ip)
-      redirect_to edit_teacher_path(params[:id]), notice: "Successfully updated your information"
+      redirect_to root_path, notice: "Saved successfully. Thanks!"
     end
   end
 
