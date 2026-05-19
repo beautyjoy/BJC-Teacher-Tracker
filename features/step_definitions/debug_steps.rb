@@ -22,7 +22,7 @@ And (/^Show me full page html$/) do
   puts page.html
 end
 
-# views/pages/_form.html.erb has a TinyMCE script that 
+# views/pages/_form.html.erb has a TinyMCE script that
 # will cause broswer to hang due to loading assets
 And (/^I wait for TinyMCE to load$/) do
   sleep 1
