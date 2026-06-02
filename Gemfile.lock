@@ -267,7 +267,8 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.1)
     json (2.6.3)
-    jwt (2.7.1)
+    jwt (2.10.3)
+      base64
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.7.0)
