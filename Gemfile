@@ -9,7 +9,7 @@ ruby "3.2.3" # TODO: use file: '.tool-versions' when heroku supports it. (bundle
 gem "rails", "6.1.7.7"
 
 # Production app server
-gem "puma", "~> 5"
+gem "puma", "~> 7"
 gem "pg", "~> 1.5"
 
 # Front-end Assets
