@@ -13,8 +13,8 @@ class TeachersController < ApplicationController
   before_action :load_teacher, except: [:new, :index, :create, :import, :search]
   before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
-  before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
+  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :import, :request_info]
+  before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email, :upload_file, :remove_file]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
 
