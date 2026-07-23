@@ -120,8 +120,8 @@ class MergeController < ApplicationController
     end
 
     from_teacher.email_addresses.each do |email_address|
-      if existing_emails.select(:email).include?(email_address.email.strip.downcase)
-        puts "[WARN]: Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'"
+      if existing_emails.exists?(email: email_address.email.strip.downcase)
+        Rails.logger.warn("Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'")
         next
       end
       email_address.update!(teacher: into_teacher)

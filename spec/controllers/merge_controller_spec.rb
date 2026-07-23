@@ -44,6 +44,20 @@ RSpec.describe MergeController, type: :request do
         .to change { Teacher.count }.by(-1)
     end
 
+    it "skips email addresses the surviving teacher already has (case-insensitively)" do
+      # A case-variant duplicate can only exist in legacy data, since
+      # normalize_email downcases on save — bypass callbacks to create one.
+      variant = EmailAddress.create!(teacher: from_teacher, email: "placeholder@example.com", primary: false)
+      variant.update_column(:email, into_teacher.primary_email.upcase)
+
+      expect { patch merge_path(from: from_teacher.id, into: into_teacher.id) }
+        .to change { Teacher.exists?(from_teacher.id) }.from(true).to(false)
+
+      emails = into_teacher.reload.email_addresses.pluck(:email)
+      expect(emails).to match_array([into_teacher.primary_email, "short@long.com"])
+      expect(EmailAddress.exists?(variant.id)).to be false
+    end
+
     it "does not modify any records when previewing" do
       expect { get preview_merge_path(from: from_teacher.id, into: into_teacher.id) }
         .not_to change { EmailAddress.order(:id).pluck(:id, :teacher_id, :email) }
