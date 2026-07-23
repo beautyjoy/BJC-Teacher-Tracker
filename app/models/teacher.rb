@@ -212,10 +212,19 @@ class Teacher < ApplicationRecord
   end
 
   def valid_languages
-    !languages.empty? && languages.all? { |value| WORLD_LANGUAGES.include?(value) }
+    if languages.blank?
+      errors.add(:languages, "must include at least one language")
+      return
+    end
+
+    unrecognized = languages.reject { |value| WORLD_LANGUAGES.include?(value) }
+    if unrecognized.any?
+      errors.add(:languages, "contains unrecognized languages: #{unrecognized.join(', ')}")
+    end
   end
 
   def sort_and_clean_languages
+    return if languages.nil?
     # Due to an identified bug in the Selectize plugin, an empty string is occasionally appended to the 'languages' list.
     # To ensure data integrity, the following code removes any occurrences of empty strings from the list.
     languages.sort!.reject!(&:blank?)
