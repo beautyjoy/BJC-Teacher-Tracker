@@ -10,6 +10,36 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:require_login).and_return(true)
   end
 
+  it "preserves the selected grade level and school type when signup creates a school" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    # The school form submits enum key strings (School.grade_level_options);
+    # these used to be coerced with to_i, turning every choice into 0
+    # (elementary / public).
+    post :create, params: { teacher: { first_name: "Grade", last_name: "Probe", status: 0,
+                                       personal_website: "https://example.com" },
+                            school: { name: "Grade Level High", city: "Fresno", state: "CA", country: "US",
+                                      website: "glh.example.com", grade_level: "high_school", school_type: "private" },
+                            email: { primary: "gradeprobe@example.com" }
+    }
+    school = School.find_by(name: "Grade Level High")
+    expect(school).not_to be_nil
+    expect(school.grade_level).to eq "high_school"
+    expect(school.school_type).to eq "private"
+  end
+
+  it "leaves education_level unset when the signup form submits a blank value" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+    # A blank education_level used to be coerced to 0 (middle_school).
+    post :create, params: { teacher: { first_name: "Edu", last_name: "Blank", status: 0, education_level: "",
+                                       personal_website: "https://example.com", school_id: short_app.school_id },
+                            email: { primary: "edublank@example.com" }
+    }
+    user = Teacher.find_by(first_name: "Edu")
+    expect(user).not_to be_nil
+    expect(user.education_level).to be_nil
+  end
+
   it "should initialize session count to 1 when teachers signs up (submits app)" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")

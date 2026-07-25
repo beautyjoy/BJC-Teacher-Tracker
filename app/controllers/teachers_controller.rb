@@ -11,7 +11,6 @@ class TeachersController < ApplicationController
 
   before_action :load_pages, only: [:new, :create, :edit, :update]
   before_action :load_teacher, except: [:new, :index, :create, :import, :search]
-  before_action :sanitize_params, only: [:new, :create, :edit, :update]
   before_action :require_login, except: [:new, :create]
   before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search, :import, :request_info]
   before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email, :upload_file, :remove_file]
@@ -297,24 +296,6 @@ class TeachersController < ApplicationController
         School.all.order(:name).reject { |s| s.id == @teacher.school_id }
     else
       @ordered_schools ||= School.all.order(:name)
-    end
-  end
-
-  def sanitize_params
-    teacher = params[:teacher]
-    if teacher && teacher[:status]
-      teacher[:status] = teacher[:status].to_i
-    end
-    if teacher && teacher[:education_level]
-      teacher[:education_level] = teacher[:education_level].to_i
-    end
-
-    school = params[:school]
-    if school && school[:grade_level]
-      school[:grade_level] = school[:grade_level].to_i
-    end
-    if school && school[:school_type]
-      school[:school_type] = school[:school_type].to_i
     end
   end
 

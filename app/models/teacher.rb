@@ -177,6 +177,15 @@ class Teacher < ApplicationRecord
     super(value)
   end
 
+  # education_level_options renders the enum's integer values, so the form
+  # submits them as strings (e.g. "1"). Rails enums accept integers or key
+  # names but not integer-strings, so bridge only the numeric case; anything
+  # else falls through to the enum for native key handling / validation.
+  def education_level=(value)
+    value = value.to_i if value.is_a?(String) && value.match?(/\A-?\d+\z/)
+    super(value)
+  end
+
   def text_status
     STATUSES[status_before_type_cast]
   end
