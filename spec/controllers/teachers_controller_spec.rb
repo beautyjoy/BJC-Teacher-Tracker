@@ -162,6 +162,30 @@ RSpec.describe TeachersController, type: :controller do
     expect(short_app.ip_history.count()).to eq ip_count
   end
 
+  it "ignores non-attribute keys mistakenly nested under :teacher instead of raising" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(true)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+    short_app = Teacher.find_by(first_name: "Short")
+
+    # request_reason/skip_email are top-level params and :school is an
+    # association, not a mass-assignable attribute. Permitting them made
+    # assign_attributes raise; strong params should now drop them silently.
+    post :update, params: {
+      id: short_app.id,
+      teacher: {
+        id: short_app.id,
+        more_info: "still works",
+        school_id: short_app.school_id,
+        school: "not-an-association",
+        request_reason: "should be ignored",
+        skip_email: "No"
+      }
+    }
+    short_app = Teacher.find_by(first_name: "Short")
+    expect(short_app.more_info).to eq "still works"
+    expect(short_app.school_id).to eq short_app.school_id
+  end
+
   it "allows a teacher to update verification_notes on their own profile" do
     ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)

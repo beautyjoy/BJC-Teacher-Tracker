@@ -276,10 +276,13 @@ class TeachersController < ApplicationController
   end
 
   def teacher_params
-    teacher_attributes = [:first_name, :last_name, :school, :status, :snap,
+    teacher_attributes = [:first_name, :last_name, :status, :snap,
                           :more_info, :verification_notes, :personal_website, :education_level, :school_id, languages: [], files: [],
                         more_files: []]
-    admin_attributes = [:application_status, :request_reason, :skip_email]
+    # application_status is the only admin-only teacher attribute; request_reason
+    # and skip_email are submitted as top-level params (see #update et al.), not
+    # nested under :teacher, and are not model attributes.
+    admin_attributes = [:application_status]
     teacher_attributes.push(*admin_attributes) if is_admin?
 
     params.require(:teacher).permit(*teacher_attributes)
