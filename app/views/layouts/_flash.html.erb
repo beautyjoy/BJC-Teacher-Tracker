@@ -3,6 +3,11 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Dismiss">
         <span aria-hidden="true">✖️</span>
     </button>
-    <%= msg.html_safe %>
+    <%# Flash messages interpolate user-supplied data (teacher names, school
+        names, CSV contents), so they must never be marked html_safe wholesale.
+        A few messages legitimately contain a link, and flash survives a redirect
+        as a plain String (the session is JSON-serialized), which would strip any
+        safe-buffer marking -- so sanitize rather than escape outright. %>
+    <%= sanitize(msg) %>
   </div>
 <% end %>
