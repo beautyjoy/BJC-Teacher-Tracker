@@ -162,6 +162,17 @@ RSpec.describe TeachersController, type: :controller do
     expect(short_app.ip_history.count()).to eq ip_count
   end
 
+  it "re-renders signup with an error when no email is submitted" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+    expect {
+      post :create, params: { teacher: { first_name: "NoEmail", last_name: "User", status: 0,
+                                         personal_website: "https://example.com",
+                                         school_id: short_app.school_id } }
+    }.not_to change { Teacher.count }
+    expect(flash[:alert]).to match(/An error occurred/)
+  end
+
   it "attaches more_files uploads to the files collection only" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))

@@ -67,7 +67,7 @@ class TeachersController < ApplicationController
     end
 
     @teacher = Teacher.new(teacher_params)
-    @teacher.email_addresses.build(email: params[:email][:primary], primary: true)
+    @teacher.email_addresses.build(email: primary_email_param, primary: true)
 
     @teacher.try_append_ip(request.remote_ip)
     @teacher.session_count += 1
@@ -107,7 +107,7 @@ class TeachersController < ApplicationController
     load_school
     ordered_schools
 
-    primary_email = params.dig(:email, :primary)
+    primary_email = primary_email_param
 
     @teacher.assign_attributes(teacher_params)
 
@@ -219,7 +219,7 @@ class TeachersController < ApplicationController
 
   def existing_teacher
     # Find by email, but allow updating other info.
-    @teacher = EmailAddress.find_by(email: params.dig(:email, :primary))&.teacher
+    @teacher = EmailAddress.find_by(email: primary_email_param)&.teacher
     if @teacher && defined?(current_user.id) && (current_user.id == @teacher.id)
       params[:id] = current_user.id
       update
@@ -287,6 +287,12 @@ class TeachersController < ApplicationController
     teacher_attributes.push(*admin_attributes) if is_admin?
 
     params.require(:teacher).permit(*teacher_attributes)
+  end
+
+  # The signup/edit forms submit the primary email outside the teacher hash;
+  # permit it explicitly rather than reading raw params.
+  def primary_email_param
+    params.fetch(:email, ActionController::Parameters.new).permit(:primary)[:primary]
   end
 
   def omniauth_data
