@@ -268,17 +268,18 @@ class TeachersController < ApplicationController
   end
 
   def attach_new_files_if_any
-    if params.dig(:teacher, :more_files).present?
-      params[:teacher][:more_files].each do |file|
-        @teacher.files.attach(file)
-      end
+    more_files = params.require(:teacher).permit(more_files: [])[:more_files]
+    more_files&.each do |file|
+      @teacher.files.attach(file)
     end
   end
 
   def teacher_params
+    # more_files is intentionally not mass-assignable: uploads sent under that
+    # name belong in the files collection and are attached explicitly by
+    # attach_new_files_if_any.
     teacher_attributes = [:first_name, :last_name, :status, :snap,
-                          :more_info, :verification_notes, :personal_website, :education_level, :school_id, languages: [], files: [],
-                        more_files: []]
+                          :more_info, :verification_notes, :personal_website, :education_level, :school_id, languages: [], files: []]
     # application_status is the only admin-only teacher attribute; request_reason
     # and skip_email are submitted as top-level params (see #update et al.), not
     # nested under :teacher, and are not model attributes.

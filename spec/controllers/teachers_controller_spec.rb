@@ -162,6 +162,22 @@ RSpec.describe TeachersController, type: :controller do
     expect(short_app.ip_history.count()).to eq ip_count
   end
 
+  it "attaches more_files uploads to the files collection only" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+    short_app = Teacher.find_by(first_name: "Short")
+    post :update, params: {
+      id: short_app.id,
+      teacher: {
+        school_id: short_app.school_id,
+        more_files: [fixture_file_upload(Rails.root.join("spec/fixtures/test_file.txt"), "text/plain")]
+      }
+    }
+    short_app.reload
+    expect(short_app.files.count).to eq(1)
+    expect(short_app.more_files.count).to eq(0)
+  end
+
   it "ignores non-attribute keys mistakenly nested under :teacher instead of raising" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
