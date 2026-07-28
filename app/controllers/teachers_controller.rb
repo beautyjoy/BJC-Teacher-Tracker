@@ -279,7 +279,11 @@ class TeachersController < ApplicationController
     # name belong in the files collection and are attached explicitly by
     # attach_new_files_if_any.
     teacher_attributes = [:first_name, :last_name, :status, :snap,
-                          :more_info, :verification_notes, :personal_website, :education_level, :school_id, languages: [], files: []]
+                          :more_info, :verification_notes, :personal_website, :education_level, :school_id, { languages: [] }]
+    # Only the signup form submits teacher[files]; on update, assigning files
+    # would replace the existing attachment set, and attachments are managed
+    # through the dedicated upload_file/remove_file actions instead.
+    teacher_attributes << { files: [] } if action_name == "create"
     # application_status is the only admin-only teacher attribute; request_reason
     # and skip_email are submitted as top-level params (see #update et al.), not
     # nested under :teacher, and are not model attributes.

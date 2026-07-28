@@ -189,6 +189,38 @@ RSpec.describe TeachersController, type: :controller do
     expect(short_app.more_files.count).to eq(0)
   end
 
+  it "still attaches supporting files submitted with a new signup" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+    post :create, params: {
+      teacher: { first_name: "File", last_name: "Signup", status: 0,
+                 personal_website: "https://example.com", school_id: short_app.school_id,
+                 files: [fixture_file_upload(Rails.root.join("spec/fixtures/test_file.txt"), "text/plain")] },
+      email: { primary: "filesignup@example.com" }
+    }
+    user = Teacher.find_by(first_name: "File")
+    expect(user).not_to be_nil
+    expect(user.files.count).to eq(1)
+  end
+
+  it "ignores teacher[files] on update so attachments cannot be replaced by mass assignment" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+    short_app = Teacher.find_by(first_name: "Short")
+    short_app.files.attach(fixture_file_upload(Rails.root.join("spec/fixtures/test_file.txt"), "text/plain"))
+
+    post :update, params: {
+      id: short_app.id,
+      teacher: {
+        school_id: short_app.school_id,
+        files: [fixture_file_upload(Rails.root.join("spec/fixtures/test_file2.txt"), "text/plain")]
+      }
+    }
+    short_app.reload
+    expect(short_app.files.count).to eq(1)
+    expect(short_app.files.first.blob.filename.to_s).to eq("test_file.txt")
+  end
+
   it "ignores non-attribute keys mistakenly nested under :teacher instead of raising" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(true)
     ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
