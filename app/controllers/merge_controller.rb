@@ -54,9 +54,9 @@ class MergeController < ApplicationController
     merged_attributes = {}
     into_teacher.attributes.each do |attr_name, attr_value|
       from_teacher_attr_value = from_teacher.attributes[attr_name]
-      if attr_value.blank?
+      if missing_for_merge?(attr_value)
         merged_attributes[attr_name] = from_teacher_attr_value
-      elsif from_teacher_attr_value.blank?
+      elsif missing_for_merge?(from_teacher_attr_value)
         merged_attributes[attr_name] = attr_value
       else
         case attr_name
@@ -86,9 +86,9 @@ class MergeController < ApplicationController
     merged_attributes = {}
     into_school.attributes.each do |attr_name, attr_value|
       from_school_attr_value = from_school.attributes[attr_name]
-      if attr_value.blank?
+      if missing_for_merge?(attr_value)
         merged_attributes[attr_name] = from_school_attr_value
-      elsif from_school_attr_value.blank?
+      elsif missing_for_merge?(from_school_attr_value)
         merged_attributes[attr_name] = attr_value
       else
         case attr_name
@@ -106,10 +106,17 @@ class MergeController < ApplicationController
     School.new(merged_attributes)
   end
 
+  # `false` and `0` are meaningful values, not missing ones. Using `blank?` here
+  # would treat `admin: false` as absent and let a merge silently copy
+  # `admin: true` over from the other record.
+  def missing_for_merge?(value)
+    value.nil? || (value.respond_to?(:empty?) && value.empty?)
+  end
+
   # Handle merging EmailAddress records, so they all belong to the saved record.
   # This method is designed to be inside a transaction for safety.
   def merge_email_addresses(from_teacher, into_teacher)
-    existing_emails = into_teacher.email_addresses
+    existing_emails = into_teacher.email_addresses.pluck(:email)
 
     # Ensure there is only one primary email if both have a primary.
     if into_teacher.primary_email.present?
@@ -117,11 +124,16 @@ class MergeController < ApplicationController
     end
 
     from_teacher.email_addresses.each do |email_address|
-      if existing_emails.select(:email).include?(email_address.email.strip.downcase)
-        puts "[WARN]: Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'"
+      if existing_emails.include?(email_address.email.strip.downcase)
+        Rails.logger.warn("Merge Teacher #{from_teacher.id} into #{into_teacher.id} found duplicate email: '#{email_address.email}'")
         next
       end
       email_address.update!(teacher: into_teacher)
     end
+
+    # The association still holds the rows we just re-parented. Leaving it loaded
+    # would make `from_teacher.destroy` delete them by id via `dependent: :destroy`,
+    # undoing the merge and locking the surviving teacher out of those logins.
+    from_teacher.email_addresses.reload
   end
 end

@@ -9,12 +9,18 @@ class TeachersController < ApplicationController
   include SchoolParams
   include CsvProcess
 
-  before_action :load_pages, only: [:new, :create, :edit, :update]
-  before_action :load_teacher, except: [:new, :index, :create, :import, :search]
-  before_action :sanitize_params, only: [:new, :create, :edit, :update]
+  # Authorization runs before any record is loaded, so that a failed lookup can
+  # never be used to probe which teacher ids exist.
   before_action :require_login, except: [:new, :create]
-  before_action :require_admin, only: [:validate, :deny, :destroy, :index, :show, :search]
-  before_action :require_edit_permission, only: [:edit, :update, :resend_welcome_email]
+  before_action :require_admin, only: [:validate, :deny, :request_info, :destroy, :index, :show, :import]
+  # Uploading and removing files is something a teacher may do to their own
+  # record; :require_edit_permission allows self-or-admin.
+  before_action :require_edit_permission,
+                only: [:edit, :update, :resend_welcome_email, :upload_file, :remove_file]
+
+  before_action :load_pages, only: [:new, :create, :edit, :update]
+  before_action :load_teacher, except: [:new, :index, :create, :import]
+  before_action :sanitize_params, only: [:new, :create, :edit, :update]
 
   rescue_from ActiveRecord::RecordNotUnique, with: :deny_access
 
