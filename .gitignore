@@ -162,3 +162,6 @@ cc-test-reporter
 
 # CSV data files
 *.csv
+
+# Sandbox/devcontainer-only host-check bypass; must not ship.
+/config/initializers/zzz_disable_host_check.rb
