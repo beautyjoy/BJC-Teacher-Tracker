@@ -150,12 +150,17 @@ module SeedData
   end
 
   def self.create_schools
-    School.find_or_create_by(
+    school = School.find_or_initialize_by(
       name: "UC Berkeley",
       city: "Berkeley",
-      country: "US",
+      state: "CA",
+      country: "US"
+    )
+
+    school.update!(
       website: "https://bjc.berkeley.edu",
-      state: "CA"
+      grade_level: 4,
+      school_type: 0
     )
   end
 
@@ -167,6 +172,7 @@ module SeedData
             admin: true,
             status: 0,
             application_status: "Validated",
+            personal_website: "https://example.com",
             school: School.find_by(name: "UC Berkeley"),
 
             # Note: email field does not exist in the schema of the Teacher model
@@ -181,6 +187,7 @@ module SeedData
             admin: true,
             status: 0,
             application_status: "Validated",
+            personal_website: "https://example.com",
             school: School.find_by(name: "UC Berkeley"),
 
             email: "lmock@berkeley.edu",

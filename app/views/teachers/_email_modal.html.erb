@@ -1,0 +1,32 @@
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="emailModalLabel">Add New Emails</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with(url: teacher_email_address_path(teacher), method: :post, local: true, id: "email-modal-form") do %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= label_tag :email, "Email address" %>
+            <%= email_field_tag :email, "", class: "form-control", required: true, placeholder: "Type an email address" %>
+            <small class="form-text text-muted">Enter a valid email address, then click Add Emails.</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add Emails</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#emailModal').on('hidden.bs.modal', function() {
+      $(this).find('input[type="email"]').val('');
+    });
+  });
+</script>

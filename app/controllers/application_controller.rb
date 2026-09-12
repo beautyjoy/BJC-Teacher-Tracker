@@ -26,15 +26,22 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      flash[:danger] = "You need to log in to access this."
-      redirect_to root_path
+      session[:redirect_on_login] = request.path
+      flash[:danger] = "Please log in to access this page."
+      redirect_to login_path
     end
   end
 
   def require_admin
     unless is_admin?
-      flash[:danger] = "Only admins can access this page."
-      redirect_to root_path
+      if !logged_in?
+        session[:redirect_on_login] = request.path
+        flash[:danger] = "Please log in to access this page."
+        redirect_to login_path
+      else
+        flash[:danger] = "Only admins can access this page."
+        redirect_to root_path
+      end
     end
   end
 

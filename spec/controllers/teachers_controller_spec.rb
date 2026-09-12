@@ -14,7 +14,7 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")
     post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
-                                       password: "pa33word!", more_info: "info",
+                                       password: "pa33word!", more_info: "info", personal_website: "https://example.com",
                                        school_id: short_app.school_id },
                             email: { primary: "new@user.com" }
     }
@@ -27,7 +27,7 @@ RSpec.describe TeachersController, type: :controller do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")
     post :create, params: { teacher: { first_name: "First", last_name: "Last", status: 0, education_level: 0,
-                                       password: "pa33word!", more_info: "info",
+                                       password: "pa33word!", more_info: "info", personal_website: "https://example.com",
                                        school_id: short_app.school_id },
                             email: { primary: "new@user.com" }
     }
@@ -36,12 +36,31 @@ RSpec.describe TeachersController, type: :controller do
     expect(user.ip_history).to include(request.remote_ip)
   end
 
+  it "persists verification_notes when a teacher submits a new application" do
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    short_app = Teacher.find_by(first_name: "Short")
+
+    # Clarifying intent:
+    # This verifies the end-to-end create path accepts and stores the new optional
+    # verification_notes field (strong params + model assignment + persistence).
+    post :create, params: { teacher: { first_name: "Verify", last_name: "Notes", status: 0, education_level: 0,
+                                       password: "pa33word!", more_info: "info", personal_website: "www.example.com",
+                                       verification_notes: "Principal contact: principal@example.edu",
+                                       school_id: short_app.school_id },
+                            email: { primary: "verify_notes_#{Time.now.to_i}@user.com" }
+    }
+
+    user = Teacher.find_by(first_name: "Verify", last_name: "Notes")
+    expect(user).not_to be_nil
+    expect(user.verification_notes).to eq("Principal contact: principal@example.edu")
+  end
+
   it "should not increase session count when teacher attempts to sign up with existing email" do
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
     short_app = Teacher.find_by(first_name: "Short")
     session_count_orig = short_app.session_count
     post :create, params: { teacher: { first_name: "Short", last_name: "Last", status: 0, education_level: 0,
-                                       password: "pa33word!", more_info: "info",
+                                       password: "pa33word!", more_info: "info", personal_website: "https://example.com",
                                        school_id: short_app.school_id },
                             email: { primary: short_app.primary_email }
     }
@@ -113,6 +132,28 @@ RSpec.describe TeachersController, type: :controller do
     expect(short_app.ip_history.count()).to eq ip_count
   end
 
+  it "allows a teacher to update verification_notes on their own profile" do
+    ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
+    ApplicationController.any_instance.stub(:is_admin?).and_return(false)
+    ApplicationController.any_instance.stub(:current_user).and_return(Teacher.find_by(first_name: "Short"))
+    short_app = Teacher.find_by(first_name: "Short")
+
+    # Clarifying intent:
+    # This checks the edit/update path for existing teachers and ensures
+    # verification_notes remains writable for normal self-service profile updates.
+    post :update, params: {
+      id: short_app.id,
+      teacher: {
+        id: short_app.id,
+        verification_notes: "Homeschool verification via district office",
+        school_id: short_app.school_id
+      }
+    }
+
+    short_app = Teacher.find_by(first_name: "Short")
+    expect(short_app.verification_notes).to eq("Homeschool verification via district office")
+  end
+
   it "doesn't allow teacher to change their snap or email" do
     ApplicationController.any_instance.stub(:require_edit_permission).and_return(true)
     ApplicationController.any_instance.stub(:is_admin?).and_return(false)
@@ -158,8 +199,8 @@ RSpec.describe TeachersController, type: :controller do
     it "does not allow non-admin to accept a user" do
       post :validate, params: { id: 1 }
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to(root_path)
-      expect(flash[:danger]).to eq "Only admins can access this page."
+      expect(response).to redirect_to(login_path)
+      expect(flash[:danger]).to eq "Please log in to access this page."
     end
 
     it "rejects malicious admin signup attempt" do
@@ -170,6 +211,7 @@ RSpec.describe TeachersController, type: :controller do
           status: 0,
           snap: "valid_example",
           admin: true,
+          personal_website: "https://example.com",
           school_id: School.first.id
         },
         email: {
@@ -191,6 +233,7 @@ RSpec.describe TeachersController, type: :controller do
           status: 0,
           application_status: "validated",
           snap: "valid_example",
+          personal_website: "https://example.com",
           school_id: School.first.id,
         },
         email: {
