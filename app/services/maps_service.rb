@@ -6,10 +6,10 @@ module MapsService
     return nil if address.blank?
 
     address = CGI.escape(address)
-    url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=#{ENV['MAPS_API_KEY']}"
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{address}&key=#{ENV['BACKEND_MAPS_API_KEY']}"
     response = HTTParty.get(url)
     return nil if response["status"] != "OK"
 
     response["results"][0]["geometry"]["location"].with_indifferent_access
-    end
+  end
 end
