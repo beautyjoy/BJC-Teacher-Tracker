@@ -71,4 +71,14 @@ Rails.application.configure do
   # Store files locally
   # config.active_storage.service = :amazon
   config.active_storage.service = :local
+
+  # Superconductor exposes the dev server through a tunneled HTTPS host and
+  # embeds it in an iframe for Live Preview.
+  if ENV['AGENT_WEB_HOST'].present?
+    config.hosts << ENV['AGENT_WEB_HOST']
+    config.action_dispatch.default_headers.delete('X-Frame-Options')
+    config.content_security_policy do |policy|
+      policy.frame_ancestors :self, 'https://superconductor.com', 'https://*.superconductor.com'
+    end
+  end
 end

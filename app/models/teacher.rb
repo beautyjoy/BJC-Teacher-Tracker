@@ -131,6 +131,15 @@ class Teacher < ApplicationRecord
     reset_validation_status
   end
 
+  # A teacher whose application is "info needed" has responded once they make
+  # a meaningful change, so send it back to the review queue.
+  def reset_validation_status
+    return if application_status_changed? || school_id_changed?
+    if info_needed?
+      not_reviewed!
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -159,8 +168,10 @@ class Teacher < ApplicationRecord
     self.snap
   end
 
+  # Attributes which only an admin may change.
+  # email_changed_flag is set by EmailAddress when a linked address is edited.
   def admin_attributes_changed?
-    self.email_changed? || self.personal_email_changed? || self.snap_changed?
+    email_changed_flag || snap_changed?
   end
 
   def try_append_ip(ip)
