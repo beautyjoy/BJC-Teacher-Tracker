@@ -5,7 +5,11 @@ class SchoolsController < ApplicationController
   before_action :require_admin
 
   def index
-    @schools = School.all.order(:name)
+    respond_to do |format|
+      format.html
+      format.json { render json: SchoolDatatable.new(params) }
+      format.csv { send_data School.csv_export, filename: "schools-#{Date.today}.csv" }
+    end
   end
 
   def show

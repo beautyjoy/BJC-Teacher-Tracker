@@ -61,9 +61,13 @@ class TeacherMailer < ApplicationMailer
       piazza_password: Rails.application.secrets[:piazza_password],
       denial_reason: @denial_reason,
       request_reason: @request_reason,
-      request_info_reason: @request_reason
+      request_info_reason: @request_reason,
+      # Admin-only page; use only in emails sent to admins.
+      view_teacher_url: @teacher&.persisted? ? teacher_url(@teacher) : nil,
+      # The teacher's own edit page; safe to send to the teacher.
+      edit_teacher_url: @teacher&.persisted? ? edit_teacher_url(@teacher) : nil
     }
-    base_rules.merge!(@teacher.email_attributes)
+    base_rules.merge!(@teacher.email_attributes) if @teacher
     base_rules.with_indifferent_access
   end
 

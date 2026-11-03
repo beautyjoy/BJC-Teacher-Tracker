@@ -4,12 +4,18 @@
 #
 # Table name: email_addresses
 #
-#  id         :bigint           not null, primary key
-#  email      :string           not null
-#  primary    :boolean          default(FALSE), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  teacher_id :bigint           not null
+#  id                :bigint           not null, primary key
+#  bounced           :boolean          default(FALSE), not null
+#  email             :string           not null
+#  emails_delivered  :integer          default(0), not null
+#  emails_sent       :integer          default(0), not null
+#  hard_bounce_count :integer          default(0), not null
+#  last_ses_event_at :datetime
+#  primary           :boolean          default(FALSE), not null
+#  soft_bounce_count :integer          default(0), not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  teacher_id        :bigint           not null
 #
 # Indexes
 #
@@ -23,6 +29,7 @@
 #
 class EmailAddress < ApplicationRecord
   belongs_to :teacher
+  has_many :ses_delivery_events, dependent: :destroy
 
   # Rail's bulit-in validation for email format regex
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -30,6 +37,19 @@ class EmailAddress < ApplicationRecord
 
   before_save :normalize_email
   before_save :flag_teacher_if_email_changed
+
+  scope :bounced, -> { where(bounced: true) }
+  scope :with_undelivered, -> { where("emails_sent > emails_delivered") }
+
+  # Number of emails that were sent but not delivered.
+  def undelivered_count
+    [emails_sent - emails_delivered, 0].max
+  end
+
+  # Whether this email has any undelivered emails.
+  def has_undelivered?
+    undelivered_count > 0
+  end
 
   private
   def only_one_primary_email_per_teacher

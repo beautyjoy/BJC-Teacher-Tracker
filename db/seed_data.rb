@@ -13,8 +13,7 @@ module SeedData
     <p>Thank you! <br />&mdash; The BJC Team</p>
   WELCOME_EMAIL
 
-  @form_submission = <<-FORM_SUBMISSION
-    <p>
+  @form_submission_details = <<-FORM_SUBMISSION_DETAILS
       Here is the information that was submitted: <br>
       Name: {{teacher_first_name}} {{teacher_last_name}} <br>
       Email: {{teacher_email}} <br>
@@ -22,8 +21,24 @@ module SeedData
       School: {{teacher_school_name}} <br>
       Location: {{teacher_school_city}}, {{teacher_school_state}} <br>
       Website: {{ teacher_school_website | link_to(nil, teacher_school_website) }}
-    </p>
+  FORM_SUBMISSION_DETAILS
+
+  # Sent to the admins. {{view_teacher_url}} links to the admin-only teacher page.
+  @form_submission = <<-FORM_SUBMISSION
+    <p>
+      <a href="{{view_teacher_url}}">View form submission</a><br>
+#{@form_submission_details}    </p>
   FORM_SUBMISSION
+
+  # Sent to the applicant. Teachers can't open the admin page, so link to
+  # their own edit page instead.
+  @teacher_form_submission = <<-TEACHER_FORM_SUBMISSION
+    <p>
+#{@form_submission_details}    </p>
+    <p>
+      You can <a href="{{edit_teacher_url}}">review or update your information here</a>.
+    </p>
+  TEACHER_FORM_SUBMISSION
 
   @basic_email_with_reason = <<-DENY_EMAIL
     <p>
@@ -112,7 +127,7 @@ module SeedData
       },
       { # teacher form submission email
         to: @default_to_field,
-        body: @form_submission,
+        body: @teacher_form_submission,
         path: "teacher_mailer/teacher_form_submission",
         locale: nil,
         handler: "liquid",
@@ -164,6 +179,9 @@ module SeedData
     )
   end
 
+  # Only the core admin accounts belong here: `db:seed` is run against
+  # production to roll out email template changes. Demo teachers live in
+  # db/sample_data.rb and are loaded by `bin/rails db:seed:sample_data`.
   def self.teachers
     [
         {
@@ -195,33 +213,56 @@ module SeedData
     ]
   end
 
+  # Extra addresses are attached to the teacher who owns `owner` (a primary
+  # email), never looked up by name -- a name match in production could be any
+  # real teacher.
   def self.email_addresses
     [
-      {
-        email: "ball@berkeley.edu",
-        primary: true,
-        teacher: Teacher.find_by(first_name: "Michael"),
-      },
-      {
-        email: "lmock@berkeley.edu",
-        primary: true,
-        teacher: Teacher.find_by(first_name: "Lauren"),
-      },
-      {
-        email: "ball2@berkeley.edu",
-        primary: false,
-        teacher: Teacher.find_by(first_name: "Michael"),
-      },
-      {
-        email: "ball3@berkeley.edu",
-        primary: false,
-        teacher: Teacher.find_by(first_name: "Michael"),
-      },
-      {
-        email: "lmock2@berkeley.edu",
-        primary: false,
-        teacher: Teacher.find_by(first_name: "Lauren"),
-      },
+      { email: "ball2@berkeley.edu", primary: false, owner: "ball@berkeley.edu" },
+      { email: "ball3@berkeley.edu", primary: false, owner: "ball@berkeley.edu" },
+      { email: "lmock2@berkeley.edu", primary: false, owner: "lmock@berkeley.edu" },
     ]
+  end
+
+  # Creates or updates each teacher, keyed by their primary email address.
+  def self.upsert_teachers(teacher_list)
+    teacher_list.each do |teacher_attr|
+      teacher_attr = teacher_attr.dup
+      email_address = EmailAddress.find_or_initialize_by(email: teacher_attr.delete(:email))
+
+      if email_address.new_record?
+        teacher = Teacher.create(teacher_attr)
+        if teacher.persisted?
+          email_address.teacher_id = teacher.id
+          email_address.primary = true
+          email_address.save
+        else
+          puts "Failed to create teacher. Errors: #{teacher.errors.full_messages.join(", ")}"
+        end
+      else
+        teacher = Teacher.find_by(id: email_address.teacher_id)
+        if !teacher&.update(teacher_attr)
+          puts "Failed to update teacher. Errors: #{teacher&.errors&.full_messages&.join(", ")}"
+        end
+      end
+    end
+  end
+
+  # Adds secondary addresses, skipping any whose owner doesn't exist.
+  def self.upsert_email_addresses(address_list)
+    address_list.each do |attrs|
+      owner = EmailAddress.find_by(email: attrs[:owner])&.teacher
+      if owner.nil?
+        puts "Skipping #{attrs[:email]}: no teacher with email #{attrs[:owner]}"
+        next
+      end
+
+      email_address = EmailAddress.find_or_initialize_by(email: attrs[:email])
+      if email_address.persisted? && email_address.teacher_id != owner.id
+        puts "Skipping #{attrs[:email]}: already belongs to another teacher"
+        next
+      end
+      email_address.update(teacher: owner, primary: attrs[:primary])
+    end
   end
 end

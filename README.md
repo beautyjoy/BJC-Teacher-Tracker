@@ -159,6 +159,100 @@ If bundler install runs successfully, continue with the following commands to co
 - `heroku config:set ...` for each of the environment variables.
 - `heroku open`
 
+## Seed Data
+
+- `bin/rails db:seed` loads only production-safe data: email templates, UC Berkeley, and the core admin accounts. It is safe to run on production, and is how email template changes get there.
+- `bin/rails db:seed:sample_data` runs `db:seed`, then adds a dozen demo schools and teachers for local development. All addresses use reserved `.example` domains. It refuses to run in production unless `ALLOW_SAMPLE_DATA=true` is set.
+
+## Staging Data
+
+Populates a staging database with realistic sample data (~500 schools, ~700 teachers, PD events, and registrations). Run **after** `db:seed`. Refuses to run in production unless `ALLOW_SAMPLE_DATA=true` is set, which should only ever be set on a staging app. Note that rows with invalid/missing data will not be seeded.
+
+**Requires:** `BACKEND_MAPS_API_KEY` with the [Geocoding API](https://console.cloud.google.com) enabled, and a CSV export of schools (`Name, Location, Country, URL, Teachers, Grade Level, Actions`).
+
+### Local
+```bash
+export BACKEND_MAPS_API_KEY="your-key"
+bin/rails "db:staging_seed[/path/to/schools.csv,500]"
+```
+
+### Heroku
+`db:seed` is **not** run automatically (only `db:prepare` runs on deploy), so seed admins first:
+```bash
+heroku config:set BACKEND_MAPS_API_KEY=your-key --app your-app
+heroku run bin/rails db:seed --app your-app
+heroku run bash --app your-app
+```
+Inside the dyno, download the CSV. Any hosting works — Google Drive, Dropbox, S3, transfer.sh, or committed directly to the repo. Google Drive example (share as "Anyone with link", copy the file ID):
+```bash
+ID=YOUR_FILE_ID
+OUT=/tmp/schools.csv
+curl -L "https://drive.google.com/uc?export=download&id=$ID" -o $OUT
+bin/rails "db:staging_seed[/tmp/schools.csv,500]"
+```
+Revoke the Google Drive link after seeding.
+
+
+## MailBluster Integration
+
+The app integrates with [MailBluster](https://mailbluster.com/) for email marketing and newsletter management.
+
+### Configuration
+
+Set the `MAILBLUSTER_API_KEY` environment variable:
+
+```bash
+# Local development
+export MAILBLUSTER_API_KEY=your_api_key_here
+
+# Heroku
+heroku config:set MAILBLUSTER_API_KEY=your_api_key_here
+```
+
+### Features
+
+- **Auto-sync on approval**: When a teacher is validated, their info is synced to MailBluster as a lead
+- **Auto-sync on status change**: Updating a teacher's application status triggers a MailBluster sync
+- **Auto-sync on email add**: Adding a new email address to a validated teacher triggers sync
+- **Manual sync**: Admins can sync individual teachers or all validated teachers from the UI
+- **Lead cleanup**: Deleting a teacher removes their lead from MailBluster
+- **Delivery tracking**: Email addresses track `emails_sent`, `emails_delivered`, and `bounced` status
+
+### Rake Tasks
+
+```bash
+# Sync all validated teachers to MailBluster
+bundle exec rake mailbluster:sync_all
+
+# Sync a single teacher by ID
+bundle exec rake mailbluster:sync_teacher[123]
+
+# Check sync status
+bundle exec rake mailbluster:status
+```
+
+## SES bounce tracking (setup)
+
+> **Status:** the webhook is deployed but **not active in production yet** — no SNS topic is subscribed and `SNS_ALLOWED_TOPIC_ARNS` is unset, so it rejects everything.
+
+`POST /webhooks/ses` receives Amazon SES events via SNS and updates the `emails_sent`, `emails_delivered`, `soft_bounce_count`, `hard_bounce_count`, and `bounced` fields on `EmailAddress`. Every event is also stored in `ses_delivery_events`. Messages are checked against an SNS topic allowlist and their AWS signature before anything is processed.
+
+To turn it on:
+
+1. **Create an SNS topic** (e.g. `bjc-ses-events`) in the same region as SES.
+2. **Send SES events to it.** Either:
+   - *Preferred:* create an SES **configuration set** with an **SNS event destination** for `Send`, `Delivery`, `Bounce`, and `Complaint`, then set it as the **default configuration set** of the sending identity (domain or address). The app sends over SMTP and does not set an `X-SES-CONFIGURATION-SET` header, so the default is the only way the configuration set gets applied.
+   - *Or:* on the identity, enable **feedback notifications** to the topic for Bounce, Complaint, and Delivery. (No `Send` events in this mode, so `emails_sent` won't move.)
+3. **Set the allowlist on Heroku** before subscribing. Without it, every message gets a 401, including the subscription confirmation:
+   ```bash
+   heroku config:set SNS_ALLOWED_TOPIC_ARNS=arn:aws:sns:us-west-2:123456789012:bjc-ses-events
+   ```
+   (Comma-separated if there's more than one.)
+4. **Subscribe the app** to the topic: protocol **HTTPS**, endpoint `https://<your-host>/webhooks/ses`. Leave *raw message delivery* off. The app confirms the subscription by itself.
+5. **Check it works:** the subscription should show **Confirmed** in the SNS console. Send an email (or use the SES mailbox simulator, e.g. `bounce@simulator.amazonses.com`), then check `heroku run bin/rails runner 'p SesDeliveryEvent.last'` or the teacher's Email Delivery Stats. Webhook problems are logged with the `[SES Webhook]` prefix.
+
+For local development, `bin/rails "ses:simulate[teacher@example.com,hard_bounce]"` fires a fixture event without AWS, and `bin/rails ses:reset` clears the counters. Both refuse to run outside development and test.
+
 
 
 ### CodeClimate Local Test
@@ -168,3 +262,6 @@ TODO: Link to download CodeClimate binaries for macOS.
 ```
 https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64
 ```
+
+### Contributions
+[Hagen Haeussler](https://www.linkedin.com/in/hagen-h%C3%A4u%C3%9Fler-6bb293289/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BeCJ75lhZToWJMy945exu1g%3D%3D) 

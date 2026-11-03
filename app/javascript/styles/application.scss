@@ -27,6 +27,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import 'merge_modal';
 @import './sidebar.scss';
 @import "./selectize.scss";
+@import "datatable_sorting";
 
 html {
   min-height: 100%;
@@ -160,6 +161,25 @@ footer a:active {
   td[data-col="status"] {
     display: none;
   }
+}
+
+.primary-email-dot,
+.bounced-email-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 4px;
+  cursor: default;
+}
+
+.primary-email-dot {
+  background-color: #007bff;
+}
+
+.bounced-email-dot {
+  background-color: #dc3545;
 }
 
 .trapezoid {
