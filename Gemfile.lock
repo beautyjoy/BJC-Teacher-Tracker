@@ -87,6 +87,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.9.2)
       public_suffix (>= 2.0.2, < 8.0)
+    ajax-datatables-rails (1.5.0)
+      rails (>= 6.0)
+      zeitwerk
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
@@ -113,6 +116,9 @@ GEM
     aws-sdk-s3 (1.245.0)
       aws-sdk-core (~> 3, >= 3.269.0)
       aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.5)
+    aws-sdk-sns (1.133.0)
+      aws-sdk-core (~> 3, >= 3.270.0)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.12.1)
       aws-eventstream (~> 1, >= 1.0.2)
@@ -590,8 +596,10 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import
+  ajax-datatables-rails
   annotate
   aws-sdk-s3
+  aws-sdk-sns (~> 1)
   axe-core-cucumber
   axe-core-rspec
   bootsnap (>= 1.4.4)
@@ -600,6 +608,7 @@ DEPENDENCIES
   database_cleaner
   debug
   factory_bot_rails
+  faker
   haml-lint
   httparty (~> 0.24)
   image_processing (>= 1.2)

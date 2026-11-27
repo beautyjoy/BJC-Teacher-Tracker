@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class EmailAddressesController < ApplicationController
+  # Login emails are admin-managed: addresses aren't verified, and any address
+  # on a teacher can be used to sign in as them. Authorize before loading the
+  # teacher so a failed lookup can't be used to probe which ids exist.
   before_action :require_login
   before_action :require_admin
   before_action :set_teacher
@@ -13,6 +16,8 @@ class EmailAddressesController < ApplicationController
     end
 
     @teacher.email_addresses.create!(email:, primary: false)
+    # Sync teacher to MailBluster when a new email is added
+    MailblusterService.create_or_update_lead(@teacher) if MailblusterService.configured? && @teacher.validated?
     redirect_to teacher_path(@teacher), notice: "Personal email addresses added successfully."
   rescue ActiveRecord::RecordInvalid => e
     error_message = e.record&.errors&.full_messages&.join(", ")
@@ -27,7 +32,19 @@ class EmailAddressesController < ApplicationController
       return
     end
 
+    if email.primary?
+      redirect_to teacher_path(@teacher), alert: "Make another email primary before deleting this one."
+      return
+    end
+
+    if @teacher.email_addresses.count <= 1
+      redirect_to teacher_path(@teacher), alert: "Add another email before deleting this one."
+      return
+    end
+
     email.destroy!
+    # Re-sync to MailBluster since email list changed
+    MailblusterService.create_or_update_lead(@teacher) if MailblusterService.configured? && @teacher.validated?
     redirect_to teacher_path(@teacher), notice: "Email address deleted successfully."
   rescue ActiveRecord::RecordNotFound
     redirect_to teacher_path(@teacher), alert: "Email address not found."

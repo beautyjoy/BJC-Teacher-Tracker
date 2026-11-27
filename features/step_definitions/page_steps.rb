@@ -19,6 +19,10 @@ When("I check {string} checkbox") do |checkbox|
   check checkbox
 end
 
+When(/^I search the schools table for "([^"]*)"$/) do |query|
+  find("#schools-table_filter input").set(query)
+end
+
 When(/^(?:|I )fill in the page HTML content with "([^"]*)"$/) do |value|
   Timeout.timeout(Capybara.default_max_wait_time) do
     sleep 0.05 until page.evaluate_script("typeof tinyMCE !== 'undefined' && tinyMCE.editors && tinyMCE.editors.length > 0")
