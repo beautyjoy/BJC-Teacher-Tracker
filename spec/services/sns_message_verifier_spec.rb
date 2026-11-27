@@ -141,7 +141,7 @@ RSpec.describe SnsMessageVerifier, type: :service do
     end
 
     def sign(message)
-      canonical = Aws::SNS::MessageVerifier::SIGNABLE_KEYS.filter_map do |k|
+      canonical = Aws::SNS::MessageVerifier::SIGNABLE_KEYS_BY_TYPE.fetch(message["Type"]).filter_map do |k|
         "#{k}\n#{message[k]}\n" if message[k].present?
       end.join
       message.merge(

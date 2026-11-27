@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 3.3.9
+    - name: Set up Ruby 3.3.13
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.3.9
+        ruby-version: 3.3.13
         bundler-cache: true
     - name: Run RuboCop
       run: bundle exec rubocop --parallel
