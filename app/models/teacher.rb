@@ -131,6 +131,8 @@ class Teacher < ApplicationRecord
     reset_validation_status
   end
 
+  # A teacher whose application is "info needed" has responded once they make
+  # a meaningful change, so send it back to the review queue.
   def reset_validation_status
     return if application_status_changed? || school_id_changed?
     if info_needed?
@@ -164,6 +166,12 @@ class Teacher < ApplicationRecord
   # TODO: use this method until we rename the column.
   def snap_username
     self.snap
+  end
+
+  # Attributes which only an admin may change.
+  # email_changed_flag is set by EmailAddress when a linked address is edited.
+  def admin_attributes_changed?
+    email_changed_flag || snap_changed?
   end
 
   def try_append_ip(ip)
@@ -307,7 +315,7 @@ class Teacher < ApplicationRecord
     }.transform_values { |value| value.blank? ? "(blank)" : value }
   end
 
-  # TODO: The school data needs to be cleaned up.
+  # TODO: Move this to a TeacherCSVExports lib file
   def self.csv_export
     attributes = %w|
       id
