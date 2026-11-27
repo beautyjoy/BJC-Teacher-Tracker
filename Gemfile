@@ -4,9 +4,13 @@ source "https://rubygems.org"
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.3" # TODO: use file: '.tool-versions' when heroku supports it. (bundler >= 2.5)
+ruby "3.3.13" # TODO: use file: '.tool-versions' when heroku supports it. (bundler >= 2.5)
 
-gem "rails", "6.1.7.7"
+gem "rails", "6.1.7.10"
+
+# Rails 6.1 still calls JSON.parse/generate with `quirks_mode: true`, which the
+# json 3.x line removed. Pin below 3.0 until we can upgrade Rails.
+gem "json", "< 3.0"
 
 # Production app server
 gem "puma", "~> 5"
@@ -47,7 +51,7 @@ gem "selectize-rails"
 gem "smarter_csv", "~> 1.4"
 gem "activerecord-import", require: false
 
-gem "httparty", "~> 0.21.0"
+gem "httparty", "~> 0.24"
 
 gem "country_select", "~> 8.0"
 

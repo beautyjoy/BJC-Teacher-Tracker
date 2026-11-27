@@ -96,7 +96,7 @@ C4Context
   * Note: if you are using WSL2 on windows, the command to start postgres is `sudo service postgresql start`
 
 ### Framework/Gem Installation
-* `rvm use 3.2.3` # Double-check `.ruby-version`
+* `rvm use 3.3.13` # Double-check `.ruby-version`
 * `bundle`
 * `bin/rails db:setup` (Run this after setting up Postgres)
 * `nvm install 14` Node v14 is needed
